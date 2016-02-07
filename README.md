@@ -73,7 +73,7 @@ Gp.Services.geocode({
 });
 ```
 
-Exemple d'utilisation [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/saye4oaz/embedded/result,js,html,css/)
+**Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/saye4oaz/embedded/result,js,html,css/)
 
 
 <a id="autocomplete"/>
@@ -108,9 +108,7 @@ Gp.Services.autoComplete({
 });
 ```
 
-Exemple d'utilisation :
-
-<iframe width="100%" height="600" src="//jsfiddle.net/ignfgeoportail/jsjqk4wq/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+**Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/jsjqk4wq/embedded/result,js,html,css/)
 
 
 <a id="reverseGeocode"/>
@@ -148,9 +146,7 @@ Gp.Services.reverseGeocode({
 });
 ```
 
-Exemple d'utilisation :
-
-<iframe width="100%" height="600" src="//jsfiddle.net/ignfgeoportail/4t0wfey5/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+**Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/4t0wfey5/embedded/result,js,html,css/)
 
 
 <a id="alti"/>
@@ -186,9 +182,7 @@ Gp.Services.getAltitude({
 });
 ```
 
-Exemple d'utilisation :
-
-<iframe width="100%" height="600" src="//jsfiddle.net/ignfgeoportail/owxffaf3/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+**Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/owxffaf3/embedded/result,js,html,css/)
 
 
 <a id="route"/>
@@ -225,9 +219,7 @@ Gp.Services.route({
 });
 ```
 
-Exemple d'utilisation :
-
-<iframe width="100%" height="600" src="//jsfiddle.net/ignfgeoportail/prvrjd93/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+**Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/prvrjd93/embedded/result,js,html,css/)
 
 
 <a id="isoCurve"/>
@@ -265,9 +257,8 @@ Gp.Services.isoCurve({
 });
 ```
 
-Exemple d'utilisation :
+**Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/x1hcak86/embedded/result,js,html,css/)
 
-<iframe width="100%" height="600" src="//jsfiddle.net/ignfgeoportail/x1hcak86/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 <a id="getConfig"/>
 
@@ -292,6 +283,5 @@ Gp.Services.getConfig({
 });
 ```
 
-Exemple d'utilisation :
+**Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/0hsanbv2/embedded/result,js,html,css/)
 
-<iframe width="100%" height="600" src="//jsfiddle.net/ignfgeoportail/0hsanbv2/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
