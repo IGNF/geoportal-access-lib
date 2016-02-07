@@ -77,6 +77,8 @@ Exemple d'utilisation :
 
 <iframe width="100%" height="600" src="//jsfiddle.net/ignfgeoportail/saye4oaz/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
+<script async src="//jsfiddle.net/ignfgeoportail/saye4oaz/embed/result,js,html,css/"></script>
+
 
 <a id="autocomplete"/>
 
