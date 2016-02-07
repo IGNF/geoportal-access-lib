@@ -73,11 +73,7 @@ Gp.Services.geocode({
 });
 ```
 
-Exemple d'utilisation :
-
-<iframe width="100%" height="600" src="//jsfiddle.net/ignfgeoportail/saye4oaz/embedded/result,js,html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-<script async src="//jsfiddle.net/ignfgeoportail/saye4oaz/embed/result,js,html,css/"></script>
+Exemple d'utilisation [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/saye4oaz/embedded/result,js,html,css/)
 
 
 <a id="autocomplete"/>
