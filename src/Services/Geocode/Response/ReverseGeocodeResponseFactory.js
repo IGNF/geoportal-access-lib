@@ -1,0 +1,105 @@
+/**
+ * Factory pour générer une reponse JSON à partir d'un XML
+ * ou d'un JSON encapsulant du XML
+ * (Factory)
+ *
+ * @module ReverseGeocodeResponseFactory
+ * @alias Gp.Services.ReverseGeocode.Response.ReverseGeocodeResponseFactory
+ * @todo La reponse JSON peut encapsuler un XML !
+ * @private
+ */
+define([
+    "Utils/LoggerByDefault",
+    "Utils/MessagesResources",
+    "Exceptions/ErrorService",
+    "Formats/XML",
+    "Services/Geocode/Formats/ReverseGeocodeResponseReader"
+],
+function (
+    Logger, MRes,
+    ErrorService,
+    XML, ReverseGeocodeResponseReader
+) {
+
+    "use strict";
+
+    var ReverseGeocodeReponseFactory = {
+
+        /**
+         * interface unique
+         *
+         * @method build
+         * @static
+         * @param {Object} options - options definies dans le composant ReverseGeocode
+         *
+         * @example
+         *   var options = {
+         *      response :
+         *      rawResponse :
+         *      scope :
+         *      onSuccess :
+         *      onError :
+         *   };
+         *
+         */
+        build : function (options) {
+
+            // data de type ReverseGeocodeResponse
+            var data = null;
+
+            if ( options.response ) {
+                if ( options.rawResponse ) {
+                    data = options.response;
+                } else {
+
+                    try {
+
+                        var p = new XML({
+                            reader : ReverseGeocodeResponseReader
+                        });
+
+                        if ( typeof options.response === "string" ) {
+                            p.setXMLString(options.response);
+                        } else {
+                            p.setXMLDoc(options.response);
+                        }
+
+                        data = p.parse();
+
+                        if (! data) {
+                            throw new Error("L'analyse de la réponse du service !?");
+                        }
+                    } catch (e) {
+                        // on relaye l'erreur reçue
+                        e.status = 200 ;
+                        options.onError.call(options.scope, e) ;
+                        return;
+                    }
+
+                    // Si la réponse contenait une exception renvoyée par le service
+                    // TODO : quand cela arrive-t-il ?
+                    if ( data.exceptionReport ) {
+                        options.onError.call(options.scope, new ErrorService({
+                            message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", data.exceptionReport),
+                            type : ErrorService.TYPE_SRVERR,
+                            status : 200
+                        }));
+                        return;
+                    }
+                }
+            } else {
+                options.onError.call(options.scope, new ErrorService({
+                    message : MRes.getMessage("SERVICE_RESPONSE_EMPTY"),
+                    type : ErrorService.TYPE_SRVERR,
+                    status : -1 // FIXME : status response
+                }));
+                return;
+            }
+
+            options.onSuccess.call(options.scope, data);
+            return;
+        }
+    };
+
+    return ReverseGeocodeReponseFactory;
+});

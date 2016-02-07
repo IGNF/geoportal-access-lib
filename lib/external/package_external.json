@@ -1,0 +1,17 @@
+{
+    "requirejs" : {
+        "desc" : "JavaScript file and module loader",
+        "url" : "http://requirejs.org/",
+        "version" : "2.1.18"
+    },
+    "woodman" : {
+        "desc" : "Flexible JavaScript logger utility based on log4j. Runs client-side and server-side.",
+        "url" : "https://github.com/joshfire/woodman",
+        "version" : "1.1.0"
+    },
+    "es6-promise" : {
+        "desc" : "This is a polyfill of the ES6 Promise.",
+        "url" : "https://github.com/jakearchibald/es6-promise",
+        "version" : "3.0.2"
+    }
+}
