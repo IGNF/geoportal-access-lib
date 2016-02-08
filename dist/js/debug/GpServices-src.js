@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta1
- * @date 2016-02-05
+ * @date 2016-02-08
  *
  */
 /*!
@@ -4836,9 +4836,9 @@ ServicesAltiResponseAltiResponseFactory = function (Logger, ErrorService, MRes, 
                         }));
                         return;
                     } else if (data.error) {
-                        var message = data.error.description;
+                        var errorMess = data.error.description;
                         options.onError.call(options.scope, new ErrorService({
-                            message: MRes.getMessage('SERVICE_RESPONSE_EXCEPTION', message),
+                            message: MRes.getMessage('SERVICE_RESPONSE_EXCEPTION', errorMess),
                             type: ErrorService.TYPE_SRVERR,
                             status: 200
                         }));
@@ -7440,8 +7440,8 @@ ServicesGeocodeFormatsDirectGeocodeResponseReader = function (Logger, MR, ErrSrv
         } else {
             var mess = MR.getMessage('SERVICE_RESPONSE_ANALYSE', root.nodeName);
             throw new ErrSrv({
-                message: message,
-                type: ErrServ.TYPE_UNKERR,
+                message: mess,
+                type: ErrSrv.TYPE_UNKERR,
                 status: 200
             });
         }
@@ -8055,7 +8055,7 @@ ServicesGeocodeReverseGeocode = function (Logger, _, ErrorService, CommonService
         this.options.maximumResponses = options.maximumResponses || 25;
         this.options.returnFreeForm = options.returnFreeForm || false;
         this.options.srs = options.srs || 'EPSG:4326';
-        if (geoEPSG.indexOf(this.options.srs) !== -1) {
+        if (ReverseGeocode.geoEPSG.indexOf(this.options.srs) !== -1) {
             this.options.position = {
                 x: this.options.position.y,
                 y: this.options.position.x
@@ -8070,7 +8070,7 @@ ServicesGeocodeReverseGeocode = function (Logger, _, ErrorService, CommonService
             }
             if (this.options.filterOptions && this.options.filterOptions.polygon) {
                 var polygon = this.options.filterOptions.polygon;
-                for (var i = 0; i < polygon.length; i++) {
+                for (i = 0; i < polygon.length; i++) {
                     var coords = polygon[i];
                     this.options.filterOptions.polygon[i] = {
                         x: coords.y,
@@ -8113,7 +8113,7 @@ ServicesGeocodeReverseGeocode = function (Logger, _, ErrorService, CommonService
             error.call(this, new ErrorService(_.getMessage('SERVICE_RESPONSE_EMPTY')));
         }
     };
-    var geoEPSG = [
+    ReverseGeocode.geoEPSG = [
         'EPSG:4326',
         'autreEPSG',
         'encoreunautreEPSG'
@@ -8849,7 +8849,7 @@ ServicesRouteFormatsRouteResponseRESTReader = function (Logger, WKT, MessagesRes
             var response = new RouteResponse();
             __getChildNodes(node, response);
             if (response.status === 'error') {
-                var message = MR.getMessage('SERVICE_RESPONSE_EXCEPTION', response.message);
+                var message = MessagesResources.getMessage('SERVICE_RESPONSE_EXCEPTION', response.message);
                 throw new ErrSrv({
                     message: message,
                     type: ErrSrv.TYPE_SRVERR
@@ -9534,7 +9534,7 @@ ServicesProcessIsoCurveFormatsProcessIsoCurveResponseReader = function (Logger, 
                 }
             }
             if (response.status === 'error') {
-                var message = MR.getMessage('SERVICE_RESPONSE_EXCEPTION', response.message);
+                var message = MessagesResources.getMessage('SERVICE_RESPONSE_EXCEPTION', response.message);
                 throw new ErrSrv({
                     message: message,
                     type: ErrSrv.TYPE_SRVERR
@@ -9649,7 +9649,7 @@ ServicesProcessIsoCurveFormatsProcessIsoCurveResponseReader = function (Logger, 
         } else if (ProcessIsoCurveResponseReader.READERS[root.nodeName]) {
             response = ProcessIsoCurveResponseReader.READERS[root.nodeName](root);
             if (response.status === 'error') {
-                var errMsg = MR.getMessage('SERVICE_RESPONSE_EXCEPTION', response.message);
+                var errMsg = MessagesResources.getMessage('SERVICE_RESPONSE_EXCEPTION', response.message);
                 throw new ErrSrv({
                     message: errMsg,
                     type: ErrSrv.TYPE_SRVERR
@@ -9658,7 +9658,7 @@ ServicesProcessIsoCurveFormatsProcessIsoCurveResponseReader = function (Logger, 
             return response;
         } else {
             throw new ErrSrv({
-                message: MR.getMessage('SERVICE_RESPONSE_ANALYSE', root.nodeName),
+                message: MessagesResources.getMessage('SERVICE_RESPONSE_ANALYSE', root.nodeName),
                 type: ErrSrv.TYPE_UNKERR
             });
         }
