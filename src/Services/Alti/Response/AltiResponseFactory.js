@@ -178,9 +178,9 @@ function (
                         }));
                         return;
                     } else if ( data.error ) {
-                        var message = data.error.description;
+                        var errorMess = data.error.description;
                         options.onError.call(options.scope, new ErrorService({
-                            message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", message),
+                            message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", errorMess),
                             type : ErrorService.TYPE_SRVERR,
                             status : 200
                         }));

@@ -332,8 +332,8 @@ function (
         } else {
             var mess = MR.getMessage("SERVICE_RESPONSE_ANALYSE", root.nodeName) ;
             throw new ErrSrv({
-                message : message,
-                type : ErrServ.TYPE_UNKERR,
+                message : mess,
+                type : ErrSrv.TYPE_UNKERR,
                 status : 200
             });
         }

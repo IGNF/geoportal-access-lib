@@ -54,7 +54,7 @@ function (
             __getChildNodes(node, response);
 
             if ( response.status === "error" ) {
-                var message = MR.getMessage("SERVICE_RESPONSE_EXCEPTION",
+                var message = MessagesResources.getMessage("SERVICE_RESPONSE_EXCEPTION",
                                             response.message) ;
                 throw new ErrSrv({
                     message : message,

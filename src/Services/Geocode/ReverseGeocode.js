@@ -167,7 +167,7 @@ function (
 
         // si le systeme de coordonnées est géographique, et EPSG, il faut inverser les coordonnées
         // (le service attend une position "lat lon")
-        if ( geoEPSG.indexOf(this.options.srs) !== -1 ) {
+        if ( ReverseGeocode.geoEPSG.indexOf(this.options.srs) !== -1 ) {
             // pour la position
             this.options.position = {
                 x : this.options.position.y,
@@ -184,7 +184,7 @@ function (
             }
             if ( this.options.filterOptions && this.options.filterOptions.polygon ) {
                 var polygon = this.options.filterOptions.polygon;
-                for ( var i = 0 ; i < polygon.length; i++ ) {
+                for ( i = 0 ; i < polygon.length; i++ ) {
                     var coords = polygon[i];
                     this.options.filterOptions.polygon[i] = {
                         x : coords.y,
@@ -272,7 +272,7 @@ function (
     /**
      * Codes EPSG géographiques (lat/lon). Utiles car les coordonnées doivent être inversées.
      */
-    var geoEPSG = ["EPSG:4326", "autreEPSG", "encoreunautreEPSG"];
+    ReverseGeocode.geoEPSG = ["EPSG:4326", "autreEPSG", "encoreunautreEPSG"] ;
 
     return ReverseGeocode;
 });

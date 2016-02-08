@@ -106,7 +106,7 @@ define([
             }
 
             if ( response.status === "error" ) {
-                var message = MR.getMessage("SERVICE_RESPONSE_EXCEPTION",
+                var message = MessagesResources.getMessage("SERVICE_RESPONSE_EXCEPTION",
                                             response.message) ;
                 throw new ErrSrv({
                     message : message,
@@ -258,7 +258,7 @@ define([
         } else if ( ProcessIsoCurveResponseReader.READERS[root.nodeName] ) {
             response = ProcessIsoCurveResponseReader.READERS[root.nodeName](root);
             if ( response.status === "error" ) {
-                var errMsg = MR.getMessage("SERVICE_RESPONSE_EXCEPTION",
+                var errMsg = MessagesResources.getMessage("SERVICE_RESPONSE_EXCEPTION",
                                            response.message ) ;
                 throw new ErrSrv({
                     message : errMsg,
@@ -269,7 +269,7 @@ define([
 
         } else {
             throw new ErrSrv({
-                message : MR.getMessage("SERVICE_RESPONSE_ANALYSE",root.nodeName),
+                message : MessagesResources.getMessage("SERVICE_RESPONSE_ANALYSE",root.nodeName),
                 type : ErrSrv.TYPE_UNKERR
             }) ;
         }
