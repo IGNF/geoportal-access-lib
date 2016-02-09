@@ -24,7 +24,7 @@ Elle permet plus particulièrement d'effecturer les opérations suivantes utilis
 
 ### Téléchargement
 
-Vous pouvez récupérer la bibliothèque d'accès ici : [GpServices.js](https://github.com/IGNF-geoportail/geoportal-access-lib/releases/download/v1.0.0-beta.1/GpServices.js).
+Vous pouvez récupérer la bibliothèque d'accès ici : [GpServices.js](https://github.com/ignf/geoportal-access-lib/releases/download/v1.0.0-beta.1/GpServices.js).
 
 ### Intégration dans une page web
 
