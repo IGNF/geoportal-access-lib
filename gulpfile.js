@@ -150,11 +150,11 @@
         }
 
         requirejs.optimize({
-            mainConfigFile: _.src + '/Config.js',
+            mainConfigFile: build.src + '/Config.js',
             paths : {
                 log4js : (isDebug) ? "../lib/external/woodman/woodman-amd" : "../lib/external/empty"
             },
-            baseUrl: _.src,
+            baseUrl: build.src,
             optimize: mode,
             uglify2: {
                 output: {
@@ -226,41 +226,7 @@
     //| > Framework RequireJS
     //| > https://www.npmjs.com/package/gulp-requirejs-optimize
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    gulp.task('requirejs-optimize', function () {
-
-        // Pour information,
-        // les valeurs possibles sont les suivantes :
-        // uglify2, closure, or closure.keepLines
-        var mode = 'none';
-        if (isProduction) {
-            $.util.log("OK, mode optimisation...");
-            mode = 'uglify';
-        }
-
-        var requirejsOptimize = require('gulp-requirejs-optimize');
-
-        return gulp.src([
-            _.src + "/**/*.js",
-            "!" + _.src + "/Config.js"])
-            .pipe(requirejsOptimize({
-                mainConfigFile: _.src + '/Config.js',
-                paths : {
-                    // INFO mode debug => log4js : (!isDebug) ? "./lib/external/empty" : "./lib/external/woodman/woodman-amd"
-                    log4js : "./lib/external/empty"
-                },
-                optimize: mode,
-                preserveLicenseComments: false,
-                useStrict: true,
-                include: [
-                    'Gp'
-                ],
-                out: 'GpServices.js'
-            }))
-            .pipe($.plumber())
-            .pipe(gulp.dest(build.dist + '/amd'))
-            .pipe($.plumber())
-            .pipe(gulp.dest(build.dist)).pipe($.size());
-    });
+    // REMOVED (please browse history)
 
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //| ✓ umd
@@ -450,7 +416,7 @@
     gulp.task('test', ['mocha']);
     gulp.task('test-cloud', ['server']);
     gulp.task('check', ['jsonlint', 'jshint', 'jscs']);
-    gulp.task('src', ['sources', 'samples', 'lib', 'umd']);
+    gulp.task('src', ['sources', 'samples', 'lib']);
 
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //| ✓ synchronisation des tâches
@@ -460,10 +426,10 @@
         runSequence('libdoc', 'jsdoc', callback);
     });
     gulp.task('build', function(callback) {
-        runSequence('check', 'test', 'src', 'doc', 'licence', callback);
+        runSequence('check', 'test', 'src', 'umd', 'doc', 'licence', callback);
     });
     gulp.task('build-only', function(callback) {
-        runSequence('src', 'licence', callback);
+        runSequence('src', 'umd', 'licence', callback);
     });
 
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
