@@ -9,8 +9,8 @@
  * copyright CeCILL-B
  * copyright IGN
  * @author IGN 
- * @version 1.0.0-beta1
- * @date 2016-02-08
+ * @version 1.0.0-beta2
+ * @date 2016-02-13
  *
  */
 /*!
@@ -9916,8 +9916,8 @@ ServicesServices = function (Alti, AutoConf, Geocode, ReverseGeocode, AutoComple
 Gp = function (Services, AltiResponse, Elevation, AutoCompleteResponse, SuggestedLocation, GetConfigResponse, Constraint, Format, Layer, Legend, Metadata, Originator, Service, Style, Territory, Thematic, TM, TMLimit, TMS, GeocodeResponse, GeocodedLocation, DirectGeocodedLocation, ReverseGeocodedLocation, IsoCurveResponse, RouteResponse, RouteInstruction, Error) {
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
-        versionServices: '__GPVERSION__',
-        date: '__GPDATE__',
+        servicesVersion: '1.0.0-beta2',
+        servicesDate: '2016-02-13',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;
