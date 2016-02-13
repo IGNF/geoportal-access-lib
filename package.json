@@ -1,6 +1,6 @@
 {
   "name": "geoportal-access-lib",
-  "version": "1.0.0-beta1",
+  "version": "1.0.0-beta2",
   "description": "French Geoportal resources access library",
   "main": "dist/umd/GpServices.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/IGNF-geoportail/geoportal-access-lib.git"
+    "url": "https://github.com/IGNF/geoportal-access-lib.git"
   },
   "keywords": [
     "geoportail",
