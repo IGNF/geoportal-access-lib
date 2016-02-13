@@ -61,8 +61,8 @@ define([
         
         // on voit s'il existe déjà cette variable, sinon on la met en place
         var Gp = scope.Gp || {
-            versionServices : "__GPVERSION__",
-            date : "__GPDATE__",
+            servicesVersion : "__GPVERSION__",
+            servicesDate : "__GPDATE__",
             /**
              * Methode pour rajouter une classe / objet au namespace global.
              *
