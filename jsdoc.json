@@ -11,7 +11,7 @@
     },
     "templates": {
         "cleverLinks"           : false,
-        "applicationName"       : "Geoportal Resources Access",
+        "applicationName"       : "Geoportal Resources Access -- ",
         "monospaceLinks"        : false,
         "dateFormat"            : "ddd MMM Do YYYY",
         "outputSourceFiles"     : true,
@@ -20,30 +20,31 @@
         "footer"                : "Geoportal Resources Access- version 1.0.0",
         "copyright"             : "Geoportail - Copyright (c) IGN, released under the CECILL-B license",
         "navType"               : "inline",
-		"theme"                 : "darkly",
-		"linenums"              : true,
-		"collapseSymbols"       : true,
-		"inverseNav"            : true,
-		"highlightTutorialCode" : false,
-		"syntaxTheme"           : "default"
+    		"theme"                 : "darkly",
+    		"linenums"              : true,
+    		"collapseSymbols"       : true,
+    		"inverseNav"            : true,
+    		"highlightTutorialCode" : false,
+    		"syntaxTheme"           : "default"
     },
     "markdown": {
         "parser": "gfm",
         "hardwrap": true
     },
     "opts": {
-        "template"         : "target/doc/jaguarjs-jsdoc",//"node_modules/minami",
+        "template"         : "target/doc/jaguarjs-jsdoc",
         "template-inactif0": "node_modules/ink-docstrap/template/",
         "template-inactif1": "node_modules/jaguarjs-jsdoc/",
         "template-inactif2": "node_modules/jsdoc-oblivion/template/",
         "template-inactif3": "node_modules/jsdoc-dash-template",
         "template-inactif4": "node_modules/jsdoc-simple-template",
         "template-inactif5": "node_modules/jsdoc-react",
+        "template-inactif6": "node_modules/minami",
         "encoding": "utf8",
         "destination": "./target/doc/",
         "recurse": true,
         "lenient": true,
-        "verbose": true
-        //"tutorials": "../doc/tutorials" // FIXME ne fonctionne pas avec 'jaguarjs-jsdoc' !
+        "verbose": true,
+        "tutorials": "doc/tutorials"
     }
 }

@@ -2,12 +2,13 @@
   "name": "geoportal-access-lib",
   "version": "1.0.0-beta2",
   "description": "French Geoportal resources access library",
-  "main": "dist/umd/GpServices.js",
+  "main": "dist/GpServices.js",
   "scripts": {
     "build": "gulp build",
     "test": "gulp test",
     "doc": "gulp doc",
-    "src": "gulp src"
+    "dist": "gulp dist",
+    "check": "gulp check"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   "license": "CECILL-B",
   "dependencies": {
     "amdclean": "^2.7.0",
+    "glob": "^7.0.3",
     "groundskeeper": "^0.1.12",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "0.0.6",
@@ -41,12 +43,14 @@
     "gulp-plumber": "~0.5.6",
     "gulp-replace": "^0.5.4",
     "gulp-size": "~0.1.2",
+    "gulp-template": "^3.1.0",
     "gulp-uglify": "~0.2.1",
     "gulp-umd": "^0.2.0",
     "gulp-useref": "^1.2.0",
     "gulp-util": "~2.2.14",
     "gulp-watch": "~0.5.3",
     "minimist": "^1.1.1",
+    "open": "0.0.5",
     "requirejs": "^2.1.20",
     "shelljs": "~0.2.6",
     "wiredep": "~1.4.3"

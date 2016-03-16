@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta2
- * @date 2016-02-13
+ * @date 2016-03-16
  *
  */
 /*!
@@ -7138,7 +7138,7 @@ Gp = function (Services, AltiResponse, Elevation, AutoCompleteResponse, Suggeste
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta2',
-        servicesDate: '2016-02-13',
+        servicesDate: '2016-03-16',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;
