@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta2
- * @date 2016-03-16
+ * @date 2016-03-17
  *
  */
 /*!
@@ -3123,7 +3123,7 @@ ServicesAutoConfFormatsAutoConfResponseReader = function (Logger, AutoConfRespon
                 var l = new Legend();
                 __getChildNodes(node, l);
                 if (lyr) {
-                    if (!lyr.legends || Array.isArray(lyr.legends)) {
+                    if (!lyr.legends || !Array.isArray(lyr.legends)) {
                         lyr.legends = [];
                     }
                     lyr.legends.push(l);
@@ -4879,11 +4879,11 @@ ServicesGeocodeGeocode = function (Logger, _, ErrorService, CommonService, Direc
         if (!options.location) {
             throw new Error(_.getMessage('PARAM_MISSING', 'location'));
         }
-        if (Object.keys(options.location).length === 0) {
+        if (typeof options.location == 'object' && Object.keys(options.location).length === 0) {
             throw new Error(_.getMessage('PARAM_EMPTY', 'location'));
         }
         this.options.location = options.location;
-        if (!options.filterOptions) {
+        if (!options.filterOptions || typeof options.filterOptions !== 'object') {
             this.options.filterOptions = options.filterOptions = { type: ['StreetAddress'] };
         }
         if (Object.keys(options.filterOptions).length === 0) {
@@ -5312,7 +5312,7 @@ ServicesGeocodeReverseGeocode = function (Logger, _, ErrorService, CommonService
             throw new Error(_.getMessage('PARAM_MISSING', 'position.y'));
         }
         this.options.position = options.position;
-        if (!options.filterOptions) {
+        if (!options.filterOptions || typeof options.filterOptions !== 'object') {
             this.options.filterOptions = options.filterOptions = { type: ['StreetAddress'] };
         }
         if (Object.keys(options.filterOptions).length === 0) {
@@ -5390,11 +5390,7 @@ ServicesGeocodeReverseGeocode = function (Logger, _, ErrorService, CommonService
             error.call(this, new ErrorService(_.getMessage('SERVICE_RESPONSE_EMPTY')));
         }
     };
-    ReverseGeocode.geoEPSG = [
-        'EPSG:4326',
-        'autreEPSG',
-        'encoreunautreEPSG'
-    ];
+    ReverseGeocode.geoEPSG = ['EPSG:4326'];
     return ReverseGeocode;
 }(UtilsLoggerByDefault, UtilsMessagesResources, ExceptionsErrorService, ServicesCommonService, ServicesGeocodeRequestReverseGeocodeRequestFactory, ServicesGeocodeResponseReverseGeocodeResponseFactory);
 ServicesAutoCompleteResponseModelAutoCompleteResponse = function () {
@@ -5524,7 +5520,7 @@ ServicesAutoCompleteAutoComplete = function (CommonService, AutoCompleteResponse
             throw new Error(MR.getMessage('PARAM_MISSING', 'text'));
         }
         this.options.text = options.text;
-        if (!options.filterOptions) {
+        if (!options.filterOptions || typeof options.filterOptions !== 'object') {
             this.options.filterOptions = options.filterOptions = {
                 territory: [],
                 type: ['StreetAddress']
@@ -7138,7 +7134,7 @@ Gp = function (Services, AltiResponse, Elevation, AutoCompleteResponse, Suggeste
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta2',
-        servicesDate: '2016-03-16',
+        servicesDate: '2016-03-17',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;

@@ -98,7 +98,7 @@ function (
         this.options.text = options.text;
 
         // on definit des filtres par defaut
-        if (! options.filterOptions) {
+        if (! options.filterOptions || typeof options.filterOptions !== "object" ) {
             this.options.filterOptions = options.filterOptions = {
                 territory : [],
                 type : ["StreetAddress"]
