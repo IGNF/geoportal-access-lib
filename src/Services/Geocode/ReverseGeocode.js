@@ -129,7 +129,7 @@ function (
         this.options.position = options.position;
 
         // on definit des filtres par defaut
-        if (! options.filterOptions) {
+        if (! options.filterOptions || typeof options.filterOptions !== "object" ) {
             this.options.filterOptions = options.filterOptions = {
                 type : ["StreetAddress"]
             };
@@ -272,7 +272,7 @@ function (
     /**
      * Codes EPSG géographiques (lat/lon). Utiles car les coordonnées doivent être inversées.
      */
-    ReverseGeocode.geoEPSG = ["EPSG:4326", "autreEPSG", "encoreunautreEPSG"] ;
+    ReverseGeocode.geoEPSG = ["EPSG:4326"] ;
 
     return ReverseGeocode;
 });

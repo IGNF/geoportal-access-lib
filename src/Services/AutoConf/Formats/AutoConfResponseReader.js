@@ -684,7 +684,7 @@ function (
                 __getChildNodes(node, l);
                 if ( lyr ) {
                     // si aucune légende n'a encore été ajoutée, on crée le tableau vide
-                    if ( !lyr.legends || Array.isArray(lyr.legends) ) {
+                    if ( !lyr.legends || !Array.isArray(lyr.legends) ) {
                         lyr.legends = [];
                     }
                     lyr.legends.push(l);

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../../../dist/GpServices.js"></script>
+        <script>
+
+                var options = {
+                     apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn', 
+                     onSuccess : function (response) {console.log(response.locations);},
+                     // spécifique au service
+                     location : "paris"
+                 };
+
+                 Gp.Services.geocode(options);
+
+            </script>
+    </head>
+    <body>
+        <h1>Utilisation du service de geocodage avec les parametres obligatoires seulement (options par defaut pour les autres)</h1>
+        <span>(Ouvrir la console)</span>
+    </body>
+</html>
