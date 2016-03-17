@@ -12,6 +12,17 @@ define(["Utils/LoggerByDefault"], function (Logger) {
     var JSONP = {
 
         /**
+         * Construction d'un identifiant statique basé sur le timestamp,
+         * et qui s'incremente de +1 à chaque appel
+         */
+        uuid : (function () {
+            var id = Math.floor(Date.now());
+            return function () {
+                return id++;
+            };
+        })(),
+
+        /**
          * Cette fonction réalise l'appel du service fourni via le paramètre "options.url"
          * en mettant en œuvre le protocole JSONP.
          *
@@ -79,6 +90,9 @@ define(["Utils/LoggerByDefault"], function (Logger) {
                 // };
             }
 
+            // ID du callback courrant : Number, 0 ou null
+            var callbackId = (options.id || options.id === 0) ? options.id : this.uuid();
+
             // on recherche le parametre callback et son nom de fonction dans l'url
             var urlHasCallbackKey  = false ;
             var urlHasCallbackName = false ;
@@ -129,6 +143,12 @@ define(["Utils/LoggerByDefault"], function (Logger) {
                 if ( !options.callbackName ) {
                     logger.info("setting 'options.callbackName' default value");
                     options.callbackName = "callback"; // ou "gp.protocol.jsonp" ?
+                    // si on ne veut pas gerer d'ID dans le callback,
+                    // options.id = 0
+                    if (callbackId) {
+                        options.callbackName += "_";
+                        options.callbackName += callbackId;
+                    }
                 }
                 options.url = options.url.replace("callback=", "callback=" + options.callbackName);
                 logger.info("setting callback function name in 'options.url' : " + options.url);
@@ -144,6 +164,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
             }
 
             if ( !HasCallbackName ) {
+
                 // event du timeout
                 var onTimeOutTrigger = null;
 
@@ -157,22 +178,29 @@ define(["Utils/LoggerByDefault"], function (Logger) {
                         }, options.timeOut);
                 }
 
+                var self = this;
                 /** fonction de reponse du service */
                 window[options.callbackName] = function (data) {
                     window.clearTimeout(onTimeOutTrigger);
                     options.onResponse(data);
+                    self._deleteScript(callbackId);
                 };
             }
 
-            // script
+            this._createScript(callbackId, options.url);
+        },
+
+        /** create Script */
+        _createScript : function (callbackId, url) {
+
             var scriptu;
-            var scripto = document .getElementById("results");
+            var scripto = document.getElementById("results_" + callbackId);
 
             scriptu = document.createElement("script");
             scriptu.setAttribute("type", "text/javascript");
-            scriptu.setAttribute("src", options.url);
+            scriptu.setAttribute("src", url);
             scriptu.setAttribute("charset", "UTF-8");
-            scriptu.setAttribute("id", "results");
+            scriptu.setAttribute("id", "results_" + callbackId);
             scriptu.setAttribute("async", "true"); // FIXME async ?
             // head ou body ou autres ?
             var node = document.documentElement || document.getElementsByTagName("head")[0];
@@ -181,6 +209,20 @@ define(["Utils/LoggerByDefault"], function (Logger) {
             } else {
                 // s'il existe déjà, on le remplace !
                 node.replaceChild(scriptu, scripto);
+            }
+
+        },
+
+        /** delete Script */
+        _deleteScript : function (callbackId) {
+
+            var script = document.getElementById("results_" + callbackId);
+            if (script) {
+                var node = script.parentNode || document.documentElement;
+                if (!node) {
+                    return;
+                }
+                node.removeChild(script);
             }
         }
     };

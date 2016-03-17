@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../../../dist/GpServices-src.js"></script>
+        <script>
+
+            var myApiKey = "jhyvi0fgmnuxvfv0zjzorvdn";
+
+            Gp.Services.autoComplete({
+                apiKey : myApiKey,
+                onSuccess : function (response) {
+                  console.log("appel 1 :", response);
+                },
+                // spécifique au service
+                text : "Brie-Co",
+            });
+
+            Gp.Services.autoComplete({
+                apiKey : myApiKey,
+                onSuccess : function (response) {
+                  console.log("appel 3 :", response);
+                },
+                // spécifique au service
+                text : "Saint-Man",
+            });
+
+            Gp.Services.autoComplete({
+                apiKey : myApiKey,
+                onSuccess : function (response) {
+                  console.log("appel 4 :", response);
+                },
+                // spécifique au service
+                text : "Vincenn",
+            });
+
+            Gp.Services.autoComplete({
+                apiKey : myApiKey,
+                onSuccess : function (response) {
+                  console.log("appel 2 :", response);
+                },
+                // spécifique au service
+                text : "Paris",
+            });
+
+
+        </script>
+    </head>
+    <body>
+        <h1>Utilisation du service Gp.Services.autoComplete</h1>
+        <span>(Ouvrir la console)</span>
+    </body>
+</html>

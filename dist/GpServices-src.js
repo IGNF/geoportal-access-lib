@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta2
- * @date 2016-03-16
+ * @date 2016-03-17
  *
  */
 /*!
@@ -866,6 +866,12 @@ ProtocolsXHR = function (Logger, Helper, ES6Promise) {
 }(UtilsLoggerByDefault, UtilsHelper, promise);
 ProtocolsJSONP = function (Logger) {
     var JSONP = {
+        uuid: function () {
+            var id = Math.floor(Date.now());
+            return function () {
+                return id++;
+            };
+        }(),
         call: function (options) {
             if (!options) {
                 throw new Error('missing parameter : options !');
@@ -879,6 +885,7 @@ ProtocolsJSONP = function (Logger) {
             if (!options.onResponse) {
                 throw new Error('missing parameter : options.onResponse !');
             }
+            var callbackId = options.id || options.id === 0 ? options.id : this.uuid();
             var urlHasCallbackKey = false;
             var urlHasCallbackName = false;
             var idx = options.url.indexOf('callback=');
@@ -908,6 +915,10 @@ ProtocolsJSONP = function (Logger) {
             if (!urlHasCallbackName) {
                 if (!options.callbackName) {
                     options.callbackName = 'callback';
+                    if (callbackId) {
+                        options.callbackName += '_';
+                        options.callbackName += callbackId;
+                    }
                 }
                 options.url = options.url.replace('callback=', 'callback=' + options.callbackName);
             }
@@ -925,24 +936,39 @@ ProtocolsJSONP = function (Logger) {
                         options.onTimeOut();
                     }, options.timeOut);
                 }
+                var self = this;
                 window[options.callbackName] = function (data) {
                     window.clearTimeout(onTimeOutTrigger);
                     options.onResponse(data);
+                    self._deleteScript(callbackId);
                 };
             }
+            this._createScript(callbackId, options.url);
+        },
+        _createScript: function (callbackId, url) {
             var scriptu;
-            var scripto = document.getElementById('results');
+            var scripto = document.getElementById('results_' + callbackId);
             scriptu = document.createElement('script');
             scriptu.setAttribute('type', 'text/javascript');
-            scriptu.setAttribute('src', options.url);
+            scriptu.setAttribute('src', url);
             scriptu.setAttribute('charset', 'UTF-8');
-            scriptu.setAttribute('id', 'results');
+            scriptu.setAttribute('id', 'results_' + callbackId);
             scriptu.setAttribute('async', 'true');
             var node = document.documentElement || document.getElementsByTagName('head')[0];
             if (scripto === null) {
                 node.appendChild(scriptu);
             } else {
                 node.replaceChild(scriptu, scripto);
+            }
+        },
+        _deleteScript: function (callbackId) {
+            var script = document.getElementById('results_' + callbackId);
+            if (script) {
+                var node = script.parentNode || document.documentElement;
+                if (!node) {
+                    return;
+                }
+                node.removeChild(script);
             }
         }
     };
@@ -959,7 +985,8 @@ ProtocolsProtocol = function (Helper, XHR, JSONP) {
                 wrap: true,
                 nocache: true,
                 output: 'json',
-                callback: null
+                callback: null,
+                id: 0
             };
             if (options.protocol === 'XHR' || options.format === 'json') {
                 settings.wrap = false;
@@ -7138,7 +7165,7 @@ Gp = function (Services, AltiResponse, Elevation, AutoCompleteResponse, Suggeste
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta2',
-        servicesDate: '2016-03-16',
+        servicesDate: '2016-03-17',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;

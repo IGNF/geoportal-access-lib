@@ -309,13 +309,14 @@
         var tmpl = require("gulp-template");
         var glob = require("glob");
 
-        var lstSources = glob.sync("**/*.*" , {
-            cwd : build.sample , nodir : true, ignore : "index.html"
+        // uniquement les html !
+        var lstSources = glob.sync("**/*.html" , {
+            cwd : build.sample , nodir : true, ignore : "index-samples.html"
         });
 
         console.log(lstSources);
 
-        return gulp.src(path.join(_.sample, "index.html"))
+        return gulp.src(path.join(_.sample, "index-samples.html"))
             .pipe(tmpl({
                 'files' : lstSources
             }))
@@ -360,7 +361,7 @@
     //| > http://localhost:9001
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task('connect', $.connect.server({
-        root: ["."],
+        root: [_.root],
         livereload: true,
         port: 9001
     }));
@@ -378,7 +379,7 @@
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task('server-sample', ['connect'], function () {
         var open = require('open');
-        open("http://localhost:9001/target/samples/index.html");
+        open("http://localhost:9001/target/samples/index-samples.html");
     });
 
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

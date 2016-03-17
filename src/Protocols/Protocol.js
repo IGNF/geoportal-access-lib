@@ -15,6 +15,7 @@ function (Helper, XHR, JSONP) {
     "use strict";
 
     var Protocol = {
+
         /**
          * Interface unique d"envoi d"une requête.
          *
@@ -80,7 +81,8 @@ function (Helper, XHR, JSONP) {
                 wrap : true,
                 nocache : true,
                 output : "json",
-                callback : null
+                callback : null,
+                id : 0
             };
 
             if ( options.protocol === "XHR" || options.format === "json" ) {
@@ -120,7 +122,7 @@ function (Helper, XHR, JSONP) {
                         settings.url = Helper.normalyzeUrl(settings.url, settings.data);
                     }
 
-                    // appel du service en JSONP
+                    // appel du service en JSONPMath.floor(Date.now());
                     JSONP.call(settings);
                     break;
                 default:
