@@ -4879,7 +4879,9 @@ ServicesGeocodeGeocode = function (Logger, _, ErrorService, CommonService, Direc
         if (!options.location) {
             throw new Error(_.getMessage('PARAM_MISSING', 'location'));
         }
-        if (typeof options.location == 'object' && Object.keys(options.location).length === 0) {
+        if (typeof options.location === 'object' && Object.keys(options.location).length === 0) {
+            throw new Error(_.getMessage('PARAM_EMPTY', 'location'));
+        } else if (typeof options.location === 'string' && options.location.length === 0) {
             throw new Error(_.getMessage('PARAM_EMPTY', 'location'));
         }
         this.options.location = options.location;

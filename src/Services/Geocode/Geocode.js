@@ -121,7 +121,9 @@ function (
         }
 
         // FIXME ECMAScript 5 support
-        if ( typeof options.location == "object" && Object.keys(options.location).length === 0 ) {
+        if ( typeof options.location === "object" && Object.keys(options.location).length === 0 ) {
+            throw new Error(_.getMessage("PARAM_EMPTY", "location"));
+        } else if ( typeof options.location === "string" && options.location.length === 0 ) {
             throw new Error(_.getMessage("PARAM_EMPTY", "location"));
         }
 
@@ -137,7 +139,7 @@ function (
 
         // FIXME ECMAScript 5 support (valable pour un objet uniquement !)
         // ceci permet de tester le cas où 'options.filterOptions' : {}
-        if (Object.keys(options.filterOptions).length === 0) {
+        if ( Object.keys(options.filterOptions).length === 0 ) {
             this.options.filterOptions = {
                 type : ["StreetAddress"]
             };
