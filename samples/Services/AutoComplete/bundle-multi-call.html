@@ -36,12 +36,20 @@
             Gp.Services.autoComplete({
                 apiKey : myApiKey,
                 onSuccess : function (response) {
+                  console.log("appel 5 :", response);
+                },
+                // spécifique au service
+                text : "Sain",
+            });
+
+            Gp.Services.autoComplete({
+                apiKey : myApiKey,
+                onSuccess : function (response) {
                   console.log("appel 2 :", response);
                 },
                 // spécifique au service
-                text : "Paris",
+                text : "paris",
             });
-
 
         </script>
     </head>
