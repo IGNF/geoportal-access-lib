@@ -46,6 +46,12 @@ function (
      * @param {String} [options.proxyURL] - Le proxy à utiliser pour pallier au problème de cross-domain dans le cas d'une requête XHR.
      *      Utile si le paramètre 'protocol' vaut 'XHR', il ne sera pas pris en compte si protocol vaut JSONP.
      *
+     * @param {String} [options.callbackSuffix] - Suffixe de la fonction de callback à utiliser, dans le cas du protocole JSONP.
+     *      Par défaut, la fonction de callback portera un nom du type "callback"+ID, où ID est soit un identifiant unique généré à chaque requête,
+     *      soit le paramètre callbackSuffix s'il est spécifié. Par exemple, si callbackSuffix="_2", la fonction sera "callback_2()".
+     *      Utile pour utiliser une réponse déjà encapsulée dans une fonction de callback, dont le nom est connu (ex: chargement de l'autoconfiguration en local)
+     *      Utile seulement si le paramètre 'protocol' vaut 'JSONP', il ne sera pas pris en compte si protocol vaut 'XHR'.
+     *
      * @param {String} [options.httpMethod] - La méthode HTTP
      *      à utiliser dans le cas d'une requête XHR : peut valoir 'GET' ou 'POST'.
      *      Non pris en compte si 'protocol' vaut JSONP qui fonctionne obligatoirement en GET.
@@ -72,6 +78,7 @@ function (
      *      serverUrl : 'http://localhost/service/',
      *      protocol : 'JSONP', // JSONP|XHR
      *      proxyURL : null,
+     *      callbackName : null,
      *      httpMethod : 'GET', // GET|POST
      *      timeOut : 10000, // ms
      *      rawResponse : false, // true|false
@@ -101,6 +108,8 @@ function (
         this.options = {
             protocol : "JSONP",
             proxyURL : "",
+            // callbackName : "",
+            callbackSuffix : null,
             httpMethod : "GET",
             timeOut : 0,
             rawResponse : false,
@@ -208,7 +217,7 @@ function (
 
         // gestion du cache
         this.options.nocache = options.nocache || false;
-        
+
         // #####################
         // attributs d'instances
         // #####################
@@ -342,17 +351,19 @@ function (
             var self = this;
 
             var options = {
-                url        : strUrlProxified || this.options.serverUrl,
-                method     : this.options.httpMethod,
-                protocol   : this.options.protocol,
-                timeOut    : this.options.timeOut || 0,
-                format     : this.options.outputFormat,  // ceci declenche le parsing de la reponse du service, mais on souhaite toujours une reponse brute (string) !
-                nocache    : this.options.nocache || false, // ceci permet d'ajouter un timestamp dans la requête
-                wrap       : (this.options.protocol === "XHR") ? false : true, // ceci declenche l'encapsulation de la reponse XML du service dans du JSON, mais pas en mode XHR !
-                data       : strData,
-                headers    : null,
-                content    : null,
-                scope      : this.options.scope || this,
+                url          : strUrlProxified || this.options.serverUrl,
+                method       : this.options.httpMethod,
+                protocol     : this.options.protocol,
+                timeOut      : this.options.timeOut || 0,
+                format       : this.options.outputFormat,  // ceci declenche le parsing de la reponse du service, mais on souhaite toujours une reponse brute (string) !
+                nocache      : this.options.nocache || false, // ceci permet d'ajouter un timestamp dans la requête
+                wrap         : (this.options.protocol === "XHR") ? false : true, // ceci declenche l'encapsulation de la reponse XML du service dans du JSON, mais pas en mode XHR !
+                callbackSuffix : this.options.callbackSuffix,
+                // callbackName : this.options.callbackName || null,
+                data         : strData,
+                headers      : null,
+                content      : null,
+                scope        : this.options.scope || this,
                 /** callback de reponse */
                 onResponse : function (response) {
                     self.logger.trace("callService::onResponse()");

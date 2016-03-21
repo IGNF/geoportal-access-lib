@@ -35,6 +35,8 @@ define(["Utils/LoggerByDefault"], function (Logger) {
          *  sa valeur est déterminée en fonction du paramètre callbackName.
          * @param {Number} [options.timeOut = 0] - Nombre de ms au bout duquel on considère que le service n'a pas répondu.
          *  Une valeur de 0 pour ce paramètre permet de désactiver la gestion du timeOut.
+         * @param {String} [options.callbackSuffix = null] - Suffixe de la fonction de callback à rajouter sur l'URL.
+         *  Si aucun suffixe n'est spécifié (cas par défaut), on utilisera l'identifiant this.uuid() comme suffixe. Ex: "callback1458574396582()"
          * @param {String} [options.callbackName = gp.protocol.jsonp] - Valeur du paramètre callback à rajouter sur l'URL.
          *  Si l'URL fournie contient déjà le paramètre callback, le paramètre callbackName ne sera pas pris en compte.
          *  La fonction de callback est créée dynamiquement par la fonction JSONP ;
@@ -51,6 +53,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
          *      url : 'http://localhost/some/test.json&callback=myResults',
          *      timeOut : 100,
          *      callbackName : 'myResults',
+         *      callbackSuffix : "",
          *      onResponse : function (response) {
          *          console.log('results : ', response);
          *      },
@@ -90,8 +93,10 @@ define(["Utils/LoggerByDefault"], function (Logger) {
                 // };
             }
 
-            // ID du callback courrant : Number, 0 ou null
-            var callbackId = (options.id || options.id === 0) ? options.id : this.uuid();
+            // ID du callback à utiliser : null ou string.
+            // si l'utilisateur a spécifié un suffixe pour le callback, on le récupère comme un ID (ex: options.callbackSuffix = "")
+            // sinon, on utilise un timestamp : this.uuid()
+            var callbackId = ( typeof options.callbackSuffix === "string" ) ? options.callbackSuffix : this.uuid();
 
             // on recherche le parametre callback et son nom de fonction dans l'url
             var urlHasCallbackKey  = false ;
@@ -143,10 +148,9 @@ define(["Utils/LoggerByDefault"], function (Logger) {
                 if ( !options.callbackName ) {
                     logger.info("setting 'options.callbackName' default value");
                     options.callbackName = "callback"; // ou "gp.protocol.jsonp" ?
-                    // si on ne veut pas gerer d'ID dans le callback,
-                    // options.id = 0
-                    if (callbackId) {
-                        options.callbackName += "_";
+                    // info : si on ne veut pas gerer d'ID dans le callback,
+                    // options.callbackSuffix = ""
+                    if ( callbackId || callbackId === "" ) {
                         options.callbackName += callbackId;
                     }
                 }
@@ -194,13 +198,13 @@ define(["Utils/LoggerByDefault"], function (Logger) {
         _createScript : function (callbackId, url) {
 
             var scriptu;
-            var scripto = document.getElementById("results_" + callbackId);
+            var scripto = document.getElementById("results" + callbackId);
 
             scriptu = document.createElement("script");
             scriptu.setAttribute("type", "text/javascript");
             scriptu.setAttribute("src", url);
             scriptu.setAttribute("charset", "UTF-8");
-            scriptu.setAttribute("id", "results_" + callbackId);
+            scriptu.setAttribute("id", "results" + callbackId);
             scriptu.setAttribute("async", "true"); // FIXME async ?
             // head ou body ou autres ?
             var node = document.documentElement || document.getElementsByTagName("head")[0];

@@ -19,7 +19,7 @@
 
                   JSONP.call({
                     url : 'fixtures/callback-1.js',
-                    id : "1",
+                    callbackSuffix : "_1",
                     onResponse : function (response) {
                       console.log('Reponse 1:', response);
                     },
@@ -30,7 +30,7 @@
 
                   JSONP.call({
                     url : 'fixtures/callback-2.js',
-                    id : "2",
+                    callbackSuffix : "_2",
                     onResponse : function (response) {
                       console.log('Reponse 2:', response);
                     },
@@ -41,7 +41,7 @@
 
                   JSONP.call({
                     url : 'fixtures/callback-3.js',
-                    id : "3",
+                    callbackSuffix : "_3",
                     onResponse : function (response) {
                       console.log('Reponse 3:', response);
                     },

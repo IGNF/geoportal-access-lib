@@ -27,6 +27,7 @@ function (Helper, XHR, JSONP) {
          * @param {String} options.protocol - XHR | JSONP
          * @param {String} options.format   - format de la reponse du service : json, xml ou null (brute)...
          * @param {String} options.wrap     - encapsuler la reponse du service dans du JSON : true|false (true par defaut sur le protocole JSONP)
+         * @param {String} options.callbackSuffix - suffixe de la fonction de callback (JSONP uniquement) (ex: si callbackSuffix="", la fonction s'appellera "callback")
          * @param {String} options.timeOut  - 0 ms
          * @param {Boolean} options.nocache  - true|false
          * @param {Object|String} options.data        - content (post) ou param (get)
@@ -82,7 +83,7 @@ function (Helper, XHR, JSONP) {
                 nocache : true,
                 output : "json",
                 callback : null,
-                id : 0
+                callbackSuffix : null
             };
 
             if ( options.protocol === "XHR" || options.format === "json" ) {

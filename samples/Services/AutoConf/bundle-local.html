@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../../../dist/GpServices-src.js"></script>
+        <script>
+
+                var options = {
+                     serverUrl : 'resources/config.js',
+                     callbackSuffix : "",
+                     onSuccess : function (response) {console.log(response);}
+                 };
+
+                 Gp.Services.getConfig(options);
+
+            </script>
+    </head>
+    <body>
+        <h1>Utilisation du service d'autoconfiguration des APIs avec les parametres obligatoires seulement (options par defaut pour les autres)</h1>
+        <span>(Ouvrir la console)</span>
+    </body>
+</html>

@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta2
- * @date 2016-03-17
+ * @date 2016-03-21
  *
  */
 /*!
@@ -3503,7 +3503,7 @@ ProtocolsJSONP = function (Logger) {
                 logger.error('missing parameter : options.onResponse !');
                 throw new Error('missing parameter : options.onResponse !');
             }
-            var callbackId = options.id || options.id === 0 ? options.id : this.uuid();
+            var callbackId = typeof options.callbackSuffix === 'string' ? options.callbackSuffix : this.uuid();
             var urlHasCallbackKey = false;
             var urlHasCallbackName = false;
             var idx = options.url.indexOf('callback=');
@@ -3536,8 +3536,7 @@ ProtocolsJSONP = function (Logger) {
                 if (!options.callbackName) {
                     logger.info('setting \'options.callbackName\' default value');
                     options.callbackName = 'callback';
-                    if (callbackId) {
-                        options.callbackName += '_';
+                    if (callbackId || callbackId === '') {
                         options.callbackName += callbackId;
                     }
                 }
@@ -3570,12 +3569,12 @@ ProtocolsJSONP = function (Logger) {
         },
         _createScript: function (callbackId, url) {
             var scriptu;
-            var scripto = document.getElementById('results_' + callbackId);
+            var scripto = document.getElementById('results' + callbackId);
             scriptu = document.createElement('script');
             scriptu.setAttribute('type', 'text/javascript');
             scriptu.setAttribute('src', url);
             scriptu.setAttribute('charset', 'UTF-8');
-            scriptu.setAttribute('id', 'results_' + callbackId);
+            scriptu.setAttribute('id', 'results' + callbackId);
             scriptu.setAttribute('async', 'true');
             var node = document.documentElement || document.getElementsByTagName('head')[0];
             if (scripto === null) {
@@ -3609,7 +3608,7 @@ ProtocolsProtocol = function (Helper, XHR, JSONP) {
                 nocache: true,
                 output: 'json',
                 callback: null,
-                id: 0
+                callbackSuffix: null
             };
             if (options.protocol === 'XHR' || options.format === 'json') {
                 settings.wrap = false;
@@ -3743,6 +3742,7 @@ ServicesCommonService = function (Logger, Helper, _, Protocol, ErrorService, Def
         this.options = {
             protocol: 'JSONP',
             proxyURL: '',
+            callbackSuffix: null,
             httpMethod: 'GET',
             timeOut: 0,
             rawResponse: false,
@@ -3877,6 +3877,7 @@ ServicesCommonService = function (Logger, Helper, _, Protocol, ErrorService, Def
                 format: this.options.outputFormat,
                 nocache: this.options.nocache || false,
                 wrap: this.options.protocol === 'XHR' ? false : true,
+                callbackSuffix: this.options.callbackSuffix,
                 data: strData,
                 headers: null,
                 content: null,
@@ -9951,7 +9952,7 @@ Gp = function (Services, AltiResponse, Elevation, AutoCompleteResponse, Suggeste
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta2',
-        servicesDate: '2016-03-17',
+        servicesDate: '2016-03-21',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;
