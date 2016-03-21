@@ -15,7 +15,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
          * Construction d'un identifiant statique basé sur le timestamp,
          * et qui s'incremente de +1 à chaque appel
          */
-        uuid : (function () {
+        uuid : ( function () {
             var id = Math.floor(Date.now());
             return function () {
                 return id++;

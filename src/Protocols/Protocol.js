@@ -123,7 +123,7 @@ function (Helper, XHR, JSONP) {
                         settings.url = Helper.normalyzeUrl(settings.url, settings.data);
                     }
 
-                    // appel du service en JSONPMath.floor(Date.now());
+                    // appel du service en JSONP
                     JSONP.call(settings);
                     break;
                 default:

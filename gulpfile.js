@@ -6,10 +6,14 @@
     // gestion des paths
     var path  = require("path");
 
+    // load plugins
     var $ = gulpLoadPlugins({pattern: '*', lazy: true});
 
+    // tests mocha
+    $.mochaPhantomJS = require('gulp-mocha-phantomjs');
+
     var _ = {
-        root:   '.',
+        root:   $.shelljs.pwd(),
         src:    './src',
         lib:    './lib',
         test:   './test',
@@ -81,7 +85,6 @@
     //| > Coding conventions respect
     //| > http://jscs.info/rules.html
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    //var jscs = require('gulp-jscs');
     gulp.task('jscs', function () {
 
         return gulp.src([ path.join(_.src, '**/*.js') ])
@@ -118,10 +121,8 @@
         // la ligne de commande est la suivante :
         // $.shelljs.exec('./node_modules/.bin/mocha --recursive -R list ./test/spec/');
 
-        var gmochaPhantomJS = require('gulp-mocha-phantomjs');
-
         return gulp.src(path.join(_.test, 'index.html'))
-            .pipe(gmochaPhantomJS({reporter: 'spec'}));
+            .pipe($.mochaPhantomJS({reporter: 'spec'}));
     });
 
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -251,18 +252,18 @@
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //| ✓ licence
     //| > ajout d'une licence au bundle
+    //| > https://www.npmjs.com/package/gulp-header
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task('licence', function () {
 
         // pour information,
         // le fichier de licence peut être un template,
         // les balises en nottion ES6-style : ${date}
-        var fs      = require('fs');
-        var header  = require('gulp-header');
+        var fs = require('fs');
         var licence = path.join(_.utils, "licence-template.txt");
 
         return gulp.src([ path.join(build.umd, (isDebug?  distFileNameDebug : distFileName)) ])
-                .pipe(header(fs.readFileSync(licence, 'utf8'), {
+                .pipe($.header(fs.readFileSync(licence, 'utf8'), {
                      date : buildDate,
                      version : npmConf.version
                 }))
@@ -274,14 +275,13 @@
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //| ✓ sources
     //| > copie des sources js
+    //| > https://www.npmjs.com/package/gulp-replace
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task('sources', function () {
 
-        var replace = require('gulp-replace');
-
         return gulp.src([ path.join(_.src, '**/*.js') ])
-                .pipe(replace(/__GPVERSION__/g,npmConf.version))
-                .pipe(replace(/__GPDATE__/g,buildDate))
+                .pipe($.replace(/__GPVERSION__/g,npmConf.version))
+                .pipe($.replace(/__GPDATE__/g,buildDate))
                 .pipe(gulp.dest(build.src))
                 .pipe($.plumber())
                 .pipe($.size()) ;
@@ -292,6 +292,7 @@
     //| > copie des pages d'exemples
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task('copy-sample', function () {
+
         return gulp.src([ path.join(_.sample, '**/*.html'), path.join(_.sample, '**/*.js') ])
                 .pipe(gulp.dest(build.sample))
                 .pipe($.plumber())
@@ -358,6 +359,7 @@
 
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //| ✓ connect to web server for test
+    //| > https://www.npmjs.com/package/gulp-connect
     //| > http://localhost:9001
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task('connect', $.connect.server({
@@ -384,6 +386,7 @@
 
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //| ✓ watch test change
+    //| > https://www.npmjs.com/package/gulp-watch
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task('watch', ['server-test'], function () {
         $.watch({glob: [ path.join(_.test, 'spec/**/*.js') ]}, function () {
@@ -394,6 +397,7 @@
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //| ✓ clean
     //| > nettoyage
+    //| > https://www.npmjs.com/package/gulp-clean
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task('clean', [], function () {
 
