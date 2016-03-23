@@ -51,7 +51,7 @@ La fonction [Gp.Services.geocode](http://ignf.github.io/geoportal-access-lib/v1.
 
 * le **localisant** dont on veut obtenir les coordonnées ;
 
-* le **type de localisant** : adresse ("StreetAddress"), toponyme ("PositionOfInterest") ou parcelle cadastrale ("CadastralParcels"). Choix multiple possible. Par défaut les adresses seront utilisées.
+* le **type de localisant** : adresse ("StreetAddress"), toponyme ("PositionOfInterest") ou parcelle cadastrale ("CadastralParcel"). Choix multiple possible. Par défaut les adresses seront utilisées.
 
 * d'autres paramètres éventuels à passer au service...
 
@@ -121,7 +121,7 @@ La fonction [Gp.Services.reverseGeocode](http://ignf.github.io/geoportal-access-
 
 * une **position** donnée
 
-* le **type de localisant** : adresse ("StreetAddress"), toponyme ("PositionOfInterest") ou parcelle cadastrale ("CadastralParcels"). Choix multiple possible. Par défaut les adresses seront utilisées.
+* le **type de localisant** : adresse ("StreetAddress"), toponyme ("PositionOfInterest") ou parcelle cadastrale ("CadastralParcel"). Choix multiple possible. Par défaut les adresses seront utilisées.
 
 * d'autres paramètres éventuels à passer au service...
 
