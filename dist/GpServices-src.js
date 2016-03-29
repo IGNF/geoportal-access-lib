@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta2
- * @date 2016-03-21
+ * @date 2016-03-29
  *
  */
 /*!
@@ -3309,6 +3309,14 @@ ServicesAutoConfFormatsAutoConfResponseReader = function (Logger, AutoConfRespon
                             tmsData.TMS.matrixIds.push(tm);
                         }
                     }
+                    if (tmsData.TMS.getProjection() === 'IGNF:WGS84G' || tmsData.TMS.getProjection() === 'EPSG:4326') {
+                        if (data.generalOptions && Array.isArray(data.generalOptions.wgs84Resolutions)) {
+                            var wgs84Resolutions = data.generalOptions.wgs84Resolutions;
+                            for (var i = 0; i < wgs84Resolutions.length; i++) {
+                                tmsData.resolutions[i] = parseFloat(wgs84Resolutions[i]);
+                            }
+                        }
+                    }
                     if (Array.isArray(tmsData.resolutions) && tmsData.resolutions.sort !== undefined) {
                         tmsData.resolutions.sort(function (x, y) {
                             return y - x;
@@ -3327,9 +3335,14 @@ ServicesAutoConfFormatsAutoConfResponseReader = function (Logger, AutoConfRespon
                 if (tmsData) {
                     var tileMatrix = new TileMatrix();
                     __getChildNodes(node, tileMatrix);
-                    var r = tileMatrix.scaleDenominator * 0.00028;
-                    if (tmsData.resolutions && Array.isArray(tmsData.resolutions)) {
-                        tmsData.resolutions.push(r);
+                    if (tmsData.TMS && tmsData.TMS.getProjection()) {
+                        var proj = tmsData.TMS.getProjection();
+                        if (proj === 'EPSG:3857' || proj === 'EPSG:2154') {
+                            var r = tileMatrix.scaleDenominator * 0.00028;
+                            if (tmsData.resolutions && Array.isArray(tmsData.resolutions)) {
+                                tmsData.resolutions.push(r);
+                            }
+                        }
                     }
                     if (tmsData.TMS && tmsData.TMS.tileMatrices) {
                         tmsData.TMS.tileMatrices[tileMatrix.matrixId] = tileMatrix;
@@ -7164,7 +7177,7 @@ Gp = function (Services, AltiResponse, Elevation, AutoCompleteResponse, Suggeste
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta2',
-        servicesDate: '2016-03-21',
+        servicesDate: '2016-03-29',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;

@@ -1,6 +1,6 @@
 
 /**
- * Fonction retournant un objet contenant des clés de lecture (readers) 
+ * Fonction retournant un objet contenant des clés de lecture (readers)
  *      qui permettent de parser des réponses XML du service d'autoconfiguration du Géoportail
  *      afin de récupérer les informations retournées.
  * @module AutoConfResponseReader
@@ -24,7 +24,7 @@ define([
     "Services/AutoConf/Response/model/TileMatrixSet",
     "Services/AutoConf/Response/model/TileMatrix",
     "Services/AutoConf/Response/model/TileMatrixLimit"
-], 
+],
 function (
     Logger,
     AutoConfResponse,
@@ -74,11 +74,11 @@ function (
     ];
 
     /**
-     * Namespace par défaut du format 
+     * Namespace par défaut du format
      */
     AutoConfResponseReader.DEFAULTPREFIX = "context";
 
-    /** 
+    /**
      * Objet contenant des fonctions de lecture, appelées "READERS"
      *      dont chaque clé correspond au nom d'un tag du XML que l'on souhaite lire
      *      et la valeur associée est une fonction (node, data)
@@ -414,7 +414,7 @@ function (
             // info: /General/Extension/gpp:General/gpp:Territories/gpp:Territory/gpp:defaultCRS
             /** TODO : jsdoc block */
             defaultCRS : function (node, territory) {
-                // info: Identifier for the default Coordinate Reference System (CRS).            
+                // info: Identifier for the default Coordinate Reference System (CRS).
                 if ( territory && territory.hasOwnProperty("defaultCRS") ) {
                     territory.defaultCRS = __getChildValue(node);
                 }
@@ -427,7 +427,7 @@ function (
                 // info: Identifier for additional Coordinate Reference System (CRS).
                 // info: data peut être une instance de Territory.js, ou une instance de Layer.js
                 var addCRS = __getChildValue(node);
-                if ( addCRS && data ) { 
+                if ( addCRS && data ) {
                     if ( Array.isArray(data.additionalCRS) ) { // cas d'un territoire
                         data.additionalCRS.push(addCRS);
                     } else { // cas d'une couche
@@ -900,6 +900,16 @@ function (
                         }
                     }
 
+                    if ( tmsData.TMS.getProjection() === "IGNF:WGS84G" || tmsData.TMS.getProjection() === "EPSG:4326" ) {
+                        if ( data.generalOptions && Array.isArray(data.generalOptions.wgs84Resolutions) ) {
+                            var wgs84Resolutions = data.generalOptions.wgs84Resolutions;
+                            for ( var i = 0; i < wgs84Resolutions.length; i++ ) {
+                                // info: les résolutions stockées dans wgs84Resolutions, issues de l'autoconf, sont des string
+                                tmsData.resolutions[i] = parseFloat(wgs84Resolutions[i]);
+                            }
+                        }
+                    }
+
                     // tri des résolutions (par ordre décroissant cette fois)
                     if ( Array.isArray(tmsData.resolutions) && tmsData.resolutions.sort !== undefined ) {
                         tmsData.resolutions.sort(
@@ -934,11 +944,17 @@ function (
                     // lecture des information du TileMatrix
                     __getChildNodes(node, tileMatrix);
 
-                    // calcul de la résolution associée, en m/px
-                    // en se basant sur une "taille standard de pixel" de 0.28mm*0.28mm (standard WMTS 1.0)
-                    var r = tileMatrix.scaleDenominator * 0.00028;
-                    if ( tmsData.resolutions && Array.isArray(tmsData.resolutions) ) {
-                        tmsData.resolutions.push(r);
+                    // calcul de la résolution associée au dénominateur d'échelle du niveau de pyramide, selon la projection.
+                    if ( tmsData.TMS && tmsData.TMS.getProjection() ) {
+                        var proj = tmsData.TMS.getProjection();
+                        if ( proj === "EPSG:3857" || proj === "EPSG:2154" ) {
+                            // calcul de la résolution associée, en m/px
+                            // en se basant sur une "taille standard de pixel" de 0.28mm*0.28mm (standard WMTS 1.0)
+                            var r = tileMatrix.scaleDenominator * 0.00028;
+                            if ( tmsData.resolutions && Array.isArray(tmsData.resolutions) ) {
+                                tmsData.resolutions.push(r);
+                            }
+                        }
                     }
 
                     // ajout du TileMatrix au TileMatrixSet
@@ -1015,7 +1031,7 @@ function (
                     child = children[i];
                     if ( child.nodeName === "exception" ) {
                         response.exceptionReport = AutoConfResponseReader.READERS["exception"](child);
-                    } 
+                    }
                 }
             }
             return response;
@@ -1039,11 +1055,11 @@ function (
 
             return exceptionReport;
         }
-        
+
     };
 
     /**
-     * Méthode permettant de lancer la lecture d'une réponse XML du service d'autoconf, 
+     * Méthode permettant de lancer la lecture d'une réponse XML du service d'autoconf,
      *      à l'aide des READERS de la classe.
      *
      * @method AutoConfResponseReader.read
@@ -1054,7 +1070,7 @@ function (
      * @memberof AutoConfResponseReader
      */
     AutoConfResponseReader.read = function (root) {
-        
+
         if ( root.nodeName === "ViewContext" ) {
             var nsPrefix = root.prefix || AutoConfResponseReader.DEFAULTPREFIX;
             var config = AutoConfResponseReader.READERS[nsPrefix][root.nodeName](root);
@@ -1097,7 +1113,7 @@ function (
      * @memberof AutoConfResponseReader
      * @method __getChildNodes
      * @param {DOMElement} node - a DOM node
-     * @param {Array|Object} [data] - an object to be filled with node data 
+     * @param {Array|Object} [data] - an object to be filled with node data
      */
     function __getChildNodes (node, data) {
 
@@ -1137,7 +1153,7 @@ function (
      */
     function __getChildValue (node) {
 
-        var textNode; 
+        var textNode;
         var value = "";
 
         if ( node.hasChildNodes() ) {
