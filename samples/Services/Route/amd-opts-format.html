@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../../../lib/external/require.js"></script>
+        <script>
+            /* global requirejs */
+            requirejs.config({
+                'baseUrl' : "../../../src/",
+                'paths': {
+                    // lib external
+                    'log4js' : "../lib/external/woodman/woodman-amd",
+                    'promise': '../lib/external/promise',
+                    // config du logger
+                    "logger-cfg" : "Utils/Logger.cfg"
+                }
+            });
+
+            requirejs(['Services/Route/Route'],
+                function (Route) {
+
+                    var options = {
+                      apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
+                      onSuccess : function (response) {console.log(response);},
+                      // options spécifiques au service
+                      startPoint : {
+                        x : 2.3,
+                        y : 48.8
+                      },
+                      endPoint : {
+                        x : 2.4,
+                        y : 48.9
+                      },
+                      routePreference : "shortest",
+                      provideGeometry : false
+                    };
+
+                    var o = new Route(options);
+                    o.call();
+            });
+            </script>
+    </head>
+    <body>
+        <h1>Utilisation des modules natifs AMD sur les services</h1>
+        <span>(Ouvrir la console)</span>
+    </body>
+</html>

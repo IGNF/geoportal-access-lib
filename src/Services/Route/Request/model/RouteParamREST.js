@@ -73,10 +73,10 @@ define(["Utils/LoggerByDefault"], function (Logger) {
             }
         }
 
-        // y'a t-il d'autres options à ajouter (par defaut) ?
-
         /** Format de sortie (résumé de l’itinéraire) */
-        this.format = "STANDARD";
+        this.format = (this.options.provideGeometry) ? "EXTENDED" : "STANDARD";
+
+        // y'a t-il d'autres options à ajouter (par defaut) ?
 
         /** Distance de tolérance (en mètre) de simplification de la géométrie. */
         this.tolerance = 10;
@@ -87,11 +87,9 @@ define(["Utils/LoggerByDefault"], function (Logger) {
         /** Profil du véhicule (enregistré dans les profils de véhicule) à utiliser */
         this.profileName = null;
 
-        // options dont le mapping n'est pas possible
-
+        // options dont le mapping n'est pas possible :
         // - distanceUnit
         // - provideBoundingBox
-        // - provideGeometry
     }
 
     /**
@@ -190,6 +188,13 @@ define(["Utils/LoggerByDefault"], function (Logger) {
             map.push({
                 k : "srs",
                 v : this.srs
+            });
+        }
+
+        if (this.format) {
+            map.push({
+                k : "format",
+                v : this.format
             });
         }
 

@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta2
- * @date 2016-03-29
+ * @date 2016-04-06
  *
  */
 /*!
@@ -3550,15 +3550,16 @@ ProtocolsJSONP = function (Logger) {
                 };
             }
             if (!HasCallbackName) {
+                var self = this;
                 var onTimeOutTrigger = null;
                 if (options.timeOut > 0) {
                     onTimeOutTrigger = window.setTimeout(function () {
                         window[options.callbackName] = function () {
                         };
                         options.onTimeOut();
+                        self._deleteScript(callbackId);
                     }, options.timeOut);
                 }
-                var self = this;
                 window[options.callbackName] = function (data) {
                     window.clearTimeout(onTimeOutTrigger);
                     options.onResponse(data);
@@ -3584,7 +3585,7 @@ ProtocolsJSONP = function (Logger) {
             }
         },
         _deleteScript: function (callbackId) {
-            var script = document.getElementById('results_' + callbackId);
+            var script = document.getElementById('results' + callbackId);
             if (script) {
                 var node = script.parentNode || document.documentElement;
                 if (!node) {
@@ -8633,7 +8634,7 @@ ServicesRouteRequestModelRouteParamREST = function (Logger) {
                 this.method = 'TIME';
             }
         }
-        this.format = 'STANDARD';
+        this.format = this.options.provideGeometry ? 'EXTENDED' : 'STANDARD';
         this.tolerance = 10;
         this.profileId = null;
         this.profileName = null;
@@ -8698,6 +8699,12 @@ ServicesRouteRequestModelRouteParamREST = function (Logger) {
             map.push({
                 k: 'srs',
                 v: this.srs
+            });
+        }
+        if (this.format) {
+            map.push({
+                k: 'format',
+                v: this.format
             });
         }
         return map;
@@ -8886,6 +8893,7 @@ ServicesRouteResponseModelRouteInstruction = function () {
         this.distance = null;
         this.code = null;
         this.instruction = null;
+        this.geometry = null;
     }
     RouteInstruction.prototype = { constructor: RouteInstruction };
     return RouteInstruction;
@@ -9141,7 +9149,11 @@ ServicesRouteResponseRouteResponseFactory = function (Logger, ErrorService, XML,
                                 options.onError.call(options.scope, new ErrorService(MRes.getMessage('PARAM_FORMAT', ['geometryWkt'])));
                             };
                             if (data.hasOwnProperty('routeGeometry')) {
-                                WKT.toJson(JSONResponse.geometryWkt, onWKTSuccess, onWKTError);
+                                var geometry = JSONResponse.geometryWkt;
+                                if (!geometry) {
+                                    geometry = JSONResponse.simplifiedWkt;
+                                }
+                                WKT.toJson(geometry, onWKTSuccess, onWKTError);
                                 if (!data.routeGeometry) {
                                     return;
                                 }
@@ -9169,9 +9181,27 @@ ServicesRouteResponseRouteResponseFactory = function (Logger, ErrorService, XML,
                                     data.routeInstructions[data.routeInstructions.length - 1].duration = step.duration;
                                     data.routeInstructions[data.routeInstructions.length - 1].distance = step.distance;
                                     data.routeInstructions[data.routeInstructions.length - 1].code = step.navInstruction;
+                                    var points = [];
+                                    for (var i = 0; i < step.points.length; i++) {
+                                        var point = step.points[i].split(',');
+                                        if (point) {
+                                            points.push(point);
+                                        }
+                                    }
+                                    if (points && points.length !== 0) {
+                                        data.routeInstructions[data.routeInstructions.length - 1].geometry = {
+                                            coordinates: points,
+                                            type: 'LineString'
+                                        };
+                                    } else {
+                                        data.routeInstructions[data.routeInstructions.length - 1].geometry = null;
+                                    }
+                                    if (step.name == 'Valeur non renseignée') {
+                                        step.name = '';
+                                    }
                                     switch (step.navInstruction) {
                                     case 'F':
-                                        if (step.name != 'Valeur non renseignée') {
+                                        if (!step.name) {
                                             data.routeInstructions[data.routeInstructions.length - 1].instruction = 'Tout droit ' + step.name;
                                         } else {
                                             data.routeInstructions[data.routeInstructions.length - 1].instruction = 'Continuer tout droit ';
@@ -9205,7 +9235,7 @@ ServicesRouteResponseRouteResponseFactory = function (Logger, ErrorService, XML,
                                         data.routeInstructions[data.routeInstructions.length - 1].instruction = 'Sortie rond-point ' + step.name;
                                         break;
                                     case null:
-                                        data.routeInstructions[data.routeInstructions.length - 1].instruction = 'Prendre ' + step.name;
+                                        data.routeInstructions[data.routeInstructions.length - 1].instruction = 'Prendre tout droit' + step.name;
                                         break;
                                     default:
                                         data.routeInstructions[data.routeInstructions.length - 1].instruction = '?' + step.navInstruction + '? ' + step.name;
@@ -9965,7 +9995,7 @@ Gp = function (Services, AltiResponse, Elevation, AutoCompleteResponse, Suggeste
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta2',
-        servicesDate: '2016-03-29',
+        servicesDate: '2016-04-06',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;

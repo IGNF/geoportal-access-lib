@@ -145,7 +145,11 @@ function (
                                 };
 
                                 if ( data.hasOwnProperty("routeGeometry")) {
-                                    WKT.toJson(JSONResponse.geometryWkt, onWKTSuccess, onWKTError);
+                                    var geometry = JSONResponse.geometryWkt;
+                                    if (!geometry) {
+                                        geometry = JSONResponse.simplifiedWkt;
+                                    }
+                                    WKT.toJson(geometry, onWKTSuccess, onWKTError);
                                     if (!data.routeGeometry) {
                                         return;
                                     }
@@ -175,6 +179,23 @@ function (
                                         data.routeInstructions[data.routeInstructions.length - 1].duration = step.duration;
                                         data.routeInstructions[data.routeInstructions.length - 1].distance = step.distance;
                                         data.routeInstructions[data.routeInstructions.length - 1].code = step.navInstruction;
+                                        // geometrie en geojson
+                                        var points = [];
+                                        for (var i = 0; i < step.points.length; i++) {
+                                            var point = step.points[i].split(",");
+                                            if (point) {
+                                                points.push(point);
+                                            }
+                                        }
+                                        if (points && points.length !== 0) {
+                                            data.routeInstructions[data.routeInstructions.length - 1].geometry = {
+                                                coordinates : points,
+                                                type : "LineString"
+                                            };
+                                        } else {
+                                            data.routeInstructions[data.routeInstructions.length - 1].geometry = null;
+                                        }
+
                                         /*
                                         Traduction du code en instruction
                                         * - F : tout droit
@@ -188,9 +209,15 @@ function (
                                         * - round_about_entry : entrée rond-point
                                         * - round_about_exit : sortie rond-point
                                         */
+
+                                        // on ne souhaite pas de ce type de valeur...
+                                        if (step.name == "Valeur non renseignée") {
+                                            step.name = "";
+                                        }
+
                                         switch (step.navInstruction) {
                                             case "F" :
-                                                if (step.name != "Valeur non renseignée") {
+                                                if (!step.name) {
                                                     data.routeInstructions[data.routeInstructions.length - 1].instruction = "Tout droit " + step.name;
                                                 } else {
                                                     data.routeInstructions[data.routeInstructions.length - 1].instruction = "Continuer tout droit ";
@@ -224,7 +251,7 @@ function (
                                                 data.routeInstructions[data.routeInstructions.length - 1].instruction = "Sortie rond-point " + step.name;
                                                 break;
                                             case null :
-                                                data.routeInstructions[data.routeInstructions.length - 1].instruction = "Prendre " + step.name;
+                                                data.routeInstructions[data.routeInstructions.length - 1].instruction = "Prendre tout droit" + step.name;
                                                 break;
                                             default :
                                                 data.routeInstructions[data.routeInstructions.length - 1].instruction = "?" + step.navInstruction + "? " + step.name;

@@ -17,10 +17,10 @@
  *      function onSuccess (json) {
  *          // {
  *          //      type : 'LINESTRING',
- *          //      points : {
+ *          //      coordinates : [
  *          //          [2.416907, 48.846577],
  *          //          [2.416916, 48.846613]
- *          //      }
+ *          //      ]
  *          // }
  *      },
  *      function onError (error) {
@@ -82,8 +82,8 @@ define(["Utils/LoggerByDefault"], function (Logger) {
                 subst = "[$1,$2]";
                 strWkt = strWkt.replace(regex, subst);
 
-                // regex type 
-                regex = /^(\w+)/;   
+                // regex type
+                regex = /^(\w+)/;
                 result = regex.exec(strWkt);
                 if (RegExp.$1 === "POLYGON") {
                     subst = "{\"type\" : \"Polygon\",";
@@ -115,7 +115,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
                     regex = /(\)\)?)/;
                     subst = "]}";
                     strWkt = strWkt.replace(regex, subst);
-                } 
+                }
 
                 logger.trace(strWkt);
 

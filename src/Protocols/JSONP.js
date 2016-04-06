@@ -169,6 +169,8 @@ define(["Utils/LoggerByDefault"], function (Logger) {
 
             if ( !HasCallbackName ) {
 
+                var self = this;
+
                 // event du timeout
                 var onTimeOutTrigger = null;
 
@@ -179,10 +181,10 @@ define(["Utils/LoggerByDefault"], function (Logger) {
                             /** fonction de reponse du service */
                             window[options.callbackName] = function () {};
                             options.onTimeOut();
+                            self._deleteScript(callbackId);
                         }, options.timeOut);
                 }
 
-                var self = this;
                 /** fonction de reponse du service */
                 window[options.callbackName] = function (data) {
                     window.clearTimeout(onTimeOutTrigger);
@@ -220,7 +222,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
         /** delete Script */
         _deleteScript : function (callbackId) {
 
-            var script = document.getElementById("results_" + callbackId);
+            var script = document.getElementById("results" + callbackId);
             if (script) {
                 var node = script.parentNode || document.documentElement;
                 if (!node) {

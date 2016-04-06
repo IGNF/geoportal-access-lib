@@ -1,4 +1,4 @@
-/* 
+/*
  * Tests de la construction d'une requête de calcul d'itinéraires, à partir d'options, par la classe RouteRequestFactory.
  */
 define(['chai'], function (chai) {
@@ -141,7 +141,7 @@ define(['chai'], function (chai) {
 				};
 
                 var valide =  function (result) {
-                    expect(result).to.be.equal("origin=2.64,48.54&destination=3.01,48.45&method=TIME");
+                    expect(result).to.be.equal("origin=2.64,48.54&destination=3.01,48.45&method=TIME&format=STANDARD");
                 };
 
 				var request = RouteRequestFactory.build(options);
@@ -173,12 +173,12 @@ define(['chai'], function (chai) {
                    exclusions : ["Tunnel", "Toll"],
                    distanceUnit : "km",
                    graph : "Voiture",
-                   provideGeometry : false,
+                   provideGeometry : true,
                    routePreference : "fastest"
 				};
 
                 var valide =  function (result) {
-                    expect(result).to.be.equal("origin=2.64,48.54&destination=3.01,48.45&method=TIME&graphName=Voiture&exclusions=Tunnel;Toll&srs=EPSG:4326");
+                    expect(result).to.be.equal("origin=2.64,48.54&destination=3.01,48.45&method=TIME&graphName=Voiture&exclusions=Tunnel;Toll&srs=EPSG:4326&format=EXTENDED");
                 };
 
 				var request = RouteRequestFactory.build(options);
