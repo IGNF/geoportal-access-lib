@@ -20,7 +20,7 @@ define([], function () {
      * - "round_about_exit" : round about exit
      *
      * @property {String} instruction - Instruction text : translated code + street name
-     * @property {Array} geometry - List points of street
+     * @property {Object} geometry - Geometry (expressed in [GeoJSON]{@link http://geojson.org/}) of the street.
      * @property {Float} distance - Length of the instruction. Expressed in km or m, depending on distanceUnit parameter.
      * @property {Float} duration - Instruction duration in seconds.
      *

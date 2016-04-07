@@ -71,8 +71,8 @@ function (
      * @param {Boolean} [options.provideBoundingBox = true] - Indique si les instructions doivent être localisées par une bbox dans la réponse.
      *      Par défaut : true.
      *
-     * @param {String} [options.distanceUnit = "km"] - Indique si les instructions doivent être localisées par une bbox dans la réponse.
-     *      Par défaut : true.
+     * @param {String} [options.distanceUnit = "km"] - Indique si la distance doit être exprimée en km ou m dans la réponse.
+     *      Par défaut : km.
      *
      * @param {String} [options.srs] - Système de coordonnées dans lequel les paramètres géographiques en entrée et la réponse du service sont exprimés.
      *      Pas de valeur par défaut. Si le serveur consulté est celui du Géoportail, la valeur par défaut sera donc celle du service : 'EPSG:4326'.
@@ -291,6 +291,7 @@ function (
         if (this.response) {
 
             var options = {
+                distanceUnit : this.options.distanceUnit, // FIXME ce parametre nous permet de choisir le type d'unité dans la reponse !
                 response : this.response,
                 outputFormat : this.options.outputFormat, // utile pour parser la string en mode XHR : JSON ou XML !
                 api : this.options.api,                   // utile de connaitre le type d'API car la reponse est differente !

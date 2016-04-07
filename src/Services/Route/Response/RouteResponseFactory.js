@@ -124,7 +124,7 @@ function (
                                     data.totalTime = parseFloat(JSONResponse.durationSeconds);
                                 }
                                 if ( data.hasOwnProperty("totalDistance")) {
-                                    data.totalDistance = JSONResponse.distance;
+                                    data.totalDistance = (options.distanceUnit === "m") ? JSONResponse.distanceMeters : JSONResponse.distance;
                                 }
 
                                 if ( data.hasOwnProperty("bbox")) {
@@ -176,8 +176,8 @@ function (
 
                                     steps.forEach( function (step) {
                                         data.routeInstructions.push(new RouteInstruction());
-                                        data.routeInstructions[data.routeInstructions.length - 1].duration = step.duration;
-                                        data.routeInstructions[data.routeInstructions.length - 1].distance = step.distance;
+                                        data.routeInstructions[data.routeInstructions.length - 1].duration = step.durationSeconds;
+                                        data.routeInstructions[data.routeInstructions.length - 1].distance = (options.distanceUnit === "m") ? step.distanceMeters : step.distance;
                                         data.routeInstructions[data.routeInstructions.length - 1].code = step.navInstruction;
                                         // geometrie en geojson
                                         var points = [];

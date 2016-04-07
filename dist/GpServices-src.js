@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta2
- * @date 2016-04-06
+ * @date 2016-04-07
  *
  */
 /*!
@@ -6368,7 +6368,7 @@ ServicesRouteResponseRouteResponseFactory = function (Logger, ErrorService, XML,
                                 data.totalTime = parseFloat(JSONResponse.durationSeconds);
                             }
                             if (data.hasOwnProperty('totalDistance')) {
-                                data.totalDistance = JSONResponse.distance;
+                                data.totalDistance = options.distanceUnit === 'm' ? JSONResponse.distanceMeters : JSONResponse.distance;
                             }
                             if (data.hasOwnProperty('bbox')) {
                                 var coords = JSONResponse.bounds.split(/[,;]/);
@@ -6414,8 +6414,8 @@ ServicesRouteResponseRouteResponseFactory = function (Logger, ErrorService, XML,
                                 }
                                 steps.forEach(function (step) {
                                     data.routeInstructions.push(new RouteInstruction());
-                                    data.routeInstructions[data.routeInstructions.length - 1].duration = step.duration;
-                                    data.routeInstructions[data.routeInstructions.length - 1].distance = step.distance;
+                                    data.routeInstructions[data.routeInstructions.length - 1].duration = step.durationSeconds;
+                                    data.routeInstructions[data.routeInstructions.length - 1].distance = options.distanceUnit === 'm' ? step.distanceMeters : step.distance;
                                     data.routeInstructions[data.routeInstructions.length - 1].code = step.navInstruction;
                                     var points = [];
                                     for (var i = 0; i < step.points.length; i++) {
@@ -6606,6 +6606,7 @@ ServicesRouteRoute = function (Logger, _, ErrorService, CommonService, DefaultUr
     Route.prototype.analyzeResponse = function (error, success) {
         if (this.response) {
             var options = {
+                distanceUnit: this.options.distanceUnit,
                 response: this.response,
                 outputFormat: this.options.outputFormat,
                 api: this.options.api,
@@ -7207,7 +7208,7 @@ Gp = function (Services, AltiResponse, Elevation, AutoCompleteResponse, Suggeste
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta2',
-        servicesDate: '2016-04-06',
+        servicesDate: '2016-04-07',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;
