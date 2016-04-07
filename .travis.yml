@@ -4,4 +4,3 @@ script: gulp build
 cache:
   directories:
     - node_modules
-sudo: false
