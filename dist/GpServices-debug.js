@@ -9235,7 +9235,7 @@ ServicesRouteResponseRouteResponseFactory = function (Logger, ErrorService, XML,
                                         data.routeInstructions[data.routeInstructions.length - 1].instruction = 'Sortie rond-point ' + step.name;
                                         break;
                                     case null:
-                                        data.routeInstructions[data.routeInstructions.length - 1].instruction = 'Prendre tout droit' + step.name;
+                                        data.routeInstructions[data.routeInstructions.length - 1].instruction = 'Prendre tout droit ' + step.name;
                                         break;
                                     default:
                                         data.routeInstructions[data.routeInstructions.length - 1].instruction = '?' + step.navInstruction + '? ' + step.name;
