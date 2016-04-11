@@ -49,7 +49,7 @@ define([
             *      exclusions : ["Bridge", "Tunnel", "Toll"],
             *      distanceUnit : "km",
             *      graph : "Voiture",
-            *      provideGeometry : false,
+            *      geometryInInstructions : false,
             *      routePreference : "fastest"
             *   };
             *   RouteRequestFactory.build(options);

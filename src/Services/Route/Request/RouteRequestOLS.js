@@ -53,7 +53,7 @@ define([
                     expectedStartTime : options.expectedStartTime, // TODO format ?
                     distanceUnit : options.distanceUnit,
                     graph : options.graph,
-                    provideGeometry : options.provideGeometry,
+                    provideGeometry : options.geometryInInstructions, // mapping OLS et options
                     routePreference : options.routePreference
                 };
 

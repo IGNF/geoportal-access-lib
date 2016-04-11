@@ -145,13 +145,12 @@ function (
                                 };
 
                                 if ( data.hasOwnProperty("routeGeometry")) {
-                                    var geometry = JSONResponse.geometryWkt;
-                                    if (!geometry) {
-                                        geometry = JSONResponse.simplifiedWkt;
-                                    }
-                                    WKT.toJson(geometry, onWKTSuccess, onWKTError);
-                                    if (!data.routeGeometry) {
-                                        return;
+                                    var geometry = JSONResponse.geometryWkt || JSONResponse.simplifiedWkt;
+                                    if (geometry) {
+                                        WKT.toJson(geometry, onWKTSuccess, onWKTError);
+                                        if (!data.routeGeometry) {
+                                            return;
+                                        }
                                     }
                                 }
 
@@ -217,7 +216,7 @@ function (
 
                                         switch (step.navInstruction) {
                                             case "F" :
-                                                if (!step.name) {
+                                                if (step.name) {
                                                     data.routeInstructions[data.routeInstructions.length - 1].instruction = "Tout droit " + step.name;
                                                 } else {
                                                     data.routeInstructions[data.routeInstructions.length - 1].instruction = "Continuer tout droit ";

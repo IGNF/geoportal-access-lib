@@ -191,7 +191,7 @@ define([
             * @param {Array.<Gp.Point>} [options.viaPoints] - Ordered via Points of the route. Expressed in EPSG:4326 coordinates system.
             * @param {String} [options.graph = "Voiture"] - User profile to use to compute the route : "Voiture" (using a vehicule) or "Pieton" (pedestrian). Has an influence on the kind of roads the route may use and the average speed.
             * @param {Array.<String>} [options.avoidFeature] - Indicates if route has to avoid some features ("toll", "bridges" or "tunnel").
-            * @param {Boolean} [options.provideGeometry = false] - Indicates if route geometry has to be also returned with route instructions.
+            * @param {Boolean} [options.geometryInInstructions = false] - Indicates if route geometry has to be also returned with route instructions.
             * @param {Boolean} [options.provideBoundingBox = true] - Indicates if route instructions has to be localised with a BBOX in the response.
             * @param {String} [options.distanceUnit = "km"] - The unit used to provide distances in the response ("m" or "km").
             * @param {Function} options.onSuccess - callback function for getting successful service response. Takes a {@link Gp.Services.RouteResponse} object as a parameter. Except if "rawResponse" is set to true.

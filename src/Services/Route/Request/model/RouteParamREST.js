@@ -74,7 +74,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
         }
 
         /** Format de sortie (résumé de l’itinéraire) */
-        this.format = (this.options.provideGeometry) ? "EXTENDED" : "STANDARD";
+        this.format = (this.options.geometryInInstructions) ? "STANDARDEXT" : "STANDARD";
 
         // y'a t-il d'autres options à ajouter (par defaut) ?
 

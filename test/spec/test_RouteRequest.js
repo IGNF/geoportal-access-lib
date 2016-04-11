@@ -89,7 +89,7 @@ define(['chai'], function (chai) {
                    exclusions : ["Tunnel", "Toll"],
                    distanceUnit : "km",
                    graph : "Voiture",
-                   provideGeometry : false,
+                   geometryInInstructions : false,
                    routePreference : "fastest"
 				};
 
@@ -173,12 +173,12 @@ define(['chai'], function (chai) {
                    exclusions : ["Tunnel", "Toll"],
                    distanceUnit : "km",
                    graph : "Voiture",
-                   provideGeometry : true,
+                   geometryInInstructions : true,
                    routePreference : "fastest"
 				};
 
                 var valide =  function (result) {
-                    expect(result).to.be.equal("origin=2.64,48.54&destination=3.01,48.45&method=TIME&graphName=Voiture&exclusions=Tunnel;Toll&srs=EPSG:4326&format=EXTENDED");
+                    expect(result).to.be.equal("origin=2.64,48.54&destination=3.01,48.45&method=TIME&graphName=Voiture&exclusions=Tunnel;Toll&srs=EPSG:4326&format=STANDARDEXT");
                 };
 
 				var request = RouteRequestFactory.build(options);

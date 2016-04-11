@@ -10,7 +10,7 @@ define([], function () {
      * @property {Array.<Gp.Services.Route.RouteInstruction>} routeInstructions - Instructions of the route.
      * @property {Float} totalDistance - Length of the route. Expressed in km or m, depending on distanceUnit parameter.
      * @property {Float} totalTime - Route duration in seconds.
-     * 
+     *
      * @namespace
      * @alias Gp.Services.RouteResponse
      */
@@ -21,26 +21,26 @@ define([], function () {
         }
 
         this.totalTime = null;
-         
+
         this.totalDistance = null;
 
         this.bbox = {
-            left : null, 
-            right : null, 
-            top : null, 
+            left : null,
+            right : null,
+            top : null,
             bottom : null
         };
 
-        this.routeGeometry = null;
+        this.routeGeometry = null; // FIXME can be null if option 'geometryInInstructions' is true !
 
         this.routeInstructions = [];
     }
-    
+
     RouteResponse.prototype = {
 
         constructor : RouteResponse
 
     };
-    
+
     return RouteResponse;
 });
