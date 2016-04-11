@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta2
- * @date 2016-04-07
+ * @date 2016-04-11
  *
  */
 /*!
@@ -8634,7 +8634,7 @@ ServicesRouteRequestModelRouteParamREST = function (Logger) {
                 this.method = 'TIME';
             }
         }
-        this.format = this.options.provideGeometry ? 'EXTENDED' : 'STANDARD';
+        this.format = this.options.provideGeometry ? 'STANDARDEXT' : 'STANDARD';
         this.tolerance = 10;
         this.profileId = null;
         this.profileName = null;
@@ -9149,13 +9149,12 @@ ServicesRouteResponseRouteResponseFactory = function (Logger, ErrorService, XML,
                                 options.onError.call(options.scope, new ErrorService(MRes.getMessage('PARAM_FORMAT', ['geometryWkt'])));
                             };
                             if (data.hasOwnProperty('routeGeometry')) {
-                                var geometry = JSONResponse.geometryWkt;
-                                if (!geometry) {
-                                    geometry = JSONResponse.simplifiedWkt;
-                                }
-                                WKT.toJson(geometry, onWKTSuccess, onWKTError);
-                                if (!data.routeGeometry) {
-                                    return;
+                                var geometry = JSONResponse.geometryWkt || JSONResponse.simplifiedWkt;
+                                if (geometry) {
+                                    WKT.toJson(geometry, onWKTSuccess, onWKTError);
+                                    if (!data.routeGeometry) {
+                                        return;
+                                    }
                                 }
                             }
                             if (data.hasOwnProperty('routeInstructions')) {
@@ -9201,7 +9200,7 @@ ServicesRouteResponseRouteResponseFactory = function (Logger, ErrorService, XML,
                                     }
                                     switch (step.navInstruction) {
                                     case 'F':
-                                        if (!step.name) {
+                                        if (step.name) {
                                             data.routeInstructions[data.routeInstructions.length - 1].instruction = 'Tout droit ' + step.name;
                                         } else {
                                             data.routeInstructions[data.routeInstructions.length - 1].instruction = 'Continuer tout droit ';
@@ -9996,7 +9995,7 @@ Gp = function (Services, AltiResponse, Elevation, AutoCompleteResponse, Suggeste
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta2',
-        servicesDate: '2016-04-07',
+        servicesDate: '2016-04-11',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;

@@ -41,7 +41,7 @@ define([], function () {
 
         this.instruction = null;
 
-        this.geometry = null;
+        this.geometry = null; // FIXME can be null if option 'provideGeometry' is false !
     }
 
     RouteInstruction.prototype = {
