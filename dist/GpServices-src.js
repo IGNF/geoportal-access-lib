@@ -5838,7 +5838,7 @@ ServicesRouteRequestRouteRequestOLS = function (Logger, XLS, RouteService) {
                 expectedStartTime: options.expectedStartTime,
                 distanceUnit: options.distanceUnit,
                 graph: options.graph,
-                provideGeometry: options.provideGeometry,
+                provideGeometry: options.geometryInInstructions,
                 routePreference: options.routePreference
             };
             var oRS = new RouteService(settings);
@@ -5885,7 +5885,7 @@ ServicesRouteRequestModelRouteParamREST = function (Logger) {
                 this.method = 'TIME';
             }
         }
-        this.format = this.options.provideGeometry ? 'STANDARDEXT' : 'STANDARD';
+        this.format = this.options.geometryInInstructions ? 'STANDARDEXT' : 'STANDARD';
         this.tolerance = 10;
         this.profileId = null;
         this.profileName = null;
@@ -6470,7 +6470,7 @@ ServicesRouteResponseRouteResponseFactory = function (Logger, ErrorService, XML,
                                         data.routeInstructions[data.routeInstructions.length - 1].instruction = 'Sortie rond-point ' + step.name;
                                         break;
                                     case null:
-                                        data.routeInstructions[data.routeInstructions.length - 1].instruction = 'Prendre tout droit' + step.name;
+                                        data.routeInstructions[data.routeInstructions.length - 1].instruction = 'Prendre tout droit ' + step.name;
                                         break;
                                     default:
                                         data.routeInstructions[data.routeInstructions.length - 1].instruction = '?' + step.navInstruction + '? ' + step.name;
@@ -6536,7 +6536,7 @@ ServicesRouteRoute = function (Logger, _, ErrorService, CommonService, DefaultUr
         this.options.exclusions = options.exclusions || null;
         this.options.routePreference = options.routePreference || 'fastest';
         this.options.graph = options.graph || 'Voiture';
-        this.options.provideGeometry = options.provideGeometry || false;
+        this.options.geometryInInstructions = options.geometryInInstructions || false;
         this.options.provideBbox = options.provideBbox || true;
         this.options.distanceUnit = options.distanceUnit || 'km';
         this.options.expectedStartTime = null;
@@ -6591,7 +6591,7 @@ ServicesRouteRoute = function (Logger, _, ErrorService, CommonService, DefaultUr
             exclusions: this.options.exclusions,
             distanceUnit: this.options.distanceUnit,
             graph: this.options.graph,
-            provideGeometry: this.options.provideGeometry,
+            geometryInInstructions: this.options.geometryInInstructions,
             routePreference: this.options.routePreference,
             srs: this.options.srs
         };

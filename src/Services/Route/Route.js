@@ -65,7 +65,7 @@ function (
      *      On précise ici le type de tronçons que l'on ne veut pas que l'itinéraire emprunte
      *      (valeurs possibles : « toll » (éviter les péages), « bridge », « tunnel »).
      *
-     * @param {Boolean} [options.provideGeometry = false] - Indique si la géométrie de l'itinéraire doit être reprise morceau par morceau dans les instructions.
+     * @param {Boolean} [options.geometryInInstructions = false] - Indique si la géométrie de l'itinéraire doit être reprise morceau par morceau dans les instructions.
      *      Par défaut : false.
      *
      * @param {Boolean} [options.provideBoundingBox = true] - Indique si les instructions doivent être localisées par une bbox dans la réponse.
@@ -105,7 +105,7 @@ function (
      *      exclusions : ["Bridge", "Tunnel", "Toll"],
      *      distanceUnit : "km",
      *      graph: "Voiture",
-     *      provideGeometry : false,
+     *      geometryInInstructions : false,
      *      routePreference : "fastest"
      *  };
      *
@@ -168,7 +168,7 @@ function (
         this.options.exclusions = options.exclusions || null;         // INFO mapping exclusions <=> xls:avoidFeature
         this.options.routePreference = options.routePreference || "fastest";
         this.options.graph = options.graph || "Voiture";
-        this.options.provideGeometry = options.provideGeometry || false;
+        this.options.geometryInInstructions = options.geometryInInstructions || false; // INFO mapping geometryInInstructions <=> xls:provideGeometry
         this.options.provideBbox = options.provideBbox || true;       // INFO mapping provideBbox <=> xls:provideBoundingBox
         this.options.distanceUnit = options.distanceUnit || "km";
         this.options.expectedStartTime = null;                        // FIXME not yet implemented !
@@ -259,7 +259,7 @@ function (
             exclusions : this.options.exclusions,
             distanceUnit : this.options.distanceUnit,
             graph : this.options.graph,
-            provideGeometry : this.options.provideGeometry,
+            geometryInInstructions : this.options.geometryInInstructions,
             routePreference : this.options.routePreference,
             srs : this.options.srs
         };

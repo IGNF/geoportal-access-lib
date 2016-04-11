@@ -31,7 +31,7 @@ define([], function () {
             bottom : null
         };
 
-        this.routeGeometry = null; // FIXME can be null if option 'provideGeometry' is true !
+        this.routeGeometry = null; // FIXME can be null if option 'geometryInInstructions' is true !
 
         this.routeInstructions = [];
     }

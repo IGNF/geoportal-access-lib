@@ -89,7 +89,7 @@ define(['chai'], function (chai) {
                    exclusions : ["Tunnel", "Toll"],
                    distanceUnit : "km",
                    graph : "Voiture",
-                   provideGeometry : false,
+                   geometryInInstructions : false,
                    routePreference : "fastest"
 				};
 
@@ -173,7 +173,7 @@ define(['chai'], function (chai) {
                    exclusions : ["Tunnel", "Toll"],
                    distanceUnit : "km",
                    graph : "Voiture",
-                   provideGeometry : true,
+                   geometryInInstructions : true,
                    routePreference : "fastest"
 				};
 
