@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta2
- * @date 2016-04-11
+ * @date 2016-04-18
  *
  */
 /*!
@@ -5349,10 +5349,10 @@ ServicesGeocodeReverseGeocode = function (Logger, _, ErrorService, CommonService
         if (!options.position) {
             throw new Error(_.getMessage('PARAM_MISSING', 'position'));
         }
-        if (!options.position.x) {
+        if (options.position.x == null) {
             throw new Error(_.getMessage('PARAM_MISSING', 'position.x'));
         }
-        if (!options.position.y) {
+        if (options.position.y == null) {
             throw new Error(_.getMessage('PARAM_MISSING', 'position.y'));
         }
         this.options.position = options.position;
@@ -6513,19 +6513,19 @@ ServicesRouteRoute = function (Logger, _, ErrorService, CommonService, DefaultUr
         if (!options.startPoint) {
             throw new Error(_.getMessage('PARAM_MISSING', 'startPoint'));
         }
-        if (!options.startPoint.x) {
+        if (options.startPoint.x == null) {
             throw new Error(_.getMessage('PARAM_MISSING', 'startPoint.x'));
         }
-        if (!options.startPoint.y) {
+        if (options.startPoint.y == null) {
             throw new Error(_.getMessage('PARAM_MISSING', 'startPoint.y'));
         }
         if (!options.endPoint) {
             throw new Error(_.getMessage('PARAM_MISSING', 'endPoint'));
         }
-        if (!options.endPoint.x) {
+        if (options.endPoint.x == null) {
             throw new Error(_.getMessage('PARAM_MISSING', 'endPoint.x'));
         }
-        if (!options.endPoint.y) {
+        if (options.endPoint.y == null) {
             throw new Error(_.getMessage('PARAM_MISSING', 'endPoint.y'));
         }
         this.options.api = typeof options.api == 'string' ? options.api.toUpperCase() : 'REST';
@@ -7083,10 +7083,10 @@ ServicesProcessIsoCurveProcessIsoCurve = function (Logger, _, ErrorService, Comm
         if (!options.position) {
             throw new Error(_.getMessage('PARAM_MISSING', 'position'));
         }
-        if (!options.position.x) {
+        if (options.position.x == null) {
             throw new Error(_.getMessage('PARAM_MISSING', 'position.x'));
         }
-        if (!options.position.y) {
+        if (options.position.y == null) {
             throw new Error(_.getMessage('PARAM_MISSING', 'position.y'));
         }
         if (!options.time && !options.distance) {
@@ -7207,7 +7207,7 @@ Gp = function (Services, AltiResponse, Elevation, AutoCompleteResponse, Suggeste
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta2',
-        servicesDate: '2016-04-11',
+        servicesDate: '2016-04-18',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;

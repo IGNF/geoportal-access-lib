@@ -190,7 +190,7 @@ define([
             * @param {Gp.Point} options.endPoint - End point of the route. Expressed in EPSG:4326 coordinates system.
             * @param {Array.<Gp.Point>} [options.viaPoints] - Ordered via Points of the route. Expressed in EPSG:4326 coordinates system.
             * @param {String} [options.graph = "Voiture"] - User profile to use to compute the route : "Voiture" (using a vehicule) or "Pieton" (pedestrian). Has an influence on the kind of roads the route may use and the average speed.
-            * @param {Array.<String>} [options.avoidFeature] - Indicates if route has to avoid some features ("toll", "bridges" or "tunnel").
+            * @param {Array.<String>} [options.exclusions] - Indicates if route has to avoid some features ("toll", "bridge" or "tunnel").
             * @param {Boolean} [options.geometryInInstructions = false] - Indicates if route geometry has to be also returned with route instructions.
             * @param {Boolean} [options.provideBoundingBox = true] - Indicates if route instructions has to be localised with a BBOX in the response.
             * @param {String} [options.distanceUnit = "km"] - The unit used to provide distances in the response ("m" or "km").
@@ -218,7 +218,7 @@ define([
             * @param {Gp.Point} options.position - Start or Arrival (options.reverse==true) Point for the computing. Expressed in the coordinates system given with options.srs.
             * @param {String} [options.srs] - Coordinates System used to express coordinates for parameters and responses. Default underlying service value (EPSG:4326) applies.
             * @param {String} [options.graph = "Voiture"] - User profile to use to compute the isoCurve : "Voiture" (using a vehicule) or "Pieton" (pedestrian). Has an influence on the kind of roads to use and the average speed.
-            * @param {Array.<String>} [options.exclusions] - (FIXME : options.avoidFeature) Indicates if route has to avoid some features ("toll", "bridges" or "tunnel").
+            * @param {Array.<String>} [options.exclusions] - (FIXME : options.avoidFeature) Indicates if route has to avoid some features ("toll", "bridge" or "tunnel").
             * @param {String} [options.method = "time"] - Computing method to use : "time" (using a duration as a constraint) or "distance" (using a distance as a constraint).
             * @param {Float} options.time - Maximum duration (expressed in seconds) to use when options.method is set to "time".
             * @param {Float} options.distance - Maximum distance (expressed in meters) to use when options.method is set to "distance".
