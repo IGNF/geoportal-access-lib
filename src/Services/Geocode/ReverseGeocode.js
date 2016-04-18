@@ -117,11 +117,11 @@ function (
         }
 
         // on lance une exception afin d'eviter au service de le faire...
-        if (!options.position.x) {
+        if ( options.position.x == null ) {
             throw new Error(_.getMessage("PARAM_MISSING", "position.x"));
         }
 
-        if (!options.position.y) {
+        if ( options.position.y == null ) {
             throw new Error(_.getMessage("PARAM_MISSING", "position.y"));
         }
 

@@ -61,12 +61,12 @@ function (
      *      Détermine le profil de vitesses utilisé pour le calcul ainsi que les tronçons autorisés ou non.
      *      Par défaut, c'est la valeur "Voiture" qui sera utilisée.
      *
-     * @param {String[]} [options.avoidFeature] - Critères d'avoidFeature à appliquer pour le calcul.
+     * @param {String[]} [options.exclusions] - Critères d'exclusions à appliquer pour le calcul. (correspond au paramètre "avoidFeature" d'OpenLS)
      *      On précise ici le type de tronçons que l'on ne veut pas que l'itinéraire emprunte
      *      (valeurs possibles : « toll » (éviter les péages), « bridge », « tunnel »).
      *
      * @param {Boolean} [options.geometryInInstructions = false] - Indique si la géométrie de l'itinéraire doit être reprise morceau par morceau dans les instructions.
-     *      Par défaut : false.
+     *      (correspond au paramètre "provideGeometry" d'OpenLS) Par défaut : false.
      *
      * @param {Boolean} [options.provideBoundingBox = true] - Indique si les instructions doivent être localisées par une bbox dans la réponse.
      *      Par défaut : true.
@@ -129,29 +129,29 @@ function (
         this.logger = Logger.getLogger("Gp.Services.Route");
         this.logger.trace("[Constructeur Route(options)]");
 
-        if (!options.startPoint) {
+        if ( !options.startPoint ) {
             throw new Error(_.getMessage("PARAM_MISSING", "startPoint"));
         }
 
         // on lance une exception afin d'eviter au service de le faire...
-        if (!options.startPoint.x) {
+        if ( options.startPoint.x == null ) {
             throw new Error(_.getMessage("PARAM_MISSING", "startPoint.x"));
         }
 
-        if (!options.startPoint.y) {
+        if ( options.startPoint.y == null ) {
             throw new Error(_.getMessage("PARAM_MISSING", "startPoint.y"));
         }
 
-        if (!options.endPoint) {
+        if ( !options.endPoint ) {
             throw new Error(_.getMessage("PARAM_MISSING", "endPoint"));
         }
 
         // on lance une exception afin d'eviter au service de le faire...
-        if (!options.endPoint.x) {
+        if ( options.endPoint.x == null ) {
             throw new Error(_.getMessage("PARAM_MISSING", "endPoint.x"));
         }
 
-        if (!options.endPoint.y) {
+        if ( options.endPoint.y == null ) {
             throw new Error(_.getMessage("PARAM_MISSING", "endPoint.y"));
         }
 
