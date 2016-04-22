@@ -61,14 +61,14 @@ function (
      *      Détermine le profil de vitesses utilisé pour le calcul ainsi que les tronçons autorisés ou non.
      *      Par défaut, c'est la valeur "Voiture" qui sera utilisée.
      *
-     * @param {String[]} [options.avoidFeature] - Critères d'avoidFeature à appliquer pour le calcul.
+     * @param {String[]} [options.exclusions] - Critères d'exclusions à appliquer pour le calcul.
      *      On précise ici le type de tronçons que l'on ne veut pas que l'itinéraire emprunte
      *      (valeurs possibles : « toll » (éviter les péages), « bridge », « tunnel »).
      *
      * @param {Boolean} [options.geometryInInstructions = false] - Indique si la géométrie de l'itinéraire doit être reprise morceau par morceau dans les instructions.
      *      Par défaut : false.
      *
-     * @param {Boolean} [options.provideBoundingBox = true] - Indique si les instructions doivent être localisées par une bbox dans la réponse.
+     * @param {Boolean} [options.provideBbox = true] - Indique si les instructions doivent être localisées par une bbox dans la réponse.
      *      Par défaut : true.
      *
      * @param {String} [options.distanceUnit = "km"] - Indique si la distance doit être exprimée en km ou m dans la réponse.

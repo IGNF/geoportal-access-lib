@@ -147,36 +147,36 @@ define(["Utils/LoggerByDefault"], function (Logger) {
          * - __AVOIDLIST__ (lst!), __AVOIDFEATURE__, __VALUEAVOIDFEATURE__
          */
         template : {
-            routePlan : "\t\t\t<RoutePlan>\n" +
-            "__ROUTEPREFERENCE__\n" +
-            "__GRAPH__\n" +
-            "__WAYPOINTLIST__ \n" +
-            "__AVOIDLIST__ \n" +
-            "\t\t\t</RoutePlan>",
-            routePreference : "\t\t\t\t<RoutePreference>__VALUEROUTEPREFERENCE__</RoutePreference>",
-            graph : "\t\t\t\t<xlsext:graphName xmlns:xlsext=\"http://www.opengis.net/xlsext\" name=\"__VALUEGRAPH__\"/>",
+            routePlan : "<RoutePlan>" +
+            "__ROUTEPREFERENCE__" +
+            "__GRAPH__" +
+            "__WAYPOINTLIST__" +
+            "__AVOIDLIST__" +
+            "</RoutePlan>",
+            routePreference : "<RoutePreference>__VALUEROUTEPREFERENCE__</RoutePreference>",
+            graph : "<xlsext:graphName xmlns:xlsext=\"http://www.opengis.net/xlsext\" name=\"__VALUEGRAPH__\"/>",
             wayPointList : {
-                container : "\t\t\t\t<WayPointList>\n" +
+                container : "<WayPointList>" +
                 "__STARTPOINT__" +
                 "__VIAPOINT__" +
                 "__ENDPOINT__" +
-                "\t\t\t\t</WayPointList>\n",
-                point : "\t\t\t\t\t\t<Position><gml:Point xmlns:gml=\"http://www.opengis.net/gml\"><gml:pos>__X__ __Y__</gml:pos></gml:Point></Position>",
-                startPoint : "\t\t\t\t\t<StartPoint>\n" +
-                            "__POINT__\n" +
-                            "\t\t\t\t\t</StartPoint>\n",
-                endPoint : "\t\t\t\t\t<EndPoint>\n" +
-                          "__POINT__\n" +
-                          "\t\t\t\t\t</EndPoint>\n",
-                viaPoint : "\t\t\t\t\t<ViaPoint>\n" +
-                          "__POINT__\n" +
-                          "\t\t\t\t\t</ViaPoint>\n" // implémentation de plusieurs étapes...
+                "</WayPointList>",
+                point : "<Position><gml:Point xmlns:gml=\"http://www.opengis.net/gml\"><gml:pos>__X__ __Y__</gml:pos></gml:Point></Position>",
+                startPoint : "<StartPoint>" +
+                            "__POINT__" +
+                            "</StartPoint>",
+                endPoint : "<EndPoint>" +
+                          "__POINT__" +
+                          "</EndPoint>",
+                viaPoint : "<ViaPoint>" +
+                          "__POINT__" +
+                          "</ViaPoint>" // implémentation de plusieurs étapes...
             },
             avoidList : {
-                container : "\t\t\t\t<AvoidList>\n" +
-                "__AVOIDFEATURE__\n" +
-                "\t\t\t\t</AvoidList>",
-                avoidFeature : "\t\t\t\t\t<AvoidFeature>__VALUEAVOIDFEATURE__</AvoidFeature>"
+                container : "<AvoidList>" +
+                "__AVOIDFEATURE__" +
+                "</AvoidList>",
+                avoidFeature : "<AvoidFeature>__VALUEAVOIDFEATURE__</AvoidFeature>"
             }
         },
 

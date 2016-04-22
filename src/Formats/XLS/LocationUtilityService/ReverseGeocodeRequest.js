@@ -108,10 +108,10 @@ function (Logger, Position, Preference) {
          * substitution des valeurs suivantes :
          * __POSITION__, __PREFERENCE__, __RETURNFREEFORM__
          */
-        template : "\t\t<ReverseGeocodeRequest returnFreeForm=\"__RETURNFREEFORM__\">\n" +
-                 "__POSITION__ \n" +
-                 "__PREFERENCE__\n" +
-                 "\t\t</ReverseGeocodeRequest>",
+        template : "<ReverseGeocodeRequest returnFreeForm=\"__RETURNFREEFORM__\">" +
+                 "__POSITION__" +
+                 "__PREFERENCE__" +
+                 "</ReverseGeocodeRequest>",
 
         /**
          * Ajout d"un objet de type Position

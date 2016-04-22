@@ -167,29 +167,29 @@ define(["Gp", "Utils/LoggerByDefault"], function (Gp, Logger) {
          * @todo gestion de l"indentation
          */
         template : {
-            address : "\t\t\t<Address countryCode=\"__COUNTRYCODE__\">\n" +
-                      "__LOCATION__ \n" +
-                      "__PLACE__ \n" +
-                      "__POSTALCODE__ \n" +
-                      "__ENVELOPE__ \n" +
-                      "\t\t\t</Address>",
+            address : "<Address countryCode=\"__COUNTRYCODE__\">" +
+                      "__LOCATION__" +
+                      "__PLACE__" +
+                      "__POSTALCODE__" +
+                      "__ENVELOPE__" +
+                      "</Address>",
             location : {
-                freeFormAddress : "\t\t\t\t<freeFormAddress>__FREEFORMADDRESSVALUE__</freeFormAddress>",
+                freeFormAddress : "<freeFormAddress>__FREEFORMADDRESSVALUE__</freeFormAddress>",
                 streetAddress : {
-                    container : "\t\t\t\t<StreetAddress>\n" +
-                                "\t\t\t\t\t__STREET__ \n" +
-                                "\t\t\t\t\t__BUILDING__ \n" +
-                                "\t\t\t\t</StreetAddress>",
-                    building : "\t<Building number=\"__BUILDINGVALUE__\"/>",
-                    street : "\t<Street>__STREETVALUE__</Street>"
+                    container : "<StreetAddress>" +
+                                "__STREET__" +
+                                "__BUILDING__" +
+                                "</StreetAddress>",
+                    building : "<Building number=\"__BUILDINGVALUE__\"/>",
+                    street : "<Street>__STREETVALUE__</Street>"
                 }
             },
-            place : "\t\t\t\t<Place type=\"__PLACETYPE__\">__PLACEVALUE__</Place>",
-            postalCode : "\t\t\t\t<PostalCode>__POSTALCODEVALUE__</PostalCode>",
-            envelope : "\t\t\t\t<gml:Envelope>\n" +
-                       "\t\t\t\t\t<gml:lowerCorner>__LEFT__ __BOTTOM__</gml:lowerCorner>\n" +
-                       "\t\t\t\t\t<gml:upperCorner>__RIGHT__ __TOP__</gml:upperCorner>\n" +
-                       "\t\t\t\t</gml:Envelope>"
+            place : "<Place type=\"__PLACETYPE__\">__PLACEVALUE__</Place>",
+            postalCode : "<PostalCode>__POSTALCODEVALUE__</PostalCode>",
+            envelope : "<gml:Envelope>" +
+                       "<gml:lowerCorner>__LEFT__ __BOTTOM__</gml:lowerCorner>" +
+                       "<gml:upperCorner>__RIGHT__ __TOP__</gml:upperCorner>" +
+                       "</gml:Envelope>"
         }
 
     };

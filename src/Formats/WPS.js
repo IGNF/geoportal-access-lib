@@ -113,26 +113,26 @@ define(["Utils/LoggerByDefault"], function (Logger) {
             },
             post : {
 
-                value : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                        "<wps:__REQUEST__ version=\"__VERSION__\" service=\"__SERVICE__\"\n" +
-                        "\t__NAMESPACE__ __SCHEMALOCATION__>\n" +
-                        "\t<ows:Identifier>__IDENTIFIER__</ows:Identifier>\n" +
-                        "\t<wps:DataInputs>\n" +
-                        "<!-- __DATAINPUTS__ -->\n" +
-                        "\t</wps:DataInputs>\n" +
-                        "\t<wps:ResponseForm>\n" +
-                        "\t\t<wps:RawDataOutput>\n" +
-                        "\t\t<ows:Identifier>__RAWDATAOUTPUT__</ows:Identifier>\n" +
-                        "\t\t</wps:RawDataOutput>\n" +
-                        "\t</wps:ResponseForm>\n" +
-                        "</wps:__REQUEST__>\n",
+                value : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                        "<wps:__REQUEST__ version=\"__VERSION__\" service=\"__SERVICE__\" " +
+                        "__NAMESPACE__ __SCHEMALOCATION__>" +
+                        "<ows:Identifier>__IDENTIFIER__</ows:Identifier>" +
+                        "<wps:DataInputs>" +
+                        "<!-- __DATAINPUTS__ -->" +
+                        "</wps:DataInputs>" +
+                        "<wps:ResponseForm>" +
+                        "<wps:RawDataOutput>" +
+                        "<ows:Identifier>__RAWDATAOUTPUT__</ows:Identifier>" +
+                        "</wps:RawDataOutput>" +
+                        "</wps:ResponseForm>" +
+                        "</wps:__REQUEST__>",
 
-                input : "\t\t<wps:Input>\n" +
-                        "\t\t\t<ows:Identifier>__KEY__</ows:Identifier>\n" +
-                        "\t\t\t<wps:Data>\n" +
-                        "\t\t\t\t<wps:LiteralData>__DATA__</wps:LiteralData>\n" +
-                        "\t\t\t</wps:Data>\n" +
-                        "\t\t</wps:Input>"
+                input : "<wps:Input>" +
+                        "<ows:Identifier>__KEY__</ows:Identifier>" +
+                        "<wps:Data>" +
+                        "<wps:LiteralData>__DATA__</wps:LiteralData>" +
+                        "</wps:Data>" +
+                        "</wps:Input>"
             }
         },
 

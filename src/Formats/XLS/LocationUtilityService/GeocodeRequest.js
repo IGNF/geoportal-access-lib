@@ -128,9 +128,9 @@ function (
          * substitution des valeurs suivantes :
          * __ADDRESS__, __RETURNFREEFORM__
          */
-        template : "\t\t<GeocodeRequest returnFreeForm=\"__RETURNFREEFORM__\">\n" +
-                   "__ADDRESS__ \n" +
-                   "\t\t</GeocodeRequest>",
+        template : "<GeocodeRequest returnFreeForm=\"__RETURNFREEFORM__\">" +
+                   "__ADDRESS__" +
+                   "</GeocodeRequest>",
 
         /**
          * Ajout d'un objet de type Adresse

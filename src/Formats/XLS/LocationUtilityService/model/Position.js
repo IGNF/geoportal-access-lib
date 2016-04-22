@@ -99,20 +99,20 @@ define(["Utils/LoggerByDefault"], function (Logger) {
          * @todo implementation classe GML
          */
         template : {
-            position : "\t\t\t<Position>\n" +
-                       "__GMLPOINT__ \n" +
-                       "__GMLFILTER__ \n" +
-                       "\t\t\t</Position>",
+            position : "<Position>" +
+                       "__GMLPOINT__" +
+                       "__GMLFILTER__" +
+                       "</Position>",
             gml : {
-                point : "\t\t\t\t<gml:Point xmlns:gml=\"http://www.opengis.net/gml\"><gml:pos>__X__ __Y__</gml:pos></gml:Point>",
+                point : "<gml:Point xmlns:gml=\"http://www.opengis.net/gml\"><gml:pos>__X__ __Y__</gml:pos></gml:Point>",
                 pos : null,
                 filter : {
-                    bbox : "\t\t\t\t<gml:Envelope xmlns:gml=\"http://www.opengis.net/gml\">\n" +
-                           "\t\t\t\t\t<gml:lowerCorner>__LEFT__ __BOTTOM__</gml:lowerCorner>\n" +
-                           "\t\t\t\t\t<gml:upperCorner>__RIGHT__ __TOP__</gml:upperCorner>\n" +
-                           "\t\t\t\t</gml:Envelope>",
-                    circle : "\t\t\t\t<gml:CircleByCenterPoint xmlns:gml=\"http://www.opengis.net/gml\"><gml:pos>__X__ __Y__</gml:pos><gml:radius>__RADIUS__</gml:radius></gml:CircleByCenterPoint>",
-                    polygon : "\t\t\t\t<gml:Polygon xmlns:gml=\"http://www.opengis.net/gml\"><gml:exterior><gml:LinearRing><gml:posList>__XY__</gml:posList></gml:LinearRing></gml:exterior></gml:Polygon>",
+                    bbox : "<gml:Envelope xmlns:gml=\"http://www.opengis.net/gml\">" +
+                           "<gml:lowerCorner>__LEFT__ __BOTTOM__</gml:lowerCorner>" +
+                           "<gml:upperCorner>__RIGHT__ __TOP__</gml:upperCorner>" +
+                           "</gml:Envelope>",
+                    circle : "<gml:CircleByCenterPoint xmlns:gml=\"http://www.opengis.net/gml\"><gml:pos>__X__ __Y__</gml:pos><gml:radius>__RADIUS__</gml:radius></gml:CircleByCenterPoint>",
+                    polygon : "<gml:Polygon xmlns:gml=\"http://www.opengis.net/gml\"><gml:exterior><gml:LinearRing><gml:posList>__XY__</gml:posList></gml:LinearRing></gml:exterior></gml:Polygon>",
                     multipolygon : null
                 }
             }

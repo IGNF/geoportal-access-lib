@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta2
- * @date 2016-04-11
+ * @date 2016-04-22
  *
  */
 /*!
@@ -4242,8 +4242,8 @@ FormatsWPS = function (Logger) {
                 input: '__KEY__=__DATA__'
             },
             post: {
-                value: '<?xml version="1.0" encoding="UTF-8"?>\n' + '<wps:__REQUEST__ version="__VERSION__" service="__SERVICE__"\n' + '\t__NAMESPACE__ __SCHEMALOCATION__>\n' + '\t<ows:Identifier>__IDENTIFIER__</ows:Identifier>\n' + '\t<wps:DataInputs>\n' + '<!-- __DATAINPUTS__ -->\n' + '\t</wps:DataInputs>\n' + '\t<wps:ResponseForm>\n' + '\t\t<wps:RawDataOutput>\n' + '\t\t<ows:Identifier>__RAWDATAOUTPUT__</ows:Identifier>\n' + '\t\t</wps:RawDataOutput>\n' + '\t</wps:ResponseForm>\n' + '</wps:__REQUEST__>\n',
-                input: '\t\t<wps:Input>\n' + '\t\t\t<ows:Identifier>__KEY__</ows:Identifier>\n' + '\t\t\t<wps:Data>\n' + '\t\t\t\t<wps:LiteralData>__DATA__</wps:LiteralData>\n' + '\t\t\t</wps:Data>\n' + '\t\t</wps:Input>'
+                value: '<?xml version="1.0" encoding="UTF-8"?>' + '<wps:__REQUEST__ version="__VERSION__" service="__SERVICE__" ' + '__NAMESPACE__ __SCHEMALOCATION__>' + '<ows:Identifier>__IDENTIFIER__</ows:Identifier>' + '<wps:DataInputs>' + '<!-- __DATAINPUTS__ -->' + '</wps:DataInputs>' + '<wps:ResponseForm>' + '<wps:RawDataOutput>' + '<ows:Identifier>__RAWDATAOUTPUT__</ows:Identifier>' + '</wps:RawDataOutput>' + '</wps:ResponseForm>' + '</wps:__REQUEST__>',
+                input: '<wps:Input>' + '<ows:Identifier>__KEY__</ows:Identifier>' + '<wps:Data>' + '<wps:LiteralData>__DATA__</wps:LiteralData>' + '</wps:Data>' + '</wps:Input>'
             }
         },
         namespaceByDefault: function () {
@@ -6381,7 +6381,7 @@ FormatsXLSRequestHeader = function (Logger) {
     }
     RequestHeader.prototype = {
         requestString: null,
-        template: '\t<RequestHeader srsName="__SRSNAME__"/>',
+        template: '<RequestHeader srsName="__SRSNAME__"/>',
         constructor: RequestHeader,
         toString: function () {
             var template = null;
@@ -6413,7 +6413,7 @@ FormatsXLSRequest = function (Logger) {
     }
     Request.prototype = {
         requestString: null,
-        template: '\t<Request maximumResponses="__MAXRESPONSES__" methodName="__METHODNAME__" requestID="__UUID__" version="__VERSION__">\n' + '<!-- __REQUESTSERVICE__ -->\n' + '\t</Request>',
+        template: '<Request maximumResponses="__MAXRESPONSES__" methodName="__METHODNAME__" requestID="__UUID__" version="__VERSION__">' + '<!-- __REQUESTSERVICE__ -->' + '</Request>',
         constructor: Request,
         guid: function () {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -6605,18 +6605,18 @@ FormatsXLSLocationUtilityServiceModelAddress = function (Gp, Logger) {
         constructor: Address,
         requestString: null,
         template: {
-            address: '\t\t\t<Address countryCode="__COUNTRYCODE__">\n' + '__LOCATION__ \n' + '__PLACE__ \n' + '__POSTALCODE__ \n' + '__ENVELOPE__ \n' + '\t\t\t</Address>',
+            address: '<Address countryCode="__COUNTRYCODE__">' + '__LOCATION__' + '__PLACE__' + '__POSTALCODE__' + '__ENVELOPE__' + '</Address>',
             location: {
-                freeFormAddress: '\t\t\t\t<freeFormAddress>__FREEFORMADDRESSVALUE__</freeFormAddress>',
+                freeFormAddress: '<freeFormAddress>__FREEFORMADDRESSVALUE__</freeFormAddress>',
                 streetAddress: {
-                    container: '\t\t\t\t<StreetAddress>\n' + '\t\t\t\t\t__STREET__ \n' + '\t\t\t\t\t__BUILDING__ \n' + '\t\t\t\t</StreetAddress>',
-                    building: '\t<Building number="__BUILDINGVALUE__"/>',
-                    street: '\t<Street>__STREETVALUE__</Street>'
+                    container: '<StreetAddress>' + '__STREET__' + '__BUILDING__' + '</StreetAddress>',
+                    building: '<Building number="__BUILDINGVALUE__"/>',
+                    street: '<Street>__STREETVALUE__</Street>'
                 }
             },
-            place: '\t\t\t\t<Place type="__PLACETYPE__">__PLACEVALUE__</Place>',
-            postalCode: '\t\t\t\t<PostalCode>__POSTALCODEVALUE__</PostalCode>',
-            envelope: '\t\t\t\t<gml:Envelope>\n' + '\t\t\t\t\t<gml:lowerCorner>__LEFT__ __BOTTOM__</gml:lowerCorner>\n' + '\t\t\t\t\t<gml:upperCorner>__RIGHT__ __TOP__</gml:upperCorner>\n' + '\t\t\t\t</gml:Envelope>'
+            place: '<Place type="__PLACETYPE__">__PLACEVALUE__</Place>',
+            postalCode: '<PostalCode>__POSTALCODEVALUE__</PostalCode>',
+            envelope: '<gml:Envelope>' + '<gml:lowerCorner>__LEFT__ __BOTTOM__</gml:lowerCorner>' + '<gml:upperCorner>__RIGHT__ __TOP__</gml:upperCorner>' + '</gml:Envelope>'
         }
     };
     Address.prototype.toString = function () {
@@ -6778,7 +6778,7 @@ FormatsXLSLocationUtilityServiceGeocodeRequest = function (Logger, Address, Geoc
         strRequest: null,
         oAddress: null,
         oFilter: null,
-        template: '\t\t<GeocodeRequest returnFreeForm="__RETURNFREEFORM__">\n' + '__ADDRESS__ \n' + '\t\t</GeocodeRequest>',
+        template: '<GeocodeRequest returnFreeForm="__RETURNFREEFORM__">' + '__ADDRESS__' + '</GeocodeRequest>',
         addAddress: function (oAddress) {
             if (oAddress instanceof Address) {
                 this.oAddress = oAddress;
@@ -6860,14 +6860,14 @@ FormatsXLSLocationUtilityServiceModelPosition = function (Logger) {
         constructor: Position,
         requestString: null,
         template: {
-            position: '\t\t\t<Position>\n' + '__GMLPOINT__ \n' + '__GMLFILTER__ \n' + '\t\t\t</Position>',
+            position: '<Position>' + '__GMLPOINT__' + '__GMLFILTER__' + '</Position>',
             gml: {
-                point: '\t\t\t\t<gml:Point xmlns:gml="http://www.opengis.net/gml"><gml:pos>__X__ __Y__</gml:pos></gml:Point>',
+                point: '<gml:Point xmlns:gml="http://www.opengis.net/gml"><gml:pos>__X__ __Y__</gml:pos></gml:Point>',
                 pos: null,
                 filter: {
-                    bbox: '\t\t\t\t<gml:Envelope xmlns:gml="http://www.opengis.net/gml">\n' + '\t\t\t\t\t<gml:lowerCorner>__LEFT__ __BOTTOM__</gml:lowerCorner>\n' + '\t\t\t\t\t<gml:upperCorner>__RIGHT__ __TOP__</gml:upperCorner>\n' + '\t\t\t\t</gml:Envelope>',
-                    circle: '\t\t\t\t<gml:CircleByCenterPoint xmlns:gml="http://www.opengis.net/gml"><gml:pos>__X__ __Y__</gml:pos><gml:radius>__RADIUS__</gml:radius></gml:CircleByCenterPoint>',
-                    polygon: '\t\t\t\t<gml:Polygon xmlns:gml="http://www.opengis.net/gml"><gml:exterior><gml:LinearRing><gml:posList>__XY__</gml:posList></gml:LinearRing></gml:exterior></gml:Polygon>',
+                    bbox: '<gml:Envelope xmlns:gml="http://www.opengis.net/gml">' + '<gml:lowerCorner>__LEFT__ __BOTTOM__</gml:lowerCorner>' + '<gml:upperCorner>__RIGHT__ __TOP__</gml:upperCorner>' + '</gml:Envelope>',
+                    circle: '<gml:CircleByCenterPoint xmlns:gml="http://www.opengis.net/gml"><gml:pos>__X__ __Y__</gml:pos><gml:radius>__RADIUS__</gml:radius></gml:CircleByCenterPoint>',
+                    polygon: '<gml:Polygon xmlns:gml="http://www.opengis.net/gml"><gml:exterior><gml:LinearRing><gml:posList>__XY__</gml:posList></gml:LinearRing></gml:exterior></gml:Polygon>',
                     multipolygon: null
                 }
             }
@@ -6942,7 +6942,7 @@ FormatsXLSLocationUtilityServiceModelPreference = function (Logger) {
     Preference.prototype = {
         constructor: Preference,
         requestString: null,
-        template: '\t\t\t<ReverseGeocodePreference>__TYPE__</ReverseGeocodePreference>'
+        template: '<ReverseGeocodePreference>__TYPE__</ReverseGeocodePreference>'
     };
     Preference.prototype.toString = function () {
         var Preferences = [];
@@ -6977,7 +6977,7 @@ FormatsXLSLocationUtilityServiceReverseGeocodeRequest = function (Logger, Positi
         oPosition: null,
         oPreference: null,
         constructor: ReverseGeocodeRequest,
-        template: '\t\t<ReverseGeocodeRequest returnFreeForm="__RETURNFREEFORM__">\n' + '__POSITION__ \n' + '__PREFERENCE__\n' + '\t\t</ReverseGeocodeRequest>',
+        template: '<ReverseGeocodeRequest returnFreeForm="__RETURNFREEFORM__">' + '__POSITION__' + '__PREFERENCE__' + '</ReverseGeocodeRequest>',
         addPosition: function (oPosition) {
             if (oPosition instanceof Position) {
                 this.oPosition = oPosition;
@@ -8381,19 +8381,19 @@ FormatsXLSRouteServiceModelRoutePlan = function (Logger) {
         constructor: RoutePlan,
         requestString: null,
         template: {
-            routePlan: '\t\t\t<RoutePlan>\n' + '__ROUTEPREFERENCE__\n' + '__GRAPH__\n' + '__WAYPOINTLIST__ \n' + '__AVOIDLIST__ \n' + '\t\t\t</RoutePlan>',
-            routePreference: '\t\t\t\t<RoutePreference>__VALUEROUTEPREFERENCE__</RoutePreference>',
-            graph: '\t\t\t\t<xlsext:graphName xmlns:xlsext="http://www.opengis.net/xlsext" name="__VALUEGRAPH__"/>',
+            routePlan: '<RoutePlan>' + '__ROUTEPREFERENCE__' + '__GRAPH__' + '__WAYPOINTLIST__' + '__AVOIDLIST__' + '</RoutePlan>',
+            routePreference: '<RoutePreference>__VALUEROUTEPREFERENCE__</RoutePreference>',
+            graph: '<xlsext:graphName xmlns:xlsext="http://www.opengis.net/xlsext" name="__VALUEGRAPH__"/>',
             wayPointList: {
-                container: '\t\t\t\t<WayPointList>\n' + '__STARTPOINT__' + '__VIAPOINT__' + '__ENDPOINT__' + '\t\t\t\t</WayPointList>\n',
-                point: '\t\t\t\t\t\t<Position><gml:Point xmlns:gml="http://www.opengis.net/gml"><gml:pos>__X__ __Y__</gml:pos></gml:Point></Position>',
-                startPoint: '\t\t\t\t\t<StartPoint>\n' + '__POINT__\n' + '\t\t\t\t\t</StartPoint>\n',
-                endPoint: '\t\t\t\t\t<EndPoint>\n' + '__POINT__\n' + '\t\t\t\t\t</EndPoint>\n',
-                viaPoint: '\t\t\t\t\t<ViaPoint>\n' + '__POINT__\n' + '\t\t\t\t\t</ViaPoint>\n'
+                container: '<WayPointList>' + '__STARTPOINT__' + '__VIAPOINT__' + '__ENDPOINT__' + '</WayPointList>',
+                point: '<Position><gml:Point xmlns:gml="http://www.opengis.net/gml"><gml:pos>__X__ __Y__</gml:pos></gml:Point></Position>',
+                startPoint: '<StartPoint>' + '__POINT__' + '</StartPoint>',
+                endPoint: '<EndPoint>' + '__POINT__' + '</EndPoint>',
+                viaPoint: '<ViaPoint>' + '__POINT__' + '</ViaPoint>'
             },
             avoidList: {
-                container: '\t\t\t\t<AvoidList>\n' + '__AVOIDFEATURE__\n' + '\t\t\t\t</AvoidList>',
-                avoidFeature: '\t\t\t\t\t<AvoidFeature>__VALUEAVOIDFEATURE__</AvoidFeature>'
+                container: '<AvoidList>' + '__AVOIDFEATURE__' + '</AvoidList>',
+                avoidFeature: '<AvoidFeature>__VALUEAVOIDFEATURE__</AvoidFeature>'
             }
         },
         toString: function () {
@@ -8472,10 +8472,10 @@ FormatsXLSRouteServiceDetermineRouteRequest = function (Logger, RoutePlan) {
         strRequest: null,
         oRoutePlan: null,
         template: {
-            determineRouteRequest: '\t\t<DetermineRouteRequest distanceUnit="__DISTANCEUNIT__">\n' + '__ROUTEPLAN__ \n' + '__ROUTEINSTRUCTIONREQUEST__ \n' + '__ROUTEGEOMETRYREQUEST__ \n' + '__ROUTEMAPREQUEST__ \n' + '\t\t</DetermineRouteRequest>',
-            routeInstructionRequest: '\t\t\t<RouteInstructionsRequest ' + 'provideGeometry="__PROVIDEGEOMETRY__" ' + 'provideBoundingBox="__PROVIDEBBOX__" />',
-            routeGeometryRequest: '\t\t\t<RouteGeometryRequest />',
-            routeMapRequest: '\t\t\t'
+            determineRouteRequest: '<DetermineRouteRequest distanceUnit="__DISTANCEUNIT__">' + '__ROUTEPLAN__' + '__ROUTEINSTRUCTIONREQUEST__' + '__ROUTEGEOMETRYREQUEST__' + '__ROUTEMAPREQUEST__' + '</DetermineRouteRequest>',
+            routeInstructionRequest: '<RouteInstructionsRequest ' + 'provideGeometry="__PROVIDEGEOMETRY__" ' + 'provideBoundingBox="__PROVIDEBBOX__" />',
+            routeGeometryRequest: '<RouteGeometryRequest />',
+            routeMapRequest: ''
         },
         addRoute: function (oRoutePlan) {
             if (oRoutePlan instanceof RoutePlan) {
@@ -9995,7 +9995,7 @@ Gp = function (Services, AltiResponse, Elevation, AutoCompleteResponse, Suggeste
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta2',
-        servicesDate: '2016-04-11',
+        servicesDate: '2016-04-22',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;

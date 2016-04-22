@@ -60,7 +60,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
          *  __TYPE__
          *
          */
-        template : "\t\t\t<ReverseGeocodePreference>__TYPE__</ReverseGeocodePreference>"
+        template : "<ReverseGeocodePreference>__TYPE__</ReverseGeocodePreference>"
     };
 
     /**

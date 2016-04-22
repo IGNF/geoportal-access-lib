@@ -1,4 +1,4 @@
-/* 
+/*
  * Tests de la construction d'une requête de calcul altimétrique, par la classe AltiRequestFactory,
  * avec les différents paramètres et combinaisons possibles en options.
  */
