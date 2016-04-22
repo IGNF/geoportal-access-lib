@@ -63,7 +63,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
          * substitution des valeurs suivantes :
          * __SRSNAME__
          */
-        template : "\t<RequestHeader srsName=\"__SRSNAME__\"/>",
+        template : "<RequestHeader srsName=\"__SRSNAME__\"/>",
 
         /**
          * Constructeur (alias)

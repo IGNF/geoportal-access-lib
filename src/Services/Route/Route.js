@@ -68,7 +68,7 @@ function (
      * @param {Boolean} [options.geometryInInstructions = false] - Indique si la géométrie de l'itinéraire doit être reprise morceau par morceau dans les instructions.
      *      (correspond au paramètre "provideGeometry" d'OpenLS) Par défaut : false.
      *
-     * @param {Boolean} [options.provideBoundingBox = true] - Indique si les instructions doivent être localisées par une bbox dans la réponse.
+     * @param {Boolean} [options.provideBbox = true] - Indique si les instructions doivent être localisées par une bbox dans la réponse.
      *      Par défaut : true.
      *
      * @param {String} [options.distanceUnit = "km"] - Indique si la distance doit être exprimée en km ou m dans la réponse.

@@ -78,7 +78,7 @@ function (Logger, Helper, ES6Promise) {
                     break;
                 case "POST"  :
                     // params spécifiques au mode POST
-                    options.content = settings.content ? settings.content : "application/x-www-form-urlencoded";
+                    options.content = settings.content ? settings.content : "application/x-www-form-urlencoded"; // FIXME en attente des services : bascule en "application/xml" ou "application/json"
                     options.headers = settings.headers ? settings.headers : {
                         referer : "http://localhost" // todo ...
                     };

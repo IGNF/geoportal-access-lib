@@ -73,9 +73,9 @@ define(["Utils/LoggerByDefault"], function (Logger) {
          * __MAXRESPONSES__, __METHODNAME__, __UUID__, __VERSION__
          * __REQUESTSERVICE__
          */
-        template : "\t<Request maximumResponses=\"__MAXRESPONSES__\" methodName=\"__METHODNAME__\" requestID=\"__UUID__\" version=\"__VERSION__\">\n" +
-                   "<!-- __REQUESTSERVICE__ -->\n" +
-                   "\t</Request>",
+        template : "<Request maximumResponses=\"__MAXRESPONSES__\" methodName=\"__METHODNAME__\" requestID=\"__UUID__\" version=\"__VERSION__\">" +
+                   "<!-- __REQUESTSERVICE__ -->" +
+                   "</Request>",
 
         /**
          * Constructeur (alias)

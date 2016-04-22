@@ -145,17 +145,17 @@ function (
          * __PROVIDEGEOMETRY__, __PROVIDEBBOX__
          */
         template : {
-            determineRouteRequest : "\t\t<DetermineRouteRequest distanceUnit=\"__DISTANCEUNIT__\">\n" +
-                "__ROUTEPLAN__ \n" +
-                "__ROUTEINSTRUCTIONREQUEST__ \n" +
-                "__ROUTEGEOMETRYREQUEST__ \n" +
-                "__ROUTEMAPREQUEST__ \n" +
-                "\t\t</DetermineRouteRequest>",
-            routeInstructionRequest : "\t\t\t<RouteInstructionsRequest " +
+            determineRouteRequest : "<DetermineRouteRequest distanceUnit=\"__DISTANCEUNIT__\">" +
+                "__ROUTEPLAN__" +
+                "__ROUTEINSTRUCTIONREQUEST__" +
+                "__ROUTEGEOMETRYREQUEST__" +
+                "__ROUTEMAPREQUEST__" +
+                "</DetermineRouteRequest>",
+            routeInstructionRequest : "<RouteInstructionsRequest " +
                 "provideGeometry=\"__PROVIDEGEOMETRY__\" " +
                 "provideBoundingBox=\"__PROVIDEBBOX__\" />",
-            routeGeometryRequest : "\t\t\t<RouteGeometryRequest />",
-            routeMapRequest : "\t\t\t" // FIXME <RouteMapRequest/> not yet implemented !
+            routeGeometryRequest : "<RouteGeometryRequest />",
+            routeMapRequest : "" // FIXME <RouteMapRequest/> not yet implemented !
         },
 
         /**
