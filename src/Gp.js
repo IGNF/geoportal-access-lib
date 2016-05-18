@@ -1,4 +1,7 @@
 define([
+    // Protocols
+    "Protocols/XHR",
+    // Services
     "Services/Services",
     // Alti Rseponses 
     "Services/Alti/Response/model/AltiResponse",
@@ -36,6 +39,9 @@ define([
     
 ],
     function (
+        // XHR stuff
+        XHR,
+        // Services
         Services,
         // Alti Responses
         AltiResponse, Elevation,
@@ -97,6 +103,8 @@ define([
         }; 
         
         // on declare les ns dan root global
+        Gp.extend("Protocols", {});
+        Gp.extend("Protocols.XHR", XHR);
         Gp.extend("Services", Services);
         // Export Alti
         Gp.extend("Services.AltiResponse", AltiResponse);
