@@ -149,6 +149,10 @@ function (
         var filter = Object.keys(options.filterOptions);
         for (var i = 0; i < filter.length; i++) {
             var key = filter[i];
+            var filtersCouldBeNumberList = ["department", "number", "postalCode", "insee", "importance", "ID", "IDTR", "absorbedCity", "sheet", "section", "inseeRegion", "inseeDepartment"];
+            if ( filtersCouldBeNumberList.indexOf(key) !== -1 && typeof options.filterOptions[key] !== "string" ) {
+                options.filterOptions[key] = options.filterOptions[key].toString();
+            }
             if (! options.filterOptions[key] || Object.keys(options.filterOptions[key]).length === 0) {
                 delete this.options.filterOptions[key];
             }

@@ -1,6 +1,6 @@
 
 /**
- * Fonction retournant un objet contenant des clés de lecture (readers) 
+ * Fonction retournant un objet contenant des clés de lecture (readers)
  *      qui permettent de parser des réponses XML du service de géocodage inverse du Géoportail
  *      afin de récupérer les résultats retournés.
  * @module ReverseGeocodeResponseReader
@@ -14,7 +14,7 @@ define([
     "Exceptions/ErrorService",
     "Services/Geocode/Response/model/GeocodeResponse",
     "Services/Geocode/Response/model/ReverseGeocodedLocation"
-], 
+],
 function (
     Logger, MR,
     ErrSrv,
@@ -22,7 +22,7 @@ function (
 ) {
 
     "use strict";
-    
+
     /**
     * Objet ReverseGeocodeResponseReader
     * @member {Object} ReverseGeocodeResponseReader
@@ -33,7 +33,7 @@ function (
     *
     * @property {String} ReverseGeocodeResponseReader.SCHEMALOCATION - Localisation (URL) du schema de définition du XML (XSD)
     *
-    * @property {String} ReverseGeocodeResponseReader.DEFAULTPREFIX - Namespace par défaut du format 
+    * @property {String} ReverseGeocodeResponseReader.DEFAULTPREFIX - Namespace par défaut du format
     *
     * @property {Object} ReverseGeocodeResponseReader.READERS - Objet contenant des fonctions de lecture, appelées "READERS"
     *      dont chaque clé correspond au nom d'un tag du XML que l'on souhaite lire
@@ -41,7 +41,7 @@ function (
     *      où node est un noeud du document DOM
     *      et data est un objet où l'on stocke les informations lues dans le XML.
     *
-    * @property {Method} ReverseGeocodeResponseReader.read - Méthode permettant de lancer la lecture d'une réponse XML du service de géocodage, 
+    * @property {Method} ReverseGeocodeResponseReader.read - Méthode permettant de lancer la lecture d'une réponse XML du service de géocodage,
     *      à l'aide des READERS de la classe.
     *
     */
@@ -70,11 +70,11 @@ function (
     ReverseGeocodeResponseReader.SCHEMALOCATION = "http://wxs.ign.fr/schemas/olsAll.xsd";
 
     /**
-     * Namespace par défaut du format 
+     * Namespace par défaut du format
      */
     ReverseGeocodeResponseReader.DEFAULTPREFIX = "xls";
 
-    /** 
+    /**
      * Objet contenant des fonctions de lecture, appelées "READERS"
      *      dont chaque clé correspond au nom d'un tag du XML que l'on souhaite lire
      *      et la valeur associée est une fonction (node, data)
@@ -168,7 +168,7 @@ function (
                                 bottom : parseFloat(values[3])
                             };
                         }
-                        
+
                     } else if ( placeType === "Commune" ) {
                         reverseGeocodedLocation.placeAttributes.commune = placeName;
 
@@ -290,7 +290,7 @@ function (
                     child = children[i];
                     if ( child.nodeName === "Exception" ) {
                         response.exceptionReport = ReverseGeocodeResponseReader.READERS["Exception"](child);
-                    } 
+                    }
                 }
             }
             return response;
@@ -314,11 +314,11 @@ function (
 
             return exceptionReport;
         }
-        
+
     };
 
     /**
-     * Méthode permettant de lancer la lecture d'une réponse XML du service de géocodage, 
+     * Méthode permettant de lancer la lecture d'une réponse XML du service de géocodage,
      *      à l'aide des READERS de la classe.
      *
      * @method ReverseGeocodeResponseReader.read
@@ -329,12 +329,12 @@ function (
      * @memberof ReverseGeocodeResponseReader
      */
     ReverseGeocodeResponseReader.read = function (root) {
-        
+
         if ( root.nodeName === "XLS" ) {
             var nsPrefix = root.prefix;
             if ( !nsPrefix ) {
                 nsPrefix = ReverseGeocodeResponseReader.DEFAULTPREFIX;
-            } 
+            }
             var geocodeResponse = ReverseGeocodeResponseReader.READERS[nsPrefix][root.nodeName](root);
             return geocodeResponse;
 
@@ -375,7 +375,7 @@ function (
      * @memberof ReverseGeocodeResponseReader
      * @method __getChildNodes
      * @param {DOMElement} node - a DOM node
-     * @param {Array|Object} [data] - an object to be filled with node data 
+     * @param {Array|Object} [data] - an object to be filled with node data
      */
     function __getChildNodes (node, data) {
 
@@ -415,7 +415,7 @@ function (
      */
     function __getChildValue (node) {
 
-        var textNode; 
+        var textNode;
         var value = "";
 
         if ( node.hasChildNodes() ) {

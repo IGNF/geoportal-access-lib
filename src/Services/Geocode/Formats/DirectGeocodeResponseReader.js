@@ -1,6 +1,6 @@
 
 /**
- * Fonction retournant un objet contenant des clés de lecture (readers) 
+ * Fonction retournant un objet contenant des clés de lecture (readers)
  *      qui permettent de parser des réponses XML du service de géocodage direct du Géoportail
  *      afin de récupérer les résultats retournés.
  * @module DirectGeocodeResponseReader
@@ -14,7 +14,7 @@ define([
     "Exceptions/ErrorService",
     "Services/Geocode/Response/model/GeocodeResponse",
     "Services/Geocode/Response/model/DirectGeocodedLocation"
-], 
+],
 function (
     Logger, MR,
     ErrSrv,
@@ -23,7 +23,7 @@ function (
 ) {
 
     "use strict";
-    
+
     /**
     * @member DirectGeocodeResponseReader
     */
@@ -51,11 +51,11 @@ function (
     DirectGeocodeResponseReader.SCHEMALOCATION = "http://wxs.ign.fr/schemas/olsAll.xsd";
 
     /**
-     * Namespace par défaut du format 
+     * Namespace par défaut du format
      */
     DirectGeocodeResponseReader.DEFAULTPREFIX = "xls";
 
-    /** 
+    /**
      * Objet contenant des fonctions de lecture, appelées "READERS"
      *      dont chaque clé correspond au nom d'un tag du XML que l'on souhaite lire
      *      et la valeur associée est une fonction (node, data)
@@ -170,7 +170,7 @@ function (
                                 bottom : parseFloat(values[3])
                             };
                         }
-                        
+
                     } else if ( placeType === "Commune" ) {
                         geocodedLocation.placeAttributes.commune = placeName;
 
@@ -209,7 +209,7 @@ function (
 
                     } else if ( placeType === "CommuneAbsorbee" ) {
                         geocodedLocation.placeAttributes.absorbedCity = placeName;
-                    
+
                     } else if ( placeType === "Arrondissement" ) {
                         if ( placeName ) {
                             geocodedLocation.placeAttributes.arrondissement = placeName;
@@ -277,7 +277,7 @@ function (
                     child = children[i];
                     if ( child.nodeName === "Exception" ) {
                         response.exceptionReport = DirectGeocodeResponseReader.READERS["Exception"](child);
-                    } 
+                    }
                 }
             }
             return response;
@@ -301,11 +301,11 @@ function (
 
             return exceptionReport;
         }
-        
+
     };
 
     /**
-     * Méthode permettant de lancer la lecture d'une réponse XML du service de géocodage, 
+     * Méthode permettant de lancer la lecture d'une réponse XML du service de géocodage,
      *      à l'aide des READERS de la classe.
      *
      * @method DirectGeocodeResponseReader.read
@@ -316,12 +316,12 @@ function (
      * @memberof DirectGeocodeResponseReader
      */
     DirectGeocodeResponseReader.read = function (root) {
-        
+
         if ( root.nodeName === "XLS" ) {
             var nsPrefix = root.prefix;
             if ( !nsPrefix ) {
                 nsPrefix = DirectGeocodeResponseReader.DEFAULTPREFIX;
-            } 
+            }
             var geocodeResponse = DirectGeocodeResponseReader.READERS[nsPrefix][root.nodeName](root);
             return geocodeResponse;
 
@@ -367,7 +367,7 @@ function (
      * @memberof DirectGeocodeResponseReader
      * @method __getChildNodes
      * @param {DOMElement} node - a DOM node
-     * @param {Array|Object} [data] - an object to be filled with node data 
+     * @param {Array|Object} [data] - an object to be filled with node data
      */
     function __getChildNodes (node, data) {
 

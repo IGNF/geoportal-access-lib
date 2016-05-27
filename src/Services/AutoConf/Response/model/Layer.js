@@ -16,7 +16,7 @@ define([], function () {
      * @property {Object} serviceParams.serverUrl - Associative array mapping geoportal access key (keys) with their properties (URLs of the web service, with the geoportal access key).
      * @property {String} serviceParams.version - webservice version.
      * @property {String} defaultProjection - coordinates system ID used by default for the resource (WMS or WFS layer) or of the TileMatrixSet used by the WMTS layer.
-     * @property {Array.<String>} additionalProjections - additional coordinates systems IDs availables for the resource, others than the default one (see defaultProjection) (WMS and WFS layers only). 
+     * @property {Array.<String>} additionalProjections - additional coordinates systems IDs availables for the resource, others than the default one (see defaultProjection) (WMS and WFS layers only).
      * @property {Array.<Gp.Services.Config.Format>} formats - Formats availables for the resource.
      * @property {Array.<Gp.Services.Config.Legend>} legends - Informations about legends associated to the resource.
      * @property {Array.<Gp.Services.Config.Metadata>} metadata - Informations about metadata associated to the resource.
@@ -35,11 +35,11 @@ define([], function () {
      * @property {Array.<String>} apiKeys - Array of access keys that grant access to that resource.
      * @property {Object} dimensions - Dimensions informations associated with the resource.
      * @property {String} dimensions.type
-     * @property {String} dimensions.visibilityRange 
+     * @property {String} dimensions.visibilityRange
      * @property {String} dimensions.visibilityMode
      * @property {String} dimensions.noDataValue
      * @property {String} dimensions.geometricType
-     * 
+     *
      * @namespace
      * @alias Gp.Services.Config.Layer
      */
@@ -47,20 +47,20 @@ define([], function () {
 
         if (!(this instanceof Layer)) {
             throw new TypeError("Layer constructor cannot be called as a function.");
-        } 
+        }
 
         // info: une instance de la classe Layer n'a aucune propriété au départ,.
-        // les attributs possibles sont documentés ci-dessus, 
+        // les attributs possibles sont documentés ci-dessus,
         // et seront implémentés au fur et à mesure de la lecture de la réponse de l'autoconf, lorsque l'information est rencontrée.
 
     }
-    
+
     Layer.prototype = {
 
         constructor : Layer,
 
         /**
-         * Returns the layer name 
+         * Returns the layer name
          *
          * @returns {String} name - name of the resource to use with the webservice that serves it (eg : "GEOGRAPHICALGRIDSYSTEMS.MAPS").
          */
@@ -69,43 +69,43 @@ define([], function () {
         },
 
         /**
-         * Returns the layer title 
+         * Returns the layer title
          *
          * @returns {String} title - Human readable name for the resource.
          */
         getTitle : function () {
             return this.title;
-        }, 
+        },
 
         /**
-         * Returns the layer description  
+         * Returns the layer description
          *
          * @returns {String} description - Resource description.
          */
         getDescription : function () {
             return this.description;
-        }, 
+        },
 
         /**
-         * Returns the layer identifier 
+         * Returns the layer identifier
          *
          * @returns {String} layerId - Unique resource Identifier (eg : "GEOGRAPHICALGRIDSYSTEMS.MAPS$GEOPORTAIL:OGC:WMTS")
          */
         getLayerId : function () {
             return this.layerId;
-        }, 
+        },
 
         /**
-         * Returns the layer quicklookUrl  
+         * Returns the layer quicklookUrl
          *
          * @returns {String} quicklookUrl - Image URL for the resource.
          */
         getQuicklookUrl : function () {
             return this.quicklookUrl;
-        }, 
+        },
 
         /**
-         * Returns the layer default projection 
+         * Returns the layer default projection
          *
          * @returns {String} defaultProjection - coordinates system ID used by default for the resource (WMS or WFS layer) or of the TileMatrixSet used by the WMTS layer.
          */
@@ -114,9 +114,9 @@ define([], function () {
         },
 
         /**
-         * Returns the layer projections 
+         * Returns the layer projections
          *
-         * @returns {Array.<String>} projections - coordinates systems IDs availables for the resource, including the default one. 
+         * @returns {Array.<String>} projections - coordinates systems IDs availables for the resource, including the default one.
          */
         getProjections : function () {
             var projections = [];
@@ -126,7 +126,7 @@ define([], function () {
         },
 
         /**
-         * Returns the global BBOX 
+         * Returns the global BBOX
          *
          * @returns {Gp.BBox} bbox - the layer global bounding box, expressed in CRS system.
          */
@@ -138,7 +138,7 @@ define([], function () {
         },
 
         /**
-         * Returns the layer minimum scale denominator 
+         * Returns the layer minimum scale denominator
          *
          * @returns {Number} minScaleDenominator - minimum scale denominator for this layer
          */
@@ -150,7 +150,7 @@ define([], function () {
         },
 
         /**
-         * Returns the layer maximum scale denominator 
+         * Returns the layer maximum scale denominator
          *
          * @returns {Number} maxScaleDenominator - maximum scale denominator for this layer
          */
@@ -162,7 +162,7 @@ define([], function () {
         },
 
         /**
-         * Returns layer Tile Matrix Set identifier if exists 
+         * Returns layer Tile Matrix Set identifier if exists
          *
          * @returns {String} tileMatrixSetLink - Tile Matrix Set identifier (for instance : "PM")
          */
@@ -174,7 +174,7 @@ define([], function () {
         },
 
         /**
-         * Returns information about the webservice that serves the resource 
+         * Returns information about the webservice that serves the resource
          *
          * @returns {Object} serviceParams - Information about the webservice that serves the resource (OpenLS, WFS, WMTS)
          */
@@ -183,7 +183,7 @@ define([], function () {
         },
 
         /**
-         * Returns Geoportal server url for a given key 
+         * Returns Geoportal server url for a given key
          *
          * @param {String} apiKey - Access key to Geoportal platform
          * @returns {String} serverUrl - general URL of the web service (with the geoportal access key)
@@ -196,7 +196,7 @@ define([], function () {
         },
 
         /**
-         * Returns information about legends associated to the resource. 
+         * Returns information about legends associated to the resource.
          *
          * @returns {Array.<Gp.Services.Config.Legend>} legends - Informations about legends associated to the resource.
          */
@@ -205,7 +205,7 @@ define([], function () {
         },
 
         /**
-         * Returns information about metadata associated to the resource. 
+         * Returns information about metadata associated to the resource.
          *
          * @returns {Array.<Gp.Services.Config.Metadata>} metadata - Informations about metadata associated to the resource.
          */
@@ -214,7 +214,7 @@ define([], function () {
         },
 
         /**
-         * Returns information about styles availables for the resources (WMS, WFS and WMTS only). 
+         * Returns information about styles availables for the resources (WMS, WFS and WMTS only).
          *
          * @returns {Array.<Gp.Services.Config.Style>} styles - Informations about styles availables for the resources (WMS, WFS and WMTS only).
          */
@@ -223,11 +223,14 @@ define([], function () {
         },
 
         /**
-         * Returns layer default style 
+         * Returns layer default style
          *
          * @returns {String} styleName - style identifier (eg: "normal", "bdparcellaire", ...)
          */
         getDefaultStyle : function () {
+            if ( !this.styles ) {
+                return;
+            }
             var style;
             var s = this.styles;
             for ( var i = 0; i < s.length; i++ ) {
@@ -240,7 +243,7 @@ define([], function () {
         },
 
         /**
-         * Returns information about thematics associated to the resource. 
+         * Returns information about thematics associated to the resource.
          *
          * @returns {Array.<Gp.Services.Config.Thematic>} thematics - Informations about thematics associated to the resource.
          */
@@ -249,11 +252,14 @@ define([], function () {
         },
 
         /**
-         * Returns layer default format 
+         * Returns layer default format
          *
          * @returns {String} formatName - Format mime-type. (eg. "image/jpeg")
          */
         getDefaultFormat : function () {
+            if ( !this.formats ) {
+                return;
+            }
             var format;
             var f = this.formats;
             for ( var i = 0; i < f.length; i++ ) {
@@ -266,7 +272,7 @@ define([], function () {
         },
 
         /**
-         * Returns information about geographical or temporal constraints for the resource 
+         * Returns information about geographical or temporal constraints for the resource
          *
          * @returns {Array.<Gp.Services.Config.Constraint>} constraints - Informations about geographical or temporal constraints for the resource
          */
@@ -275,7 +281,7 @@ define([], function () {
         },
 
         /**
-         * Returns information about originators of this resource 
+         * Returns information about originators of this resource
          *
          * @returns {Array.<Gp.Services.Config.Originator>} originators - Informations about originators of this resource
          */
@@ -284,7 +290,7 @@ define([], function () {
         },
 
         /**
-         * Returns information about dimensions associated with this resource 
+         * Returns information about dimensions associated with this resource
          *
          * @returns {Object} dimensions - Dimensions informations associated with the resource.
          */
@@ -293,7 +299,7 @@ define([], function () {
         },
 
         /**
-         * Returns information about aggregated layers composing the being described layer, in case the resource is an aggregate of other resources. 
+         * Returns information about aggregated layers composing the being described layer, in case the resource is an aggregate of other resources.
          *
          * @returns {Object} aggregatedLayers - Layers IDs composing the being described aggregated layer.
          */
@@ -306,6 +312,6 @@ define([], function () {
         }
 
     };
-    
+
     return Layer;
 });

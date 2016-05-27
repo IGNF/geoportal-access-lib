@@ -31,8 +31,8 @@ function (
      * @param {Object} options - options spécifiques au service (+ les options heritées)
      *
      * @param {Object} options.position - Position du point de référence pour le calcul de proximité exprimée dans le système de référence spécifié par le srs.
-     *      @param {Float} options.position.x - Abcisse du point de référence pour le calcul de proximité exprimée dans le système de référence spécifié par le srs.
-     *      @param {Float} options.position.y - Ordonnée du point de référence pour le calcul de proximité exprimée dans le système de référence spécifié par le srs.
+     *      @param {Float} options.position.x - Abcisse du point de référence pour le calcul de proximité exprimée dans le système de référence spécifié par le srs. (= longitude si srs = "CRS:84", latitude si srs = "EPSG:4326")
+     *      @param {Float} options.position.y - Ordonnée du point de référence pour le calcul de proximité exprimée dans le système de référence spécifié par le srs. (= latitude si srs = "CRS:84", longitude si srs = "EPSG:4326")
      *
      * @param {Object} [options.filterOptions] - Les propriétés possibles de cet objet sont décrites ci-après.
      * @param {Object} [options.filterOptions.bbox] - Emprise dans laquelle on souhaite effectuer la recherche.
@@ -60,9 +60,9 @@ function (
      * @param {Number} [options.maximumResponses] - Nombre de réponses maximal que l'on souhaite recevoir.
      *      Pas de valeur par défaut. Si le serveur consulté est celui du Géoportail, la valeur par défaut sera donc celle du service : 25.
      *
-     * @param {String} [options.srs = EPSG:4326] - Système de coordonnées dans lequel les paramètres géographiques en entrée et la réponse du service sont exprimés.
+     * @param {String} [options.srs = CRS:84] - Système de coordonnées dans lequel les paramètres géographiques en entrée et la réponse du service sont exprimés.
      *      Pas de valeur par défaut.
-     *      Si le serveur consulté est celui du Géoportail, la valeur par défaut sera donc celle du service : 'EPSG:4326'.
+     *      Si le serveur consulté est celui du Géoportail, la valeur par défaut est : "CRS:84".
      *
      * @example
      *   var options = {
@@ -163,11 +163,13 @@ function (
         // FIXME: cet attribut (returnFreeForm) n'est pas spécifié dans la doc du constructeur ?
         // Il est inutile en effet, mais présent dans les specs...
         this.options.returnFreeForm = options.returnFreeForm || false;
-        this.options.srs = options.srs || "EPSG:4326";
+        // info: en réalité le service ne reconnait que EPSG:4326. this.options.srs permet essentiellement de différencier EPSG:4326 (lat,lon) et CRS:84 (lon,lat)
+        this.options.srs = options.srs || "CRS:84";
 
-        // si le systeme de coordonnées est géographique, et EPSG, il faut inverser les coordonnées
-        // (le service attend une position "lat lon")
-        if ( ReverseGeocode.geoEPSG.indexOf(this.options.srs) !== -1 ) {
+        // si on n'a pas un systeme de coordonnées EPSG géographique, il faut inverser les coordonnées
+        // (car elles sont en lon, lat alors que le service attend une position en lat, lon).
+        // dans le cas d'EPSG:4326 par exemple, les coordonnées sont bien en lat, lon donc on ne fait rien.
+        if ( ReverseGeocode.geoEPSG.indexOf(this.options.srs) === -1 ) {
             // pour la position
             this.options.position = {
                 x : this.options.position.y,
@@ -228,7 +230,7 @@ function (
             position : this.options.position,
             returnFreeForm : this.options.returnFreeForm,
             filterOptions : this.options.filterOptions,
-            srs : this.options.srs,
+            srs : "EPSG:4326", // info: en réalité le service ne reconnait que EPSG:4326. this.options.srs permet essentiellement de différencier EPSG:4326 (lat,lon) et CRS:84 (lon,lat)
             maximumResponses : this.options.maximumResponses
         };
 

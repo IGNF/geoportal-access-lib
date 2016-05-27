@@ -29,10 +29,12 @@
                    onSuccess : function (response) {console.log(response.locations);},
                    onFailure : function (error) {console.log(error);},
                    // spécifique au service
-                   location: "2 avenue de paris, 94166 Saint-Mandée",
+                //    location: "2 avenue de paris, 94166 Saint-Mandée",
+                   location: "brie",
                    returnFreeForm : false,
                    filterOptions :{
-                       type : ["StreetAddress"]
+                       type : ["StreetAddress"],
+                       department : 77
                    },
                    maximumResponses : 25,
                    srs : 'EPSG:4326'
