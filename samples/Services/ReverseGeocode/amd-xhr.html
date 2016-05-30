@@ -27,14 +27,19 @@
                    httpMethod : 'POST', // GET|POST
                    onSuccess : function (response) {console.log(response);},
                    onFailure : function (error) {console.log(error);},
-                   // spécifique au service
-                   position: {
-                        x : 2,
-                        y : 48
-                   },
-                   filterOptions :{
-                       type : ['PositionOfInterest']
-                   }
+                // spécifique au service
+                //    position: {
+                //         x : 2,
+                //         y : 48
+                //    },
+                    position: {
+                         x : 48,
+                         y : 2
+                    },
+                    srs : "EPSG:4326",
+                    filterOptions :{
+                        type : ['PositionOfInterest']
+                    }
                 };
 
                 var obj = new ReverseGeocode(options);

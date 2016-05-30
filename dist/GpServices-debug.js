@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta2
- * @date 2016-04-22
+ * @date 2016-05-27
  *
  */
 /*!
@@ -32,7 +32,7 @@
 }(this, function() {
 
 /* BEGIN CODE */
-var log4js, loggerCfg, UtilsLoggerByDefault, UtilsMessagesResources, ExceptionsErrorService, UtilsHelper, promise, ProtocolsXHR, ProtocolsJSONP, ProtocolsProtocol, ServicesDefaultUrlService, ServicesCommonService, ServicesAltiRequestModelAltiRequest, ServicesAltiRequestModelAltiElevationRequest, ServicesAltiRequestModelAltiProfilRequest, ServicesAltiRequestAltiRequestREST, FormatsWPS, ServicesAltiRequestAltiRequestWPS, ServicesAltiRequestAltiRequestFactory, FormatsXML, ServicesAltiResponseModelAltiResponse, ServicesAltiResponseModelElevation, ServicesAltiFormatsAltiResponseReader, ServicesAltiResponseAltiResponseFactory, ServicesAltiAlti, ServicesAutoConfResponseModelAutoConfResponse, ServicesAutoConfResponseModelConstraint, ServicesAutoConfResponseModelFormat, ServicesAutoConfResponseModelLayer, ServicesAutoConfResponseModelLegend, ServicesAutoConfResponseModelMetadata, ServicesAutoConfResponseModelOriginator, ServicesAutoConfResponseModelService, ServicesAutoConfResponseModelStyle, ServicesAutoConfResponseModelTerritory, ServicesAutoConfResponseModelThematic, ServicesAutoConfResponseModelTileMatrixSet, ServicesAutoConfResponseModelTileMatrix, ServicesAutoConfResponseModelTileMatrixLimit, ServicesAutoConfFormatsAutoConfResponseReader, ServicesAutoConfResponseAutoConfResponseFactory, ServicesAutoConfAutoConf, FormatsXLSRequestHeader, FormatsXLSRequest, FormatsXLSAbstractService, FormatsXLS, FormatsXLSLocationUtilityServiceModelAddress, FormatsXLSLocationUtilityServiceGeocodeFilterExtension, FormatsXLSLocationUtilityServiceGeocodeRequest, FormatsXLSLocationUtilityServiceModelPosition, FormatsXLSLocationUtilityServiceModelPreference, FormatsXLSLocationUtilityServiceReverseGeocodeRequest, FormatsXLSLocationUtilityService, ServicesGeocodeRequestGeocodeLocation, ServicesGeocodeRequestModelStreetAddress, ServicesGeocodeRequestModelPositionOfInterest, ServicesGeocodeRequestModelCadastralParcel, ServicesGeocodeRequestModelAdministratif, ServicesGeocodeRequestDirectGeocodeRequestFactory, ServicesGeocodeResponseModelGeocodeResponse, ServicesGeocodeResponseModelGeocodedLocation, ServicesGeocodeResponseModelDirectGeocodedLocation, ServicesGeocodeFormatsDirectGeocodeResponseReader, ServicesGeocodeResponseDirectGeocodeResponseFactory, ServicesGeocodeGeocode, ServicesGeocodeRequestReverseGeocodeRequestFactory, ServicesGeocodeResponseModelReverseGeocodedLocation, ServicesGeocodeFormatsReverseGeocodeResponseReader, ServicesGeocodeResponseReverseGeocodeResponseFactory, ServicesGeocodeReverseGeocode, ServicesAutoCompleteResponseModelAutoCompleteResponse, ServicesAutoCompleteResponseModelSuggestedLocation, ServicesAutoCompleteResponseAutoCompleteResponseFactory, ServicesAutoCompleteAutoComplete, FormatsXLSRouteServiceModelRoutePlan, FormatsXLSRouteServiceDetermineRouteRequest, FormatsXLSRouteServiceRouteRequestExtension, FormatsXLSRouteService, ServicesRouteRequestRouteRequestOLS, ServicesRouteRequestModelRouteParamREST, ServicesRouteRequestRouteRequestREST, ServicesRouteRequestRouteRequestFactory, FormatsWKT, ServicesRouteResponseModelRouteResponse, ServicesRouteResponseModelRouteInstruction, ServicesRouteFormatsRouteResponseRESTReader, ServicesRouteFormatsRouteResponseOLSReader, ServicesRouteResponseRouteResponseFactory, ServicesRouteRoute, ServicesProcessIsoCurveRequestModelProcessIsoCurveParam, ServicesProcessIsoCurveRequestProcessIsoCurveRequest, ServicesProcessIsoCurveResponseModelProcessIsoCurveResponse, ServicesProcessIsoCurveFormatsProcessIsoCurveResponseReader, ServicesProcessIsoCurveResponseProcessIsoCurveResponseFactory, ServicesProcessIsoCurveProcessIsoCurve, ServicesServices, Gp;
+var log4js, loggerCfg, UtilsLoggerByDefault, UtilsHelper, promise, ProtocolsXHR, UtilsMessagesResources, ExceptionsErrorService, ProtocolsJSONP, ProtocolsProtocol, ServicesDefaultUrlService, ServicesCommonService, ServicesAltiRequestModelAltiRequest, ServicesAltiRequestModelAltiElevationRequest, ServicesAltiRequestModelAltiProfilRequest, ServicesAltiRequestAltiRequestREST, FormatsWPS, ServicesAltiRequestAltiRequestWPS, ServicesAltiRequestAltiRequestFactory, FormatsXML, ServicesAltiResponseModelAltiResponse, ServicesAltiResponseModelElevation, ServicesAltiFormatsAltiResponseReader, ServicesAltiResponseAltiResponseFactory, ServicesAltiAlti, ServicesAutoConfResponseModelAutoConfResponse, ServicesAutoConfResponseModelConstraint, ServicesAutoConfResponseModelFormat, ServicesAutoConfResponseModelLayer, ServicesAutoConfResponseModelLegend, ServicesAutoConfResponseModelMetadata, ServicesAutoConfResponseModelOriginator, ServicesAutoConfResponseModelService, ServicesAutoConfResponseModelStyle, ServicesAutoConfResponseModelTerritory, ServicesAutoConfResponseModelThematic, ServicesAutoConfResponseModelTileMatrixSet, ServicesAutoConfResponseModelTileMatrix, ServicesAutoConfResponseModelTileMatrixLimit, ServicesAutoConfFormatsAutoConfResponseReader, ServicesAutoConfResponseAutoConfResponseFactory, ServicesAutoConfAutoConf, FormatsXLSRequestHeader, FormatsXLSRequest, FormatsXLSAbstractService, FormatsXLS, FormatsXLSLocationUtilityServiceModelAddress, FormatsXLSLocationUtilityServiceGeocodeFilterExtension, FormatsXLSLocationUtilityServiceGeocodeRequest, FormatsXLSLocationUtilityServiceModelPosition, FormatsXLSLocationUtilityServiceModelPreference, FormatsXLSLocationUtilityServiceReverseGeocodeRequest, FormatsXLSLocationUtilityService, ServicesGeocodeRequestGeocodeLocation, ServicesGeocodeRequestModelStreetAddress, ServicesGeocodeRequestModelPositionOfInterest, ServicesGeocodeRequestModelCadastralParcel, ServicesGeocodeRequestModelAdministratif, ServicesGeocodeRequestDirectGeocodeRequestFactory, ServicesGeocodeResponseModelGeocodeResponse, ServicesGeocodeResponseModelGeocodedLocation, ServicesGeocodeResponseModelDirectGeocodedLocation, ServicesGeocodeFormatsDirectGeocodeResponseReader, ServicesGeocodeResponseDirectGeocodeResponseFactory, ServicesGeocodeGeocode, ServicesGeocodeRequestReverseGeocodeRequestFactory, ServicesGeocodeResponseModelReverseGeocodedLocation, ServicesGeocodeFormatsReverseGeocodeResponseReader, ServicesGeocodeResponseReverseGeocodeResponseFactory, ServicesGeocodeReverseGeocode, ServicesAutoCompleteResponseModelAutoCompleteResponse, ServicesAutoCompleteResponseModelSuggestedLocation, ServicesAutoCompleteResponseAutoCompleteResponseFactory, ServicesAutoCompleteAutoComplete, FormatsXLSRouteServiceModelRoutePlan, FormatsXLSRouteServiceDetermineRouteRequest, FormatsXLSRouteServiceRouteRequestExtension, FormatsXLSRouteService, ServicesRouteRequestRouteRequestOLS, ServicesRouteRequestModelRouteParamREST, ServicesRouteRequestRouteRequestREST, ServicesRouteRequestRouteRequestFactory, FormatsWKT, ServicesRouteResponseModelRouteResponse, ServicesRouteResponseModelRouteInstruction, ServicesRouteFormatsRouteResponseRESTReader, ServicesRouteFormatsRouteResponseOLSReader, ServicesRouteResponseRouteResponseFactory, ServicesRouteRoute, ServicesProcessIsoCurveRequestModelProcessIsoCurveParam, ServicesProcessIsoCurveRequestProcessIsoCurveRequest, ServicesProcessIsoCurveResponseModelProcessIsoCurveResponse, ServicesProcessIsoCurveFormatsProcessIsoCurveResponseReader, ServicesProcessIsoCurveResponseProcessIsoCurveResponseFactory, ServicesProcessIsoCurveProcessIsoCurve, ServicesServices, Gp;
 (function (rootRequire) {
     log4js = function () {
         var requirejs, require, define;
@@ -2660,77 +2660,6 @@ UtilsLoggerByDefault = function (Log4js, Config) {
     };
     return LoggerByDefault;
 }(log4js, loggerCfg);
-UtilsMessagesResources = function () {
-    var MessagesResources = {
-        PARAM_MISSING: 'Parameter(s) \'%var%\' missing',
-        PARAM_EMPTY: 'Parameter(s) \'%var%\' empty',
-        PARAM_TYPE: 'Wrong type(s) for parameter(s) \'%var%\'',
-        PARAM_FORMAT: 'Parameter(s) \'%var%\' not correctly formatted',
-        PARAM_NOT_SUPPORT: 'Value(s) for parameter(s) \'%var%\' not supported',
-        PARAM_UNKNOWN: 'Value(s) for parameter(s) \'%var%\' unknown',
-        SERVICE_REQUEST_BUILD: 'An error occurred during the request building of the service',
-        SERVICE_REQUEST_EMPTY: 'The request sent to the service is empty',
-        SERVICE_RESPONSE_EXCEPTION: 'The service returned an exception : \'%var%\'',
-        SERVICE_RESPONSE_EXCEPTION_2: 'The service returned an exception',
-        SERVICE_RESPONSE_ANALYSE: 'An error occurred while parsing the response \'%var%\' of the service',
-        SERVICE_RESPONSE_ANALYSE_2: 'An unknown error occurred while parsing the response',
-        SERVICE_RESPONSE_EMPTY: 'The response of the service is empty',
-        SERVICE_RESPONSE_EMPTY_2: 'The response from the service could not be analyzed or is empty',
-        SERVICE_RESPONSE_FORMAT: 'The format of the service response is not supported (handled format(s) : \'%var%\')',
-        SERVICE_RESPONSE_FORMAT_2: 'The format of the service response is not supported',
-        SERVICE_RESPONSE_FORMAT_3: 'No suggestion matching the search',
-        CLASS_CONSTRUCTOR: '\'%var%\' constructor cannot be called as a function.',
-        getMessage: function (clef, parametres) {
-            if (!arguments) {
-                return 'Message indefined !';
-            }
-            var params = Array.prototype.slice.call(arguments);
-            var key = params.shift();
-            var args = params;
-            var message = this[key];
-            try {
-                if (Array.isArray(args) && args.length > 0) {
-                    message = message.replace('%var%', args.join(' - '));
-                } else {
-                    message = message.replace('%var%', '%var% (not specified)');
-                }
-            } catch (e) {
-            }
-            return message;
-        }
-    };
-    return MessagesResources;
-}();
-ExceptionsErrorService = function () {
-    function ErrorService(error) {
-        if (!(this instanceof ErrorService)) {
-            throw new TypeError('ErrorService constructor cannot be called as a function.');
-        }
-        var e = error;
-        if (typeof error === 'string' || error instanceof String) {
-            this.message = error;
-            this.status = -1;
-            this.type = ErrorService.TYPE_UNKERR;
-        } else {
-            this.message = e.message || 'undefined!?';
-            this.type = e.type;
-            this.status = e.status || -1;
-        }
-        this.name = 'ErrorService';
-        this.stack = new Error().stack;
-    }
-    ErrorService.TYPE_SRVERR = 'SERVICE_ERROR';
-    ErrorService.TYPE_USEERR = 'USAGE_ERROR';
-    ErrorService.TYPE_UNKERR = 'UNKNOWN_ERROR';
-    ErrorService.prototype = Object.create(Error.prototype, {
-        constructor: {
-            value: ErrorService,
-            writable: true,
-            configurable: true
-        }
-    });
-    return ErrorService;
-}();
 UtilsHelper = function () {
     var Helper = {
         normalyzeParameters: function (params) {
@@ -3476,6 +3405,77 @@ ProtocolsXHR = function (Logger, Helper, ES6Promise) {
     };
     return XHR;
 }(UtilsLoggerByDefault, UtilsHelper, promise);
+UtilsMessagesResources = function () {
+    var MessagesResources = {
+        PARAM_MISSING: 'Parameter(s) \'%var%\' missing',
+        PARAM_EMPTY: 'Parameter(s) \'%var%\' empty',
+        PARAM_TYPE: 'Wrong type(s) for parameter(s) \'%var%\'',
+        PARAM_FORMAT: 'Parameter(s) \'%var%\' not correctly formatted',
+        PARAM_NOT_SUPPORT: 'Value(s) for parameter(s) \'%var%\' not supported',
+        PARAM_UNKNOWN: 'Value(s) for parameter(s) \'%var%\' unknown',
+        SERVICE_REQUEST_BUILD: 'An error occurred during the request building of the service',
+        SERVICE_REQUEST_EMPTY: 'The request sent to the service is empty',
+        SERVICE_RESPONSE_EXCEPTION: 'The service returned an exception : \'%var%\'',
+        SERVICE_RESPONSE_EXCEPTION_2: 'The service returned an exception',
+        SERVICE_RESPONSE_ANALYSE: 'An error occurred while parsing the response \'%var%\' of the service',
+        SERVICE_RESPONSE_ANALYSE_2: 'An unknown error occurred while parsing the response',
+        SERVICE_RESPONSE_EMPTY: 'The response of the service is empty',
+        SERVICE_RESPONSE_EMPTY_2: 'The response from the service could not be analyzed or is empty',
+        SERVICE_RESPONSE_FORMAT: 'The format of the service response is not supported (handled format(s) : \'%var%\')',
+        SERVICE_RESPONSE_FORMAT_2: 'The format of the service response is not supported',
+        SERVICE_RESPONSE_FORMAT_3: 'No suggestion matching the search',
+        CLASS_CONSTRUCTOR: '\'%var%\' constructor cannot be called as a function.',
+        getMessage: function (clef, parametres) {
+            if (!arguments) {
+                return 'Message indefined !';
+            }
+            var params = Array.prototype.slice.call(arguments);
+            var key = params.shift();
+            var args = params;
+            var message = this[key];
+            try {
+                if (Array.isArray(args) && args.length > 0) {
+                    message = message.replace('%var%', args.join(' - '));
+                } else {
+                    message = message.replace('%var%', '%var% (not specified)');
+                }
+            } catch (e) {
+            }
+            return message;
+        }
+    };
+    return MessagesResources;
+}();
+ExceptionsErrorService = function () {
+    function ErrorService(error) {
+        if (!(this instanceof ErrorService)) {
+            throw new TypeError('ErrorService constructor cannot be called as a function.');
+        }
+        var e = error;
+        if (typeof error === 'string' || error instanceof String) {
+            this.message = error;
+            this.status = -1;
+            this.type = ErrorService.TYPE_UNKERR;
+        } else {
+            this.message = e.message || 'undefined!?';
+            this.type = e.type;
+            this.status = e.status || -1;
+        }
+        this.name = 'ErrorService';
+        this.stack = new Error().stack;
+    }
+    ErrorService.TYPE_SRVERR = 'SERVICE_ERROR';
+    ErrorService.TYPE_USEERR = 'USAGE_ERROR';
+    ErrorService.TYPE_UNKERR = 'UNKNOWN_ERROR';
+    ErrorService.prototype = Object.create(Error.prototype, {
+        constructor: {
+            value: ErrorService,
+            writable: true,
+            configurable: true
+        }
+    });
+    return ErrorService;
+}();
 ProtocolsJSONP = function (Logger) {
     var JSONP = {
         uuid: function () {
@@ -5022,31 +5022,45 @@ ServicesAutoConfResponseModelAutoConfResponse = function () {
         getLayersConf: function (apiKey) {
             var layers = {};
             var layersIdArray = this.getLayersId(apiKey);
-            for (var i = 0; i < layersIdArray.length; i++) {
-                var lyrId = layersIdArray[i];
-                layers[lyrId] = this.layers[lyrId];
+            if (layersIdArray) {
+                for (var i = 0; i < layersIdArray.length; i++) {
+                    var lyrId = layersIdArray[i];
+                    layers[lyrId] = this.layers[lyrId];
+                }
             }
             return layers;
         },
         getLayerConf: function (layerId) {
+            if (!this.layers) {
+                return;
+            }
             return this.layers[layerId];
         },
         getTileMatrixSets: function () {
             return this.tileMatrixSets;
         },
         getTMSConf: function (tmsID) {
+            if (!this.tileMatrixSets) {
+                return;
+            }
             return this.tileMatrixSets[tmsID];
         },
         getTerritories: function () {
             return this.territories;
         },
         getTerritoryConf: function (territoryID) {
+            if (!this.territories) {
+                return;
+            }
             return this.territories[territoryID];
         },
         getServices: function () {
             return this.services;
         },
         getServiceConf: function (serviceID) {
+            if (!this.services) {
+                return;
+            }
             return this.services[serviceID];
         }
     };
@@ -5160,6 +5174,9 @@ ServicesAutoConfResponseModelLayer = function () {
             return this.styles;
         },
         getDefaultStyle: function () {
+            if (!this.styles) {
+                return;
+            }
             var style;
             var s = this.styles;
             for (var i = 0; i < s.length; i++) {
@@ -5174,6 +5191,9 @@ ServicesAutoConfResponseModelLayer = function () {
             return this.thematics;
         },
         getDefaultFormat: function () {
+            if (!this.formats) {
+                return;
+            }
             var format;
             var f = this.formats;
             for (var i = 0; i < f.length; i++) {
@@ -7663,6 +7683,23 @@ ServicesGeocodeGeocode = function (Logger, _, ErrorService, CommonService, Direc
         var filter = Object.keys(options.filterOptions);
         for (var i = 0; i < filter.length; i++) {
             var key = filter[i];
+            var filtersCouldBeNumberList = [
+                'department',
+                'number',
+                'postalCode',
+                'insee',
+                'importance',
+                'ID',
+                'IDTR',
+                'absorbedCity',
+                'sheet',
+                'section',
+                'inseeRegion',
+                'inseeDepartment'
+            ];
+            if (filtersCouldBeNumberList.indexOf(key) !== -1 && typeof options.filterOptions[key] !== 'string') {
+                options.filterOptions[key] = options.filterOptions[key].toString();
+            }
             if (!options.filterOptions[key] || Object.keys(options.filterOptions[key]).length === 0) {
                 delete this.options.filterOptions[key];
             }
@@ -8054,6 +8091,24 @@ ServicesGeocodeResponseReverseGeocodeResponseFactory = function (Logger, MRes, E
                         }));
                         return;
                     }
+                    if (options.scope && options.scope.options && options.scope.options.srs && options.scope.options.srs !== 'EPSG:4326') {
+                        var location;
+                        var pos;
+                        if (data || data.locations || data.locations.length) {
+                            for (var i = 0; i < data.locations.length; i++) {
+                                location = data.locations[i];
+                                if (location) {
+                                    pos = location.position;
+                                    if (pos) {
+                                        location.position = {
+                                            x: pos.y,
+                                            y: pos.x
+                                        };
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             } else {
                 options.onError.call(options.scope, new ErrorService({
@@ -8107,8 +8162,8 @@ ServicesGeocodeReverseGeocode = function (Logger, _, ErrorService, CommonService
         }
         this.options.maximumResponses = options.maximumResponses || 25;
         this.options.returnFreeForm = options.returnFreeForm || false;
-        this.options.srs = options.srs || 'EPSG:4326';
-        if (ReverseGeocode.geoEPSG.indexOf(this.options.srs) !== -1) {
+        this.options.srs = options.srs || 'CRS:84';
+        if (ReverseGeocode.geoEPSG.indexOf(this.options.srs) === -1) {
             this.options.position = {
                 x: this.options.position.y,
                 y: this.options.position.x
@@ -8142,7 +8197,7 @@ ServicesGeocodeReverseGeocode = function (Logger, _, ErrorService, CommonService
             position: this.options.position,
             returnFreeForm: this.options.returnFreeForm,
             filterOptions: this.options.filterOptions,
-            srs: this.options.srs,
+            srs: 'EPSG:4326',
             maximumResponses: this.options.maximumResponses
         };
         this.request = ReverseGeocodeRequestFactory.build(options);
@@ -9991,11 +10046,11 @@ ServicesServices = function (Alti, AutoConf, Geocode, ReverseGeocode, AutoComple
     var bbox = {};
     return Services;
 }(ServicesAltiAlti, ServicesAutoConfAutoConf, ServicesGeocodeGeocode, ServicesGeocodeReverseGeocode, ServicesAutoCompleteAutoComplete, ServicesRouteRoute, ServicesProcessIsoCurveProcessIsoCurve);
-Gp = function (Services, AltiResponse, Elevation, AutoCompleteResponse, SuggestedLocation, GetConfigResponse, Constraint, Format, Layer, Legend, Metadata, Originator, Service, Style, Territory, Thematic, TM, TMLimit, TMS, GeocodeResponse, GeocodedLocation, DirectGeocodedLocation, ReverseGeocodedLocation, IsoCurveResponse, RouteResponse, RouteInstruction, Error) {
+Gp = function (XHR, Services, AltiResponse, Elevation, AutoCompleteResponse, SuggestedLocation, GetConfigResponse, Constraint, Format, Layer, Legend, Metadata, Originator, Service, Style, Territory, Thematic, TM, TMLimit, TMS, GeocodeResponse, GeocodedLocation, DirectGeocodedLocation, ReverseGeocodedLocation, IsoCurveResponse, RouteResponse, RouteInstruction, Error) {
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta2',
-        servicesDate: '2016-04-22',
+        servicesDate: '2016-05-27',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;
@@ -10014,6 +10069,8 @@ Gp = function (Services, AltiResponse, Elevation, AutoCompleteResponse, Suggeste
             return this;
         }
     };
+    Gp.extend('Protocols', {});
+    Gp.extend('Protocols.XHR', XHR);
     Gp.extend('Services', Services);
     Gp.extend('Services.AltiResponse', AltiResponse);
     Gp.extend('Services.Alti.Elevation', Elevation);
@@ -10043,7 +10100,7 @@ Gp = function (Services, AltiResponse, Elevation, AutoCompleteResponse, Suggeste
     Gp.extend('Error', Error);
     scope.Gp = Gp;
     return scope.Gp;
-}(ServicesServices, ServicesAltiResponseModelAltiResponse, ServicesAltiResponseModelElevation, ServicesAutoCompleteResponseModelAutoCompleteResponse, ServicesAutoCompleteResponseModelSuggestedLocation, ServicesAutoConfResponseModelAutoConfResponse, ServicesAutoConfResponseModelConstraint, ServicesAutoConfResponseModelFormat, ServicesAutoConfResponseModelLayer, ServicesAutoConfResponseModelLegend, ServicesAutoConfResponseModelMetadata, ServicesAutoConfResponseModelOriginator, ServicesAutoConfResponseModelService, ServicesAutoConfResponseModelStyle, ServicesAutoConfResponseModelTerritory, ServicesAutoConfResponseModelThematic, ServicesAutoConfResponseModelTileMatrix, ServicesAutoConfResponseModelTileMatrixLimit, ServicesAutoConfResponseModelTileMatrixSet, ServicesGeocodeResponseModelGeocodeResponse, ServicesGeocodeResponseModelGeocodedLocation, ServicesGeocodeResponseModelDirectGeocodedLocation, ServicesGeocodeResponseModelReverseGeocodedLocation, ServicesProcessIsoCurveResponseModelProcessIsoCurveResponse, ServicesRouteResponseModelRouteResponse, ServicesRouteResponseModelRouteInstruction, ExceptionsErrorService);
+}(ProtocolsXHR, ServicesServices, ServicesAltiResponseModelAltiResponse, ServicesAltiResponseModelElevation, ServicesAutoCompleteResponseModelAutoCompleteResponse, ServicesAutoCompleteResponseModelSuggestedLocation, ServicesAutoConfResponseModelAutoConfResponse, ServicesAutoConfResponseModelConstraint, ServicesAutoConfResponseModelFormat, ServicesAutoConfResponseModelLayer, ServicesAutoConfResponseModelLegend, ServicesAutoConfResponseModelMetadata, ServicesAutoConfResponseModelOriginator, ServicesAutoConfResponseModelService, ServicesAutoConfResponseModelStyle, ServicesAutoConfResponseModelTerritory, ServicesAutoConfResponseModelThematic, ServicesAutoConfResponseModelTileMatrix, ServicesAutoConfResponseModelTileMatrixLimit, ServicesAutoConfResponseModelTileMatrixSet, ServicesGeocodeResponseModelGeocodeResponse, ServicesGeocodeResponseModelGeocodedLocation, ServicesGeocodeResponseModelDirectGeocodedLocation, ServicesGeocodeResponseModelReverseGeocodedLocation, ServicesProcessIsoCurveResponseModelProcessIsoCurveResponse, ServicesRouteResponseModelRouteResponse, ServicesRouteResponseModelRouteInstruction, ExceptionsErrorService);
 /* END CODE   */
 
 return Gp;

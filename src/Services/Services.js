@@ -96,7 +96,7 @@ define([
             *      @param {Gp.BBox} [options.filterOptions.bbox] - bounding box where to perform the search. Properties expressed in options.srs coordinates system.
             *      @param {Array.<String>} [options.filterOptions.type] - geographical identifier types to search. Values currently availables are : "PositionOfInterest" for place names, "StreetAddress" for address search, "CadastralParcel" for Cadastral parcels search. Default is "StreetAddress".
             *
-            *      @param {String} [options.filterOptions.[prop]] - Additionnal properties to filter search. Properties depends on options.filterOptions.type.
+            *      @param {String} [options.filterOptions.[prop]] - Additionnal properties to filter search. Properties depends on options.filterOptions.type, and values type should be "String".
             *      <br/><br/>
             *      Common Properties availables for all search types :<br/>
             *      "municipality", "insee", "department".
@@ -132,7 +132,7 @@ define([
             * @method reverseGeocode
             * @param {Object} options - options for function call.
             * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/geoservices-ign}.
-            * @param {Gp.Point} options.position - Reference position where to search geographical identifiers. Its coordinates are expressed in the coordinates system given with options.srs parameter.
+            * @param {Gp.Point} options.position - Reference position where to search geographical identifiers. Its coordinates are expressed in the coordinates system given with options.srs parameter. (default is CRS:84, that means position.x corresponds to longitude and position.y corresponds to latitude)
             * @param {Object} [options.filterOptions] - Additional filters to apply to search. The following properties may be given.
             *      @param {Array.<String>} [options.filterOptions.type] - geographical identifier types to search. Values currently availables are : "PositionOfInterest" for place names, "StreetAddress" for address search, "CadastralParcel" for Cadastral parcels search. Default is "StreetAddress".
             *      @param {Gp.BBox} [options.filterOptions.bbox] - bounding box where to perform the search. Expressed in options.srs coordinates system.
@@ -140,7 +140,7 @@ define([
             * @param {Array.<Gp.Point>} [options.filterOptions.polygon] - Polygon where to perform the search. Expressed in options.srs coordinates system.
             * @param {Number} [options.maximumResponses] - Maximum number of responses. Default underlying service value applies (25) if not provided.
             * @param {Boolean} [options.returnFreeForm] - Set this parameter to true if you wish to have an address returned in a single String (unstructured). If unset, default underlying service value (false) applies.
-            * @param {String} [options.srs] - Coordinates System used to expres coordinates for parameters and responses. Default underlying service value (EPSG:4326) applies.
+            * @param {String} [options.srs] - Coordinates System used to expres coordinates for parameters and responses. Default is CRS:84.
             * @param {Function} options.onSuccess - callback function for getting successful service response. Takes a {@link Gp.Services.GeocodeResponse} object as a parameter. Except if "rawResponse" is set to true.
             * @param {Function} [options.onFailure] - callback function for handling unsuccessful service responses (timeOut, missing rights, ...). Takes a {@link Gp.Exceptions.ErrorService} object as parameter.
             * @param {Number} [options.timeOut=0] - Number of milliseconds above which a timeOut response will be returned with onFailure callback (see above). Default value is 0 which means timeOut will not be handled.
@@ -186,9 +186,9 @@ define([
             * @param {Object} options - options for function call.
             * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/geoservices-ign}.
             * @param {String} [options.routePreference = "fastest"] - Indicates the way to compute the route : "fastest" (time optimisation) or "shortest" (distance optimisation).
-            * @param {Gp.Point} options.startPoint - Start point of the route. Expressed in EPSG:4326 coordinates system.
-            * @param {Gp.Point} options.endPoint - End point of the route. Expressed in EPSG:4326 coordinates system.
-            * @param {Array.<Gp.Point>} [options.viaPoints] - Ordered via Points of the route. Expressed in EPSG:4326 coordinates system.
+            * @param {Gp.Point} options.startPoint - Start point of the route. Expressed in CRS:84 coordinates system (Gp.Point.x corresponds to longitude, Gp.Point.y corresponds to latitude).
+            * @param {Gp.Point} options.endPoint - End point of the route. Expressed in CRS:84 coordinates system (Gp.Point.x corresponds to longitude, Gp.Point.y corresponds to latitude).
+            * @param {Array.<Gp.Point>} [options.viaPoints] - Ordered via Points of the route. Expressed in CRS:84 coordinates system (Gp.Point.x corresponds to longitude, Gp.Point.y corresponds to latitude).
             * @param {String} [options.graph = "Voiture"] - User profile to use to compute the route : "Voiture" (using a vehicule) or "Pieton" (pedestrian). Has an influence on the kind of roads the route may use and the average speed.
             * @param {Array.<String>} [options.exclusions] - Indicates if route has to avoid some features ("toll", "bridge" or "tunnel").
             * @param {Boolean} [options.geometryInInstructions = false] - Indicates if route geometry has to be also returned with route instructions.
@@ -215,8 +215,7 @@ define([
             * @method isoCurve
             * @param {Object} options - options for function call.
             * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/geoservices-ign}.
-            * @param {Gp.Point} options.position - Start or Arrival (options.reverse==true) Point for the computing. Expressed in the coordinates system given with options.srs.
-            * @param {String} [options.srs] - Coordinates System used to express coordinates for parameters and responses. Default underlying service value (EPSG:4326) applies.
+            * @param {Gp.Point} options.position - Start or Arrival (options.reverse==true) Point for the computing. Expressed in CRS:84 coordinates system (Gp.Point.x corresponds to longitude, Gp.Point.y corresponds to latitude).
             * @param {String} [options.graph = "Voiture"] - User profile to use to compute the isoCurve : "Voiture" (using a vehicule) or "Pieton" (pedestrian). Has an influence on the kind of roads to use and the average speed.
             * @param {Array.<String>} [options.exclusions] - (FIXME : options.avoidFeature) Indicates if route has to avoid some features ("toll", "bridge" or "tunnel").
             * @param {String} [options.method = "time"] - Computing method to use : "time" (using a duration as a constraint) or "distance" (using a distance as a constraint).

@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta2
- * @date 2016-05-18
+ * @date 2016-05-27
  *
  */
 /*!
@@ -2349,31 +2349,45 @@ ServicesAutoConfResponseModelAutoConfResponse = function () {
         getLayersConf: function (apiKey) {
             var layers = {};
             var layersIdArray = this.getLayersId(apiKey);
-            for (var i = 0; i < layersIdArray.length; i++) {
-                var lyrId = layersIdArray[i];
-                layers[lyrId] = this.layers[lyrId];
+            if (layersIdArray) {
+                for (var i = 0; i < layersIdArray.length; i++) {
+                    var lyrId = layersIdArray[i];
+                    layers[lyrId] = this.layers[lyrId];
+                }
             }
             return layers;
         },
         getLayerConf: function (layerId) {
+            if (!this.layers) {
+                return;
+            }
             return this.layers[layerId];
         },
         getTileMatrixSets: function () {
             return this.tileMatrixSets;
         },
         getTMSConf: function (tmsID) {
+            if (!this.tileMatrixSets) {
+                return;
+            }
             return this.tileMatrixSets[tmsID];
         },
         getTerritories: function () {
             return this.territories;
         },
         getTerritoryConf: function (territoryID) {
+            if (!this.territories) {
+                return;
+            }
             return this.territories[territoryID];
         },
         getServices: function () {
             return this.services;
         },
         getServiceConf: function (serviceID) {
+            if (!this.services) {
+                return;
+            }
             return this.services[serviceID];
         }
     };
@@ -2487,6 +2501,9 @@ ServicesAutoConfResponseModelLayer = function () {
             return this.styles;
         },
         getDefaultStyle: function () {
+            if (!this.styles) {
+                return;
+            }
             var style;
             var s = this.styles;
             for (var i = 0; i < s.length; i++) {
@@ -2501,6 +2518,9 @@ ServicesAutoConfResponseModelLayer = function () {
             return this.thematics;
         },
         getDefaultFormat: function () {
+            if (!this.formats) {
+                return;
+            }
             var format;
             var f = this.formats;
             for (var i = 0; i < f.length; i++) {
@@ -4936,6 +4956,23 @@ ServicesGeocodeGeocode = function (Logger, _, ErrorService, CommonService, Direc
         var filter = Object.keys(options.filterOptions);
         for (var i = 0; i < filter.length; i++) {
             var key = filter[i];
+            var filtersCouldBeNumberList = [
+                'department',
+                'number',
+                'postalCode',
+                'insee',
+                'importance',
+                'ID',
+                'IDTR',
+                'absorbedCity',
+                'sheet',
+                'section',
+                'inseeRegion',
+                'inseeDepartment'
+            ];
+            if (filtersCouldBeNumberList.indexOf(key) !== -1 && typeof options.filterOptions[key] !== 'string') {
+                options.filterOptions[key] = options.filterOptions[key].toString();
+            }
             if (!options.filterOptions[key] || Object.keys(options.filterOptions[key]).length === 0) {
                 delete this.options.filterOptions[key];
             }
@@ -5324,6 +5361,24 @@ ServicesGeocodeResponseReverseGeocodeResponseFactory = function (Logger, MRes, E
                         }));
                         return;
                     }
+                    if (options.scope && options.scope.options && options.scope.options.srs && options.scope.options.srs !== 'EPSG:4326') {
+                        var location;
+                        var pos;
+                        if (data || data.locations || data.locations.length) {
+                            for (var i = 0; i < data.locations.length; i++) {
+                                location = data.locations[i];
+                                if (location) {
+                                    pos = location.position;
+                                    if (pos) {
+                                        location.position = {
+                                            x: pos.y,
+                                            y: pos.x
+                                        };
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             } else {
                 options.onError.call(options.scope, new ErrorService({
@@ -5375,8 +5430,8 @@ ServicesGeocodeReverseGeocode = function (Logger, _, ErrorService, CommonService
         }
         this.options.maximumResponses = options.maximumResponses || 25;
         this.options.returnFreeForm = options.returnFreeForm || false;
-        this.options.srs = options.srs || 'EPSG:4326';
-        if (ReverseGeocode.geoEPSG.indexOf(this.options.srs) !== -1) {
+        this.options.srs = options.srs || 'CRS:84';
+        if (ReverseGeocode.geoEPSG.indexOf(this.options.srs) === -1) {
             this.options.position = {
                 x: this.options.position.y,
                 y: this.options.position.x
@@ -5410,7 +5465,7 @@ ServicesGeocodeReverseGeocode = function (Logger, _, ErrorService, CommonService
             position: this.options.position,
             returnFreeForm: this.options.returnFreeForm,
             filterOptions: this.options.filterOptions,
-            srs: this.options.srs,
+            srs: 'EPSG:4326',
             maximumResponses: this.options.maximumResponses
         };
         this.request = ReverseGeocodeRequestFactory.build(options);
@@ -7207,7 +7262,7 @@ Gp = function (XHR, Services, AltiResponse, Elevation, AutoCompleteResponse, Sug
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta2',
-        servicesDate: '2016-05-18',
+        servicesDate: '2016-05-27',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;

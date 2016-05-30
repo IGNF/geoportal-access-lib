@@ -72,7 +72,7 @@ function (
                     } catch (e) {
                         // on relaye l'erreur reçue
                         e.status = 200 ;
-                        options.onError.call(options.scope, e) ;
+                        options.onError.call(options.scope, e);
                         return;
                     }
 
@@ -86,6 +86,28 @@ function (
                         }));
                         return;
                     }
+
+                    // dans le cas d'un srs non EPSG géographique, il faut réinverser les coordonnées (lat,lon => lon,lat)
+                    if ( options.scope && options.scope.options && options.scope.options.srs && options.scope.options.srs !== "EPSG:4326" ) {
+                        var location;
+                        var pos;
+                        if ( data || data.locations || data.locations.length ) {
+                            for ( var i = 0; i < data.locations.length; i++ ) {
+                                location = data.locations[i];
+                                if ( location ) {
+                                    pos = location.position;
+                                    if ( pos ) {
+                                        // on inverse les 2 coordonnées
+                                        location.position = {
+                                            x : pos.y,
+                                            y : pos.x
+                                        };
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                 }
             } else {
                 options.onError.call(options.scope, new ErrorService({
