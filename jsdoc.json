@@ -11,7 +11,7 @@
     },
     "templates": {
         "cleverLinks"           : false,
-        "applicationName"       : "Geoportal Resources Access -- ",
+        "applicationName"       : "Geoportal Resources Access",
         "monospaceLinks"        : false,
         "dateFormat"            : "ddd MMM Do YYYY",
         "outputSourceFiles"     : true,
