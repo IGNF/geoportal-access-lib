@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta2
- * @date 2016-05-27
+ * @date 2016-05-31
  *
  */
 /*!
@@ -4973,7 +4973,7 @@ ServicesGeocodeGeocode = function (Logger, _, ErrorService, CommonService, Direc
             if (filtersCouldBeNumberList.indexOf(key) !== -1 && typeof options.filterOptions[key] !== 'string') {
                 options.filterOptions[key] = options.filterOptions[key].toString();
             }
-            if (!options.filterOptions[key] || Object.keys(options.filterOptions[key]).length === 0) {
+            if (!options.filterOptions[key]) {
                 delete this.options.filterOptions[key];
             }
         }
@@ -7262,7 +7262,7 @@ Gp = function (XHR, Services, AltiResponse, Elevation, AutoCompleteResponse, Sug
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta2',
-        servicesDate: '2016-05-27',
+        servicesDate: '2016-05-31',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;

@@ -145,15 +145,16 @@ function (
             };
         }
 
-        // on teste pour chaque filtre, les conditions suivantes : null ou vide !
         var filter = Object.keys(options.filterOptions);
         for (var i = 0; i < filter.length; i++) {
             var key = filter[i];
+            // on transforme certains filtres qui pourraient être numériques en string
             var filtersCouldBeNumberList = ["department", "number", "postalCode", "insee", "importance", "ID", "IDTR", "absorbedCity", "sheet", "section", "inseeRegion", "inseeDepartment"];
             if ( filtersCouldBeNumberList.indexOf(key) !== -1 && typeof options.filterOptions[key] !== "string" ) {
                 options.filterOptions[key] = options.filterOptions[key].toString();
             }
-            if (! options.filterOptions[key] || Object.keys(options.filterOptions[key]).length === 0) {
+            // on supprime les filtres vides
+            if ( !options.filterOptions[key] ) {
                 delete this.options.filterOptions[key];
             }
         }
