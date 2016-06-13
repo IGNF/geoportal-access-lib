@@ -20,12 +20,12 @@
         "footer"                : "Geoportal Resources Access- version 1.0.0",
         "copyright"             : "Geoportail - Copyright (c) IGN, released under the CECILL-B license",
         "navType"               : "inline",
-    		"theme"                 : "darkly",
-    		"linenums"              : true,
-    		"collapseSymbols"       : true,
-    		"inverseNav"            : true,
-    		"highlightTutorialCode" : false,
-    		"syntaxTheme"           : "default"
+        "theme"                 : "darkly",
+        "linenums"              : true,
+        "collapseSymbols"       : true,
+        "inverseNav"            : true,
+        "highlightTutorialCode" : false,
+        "syntaxTheme"           : "default"
     },
     "markdown": {
         "parser": "gfm",
