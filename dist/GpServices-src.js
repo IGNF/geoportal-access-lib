@@ -9,7 +9,7 @@
  * copyright CeCILL-B
  * copyright IGN
  * @author IGN 
- * @version 1.0.0-beta2
+ * @version 1.0.0-beta3
  * @date 2016-06-13
  *
  */
@@ -1027,7 +1027,7 @@ ProtocolsProtocol = function (Helper, XHR, JSONP) {
     return Protocol;
 }(UtilsHelper, ProtocolsXHR, ProtocolsJSONP);
 ServicesDefaultUrlService = function () {
-    var protocol = 'http://';
+    var protocol = location && location.protocol && location.protocol.indexOf('https:') === 0 ? 'https://' : 'http://';
     var hostname = 'wxs.ign.fr';
     var keyname = '%KEY%';
     var url = protocol + hostname.concat('/', keyname);
@@ -7265,7 +7265,7 @@ ServicesServices = function (Alti, AutoConf, Geocode, ReverseGeocode, AutoComple
 Gp = function (XHR, Services, AltiResponse, Elevation, AutoCompleteResponse, SuggestedLocation, GetConfigResponse, Constraint, Format, Layer, Legend, Metadata, Originator, Service, Style, Territory, Thematic, TM, TMLimit, TMS, GeocodeResponse, GeocodedLocation, DirectGeocodedLocation, ReverseGeocodedLocation, IsoCurveResponse, RouteResponse, RouteInstruction, Error) {
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
-        servicesVersion: '1.0.0-beta2',
+        servicesVersion: '1.0.0-beta3',
         servicesDate: '2016-06-13',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
