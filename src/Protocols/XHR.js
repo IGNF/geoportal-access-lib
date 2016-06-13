@@ -20,10 +20,6 @@ function (Logger, Helper, ES6Promise) {
 
     "use strict";
 
-    // TODO
-    // gestion du DELETE, PUT, ...
-    // ...
-
     var XHR = {
 
         /**
@@ -39,7 +35,7 @@ function (Logger, Helper, ES6Promise) {
          * @param {Object|String} settings.headers - (post) ex. referer
          * @param {Object|String} settings.content - (post) ex. 'application/json'
          * @param {String} settings.timeOut - timeout = 0 par defaut
-         * @param {String} settings.scope          - this (TODO)
+         * @param {String} settings.scope - this
          * @param {Function} settings.onResponse - callback
          * @param {Function} settings.onFailure  - callback
          */
@@ -66,16 +62,18 @@ function (Logger, Helper, ES6Promise) {
             }
 
             var options = {};
-            options.url    = settings.url;
-            options.data   = settings.data ? settings.data : null;
-            options.method = settings.method;
+            options.url      = settings.url;
+            options.data     = settings.data ? settings.data : null;
+            options.method   = settings.method;
             options.timeOut  = settings.timeOut || 0;
-            // options.scope  = settings.scope || this;
+            options.scope    = settings.scope || this;
 
             // test sur les valeurs de 'settings.method'
             switch (settings.method) {
+                case "DELETE":
                 case "GET" :
                     break;
+                case "PUT"   :
                 case "POST"  :
                     // params spécifiques au mode POST
                     options.content = settings.content ? settings.content : "application/x-www-form-urlencoded"; // FIXME en attente des services : bascule en "application/xml" ou "application/json"
@@ -83,8 +81,8 @@ function (Logger, Helper, ES6Promise) {
                         referer : "http://localhost" // todo ...
                     };
                     break;
-                case "DELETE":
-                case "PUT"   :
+                case "HEAD" :
+                case "OPTIONS" :
                     throw new Error("HTTP method not yet supported !");
                 default :
                     throw new Error("HTTP method unknown !");
@@ -143,8 +141,10 @@ function (Logger, Helper, ES6Promise) {
             var promise = new Promise(
                 function (resolve, reject) {
 
-                    // traitement des params 'data' en mode GET
-                    if (options.data && options.method == "GET") {
+                    // traitement du corps de la requête
+                    var corps = (options.method === "POST" || options.method === "PUT") ? true : false;
+
+                    if (options.data && !corps) {
                         options.url = Helper.normalyzeUrl(options.url, options.data);
                     }
 
@@ -166,7 +166,7 @@ function (Logger, Helper, ES6Promise) {
                             logger.trace("XHR - TimeOut actif !");
                         }
 
-                        if (options.method !== "GET") {
+                        if (corps) {
                             // headers, data, content of data
                             // cf. https://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html#dom-xmlhttprequest-setrequestheader
                             hXHR.setRequestHeader("Content-type", options.content);
@@ -215,9 +215,10 @@ function (Logger, Helper, ES6Promise) {
                             }
                         };
 
-                        var data4xdr = (options.data && options.method == "POST") ? options.data : null;
+                        var data4xdr = (options.data && corps) ? options.data : null;
 
                         hXHR.send(data4xdr);
+
                     } else if (window.XMLHttpRequest) {
 
                         logger.trace("XMLHttpRequest");
@@ -248,7 +249,7 @@ function (Logger, Helper, ES6Promise) {
                                 }, options.timeOut);
                         }
 
-                        if (options.method !== "GET") {
+                        if (corps) {
                             // headers, data, content of data
                             // cf. https://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html#dom-xmlhttprequest-setrequestheader
                             logger.trace("data = ", options.data);
@@ -306,9 +307,10 @@ function (Logger, Helper, ES6Promise) {
                         };
 
                         // gestion du content data
-                        var data4xhr = (options.data && options.method == "POST") ? options.data : null;
+                        var data4xhr = (options.data && corps) ? options.data : null;
 
                         hXHR.send(data4xhr);
+
                     } else {
                         throw new Error("CORS not supported");
                     }
