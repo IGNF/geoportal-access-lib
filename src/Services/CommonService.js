@@ -1,5 +1,5 @@
 /**
- * desativation du contrôle cf. l. 148 (fonction call())
+ * desativation du contrôle cf. l. 254 (fonction call())
  * Possible strict violation. (W040)
  */
 

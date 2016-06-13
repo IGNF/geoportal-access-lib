@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta2
- * @date 2016-05-31
+ * @date 2016-06-13
  *
  */
 /*!
@@ -645,15 +645,18 @@ ProtocolsXHR = function (Logger, Helper, ES6Promise) {
             options.data = settings.data ? settings.data : null;
             options.method = settings.method;
             options.timeOut = settings.timeOut || 0;
+            options.scope = settings.scope || this;
             switch (settings.method) {
+            case 'DELETE':
             case 'GET':
                 break;
+            case 'PUT':
             case 'POST':
                 options.content = settings.content ? settings.content : 'application/x-www-form-urlencoded';
                 options.headers = settings.headers ? settings.headers : { referer: 'http://localhost' };
                 break;
-            case 'DELETE':
-            case 'PUT':
+            case 'HEAD':
+            case 'OPTIONS':
                 throw new Error('HTTP method not yet supported !');
             default:
                 throw new Error('HTTP method unknown !');
@@ -686,7 +689,8 @@ ProtocolsXHR = function (Logger, Helper, ES6Promise) {
         },
         __call: function (options) {
             var promise = new Promise(function (resolve, reject) {
-                if (options.data && options.method == 'GET') {
+                var corps = options.method === 'POST' || options.method === 'PUT' ? true : false;
+                if (options.data && !corps) {
                     options.url = Helper.normalyzeUrl(options.url, options.data);
                 }
                 var hXHR = null;
@@ -697,7 +701,7 @@ ProtocolsXHR = function (Logger, Helper, ES6Promise) {
                     if (options.timeOut > 0) {
                         hXHR.timeout = options.timeout;
                     }
-                    if (options.method !== 'GET') {
+                    if (corps) {
                         hXHR.setRequestHeader('Content-type', options.content);
                     }
                     hXHR.onerror = function () {
@@ -718,7 +722,7 @@ ProtocolsXHR = function (Logger, Helper, ES6Promise) {
                             });
                         }
                     };
-                    var data4xdr = options.data && options.method == 'POST' ? options.data : null;
+                    var data4xdr = options.data && corps ? options.data : null;
                     hXHR.send(data4xdr);
                 } else if (window.XMLHttpRequest) {
                     hXHR = new XMLHttpRequest();
@@ -734,7 +738,7 @@ ProtocolsXHR = function (Logger, Helper, ES6Promise) {
                             });
                         }, options.timeOut);
                     }
-                    if (options.method !== 'GET') {
+                    if (corps) {
                         hXHR.setRequestHeader('Content-type', options.content);
                     }
                     hXHR.onerror = function (e) {
@@ -759,7 +763,7 @@ ProtocolsXHR = function (Logger, Helper, ES6Promise) {
                             }
                         }
                     };
-                    var data4xhr = options.data && options.method == 'POST' ? options.data : null;
+                    var data4xhr = options.data && corps ? options.data : null;
                     hXHR.send(data4xhr);
                 } else {
                     throw new Error('CORS not supported');
@@ -7262,7 +7266,7 @@ Gp = function (XHR, Services, AltiResponse, Elevation, AutoCompleteResponse, Sug
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta2',
-        servicesDate: '2016-05-31',
+        servicesDate: '2016-06-13',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;
