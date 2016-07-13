@@ -72,7 +72,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
 
         var Preferences = [];
         var tmplPreference = "";
-        for (var idx in this.type) {
+        for (var idx = 0 ; idx < this.type.length ; idx++) {
             tmplPreference = this.template;
             tmplPreference = tmplPreference.replace(/__TYPE__/g, this.type[idx]);
             Preferences.push(tmplPreference);
