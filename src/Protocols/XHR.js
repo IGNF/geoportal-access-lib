@@ -152,74 +152,7 @@ function (Logger, Helper, ES6Promise) {
 
                     var hXHR = null;
 
-                    if (window.XDomainRequest) {
-                        // worked in Internet Explorer 8–10 only !
-                        logger.trace("XDomainRequest");
-
-                        hXHR = new XDomainRequest();
-                        hXHR.open(options.method, options.url);
-
-                        hXHR.overrideMimeType = options.content;
-
-                        if (options.timeOut > 0) {
-                            hXHR.timeout = options.timeout;
-                            logger.trace("XHR - TimeOut actif !");
-                        }
-
-                        if (corps) {
-                            // headers, data, content of data
-                            // cf. https://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html#dom-xmlhttprequest-setrequestheader
-                            hXHR.setRequestHeader("Content-type", options.content);
-                            // FIXME refused to set unsafe header content-length javascript
-                            // hXHR.setRequestHeader("Content-length", options.data.length);
-                            // hXHR.setRequestHeader("Referer", options.headers.referer);
-                        }
-
-                        /**
-                         * Description
-                         *
-                         * @method onerror
-                         * @private
-                         */
-                        hXHR.onerror = function () {
-                            reject(new Error("Errors Occured on Http Request with XMLHttpRequest !"));
-                        };
-
-                        /**
-                         * Description
-                         *
-                         * @method ontimeout
-                         * @private
-                         */
-                        hXHR.ontimeout = function () {
-                            reject(new Error("TimeOut Occured on Http Request with XMLHttpRequest !"));
-                        };
-
-                        /**
-                         * Description
-                         *
-                         * @method onload
-                         * @private
-                         */
-                        hXHR.onload  = function () {
-
-                            if (hXHR.status == 200) {
-                                resolve(hXHR.response);
-                            } else {
-                                var message = "Errors Occured on Http Request (status : '" + hXHR.status + "' | response : '" + hXHR.response + "')";
-                                var status  = hXHR.status;
-                                reject({
-                                    message : message,
-                                    status  : status
-                                });
-                            }
-                        };
-
-                        var data4xdr = (options.data && corps) ? options.data : null;
-
-                        hXHR.send(data4xdr);
-
-                    } else if (window.XMLHttpRequest) {
+                    if (window.XMLHttpRequest) {
 
                         logger.trace("XMLHttpRequest");
 
@@ -310,6 +243,73 @@ function (Logger, Helper, ES6Promise) {
                         var data4xhr = (options.data && corps) ? options.data : null;
 
                         hXHR.send(data4xhr);
+
+                    } else if (window.XDomainRequest) {
+                        // worked in Internet Explorer 8–10 only !
+                        logger.trace("XDomainRequest");
+
+                        hXHR = new XDomainRequest();
+                        hXHR.open(options.method, options.url);
+
+                        hXHR.overrideMimeType = options.content;
+
+                        if (options.timeOut > 0) {
+                            hXHR.timeout = options.timeout;
+                            logger.trace("XHR - TimeOut actif !");
+                        }
+
+                        if (corps) {
+                            // headers, data, content of data
+                            // cf. https://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html#dom-xmlhttprequest-setrequestheader
+                            hXHR.setRequestHeader("Content-type", options.content);
+                            // FIXME refused to set unsafe header content-length javascript
+                            // hXHR.setRequestHeader("Content-length", options.data.length);
+                            // hXHR.setRequestHeader("Referer", options.headers.referer);
+                        }
+
+                        /**
+                         * Description
+                         *
+                         * @method onerror
+                         * @private
+                         */
+                        hXHR.onerror = function () {
+                            reject(new Error("Errors Occured on Http Request with XMLHttpRequest !"));
+                        };
+
+                        /**
+                         * Description
+                         *
+                         * @method ontimeout
+                         * @private
+                         */
+                        hXHR.ontimeout = function () {
+                            reject(new Error("TimeOut Occured on Http Request with XMLHttpRequest !"));
+                        };
+
+                        /**
+                         * Description
+                         *
+                         * @method onload
+                         * @private
+                         */
+                        hXHR.onload  = function () {
+
+                            if (hXHR.status == 200) {
+                                resolve(hXHR.responseText);
+                            } else {
+                                var message = "Errors Occured on Http Request (status : '" + hXHR.status + "' | response : '" + hXHR.responseText + "')";
+                                var status  = hXHR.status;
+                                reject({
+                                    message : message,
+                                    status  : status
+                                });
+                            }
+                        };
+
+                        var data4xdr = (options.data && corps) ? options.data : null;
+
+                        hXHR.send(data4xdr);
 
                     } else {
                         throw new Error("CORS not supported");
