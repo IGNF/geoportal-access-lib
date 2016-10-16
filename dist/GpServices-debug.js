@@ -3863,7 +3863,7 @@ ServicesCommonService = function (Logger, Helper, _, Protocol, ErrorService, Def
             var strUrlProxified = null;
             var strData = this.request;
             var bUrlProxified = this.options.proxyURL && this.options.protocol === 'XHR' ? true : false;
-            this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, { 'gp-access-lib': 'version' }, false);
+            this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, { 'gp-access-lib': '1.0.0-beta3' }, false);
             if (bUrlProxified) {
                 if (this.options.httpMethod === 'GET') {
                     strUrlProxified = this.options.proxyURL + Helper.normalyzeUrl(this.options.serverUrl, this.request, true);

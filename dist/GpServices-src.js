@@ -1114,7 +1114,7 @@ ServicesDefaultUrlService = function () {
     };
     return DefaultUrlService;
 }();
-ServicesCommonService = function (Logger, Helper, _, Protocol, ErrorService, DefaultUrlService, Gp) {
+ServicesCommonService = function (Logger, Helper, _, Protocol, ErrorService, DefaultUrlService) {
     function CommonService(options) {
         if (!(this instanceof CommonService)) {
             throw new TypeError(_.getMessage('CLASS_CONSTRUCTOR'));
@@ -1230,7 +1230,7 @@ ServicesCommonService = function (Logger, Helper, _, Protocol, ErrorService, Def
             var strUrlProxified = null;
             var strData = this.request;
             var bUrlProxified = this.options.proxyURL && this.options.protocol === 'XHR' ? true : false;
-            this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, { 'gp-access-lib': Gp.servicesVersion }, false);
+            this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, { 'gp-access-lib': '1.0.0-beta3' }, false);
             if (bUrlProxified) {
                 if (this.options.httpMethod === 'GET') {
                     strUrlProxified = this.options.proxyURL + Helper.normalyzeUrl(this.options.serverUrl, this.request, true);
@@ -1298,7 +1298,7 @@ ServicesCommonService = function (Logger, Helper, _, Protocol, ErrorService, Def
         }
     };
     return CommonService;
-}(UtilsLoggerByDefault, UtilsHelper, UtilsMessagesResources, ProtocolsProtocol, ExceptionsErrorService, ServicesDefaultUrlService, Gp);
+}(UtilsLoggerByDefault, UtilsHelper, UtilsMessagesResources, ProtocolsProtocol, ExceptionsErrorService, ServicesDefaultUrlService);
 ServicesAltiRequestModelAltiRequest = function (Logger) {
     function AltiRequest(options) {
         if (!(this instanceof AltiRequest)) {
