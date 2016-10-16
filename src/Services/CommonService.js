@@ -334,10 +334,20 @@ function (
             // la proxyfication est valable uniquement en mode XHR !
             var bUrlProxified = (this.options.proxyURL && this.options.protocol === "XHR") ? true : false;
 
+            // rajout de l'option gpbibaccess
+            // FIXME : acces au numero de version de package.conf
+            /*
+            var scope = typeof window !== "undefined" ? window : {};
+            var servicesVersion = scope.Gp ? scope.Gp.servicesVersion : "__GPVERSION__" ;
+            */
+            this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl,{
+                "gp-access-lib" : "__GPVERSION__"
+            },false) ;
+
             // si le proxy est renseigné, on proxifie l'url du service
             if (bUrlProxified) {
                 if (this.options.httpMethod === "GET") {
-                    strUrlProxified  = this.options.proxyURL + Helper.normalyzeUrl(this.options.serverUrl, this.request, true);
+                    strUrlProxified  = this.options.proxyURL + Helper.normalyzeUrl(this.options.serverUrl, this.request , true);
                     strData = null;
                 }
 

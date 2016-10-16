@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta3
- * @date 2016-07-29
+ * @date 2016-10-16
  *
  */
 /*!
@@ -1114,7 +1114,7 @@ ServicesDefaultUrlService = function () {
     };
     return DefaultUrlService;
 }();
-ServicesCommonService = function (Logger, Helper, _, Protocol, ErrorService, DefaultUrlService) {
+ServicesCommonService = function (Logger, Helper, _, Protocol, ErrorService, DefaultUrlService, Gp) {
     function CommonService(options) {
         if (!(this instanceof CommonService)) {
             throw new TypeError(_.getMessage('CLASS_CONSTRUCTOR'));
@@ -1230,6 +1230,7 @@ ServicesCommonService = function (Logger, Helper, _, Protocol, ErrorService, Def
             var strUrlProxified = null;
             var strData = this.request;
             var bUrlProxified = this.options.proxyURL && this.options.protocol === 'XHR' ? true : false;
+            this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, { 'gp-access-lib': Gp.servicesVersion }, false);
             if (bUrlProxified) {
                 if (this.options.httpMethod === 'GET') {
                     strUrlProxified = this.options.proxyURL + Helper.normalyzeUrl(this.options.serverUrl, this.request, true);
@@ -1297,7 +1298,7 @@ ServicesCommonService = function (Logger, Helper, _, Protocol, ErrorService, Def
         }
     };
     return CommonService;
-}(UtilsLoggerByDefault, UtilsHelper, UtilsMessagesResources, ProtocolsProtocol, ExceptionsErrorService, ServicesDefaultUrlService);
+}(UtilsLoggerByDefault, UtilsHelper, UtilsMessagesResources, ProtocolsProtocol, ExceptionsErrorService, ServicesDefaultUrlService, Gp);
 ServicesAltiRequestModelAltiRequest = function (Logger) {
     function AltiRequest(options) {
         if (!(this instanceof AltiRequest)) {
@@ -7266,7 +7267,7 @@ Gp = function (XHR, Services, AltiResponse, Elevation, AutoCompleteResponse, Sug
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta3',
-        servicesDate: '2016-07-29',
+        servicesDate: '2016-10-16',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;
