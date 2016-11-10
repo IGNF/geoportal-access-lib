@@ -57,6 +57,11 @@ function (
      *      Non pris en compte si 'protocol' vaut JSONP qui fonctionne obligatoirement en GET.
      *      Par défaut, c'est la méthode GET qui est utilisée.
      *
+     * @param {String} [options.contentType] - Content-Type de la requete
+     *      à utiliser dans le cas d'une requête XHR en mode POST.
+     *      Non pris en compte si 'protocol' vaut JSONP et/ou la méthode HTTP vaut GET.
+     *      Par défaut, c'est la méthode GET qui est utilisée donc on n'utilise pas de Content-Type.
+     *
      * @param {Number} [options.timeOut] - Délai d'attente maximal (en ms) de la réponse du service (à partir de l'envoi de la requête).
      *      Par défaut, aucun timeOut n'est pris en compte (timeoutDelay= 0).
      *
@@ -372,7 +377,7 @@ function (
                 // callbackName : this.options.callbackName || null,
                 data         : strData,
                 headers      : null,
-                content      : null,
+                content      : this.options.contentType || null,
                 scope        : this.options.scope || this,
                 /** callback de reponse */
                 onResponse : function (response) {

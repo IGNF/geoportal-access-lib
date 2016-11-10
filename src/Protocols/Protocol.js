@@ -32,7 +32,7 @@ function (Helper, XHR, JSONP) {
          * @param {Boolean} options.nocache  - true|false
          * @param {Object|String} options.data        - content (post) ou param (get)
          * @param {Object|String} options.headers     - (post) ex. referer
-         * @param {Object|String} options.contentType - (post) ex. "application/json"
+         * @param {Object|String} options.content - (post) ex. "application/json"
          * @param {String} options.scope       - this (TODO)
          * @param {Function} options.onResponse - callback
          * @param {Function} options.onFailure - callback

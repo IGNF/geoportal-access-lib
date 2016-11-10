@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta3
- * @date 2016-10-16
+ * @date 2016-11-10
  *
  */
 /*!
@@ -1253,7 +1253,7 @@ ServicesCommonService = function (Logger, Helper, _, Protocol, ErrorService, Def
                 callbackSuffix: this.options.callbackSuffix,
                 data: strData,
                 headers: null,
-                content: null,
+                content: this.options.contentType || null,
                 scope: this.options.scope || this,
                 onResponse: function (response) {
                     var content = null;
@@ -7267,7 +7267,7 @@ Gp = function (XHR, Services, AltiResponse, Elevation, AutoCompleteResponse, Sug
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta3',
-        servicesDate: '2016-10-16',
+        servicesDate: '2016-11-10',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;

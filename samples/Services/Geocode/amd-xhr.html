@@ -26,10 +26,11 @@
                    // FIXME retrait du proxy quand les services autoriseront le Cross-domain
                    proxyURL : 'http://localhost/proxy/php/proxy.php?url=',
                    httpMethod : 'POST', // GET|POST
+                   contentType : "application/xml",
                    onSuccess : function (response) {console.log(response.locations);},
                    onFailure : function (error) {console.log(error);},
                    // spécifique au service
-                //    location: "2 avenue de paris, 94166 Saint-Mandée",
+                   // location: "2 avenue de paris, 94166 Saint-Mandée",
                    location: "brie",
                    returnFreeForm : false,
                    filterOptions :{
