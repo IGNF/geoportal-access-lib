@@ -376,8 +376,8 @@ function (
                 callbackSuffix : this.options.callbackSuffix,
                 // callbackName : this.options.callbackName || null,
                 data         : strData,
-                headers      : null,
-                content      : this.options.contentType || null,
+                headers      : null, // TODO...
+                content      : this.options.contentType || "application/xml",
                 scope        : this.options.scope || this,
                 /** callback de reponse */
                 onResponse : function (response) {

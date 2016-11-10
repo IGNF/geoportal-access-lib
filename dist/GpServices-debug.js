@@ -3886,7 +3886,7 @@ ServicesCommonService = function (Logger, Helper, _, Protocol, ErrorService, Def
                 callbackSuffix: this.options.callbackSuffix,
                 data: strData,
                 headers: null,
-                content: this.options.contentType || null,
+                content: this.options.contentType || 'application/xml',
                 scope: this.options.scope || this,
                 onResponse: function (response) {
                     self.logger.trace('callService::onResponse()');

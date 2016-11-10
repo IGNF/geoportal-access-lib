@@ -26,7 +26,7 @@
                    // FIXME retrait du proxy quand les services autoriseront le Cross-domain
                    proxyURL : 'http://localhost/proxy/php/proxy.php?url=',
                    httpMethod : 'POST', // GET|POST
-                   contentType : "application/xml",
+                   contentType : "text/xml",
                    onSuccess : function (response) {console.log(response.locations);},
                    onFailure : function (error) {console.log(error);},
                    // spécifique au service
