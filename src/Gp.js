@@ -3,7 +3,7 @@ define([
     "Protocols/XHR",
     // Services
     "Services/Services",
-    // Alti Rseponses 
+    // Alti Rseponses
     "Services/Alti/Response/model/AltiResponse",
     "Services/Alti/Response/model/Elevation",
     // Autocomplete Responses
@@ -35,8 +35,10 @@ define([
     "Services/Route/Response/model/RouteResponse",
     "Services/Route/Response/model/RouteInstruction",
     // Erreurs
-    "Exceptions/ErrorService"
-    
+    "Exceptions/ErrorService",
+    // Outils
+    "Utils/Helper"
+
 ],
     function (
         // XHR stuff
@@ -48,7 +50,7 @@ define([
         // Autocomple responses
         AutoCompleteResponse, SuggestedLocation,
         // Autoconf Responses
-        GetConfigResponse, Constraint, Format, Layer, Legend, Metadata, 
+        GetConfigResponse, Constraint, Format, Layer, Legend, Metadata,
         Originator, Service, Style, Territory, Thematic, TM, TMLimit, TMS,
         // Geocode Responses
         GeocodeResponse, GeocodedLocation, DirectGeocodedLocation, ReverseGeocodedLocation,
@@ -57,14 +59,16 @@ define([
         // Route Responses
         RouteResponse, RouteInstruction,
         // Erreurs
-        Error
+        Error,
+        // Outils
+        Helper
         ) {
 
         "use strict";
-        
+
         // on determine l'environnement d'execution : browser ou non ?
         var scope = typeof window !== "undefined" ? window : {};
-        
+
         // on voit s'il existe déjà cette variable, sinon on la met en place
         var Gp = scope.Gp || {
             servicesVersion : "__GPVERSION__",
@@ -73,7 +77,7 @@ define([
              * Methode pour rajouter une classe / objet au namespace global.
              *
              * @method extend
-             * @param {String} strNS - nom sous lequel on veut présenter la 
+             * @param {String} strNS - nom sous lequel on veut présenter la
              *        classe / objet (Gp."strNS").
              * @param {Object} value - la classe / objet à rajouter au NS global.
              */
@@ -100,8 +104,8 @@ define([
 
                 return this;
             }
-        }; 
-        
+        };
+
         // on declare les ns dan root global
         Gp.extend("Protocols", {});
         Gp.extend("Protocols.XHR", XHR);
@@ -137,9 +141,11 @@ define([
         // Export Route
         Gp.extend("Services.RouteResponse", RouteResponse);
         Gp.extend("Services.Route.RouteInstruction", RouteInstruction);
+        // Export Erreurs et Outils
         Gp.extend("Error", Error);
-        
-        // on sauvegarde la variable dans l'env. 
+        Gp.extend("Helper", Helper);
+
+        // on sauvegarde la variable dans l'env.
         scope.Gp = Gp;
 
         return scope.Gp;
