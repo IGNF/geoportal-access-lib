@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN 
  * @version 1.0.0-beta3
- * @date 2016-11-10
+ * @date 2016-11-15
  *
  */
 /*!
@@ -8791,11 +8791,12 @@ ServicesRouteRequestRouteRequestREST = function (Logger, _, RouteParamREST) {
             var oParams = new RouteParamREST(this.settings);
             var params = oParams.getParams();
             var request = '';
-            for (var idx in params) {
+            for (var i = 0; i < params.length; i++) {
+                var o = params[i];
                 if (request) {
                     request += '&';
                 }
-                request += params[idx].k + '=' + params[idx].v;
+                request += o.k + '=' + o.v;
             }
             this.logger.trace(request);
             this.requestString = request;
@@ -9582,11 +9583,12 @@ ServicesProcessIsoCurveRequestProcessIsoCurveRequest = function (Logger, _, Proc
                 this.logger.trace('Process GET Request');
                 var oParams = new ProcessIsoCurveParam(this.settings);
                 var params = oParams.getParams();
-                for (var idx in params) {
+                for (var i = 0; i < params.length; i++) {
+                    var o = params[i];
                     if (request) {
                         request += '&';
                     }
-                    request += params[idx].k + '=' + params[idx].v;
+                    request += o.k + '=' + o.v;
                 }
                 break;
             case 'POST':
@@ -10055,7 +10057,7 @@ Gp = function (XHR, Services, AltiResponse, Elevation, AutoCompleteResponse, Sug
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
         servicesVersion: '1.0.0-beta3',
-        servicesDate: '2016-11-10',
+        servicesDate: '2016-11-15',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
             var parent = this;

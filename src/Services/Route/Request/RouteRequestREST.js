@@ -78,14 +78,15 @@ function (
 
             // Mapping des options avec le service de l'API REST
             var oParams = new RouteParamREST(this.settings);
-
             var params  = oParams.getParams();
+            
             var request = "";
-            for ( var idx in params ) {
+            for (var i = 0; i < params.length; i++) {
+                var o = params[i];
                 if (request) {
                     request += "&";
                 }
-                request += params[idx].k  + "=" + params[idx].v;
+                request += o.k + "=" + o.v;
             }
 
             // Exemple :
