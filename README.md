@@ -37,7 +37,7 @@ Intégrez la bibliothèque d'accès dans votre page WEB classiquement à l'aide 
 
 ### Utilisation
 
-Le chargement de la bibliothèque d'accès vous donne accès au namespace [Gp.Services](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/module-Services.html) à partir duquel vous pouvez utiliser les différentes fonctions proposées.
+Le chargement de la bibliothèque d'accès vous donne accès au namespace [Gp.Services](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html) à partir duquel vous pouvez utiliser les différentes fonctions proposées.
 
 
 
@@ -45,9 +45,9 @@ Le chargement de la bibliothèque d'accès vous donne accès au namespace [Gp.Se
 
 ### Géocoder des adresses, toponymes et parcelles cadastrales
 
-La fonction [Gp.Services.geocode](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/module-Services.html#~geocode) permet d'utiliser le service de géocodage de la plateforme Géoportail pour obtenir la position d'un toponyme, d'une adresse ou d'une parcelle cadastrale. Elle prend en paramètres :
+La fonction [Gp.Services.geocode](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~geocode) permet d'utiliser le service de géocodage de la plateforme Géoportail pour obtenir la position d'un toponyme, d'une adresse ou d'une parcelle cadastrale. Elle prend en paramètres :
 
-* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [professionnels.ign.fr](http://professionnels.ign.fr/api-web) ayant les droits sur les ressources de recherche OpenLS du Géoportail.
+* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [professionnels.ign.fr](http://professionnels.ign.fr/ign/contrats) ayant les droits sur les ressources de recherche OpenLS du Géoportail.
 
 * le **localisant** dont on veut obtenir les coordonnées ;
 
@@ -55,7 +55,7 @@ La fonction [Gp.Services.geocode](http://ignf.github.io/geoportal-access-lib/v1.
 
 * d'autres paramètres éventuels à passer au service...
 
-* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.GeocodeResponse](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/Gp.Services.GeocodeResponse.html).
+* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.GeocodeResponse](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/Gp.Services.GeocodeResponse.html).
 
 
 ``` javascript
@@ -80,9 +80,9 @@ Gp.Services.geocode({
 
 ### Obtenir des suggestions d'adresses ou de toponymes à partir de textes incomplets
 
-La fonction [Gp.Services.autoComplete](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/module-Services.html#~autoComplete) permet d'utiliser le service d'autocomplétion de la plateforme Géoportail pour obtenir des suggestions de loclalisants (toponyme ou adresse) à partir d'un texte incomplet. Elle prend en paramètres :
+La fonction [Gp.Services.autoComplete](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~autoComplete) permet d'utiliser le service d'autocomplétion de la plateforme Géoportail pour obtenir des suggestions de loclalisants (toponyme ou adresse) à partir d'un texte incomplet. Elle prend en paramètres :
 
-* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [professionnels.ign.fr](http://professionnels.ign.fr/api-web) ayant les droits sur les ressources de recherche OpenLS du Géoportail.
+* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [professionnels.ign.fr](http://professionnels.ign.fr/ign/contrats) ayant les droits sur les ressources de recherche OpenLS du Géoportail.
 
 * le **texte** pour lequel on souhaite obtenir des suggestions
 
@@ -90,7 +90,7 @@ La fonction [Gp.Services.autoComplete](http://ignf.github.io/geoportal-access-li
 
 * d'autres paramètres éventuels à passer au service...
 
-* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.AutoCompleteResponse](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/Gp.Services.AutoCompleteResponse.html).
+* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.AutoCompleteResponse](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/Gp.Services.AutoCompleteResponse.html).
 
 
 ``` javascript
@@ -115,9 +115,9 @@ Gp.Services.autoComplete({
 
 ### Obtenir des localisants (toponymes, adresses, parcelles cadastrales) proches d'une position donnée (géocodage inverse)
 
-La fonction [Gp.Services.reverseGeocode](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/module-Services.html#~reverseGeocode) permet d'utiliser le service de géocodage inverse de la plateforme Géoportail pour trouver des toponymes, adresses ou parcelles cadastrales proches d'une position donnée. Elle prend en paramètres :
+La fonction [Gp.Services.reverseGeocode](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~reverseGeocode) permet d'utiliser le service de géocodage inverse de la plateforme Géoportail pour trouver des toponymes, adresses ou parcelles cadastrales proches d'une position donnée. Elle prend en paramètres :
 
-* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [professionnels.ign.fr](http://professionnels.ign.fr/api-web) ayant les droits sur les ressources de recherche OpenLS du Géoportail.
+* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [professionnels.ign.fr](http://professionnels.ign.fr/ign/contrats) ayant les droits sur les ressources de recherche OpenLS du Géoportail.
 
 * une **position** donnée
 
@@ -125,7 +125,7 @@ La fonction [Gp.Services.reverseGeocode](http://ignf.github.io/geoportal-access-
 
 * d'autres paramètres éventuels à passer au service...
 
-* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.ReverseGeocodeResponse](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/Gp.Services.ReverseGeocodeResponse.html).
+* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.ReverseGeocodeResponse](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/Gp.Services.ReverseGeocodeResponse.html).
 
 
 ``` javascript
@@ -153,9 +153,9 @@ Gp.Services.reverseGeocode({
 
 ### Obtenir des altitudes en un ou plusieurs points ou calculer des profils altimétriques
 
-La fonction [Gp.Services.getAltitude()](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/module-Services.html#~getAltitude) permet d'utiliser le service d'altimétrie de la plateforme Géoportail pour obtenir les altitudes de une ou plusieurs positions données ou calculer un profil altimétrique le long d'une liste de positions. Elle prend en paramètres :
+La fonction [Gp.Services.getAltitude()](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~getAltitude) permet d'utiliser le service d'altimétrie de la plateforme Géoportail pour obtenir les altitudes de une ou plusieurs positions données ou calculer un profil altimétrique le long d'une liste de positions. Elle prend en paramètres :
 
-* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [professionnels.ign.fr](http://professionnels.ign.fr/api-web) ayant les droits sur les ressources altimétriques du Géoportail.
+* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [professionnels.ign.fr](http://professionnels.ign.fr/ign/contrats) ayant les droits sur les ressources altimétriques du Géoportail.
 
 * une **liste de positions** données
 
@@ -163,7 +163,7 @@ La fonction [Gp.Services.getAltitude()](http://ignf.github.io/geoportal-access-l
 
 * d'autres paramètres éventuels à passer au service...
 
-* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.AltiResponse](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/Gp.Services.AltiResponse.html).
+* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.AltiResponse](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/Gp.Services.AltiResponse.html).
 
 
 ``` javascript
@@ -189,9 +189,9 @@ Gp.Services.getAltitude({
 
 ### Calculer un itinéraire piéton ou routier
 
-La fonction [Gp.Services.route()](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/module-Services.html#~route) permet d'utiliser le service de calcul d'itinéraires de la plateforme Géoportail. Elle prend en paramètres :
+La fonction [Gp.Services.route()](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~route) permet d'utiliser le service de calcul d'itinéraires de la plateforme Géoportail. Elle prend en paramètres :
 
-* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [professionnels.ign.fr](http://professionnels.ign.fr/api-web) ayant les droits sur les ressources utilisés par le calcul d'itinéraire du Géoportail : graphe routier ou piéton.
+* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [professionnels.ign.fr](http://professionnels.ign.fr/ign/contrats) ayant les droits sur les ressources utilisés par le calcul d'itinéraire du Géoportail : graphe routier ou piéton.
 
 * des **points de départ, d'arrivée** et éventuellement **intermédiaires**.
 
@@ -199,7 +199,7 @@ La fonction [Gp.Services.route()](http://ignf.github.io/geoportal-access-lib/v1.
 
 * d'autres paramètres éventuels à passer au service...
 
-* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.RouteResponse](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/Gp.Services.RouteResponse.html).
+* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.RouteResponse](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/Gp.Services.RouteResponse.html).
 
 
 ``` javascript
@@ -226,9 +226,9 @@ Gp.Services.route({
 
 ### Calculer des isochrones / isodistances autour d'un point
 
-La fonction [Gp.Services.isoCurve()](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/module-Services.html#~isoCurve) permet d'utiliser le service de calcul d'isochrones / isodistances de la plateforme Géoportail. Elle prend en paramètres :
+La fonction [Gp.Services.isoCurve()](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~isoCurve) permet d'utiliser le service de calcul d'isochrones / isodistances de la plateforme Géoportail. Elle prend en paramètres :
 
-* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [professionnels.ign.fr](http://professionnels.ign.fr/api-web) ayant les droits sur les ressources utilisés par le calcul d'isochrones / isodistances du Géoportail : graphe routier ou piéton.
+* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [professionnels.ign.fr](http://professionnels.ign.fr/ign/contrats) ayant les droits sur les ressources utilisés par le calcul d'isochrones / isodistances du Géoportail : graphe routier ou piéton.
 
 * une **position de référence** (départ ou arrivée) pour le calcul.
 
@@ -240,7 +240,7 @@ La fonction [Gp.Services.isoCurve()](http://ignf.github.io/geoportal-access-lib/
 
 * d'autres paramètres éventuels à passer au service...
 
-* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.isoCurveResponse](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/Gp.Services.isoCurveResponse.html).
+* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.isoCurveResponse](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/Gp.Services.isoCurveResponse.html).
 
 
 ``` javascript
@@ -264,13 +264,13 @@ Gp.Services.isoCurve({
 
 ## Obtenir des informations relatives à un contrat d'accès au Géoportail
 
-La fonction [Gp.Services.getConfig()](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/module-Services.html#~getConfig) permet de consulter, via le service d'autoconfiguration de la plateforme Géoportail, les ressources disponibles pour une clef d'accès à la plateforme et d'avoir les paramètres permettant leur utilisation. Elle prend en paramètres :
+La fonction [Gp.Services.getConfig()](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~getConfig) permet de consulter, via le service d'autoconfiguration de la plateforme Géoportail, les ressources disponibles pour une clef d'accès à la plateforme et d'avoir les paramètres permettant leur utilisation. Elle prend en paramètres :
 
-* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [professionnels.ign.fr](http://professionnels.ign.fr/api-web) dont on veut consulter les droits.
+* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [professionnels.ign.fr](http://professionnels.ign.fr/ign/contrats) dont on veut consulter les droits.
 
 * d'autres paramètres éventuels à passer au service...
 
-* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.getConfigResponse](http://ignf.github.io/geoportal-access-lib/v1.0.0-beta.2/jsdoc/Gp.Services.getConfigResponse.html). Les informations portées par cet objet sont aussi enregistrées en variable globale de l'application sous le nom : Gp.Config.
+* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.getConfigResponse](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/Gp.Services.getConfigResponse.html). Les informations portées par cet objet sont aussi enregistrées en variable globale de l'application sous le nom : Gp.Config.
 
 
 ``` javascript
