@@ -59,7 +59,7 @@ Be it [Geoportal access lib](https://github.com/ignf/geoportal-access-lib), [Geo
 
 #### With Geoportal access lib
 
-Use it as a value of the **serverUrl** param of the [Gp.Services.getConfig()](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~getConfig) function (instead of the apiKey param) :
+Use it as a value of the **serverUrl** param of the [Gp.Services.getConfig()](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~getConfig) function (instead of the **apiKey** param) :
 
 ``` javascript
 the Gp.Services.getConfig({
@@ -83,7 +83,7 @@ Use it with the **data-url** attribute of the script tag used to load the Geopor
 
 #### With Geoportal SDK
 
-Use it as a value of the **configUrl** param of the Gp.MapOptions object used in the Gp.Map.load() function (instead of the api-key param) :
+Use it as a value of the **configUrl** param of the Gp.MapOptions object used in the Gp.Map.load() function (instead of the **apiKey** param) :
 
 ``` javascript
 Gp.Map.load(
