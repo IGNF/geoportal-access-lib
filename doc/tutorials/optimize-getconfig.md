@@ -9,7 +9,7 @@ Here is how you can do.
 
 ### 1. Get the configuration file
 
-Fill the input text below with your geoportal access key and clic on the "Get Config File" button. 
+Fill the input text below with your geoportal access key and click the "Get Config File" button. 
 
 <p><input type="text" class="form-control input-sm" placeholder="Geoportail access key" value="jhyvi0fgmnuxvfv0zjzorvdn" size="30" id="apiKey" class="key-value"></input><input type="button" onclick="doIt()" id="key-button" value="Get Config File" class="key-button" ></input></p>
 <script type="text/javascript" src="https://depot.ign.fr/geoportail/bibacces/develop/js/GpServices.js"></script>
