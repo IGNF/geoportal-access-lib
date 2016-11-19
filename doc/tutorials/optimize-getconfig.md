@@ -11,7 +11,7 @@ Here is how you can do.
 
 Fill the input text below with your geoportal access key and click the "Get Config File" button. 
 
-<p><input type="text" class="form-control input-sm" placeholder="Geoportail access key" value="jhyvi0fgmnuxvfv0zjzorvdn" size="30" id="apiKey" class="key-value"></input><input type="button" onclick="doIt()" id="key-button" value="Get Config File" class="key-button" ></input></p>
+<p><input type="text" class="form-control input-sm" placeholder="Geoportail access key" size="30" id="apiKey" class="key-value"></input><input type="button" onclick="doIt()" id="key-button" value="Get Config File" class="key-button" ></input></p>
 <script type="text/javascript" src="https://depot.ign.fr/geoportail/bibacces/develop/js/GpServices.js"></script>
 <script type="text/javascript">
 
