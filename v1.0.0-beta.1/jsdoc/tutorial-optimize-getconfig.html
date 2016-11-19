@@ -1865,7 +1865,7 @@ function doIt() {
 
 <p>When prompted, save the file &quot;autoconf.json&quot; on your platform.</p>
 <h3>2. Configure geoportal functions to use that file</h3><p>Be it <a href="https://github.com/ignf/geoportal-access-lib">Geoportal access lib</a>, <a href="https://github.com/IGNF/geoportal-extensions">Geoportal extensions</a> or <a href="http://ignf.github.io/evolution-apigeoportail/sdk/presentation.html">Geoportal SDK</a>, you can use that file to configure your application :</p>
-<h4>With Geoportal access lib</h4><p>Use it as a value of the <strong>serverUrl</strong> param of the <a href="http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~getConfig">Gp.Services.getConfig()</a> function (instead of the apiKey param) :</p>
+<h4>With Geoportal access lib</h4><p>Use it as a value of the <strong>serverUrl</strong> param of the <a href="http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~getConfig">Gp.Services.getConfig()</a> function (instead of the <strong>apiKey</strong> param) :</p>
 <pre class="prettyprint source lang-javascript"><code>the Gp.Services.getConfig({
     ...
     serverUrl : &quot;path/to/autoconf.json&quot;,
@@ -1873,7 +1873,7 @@ function doIt() {
 }) ;</code></pre><h4>With Geoportal extensions</h4><p>Use it with the <strong>data-url</strong> attribute of the script tag used to load the Geoportal extension (instead of the <strong>data-key</strong> attribute) :</p>
 <pre class="prettyprint source lang-html"><code>&lt;script type=&quot;text/javascript&quot; src=&quot;path/to/GpPluginLeaflet.js&quot; data-url=&quot;path/to/autoconf.json&quot;>&lt;/script>
 &lt;!-- or -->
-&lt;script type=&quot;text/javascript&quot; src=&quot;path/to/GpPluginOl3.js&quot; data-url=&quot;path/to/autoconf.json&quot;>&lt;/script></code></pre><h4>With Geoportal SDK</h4><p>Use it as a value of the <strong>configUrl</strong> param of the Gp.MapOptions object used in the Gp.Map.load() function (instead of the api-key param) :</p>
+&lt;script type=&quot;text/javascript&quot; src=&quot;path/to/GpPluginOl3.js&quot; data-url=&quot;path/to/autoconf.json&quot;>&lt;/script></code></pre><h4>With Geoportal SDK</h4><p>Use it as a value of the <strong>configUrl</strong> param of the Gp.MapOptions object used in the Gp.Map.load() function (instead of the <strong>apiKey</strong> param) :</p>
 <pre class="prettyprint source lang-javascript"><code>Gp.Map.load(
     &quot;mapDiv&quot;,    
     {
