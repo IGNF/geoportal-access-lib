@@ -25,7 +25,7 @@ define([
             *
             * @method getConfig
             * @param {Object} options - options for function call.
-            * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/geoservices-ign}.
+            * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/ign/contrats}.
             * @param {Function} options.onSuccess - callback function for getting successful service response. Takes a {@link Gp.Services.GetConfigResponse} object as a parameter. Except if "rawResponse" parameter is set to true : a String will be returned.
             * @param {Function} [options.onFailure] - callback function for handling unsuccessful service responses (timeOut, missing rights, ...). Takes a {@link Gp.Exceptions.ErrorService} object as parameter.
             * @param {Number} [options.timeOut=0] - Number of milliseconds above which a timeOut response will be returned with onFailure callback (see above). Default value is 0 which means timeOut will not be handled.
@@ -50,7 +50,7 @@ define([
             *
             * @method getAltitude
             * @param {Object} options - options for function call.
-            * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/geoservices-ign}.
+            * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/ign/contrats}.
             * @param {Array.<Object>} options.positions - Array of positions ({lon:float, lat:float}) expressed in CRS:84 coordinates system, where to get elevations. 50 positions maximum may be given. 2 positions minimum are required if you use the options.sampling parameter.
             * @param {Number} [options.sampling] - Number of points to use (between 2 and 5000) in order to compute an elevation path. The points given with the options.positions parameter are used to fix the planimetric path along which the elevations will be computed.<br/>
             * If not use, only elevations of these positions will be returned.
@@ -88,7 +88,7 @@ define([
             *
             * @method geocode
             * @param {Object} options - options for function call.
-            * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/geoservices-ign}.
+            * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/ign/contrats}.
             * @param {String|Object} options.location - Geographic identifier to locate. May be provided as a single String or a structured Object for an address search. In this last case, the following properties are availaibles.
             *      @param {Number} [options.location.number] - Street number.
             *      @param {String} [options.location.street] - Street name.
@@ -134,7 +134,7 @@ define([
             *
             * @method reverseGeocode
             * @param {Object} options - options for function call.
-            * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/geoservices-ign}.
+            * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/ign/contrats}.
             * @param {Gp.Point} options.position - Reference position where to search geographical identifiers. Its coordinates are expressed in the coordinates system given with options.srs parameter. (default is CRS:84, that means position.x corresponds to longitude and position.y corresponds to latitude)
             * @param {Object} [options.filterOptions] - Additional filters to apply to search. The following properties may be given.
             *      @param {Array.<String>} [options.filterOptions.type] - geographical identifier types to search. Values currently availables are : "PositionOfInterest" for place names, "StreetAddress" for address search, "CadastralParcel" for Cadastral parcels search. Default is "StreetAddress".
@@ -164,7 +164,7 @@ define([
             *
             * @method autoComplete
             * @param {Object} options - options for function call.
-            * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/geoservices-ign}.
+            * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/ign/contrats}.
             * @param {String} options.text - Text input to complete.
             * @param {Array.<String>} [options.filterOptions.type = "StreetAddress"] - Suggestion types to provide : address ("StreetAddress") and/or place name ("PositionOfInterest").
             * @param {Array.<String>} [options.filterOptions.territory] - Places where to limit the search of suggestions : "METROPOLE" (Corsica and metropolitan France), "DOMTOM" (French overseas departments and territories), or an INSEE code of a department or municipality. No limitation by default.
@@ -189,7 +189,7 @@ define([
             *
             * @method route
             * @param {Object} options - options for function call.
-            * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/geoservices-ign}.
+            * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/ign/contrats}.
             * @param {String} [options.routePreference = "fastest"] - Indicates the way to compute the route : "fastest" (time optimisation) or "shortest" (distance optimisation).
             * @param {Gp.Point} options.startPoint - Start point of the route. Expressed in CRS:84 coordinates system (Gp.Point.x corresponds to longitude, Gp.Point.y corresponds to latitude).
             * @param {Gp.Point} options.endPoint - End point of the route. Expressed in CRS:84 coordinates system (Gp.Point.x corresponds to longitude, Gp.Point.y corresponds to latitude).
@@ -220,7 +220,7 @@ define([
             *
             * @method isoCurve
             * @param {Object} options - options for function call.
-            * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/geoservices-ign}.
+            * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/ign/contrats}.
             * @param {Gp.Point} options.position - Start or Arrival (options.reverse==true) Point for the computing. Expressed in CRS:84 coordinates system (Gp.Point.x corresponds to longitude, Gp.Point.y corresponds to latitude).
             * @param {String} [options.graph = "Voiture"] - User profile to use to compute the isoCurve : "Voiture" (using a vehicule) or "Pieton" (pedestrian). Has an influence on the kind of roads to use and the average speed.
             * @param {Array.<String>} [options.exclusions] - (FIXME : options.avoidFeature) Indicates if route has to avoid some features ("toll", "bridge" or "tunnel").
