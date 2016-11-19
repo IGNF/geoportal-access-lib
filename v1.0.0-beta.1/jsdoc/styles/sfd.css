@@ -525,6 +525,12 @@ header h1 {
 }
 */
 
+.content input {
+    width : 300px;
+    display : inline-block;
+    margin : 5px;
+}
+
 .content ul,
 .contentMaxi ul {
   list-style-type: none;
@@ -610,7 +616,7 @@ h3 {
 }
 
 h3::before {
-  content: '';
+  /*content: '';*/
   display: inline-block;
   width: 5px;
   height: 5px;
@@ -627,7 +633,7 @@ h4 {
 }
 
 h4::before {
-  content: '';
+  /*content: '';*/
   display: inline-block;
   width: 2px;
   height: 2px;
