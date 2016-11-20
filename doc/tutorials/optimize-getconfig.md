@@ -16,6 +16,10 @@ Fill the input text below with your geoportal access key and click the "Get Conf
 <script type="text/javascript">
 
 function doIt() {
+    var kelem = document.getElementById("apiKey") ;
+    if (!kelem.value || kelem.value.trim().length == 0) {
+        return ;
+    }
     // disable submit button
     var belem = document.getElementById("key-button") ;
     belem.setAttribute("disabled", "true") ;
@@ -23,9 +27,8 @@ function doIt() {
     belem.style.cursor = "wait" ;
     var article = document.getElementsByClassName("content")[0];
     article.style.cursor = "wait" ;
-    var kelem = document.getElementById("apiKey") ;
     Gp.Services.getConfig({
-        apiKey : kelem.value,
+        apiKey : kelem.value.trim(),
         rawResponse : true,
         onSuccess : function(result) {
             var jsonpResult = result ;
