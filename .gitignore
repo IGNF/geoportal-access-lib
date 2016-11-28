@@ -41,3 +41,6 @@
 /test/bower_components/
 /test/bower_dependencies/
 /test/node_modules/
+
+# add dist directory to ignore
+/dist/
