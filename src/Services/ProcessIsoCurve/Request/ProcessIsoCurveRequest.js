@@ -184,6 +184,7 @@ function (
         processRequestString : function () {
 
             var request = "";
+            var i = 0 ;
 
             switch (this.mode) {
 
@@ -194,7 +195,7 @@ function (
                     var oParams = new ProcessIsoCurveParam(this.settings);
                     var params = oParams.getParams();
 
-                    for (var i = 0; i < params.length; i++) {
+                    for (i = 0; i < params.length; i++) {
                         var o = params[i];
                         if (request) {
                             request += "&";
@@ -232,7 +233,7 @@ function (
                     if (this.settings.exclusions) {
                         var tmplExclusions = this.template.exclusions.container;
                         var exclusions = [];
-                        for (var i = 0; i < this.settings.exclusions.length; i++) {
+                        for (i = 0; i < this.settings.exclusions.length; i++) {
                             var tmplFeature = this.template.exclusions.feature;
                             tmplFeature = tmplFeature.replace(/__EXCLUSIONVALUE__/, this.settings.exclusions[i]);
                             exclusions.push(tmplFeature);
