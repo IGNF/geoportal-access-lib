@@ -9,9 +9,14 @@ Here is how you can do.
 
 ### 1. Get the configuration file
 
-Fill the input text below with your geoportal access key and click the "Get Config File" button. 
+Fill the input text below with your geoportal access key ; if you want Geoportal Services to be accessed by default in https, check the "https access" check box.
 
-<p><input type="text" class="form-control input-sm" placeholder="Geoportail access key" size="30" id="apiKey" class="key-value"></input><input type="button" onclick="doIt()" id="key-button" value="Get Config File" class="key-button" ></input></p>
+Click the "Get Config File" button.
+
+<p>
+<input type="text" class="form-control input-sm" placeholder="Geoportail access key" size="30" id="apiKey" class="key-value"></input>
+<input type="checkbox" id="https-cb" >https access</input>
+<input type="button" onclick="doIt()" id="key-button" value="Get Config File" class="key-button" ></input></p>
 <script type="text/javascript" src="https://depot.ign.fr/geoportail/bibacces/develop/js/GpServices.js"></script>
 <script type="text/javascript">
 
@@ -27,8 +32,18 @@ function doIt() {
     belem.style.cursor = "wait" ;
     var article = document.getElementsByClassName("content")[0];
     article.style.cursor = "wait" ;
+    // https access
+    var httpsCB = document.getElementById("https-cb") ;
+    var protocol = "http" ;
+    var resultFileName = "autoconf.json" ;
+    if (httpsCB.checked) {
+        protocol += "s" ;
+        resultFileName = "autoconf-https.json" ;
+    }
+    var getconfigUrl = protocol + "://wxs.ign.fr/" + kelem.value.trim() + "/autoconf" ;
     Gp.Services.getConfig({
-        apiKey : kelem.value.trim(),
+        // apiKey : kelem.value.trim(),
+        serverUrl : getconfigUrl,
         rawResponse : true,
         onSuccess : function(result) {
             var jsonpResult = result ;
@@ -38,7 +53,7 @@ function doIt() {
             }
             var a = document.createElement("a") ;
             a.setAttribute("href","data:text/javascript;charset=utf-8," + encodeURIComponent(jsonpResult)) ;
-            a.setAttribute("download", "autoconf.json") ;
+            a.setAttribute("download", resultFileName) ;
             document.body.appendChild(a) ;
             a.click() ;
             // re-enable submit button
@@ -52,7 +67,7 @@ function doIt() {
 </script>
 
 
-When prompted, save the file "autoconf.json" on your platform.
+When prompted, save the file "autoconf.json" (or "autoconf-https.json") on your platform.
 
 
 ### 2. Configure geoportal functions to use that file

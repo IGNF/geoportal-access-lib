@@ -525,8 +525,11 @@ header h1 {
 }
 */
 
-.content input {
+.content input[type="text"] {
     width : 300px;
+}
+
+.content input {
     display : inline-block;
     margin : 5px;
 }
