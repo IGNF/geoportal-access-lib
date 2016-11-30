@@ -39,8 +39,8 @@ function (
      *      Par défaut, type = ['StreetAddress'].
      *
      * @param {Array.<String>} [options.filterOptions.territory] - Limitation de la zone de recherche de localisants.
-     *      Le service d'autocomplétion du Géoportail permet de limiter la recherche à la métropole et la Corse 'METROPOLE',
-     *      aux DOMS TOMS 'DOMSTOMS', à une liste de codes de départements ou codes INSEE de communes.
+     *      Le service d'autocomplétion du Géoportail permet de limiter la recherche à la métropole et la Corse : options.filterOptions.territory = ['METROPOLE'],
+     *      DOMS TOMS : options.filterOptions.territory = ['DOMTOM'], ou à une liste de départements : options.filterOptions.territory = ['31', '34']
      *      Pas de valeur par défaut.
      *      La valeur par défaut est donc celle du service.
      *      Le service d'autocomplétion du Géoportail renvoie toutes les informations quand aucun territoire n'est spécifié.
@@ -66,7 +66,7 @@ function (
      *      text : "",
      *      filterOptions : {
      *          type : ["StreetAddress"],
-     *          territory : ['METROPOLE', 'DOMSTOMS']
+     *          territory : ['METROPOLE', 'DOMTOM', '31']
      *      },
      *      maximumResponses : 10
      *   };
@@ -167,7 +167,7 @@ function (
         // traitement des param KPV sous forme de tableau
         var territories = "";
         if (this.options.filterOptions.territory) {
-            territories = this.options.filterOptions.territory.join(",");
+            territories = this.options.filterOptions.territory.join(";");
         }
 
         var types = "";

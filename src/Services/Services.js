@@ -167,7 +167,7 @@ define([
             * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/ign/contrats}.
             * @param {String} options.text - Text input to complete.
             * @param {Array.<String>} [options.filterOptions.type = "StreetAddress"] - Suggestion types to provide : address ("StreetAddress") and/or place name ("PositionOfInterest").
-            * @param {Array.<String>} [options.filterOptions.territory] - Places where to limit the search of suggestions : "METROPOLE" (Corsica and metropolitan France), "DOMTOM" (French overseas departments and territories), or an INSEE code of a department or municipality. No limitation by default.
+            * @param {Array.<String>} [options.filterOptions.territory] - Places where to limit the search of suggestions : "METROPOLE" (Corsica and metropolitan France), "DOMTOM" (French overseas departments and territories), or an INSEE code of a department. No limitation by default. For instance : ['METROPOLE', '31']
             * @param {Number} [options.maximumResponses = 10] - Maximum number of responses.
             * @param {Function} options.onSuccess - callback function for getting successful service response. Takes a {@link Gp.Services.AutoCompleteResponse} object as a parameter. Except if "rawResponse" is set to true.
             * @param {Function} [options.onFailure] - callback function for handling unsuccessful service responses (timeOut, missing rights, ...). Takes a {@link Gp.Exceptions.ErrorService} object as parameter.
