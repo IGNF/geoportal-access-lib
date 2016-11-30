@@ -33,7 +33,7 @@ define([], function () {
 
     // constantes internes
     var protocol = (location && location.protocol && location.protocol.indexOf("https:") === 0 ? "https://" : "http://");
-    var hostname = "wxs.ign.fr";
+    var hostname = "__GP_CUSTOM_HOSTNAME__" in window ? window["__GP_CUSTOM_HOSTNAME__"] : "wxs.ign.fr";
     var keyname = "%KEY%";
     var url = protocol + hostname.concat("/", keyname);
 
