@@ -4,6 +4,8 @@
 
 ## [v1.0.0-beta.2](https://github.com/IGNF/geoportal-access-lib/releases/tag/v1.0.0-beta.2)
 
+## [v1.0.0-beta.3](https://github.com/IGNF/geoportal-access-lib/tree/v1.0.0-beta.3) (2016-11-28)
+
 **Implemented enhancements:**
 
 - Appel aux webservices en HTTPs quand on est en HTTPS [\#13](https://github.com/IGNF/geoportal-access-lib/issues/13)

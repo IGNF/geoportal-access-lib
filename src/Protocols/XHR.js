@@ -14,9 +14,10 @@
 define([
     "Utils/LoggerByDefault",
     "Utils/Helper",
-    "promise"
+    "promise",
+    "require"
 ],
-function (Logger, Helper, ES6Promise) {
+function (Logger, Helper, ES6Promise, require) {
 
     "use strict";
 
@@ -32,6 +33,7 @@ function (Logger, Helper, ES6Promise) {
          * @param {String} settings.method - GET, POST, PUT, DELETE
          * @param {String} settings.format - format de la reponse du service : json, xml ou null (brute)
          * @param {String} settings.data   - content (post) ou param (get)
+         * @param {String} settings.proxy  - proxy url
          * @param {Object|String} settings.headers - (post) ex. referer
          * @param {Object|String} settings.content - (post) ex. 'application/json'
          * @param {String} settings.timeOut - timeout = 0 par defaut
@@ -67,6 +69,11 @@ function (Logger, Helper, ES6Promise) {
             options.method   = settings.method;
             options.timeOut  = settings.timeOut || 0;
             options.scope    = settings.scope || this;
+            options.proxy    = settings.proxy || null;
+            options.content  = settings.content || null;
+            options.headers  = settings.headers || {
+                referer : "http://localhost"
+            };
 
             // test sur les valeurs de 'settings.method'
             switch (settings.method) {
@@ -75,7 +82,7 @@ function (Logger, Helper, ES6Promise) {
                     break;
                 case "PUT"   :
                 case "POST"  :
-                    // params spécifiques au mode POST
+                    // on force sur ces params spécifiques au mode POST
                     options.content = settings.content ? settings.content : "application/x-www-form-urlencoded"; // FIXME en attente des services : bascule en "application/xml" ou "application/json"
                     options.headers = settings.headers ? settings.headers : {
                         referer : "http://localhost" // todo ...
@@ -144,7 +151,7 @@ function (Logger, Helper, ES6Promise) {
                     // traitement du corps de la requête
                     var corps = (options.method === "POST" || options.method === "PUT") ? true : false;
 
-                    if (options.data && !corps) {
+                    if (options.data /* && typeof options.data === "object" */ && Object.keys(options.data).length && !corps) {
                         options.url = Helper.normalyzeUrl(options.url, options.data);
                     }
 
@@ -152,167 +159,191 @@ function (Logger, Helper, ES6Promise) {
 
                     var hXHR = null;
 
-                    if (window.XMLHttpRequest) {
+                    // test on env. nodejs or browser
+                    if ( typeof window === "undefined" ) {
 
-                        logger.trace("XMLHttpRequest");
+                        // Utilisation du module :
+                        // cf. http://blog.modulus.io/node.js-tutorial-how-to-use-request-module
 
-                        hXHR = new XMLHttpRequest();
-                        hXHR.open(options.method, options.url, true); // async
-                        hXHR.overrideMimeType = options.content;
+                        var request = require("request");
 
-                        // gestion du timeout
-                        var onTimeOutTrigger = null;
-                        if (options.timeOut > 0) {
-                            // FIXME le timeout interne ne me permet pas de declencher le bon message...
-                            // hXHR.timeout = options.timeOut;
-                            logger.trace("XHR - TimeOut actif !");
+                        // mapping data avec body param. pour le mode POST ou PUT(?)
+                        if (options.data && typeof options.data === "string" && corps) {
+                            options.body = options.data;
+                        }
+
+                        request(options, function (error, response, body) {
+
+                            if (!error && response.statusCode == 200 && body) {
+                                resolve(body);
+                            } else {
+                                reject("Errors Occured on Http Request (nodejs) : " + body);
+                            }
+                        });
+                    } else {
+
+                        if (window.XMLHttpRequest) {
+
+                            logger.trace("XMLHttpRequest");
+
+                            hXHR = new XMLHttpRequest();
+                            hXHR.open(options.method, options.url, true); // async
+                            hXHR.overrideMimeType = options.content;
+
+                            // gestion du timeout
+                            var onTimeOutTrigger = null;
+                            if (options.timeOut > 0) {
+                                // FIXME le timeout interne ne me permet pas de declencher le bon message...
+                                // hXHR.timeout = options.timeOut;
+                                logger.trace("XHR - TimeOut actif !");
+                                /**
+                                 * Description
+                                 *
+                                 * @method onTimeOutTrigger
+                                 * @private
+                                 */
+                                onTimeOutTrigger = window.setTimeout(
+                                    function () {
+                                        var message = "TimeOut Occured on Http Request with XMLHttpRequest !";
+                                        reject({
+                                            message : message,
+                                            status  : -1
+                                        });
+                                    }, options.timeOut);
+                            }
+
+                            if (corps) {
+                                // headers, data, content of data
+                                // cf. https://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html#dom-xmlhttprequest-setrequestheader
+                                logger.trace("data = ", options.data);
+                                hXHR.setRequestHeader("Content-type", options.content);
+                                // FIXME refused to set unsafe header content-length javascript
+                                // hXHR.setRequestHeader("Content-length", options.data.length);
+                                // hXHR.setRequestHeader("Referer", options.headers.referer);
+                            }
+
+                            /**
+                             * Description
+                             * FIXME ne se declenche pas !?
+                             *
+                             * @method onerror
+                             * @private
+                             */
+                            hXHR.onerror = function (e) {
+                                console.log(e);
+                                reject(new Error("Errors Occured on Http Request with XMLHttpRequest !"));
+                            };
+
+                            /**
+                             * Description
+                             * FIXME ne se declenche pas !?
+                             *
+                             * @method ontimeout
+                             * @private
+                             */
+                            hXHR.ontimeout = function () {
+                                reject(new Error("TimeOut Occured on Http Request with XMLHttpRequest !"));
+                            };
+
                             /**
                              * Description
                              *
-                             * @method onTimeOutTrigger
+                             * @method onreadystatechange
                              * @private
                              */
-                            onTimeOutTrigger = window.setTimeout(
-                                function () {
-                                    var message = "TimeOut Occured on Http Request with XMLHttpRequest !";
-                                    reject({
-                                        message : message,
-                                        status  : -1
-                                    });
-                                }, options.timeOut);
-                        }
+                            hXHR.onreadystatechange = function () {
 
-                        if (corps) {
-                            // headers, data, content of data
-                            // cf. https://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html#dom-xmlhttprequest-setrequestheader
-                            logger.trace("data = ", options.data);
-                            hXHR.setRequestHeader("Content-type", options.content);
-                            // FIXME refused to set unsafe header content-length javascript
-                            // hXHR.setRequestHeader("Content-length", options.data.length);
-                            // hXHR.setRequestHeader("Referer", options.headers.referer);
-                        }
+                                if (hXHR.readyState == 4) { // DONE
+                                    if (hXHR.status == 200) {
+                                        window.clearTimeout(onTimeOutTrigger);
+                                        resolve(hXHR.response);
+                                    } else {
+                                        var message = "Errors Occured on Http Request (status : '" + hXHR.status + "' | response : '" + hXHR.response + "')";
+                                        var status  = hXHR.status;
+                                        reject({
+                                            message : message,
+                                            status  : status
+                                        });
+                                    }
+                                }
 
-                        /**
-                         * Description
-                         * FIXME ne se declenche pas !?
-                         *
-                         * @method onerror
-                         * @private
-                         */
-                        hXHR.onerror = function (e) {
-                            console.log(e);
-                            reject(new Error("Errors Occured on Http Request with XMLHttpRequest !"));
-                        };
+                            };
 
-                        /**
-                         * Description
-                         * FIXME ne se declenche pas !?
-                         *
-                         * @method ontimeout
-                         * @private
-                         */
-                        hXHR.ontimeout = function () {
-                            reject(new Error("TimeOut Occured on Http Request with XMLHttpRequest !"));
-                        };
+                            // gestion du content data
+                            var data4xhr = (options.data && corps) ? options.data : null;
 
-                        /**
-                         * Description
-                         *
-                         * @method onreadystatechange
-                         * @private
-                         */
-                        hXHR.onreadystatechange = function () {
+                            hXHR.send(data4xhr);
 
-                            if (hXHR.readyState == 4) { // DONE
+                        } else if (window.XDomainRequest) {
+                            // worked in Internet Explorer 8–10 only !
+                            logger.trace("XDomainRequest");
+
+                            hXHR = new XDomainRequest();
+                            hXHR.open(options.method, options.url);
+
+                            hXHR.overrideMimeType = options.content;
+
+                            if (options.timeOut > 0) {
+                                hXHR.timeout = options.timeout;
+                                logger.trace("XHR - TimeOut actif !");
+                            }
+
+                            if (corps) {
+                                // headers, data, content of data
+                                // cf. https://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html#dom-xmlhttprequest-setrequestheader
+                                hXHR.setRequestHeader("Content-type", options.content);
+                                // FIXME refused to set unsafe header content-length javascript
+                                // hXHR.setRequestHeader("Content-length", options.data.length);
+                                // hXHR.setRequestHeader("Referer", options.headers.referer);
+                            }
+
+                            /**
+                             * Description
+                             *
+                             * @method onerror
+                             * @private
+                             */
+                            hXHR.onerror = function () {
+                                reject(new Error("Errors Occured on Http Request with XMLHttpRequest !"));
+                            };
+
+                            /**
+                             * Description
+                             *
+                             * @method ontimeout
+                             * @private
+                             */
+                            hXHR.ontimeout = function () {
+                                reject(new Error("TimeOut Occured on Http Request with XMLHttpRequest !"));
+                            };
+
+                            /**
+                             * Description
+                             *
+                             * @method onload
+                             * @private
+                             */
+                            hXHR.onload  = function () {
+
                                 if (hXHR.status == 200) {
-                                    window.clearTimeout(onTimeOutTrigger);
-                                    resolve(hXHR.response);
+                                    resolve(hXHR.responseText);
                                 } else {
-                                    var message = "Errors Occured on Http Request (status : '" + hXHR.status + "' | response : '" + hXHR.response + "')";
+                                    var message = "Errors Occured on Http Request (status : '" + hXHR.status + "' | response : '" + hXHR.responseText + "')";
                                     var status  = hXHR.status;
                                     reject({
                                         message : message,
                                         status  : status
                                     });
                                 }
-                            }
+                            };
 
-                        };
+                            var data4xdr = (options.data && corps) ? options.data : null;
 
-                        // gestion du content data
-                        var data4xhr = (options.data && corps) ? options.data : null;
+                            hXHR.send(data4xdr);
 
-                        hXHR.send(data4xhr);
-
-                    } else if (window.XDomainRequest) {
-                        // worked in Internet Explorer 8–10 only !
-                        logger.trace("XDomainRequest");
-
-                        hXHR = new XDomainRequest();
-                        hXHR.open(options.method, options.url);
-
-                        hXHR.overrideMimeType = options.content;
-
-                        if (options.timeOut > 0) {
-                            hXHR.timeout = options.timeout;
-                            logger.trace("XHR - TimeOut actif !");
+                        } else {
+                            throw new Error("CORS not supported");
                         }
-
-                        if (corps) {
-                            // headers, data, content of data
-                            // cf. https://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html#dom-xmlhttprequest-setrequestheader
-                            hXHR.setRequestHeader("Content-type", options.content);
-                            // FIXME refused to set unsafe header content-length javascript
-                            // hXHR.setRequestHeader("Content-length", options.data.length);
-                            // hXHR.setRequestHeader("Referer", options.headers.referer);
-                        }
-
-                        /**
-                         * Description
-                         *
-                         * @method onerror
-                         * @private
-                         */
-                        hXHR.onerror = function () {
-                            reject(new Error("Errors Occured on Http Request with XMLHttpRequest !"));
-                        };
-
-                        /**
-                         * Description
-                         *
-                         * @method ontimeout
-                         * @private
-                         */
-                        hXHR.ontimeout = function () {
-                            reject(new Error("TimeOut Occured on Http Request with XMLHttpRequest !"));
-                        };
-
-                        /**
-                         * Description
-                         *
-                         * @method onload
-                         * @private
-                         */
-                        hXHR.onload  = function () {
-
-                            if (hXHR.status == 200) {
-                                resolve(hXHR.responseText);
-                            } else {
-                                var message = "Errors Occured on Http Request (status : '" + hXHR.status + "' | response : '" + hXHR.responseText + "')";
-                                var status  = hXHR.status;
-                                reject({
-                                    message : message,
-                                    status  : status
-                                });
-                            }
-                        };
-
-                        var data4xdr = (options.data && corps) ? options.data : null;
-
-                        hXHR.send(data4xdr);
-
-                    } else {
-                        throw new Error("CORS not supported");
                     }
                 }
             );
@@ -350,13 +381,19 @@ function (Logger, Helper, ES6Promise) {
                     .then( function (response) {
                         var xmlDoc;
 
-                        if (window.DOMParser) {
-                            var parser = new DOMParser();
-                            xmlDoc = parser.parseFromString(response, "text/xml");
-                        } else { // IE
-                            xmlDoc = new window.ActiveXObject("Microsoft.XMLDOM");
-                            xmlDoc.async = false;
-                            xmlDoc.loadXML(response);
+                        // test on env. nodejs or browser
+                        if ( typeof window === "undefined" ) {
+                            var DOMParser = require("xmldom").DOMParser;
+                            xmlDoc = new DOMParser().parseFromString(response, "text/xml");
+                        } else {
+                            if (window.DOMParser) {
+                                var parser = new window.DOMParser();
+                                xmlDoc = parser.parseFromString(response, "text/xml");
+                            } else { // IE
+                                xmlDoc = new window.ActiveXObject("Microsoft.XMLDOM");
+                                xmlDoc.async = false;
+                                xmlDoc.loadXML(response);
+                            }
                         }
 
                         return xmlDoc;
