@@ -19,8 +19,6 @@ var XHR = requirejs("Protocols/XHR");
 var options = {
     url       : "http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/alti/rest/elevation.json?lon=3.30&lat=49.97",
     method    : "GET",
-    // FIXME
-    // proxy  : 'http://localhost/proxy/php/proxy.php?url=',
     format    : "json", // 'xml', 'json' ou null
     content   : null,
     timeOut   : 0,

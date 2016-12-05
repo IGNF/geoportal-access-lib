@@ -242,6 +242,18 @@
                 },
                 namespace: function (file) {
                     return 'Gp';
+                },
+                dependencies: function(file) {
+                    return [
+                        {
+                            name : 'request',
+                            cjs : 'request'
+                        },
+                        {
+                            name : 'xmldom',
+                            cjs : 'xmldom'
+                        }
+                    ];
                 }
             }))
             .pipe(gulp.dest( build.umd ))

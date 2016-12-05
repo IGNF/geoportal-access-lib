@@ -1,7 +1,7 @@
 
 /* global exports, require */
 
-define(["Utils/LoggerByDefault"], function (Logger) {
+define(["Utils/LoggerByDefault", "require"], function (Logger, require) {
 
     "use strict";
     
@@ -10,10 +10,10 @@ define(["Utils/LoggerByDefault"], function (Logger) {
      *
      * Classe permettant d'écrire ou de lire du XML, sous forme de document DOM,
      * éventuellement selon des clés de lecture (readers) ou d'écriture (writers) spécifiques.
-     * 
+     *
      * @constructor
      * @alias Gp.Formats.XML
-     * 
+     *
      * @param {Object} [options] - options du format XML
      *
      * @param {Object} [options.reader] - Instance d'un Reader de service (AltiResponseReader, GeocodeRequestReader, etc.)
@@ -23,7 +23,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
      * @param {Object} [options.writers] - writers
      *
      * @param {String} [options.xmlString] - chaîne de caractère contenant du XML à interpréter.
-     * 
+     *
      * @private
      */
     function XML (options) {
@@ -67,7 +67,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
             }
         }
     }
-      
+
     XML.prototype = {
 
         /**
@@ -134,7 +134,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
         getXMLDoc : function () {
             return this.xmlDoc;
         },
-        
+
         /**
          * Setter
          */
@@ -142,8 +142,8 @@ define(["Utils/LoggerByDefault"], function (Logger) {
             this.xmlDoc = doc;
         },
         /**
-         * Méthode initialisant la lecture du XML, à partir d'un XML Document : 
-         *      création d'un objet JavaScript contenant les informations du XML, 
+         * Méthode initialisant la lecture du XML, à partir d'un XML Document :
+         *      création d'un objet JavaScript contenant les informations du XML,
          *      sauf dans le cas où il n'existe pas de XML Document à interpréter (retourne un objet vide).
          *
          * @return {Object} [parserOutput] - un objet JavaScript contenant les informations du XML :
@@ -176,7 +176,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
     };
 
     /**
-     * Méthode de la classe (privée) permettant de créer un XML Document à partir d'une chaîne de caractères XML, 
+     * Méthode de la classe (privée) permettant de créer un XML Document à partir d'une chaîne de caractères XML,
      *      en utilisant DOMParser() lorsque c'est possible.
      *      For more information, see: https://dvcs.w3.org/hg/innerhtml/raw-file/tip/index.html#the-domparser-interface
      *
@@ -184,15 +184,15 @@ define(["Utils/LoggerByDefault"], function (Logger) {
      * @memberof XML
      * @method __getXMLDOC
      * @param {String} xmlString - xml string to be converted into DOM element
-     * @return {DOMElement} - the corresponding XML Document 
+     * @return {DOMElement} - the corresponding XML Document
      */
     function __getXMLDOC (xmlString) {
 
-        if ( typeof exports === "object" ) { 
+        if ( typeof exports === "object" ) {
             // env. nodejs
             var DOMParser = require("xmldom").DOMParser;
             return new DOMParser().parseFromString(xmlString, "text/xml");
-        } else { 
+        } else {
             // env. browser
 
             var parser;
@@ -208,14 +208,14 @@ define(["Utils/LoggerByDefault"], function (Logger) {
                 if ( parseError.errorCode ) {
                     if ( parseError.line && parseError.linepos ) {
                         errorMsg += "( ligne " + parseError.line + ", colonne " + parseError.linepos;
-                    } 
+                    }
                     if ( parseError.reason ) {
                         errorMsg += ":  " + parseError.reason + ")";
                     }
                     throw new Error(errorMsg);
                 }
                 return xmlDoc;
-                
+
             } else if (window.DOMParser) {
                 // les autres (Chrome, Mozilla, IE >= 9)
                 parser = new window.DOMParser();
@@ -246,14 +246,14 @@ define(["Utils/LoggerByDefault"], function (Logger) {
                 return xmlDoc;
 
             } else {
-                // FIXME 
+                // FIXME
                 throw new Error("Incompatible DOM Parser pour ce navigateur !");
             }
         }
     }
 
     /**
-     * Méthode de la classe (privée) permettant de récupérer le noeud racine du document, 
+     * Méthode de la classe (privée) permettant de récupérer le noeud racine du document,
      *      à partir d'un document node (nodeType=9), puis lecture de ce noeud (readNode)
      *
      * @private
@@ -311,14 +311,14 @@ define(["Utils/LoggerByDefault"], function (Logger) {
         // if element node has childNodes, read them and set them to data
         if ( node.hasChildNodes() ) {
 
-            var childData = {}; 
+            var childData = {};
             var child;
             var children = node.childNodes;
 
             for ( var i = 0; i < children.length; i++ ) {
                 child = children[i];
 
-                if ( child.nodeType === 3 ) {// TEXT_NODE 
+                if ( child.nodeType === 3 ) {// TEXT_NODE
                     data["textContent"] = child.nodeValue;
 
                 } else if ( child.nodeType === 1 ) {
@@ -342,7 +342,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
                 // TODO : manage other node types (4=CDATA, etc)
             }
         }
-        
+
         return data;
     }
 

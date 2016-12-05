@@ -1,26 +1,9 @@
-/* global module, require, __dirname */
 
-var requirejs = require("requirejs");
-
-requirejs.config({
-    baseUrl : __dirname + "/../../../src",
-    nodeRequire : require,
-    paths : {
-        // lib external
-        log4js : "../lib/external/woodman/woodman-amd",
-        promise : "../lib/external/promise",
-        // config du logger
-        "logger-cfg" : "Utils/Logger.cfg"
-    }
-});
-
-var XHR = requirejs("Protocols/XHR");
+var Gp = require("../../../dist/GpServices-src.js");
 
 var options = {
     url       : "http://localhost/proxy/php/proxy.php?url=http%3A%2F%2Fwxs.ign.fr%2Fjhyvi0fgmnuxvfv0zjzorvdn%2Fgeoportail%2Fols",
     method    : "POST",
-    // FIXME
-    // proxy  : 'http://localhost/proxy/php/proxy.php?url=',
     format    : "xml", // 'xml', 'json' ou null
     content   : "application/xml",
     timeOut   : 0,
@@ -53,4 +36,4 @@ var options = {
     }
 };
 
-XHR.call(options);
+Gp.Protocols.XHR.call(options);

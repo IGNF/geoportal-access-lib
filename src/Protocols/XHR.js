@@ -165,14 +165,14 @@ function (Logger, Helper, ES6Promise, require) {
                         // Utilisation du module :
                         // cf. http://blog.modulus.io/node.js-tutorial-how-to-use-request-module
 
-                        var request = require("request");
+                        var req = require("request");
 
                         // mapping data avec body param. pour le mode POST ou PUT(?)
                         if (options.data && typeof options.data === "string" && corps) {
                             options.body = options.data;
                         }
 
-                        request(options, function (error, response, body) {
+                        req(options, function (error, response, body) {
 
                             if (!error && response.statusCode == 200 && body) {
                                 resolve(body);

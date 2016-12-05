@@ -28,10 +28,10 @@ var options = {
         console.log(eror);
     },
     // spécifique au service
-    positions : [{
-        lon : 1.25,
-        lat : 47.48
-    }]
+    position : {
+        x : 2.35,
+        y : 48.87
+    }
 };
 
 Gp.Services.reverseGeocode(options);
