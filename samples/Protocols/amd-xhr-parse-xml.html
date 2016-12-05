@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../../lib/external/require.js"></script>
+        <script>
+            /* global requirejs */
+            requirejs.config({
+                'baseUrl' : "../../src/",
+                'paths': {
+                    // lib external
+                    'log4js' : "../lib/external/woodman/woodman-amd",
+                    'promise': '../lib/external/promise',
+                    // config du logger
+                    "logger-cfg" : "Utils/Logger.cfg"
+                }
+            });
+
+            requirejs(['Protocols/XHR'],
+                function (XHR) {
+
+                    var options_get = {
+                        url       : 'http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/alti/rest/elevation.xml?lon=3.30999&lat=49.97999&indent=false&crs=%27CRS:84%27',
+                        method    : 'GET',
+                        format    : "xml", // 'xml', 'json'
+                        data      : {},
+                        onResponse : function (response) {
+                            console.log('Reponse :', response);
+                        },
+                        onFailure : function (error) {
+                            console.log('Erreur :', error);
+                        },
+                        onTimeOut : function () {}
+                    };
+
+                    XHR.call(options_get);
+
+            });
+            </script>
+    </head>
+    <body>
+        <h1>Utilisation des modules natifs AMD sur les protocoles</h1>
+        <p>exemple mock avec Mockable sur <a href="https://www.mockable.io/">https://www.mockable.io/</a></p>
+        <span>(Ouvrir la console)</span>
+    </body>
+</html>

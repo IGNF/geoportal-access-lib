@@ -31,10 +31,12 @@ define([], function () {
     // -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/wps
     //
 
+    // protocol
+    var isBrowser = typeof window !== "undefined" ? true : false;
+    var protocol  = (isBrowser) ? (location && location.protocol && location.protocol.indexOf("https:") === 0 ? "https://" : "http://") :  "http://";
     // constantes internes
-    var protocol = (location && location.protocol && location.protocol.indexOf("https:") === 0 ? "https://" : "http://");
     var hostname = "wxs.ign.fr";
-    var keyname = "%KEY%";
+    var keyname  = "%KEY%";
     var url = protocol + hostname.concat("/", keyname);
 
     /** fonctions de substitutions */
