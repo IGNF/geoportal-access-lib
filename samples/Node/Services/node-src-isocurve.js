@@ -14,7 +14,7 @@ requirejs.config({
     }
 });
 
-var Gp = requirejs("Gp");
+var IsoCurve = requirejs("Services/ProcessIsoCurve/ProcessIsoCurve");
 
 var options = {
     apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
@@ -32,7 +32,8 @@ var options = {
         x : 2.35,
         y : 48.87
     },
-    time : 10
+    time : 60
 };
 
-Gp.Services.isoCurve(options);
+var obj = new IsoCurve(options);
+obj.call();

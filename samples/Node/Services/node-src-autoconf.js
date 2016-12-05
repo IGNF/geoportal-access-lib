@@ -14,25 +14,15 @@ requirejs.config({
     }
 });
 
-var Gp = requirejs("Gp");
+var AutoConf = requirejs("Services/AutoConf/AutoConf");
 
 var options = {
     apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
-    // httpMethod : 'GET',
-    // outputFormat : 'json',
     protocol : 'XHR',
     onSuccess : function (response) {
         console.log(response);
-    },
-    onFailure : function (error) {
-        console.log(eror);
-    },
-    // spécifique au service
-    position : {
-        x : 2.35,
-        y : 48.87
-    },
-    time : 10
+    }
 };
 
-Gp.Services.isoCurve(options);
+var obj = new AutoConf(options);
+obj.call();

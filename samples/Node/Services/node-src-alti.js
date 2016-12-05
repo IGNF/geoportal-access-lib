@@ -14,7 +14,7 @@ requirejs.config({
     }
 });
 
-var Gp = requirejs("Gp");
+var Alti = requirejs("Services/Alti/Alti");
 
 var options = {
     apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
@@ -28,11 +28,11 @@ var options = {
         console.log(eror);
     },
     // spécifique au service
-    position : {
-        x : 2.35,
-        y : 48.87
-    },
-    time : 10
+    positions : [{
+        lon : 1.25,
+        lat : 47.48
+    }]
 };
 
-Gp.Services.isoCurve(options);
+var obj = new Alti(options);
+obj.call();

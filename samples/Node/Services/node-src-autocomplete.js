@@ -14,7 +14,7 @@ requirejs.config({
     }
 });
 
-var Gp = requirejs("Gp");
+var AutoComplete = requirejs("Services/AutoComplete/AutoComplete");
 
 var options = {
     apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
@@ -28,11 +28,8 @@ var options = {
         console.log(eror);
     },
     // spécifique au service
-    position : {
-        x : 2.35,
-        y : 48.87
-    },
-    time : 10
+    text : "Brie-Co"
 };
 
-Gp.Services.isoCurve(options);
+var obj = new AutoComplete(options);
+obj.call();

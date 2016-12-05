@@ -14,7 +14,7 @@ requirejs.config({
     }
 });
 
-var Gp = requirejs("Gp");
+var Route = requirejs("Services/Route/Route");
 
 var options = {
     apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
@@ -28,11 +28,15 @@ var options = {
         console.log(eror);
     },
     // spécifique au service
-    position : {
-        x : 2.35,
-        y : 48.87
+    startPoint : {
+        x : 2.3,
+        y : 48.8
     },
-    time : 10
+    endPoint : {
+        x : 2.4,
+        y : 48.9
+    }
 };
 
-Gp.Services.isoCurve(options);
+var obj = new Route(options);
+obj.call();

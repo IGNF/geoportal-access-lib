@@ -14,7 +14,7 @@ requirejs.config({
     }
 });
 
-var Gp = requirejs("Gp");
+var ReverseGeocode = requirejs("Services/Geocode/ReverseGeocode");
 
 var options = {
     apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
@@ -31,8 +31,8 @@ var options = {
     position : {
         x : 2.35,
         y : 48.87
-    },
-    time : 10
+    }
 };
 
-Gp.Services.isoCurve(options);
+var obj = new ReverseGeocode(options);
+obj.call();
