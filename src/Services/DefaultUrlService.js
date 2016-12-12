@@ -44,8 +44,19 @@ define([], function () {
         return this._key.replace(key ? keyname : null, key);
     };
 
-    // liste des URLs des services
+    /**
+    * Default Geoportal web services URLs acces.
+    *
+    * @namespace 
+    * @alias Gp.Services.DefaultUrl
+    */
     var DefaultUrlService = {
+        /**
+         * Elevation web service acces
+         *
+         * @member {Object}
+         * @property {Function} url(key) - Returns elevation service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols ("elevation-json", "elevation-xml", "profil-json" or "profil-xml").
+         */
         Alti : {
             _key : {
                 // rest
@@ -69,6 +80,12 @@ define([], function () {
                 };
             }
         },
+        /**
+         * IsoCurve web service acces
+         *
+         * @member {Object}
+         * @property {Function} url(key) - Returns isocurve service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols ("iso-json" or "iso-xml").
+         */
         ProcessIsoCurve : {
             _key : {
                 "iso-json" : url + "/isochrone/isochrone.json", // rest (geoconcept)
@@ -82,14 +99,32 @@ define([], function () {
                 };
             }
         },
+        /**
+         * Autocompletion web service acces
+         *
+         * @member {Object}
+         * @property {Function} url(key) - Returns autocomplete service default urls with or without geoportal access key given as a parameter. The result is a String.
+         */
         AutoComplete : {
             _key : url + "/ols/apis/completion",
             url : fkey
         },
+        /**
+         * Reverse geocoding web service acces
+         *
+         * @member {Object}
+         * @property {Function} url(key) - Returns reverse geocoding service default urls with or without geoportal access key given as a parameter. The result is a String.
+         */
         ReverseGeocode : {
             _key : url + "/geoportail/ols",
             url : fkey
         },
+        /**
+         * Autoconfiguration web service acces
+         *
+         * @member {Object}
+         * @property {Function} url([key1,...]) - Returns autoconfiguration service default urls with geoportal access key(s) given as a String array parameter. The result is a javascript object with different urls given the access mode ("apiKey", "apiKeys" or "aggregate").
+         */
         AutoConf : {
             _key : {
                 apiKey : url + "/autoconf",
@@ -111,10 +146,22 @@ define([], function () {
                 };
             }
         },
+        /**
+         * Geocoding web service acces
+         *
+         * @member {Object}
+         * @property {Function} url(key) - Returns geocoding service default urls with or without geoportal access key given as a parameter. The result is a String.
+         */
         Geocode : {
             _key : url + "/geoportail/ols",
             url : fkey
         },
+        /**
+         * Routing web service acces
+         *
+         * @member {Object}
+         * @property {Function} url(key) - Returns routing service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols ("route-json" or "route-xml").
+         */
         Route : {
             _key : {
                 ols : url + "/itineraire/ols", // openLS
