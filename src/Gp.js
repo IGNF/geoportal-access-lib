@@ -37,7 +37,9 @@ define([
     // Erreurs
     "Exceptions/ErrorService",
     // Outils
-    "Utils/Helper"
+    "Utils/Helper",
+    // URLs par defaut
+    "Services/DefaultUrlService"
 
 ],
     function (
@@ -61,7 +63,9 @@ define([
         // Erreurs
         Error,
         // Outils
-        Helper
+        Helper,
+        // URLs par defaut
+        DefaultUrl
         ) {
 
         "use strict";
@@ -144,6 +148,8 @@ define([
         // Export Erreurs et Outils
         Gp.extend("Error", Error);
         Gp.extend("Helper", Helper);
+        // Export DefaultUrls
+        Gp.extend("Services.DefaultUrl", DefaultUrl);
 
         // on sauvegarde la variable dans l'env.
         scope.Gp = Gp;
