@@ -17,39 +17,28 @@
                 }
             });
 
-            requirejs(["Services/Route/Route"],
-            function (Route) {
+            requirejs(["Services/Geocode/ReverseGeocode"],
+            function (ReverseGeocode) {
 
                 var options = {
                    apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
-                   protocol : 'XHR', // JSONP|XHR
-                   proxyURL : 'http://localhost/proxy/php/proxy.php?url=',
-                   httpMethod : 'POST', // GET|POST
                    // rawResponse : true,
                    onSuccess : function (response) {console.log(response);},
                    onFailure : function (error) {console.log(error);},
                    // spécifique au service
-                   api : 'OLS',
-                   outputFormat : 'json', // surchargé par l'API : xml !
-                   // srs : "EPSG:4326",
-                   startPoint: {
-                       x: 2.64,
-                       y: 48.54
+                   position: {
+                        x : 48,
+                        y : 2
                    },
-                   endPoint: {
-                       x: 3.01,
-                       y: 48.45
-                   },
-                   provideBbox : true,
-                   exclusions : ["Tunnel", "Toll"], // "Bridge",
-                   distanceUnit : "km",
-                   graph : "Voiture",
-                   geometryInInstructions : true,
-                   routePreference : "fastest"
+                   srs : "EPSG:4326",
+                   filterOptions :{
+                       type : ['PositionOfInterest']
+                   }
                 };
 
-                var obj = new Route(options);
+                var obj = new ReverseGeocode(options);
                 obj.call();
+
             });
             </script>
     </head>

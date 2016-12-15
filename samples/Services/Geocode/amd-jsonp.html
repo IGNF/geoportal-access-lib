@@ -17,39 +17,34 @@
                 }
             });
 
-            requirejs(["Services/Route/Route"],
-            function (Route) {
+            requirejs(["Services/Geocode/Geocode"],
+            function (Geocode) {
 
                 var options = {
                    apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
-                   protocol : 'XHR', // JSONP|XHR
-                   proxyURL : 'http://localhost/proxy/php/proxy.php?url=',
-                   httpMethod : 'POST', // GET|POST
-                   // rawResponse : true,
+                   // protocol : 'JSONP', // JSONP|XHR
+                   // FIXME retrait du proxy quand les services autoriseront le Cross-domain
+                   // proxyURL : 'http://localhost/proxy/php/proxy.php?url=',
+                   // httpMethod : 'POST', // GET|POST
+                   // contentType : "text/xml",
+                   rawResponse : true,
                    onSuccess : function (response) {console.log(response);},
                    onFailure : function (error) {console.log(error);},
                    // spécifique au service
-                   api : 'OLS',
-                   outputFormat : 'json', // surchargé par l'API : xml !
-                   // srs : "EPSG:4326",
-                   startPoint: {
-                       x: 2.64,
-                       y: 48.54
+                   // location: "2 avenue de paris, 94166 Saint-Mandée",
+                   location: "brie",
+                   returnFreeForm : false,
+                   filterOptions :{
+                       type : ["StreetAddress"],
+                       department : 77
                    },
-                   endPoint: {
-                       x: 3.01,
-                       y: 48.45
-                   },
-                   provideBbox : true,
-                   exclusions : ["Tunnel", "Toll"], // "Bridge",
-                   distanceUnit : "km",
-                   graph : "Voiture",
-                   geometryInInstructions : true,
-                   routePreference : "fastest"
+                   maximumResponses : 25,
+                   srs : 'EPSG:4326'
                 };
 
-                var obj = new Route(options);
+                var obj = new Geocode(options);
                 obj.call();
+
             });
             </script>
     </head>

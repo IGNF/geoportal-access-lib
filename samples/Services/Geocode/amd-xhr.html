@@ -27,6 +27,7 @@
                    proxyURL : 'http://localhost/proxy/php/proxy.php?url=',
                    httpMethod : 'POST', // GET|POST
                    contentType : "text/xml",
+                   rawResponse : true,
                    onSuccess : function (response) {console.log(response.locations);},
                    onFailure : function (error) {console.log(error);},
                    // spécifique au service
