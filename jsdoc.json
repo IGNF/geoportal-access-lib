@@ -32,14 +32,7 @@
         "hardwrap": true
     },
     "opts": {
-        "template"         : "target/doc/jaguarjs-jsdoc",
-        "template-inactif0": "node_modules/ink-docstrap/template/",
-        "template-inactif1": "node_modules/jaguarjs-jsdoc/",
-        "template-inactif2": "node_modules/jsdoc-oblivion/template/",
-        "template-inactif3": "node_modules/jsdoc-dash-template",
-        "template-inactif4": "node_modules/jsdoc-simple-template",
-        "template-inactif5": "node_modules/jsdoc-react",
-        "template-inactif6": "node_modules/minami",
+        "template": "target/doc/jaguarjs-jsdoc",
         "encoding": "utf8",
         "destination": "./target/doc/",
         "recurse": true,
