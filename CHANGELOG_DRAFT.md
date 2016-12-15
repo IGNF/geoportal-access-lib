@@ -16,6 +16,7 @@
 
 **Closed issues:**
 
+- Modification du comportement avec le paramètre rawResponse [\#25](https://github.com/IGNF/geoportal-access-lib/issues/25)
 - Identifier l'utilisation de la bilitohèque d'accès lors de l'appel aux services wxs.ign.fr [\#20](https://github.com/IGNF/geoportal-access-lib/issues/20)
 - Gp.Services.geocode\(\) en XHR POST : mauvais Content-Type de la requête [\#19](https://github.com/IGNF/geoportal-access-lib/issues/19)
 - X/Y inversé dans la réponse de géocodage [\#18](https://github.com/IGNF/geoportal-access-lib/issues/18)
@@ -30,6 +31,8 @@
 
 **Merged pull requests:**
 
+- Feature nodejs [\#23](https://github.com/IGNF/geoportal-access-lib/pull/23)
+- Making DefaultServiceUrl public [\#24](https://github.com/IGNF/geoportal-access-lib/pull/24)
 - adding gp-access-lib param [\#21](https://github.com/IGNF/geoportal-access-lib/pull/21)
 - Clarifier que GpServices.js est une release compilé et non pas un code… [\#17](https://github.com/IGNF/geoportal-access-lib/pull/17) ([jfgigand](https://github.com/jfgigand))
 - Fix forinloops [\#14](https://github.com/IGNF/geoportal-access-lib/pull/14)
