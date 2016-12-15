@@ -1,6 +1,7 @@
+
+
 <!DOCTYPE html>
 <html>
-
     <head>
         <script src="../../../lib/external/require.js"></script>
         <script>
@@ -19,35 +20,36 @@
             requirejs(["Services/Geocode/ReverseGeocode"],
             function (ReverseGeocode) {
 
-                // cas de reponse OK
                 var options = {
-                   apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
-                   protocol : 'XHR', // JSONP|XHR
-                   proxyURL : 'http://localhost/proxy/php/proxy.php?url=',
-                   httpMethod : 'POST', // GET|POST
-                   rawResponse : true,
+                  serverUrl : 'http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/geoportail/ols?output=json&callback=callbackName',
+                  protocol : 'XHR', // JSONP|XHR
+                  // FIXME retrait du proxy quand les services autoriseront le Cross-domain
+                  proxyURL : 'http://localhost/proxy/php/proxy.php?url=',
+                  httpMethod : 'POST', // GET|POST
+                  outputFormat : '',
+                  rawResponse : true,
+                  contentType : "text/xml",
                    onSuccess : function (response) {console.log(response);},
                    onFailure : function (error) {console.log(error);},
                    // spécifique au service
                    position: {
-                         x : 48,
-                         y : 2
-                    },
-                    srs : "EPSG:4326",
-                    filterOptions :{
-                        type : ['PositionOfInterest']
-                    }
+                        x : 48,
+                        y : 2
+                   },
+                   srs : "EPSG:4326",
+                   filterOptions :{
+                       type : ['PositionOfInterest']
+                   }
                 };
 
                 var obj = new ReverseGeocode(options);
                 obj.call();
-            });
-        </script>
-    </head>
 
+            });
+            </script>
+    </head>
     <body>
         <h1>Utilisation des modules natifs AMD</h1>
         <span>(Ouvrir la console)</span>
     </body>
-
 </html>

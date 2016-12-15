@@ -1,0 +1,41 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../../../lib/external/require.js"></script>
+        <script>
+            /* global requirejs */
+            requirejs.config({
+                'baseUrl' : "../../../src/",
+                'paths': {
+                    // lib external
+                    "log4js": "../lib/external/woodman/woodman-amd",
+                    'promise': '../lib/external/promise',
+                    // config du logger
+                    "logger-cfg" : "Utils/Logger.cfg"
+                }
+            });
+
+            requirejs(["Services/AutoConf/AutoConf"],
+            function (AutoConf) {
+
+              var options = {
+                   apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
+                   protocol : "XHR",
+                   // rawResponse : true,
+                   onSuccess : function (response) {console.log(response);},
+                   onFailure : function (error) {console.log(error);}
+               };
+
+               var obj = new AutoConf(options);
+               obj.call();
+
+            });
+            </script>
+    </head>
+    <body>
+        <h1>Utilisation des modules natifs AMD</h1>
+        <span>(Ouvrir la console)</span>
+    </body>
+</html>
