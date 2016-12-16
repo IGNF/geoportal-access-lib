@@ -249,12 +249,18 @@
                 dependencies: function(file) {
                     return [
                         {
-                            name : 'request',
-                            cjs : 'request'
+                            name : '',
+                            global : 'request',
+                            cjs : 'request',
+                            param : 'request',
+                            amd: ''
                         },
                         {
-                            name : 'xmldom',
-                            cjs : 'xmldom'
+                            name : '',
+                            global : 'xmldom',
+                            cjs : 'xmldom',
+                            param : 'xmldom',
+                            amd: ''
                         }
                     ];
                 }
