@@ -177,16 +177,16 @@ function (
             }
         }
 
-        // nettoyage des KVP dans l'url du service
-        if (this.options.serverUrl) {
-            // INFO
-            // si l'url est renseignée, il faut la nettoyer de tous ses KVP
-            // ex. on ne veut pas de params. 'callback' ou 'output' car ceci declencherait
-            // des opérations d'encapsulations des reponses légèrement farfelues ...
-            var urlsource = this.options.serverUrl;
-            var urlparts = urlsource.split("?");
-            this.options.serverUrl = urlparts[0];
-        }
+        // FIXME nettoyage des KVP dans l'url du service
+        // if (this.options.serverUrl) {
+        //     // INFO
+        //     // si l'url est renseignée, il faut la nettoyer de tous ses KVP
+        //     // ex. on ne veut pas de params. 'callback' ou 'output' car ceci declencherait
+        //     // des opérations d'encapsulations des reponses légèrement farfelues ...
+        //     var urlsource = this.options.serverUrl;
+        //     var urlparts = urlsource.split("?");
+        //     this.options.serverUrl = urlparts[0];
+        // }
 
         // gestion de la methode HTTP
         this.options.httpMethod = ( typeof options.httpMethod === "string" ) ? options.httpMethod.toUpperCase() : "GET";
@@ -407,7 +407,10 @@ function (
                                     }));
                                     return;
                                 } else {
-                                    content = response.xml;
+                                    content = response.xml; // par defaut !
+                                    if (self.options.rawResponse) {
+                                        content = response;
+                                    }
                                 }
                             } else {
                                 content = response;

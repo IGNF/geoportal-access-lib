@@ -128,10 +128,11 @@ function (
         // attributs d'instances
 
         /**
-         * Format de réponse du service : JSON
-         */
-        this.options.outputFormat = "json";
-
+        * Format forcé de la réponse du service : "json"
+        * sauf si l'on souhaite une reponse brute (options.rawResponse)
+        */
+        this.options.outputFormat = (this.options.rawResponse) ? "" : "json";
+    
     }
 
     /**

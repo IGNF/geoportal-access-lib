@@ -51,6 +51,7 @@
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //| ✓ jsonlint
     //| > Validation JSON (fichiers de configuration)
+    //| > https://www.npmjs.com/package/gulp-jsonlint
     //| > http://jsonlint.com/
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task('jsonlint', function () {
@@ -60,7 +61,7 @@
             'jsdoc.json',
             '.jshintrc',
             '.jscsrc'
-        ])
+            ])
             .pipe($.plumber())
             .pipe($.jsonminify())
             .pipe($.jsonlint())
@@ -70,6 +71,7 @@
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //| ✓ jshint
     //| > Helps to detect errors and potential problems in code.
+    //| > https://www.npmjs.com/package/gulp-jshint
     //| > http://jscs.info/rules.html
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task('jshint', function () {
@@ -83,6 +85,7 @@
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //| ✓ jscs
     //| > Coding conventions respect
+    //| > https://www.npmjs.com/package/gulp-jscs
     //| > http://jscs.info/rules.html
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task('jscs', function () {
@@ -247,11 +250,17 @@
                     return [
                         {
                             name : 'request',
-                            cjs : 'request'
+                            global : 'request',
+                            cjs : 'request',
+                            param : 'request',
+                            amd: 'require'
                         },
                         {
                             name : 'xmldom',
-                            cjs : 'xmldom'
+                            global : 'xmldom',
+                            cjs : 'xmldom',
+                            param : 'xmldom',
+                            amd: 'require'
                         }
                     ];
                 }
@@ -319,7 +328,7 @@
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("template-sample", ['copy-sample'], function () {
 
-        var tmpl = require("gulp-template");
+        // var tmpl = require("gulp-template");
         var glob = require("glob");
 
         // uniquement les html !
@@ -330,7 +339,7 @@
         console.log(lstSources);
 
         return gulp.src(path.join(_.sample, "index-samples.html"))
-            .pipe(tmpl({
+            .pipe($.template({
                 'files' : lstSources
             }))
             .pipe(gulp.dest(build.sample));
@@ -409,31 +418,34 @@
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //| ✓ clean
     //| > nettoyage
+    //| > https://www.npmjs.com/package/del
+    //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+    gulp.task('clean', [], function (cb) {
+        var del = require('del');
+        return del([
+            build.dist + '/**',
+            build.js + '/**',
+            build.umd + '/**',
+            build.doc + '/**',
+            build.src + '/**',
+            build.sample + '/**',
+            build.lib + '/**'
+        ]);
+    });
+
+    //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //| ✓ clean
+    //| > nettoyage
     //| > https://www.npmjs.com/package/gulp-clean
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    gulp.task('clean', [], function () {
-
-        var stream = gulp.src([
-            build.dist,
-            build.js,
-            build.umd,
-            build.doc,
-            build.src,
-            build.sample,
-            build.lib
-        ], {force: true});
-        return stream.pipe($.clean());
-    });
+    // REMOVED (please browse history)
 
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //| ✓ clean
     //| > nettoyage brutal
     //| > https://github.com/robrich/gulp-rimraf
     //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    gulp.task('clean-rimraf', [], function (cb) {
-        var rimraf = require('rimraf');
-        rimraf("./target", cb);
-    });
+    // REMOVED (please browse history)
 
     //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //| ✓ help

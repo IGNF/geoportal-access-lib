@@ -105,8 +105,12 @@ function (
         // attributs d'instances
         // #####################
 
-        /** Format de réponse du service : "xml" */
-        this.options.outputFormat = "xml";
+        /**
+        * Format forcé de la réponse du service : "xml"
+        * sauf si l'on souhaite une reponse brute (options.rawResponse)
+        */
+        this.options.outputFormat = (this.options.rawResponse) ? "" : "xml";
+
     };
 
     /**
