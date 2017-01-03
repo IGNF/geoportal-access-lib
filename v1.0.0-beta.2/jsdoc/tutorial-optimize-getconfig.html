@@ -1359,6 +1359,88 @@
 -->
     
 <!--
+        <li class="item" data-alias= "Gp.Services.DefaultUrl" data-name="DefaultUrl">
+-->
+        <li class="l1 item" data-alias= "Gp.Services.DefaultUrl" data-name="DefaultUrl">
+                <a href="Gp.Services.DefaultUrl.html">Gp.Services.DefaultUrl</a>
+                
+<!--
+            <span class="title">
+                <a href="Gp.Services.DefaultUrl.html">Gp.Services.DefaultUrl</a>
+                
+            </span>
+-->
+
+            
+            <div class="l2 itemMembers"> Members </div>
+            
+                <div class="l3 itemMembers"> <a href="Gp.Services.DefaultUrl.html#.Alti">Alti</a> </div>
+            
+                <div class="l3 itemMembers"> <a href="Gp.Services.DefaultUrl.html#.AutoComplete">AutoComplete</a> </div>
+            
+                <div class="l3 itemMembers"> <a href="Gp.Services.DefaultUrl.html#.AutoConf">AutoConf</a> </div>
+            
+                <div class="l3 itemMembers"> <a href="Gp.Services.DefaultUrl.html#.Geocode">Geocode</a> </div>
+            
+                <div class="l3 itemMembers"> <a href="Gp.Services.DefaultUrl.html#.ProcessIsoCurve">ProcessIsoCurve</a> </div>
+            
+                <div class="l3 itemMembers"> <a href="Gp.Services.DefaultUrl.html#.ReverseGeocode">ReverseGeocode</a> </div>
+            
+                <div class="l3 itemMembers"> <a href="Gp.Services.DefaultUrl.html#.Route">Route</a> </div>
+            
+
+
+<!--
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="Gp.Services.DefaultUrl.Alti"><a href="Gp.Services.DefaultUrl.html#.Alti">Alti</a></li>
+            
+                <li data-name="Gp.Services.DefaultUrl.AutoComplete"><a href="Gp.Services.DefaultUrl.html#.AutoComplete">AutoComplete</a></li>
+            
+                <li data-name="Gp.Services.DefaultUrl.AutoConf"><a href="Gp.Services.DefaultUrl.html#.AutoConf">AutoConf</a></li>
+            
+                <li data-name="Gp.Services.DefaultUrl.Geocode"><a href="Gp.Services.DefaultUrl.html#.Geocode">Geocode</a></li>
+            
+                <li data-name="Gp.Services.DefaultUrl.ProcessIsoCurve"><a href="Gp.Services.DefaultUrl.html#.ProcessIsoCurve">ProcessIsoCurve</a></li>
+            
+                <li data-name="Gp.Services.DefaultUrl.ReverseGeocode"><a href="Gp.Services.DefaultUrl.html#.ReverseGeocode">ReverseGeocode</a></li>
+            
+                <li data-name="Gp.Services.DefaultUrl.Route"><a href="Gp.Services.DefaultUrl.html#.Route">Route</a></li>
+            
+            </ul>
+-->
+
+            
+
+
+<!--
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+-->
+            
+
+<!--
+            <ul class="methods itemMembers">
+            
+            </ul>
+-->
+
+            
+
+<!--
+            <ul class="events itemMembers">
+            
+            </ul>
+-->
+       </li>
+<!--
+        </li>
+-->
+    
+<!--
         <li class="item" data-alias= "Gp.Services.Geocode.DirectGeocodedLocation" data-name="DirectGeocodedLocation">
 -->
         <li class="l1 item" data-alias= "Gp.Services.Geocode.DirectGeocodedLocation" data-name="DirectGeocodedLocation">
@@ -1824,9 +1906,13 @@
     <h1>Optimize your geoportal access configuration</h1><p>To use Geoportal resources, you need an access key which can be obtained on the <a href="http://professionnels.ign.fr/ign/contrats">professionels.ign.fr web site</a>.</p>
 <p>You can speed up your geoportal application by caching your the configuration associated to your geoportal access key on your server.</p>
 <p>Here is how you can do.</p>
-<h3>1. Get the configuration file</h3><p>Fill the input text below with your geoportal access key and click the &quot;Get Config File&quot; button. </p>
-<p><p><input type="text" class="form-control input-sm" placeholder="Geoportail access key" size="30" id="apiKey" class="key-value"></input><input type="button" onclick="doIt()" id="key-button" value="Get Config File" class="key-button" ></input></p></p>
-<script type="text/javascript" src="https://depot.ign.fr/geoportail/bibacces/develop/js/GpServices.js"></script>
+<h3>1. Get the configuration file</h3><p>Fill the input text below with your geoportal access key ; if you want Geoportal Services to be accessed by default in https, check the &quot;https access&quot; check box.</p>
+<p>Click the &quot;Get Config File&quot; button.</p>
+<p><p></p>
+<p><input type="text" class="form-control input-sm" placeholder="Geoportail access key" size="30" id="apiKey" class="key-value"></input></p>
+<p><input type="checkbox" id="https-cb" >https access</input></p>
+<p><input type="button" onclick="doIt()" id="key-button" value="Get Config File" class="key-button" ></input></p></p>
+<script type="text/javascript" src="./scripts/GpServices.js"></script>
 <script type="text/javascript">
 
 function doIt() {
@@ -1841,8 +1927,18 @@ function doIt() {
     belem.style.cursor = "wait" ;
     var article = document.getElementsByClassName("content")[0];
     article.style.cursor = "wait" ;
+    // https access
+    var httpsCB = document.getElementById("https-cb") ;
+    var protocol = "http" ;
+    var resultFileName = "autoconf.json" ;
+    if (httpsCB.checked) {
+        protocol += "s" ;
+        resultFileName = "autoconf-https.json" ;
+    }
+    var getconfigUrl = protocol + "://wxs.ign.fr/" + kelem.value.trim() + "/autoconf" ;
     Gp.Services.getConfig({
-        apiKey : kelem.value.trim(),
+        // apiKey : kelem.value.trim(),
+        serverUrl : getconfigUrl,
         rawResponse : true,
         onSuccess : function(result) {
             var jsonpResult = result ;
@@ -1852,7 +1948,7 @@ function doIt() {
             }
             var a = document.createElement("a") ;
             a.setAttribute("href","data:text/javascript;charset=utf-8," + encodeURIComponent(jsonpResult)) ;
-            a.setAttribute("download", "autoconf.json") ;
+            a.setAttribute("download", resultFileName) ;
             document.body.appendChild(a) ;
             a.click() ;
             // re-enable submit button
@@ -1866,7 +1962,7 @@ function doIt() {
 </script>
 
 
-<p>When prompted, save the file &quot;autoconf.json&quot; on your platform.</p>
+<p>When prompted, save the file &quot;autoconf.json&quot; (or &quot;autoconf-https.json&quot;) on your platform.</p>
 <h3>2. Configure geoportal functions to use that file</h3><p>Be it <a href="https://github.com/ignf/geoportal-access-lib">Geoportal access lib</a>, <a href="https://github.com/IGNF/geoportal-extensions">Geoportal extensions</a> or <a href="http://ignf.github.io/evolution-apigeoportail/sdk/presentation.html">Geoportal SDK</a>, you can use that file to configure your application :</p>
 <h4>With Geoportal access lib</h4><p>Use it as a value of the <strong>serverUrl</strong> param of the <a href="http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~getConfig">Gp.Services.getConfig()</a> function (instead of the <strong>apiKey</strong> param) :</p>
 <pre class="prettyprint source lang-javascript"><code>the Gp.Services.getConfig({
@@ -1898,7 +1994,7 @@ function doIt() {
     <footer>
         Copyright (c) IGN, released under the CECILL-B license 
         </br>
-        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sat Nov 19 2016 23:35:31 GMT+0100 (CET)
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Jan 03 2017 09:31:32 GMT+0100 (CET)
     </footer>
 
 
