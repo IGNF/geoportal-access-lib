@@ -17,7 +17,7 @@ Click the "Get Config File" button.
 <input type="text" class="form-control input-sm" placeholder="Geoportail access key" size="30" id="apiKey" class="key-value"></input>
 <input type="checkbox" id="https-cb" >https access</input>
 <input type="button" onclick="doIt()" id="key-button" value="Get Config File" class="key-button" ></input></p>
-<script type="text/javascript" src="https://depot.ign.fr/geoportail/bibacces/develop/js/GpServices.js"></script>
+<script type="text/javascript" src="./scripts/GpServices.js"></script>
 <script type="text/javascript">
 
 function doIt() {
