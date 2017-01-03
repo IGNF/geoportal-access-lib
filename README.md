@@ -1,7 +1,12 @@
-
 # Bibliothèque d'accès aux ressources du Géoportail
 
-La bibliothèque d’accès aux ressources de la plateforme Géoportail est une bibliothèque de fonctions javascript permettant d'accéder aux ressources délivrées par les services web du Géoportail. 
+[![Build Status](https://travis-ci.org/IGNF/geoportal-access-lib.png?branch=master)](https://travis-ci.org/IGNF/geoportal-access-lib)
+[![GitHub release](https://img.shields.io/badge/pre-%2drelease-1.0.0-%2dbeta3-brightgreen.svg)](https://img.shields.io/badge/release-1.0.0%20beta3.svg)
+<!-- FIXME Ce badge dynamique est à mettre en place..., en attente d'une release
+[![GitHub release](https://img.shields.io/github/release/IGNF/geoportal-access-lib.svg)](https://github.com/IGNF/geoportal-access-lib)
+-->
+
+La bibliothèque d’accès aux ressources de la plateforme Géoportail est une bibliothèque de fonctions javascript permettant d'accéder aux ressources délivrées par les services web du Géoportail.
 
 Elle permet plus particulièrement d'effecturer les opérations suivantes utilisant les données de l'IGN :
 
@@ -134,7 +139,7 @@ Gp.Services.reverseGeocode({
     position : {                         // position de recherche
       x: 2.29,
       y: 48.85
-    }, 
+    },
     filterOptions : {
         type : ["PositionOfInterest"]    // type de localisant
     },
@@ -171,8 +176,8 @@ Gp.Services.getAltitude({
     apiKey : "22726iz9m8ficsgf2hmiicpd", // clef d'accès à la plateforme
     positions : [                        // positions pour le calcul alti
         { lon: 2.29, lat: 48.85 },      
-        { lon: 2.3, lat: 48.9 }, 
-        { lon: 2.4, lat: 49 } 
+        { lon: 2.3, lat: 48.9 },
+        { lon: 2.4, lat: 49 }
     ],
     sampling : 50,                      // nombre de points pour le profil
     onSuccess : function (result) {
@@ -208,7 +213,7 @@ Gp.Services.route({
     startPoint : { x: 2, lat: 45},       // point de départ
     viaPoints : [                        // points intermédiaires
         { x: 3, y: 46 },      
-        { x: 3.5, y: 46 } 
+        { x: 3.5, y: 46 }
     ],
     endPoint : { x: 4, y: 47},          // point d'arrivée
     graph : "Voiture",                 // grapĥe utilisé
@@ -284,4 +289,3 @@ Gp.Services.getConfig({
 ```
 
 **Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/0hsanbv2/embedded/result,js,html,css/)
-

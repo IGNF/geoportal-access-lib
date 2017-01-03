@@ -84,6 +84,8 @@ define(["Utils/LoggerByDefault"], function (Logger) {
                 options.timeOut = 0;
             }
 
+            // FIXME si un callback coté client a été mis en place,
+            // cette condition sur cette methode n'a pas de sens !?
             if ( !options.onResponse ) {
                 logger.error("missing parameter : options.onResponse !");
                 throw new Error("missing parameter : options.onResponse !");
@@ -185,6 +187,8 @@ define(["Utils/LoggerByDefault"], function (Logger) {
                         }, options.timeOut);
                 }
 
+                // FIXME le nom de la fonction n'accepte pas de namespace !
+                // ex. Gp.Function.callback
                 /** fonction de reponse du service */
                 window[options.callbackName] = function (data) {
                     window.clearTimeout(onTimeOutTrigger);

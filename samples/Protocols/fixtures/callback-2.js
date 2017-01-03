@@ -1,1 +1,1 @@
-callback_2({"message": "2"});
+callback({"message": "2"});
