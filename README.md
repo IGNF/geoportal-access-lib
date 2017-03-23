@@ -130,7 +130,7 @@ La fonction [Gp.Services.reverseGeocode](http://ignf.github.io/geoportal-access-
 
 * d'autres paramètres éventuels à passer au service...
 
-* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.ReverseGeocodeResponse](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/Gp.Services.ReverseGeocodeResponse.html).
+* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.GeocodeResponse](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/Gp.Services.GeocodeResponse.html).
 
 
 ``` javascript
@@ -245,7 +245,7 @@ La fonction [Gp.Services.isoCurve()](http://ignf.github.io/geoportal-access-lib/
 
 * d'autres paramètres éventuels à passer au service...
 
-* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.isoCurveResponse](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/Gp.Services.isoCurveResponse.html).
+* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.IsoCurveResponse](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/Gp.Services.IsoCurveResponse.html).
 
 
 ``` javascript
@@ -275,7 +275,7 @@ La fonction [Gp.Services.getConfig()](http://ignf.github.io/geoportal-access-lib
 
 * d'autres paramètres éventuels à passer au service...
 
-* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.getConfigResponse](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/Gp.Services.getConfigResponse.html). Les informations portées par cet objet sont aussi enregistrées en variable globale de l'application sous le nom : Gp.Config.
+* la **fonction de traitement des résultats** qui sera appelée lorsqu'ils seront reçus. Cette fonction prend en paramètres un objet de type : [Gp.Services.GetConfigResponse](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/Gp.Services.GetConfigResponse.html). Les informations portées par cet objet sont aussi enregistrées en variable globale de l'application sous le nom : Gp.Config.
 
 
 ``` javascript
