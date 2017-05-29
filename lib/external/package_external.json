@@ -12,6 +12,6 @@
     "es6-promise" : {
         "desc" : "This is a polyfill of the ES6 Promise.",
         "url" : "https://github.com/jakearchibald/es6-promise",
-        "version" : "3.0.2"
+        "version" : "4.1.0"
     }
 }

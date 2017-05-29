@@ -8,7 +8,7 @@
  *
  * copyright CeCILL-B
  * copyright IGN
- * @author IGN 
+ * @author IGN
  * @version ${version}
  * @date ${date}
  *
@@ -18,6 +18,5 @@
    * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and cont  ributors (Conversion to ES6 API by Jake Archibald)
    * @license   Licensed under MIT license
    *            See https://raw.githubusercontent.com/jakearchibald/es6-promise/  master/LICENSE
-   * @version   3.0.2
+   * @version   4.1.0
    */
-
