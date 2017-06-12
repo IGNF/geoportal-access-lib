@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../../../dist/GpServices-src.js"></script>
+        <script>
+
+                var options = {
+                     apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
+                     protocol : 'XHR',
+                     onSuccess : function (response) {console.log(response.elevations);},
+                     // spécifique au service
+                     positions : [{lon:1.25, lat:47.48}]
+                 };
+
+                 Gp.Services.getAltitude(options);
+
+            </script>
+    </head>
+    <body>
+        <h1>Utilisation du service Alti avec les paramètres obligatoires seulement (options par défaut pour les autres)</h1>
+        <span>(Ouvrir la console)</span>
+    </body>
+</html>

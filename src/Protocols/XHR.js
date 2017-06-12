@@ -14,7 +14,7 @@
 define([
     "Utils/LoggerByDefault",
     "Utils/Helper",
-    "promise",
+    "es6-promise",
     "require"
 ],
 function (Logger, Helper, ES6Promise, require) {
@@ -47,6 +47,7 @@ function (Logger, Helper, ES6Promise, require) {
             var logger = Logger.getLogger("XHR");
             logger.trace("[XHR::call()]");
 
+            // FIXME
             // To polyfill the global environment
             ES6Promise.polyfill();
 

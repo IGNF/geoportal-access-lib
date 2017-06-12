@@ -1,22 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="../../lib/external/require.js"></script>
+        <script src="../../dist/GpServices-src.js"></script>
         <script>
-            /* global requirejs */
-            requirejs.config({
-                'baseUrl' : "../../src/",
-                'paths': {
-                    // lib external
-                    'log4js' : "../lib/external/woodman/woodman-amd",
-                    'es6-promise': '../lib/external/es6-promise-4.1.0',
-                    // config du logger
-                    "logger-cfg" : "Utils/Logger.cfg"
-                }
-            });
-
-            requirejs(['Protocols/XHR'],
-                function (XHR) {
 
                     var options_get = {
                         url       : 'http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/alti/rest/elevation.xml?lon=3.30999&lat=49.97999&indent=false&crs=%27CRS:84%27',
@@ -32,9 +18,8 @@
                         onTimeOut : function () {}
                     };
 
-                    XHR.call(options_get);
+                    Gp.Protocols.XHR.call(options_get);
 
-            });
             </script>
     </head>
     <body>
