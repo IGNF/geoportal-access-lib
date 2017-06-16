@@ -81,7 +81,9 @@
     // | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("jshint", function () {
 
-        return gulp.src([ path.join(_.src, "**/*.js") ])
+        return gulp.src([ 
+                path.join(_.src, "**/*.js")
+             ])
             .pipe($.plumber())
             .pipe($.jshint(".jshintrc"))
             .pipe($.jshint.reporter("default"));
@@ -95,7 +97,10 @@
     // |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("jscs", function () {
 
-        return gulp.src([ path.join(_.src, "**/*.js") ])
+        return gulp.src([ 
+                path.join(_.src, "**/*.js"),
+                "gulpfile.js"
+            ])
             .pipe($.plumber())
             .pipe($.jscs());
     });
