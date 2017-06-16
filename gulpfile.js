@@ -398,26 +398,29 @@
     // | > https://www.npmjs.com/package/gulp-connect
     // | > http://localhost:9001
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    gulp.task("connect", $.connect.server({
-        root : [_.root],
-        livereload : true,
-        port : 9001
-    }));
+    gulp.task("connect", function () {
+        $.connect.server({
+            root : [_.root],
+            livereload : true,
+            port : 9001
+        
+        }) ;
+    });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // | ✓ server web test
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("server-test", ["connect"], function () {
         var open = require("open");
-        open("http:// localhost:9001/test/index.html");
+        open("http://localhost:9001/test/index.html");
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // | ✓ server web sample
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    gulp.task("server-sample", ["connect"], function () {
+    gulp.task("server-samples", ["connect"], function () {
         var open = require("open");
-        open("http:// localhost:9001/target/samples/index-samples.html");
+        open("http://localhost:9001/target/samples/index-samples.html");
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -486,7 +489,7 @@
     gulp.task("check", ["jsonlint", "jshint", "jscs"]);
     gulp.task("src", ["sources", "lib"]);
     gulp.task("sample", ["template-sample"]);
-    gulp.task("sample-cloud", ["server-sample"]);
+    gulp.task("samples-cloud", ["server-samples"]);
     gulp.task("dist", ["build-only"]); // sync
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
