@@ -111,9 +111,9 @@ define([
             *      <br/><br/>
             *      Properties availables for cadastral parcels search :<br/>
             *      "sheet", "section", and "absorbedcity".
-            * @param {Number} [options.maximumResponses] - Maximum number of responses. Default underlying service value applies (25) if not provided.
-            * @param {Boolean} [options.returnFreeForm] - Set this parameter to true if you wish to have an address returned in a single String (unstructured). If unset, default underlying service value (false) applies.
-            * @param {String} [options.srs] - Coordinates System used to expres coordinates for parameters and responses. Default underlying service value (EPSG:4326) applies.
+            * @param {Number} [options.maximumResponses = 25] - Maximum number of responses. Default underlying service value applies (25) if not provided.
+            * @param {Boolean} [options.returnFreeForm = false] - Set this parameter to true if you wish to have an address returned in a single String (unstructured). If unset, default underlying service value (false) applies.
+            * @param {String} [options.srs = EPSG:4326] - Coordinates System used to expres coordinates for parameters and responses. Default underlying service value (EPSG:4326) applies.
             * @param {Function} options.onSuccess - callback function for getting successful service response. Takes a {@link Gp.Services.GeocodeResponse} object as a parameter. Except if "rawResponse" is set to true.
             * @param {Function} [options.onFailure] - callback function for handling unsuccessful service responses (timeOut, missing rights, ...). Takes a {@link Gp.Exceptions.ErrorService} object as parameter.
             * @param {Number} [options.timeOut=0] - Number of milliseconds above which a timeOut response will be returned with onFailure callback (see above). Default value is 0 which means timeOut will not be handled.
@@ -135,15 +135,15 @@ define([
             * @method reverseGeocode
             * @param {Object} options - options for function call.
             * @param {String} options.apiKey - access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/ign/contrats}.
-            * @param {Gp.Point} options.position - Reference position where to search geographical identifiers. Its coordinates are expressed in the coordinates system given with options.srs parameter. (default is CRS:84, that means position.x corresponds to longitude and position.y corresponds to latitude)
+            * @param {Gp.Point} options.position - Reference position where to search geographical identifiers. Its coordinates are expressed in the coordinates system given with options.srs parameter. (default is CRS:84, that means position.x is the longitude and position.y the latitude)
             * @param {Object} [options.filterOptions] - Additional filters to apply to search. The following properties may be given.
             *      @param {Array.<String>} [options.filterOptions.type] - geographical identifier types to search. Values currently availables are : "PositionOfInterest" for place names, "StreetAddress" for address search, "CadastralParcel" for Cadastral parcels search. Default is "StreetAddress".
             *      @param {Gp.BBox} [options.filterOptions.bbox] - bounding box where to perform the search. Expressed in options.srs coordinates system.
             *      @param {Gp.Circle} [options.filterOptions.circle] - Circle where to perform the search. Expressed in options.srs coordinates system.
             * @param {Array.<Gp.Point>} [options.filterOptions.polygon] - Polygon where to perform the search. Expressed in options.srs coordinates system.
             * @param {Number} [options.maximumResponses] - Maximum number of responses. Default underlying service value applies (25) if not provided.
-            * @param {Boolean} [options.returnFreeForm] - Set this parameter to true if you wish to have an address returned in a single String (unstructured). If unset, default underlying service value (false) applies.
-            * @param {String} [options.srs] - Coordinates System used to expres coordinates for parameters and responses. Default is CRS:84.
+            * @param {Boolean} [options.returnFreeForm = false] - Set this parameter to true if you wish to have an address returned in a single String (unstructured). If unset, default underlying service value (false) applies.
+            * @param {String} [options.srs = CRS:84] - Coordinates System used to express coordinates for parameters and responses. Only WGS 84 geographical positioning is supported. Therefore, two values are allowed : "CRS:84" (position.x is the longitude and position.y the latitude) and "EPSG:4326" (position.x is the latitude and position.y the longitude) . Default is CRS:84.
             * @param {Function} options.onSuccess - callback function for getting successful service response. Takes a {@link Gp.Services.GeocodeResponse} object as a parameter. Except if "rawResponse" is set to true.
             * @param {Function} [options.onFailure] - callback function for handling unsuccessful service responses (timeOut, missing rights, ...). Takes a {@link Gp.Exceptions.ErrorService} object as parameter.
             * @param {Number} [options.timeOut=0] - Number of milliseconds above which a timeOut response will be returned with onFailure callback (see above). Default value is 0 which means timeOut will not be handled.
