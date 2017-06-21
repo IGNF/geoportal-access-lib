@@ -164,7 +164,7 @@
         requirejs.optimize({
             mainConfigFile : path.join(build.src,  "Config.js"),
             paths : {
-                log4js : (isDebug) ? "../lib/external/woodman/woodman-amd" : "../lib/external/empty"
+                log4js : (isDebug) ? "../../node_modules/woodman/dist/woodman-amd" : "../lib/external/empty"
             },
             baseUrl : build.src,
             optimize : mode,

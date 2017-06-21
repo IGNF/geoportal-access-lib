@@ -1,10 +1,23 @@
 ## EXTERNAL
 
-Librairies à embarquer dans le projet (orienté developpement)
-ex. RequireJS
+External libs that are not fully available on NPM registry to fit geoportal-access-lib needs.
 
-Le gestionnaire de dependances <bower> permet de télécharger les dependances
-du projet (cf. build/bower.json).
+### es6-promise : release 4.1.0 + f9a5575b (bug fix on header).
 
-Ces lib. externes ne sont utiles que pour fixer des versions lors des 
-phases de developpements particulières.
+
+/*!
+ * @overview es6-promise - a tiny implementation of Promises/A+.
+ * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contri
+butors (Conversion to ES6 API by Jake Archibald)
+ * @license   Licensed under MIT license
+ *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/mas
+ter/LICENSE
+ * @version   4.1.0+f9a5575b
+ */
+
+
+### empty.js
+
+really empty javascript file used as a substitute to woodman when building geoportal-access-lib whithout debug mode (hack).
+
+
