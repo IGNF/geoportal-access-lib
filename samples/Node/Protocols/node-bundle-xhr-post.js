@@ -2,7 +2,7 @@
 var Gp = require("../../../dist/GpServices-src.js");
 
 var options = {
-    url       : "http://localhost/proxy/php/proxy.php?url=http%3A%2F%2Fwxs.ign.fr%2Fjhyvi0fgmnuxvfv0zjzorvdn%2Fgeoportail%2Fols",
+    url       : "http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/geoportail/ols",
     method    : "POST",
     format    : "xml", // 'xml', 'json' ou null
     content   : "application/xml",

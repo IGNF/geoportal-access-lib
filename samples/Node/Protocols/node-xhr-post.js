@@ -8,7 +8,7 @@ requirejs.config({
     paths : {
         // lib external
         log4js : "../lib/external/woodman/woodman-amd",
-        'es6-promise' : "../lib/external/es6-promise-4.1.0",
+        "es6-promise" : "../lib/external/es6-promise-4.1.0",
         // config du logger
         "logger-cfg" : "Utils/Logger.cfg"
     }
@@ -17,7 +17,7 @@ requirejs.config({
 var XHR = requirejs("Protocols/XHR");
 
 var options = {
-    url       : "http://localhost/proxy/php/proxy.php?url=http%3A%2F%2Fwxs.ign.fr%2Fjhyvi0fgmnuxvfv0zjzorvdn%2Fgeoportail%2Fols",
+    url       : "http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/geoportail/ols",
     method    : "POST",
     format    : "xml", // 'xml', 'json' ou null
     content   : "application/xml",

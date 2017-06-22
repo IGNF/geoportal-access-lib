@@ -22,9 +22,7 @@
 
                 var options = {
                   serverUrl : 'http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/geoportail/ols?output=json&callback=callbackName',
-                  protocol : 'XHR', // JSONP|XHR
-                  // FIXME retrait du proxy quand les services autoriseront le Cross-domain
-                  proxyURL : 'http://localhost/proxy/php/proxy.php?url=',
+                  protocol : 'JSONP', // JSONP|XHR
                   httpMethod : 'POST', // GET|POST
                   outputFormat : '',
                   rawResponse : true,

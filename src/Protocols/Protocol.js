@@ -76,7 +76,8 @@ function (Helper, XHR, JSONP) {
             // settings par defaut
             var settings = options || {
                 method : "GET",
-                protocol : "JSONP",
+                // protocol : "JSONP",
+                protocol : "XHR",
                 timeOut : 0,
                 format : null,
                 wrap : true,
