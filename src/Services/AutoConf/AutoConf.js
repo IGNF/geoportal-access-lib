@@ -62,6 +62,12 @@ function (
          */
         this.CLASSNAME = "AutoConf";
 
+        // Autoconf default protocol remains JSONP (#see http://ignf.github.io/geoportal-access-lib/latest/jsdoc/tutorial-optimize-getconfig.html)
+        if (!options) {
+            options = {} ;
+        }
+        options.protocol = options.protocol || "JSONP" ;
+
         // appel du constructeur par heritage
         CommonService.apply(this, arguments);
 
