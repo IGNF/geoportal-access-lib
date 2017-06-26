@@ -33,7 +33,7 @@
         lib   : "target/lib",
         test  : "target/test",
         doc   : "target/doc",
-        sample : "target/samples",
+        sample : "samples",
         js    : "target/js",
         umd   : "target/umd",
         dist  : "target/dist"
@@ -324,38 +324,30 @@
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // | ✓ copy-sample
-    // | > copie des pages d"exemples
-    // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    gulp.task("copy-sample", function () {
-
-        return gulp.src([ path.join(_.sample, "**/*.html"), path.join(_.sample, "**/*.js") ])
-                .pipe(gulp.dest(build.sample))
-                .pipe($.plumber())
-                .pipe($.size());
-    });
-
-    // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // | ✓ template-sample
     // | > construction de la page principale des exemples
     // | > https:// www.npmjs.com/package/gulp-template
     // | > FIXME les dependances des exemples !
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    gulp.task("template-sample", ["copy-sample"], function () {
+    gulp.task("template-sample", function () {
 
         // var tmpl = require("gulp-template");
         var glob = require("glob");
+        var rename = require("gulp-rename") ;
 
         // uniquement les html !
         var lstSources = glob.sync("**/*.html" , {
-            cwd : build.sample , nodir : true, ignore : "index-samples.html"
+            cwd : build.sample , nodir : true, ignore : "index-samples.*"
         });
 
         console.log(lstSources);
 
-        return gulp.src(path.join(_.sample, "index-samples.html"))
+        return gulp.src(path.join(_.sample, "index-samples.tpl"))
             .pipe($.template({
                 files : lstSources
+            }))
+            .pipe(rename({
+                extname : ".html"
             }))
             .pipe(gulp.dest(build.sample));
     });
@@ -418,9 +410,10 @@
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // | ✓ server web sample
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    gulp.task("server-samples", ["connect"], function () {
+    gulp.task("server-samples", ["template-sample","connect"], function () {
         var open = require("open");
-        open("http://localhost:9001/target/samples/index-samples.html");
+        // open("http://localhost:9001/target/samples/index-samples.html");
+        open("http://localhost:9001/samples/index-samples.html");
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
