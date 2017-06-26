@@ -6,21 +6,18 @@
 
                 var options = {
                      apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
-                     protocol : 'XHR',
+                     protocol : 'JSONP',
                      onSuccess : function (response) {console.log(response.locations);},
                      // spécifique au service
-                     position : {
-                        x : 2.35,
-                        y : 48.87
-                     }
+                     location : "2 avenue de paris, 94166 Saint-Mandée"
                  };
 
-                 Gp.Services.reverseGeocode(options);
+                 Gp.Services.geocode(options);
 
             </script>
     </head>
     <body>
-        <h1>Utilisation du service de geocodage inverse avec les parametres obligatoires seulement (options par defaut pour les autres)</h1>
+        <h1>Utilisation du service de geocodage avec les parametres obligatoires seulement (options par defaut pour les autres)</h1>
         <span>(Ouvrir la console)</span>
     </body>
 </html>

@@ -1,7 +1,6 @@
-
-
 <!DOCTYPE html>
 <html>
+
     <head>
         <script src="../../../node_modules/requirejs/require.js"></script>
         <script>
@@ -20,30 +19,34 @@
             requirejs(["Services/Geocode/ReverseGeocode"],
             function (ReverseGeocode) {
 
+                // cas de reponse OK
                 var options = {
                    apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
-                   // rawResponse : true,
+                   protocol : 'JSONP', // JSONP|XHR
+                   httpMethod : 'POST', // GET|POST
+                   rawResponse : true,
                    onSuccess : function (response) {console.log(response);},
                    onFailure : function (error) {console.log(error);},
                    // spécifique au service
                    position: {
-                        x : 48,
-                        y : 2
-                   },
-                   srs : "EPSG:4326",
-                   filterOptions :{
-                       type : ['PositionOfInterest']
-                   }
+                         x : 48,
+                         y : 2
+                    },
+                    srs : "EPSG:4326",
+                    filterOptions :{
+                        type : ['PositionOfInterest']
+                    }
                 };
 
                 var obj = new ReverseGeocode(options);
                 obj.call();
-
             });
-            </script>
+        </script>
     </head>
+
     <body>
         <h1>Utilisation des modules natifs AMD</h1>
         <span>(Ouvrir la console)</span>
     </body>
+
 </html>

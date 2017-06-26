@@ -111,7 +111,8 @@ function (
          * @type {Object}
          */
         this.options = {
-            protocol : "JSONP",
+            // protocol : "JSONP",
+            protocol : "XHR",
             proxyURL : "",
             // callbackName : "",
             callbackSuffix : null,
@@ -205,7 +206,8 @@ function (
         }
 
         // gestion du protocole
-        this.options.protocol = ( typeof options.protocol === "string" ) ? options.protocol.toUpperCase() : "JSONP";
+        // this.options.protocol = ( typeof options.protocol === "string" ) ? options.protocol.toUpperCase() : "JSONP";
+        this.options.protocol = ( typeof options.protocol === "string" ) ? options.protocol.toUpperCase() : "XHR";
 
         switch (this.options.protocol) {
             case "JSONP":

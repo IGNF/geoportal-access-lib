@@ -22,8 +22,6 @@
                       apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
                       httpMethod : 'POST',
                       protocol : 'XHR',
-                      // FIXME utilisation d'un proxy, en attente des dev. des services (CORS et headers)
-                      proxyURL : "http://localhost/proxy/php/proxy.php?url=",
                       onSuccess : function (response) {console.log(response.elevations);},
                       onFailure : function (error) {console.log(error.message, error.status);},
                       // spécifique au service

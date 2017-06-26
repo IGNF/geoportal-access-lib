@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="../../../dist/GpServices.js"></script>
+        <script src="../../../dist/GpServices-src.js"></script>
         <script>
 
                 var options = {
                      apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
-                     protocol : 'XHR',
+                     protocol : 'JSONP',
                      onSuccess : function (response) {console.log(response);},
                      // options spécifiques au service
                      position : {
@@ -21,7 +21,7 @@
             </script>
     </head>
     <body>
-        <h1>Utilisation du service de calcul d'isochrones avec les parametres obligatoires seulement (options par defaut pour les autres)</h1>
+        <h1>Utilisation du service de calcul d'isochrones avec le protocole JSONP</h1>
         <span>(Ouvrir la console)</span>
     </body>
 </html>

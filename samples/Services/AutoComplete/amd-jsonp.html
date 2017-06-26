@@ -1,6 +1,7 @@
+
+
 <!DOCTYPE html>
 <html>
-
     <head>
         <script src="../../../node_modules/requirejs/require.js"></script>
         <script>
@@ -16,38 +17,27 @@
                 }
             });
 
-            requirejs(["Services/Geocode/ReverseGeocode"],
-            function (ReverseGeocode) {
+            requirejs(["Services/AutoComplete/AutoComplete"],
+            function (AutoComplete) {
 
-                // cas de reponse OK
-                var options = {
+              var options = {
                    apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
-                   protocol : 'XHR', // JSONP|XHR
-                   proxyURL : 'http://localhost/proxy/php/proxy.php?url=',
-                   httpMethod : 'POST', // GET|POST
+                   protocol : 'JSONP',
                    rawResponse : true,
                    onSuccess : function (response) {console.log(response);},
                    onFailure : function (error) {console.log(error);},
                    // spécifique au service
-                   position: {
-                         x : 48,
-                         y : 2
-                    },
-                    srs : "EPSG:4326",
-                    filterOptions :{
-                        type : ['PositionOfInterest']
-                    }
-                };
+                   text : "Brie-Co",
+               };
 
-                var obj = new ReverseGeocode(options);
-                obj.call();
+               var obj = new AutoComplete(options);
+               obj.call();
+
             });
-        </script>
+            </script>
     </head>
-
     <body>
         <h1>Utilisation des modules natifs AMD</h1>
         <span>(Ouvrir la console)</span>
     </body>
-
 </html>

@@ -337,7 +337,7 @@
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // | ✓ template-sample
-    // | > construction de la page principale des exemples leaflet ou ol3
+    // | > construction de la page principale des exemples
     // | > https:// www.npmjs.com/package/gulp-template
     // | > FIXME les dependances des exemples !
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
