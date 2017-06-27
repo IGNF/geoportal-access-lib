@@ -18,7 +18,7 @@ var Gp = requirejs("Gp");
 
 var options = {
     apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
-    protocol : 'XHR',
+    // protocol : 'XHR',
     onSuccess : function (response) {
         console.log(response);
     }

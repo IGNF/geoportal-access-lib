@@ -20,7 +20,6 @@ var options = {
     apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
     // httpMethod : 'GET',
     // outputFormat : 'json',
-    protocol : 'XHR',
     onSuccess : function (response) {
         console.log(response);
     },

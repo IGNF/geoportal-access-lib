@@ -21,6 +21,7 @@ define([], function () {
         PARAM_TYPE  : "Wrong type(s) for parameter(s) '%var%'",
         PARAM_FORMAT : "Parameter(s) '%var%' not correctly formatted",
         PARAM_NOT_SUPPORT : "Value(s) for parameter(s) '%var%' not supported",
+        PARAM_NOT_SUPPORT_NODEJS : "Value(s) for parameter(s) '%var%' not supported to NodeJS",
         PARAM_UNKNOWN : "Value(s) for parameter(s) '%var%' unknown",
 
         // Services
