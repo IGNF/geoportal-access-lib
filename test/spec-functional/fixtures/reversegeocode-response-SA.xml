@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XLS version="1.2" xmlns="http://www.opengis.net/xls"
+  xmlns:gml="http://www.opengis.net/gml"
+  xmlns:xls="http://www.opengis.net/xls"
+  xmlns:xlsext="http://www.opengis.net/xlsext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://wxs.ign.fr/schemas/olsAll.xsd">
+  <ResponseHeader/>
+  <Response requestID="c67e1b1b-45a3-4adc-94db-2fa7e005f63e" version="1.2">
+    <ReverseGeocodeResponse>
+      <ReverseGeocodedLocation>
+        <gml:Point>
+          <gml:pos>48.861328 2.323855</gml:pos>
+        </gml:Point>
+        <Address countryCode="StreetAddress">
+          <StreetAddress>
+            <Building number="8"/>
+            <Street>qu anatole france</Street>
+          </StreetAddress>
+          <Place type="Municipality">Paris</Place>
+          <Place type="Qualite">Plaque adresse</Place>
+          <Place type="ID">ADRNIVX_0000000270766110</Place>
+          <Place type="Departement">75</Place>
+          <Place type="Bbox">2.323855;48.861328;2.323855;48.861328</Place>
+          <Place type="Commune">Paris</Place>
+          <Place type="INSEE">75107</Place>
+          <Place type="Territoire">FXX</Place>
+          <Place type="ID_TR">TRONROUT0000000000191362</Place>
+          <PostalCode>75007</PostalCode>
+        </Address>
+        <xlsext:ExtendedGeocodeMatchCode>Street number</xlsext:ExtendedGeocodeMatchCode>
+        <SearchCentreDistance value="34.39"/>
+      </ReverseGeocodedLocation>
+      <ReverseGeocodedLocation>
+        <gml:Point>
+          <gml:pos>48.860957 2.323900</gml:pos>
+        </gml:Point>
+        <Address countryCode="StreetAddress">
+          <StreetAddress>
+            <Building number="2"/>
+            <Street>r de solferino</Street>
+          </StreetAddress>
+          <Place type="Municipality">Paris</Place>
+          <Place type="Qualite">Plaque adresse</Place>
+          <Place type="ID">ADRNIVX_0000000270766828</Place>
+          <Place type="Departement">75</Place>
+          <Place type="Bbox">2.323901;48.860957;2.323901;48.860957</Place>
+          <Place type="Commune">Paris</Place>
+          <Place type="INSEE">75107</Place>
+          <Place type="Territoire">FXX</Place>
+          <Place type="ID_TR">TRONROUT0000000000191359</Place>
+          <PostalCode>75007</PostalCode>
+        </Address>
+        <xlsext:ExtendedGeocodeMatchCode>Street number</xlsext:ExtendedGeocodeMatchCode>
+        <SearchCentreDistance value="36.58"/>
+      </ReverseGeocodedLocation>
+      <ReverseGeocodedLocation>
+        <gml:Point>
+          <gml:pos>48.860856 2.323917</gml:pos>
+        </gml:Point>
+        <Address countryCode="StreetAddress">
+          <StreetAddress>
+            <Building number="2 BIS"/>
+            <Street>r de solferino</Street>
+          </StreetAddress>
+          <Place type="Municipality">Paris</Place>
+          <Place type="Qualite">Tronçon</Place>
+          <Place type="ID">ADRNIVX_0000000270766829</Place>
+          <Place type="Departement">75</Place>
+          <Place type="Bbox">2.323917;48.860856;2.323917;48.860856</Place>
+          <Place type="Commune">Paris</Place>
+          <Place type="INSEE">75107</Place>
+          <Place type="Territoire">FXX</Place>
+          <Place type="ID_TR">TRONROUT0000000000191359</Place>
+          <PostalCode>75007</PostalCode>
+        </Address>
+        <xlsext:ExtendedGeocodeMatchCode>Street number</xlsext:ExtendedGeocodeMatchCode>
+        <SearchCentreDistance value="44.24"/>
+      </ReverseGeocodedLocation>
+      <ReverseGeocodedLocation>
+        <gml:Point>
+          <gml:pos>48.861190 2.323632</gml:pos>
+        </gml:Point>
+        <Address countryCode="StreetAddress">
+          <StreetAddress>
+            <Building number="11"/>
+            <Street>qu anatole france</Street>
+          </StreetAddress>
+          <Place type="Municipality">Paris</Place>
+          <Place type="Qualite">Plaque adresse</Place>
+          <Place type="ID">ADRNIVX_0000000270766111</Place>
+          <Place type="Departement">75</Place>
+          <Place type="Bbox">2.323632;48.861190;2.323632;48.861190</Place>
+          <Place type="Commune">Paris</Place>
+          <Place type="INSEE">75107</Place>
+          <Place type="Territoire">FXX</Place>
+          <Place type="ID_TR">TRONROUT0000000000191362</Place>
+          <PostalCode>75007</PostalCode>
+        </Address>
+        <xlsext:ExtendedGeocodeMatchCode>Street number</xlsext:ExtendedGeocodeMatchCode>
+        <SearchCentreDistance value="46.59"/>
+      </ReverseGeocodedLocation>
+    </ReverseGeocodeResponse>
+  </Response>
+</XLS>
