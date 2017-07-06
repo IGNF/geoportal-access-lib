@@ -2,8 +2,7 @@
 
 External libs that are not fully available on NPM registry to fit geoportal-access-lib needs.
 
-### es6-promise : release 4.1.0 + f9a5575b (bug fix on header).
-
+### es6-promise : release 4.1.0 + f9a5575b + Modifying header declaration.
 
 /*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
