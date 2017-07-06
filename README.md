@@ -8,7 +8,7 @@
 
 La bibliothèque d’accès aux ressources de la plateforme Géoportail est une bibliothèque de fonctions javascript permettant d'accéder aux ressources délivrées par les services web du Géoportail.
 
-Elle permet plus particulièrement d'effecturer les opérations suivantes utilisant les données de l'IGN :
+Elle permet plus particulièrement d'effectuer les opérations suivantes utilisant les données de l'IGN :
 
 * [Géocoder des adresses, toponymes et parcelles cadastrales](#geocode)
 
@@ -27,7 +27,7 @@ Elle permet plus particulièrement d'effecturer les opérations suivantes utilis
 
 ## Mise en oeuvre
 
-Vous pouvez récupérer la bibliothèque d'accès soit en la téléchargeant directement, soit en utilisant le gestionnaire de dépendances javascript NPM.
+Vous pouvez récupérer la bibliothèque d'accès soit en la [téléchargeant directement](#t%C3%A9lC3%A9chargement-direct), soit en utilisant le [gestionnaire de dépendances javascript NPM](#r%C3%A9cup%C3%A9ration-avec-NPM).
 
 ### Téléchargement direct
 
@@ -38,7 +38,7 @@ Vous pouvez récupérer ici la version compilée et autonome de la bibliothèque
 
 La bibliothèque d'accès est aussi disponible dans les dépôts [NPM](https://www.npmjs.com/package/geoportal-access-lib).
 
-Prérequis : Node (version testée : 4.2) et npm (version testée : 3.5).
+Prérequis : [NodeJS](https://nodejs.org/en/) et [npm](https://www.npmjs.com/) installés.
 
 ```
 npm install geoportal-access-lib
