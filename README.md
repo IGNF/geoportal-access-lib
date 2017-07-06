@@ -1,7 +1,7 @@
 # Bibliothèque d'accès aux ressources du Géoportail
 
 [![Build Status](https://travis-ci.org/IGNF/geoportal-access-lib.png?branch=master)](https://travis-ci.org/IGNF/geoportal-access-lib)
-[![GitHub release](https://img.shields.io/badge/pre-%2drelease-1.0.0-%2dbeta6-brightgreen.svg)](https://img.shields.io/badge/release-1.0.0%20beta3.svg)
+[![GitHub release](https://img.shields.io/badge/pre-%2drelease-1.0.0-%2dbeta3-brightgreen.svg)](https://img.shields.io/badge/release-1.0.0%20beta3.svg)
 <!-- FIXME Ce badge dynamique est à mettre en place..., en attente d'une release
 [![GitHub release](https://img.shields.io/github/release/IGNF/geoportal-access-lib.svg)](https://github.com/IGNF/geoportal-access-lib)
 -->
