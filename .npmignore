@@ -3,6 +3,7 @@
 /_site
 /src
 /test
+/samples
 /utils
 /target
 .*
