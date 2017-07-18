@@ -28,7 +28,7 @@ Vous pouvez récupérer la bibliothèque d'accès soit en la [téléchargeant di
 
 ### Téléchargement direct
 
-Vous pouvez récupérer ici la version compilée et autonome de la bibliothèque d'accès : [GpServices.js](https://github.com/ignf/geoportal-access-lib/releases/download/v1.0.0-beta.3/GpServices.js).
+Vous pouvez récupérer ici la version compilée et autonome de la bibliothèque d'accès : [GpServices.js](https://github.com/IGNF/geoportal-access-lib/releases/latest), dans la partie "Downloads".
 
 
 ### Récupération avec NPM
