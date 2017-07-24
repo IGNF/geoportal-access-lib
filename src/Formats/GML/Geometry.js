@@ -61,7 +61,7 @@ define(["Utils/LoggerByDefault"], function (Logger) {
             throw new Error("Data is not defined !");
         }
 
-        if (Object.keys(this.options.data).length === 0) {
+        if ( typeof this.options.data === "object" && Object.keys(this.options.data).length === 0) {
             throw new Error("Data is empty !");
         }
     }

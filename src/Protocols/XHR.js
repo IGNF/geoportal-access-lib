@@ -152,7 +152,8 @@ function (Logger, Helper, ES6Promise, require) {
                     // traitement du corps de la requête
                     var corps = (options.method === "POST" || options.method === "PUT") ? true : false;
 
-                    if (options.data /* && typeof options.data === "object" */ && Object.keys(options.data).length && !corps) {
+                    // seulement si options.data n'est pas vide (peut être un objet ou une chaine de caractères)
+                    if ( options.data && ( ( typeof options.data === "object" && Object.keys(options.data).length ) || ( typeof options.data === "string" && options.data.length ) ) && !corps ) {
                         options.url = Helper.normalyzeUrl(options.url, options.data);
                     }
 
