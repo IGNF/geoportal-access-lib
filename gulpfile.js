@@ -441,7 +441,6 @@
             build.umd + "/**",
             build.doc + "/**",
             build.src + "/**",
-            // build.sample + "/**",
             build.lib + "/**"
         ]);
     });
