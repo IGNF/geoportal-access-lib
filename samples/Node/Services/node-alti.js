@@ -18,9 +18,8 @@ var Gp = requirejs("Gp");
 
 var options = {
     apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
-    // httpMethod : 'GET',
-    // outputFormat : 'json',
-    protocol : 'XHR',
+    httpMethod : 'GET',
+    outputFormat : 'json',
     onSuccess : function (response) {
         console.log(response);
     },

@@ -41,7 +41,8 @@ function (
      *
      * @param {String} [options.protocol] - Le protocole à utiliser pour récupérer les informations du service :
      *      peut valoir 'JSONP' ou 'XHR'.
-     *      Par défaut, c'est le protocole JSONP qui sera utilisé.
+     *      Par défaut, c'est le protocole XHR qui sera utilisé.
+     *      Attention, le protocole JSONP n'est pas valide dans un environnement NodeJS (Utilisation du mode XHR).
      *
      * @param {String} [options.proxyURL] - Le proxy à utiliser pour pallier au problème de cross-domain dans le cas d'une requête XHR.
      *      Utile si le paramètre 'protocol' vaut 'XHR', il ne sera pas pris en compte si protocol vaut JSONP.
@@ -215,6 +216,12 @@ function (
                 break;
             default:
                 throw new Error(_.getMessage("PARAM_UNKNOWN", "protocol"));
+        }
+
+        // on determine l'environnement d'execution : browser ou non ?
+        // et on lance une exception sur l'utilisation du protocole JSONP pour nodeJS...
+        if ( typeof window === "undefined" && this.options.protocol === "JSONP") {
+            throw new Error(_.getMessage("PARAM_NOT_SUPPORT_NODEJS", "protocol=JSONP (instead use XHR)"));
         }
 
         // le protocole JSONP ne fonctionne qu'en GET.

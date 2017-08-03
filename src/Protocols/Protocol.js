@@ -87,11 +87,19 @@ function (Helper, XHR, JSONP) {
                 callbackSuffix : null
             };
 
+            // on determine l'environnement d'execution : browser ou non ?
+            // et on stoppe pour nodeJS... sur un protocole JSONP !
+            if ( typeof window === "undefined" && options.protocol === "JSONP") {
+                console.log("Value(s) for parameter(s) 'protocol=JSONP (instead use XHR)' not supported to NodeJS");
+                return;
+            }
+
             if ( options.protocol === "XHR" || options.format === "json" ) {
                 settings.wrap = false;
             } else if ( options.protocol === "JSONP" && options.format === "xml" ) {
                 settings.wrap = true;
             }
+
             settings.callback = (options.protocol == "JSONP") ? null : null; // FIXME non géré !?
             settings.output   = settings.wrap ? "json" : null;
 

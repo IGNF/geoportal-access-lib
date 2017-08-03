@@ -14,24 +14,18 @@ requirejs.config({
     }
 });
 
-var Alti = requirejs("Services/Alti/Alti");
+var Protocol = requirejs("Protocols/Protocol");
 
 var options = {
-    apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
-    // httpMethod : 'GET',
-    // outputFormat : 'json',
-    onSuccess : function (response) {
-        console.log(response);
+    url        : "http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/alti/rest/elevation.json?lon=3.30&lat=49.97",
+    method     : "GET",
+    protocol   : 'XHR',
+    onResponse : function (response) {
+        console.log("Reponse :", response);
     },
-    onFailure : function (error) {
-        console.log(eror);
-    },
-    // spécifique au service
-    positions : [{
-        lon : 1.25,
-        lat : 47.48
-    }]
+    onFailure  : function (error) {
+        console.log("Erreur :", error);
+    }
 };
 
-var obj = new Alti(options);
-obj.call();
+Protocol.send(options);
