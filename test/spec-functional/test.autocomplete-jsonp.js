@@ -1,5 +1,5 @@
 /**
- * FIXME avec le JSONP, l'erreur est au niveau du html (execution de la balise script), 
+ * FIXME avec le JSONP, l'erreur est au niveau du html (execution de la balise script),
  * et il est difficile de la levée..., afin de la faire apparaitre dans les tests...
  */
 
@@ -20,6 +20,8 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 // options par defaut (à surcharger)
                 var options = {
                     apiKey: myKey,
+                    protocol: 'JSONP',
+                    callbackSuffix: "",
                     onSuccess: function (response) {
                         console.log(response);
                     },
@@ -84,6 +86,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                     apiKey: myKey,
                     serverUrl: null,
                     protocol: 'JSONP', // à surcharger : JSONP|XHR
+                    callbackSuffix: "",
                     proxyURL: null,
                     httpMethod: 'GET', // à surcharger : GET|POST
                     timeOut: 10000,
@@ -101,7 +104,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
 
                 it("Appel du service en mode 'JSONP'" +
                     " pour un format de sortie en 'json'", function (done) {
-                        
+
                     // FIXME ne pas ajouter output=json sur ce service sinon...
                     // description du test
                     // requête GET du service en json
@@ -116,7 +119,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                         should.exist(response.suggestedLocations);
                         expect(response.suggestedLocations).to.be.an("Array");
                         expect(response.suggestedLocations).to.have.length(1);
-                        
+
                         expect(response.suggestedLocations[0]).to.have.property("classification");
                         expect(response.suggestedLocations[0]).to.have.property("commune", "Brie-Comte-Robert");
                         expect(response.suggestedLocations[0]).to.have.property("fullText", "77170 Brie-Comte-Robert");

@@ -20,6 +20,8 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 // options par defaut (à surcharger)
                 var options = {
                     apiKey: myKey,
+                    protocol: 'JSONP',
+                    callbackSuffix: "",
                     onSuccess: function (response) {
                         console.log(response);
                     },
@@ -56,9 +58,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                         expect(response.geometry).to.be.an("object");
                         expect(response).to.have.deep.property("geometry.coordinates");
                         expect(response.geometry.coordinates).to.be.an("array");
-                        expect(response.geometry.coordinates).to.have.length(517);
-                        expect(response.geometry.coordinates[0]).to.be.an("array");
-                        expect(response.geometry.coordinates[0]).to.have.length(2);
+                        expect(response.geometry.coordinates[0]).to.have.length(517);
 
                         expect(response).to.have.property("message");
                         expect(response).to.have.property("srs");
@@ -88,6 +88,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                         apiKey: myKey,
                         serverUrl: null,
                         protocol: 'JSONP', // à surcharger : JSONP|XHR
+                        callbackSuffix: "",
                         proxyURL: null,
                         httpMethod: 'GET', // à surcharger : GET|POST
                         timeOut: 10000000000,

@@ -9,8 +9,8 @@
     var fs = require("fs");
 
     // load plugins
-    var $ = gulpLoadPlugins({ 
-        pattern : "*", 
+    var $ = gulpLoadPlugins({
+        pattern : "*",
         lazy : true
     });
 
@@ -81,7 +81,7 @@
     // | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("jshint", function () {
 
-        return gulp.src([ 
+        return gulp.src([
                 path.join(_.src, "**/*.js")
              ])
             .pipe($.plumber())
@@ -97,7 +97,7 @@
     // |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("jscs", function () {
 
-        return gulp.src([ 
+        return gulp.src([
                 path.join(_.src, "**/*.js"),
                 "gulpfile.js"
             ])
@@ -403,7 +403,7 @@
             root : [_.root],
             livereload : true,
             port : 9001
-        
+
         }) ;
     });
 

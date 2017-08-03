@@ -20,6 +20,8 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 // options par defaut (à surcharger)
                 var options = {
                     apiKey: myKey,
+                    protocol: 'JSONP',
+                    callbackSuffix: "",
                     onSuccess: function (response) {
                         console.log(response);
                     },
@@ -56,7 +58,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                         done(error);
                     };
                     Gp.Services.getAltitude(options);
-                })
+                });
             });
 
             describe("Test sur les options du Protocole", function (done) {
@@ -69,6 +71,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                         apiKey: myKey,
                         serverUrl: null,
                         protocol: 'JSONP', // à surcharger : JSONP|XHR
+                        callbackSuffix: "",
                         proxyURL: null,
                         httpMethod: 'GET', // à surcharger : GET|POST
                         timeOut: 10000,

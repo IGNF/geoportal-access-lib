@@ -22,6 +22,7 @@ define([
     describe("-- Tests fonctionnels du Service de Calcul d’isochrones / isodistances : OK --", function () {
 
         var myKey = (mock) ? "CLE" : "jhyvi0fgmnuxvfv0zjzorvdn";
+        var version = Gp.servicesVersion;
 
         describe('Service.processIsoCurve : SUCCESS', function () {
 
@@ -81,7 +82,7 @@ define([
                 it("Appel du service en mode 'XHR' avec la méthode 'GET' au format de sortie 'json'", function (done) {
                     // description du test
                     //
-                    var urlGet  = "http://wxs.ign.fr/" + myKey + "/isochrone/isochrone.json?location=2.3242664298058053,48.86118017324745&smoothing=false&holes=false&reverse=false&method=time&time=200&graphName=Voiture&exclusions=Toll;Bridge;Tunnel&srs=EPSG:4326";
+                    var urlGet  = "http://wxs.ign.fr/" + myKey + "/isochrone/isochrone.json?gp-access-lib=" + version + "&location=2.3242664298058053,48.86118017324745&smoothing=false&holes=false&reverse=false&method=time&time=200&graphName=Voiture&exclusions=Toll;Bridge;Tunnel&srs=EPSG:4326";
                     var okResponseJson = [200, { 'Content-type': 'application/json' }, processisocurveResponseJson];
                     if (mock) { server.respondWith('GET', urlGet, okResponseJson); }
 
@@ -104,7 +105,7 @@ define([
                 it("Appel du service en mode 'XHR' avec la méthode 'GET' au format de sortie 'xml'", function (done) {
                     // description du test
                     //
-                    var urlXGet  = "http://wxs.ign.fr/" + myKey + "/isochrone/isochrone.xml?location=2.3242664298058053,48.86118017324745&smoothing=false&holes=false&reverse=false&method=time&time=200&graphName=Voiture&exclusions=Toll;Bridge;Tunnel&srs=EPSG:4326";
+                    var urlXGet  = "http://wxs.ign.fr/" + myKey + "/isochrone/isochrone.xml?gp-access-lib=" + version + "&location=2.3242664298058053,48.86118017324745&smoothing=false&holes=false&reverse=false&method=time&time=200&graphName=Voiture&exclusions=Toll;Bridge;Tunnel&srs=EPSG:4326";
                     var okResponseXml = [200, { 'Content-type': 'application/xml' }, processisocurveResponseXml];
                     if (mock) { server.respondWith('GET', urlXGet, okResponseXml); }
 
@@ -127,7 +128,7 @@ define([
                 it("Appel du service en mode 'XHR' avec la méthode 'POST' au format de sortie 'json'", function (done) {
                     // description du test
                     //
-                    var urlPost = "http://wxs.ign.fr/" + myKey + "/isochrone/isochrone.json";
+                    var urlPost = "http://wxs.ign.fr/" + myKey + "/isochrone/isochrone.json?gp-access-lib=" + version;
                     var okResponseJson = [200, { 'Content-type': 'application/json' }, processisocurveResponseJson];
                     if (mock) { server.respondWith('POST', urlPost, okResponseJson); }
 
@@ -150,7 +151,7 @@ define([
                 it("Appel du service en mode 'XHR' avec la méthode 'POST' au format de sortie 'xml'", function (done) {
                     // description du test
                     //
-                    var urlXPost = "http://wxs.ign.fr/" + myKey + "/isochrone/isochrone.xml";
+                    var urlXPost = "http://wxs.ign.fr/" + myKey + "/isochrone/isochrone.xml?gp-access-lib=" + version;
                     var okResponseXml = [200, { 'Content-type': 'application/xml' }, processisocurveResponseXml];
                     if (mock) { server.respondWith('POST', urlXPost, okResponseXml); }
 

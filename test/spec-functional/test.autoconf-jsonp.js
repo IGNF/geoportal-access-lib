@@ -1,5 +1,5 @@
 /**
- * FIXME avec le JSONP, l'erreur est au niveau du html (execution de la balise script), 
+ * FIXME avec le JSONP, l'erreur est au niveau du html (execution de la balise script),
  * et il est difficile de la levée..., afin de la faire apparaitre dans les tests...
  */
 
@@ -31,6 +31,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 // options par defaut (à surcharger)
                 var options = {
                     apiKey: myKey,
+                    callbackSuffix: "",
                     onSuccess: function (response) {
                         console.log(response);
                     },
@@ -45,7 +46,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                     if (mock) { options.serverUrl = 'spec-functional/fixtures/jsonp/callback-autoconf-xml'; }
                     options.onSuccess = function (response) {
                         functionAssert(response);
-                            done();
+                        done();
                     };
                     options.onFailure = function (error) {
                         console.log(error);
@@ -67,6 +68,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                     apiKey: myKey,
                     serverUrl: null,
                     protocol: 'JSONP', // à surcharger : JSONP|XHR
+                    callbackSuffix: "",
                     proxyURL: null,
                     httpMethod: 'GET', // à surcharger : GET|POST
                     timeOut: 10000000000,

@@ -1,5 +1,5 @@
 /**
- * FIXME avec le JSONP, l'erreur est au niveau du html (execution de la balise script), 
+ * FIXME avec le JSONP, l'erreur est au niveau du html (execution de la balise script),
  * et il est difficile de la levée..., afin de la faire apparaitre dans les tests...
  */
 
@@ -20,6 +20,8 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 // options par defaut (à surcharger)
                 var options = {
                     apiKey: myKey,
+                    protocol: 'JSONP',
+                    callbackSuffix: "",
                     onSuccess: function (response) {
                         console.log(response);
                     },
@@ -33,14 +35,14 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 it("paramètres apiKey, onSuccess, onFailure et location", function (done) {
                     // description du test
                     // requête GET du service en XML (param xls avec la requête XML encodée)
-                    // 
+                    //
                     if (mock) { options.serverUrl = 'spec-functional/fixtures/jsonp/callback-geocode-xml'; }
                     options.onSuccess = function (response) {
                         console.log(response);
 
                         should.exist(response.locations);
                         expect(response.locations).to.be.an("Array");
-                        expect(response.locations).to.have.length(25);
+                        expect(response.locations).to.have.length(1);
                         expect(response.locations[0]).to.have.property("position");
                         expect(response.locations[0].position).to.be.an("object");
                         expect(response.locations[0]).to.have.deep.property("position.x");
@@ -77,13 +79,13 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             });
 
             describe("Test sur les options du Protocole", function (done) {
-                
+
                 // fonction contenant les tests de la reponse
                 var functionAssert = function (response) {
                     console.log(response);
                     should.exist(response.locations);
                     expect(response.locations).to.be.an("Array");
-                    expect(response.locations).to.have.length(25);
+                    expect(response.locations).to.have.length(1);
                     expect(response.locations[0]).to.have.property("position");
                     expect(response.locations[0].position).to.be.an("object");
                     expect(response.locations[0]).to.have.deep.property("position.x");
@@ -94,12 +96,13 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                     expect(response.locations[0]).to.have.property("placeAttributes");
                     expect(response.locations[0].placeAttributes).to.be.an("object");
                 };
-                
+
                 // options par defaut (à surcharger)
                 var options = {
                     apiKey: myKey,
                     serverUrl: null,
                     protocol: 'JSONP', // à surcharger : JSONP|XHR
+                    callbackSuffix: "",
                     proxyURL: null,
                     httpMethod: 'GET', // à surcharger : GET|POST
                     timeOut: 10000000000,
@@ -107,7 +110,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                     onSuccess: null, // à surcharge
                     onFailure: null, // à surcharge
                     // spécifique au service
-                    location: "Saint-Mandée", 
+                    location: "Saint-Mandé",
                     // location: "2 avenue de paris, 94166 Saint-Mandée",
                     returnFreeForm: false,
                     filterOptions: {

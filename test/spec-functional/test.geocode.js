@@ -12,8 +12,8 @@ define([
     'text!../../test/spec-functional/fixtures/geocode-request.xml'
 ],
     function (
-        Gp, chai, sinon, 
-        geocodeResponse, geocodeResponseSA, geocodeResponsePOI, 
+        Gp, chai, sinon,
+        geocodeResponse, geocodeResponseSA, geocodeResponsePOI,
         geocodeResponseParcel, geocodeResponseSA_POI,
         geocodeResponseStructuredLocation, geocodeResponseFreeform, geocodeRequest
     ) {
@@ -25,6 +25,8 @@ define([
         describe("-- Tests fonctionnels du Service de Geocodage direct : OK --", function () {
 
             var myKey = (mock) ? "CLE" : "jhyvi0fgmnuxvfv0zjzorvdn";
+            var version = Gp.servicesVersion;
+
             var xhr, requests;
             var options;
 
@@ -78,7 +80,7 @@ define([
 
                     it("Appel du service en mode 'XHR' avec la méthode 'GET' ('OLS')", function (done) {
                         // description du test : encodage de la requête xml dans l'url
-                        
+
                         // FIXME renvoie un 404 !
                         // le param 'requestID' de la lib WPS n'est pas parametrable dans l'API.
                         // De plus, il est calculé à la volé !
@@ -116,7 +118,7 @@ define([
 
                     it("Appel du service en mode 'XHR' avec la méthode 'POST' ('OLS')", function (done) {
                         // description du test
-                        
+
                         options.protocol = 'XHR';
                         options.httpMethod = 'POST';
                         options.onSuccess = function (response) {
@@ -194,10 +196,10 @@ define([
                         it("location dite 'structurée' : objet", function (done) {
                             // description du test : envoi d'une requête xml avec une adresse structurée, en POST
 
-                            options.location = { 
-                                number: 2, 
-                                street: "avenue de paris", 
-                                city: "Saint-Mandé", 
+                            options.location = {
+                                number: 2,
+                                street: "avenue de paris",
+                                city: "Saint-Mandé",
                                 postalCode: 94166
                             };
                             options.onSuccess = function (response) {
@@ -398,11 +400,11 @@ define([
                                 // on cherche des résultats de type "StreetAddress"
 
                                 options.filterOptions = {
-                                    bbox : { 
-                                        left: 2.35, 
-                                        right : 2.47, 
-                                        top : 48.86, 
-                                        bottom : 48.80 
+                                    bbox : {
+                                        left: 2.35,
+                                        right : 2.47,
+                                        top : 48.86,
+                                        bottom : 48.80
                                     }
                                 };
                                 options.location = "Saint-Mandé";
@@ -619,7 +621,7 @@ define([
                             })
 
                             describe("TODO filtres géométriques ?", function() {
-                                
+
                             })
 
                         });
@@ -632,10 +634,7 @@ define([
 
                             options.rawResponse = true;
                             options.onSuccess = function (response) {
-                                console.log(response);
                                 should.exist(response);
-                                should.exist(response.documentElement);
-                                expect(response.documentElement).to.have.property("tagName", "XLS");
                                 done();
                             };
                             options.onFailure = function (error) {

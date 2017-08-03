@@ -11,6 +11,7 @@ define([
         describe("-- Tests fonctionnels du Service Altimétrique : OK --", function () {
 
             var myKey = (mock) ? "CLE" : "jhyvi0fgmnuxvfv0zjzorvdn";
+            var version = Gp.servicesVersion;
 
             describe('Service.getAltitude : SUCCESS', function () {
 
@@ -37,8 +38,8 @@ define([
                     });
 
                     // reponse du service
-                    var okResponseXml = '<elevations><elevation><lon>1.25</lon><lat>47.48</lat><z>103.38</z><acc>2.5</acc></elevation></elevations>';
-                    var okResponseJson = '{"elevations": [{"lon": 1.25,"lat": 47.48,"z": 103.38,"acc": 2.5}]}';
+                    var okResponseXml = '<elevations><elevation><lon>1.25</lon><lat>47.48</lat><z>103.55</z><acc>2.5</acc></elevation></elevations>';
+                    var okResponseJson = '{"elevations": [{"lon": 1.25,"lat": 47.48,"z": 103.55,"acc": 2.5}]}';
 
                     // fonction contenant les tests de la reponse
                     var functionAssert = function (response) {
@@ -50,7 +51,7 @@ define([
                         expect(response.elevations[0]).to.have.property("lat");
                         expect(response.elevations[0]).to.have.property("z");
                         expect(response.elevations[0]).to.have.property("acc");
-                        expect(response.elevations[0].z).to.equal(103.38);
+                        expect(response.elevations[0].z).to.equal(103.55);
                     };
                     // options par defaut (à surcharger)
                     var options = {
@@ -367,7 +368,7 @@ define([
                             // la réponse en paramètre de onSuccess est un objet {"elevations": [{"lon": 1.25,"lat": 47.48,"z": 103.33,"acc": 2.5}]}
                             options.rawResponse = true;
 
-                            var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevation.json?lon=1.25&lat=47.48&indent=false&crs='CRS:84'&zonly=false";
+                            var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevation.json?gp-access-lib=" + version + "&lon=1.25&lat=47.48&indent=false&crs='CRS:84'&zonly=false";
                             var okResponseJson = [200, { 'Content-type': 'application/json' }, '{"elevations": [{"lon": 1.25,"lat": 47.48,"z": 103.33,"acc": 2.5}]}'];
                             if (mock) { server.respondWith('GET', urlGet, okResponseJson); }
 
@@ -400,7 +401,7 @@ define([
                             // description du test
                             // Le service est du type 'Altitude', et fournit les informations sur le point demandé
 
-                            var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevation.json?lon=1.25&lat=47.48&indent=false&crs='CRS:84'&zonly=false";
+                            var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevation.json?gp-access-lib=" + version + "&lon=1.25&lat=47.48&indent=false&crs='CRS:84'&zonly=false";
                             var okResponseJson = [200, { 'Content-type': 'application/json' }, '{"elevations": [{"lon": 1.25,"lat": 47.48,"z": 103.33,"acc": 2.5}]}'];
                             if (mock) { server.respondWith('GET', urlGet, okResponseJson); }
 
@@ -430,7 +431,7 @@ define([
                             // Le service est du type 'Altitude', et fournit une liste d'altitudes échantillonnées
                             options.positions = [{ lon: 1.25, lat: 47.48 }, { lon: 1.26, lat: 47.49 }];
 
-                            var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevation.json?lon=1.25|1.26&lat=47.48|47.49&indent=false&crs='CRS:84'&zonly=false";
+                            var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevation.json?gp-access-lib=" + version + "&lon=1.25|1.26&lat=47.48|47.49&indent=false&crs='CRS:84'&zonly=false";
                             var okResponseJson = [200, { 'Content-type': 'application/json' }, '{"elevations": [{"lon": 1.25,"lat": 47.48,"z": 103.33,"acc": 2.5},{"lon": 1.26,"lat": 47.49,"z": 69.76,"acc": 2.5}]}'];
                             if (mock) { server.respondWith('GET', urlGet, okResponseJson); }
 
@@ -480,7 +481,7 @@ define([
 
                                 // description du test
                                 // Le service est du type 'Altitude', et fournit une altitude sur le point demandé (sampling inactif)
-                                var urlGet2 = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevation.json?lon=1.25&lat=47.48&indent=false&crs='CRS:84'&zonly=false";
+                                var urlGet2 = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevation.json?gp-access-lib=" + version + "&lon=1.25&lat=47.48&indent=false&crs='CRS:84'&zonly=false";
                                 if (mock) { server.respondWith('GET', urlGet2, okResponseJson1); }
 
                                 options.onSuccess = function (response) {
@@ -501,7 +502,7 @@ define([
 
                                 // description du test
                                 // Le service est du type 'Altitude', et fournit une altitude sur le point demandé (sampling inactif)
-                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevationLine.json?lon=1.25&lat=47.48&indent=false&crs='CRS:84'&sampling=1";
+                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevationLine.json?gp-access-lib=" + version + "&lon=1.25&lat=47.48&indent=false&crs='CRS:84'&sampling=1";
                                 if (mock) { server.respondWith('GET', urlGet, okResponseJson1); }
 
                                 options.onSuccess = function (response) {
@@ -523,7 +524,7 @@ define([
 
                                 // description du test
                                 // Le service est du type 'Altitude', et fournit une altitude sur le point demandé (sampling inactif)
-                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevationLine.json?lon=1.25&lat=47.48&indent=false&crs='CRS:84'&sampling=3";
+                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevationLine.json?gp-access-lib=" + version + "&lon=1.25&lat=47.48&indent=false&crs='CRS:84'&sampling=3";
                                 if (mock) { server.respondWith('GET', urlGet, okResponseJson1); }
 
                                 options.onSuccess = function (response) {
@@ -575,7 +576,7 @@ define([
 
                                 // description du test
                                 // Le service est du type 'Altitude', et fournit une liste d'altitude sur les points demandés
-                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevation.json?lon=1.25|1.26&lat=47.48|47.49&indent=false&crs='CRS:84'&zonly=false";
+                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevation.json?gp-access-lib=" + version + "&lon=1.25|1.26&lat=47.48|47.49&indent=false&crs='CRS:84'&zonly=false";
                                 var okResponseJson2 = [200, { 'Content-type': 'application/json' }, '{"elevations": [{"lon": 1.25,"lat": 47.48,"z": 103.33,"acc": 2.5},{"lon": 1.26,"lat": 47.49,"z": 69.76,"acc": 2.5}]}'];
                                 if (mock) { server.respondWith('GET', urlGet, okResponseJson2); }
 
@@ -598,7 +599,7 @@ define([
 
                                 // description du test
                                 // Le service est du type 'Profile', et fournit une liste d'altitude sur les points demandés (la valeur de sampling (1) est trop faible pour un échantillonnage)
-                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevationLine.json?lon=1.25|1.26&lat=47.48|47.49&indent=false&crs='CRS:84'&sampling=1";
+                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevationLine.json?gp-access-lib=" + version + "&lon=1.25|1.26&lat=47.48|47.49&indent=false&crs='CRS:84'&sampling=1";
                                 var okResponseJson = [200, { 'Content-type': 'application/json' }, '{"elevations": [{"lon": 1.25,"lat": 47.48,"z": 103.33,"acc": 2.5},{"lon": 1.26,"lat": 47.49,"z": 69.76,"acc": 2.5}]}'];
                                 if (mock) { server.respondWith('GET', urlGet, okResponseJson); }
 
@@ -622,7 +623,7 @@ define([
 
                                 // description du test
                                 // Le service est du type 'Profile', et fournit une liste d'altitude sur les points demandés (la valeur de sampling (2) est trop faible pour un échantillonnage)
-                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevationLine.json?lon=1.25|1.26&lat=47.48|47.49&indent=false&crs='CRS:84'&sampling=2";
+                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevationLine.json?gp-access-lib=" + version + "&lon=1.25|1.26&lat=47.48|47.49&indent=false&crs='CRS:84'&sampling=2";
                                 var okResponseJson = [200, { 'Content-type': 'application/json' }, '{"elevations": [{"lon": 1.25,"lat": 47.48,"z": 103.33,"acc": 2.5},{"lon": 1.26,"lat": 47.49,"z": 69.76,"acc": 2.5}]}'];
                                 if (mock) { server.respondWith('GET', urlGet, okResponseJson); }
 
@@ -642,7 +643,7 @@ define([
                             it("Sampling > 2", function (done) {
                                 // description du test
                                 // Le service est du type 'Profile', et fournit une liste d'altitude échantillonnée sur la valeur de sampling demandée
-                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevationLine.json?lon=1.25|1.26&lat=47.48|47.49&indent=false&crs='CRS:84'&sampling=3";
+                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevationLine.json?gp-access-lib=" + version + "&lon=1.25|1.26&lat=47.48|47.49&indent=false&crs='CRS:84'&sampling=3";
                                 var okResponseJson = [200, { 'Content-type': 'application/json' }, '{"elevations": [{"lon": 1.25,"lat": 47.48,"z": 103.33,"acc": 2.5},{"lon": 1.25499953,"lat": 47.48500011,"z": 100.41,"acc": 2.5},{"lon": 1.26,"lat": 47.49,"z": 69.76,"acc": 2.5}]}'];
                                 if (mock) { server.respondWith('GET', urlGet, okResponseJson); }
 
@@ -674,7 +675,7 @@ define([
                                 // description du test
                                 // Le service (type : Altitude) fournit une valeur Z sur le point demandé
                                 // le service doit repondre une valeur d'altitude : ex. {"elevations": [103.33]}
-                                var urlGet3 = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevation.json?lon=1.25&lat=47.48&indent=false&crs='CRS:84'&zonly=true";
+                                var urlGet3 = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevation.json?gp-access-lib=" + version + "&lon=1.25&lat=47.48&indent=false&crs='CRS:84'&zonly=true";
                                 var okResponseJson3 = [200, { 'Content-type': 'application/json' }, '{"elevations": [103.33]}'];
                                 if (mock) { server.respondWith('GET', urlGet3, okResponseJson3); }
 
@@ -704,7 +705,7 @@ define([
                                 // description du test
                                 // Le service (type : Altitude) fournit une liste de valeurs Z sur les points demandés
                                 // le service doit repondre une liste d'altitudes : ex. {"elevations": [103.33, ...]}
-                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevation.json?lon=1.25|1.26&lat=47.48|47.49&indent=false&crs='CRS:84'&zonly=true";
+                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevation.json?gp-access-lib=" + version + "&lon=1.25|1.26&lat=47.48|47.49&indent=false&crs='CRS:84'&zonly=true";
                                 var okResponseJson = [200, { 'Content-type': 'application/json' }, '{"elevations": [103.33, 69.76]}'];
                                 if (mock) { server.respondWith('GET', urlGet, okResponseJson); }
 
@@ -737,7 +738,7 @@ define([
 
                                 // description du test
                                 // Le service (type : Profil) fournit une altitude sur le point demandé (zonly n'est pas pris en compte, et sampling est trop faible (1) pour lancer l'échantillonnage)
-                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevationLine.json?lon=1.25&lat=47.48&indent=false&crs='CRS:84'&sampling=3";
+                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevationLine.json?gp-access-lib=" + version + "&lon=1.25&lat=47.48&indent=false&crs='CRS:84'&sampling=3";
                                 var okResponseJson = [200, { 'Content-type': 'application/json' }, '{"elevations": [{"lon": 1.25,"lat": 47.48,"z": 103.33,"acc": 2.5}]}'];
                                 if (mock) { server.respondWith('GET', urlGet, okResponseJson); }
 
@@ -767,7 +768,7 @@ define([
                                 // description du test
                                 // Le service (type : Profile) fournit une liste de points (lon,lat,z) sur un échantillonnage
                                 // le service doit repondre une liste de points
-                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevationLine.json?lon=1.25|1.26&lat=47.48|47.49&indent=false&crs='CRS:84'&sampling=3";
+                                var urlGet = "http://wxs.ign.fr/" + myKey + "/alti/rest/elevationLine.json?gp-access-lib=" + version + "&lon=1.25|1.26&lat=47.48|47.49&indent=false&crs='CRS:84'&sampling=3";
                                 var okResponseJson = [200, { 'Content-type': 'application/json' }, '{"elevations": [{"lon": 1.25,"lat": 47.48,"z": 103.33,"acc": 2.5},{"lon": 1.25499953,"lat": 47.48500011,"z": 100.41,"acc": 2.5},{"lon": 1.26,"lat": 47.49,"z": 69.76,"acc": 2.5}]}'];
                                 if (mock) { server.respondWith('GET', urlGet, okResponseJson); }
 

@@ -1,5 +1,5 @@
 /**
- * FIXME avec le JSONP, l'erreur est au niveau du html (execution de la balise script), 
+ * FIXME avec le JSONP, l'erreur est au niveau du html (execution de la balise script),
  * et il est difficile de la levée..., afin de la faire apparaitre dans les tests...
  */
 
@@ -20,6 +20,8 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 // options par defaut (à surcharger)
                 var options = {
                     apiKey: myKey,
+                    protocol: 'JSONP',
+                    callbackSuffix: "",
                     onSuccess: function (response) {
                         console.log(response);
                     },
@@ -82,7 +84,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             });
 
             describe("Test sur les options du Protocole", function (done) {
-                
+
                 // fonction contenant les tests de la reponse
                 var functionAssert = function (response) {
                     console.log(response);
@@ -98,12 +100,13 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                     expect(response.locations[0].placeAttributes).to.be.an("object");
                     expect(response.locations[0]).to.have.property("searchCenterDistance");
                 };
-                
+
                 // options par defaut (à surcharger)
                 var options = {
                     apiKey: myKey,
                     serverUrl: null,
                     protocol: 'JSONP', // à surcharger : JSONP|XHR
+                    callbackSuffix: "",
                     proxyURL: null,
                     httpMethod: 'GET', // à surcharger : GET|POST
                     timeOut: 10000000000,
@@ -115,8 +118,8 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                             y: 2.3242664298058053,
                             x: 48.86118017324745
                         },
-                        returnFreeForm: false, 
-                        // returnFreeForm: true, 
+                        returnFreeForm: false,
+                        // returnFreeForm: true,
                         filterOptions: {
                             // bbox : { left: 0, right : 1, top : 1, bottom : 0 },
                             // circle : { x : 0, y : 0, radius : 100 },

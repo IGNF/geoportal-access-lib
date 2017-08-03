@@ -15,7 +15,7 @@ define([
         describe("--- Tests fonctionnels du Service d'autoconfiguration : OK --", function () {
 
             var myKey = (mock) ? "CLE" : "jhyvi0fgmnuxvfv0zjzorvdn";
-
+            var version = Gp.servicesVersion;
             var server;
             before(function () { if (mock) { server = sinon.fakeServer.create(); }});
             after(function () { if (mock) { server.restore(); }});
@@ -51,7 +51,7 @@ define([
                     it("Appel du service avec les options par defaut", function (done) {
                         // descriptif du test
                         // reponse du service en xml pour une requête en production (en fonction de myKey)
-                        var urlGet = "http://wxs.ign.fr/" + myKey + "/autoconf";
+                        var urlGet = "http://wxs.ign.fr/" + myKey + "/autoconf?gp-access-lib=" + version;
                         var okResponseXml = [200, { 'Content-type': 'application/xml' }, autoconfminify];
                         if (mock) { server.respondWith('GET', urlGet, okResponseXml); }
 
@@ -76,7 +76,7 @@ define([
                             console.log("Test uniquement en mode 'mock' !");
                             done();
                         }
-                        var url1Get = "http://wxs.ign.fr/CLE1/autoconf";
+                        var url1Get = "http://wxs.ign.fr/CLE1/autoconf?gp-access-lib=" + version;
                         var ok1ResponseXml = [200, { 'Content-type': 'application/xml' }, autoconfminify];
                         server.respondWith('GET', url1Get, ok1ResponseXml);
 
@@ -103,7 +103,7 @@ define([
                             console.log("Test uniquement en mode 'mock' !");
                             done();
                         }
-                        var url2Get = "http://wxs.ign.fr/CLE2/autoconf";
+                        var url2Get = "http://wxs.ign.fr/CLE2/autoconf?gp-access-lib=" + version;
                         var ok2ResponseXml = [200, { 'Content-type': 'application/xml' }, autoconfbeautify];
                         server.respondWith('GET', url2Get, ok2ResponseXml);
 
@@ -126,7 +126,7 @@ define([
                     it("Appel du service avec un autoconf local", function (done) {
                         // descriptif du test
                         // reponse du service en xml pour une requête locale
-                        var urlLGet = "spec-functional/fixtures/autoconf-beautify-light.xml";
+                        var urlLGet = "spec-functional/fixtures/autoconf-beautify-light.xml?gp-access-lib=" + version;
                         var okResponseLightXml = [200, { 'Content-type': 'application/xml' }, autoconflight];
                         if (mock) { server.respondWith('GET', urlLGet, okResponseLightXml); }
 
@@ -200,7 +200,7 @@ define([
                             Gp.Services.getConfig(options);
                             if (mock) {
                                 requests[0].respond(200, { "Content-Type": "application/xml" }, autoconfbeautify);
-                                expect(requests[0].url).to.be.equal("http://wxs.ign.fr/CLE/autoconf?layerId=LAYER");
+                                expect(requests[0].url).to.be.equal("http://wxs.ign.fr/CLE/autoconf?gp-access-lib=" + version + "layerId=LAYER");
                             }
                         });
                     });

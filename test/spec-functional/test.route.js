@@ -19,6 +19,7 @@ define([
     describe("-- Tests fonctionnels du Service de Calcul d’itinéraires : OK --", function () {
 
         var myKey = (mock) ? "CLE" : "jhyvi0fgmnuxvfv0zjzorvdn";
+        var version = Gp.servicesVersion;
 
         describe('Service.route : SUCCESS', function () {
 
@@ -87,21 +88,21 @@ define([
                     };
 
                     // OK reponse du service REST
-                    var urlGet = "http://wxs.ign.fr/" + myKey + "/itineraire/rest/route.json?origin=2.64,48.54&destination=3.01,48.45&method=TIME&graphName=Voiture&exclusions=Toll;Tunnel&srs=EPSG:4326";
-                    var urlXGet = "http://wxs.ign.fr/" + myKey + "/itineraire/rest/route.xml?origin=2.64,48.54&destination=3.01,48.45&method=TIME&graphName=Voiture&exclusions=Toll;Tunnel&srs=EPSG:4326";
+                    var urlGet = "http://wxs.ign.fr/" + myKey + "/itineraire/rest/route.json?gp-access-lib=" + version + "&origin=2.64,48.54&destination=3.01,48.45&method=TIME&waypoints=&graphName=Voiture&exclusions=Toll;Tunnel&srs=EPSG:4326&format=STANDARD";
+                    var urlXGet = "http://wxs.ign.fr/" + myKey + "/itineraire/rest/route.xml?gp-access-lib=" + version + "&origin=2.64,48.54&destination=3.01,48.45&method=TIME&waypoints=&graphName=Voiture&exclusions=Toll;Tunnel&srs=EPSG:4326&format=STANDARD";
                     var okResponseXml = [200, { 'Content-type': 'application/xml' }, routeResponseXml];
                     var okResponseJson = [200, { 'Content-type': 'application/json' }, routeResponseJson];
                     if (mock) { server.respondWith('GET', urlGet, okResponseJson); }
                     if (mock) { server.respondWith('GET', urlXGet, okResponseXml); }
 
                     // OK reponse du service en xml OLS
-                    var urlXGetOls = "http://wxs.ign.fr/" + myKey + "/itineraire/ols";
-                    var urlXPostOls = "http://wxs.ign.fr/" + myKey + "/itineraire/ols";
+                    var urlXGetOls = "http://wxs.ign.fr/" + myKey + "/itineraire/ols?gp-access-lib=" + version;
+                    var urlXPostOls = "http://wxs.ign.fr/" + myKey + "/itineraire/ols?gp-access-lib=" + version;
                     if (mock) { server.respondWith('GET', urlXGetOls, okResponseXml); }
                     if (mock) { server.respondWith('POST', urlXPostOls, okResponseXml); }
                 });
 
-                afterEach(function () { 
+                afterEach(function () {
                     if (mock) { server.restore(); }
                 });
 
@@ -109,7 +110,7 @@ define([
                     " avec la méthode 'GET'" +
                     " avec l'API 'REST'" +
                     " pour un format de sortie en 'json'", function (done) {
-                    
+
                     options.onSuccess = function (response) {
                         functionAssert(response);
                         done();
@@ -311,7 +312,7 @@ define([
                 });
 
                 describe("les options 'startPoint|endPoint' sont renseignées", function() {
-                    
+
                     it("les options 'startPoint|endPoint' sont renseignées", function (done) {
                         // description du test : envoi d'une requête GET avec les params origin, destination, calcul d'isochrone, pas d'exclusions et graph voiture (options par défaut)
                         //http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/itineraire/rest/route.json?origin=2.64,48.54&destination=3.01,48.45&method=TIME&graphName=Voiture&srs=EPSG:4326
