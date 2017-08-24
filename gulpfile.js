@@ -33,7 +33,7 @@
         lib   : "target/lib",
         test  : "target/test",
         doc   : "target/doc",
-        sample : "samples",
+        sample : "target/samples",
         js    : "target/js",
         umd   : "target/umd",
         dist  : "target/dist"
@@ -118,7 +118,9 @@
         // cf. https:// www.npmjs.com/package/gulp-jsdoc
         // cf. https:// www.npmjs.com/package/gulp-jsdoc3
 
-        $.shelljs.exec("./node_modules/.bin/jsdoc -c jsdoc.json");
+        var jsdoc = ["node_modules", ".bin", "jsdoc"].join(path.sep);
+        var opts = " -c jsdoc.json";
+        $.shelljs.exec(jsdoc + opts);
 
     });
 
@@ -337,7 +339,7 @@
 
         // uniquement les html !
         var lstSources = glob.sync("**/*.html" , {
-            cwd : build.sample , nodir : true, ignore : "index-samples.*"
+            cwd : "samples" , nodir : true, ignore : "index-samples.*"
         });
 
         console.log(lstSources);
@@ -441,7 +443,8 @@
             build.umd + "/**",
             build.doc + "/**",
             build.src + "/**",
-            build.lib + "/**"
+            build.lib + "/**",
+            build.sample + "/**"
         ]);
     });
 
