@@ -1,14 +1,15 @@
 {
   "name": "geoportal-access-lib",
-  "version": "1.0.0-beta3",
+  "version": "1.0.1",
   "description": "French Geoportal resources access library",
   "main": "dist/GpServices.js",
   "scripts": {
-    "build": "gulp build",
-    "test": "gulp test",
-    "doc": "gulp doc",
-    "dist": "gulp dist",
-    "check": "gulp check"
+    "setup": "npm install",
+    "build": "npm run setup && gulp build",
+    "test": "npm run setup && gulp test",
+    "doc": "npm run setup && gulp doc",
+    "dist": "npm run setup && gulp dist",
+    "check": "npm run setup && gulp check"
   },
   "repository": {
     "type": "git",
@@ -19,16 +20,14 @@
     "webservice",
     "javascript"
   ],
-  "author": "geoportal-api-dev",
+  "author": "IGNF",
   "license": "CECILL-B",
-  "dependencies": {
-    "requirejs": "^2.3.2"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "amdclean": "^2.7.0",
     "chai": "^3.5.0",
+    "del": "^2.2.2",
     "easy-amdtest": "^0.1.1",
-    "mocha": "^3.2.0",
-    "sinon": "^1.17.6",
     "glob": "^7.1.1",
     "groundskeeper": "^0.1.12",
     "gulp": "^3.9.1",
@@ -41,6 +40,7 @@
     "gulp-load-plugins": "^1.4.0",
     "gulp-mocha-phantomjs": "^0.12.1",
     "gulp-plumber": "^0.5.6",
+    "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-size": "^0.1.3",
     "gulp-template": "^3.1.0",
@@ -50,11 +50,13 @@
     "jaguarjs-jsdoc": "^1.0.1",
     "jsdoc": "^3.4.3",
     "minimist": "^1.2.0",
+    "mocha": "^3.2.0",
     "open": "0.0.5",
+    "requirejs": "^2.3.2",
     "run-sequence": "^1.2.2",
     "shelljs": "^0.2.6",
-    "amdclean": "^2.7.0",
-    "del": "^2.2.2"
+    "sinon": "^1.17.6",
+    "woodman": "^1.1.0"
   },
   "optionalDependencies": {
     "request": "^2.79.0",

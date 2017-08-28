@@ -11,7 +11,7 @@ http://www.cecill.info/licences/Licence_CeCILL-B_V1-fr.txt (french)
 
 see http://www.cecill.info/
 
-Copyright (c) 2016 IGN
+Copyright (c) 2016-2017 IGN
 
 
 ## Third party code :
@@ -21,10 +21,10 @@ The Geoportal resources access library includes the following third party code :
 ### ES6-Promise
 
 A tiny implementation of Promises/A+.
-Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
-See https://github.com/jakearchibald/es6-promise/
-version   4.1.0
-
+Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and cont  ributors (Conversion to ES6 API by Jake Archibald)
+Licensed under MIT license
+See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
+Version   4.1.0+f9a5575b
 
 > Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors
 >

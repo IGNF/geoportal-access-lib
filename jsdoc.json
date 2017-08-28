@@ -32,12 +32,12 @@
         "hardwrap": true
     },
     "opts": {
-        "template": "target/doc/jaguarjs-jsdoc",
+        "template": "./target/doc/jaguarjs-jsdoc",
         "encoding": "utf8",
         "destination": "./target/doc/",
         "recurse": true,
         "lenient": true,
         "verbose": true,
-        "tutorials": "doc/tutorials"
+        "tutorials": "./doc/tutorials"
     }
 }

@@ -2,10 +2,8 @@
 # Compilation du projet
 
 [![Gulp build](https://img.shields.io/badge/build%20with-GULP-brightgreen.svg)](https://img.shields.io/badge/build%20with-GULP-brightgreen.svg)
-
-<!-- TODO procedure de récuperation de la lib. avec nodejs
 [![npm version](https://badge.fury.io/js/geoportal-access-lib.svg)](https://badge.fury.io/js/geoportal-access-lib)
--->
+
 
 Récupération des dependances du projet :
 

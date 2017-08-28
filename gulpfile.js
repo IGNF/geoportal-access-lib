@@ -118,7 +118,9 @@
         // cf. https:// www.npmjs.com/package/gulp-jsdoc
         // cf. https:// www.npmjs.com/package/gulp-jsdoc3
 
-        $.shelljs.exec("./node_modules/.bin/jsdoc -c jsdoc.json");
+        var jsdoc = ["node_modules", ".bin", "jsdoc"].join(path.sep);
+        var opts = " -c jsdoc.json";
+        $.shelljs.exec(jsdoc + opts);
 
     });
 
@@ -164,7 +166,7 @@
         requirejs.optimize({
             mainConfigFile : path.join(build.src,  "Config.js"),
             paths : {
-                log4js : (isDebug) ? "../lib/external/woodman/woodman-amd" : "../lib/external/empty"
+                log4js : (isDebug) ? "../../node_modules/woodman/dist/woodman-amd" : "../lib/empty"
             },
             baseUrl : build.src,
             optimize : mode,
@@ -324,40 +326,31 @@
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // | ✓ copy-sample
-    // | > copie des pages d"exemples
-    // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    gulp.task("copy-sample", function () {
-
-        return gulp.src([ path.join(_.sample, "**/*.html"), path.join(_.sample, "**/*.js") ])
-                .pipe(gulp.dest(build.sample))
-                .pipe($.plumber())
-                .pipe($.size());
-    });
-
-    // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // | ✓ template-sample
     // | > construction de la page principale des exemples
     // | > https:// www.npmjs.com/package/gulp-template
-    // | > FIXME les dependances des exemples !
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    gulp.task("template-sample", ["copy-sample"], function () {
+    gulp.task("template-sample", function () {
 
         // var tmpl = require("gulp-template");
         var glob = require("glob");
+        var rename = require("gulp-rename") ;
 
         // uniquement les html !
         var lstSources = glob.sync("**/*.html" , {
-            cwd : build.sample , nodir : true, ignore : "index-samples.html"
+            cwd : _.sample , nodir : true, ignore : "index-samples.*"
         });
 
         console.log(lstSources);
 
-        return gulp.src(path.join(_.sample, "index-samples.html"))
+        return gulp.src(path.join(_.sample, "index-samples.tpl"))
             .pipe($.template({
                 files : lstSources
             }))
-            .pipe(gulp.dest(build.sample));
+            .pipe(rename({
+                extname : ".html"
+            }))
+            .pipe(gulp.dest(_.sample));
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -418,9 +411,9 @@
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // | ✓ server web sample
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    gulp.task("server-samples", ["connect"], function () {
+    gulp.task("server-sample", ["template-sample","connect"], function () {
         var open = require("open");
-        open("http://localhost:9001/target/samples/index-samples.html");
+        open("http://localhost:9001/samples/index-samples.html");
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -448,8 +441,8 @@
             build.umd + "/**",
             build.doc + "/**",
             build.src + "/**",
-            build.sample + "/**",
-            build.lib + "/**"
+            build.lib + "/**",
+            build.sample + "/**"
         ]);
     });
 
@@ -476,7 +469,13 @@
         $.util.log(" -- dist : construction de la librairie.");
         $.util.log(" -- check: controle des sources.");
         $.util.log(" -- test : execution des tests unitaires.");
+        $.util.log(" -- sample : construction des exemples.");
         $.util.log(" -- doc  : construction de la JSDOC.");
+        $.util.log(" -- clean  : suppression du répertoire 'target'.");
+        $.util.log("Autres target :");
+        $.util.log(" -- server-test : affichage des tests dans un navigateur.");
+        $.util.log(" -- server-sample : affichage des exemples dans un navigateur.");
+        $.util.log(" -- watch : mode developpement des tests.");
         $.util.log(" -- publish : publication de la librairie.");
     });
 
@@ -489,7 +488,7 @@
     gulp.task("check", ["jsonlint", "jshint", "jscs"]);
     gulp.task("src", ["sources", "lib"]);
     gulp.task("sample", ["template-sample"]);
-    gulp.task("samples-cloud", ["server-samples"]);
+    gulp.task("sample-cloud", ["server-sample"]);
     gulp.task("dist", ["build-only"]); // sync
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,9 +1,10 @@
 language: node_js
 node_js:
-  - "4.0.0"
+  - "node"
 before_script:
+  - npm install -g npm@latest
   - npm install
-script: gulp build
+script: ./node_modules/.bin/gulp build
 cache:
   directories:
     - node_modules

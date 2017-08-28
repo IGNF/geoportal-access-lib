@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="../../lib/external/require.js"></script>
+  <script src="../../node_modules/requirejs/require.js"></script>
   <script>
   /* global requirejs */
   requirejs.config({
     'baseUrl' : "../../src/",
     'paths': {
       // lib external
-      'log4js' : "../lib/external/woodman/woodman-amd",
+      'log4js' : "../node_modules/woodman/dist/woodman-amd",
       // config du logger
       "logger-cfg" : "Utils/Logger.cfg"
     }
