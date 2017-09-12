@@ -80,7 +80,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // sauf un TimeOut...
             options.apiKey = "bidon";
             options.protocol = 'XHR';
-            options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
+            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.onFailure = function (e) {
                 console.log(e);
                 expect(e).not.to.be.null;
@@ -108,7 +108,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // FIXME
             // test avec le protocole XHR car le service implemente très mal le callback avec le JSONP!
             options.protocol = 'XHR';
-            options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
+            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.httpMethod = 'PUT';
             try {
                 Gp.Services.getAltitude(options);
@@ -131,7 +131,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // FIXME
             // test avec le protocole XHR car le service implemente très mal le callback avec le JSONP!
             options.protocol = 'XHR';
-            options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
+            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.httpMethod = 'bidon';
             try {
                 Gp.Services.getAltitude(options);
@@ -154,7 +154,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // FIXME
             // test avec le protocole XHR car le service implemente très mal le callback avec le JSONP!
             options.protocol = 'BIDON';
-            options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
+            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.httpMethod = 'GET';
             try {
                 Gp.Services.getAltitude(options);
@@ -177,7 +177,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // FIXME
             // test possible avec le protocole XHR
             options.protocol = 'XHR';
-            options.proxyURL = 'http://localhost/BIDON/php/proxy.php?url=';
+            // options.proxyURL = 'http://localhost/BIDON/php/proxy.php?url=';
             options.onFailure = function (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
@@ -207,7 +207,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // test possible avec le protocole XHR
             // comment capturer une erreur de cross-domain or cross-origin !?
             options.protocol = 'XHR';
-            options.proxyURL = null;
+            // options.proxyURL = null;
             options.onFailure = function (e) {
                 console.log(e);
                 expect(e).not.to.be.null;
@@ -238,7 +238,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             options.protocol = 'XHR';
             options.apiKey = null;
             options.serverUrl = "http://service.bidon.json";
-            options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
+            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.onFailure = function (e) {
                 console.log(e);
                 expect(e).not.to.be.null;

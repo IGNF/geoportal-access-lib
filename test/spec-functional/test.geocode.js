@@ -43,7 +43,7 @@ define([
                     apiKey: myKey,
                     serverUrl: null,
                     protocol: 'XHR',
-                    proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
+                    // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
                     httpMethod: 'POST',
                     timeOut: 10000,
                     rawResponse: false,

@@ -107,7 +107,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                     serverUrl: null,
                     protocol: 'JSONP', // à surcharger : JSONP|XHR
                     callbackSuffix: "",
-                    proxyURL: null,
+                    // proxyURL: null,
                     httpMethod: 'GET', // à surcharger : GET|POST
                     timeOut: 10000000000,
                     rawResponse: false,

@@ -19,7 +19,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
                 serverUrl : null,
                 protocol : 'XHR',
-                proxyURL : (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null,
+                // proxyURL : (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null,
                 httpMethod : 'GET',
                 timeOut : 0,
                 rawResponse : false,

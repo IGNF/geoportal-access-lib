@@ -58,7 +58,7 @@ define([
                         apiKey: myKey,
                         serverUrl: null,
                         protocol: 'XHR', // à surcharger : JSONP|XHR
-                        proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
+                        // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
                         httpMethod: 'GET', // à surcharger : GET|POST
                         nocache : true,
                         timeOut: 10000,
@@ -341,7 +341,7 @@ define([
                         apiKey: myKey,
                         serverUrl: null,
                         protocol: 'XHR', // JSONP|XHR
-                        proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
+                        // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
                         httpMethod: 'GET', // GET|POST
                         timeOut: 10000,
                         nocache : false,

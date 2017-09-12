@@ -40,7 +40,7 @@ define([
                         serverUrl: null,   // à surcharger
                         protocol: 'XHR',
                         httpMethod: 'GET', // à surcharger : GET|POST
-                        proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
+                        // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
                         timeOut: 10000,
                         rawResponse: false,
                         onSuccess: null, // à surcharger
@@ -155,7 +155,7 @@ define([
                             apiKey: myKey,
                             serverUrl: null,
                             protocol: 'XHR',
-                            proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
+                            // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
                             httpMethod: 'GET',
                             timeOut: 10000,
                             rawResponse: false,

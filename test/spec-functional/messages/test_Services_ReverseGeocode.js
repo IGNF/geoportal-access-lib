@@ -1,4 +1,4 @@
-define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
+// define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
 
     var assert = chai.assert;
     var expect = chai.expect;
@@ -51,7 +51,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // sauf un TimeOut...
             options_reverse.apiKey = "bidon";
             options_reverse.protocol = 'XHR';
-            options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
+            // options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_reverse.onFailure = function (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
@@ -142,7 +142,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // setTimeout(done, 1500);
             options_reverse.filterOptions.type = ['BIDON'];
             options_reverse.protocol = 'XHR';
-            options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
+            // options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_reverse.onFailure = function (e) {
                 console.log(e);
                 expect(e).not.to.be.null;
@@ -163,7 +163,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             options_reverse.filterOptions = null;
             options_reverse.protocol = 'XHR';
             options_reverse.httpMethod = 'POST';
-            options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
+            // options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_reverse.onFailure = function (e) {
                 console.log(e);
                 done(e);
@@ -182,7 +182,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             options_reverse.filterOptions.bbox = {};
             options_reverse.protocol = 'XHR';
             options_reverse.httpMethod = 'POST';
-            options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
+            // options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_reverse.onFailure = function (e) {
                 console.log(e);
                 done(e);
@@ -201,7 +201,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             options_reverse.filterOptions.bbox = null;
             options_reverse.protocol = 'XHR';
             options_reverse.httpMethod = 'POST';
-            options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
+            // options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_reverse.onFailure = function (e) {
                 console.log(e);
                 done(e);

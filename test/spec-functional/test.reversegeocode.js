@@ -29,7 +29,7 @@ define([
             // var server;
             var xhr, requests;
             var options;
-            
+
             // before(function () { if (mock) { server = sinon.fakeServer.create(); } });
             // after(function () { if (mock) { server.restore(); } });
 
@@ -46,7 +46,7 @@ define([
                     apiKey: myKey,
                     serverUrl: null,
                     protocol: 'XHR', // à surcharger : JSONP|XHR
-                    proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
+                    // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
                     httpMethod: 'GET', // à surcharger : GET|POST
                     timeOut: 10000,
                     rawResponse: false,
@@ -103,7 +103,7 @@ define([
 
                     it("Appel du service en mode 'XHR' avec la méthode 'GET' ('OLS')", function (done) {
                         // description du test
-                        
+
                         options.protocol = 'XHR';
                         options.httpMethod = 'GET';
                         options.maximumResponses = 4;
@@ -162,7 +162,7 @@ define([
                     };
 
                     it("L'option 'position' est renseignée : options par defaut", function (done) {
-                        
+
                         options.maximumResponses = 4;
                         options.onSuccess = function (response) {
                             console.log(response);
