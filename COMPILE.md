@@ -38,7 +38,7 @@ Pour plus d'information, cf. https://code.visualstudio.com/docs/getstarted/setti
 
 ou
 
-sous *Windows*, modifier le fichier _C:\\Users\< USER >\\.npmrc_ 
+sous *Windows*, modifier le fichier _C:\\Users\< USER >\\.npmrc_
 (sous *Linux*, on utilise le fichier _$HOME/.npmrc_ )
 avec les lignes suivantes :
 
