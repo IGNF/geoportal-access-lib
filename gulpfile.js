@@ -351,7 +351,7 @@
             .pipe(rename({
                 extname : ".html"
             }))
-            .pipe(gulp.dest(build.sample));
+            .pipe(gulp.dest(_.sample));
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
