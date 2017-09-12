@@ -112,7 +112,7 @@ Sous *Windows*, il est possible que la *JSDoc* ne soit pas compilée correctemen
 
 **ouvrir une console :**
 
-    gulp server-samples
+    gulp server-sample
 
 Le navigateur s'ouvre sur la page des exemples sur l'URL suivante :
 http://localhost:9001/samples/index-samples.html
