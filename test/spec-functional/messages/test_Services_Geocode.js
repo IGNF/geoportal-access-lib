@@ -47,7 +47,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // sauf un TimeOut...
             options_direct.apiKey = "bidon";
             options_direct.protocol = 'XHR';
-            options_direct.proxyURL = 'http://localhost/proxy/php/proxy.php?url=';
+            options_direct.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_direct.onFailure = function (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
@@ -111,7 +111,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // {"http":{"status":403,"error":"<ExceptionReport><Exception exceptionCode=\"MissingRights\">No rights for this ressource or ressource does not exist</Exception></ExceptionReport>"}, "xml":null})
             options_direct.filterOptions.type = ['BIDON'];
             options_direct.protocol = 'XHR';
-            options_direct.proxyURL = 'http://localhost/proxy/php/proxy.php?url=';
+            options_direct.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_direct.onFailure = function (e) {
                 console.log(e);
                 expect(e).not.to.be.null;
@@ -131,7 +131,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             options_direct.filterOptions = null;
             options_direct.protocol = 'XHR';
             options_direct.httpMethod = 'POST';
-            options_direct.proxyURL = 'http://localhost/proxy/php/proxy.php?url=';
+            options_direct.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_direct.onFailure = function (e) {
                 console.log(e);
                 done(e);
@@ -148,7 +148,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             options_direct.filterOptions.bbox = {};
             options_direct.protocol = 'XHR';
             options_direct.httpMethod = 'POST';
-            options_direct.proxyURL = 'http://localhost/proxy/php/proxy.php?url=';
+            options_direct.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_direct.onFailure = function (e) {
                 console.log(e);
                 done(e);
@@ -165,7 +165,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             options_direct.filterOptions.bbox = null;
             options_direct.protocol = 'XHR';
             options_direct.httpMethod = 'POST';
-            options_direct.proxyURL = 'http://localhost/proxy/php/proxy.php?url=';
+            options_direct.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_direct.onFailure = function (e) {
                 console.log(e);
                 done(e);

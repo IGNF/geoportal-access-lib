@@ -10,7 +10,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
         var options = {};
 
         beforeEach(function() {
-            
+
             // FIXME uniquement en XHR ! Il n'est pas possible de lever les erreurs en JSONP
             // sauf un TimeOut...
 
@@ -19,7 +19,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
                 serverUrl : null,
                 protocol : 'XHR',
-                proxyURL : "http://localhost/proxy/php/proxy.php?url=",
+                proxyURL : (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null,
                 httpMethod : 'GET',
                 timeOut : 0,
                 rawResponse : false,

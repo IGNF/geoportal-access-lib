@@ -45,10 +45,13 @@
 
         // par defaut, les tests fonctionnels sont en mode 'mock'
         window.mock = true;
+        window.proxy = true;
         if (hasParams()) {
             var params  = getParams();
             window.mock = (params.mock && params.mock === "true") ? true : false;
+            window.proxy = (params.proxy && params.proxy === "true") ? true : false;
         }
+
     </script>
     <script>
 
@@ -62,11 +65,11 @@
             'chai'     : '../node_modules/chai/chai',
 
             // plugin text
-            'text'     : '../lib/external/text',
+            'text'     : '../node_modules/text/text',
 
             // lib external
-            "log4js"   : "../lib/external/woodman/woodman-amd",
-            'promise'  : '../lib/external/es-promise-4.1.0',
+            "log4js"   : "../node_modules/woodman/woodman-amd",
+            'promise'  : '../lib/es6-promise/es6-promise-4.1.0',
 
             // config logger
             "logger-cfg": "Utils/Logger.cfg",

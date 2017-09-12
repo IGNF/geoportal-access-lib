@@ -22,7 +22,6 @@
   ],
   "author": "IGNF",
   "license": "CECILL-B",
-  "dependencies": {},
   "devDependencies": {
     "amdclean": "^2.7.0",
     "chai": "^3.5.0",
@@ -56,6 +55,7 @@
     "run-sequence": "^1.2.2",
     "shelljs": "^0.2.6",
     "sinon": "^1.17.6",
+    "text": "github:requirejs/text",
     "woodman": "^1.1.0"
   },
   "optionalDependencies": {

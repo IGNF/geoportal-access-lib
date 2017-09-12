@@ -52,7 +52,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // sauf un TimeOut...
             options.apiKey = "bidon";
             options.protocol = 'XHR';
-            options.proxyURL = 'http://localhost/proxy/php/proxy.php?url=';
+            options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.onFailure = function (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
@@ -161,7 +161,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // FIXME
             // test avec le protocole XHR car le service implemente très mal le callback avec le JSONP!
             options.protocol = 'XHR';
-            options.proxyURL = 'http://localhost/proxy/php/proxy.php?url=';
+            options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.exclusions = ['BIDON'];
             options.onFailure = function (e) {
                 console.log(e);
@@ -191,7 +191,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // FIXME
             // test avec le protocole XHR car le service implemente très mal le callback avec le JSONP!
             options.protocol = 'XHR';
-            options.proxyURL = 'http://localhost/proxy/php/proxy.php?url=';
+            options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.graph = 'BIDON';
             options.onFailure = function (e) {
                 console.log(e);

@@ -45,7 +45,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // sauf un TimeOut...
             options.apiKey = "bidon";
             options.protocol = 'XHR';
-            options.proxyURL = 'http://localhost/proxy/php/proxy.php?url=';
+            options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.onFailure = function (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
@@ -94,7 +94,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // this.timeout(1000);
             options.filterOptions.type = ['BIDON'];
             options.protocol = "XHR";
-            options.proxyURL = 'http://localhost/proxy/php/proxy.php?url=';
+            options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.onFailure = function (e) {
                 console.log(e);
                 expect(e).not.to.be.null;
@@ -116,7 +116,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             options.filterOptions = null;
             options.maximumResponses = null;
             options.protocol = "XHR";
-            options.proxyURL = 'http://localhost/proxy/php/proxy.php?url=';
+            options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.onFailure = function (e) {
                 console.log(e);
                 done(e);
@@ -135,7 +135,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             options.filterOptions.bbox = {};
             options.maximumResponses = null;
             options.protocol = "XHR";
-            options.proxyURL = 'http://localhost/proxy/php/proxy.php?url=';
+            options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.onFailure = function (e) {
                 console.log(e);
                 done(e);

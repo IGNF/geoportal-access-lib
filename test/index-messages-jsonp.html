@@ -43,11 +43,13 @@
             return params;
         };
 
-        // par defaut, les tests fonctionnels sont en mode 'mock'
+        // par defaut, les tests fonctionnels sont en mode 'mock' avec un proxy
         window.mock = true;
+        window.proxy = true;
         if (hasParams()) {
             var params  = getParams();
             window.mock = (params.mock && params.mock === "true") ? true : false;
+            window.proxy = (params.proxy && params.proxy === "true") ? true : false;
         }
 
     </script>
@@ -66,8 +68,8 @@
             'chai'     : '../node_modules/chai/chai',
 
             // lib external
-            "log4js"   : "../lib/external/woodman/woodman-amd",
-            'promise'  : '../lib/external/promise',
+            "log4js"   : "../node_modules/woodman/woodman-amd",
+            'promise'  : '../lib/es6-promise/es6-promise-4.1.0',
 
             // config logger
             "logger-cfg": "Utils/Logger.cfg",
