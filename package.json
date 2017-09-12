@@ -22,6 +22,7 @@
   ],
   "author": "IGNF",
   "license": "CECILL-B",
+  "dependencies": {},
   "devDependencies": {
     "amdclean": "^2.7.0",
     "chai": "^3.5.0",

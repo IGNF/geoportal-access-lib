@@ -329,6 +329,7 @@
     // | ✓ template-sample
     // | > construction de la page principale des exemples
     // | > https:// www.npmjs.com/package/gulp-template
+    // | > FIXME les dependances des exemples !
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("template-sample", function () {
 
@@ -338,7 +339,7 @@
 
         // uniquement les html !
         var lstSources = glob.sync("**/*.html" , {
-            cwd : _.sample , nodir : true, ignore : "index-samples.*"
+            cwd : "samples" , nodir : true, ignore : "index-samples.*"
         });
 
         console.log(lstSources);
@@ -350,7 +351,7 @@
             .pipe(rename({
                 extname : ".html"
             }))
-            .pipe(gulp.dest(_.sample));
+            .pipe(gulp.dest(build.sample));
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
