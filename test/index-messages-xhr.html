@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+     <meta charset="utf-8">
+    <title>Mocha Spec Runner</title>
+
+
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+
+    <script type="text/javascript" src="../node_modules/sinon/lib/sinon.js"></script>
+    <script type="text/javascript" src="../node_modules/chai/chai.js"></script>
+    <script type="text/javascript" src="../node_modules/mocha/mocha.js"></script>
+
+  </head>
+
+  <body>
+    <!-- content -->
+    <div id="workboard"></div>
+    <div id="mocha"></div>
+
+    <script>
+
+        function hasParams () {
+            if (location.search) {
+               var parts = location.search.substring(1).split('&');
+               return (parts.length > 0) ? true : false;
+            }
+        };
+
+        function getParams() {
+            var params = {};
+
+            if (location.search) {
+               var parts = location.search.substring(1).split('&');
+               for (var i = 0; i < parts.length; i++) {
+                    var nv = parts[i].split('=');
+                    if (!nv[0]) continue;
+                    // FIXME : pas de valeur par defaut !?
+                    // params[nv[0]] = nv[1] || true;
+                    params[nv[0]] = nv[1];
+                }
+            }
+            return params;
+        };
+
+        // par defaut, les tests fonctionnels sont en mode 'mock'
+        window.mock = true;
+        window.proxy = true;
+        if (hasParams()) {
+            var params  = getParams();
+            window.mock = (params.mock && params.mock === "true") ? true : false;
+            window.proxy = (params.proxy && params.proxy === "true") ? true : false;
+        }
+
+    </script>
+
+    <script type="text/javascript" src="../node_modules/requirejs/require.js"></script>
+    <script type="text/javascript" src="../node_modules/easy-amdtest/dist/easy-amdtest.js"></script>
+
+    <script>
+
+      var testSuite = new EasyAMDTest({
+        baseUrl: '../src',
+        urlArgs: 'bust=' + (new Date()).getTime(),
+        paths: {
+            'sinon'    : '../node_modules/sinon/lib/sinon',
+            'mocha'    : '../node_modules/mocha/mocha',
+            'chai'     : '../node_modules/chai/chai',
+
+            // lib external
+            "log4js"   : "../node_modules/woodman/woodman-amd",
+            'promise'  : '../lib/es6-promise/es6-promise-4.1.0',
+
+            // config logger
+            "logger-cfg": "Utils/Logger.cfg",
+
+            // bundle
+            "gp" : "../dist/GpServices"
+
+        }
+      }).run({
+        name: 'mocha',
+        tests: [
+          "spec-functional/messages/test_Services.js",
+          "spec-functional/messages/test_Services_Alti.js",
+          "spec-functional/messages/test_Services_Geocode.js",
+          "spec-functional/messages/test_Services_ReverseGeocode.js",
+          "spec-functional/messages/test_Services_Route.js",
+          "spec-functional/messages/test_Services_ProcessIsoCurve.js",
+          "spec-functional/messages/test_Services_AutoComplete.js"
+        ]
+      });
+    </script>
+  </body>
+</html>

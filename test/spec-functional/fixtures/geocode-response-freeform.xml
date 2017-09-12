@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XLS version="1.2" xmlns="http://www.opengis.net/xls"
+  xmlns:gml="http://www.opengis.net/gml"
+  xmlns:xls="http://www.opengis.net/xls"
+  xmlns:xlsext="http://www.opengis.net/xlsext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://wxs.ign.fr/schemas/olsAll.xsd">
+  <ResponseHeader/>
+  <Response requestID="34fc9e46-7c41-41e9-a1b4-d96dc7e3c3d1" version="1.2">
+    <GeocodeResponse>
+      <GeocodeResponseList numberOfGeocodedAddresses="1">
+        <GeocodedAddress>
+          <gml:Point>
+            <gml:pos>48.842835 2.417883</gml:pos>
+          </gml:Point>
+          <Address countryCode="StreetAddress">
+            <freeFormAddress>94160 Saint-Mandé</freeFormAddress>
+          </Address>
+          <GeocodeMatchCode accuracy="1.0" matchType="City"/>
+        </GeocodedAddress>
+      </GeocodeResponseList>
+    </GeocodeResponse>
+  </Response>
+</XLS>

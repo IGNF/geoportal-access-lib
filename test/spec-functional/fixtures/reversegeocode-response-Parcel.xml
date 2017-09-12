@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XLS version="1.2" xmlns="http://www.opengis.net/xls"
+  xmlns:gml="http://www.opengis.net/gml"
+  xmlns:xls="http://www.opengis.net/xls"
+  xmlns:xlsext="http://www.opengis.net/xlsext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://wxs.ign.fr/schemas/olsAll.xsd">
+  <ResponseHeader/>
+  <Response requestID="f1af1d9a-e3a4-4387-b522-9af7ea3a8ed4" version="1.2">
+    <ReverseGeocodeResponse>
+      <ReverseGeocodedLocation>
+        <gml:Point>
+          <gml:pos>48.860565 2.324459</gml:pos>
+        </gml:Point>
+        <Address countryCode="CadastralParcel">
+          <StreetAddress>
+            <Street>75056107AP0022</Street>
+          </StreetAddress>
+          <Place type="Municipality">Paris</Place>
+          <Place type="Numero">0022</Place>
+          <Place type="Feuille">1</Place>
+          <Place type="Section">AP</Place>
+          <Place type="Departement">75</Place>
+          <Place type="CommuneAbsorbee">000</Place>
+          <Place type="Commune">056</Place>
+          <Place type="INSEE">75056</Place>
+          <Place type="Arrondissement">107</Place>
+          <Place type="Type">Parcelle</Place>
+        </Address>
+        <SearchCentreDistance value="19.05"/>
+      </ReverseGeocodedLocation>
+      <ReverseGeocodedLocation>
+        <gml:Point>
+          <gml:pos>48.860950 2.323612</gml:pos>
+        </gml:Point>
+        <Address countryCode="CadastralParcel">
+          <StreetAddress>
+            <Street>75056107AP0020</Street>
+          </StreetAddress>
+          <Place type="Municipality">Paris</Place>
+          <Place type="Numero">0020</Place>
+          <Place type="Feuille">1</Place>
+          <Place type="Section">AP</Place>
+          <Place type="Departement">75</Place>
+          <Place type="CommuneAbsorbee">000</Place>
+          <Place type="Commune">056</Place>
+          <Place type="INSEE">75056</Place>
+          <Place type="Arrondissement">107</Place>
+          <Place type="Type">Parcelle</Place>
+        </Address>
+        <SearchCentreDistance value="23.28"/>
+      </ReverseGeocodedLocation>
+      <ReverseGeocodedLocation>
+        <gml:Point>
+          <gml:pos>48.861342 2.323887</gml:pos>
+        </gml:Point>
+        <Address countryCode="CadastralParcel">
+          <StreetAddress>
+            <Street>75056107AP0021</Street>
+          </StreetAddress>
+          <Place type="Municipality">Paris</Place>
+          <Place type="Numero">0021</Place>
+          <Place type="Feuille">1</Place>
+          <Place type="Section">AP</Place>
+          <Place type="Departement">75</Place>
+          <Place type="CommuneAbsorbee">000</Place>
+          <Place type="Commune">056</Place>
+          <Place type="INSEE">75056</Place>
+          <Place type="Arrondissement">107</Place>
+          <Place type="Type">Parcelle</Place>
+        </Address>
+        <SearchCentreDistance value="24.84"/>
+      </ReverseGeocodedLocation>
+      <ReverseGeocodedLocation>
+        <gml:Point>
+          <gml:pos>48.861084 2.323093</gml:pos>
+        </gml:Point>
+        <Address countryCode="CadastralParcel">
+          <StreetAddress>
+            <Street>75056107AP0064</Street>
+          </StreetAddress>
+          <Place type="Municipality">Paris</Place>
+          <Place type="Numero">0064</Place>
+          <Place type="Feuille">1</Place>
+          <Place type="Section">AP</Place>
+          <Place type="Departement">75</Place>
+          <Place type="CommuneAbsorbee">000</Place>
+          <Place type="Commune">056</Place>
+          <Place type="INSEE">75056</Place>
+          <Place type="Arrondissement">107</Place>
+          <Place type="Type">Parcelle</Place>
+        </Address>
+        <SearchCentreDistance value="55.80"/>
+      </ReverseGeocodedLocation>
+    </ReverseGeocodeResponse>
+  </Response>
+</XLS>

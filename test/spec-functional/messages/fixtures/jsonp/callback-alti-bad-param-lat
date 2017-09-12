@@ -1,0 +1,1 @@
+callback({"error": {"code": "BAD_PARAMETER","description": "The values () cannot be parsed as a valid latitude (double value such as -90 < lat < 90)."}})

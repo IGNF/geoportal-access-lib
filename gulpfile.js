@@ -351,7 +351,7 @@
             .pipe(rename({
                 extname : ".html"
             }))
-            .pipe(gulp.dest(build.sample));
+            .pipe(gulp.dest(_.sample));
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -412,9 +412,8 @@
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // | ✓ server web sample
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    gulp.task("server-samples", ["template-sample","connect"], function () {
+    gulp.task("server-sample", ["template-sample","connect"], function () {
         var open = require("open");
-        // open("http://localhost:9001/target/samples/index-samples.html");
         open("http://localhost:9001/samples/index-samples.html");
     });
 
@@ -471,7 +470,13 @@
         $.util.log(" -- dist : construction de la librairie.");
         $.util.log(" -- check: controle des sources.");
         $.util.log(" -- test : execution des tests unitaires.");
+        $.util.log(" -- sample : construction des exemples.");
         $.util.log(" -- doc  : construction de la JSDOC.");
+        $.util.log(" -- clean  : suppression du répertoire 'target'.");
+        $.util.log("Autres target :");
+        $.util.log(" -- server-test : affichage des tests dans un navigateur.");
+        $.util.log(" -- server-sample : affichage des exemples dans un navigateur.");
+        $.util.log(" -- watch : mode developpement des tests.");
         $.util.log(" -- publish : publication de la librairie.");
     });
 
@@ -484,7 +489,7 @@
     gulp.task("check", ["jsonlint", "jshint", "jscs"]);
     gulp.task("src", ["sources", "lib"]);
     gulp.task("sample", ["template-sample"]);
-    gulp.task("samples-cloud", ["server-samples"]);
+    gulp.task("sample-cloud", ["server-sample"]);
     gulp.task("dist", ["build-only"]); // sync
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
