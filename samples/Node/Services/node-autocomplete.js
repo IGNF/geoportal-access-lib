@@ -24,10 +24,15 @@ var options = {
         console.log(response);
     },
     onFailure : function (error) {
-        console.log(eror);
+        console.log(error);
     },
     // spécifique au service
-    text : "Brie-Co"
+    text : process.argv[2] || "Saint-Mandé",
+    maximumResponses : process.argv[3] || 10,
+    filterOptions : {
+        type : (process.argv[4]) ? [process.argv[4]] : ["StreetAddress"],
+        territory : (process.argv[5]) ? [process.argv[5]] : ["METROPOLE"]
+    },
 };
 
 Gp.Services.autoComplete(options);
