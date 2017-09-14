@@ -13,9 +13,14 @@ define([
 ],
     function (
         Gp, chai, sinon,
-        geocodeResponse, geocodeResponseSA, geocodeResponsePOI,
-        geocodeResponseParcel, geocodeResponseSA_POI,
-        geocodeResponseStructuredLocation, geocodeResponseFreeform, geocodeRequest
+        geocodeResponse,
+        geocodeResponseSA,
+        geocodeResponsePOI,
+        geocodeResponseParcel,
+        geocodeResponseSA_POI,
+        geocodeResponseStructuredLocation,
+        geocodeResponseFreeform,
+        geocodeRequest
     ) {
 
         var assert = chai.assert;
@@ -29,6 +34,79 @@ define([
 
             var xhr, requests;
             var options;
+
+            var functionAssertCommon = function (response) {
+                console.log(response);
+                should.exist(response.locations);
+                expect(response.locations).to.be.an("Array");
+                // expect(response.locations).to.have.length(1);
+                expect(response.locations[0]).to.have.property("position");
+                expect(response.locations[0].position).to.be.an("object");
+                expect(response.locations[0]).to.have.deep.property("position.x");
+                expect(response.locations[0]).to.have.deep.property("position.y");
+                expect(response.locations[0]).to.have.property("matchType");
+                expect(response.locations[0]).to.have.property("placeAttributes");
+                expect(response.locations[0].placeAttributes).to.be.an("object");
+                expect(response.locations[0]).to.have.property("type");
+                expect(response.locations[0]).to.have.property("accuracy");
+            };
+
+            var functionAssertPOI  = function (response) {
+                console.log(response);
+                should.exist(response.locations);
+                expect(response.locations).to.be.an("Array");
+                expect(response.locations[0]).to.have.property("type", "PositionOfInterest");
+                expect(response.locations[0]).to.have.property("matchType", "City");
+                expect(response.locations[0].placeAttributes).to.have.property("commune");
+                expect(response.locations[0].placeAttributes).to.have.property("nature");
+                expect(response.locations[0].placeAttributes).to.have.property("department");
+                expect(response.locations[0].placeAttributes).to.have.property("insee");
+                expect(response.locations[0].placeAttributes).to.have.property("municipality");
+                expect(response.locations[0].placeAttributes).to.have.property("importance");
+                expect(response.locations[0].placeAttributes).to.have.property("postalCode");
+                expect(response.locations[0].placeAttributes).to.have.property("insee");
+                expect(response.locations[0].placeAttributes).to.have.property("territory");
+                expect(response.locations[0].placeAttributes).to.have.property("bbox");
+            };
+
+            var functionAssertCADASTRAL  = function (response) {
+                console.log(response);
+                should.exist(response.locations);
+                expect(response.locations).to.be.an("Array");
+                expect(response.locations[0]).to.have.property("type", "CadastralParcel");
+                expect(response.locations[0]).to.have.property("matchType", null);
+                expect(response.locations[0].placeAttributes).to.have.property("commune");
+                expect(response.locations[0].placeAttributes).to.have.property("number");
+                expect(response.locations[0].placeAttributes).to.have.property("department");
+                expect(response.locations[0].placeAttributes).to.have.property("insee");
+                expect(response.locations[0].placeAttributes).to.have.property("municipality");
+                expect(response.locations[0].placeAttributes).to.have.property("absorbedCity");
+                expect(response.locations[0].placeAttributes).to.have.property("insee");
+                // expect(response.locations[0].placeAttributes).to.have.property("arrondissement");
+                expect(response.locations[0].placeAttributes).to.have.property("origin");
+                expect(response.locations[0].placeAttributes).to.have.property("section");
+                expect(response.locations[0].placeAttributes).to.have.property("sheet");
+
+
+            };
+
+            var functionAssertSA = function (response) {
+                console.log(response);
+                should.exist(response.locations);
+                expect(response.locations).to.be.an("Array");
+                expect(response.locations[0]).to.have.property("type", "StreetAddress");
+                expect(response.locations[0]).to.have.property("matchType", "Street number");
+                expect(response.locations[0].placeAttributes).to.have.property("commune");
+                expect(response.locations[0].placeAttributes).to.have.property("street");
+                expect(response.locations[0].placeAttributes).to.have.property("department");
+                expect(response.locations[0].placeAttributes).to.have.property("insee");
+                expect(response.locations[0].placeAttributes).to.have.property("municipality");
+                expect(response.locations[0].placeAttributes).to.have.property("number");
+                expect(response.locations[0].placeAttributes).to.have.property("postalCode");
+                expect(response.locations[0].placeAttributes).to.have.property("quality");
+                expect(response.locations[0].placeAttributes).to.have.property("territory");
+                expect(response.locations[0].placeAttributes).to.have.property("bbox");
+            };
 
             before(function () {
                 if (mock) {
@@ -54,8 +132,8 @@ define([
                         console.log(error);
                     },
                     // spécifique au service
-                    location: "Saint-Mandé",
-                    returnFreeForm: false,
+                    location: "2 avenue pasteur, Saint-Mandé",
+                    // returnFreeForm: false,
                     // filterOptions: {
                     //     // bbox : { left: 0, right : 1, top : 1, bottom : 0 },
                     //     // circle : { x : 0, y : 0, radius : 100 },
@@ -63,7 +141,7 @@ define([
                     //     type: ['PositionOfInterest']
                     //     // type: ['StreetAddress', 'PositionOfInterest']
                     // },
-                    maximumResponses: 1,
+                    // maximumResponses: 1,
                     // srs: 'EPSG:4326'
                 };
             });
@@ -92,16 +170,7 @@ define([
                         options.httpMethod = 'GET';
                         options.onSuccess = function (response) {
                             console.log("response XHR GET : ",response);
-                            should.exist(response.locations);
-                            expect(response.locations).to.be.an("Array");
-                            expect(response.locations).to.have.length(1);
-                            expect(response.locations[0]).to.have.property("position");
-                            expect(response.locations[0].position).to.be.an("object");
-                            expect(response.locations[0]).to.have.deep.property("position.x");
-                            expect(response.locations[0]).to.have.deep.property("position.y");
-                            expect(response.locations[0]).to.have.property("matchType");
-                            expect(response.locations[0]).to.have.property("placeAttributes");
-                            expect(response.locations[0].placeAttributes).to.be.an("object");
+                            functionAssertCommon(response);
                             done();
                         };
                         options.onFailure = function (error) {
@@ -116,23 +185,14 @@ define([
                         }
                     });
 
-                    it("Appel du service en mode 'XHR' avec la méthode 'POST' ('OLS')", function (done) {
+                    xit("Appel du service en mode 'XHR' avec la méthode 'POST' ('OLS')", function (done) {
                         // description du test
 
                         options.protocol = 'XHR';
                         options.httpMethod = 'POST';
                         options.onSuccess = function (response) {
                             console.log("response XHR POST : ",response);
-                            should.exist(response.locations);
-                            expect(response.locations).to.be.an("Array");
-                            expect(response.locations).to.have.length(1);
-                            expect(response.locations[0]).to.have.property("position");
-                            expect(response.locations[0].position).to.be.an("object");
-                            expect(response.locations[0]).to.have.deep.property("position.x");
-                            expect(response.locations[0]).to.have.deep.property("position.y");
-                            expect(response.locations[0]).to.have.property("matchType");
-                            expect(response.locations[0]).to.have.property("placeAttributes");
-                            expect(response.locations[0].placeAttributes).to.be.an("object");
+                            functionAssertCommon(response);
                             done();
                         };
                         options.onFailure = function (error) {
@@ -148,37 +208,26 @@ define([
                     });
                 });
 
-                describe("Test sur les options spécifiques du service (mode 'XHR' avec la méthode 'POST', maximumResponses=1)", function () {
-
-                    // fonction contenant les tests de la reponse
-                    var functionResponseAssert = function (response) {
-                        should.exist(response);
-                        should.exist(response.locations);
-                        expect(response.locations).to.have.length(1);
-                        expect(response.locations).to.be.an("Array");
-                        expect(response.locations[0]).to.have.property("position");
-                        expect(response.locations[0].position).to.be.an("object");
-                        expect(response.locations[0]).to.have.deep.property("position.x");
-                        expect(response.locations[0]).to.have.deep.property("position.y");
-                        expect(response.locations[0]).to.have.property("matchType");
-                        expect(response.locations[0]).to.have.property("type");
-                        expect(response.locations[0]).to.have.property("placeAttributes");
-                        expect(response.locations[0].placeAttributes).to.be.an("object");
-                    };
+                describe("Test sur les options spécifiques du service", function () {
 
                     describe("L'option 'location' est renseignée",  function () {
 
                         it("location dite 'libre' : chaîne de caractères", function (done) {
-                            // description du test : envoi d'une requête POST avec freeFormAddress="Saint-Mandé"
+                            // description du test : envoi d'une requête GET avec freeFormAddress="Saint-Mandé"
 
+                            options.httpMethod = "GET";
+                            options.location = "2 avenue pasteur, saint-mandé";
                             options.onSuccess = function (response) {
                                 console.log(response);
-                                functionResponseAssert(response);
+                                functionAssertCommon(response);
+                                functionAssertSA(response);
                                 expect(response.locations[0]).to.have.property("type", "StreetAddress");
                                 expect(response.locations[0].placeAttributes).to.have.property("commune", "Saint-Mandé");
                                 expect(response.locations[0].placeAttributes).to.have.property("department", "94");
                                 expect(response.locations[0].placeAttributes).to.have.property("postalCode", "94160");
-                                expect(response.locations[0]).to.have.property("matchType", "City");
+                                expect(response.locations[0].placeAttributes).to.have.property("number", "2");
+                                expect(response.locations[0].placeAttributes).to.have.property("street", "av pasteur");
+                                expect(response.locations[0]).to.have.property("matchType", "Street number");
                                 done();
                             };
                             options.onFailure = function (error) {
@@ -198,19 +247,20 @@ define([
 
                             options.location = {
                                 number: 2,
-                                street: "avenue de paris",
+                                street: "avenue pasteur",
                                 city: "Saint-Mandé",
                                 postalCode: 94166
                             };
                             options.onSuccess = function (response) {
                                 console.log(response);
-                                functionResponseAssert(response);
+                                functionAssertCommon(response);
+                                functionAssertSA(response);
                                 expect(response.locations[0]).to.have.property("type", "StreetAddress");
                                 expect(response.locations[0].placeAttributes).to.have.property("commune", "Saint-Mandé");
                                 expect(response.locations[0].placeAttributes).to.have.property("department", "94");
                                 expect(response.locations[0].placeAttributes).to.have.property("postalCode", "94160");
-                                expect(response.locations[0].placeAttributes).to.have.property("street", "av de paris");
-                                expect(response.locations[0]).to.have.property("matchType", "Street");
+                                expect(response.locations[0].placeAttributes).to.have.property("street", "av pasteur");
+                                expect(response.locations[0]).to.have.property("matchType", "Street number");
                                 done();
                             };
                             options.onFailure = function (error) {
@@ -226,7 +276,7 @@ define([
                         });
                     });
 
-                    describe("Les options 'location' et 'filterOptions' sont renseignées", function () {
+                    describe("L'option 'filterOptions' est renseignée", function () {
 
                         describe("Le type est defini", function () {
 
@@ -236,17 +286,12 @@ define([
                                 options.filterOptions = {
                                     type : ""
                                 };
-                                options.rawResponse = false;
-                                options.location = "Saint-Mandé";
 
                                 options.onSuccess = function (response) {
                                     console.log(response);
-                                    functionResponseAssert(response);
+                                    functionAssertCommon(response);
+                                    functionAssertSA(response);
                                     expect(response.locations[0]).to.have.property("type", "StreetAddress");
-                                    expect(response.locations[0].placeAttributes).to.have.property("commune", "Saint-Mandé");
-                                    expect(response.locations[0].placeAttributes).to.have.property("department", "94");
-                                    expect(response.locations[0].placeAttributes).to.have.property("postalCode", "94160");
-                                    expect(response.locations[0]).to.have.property("matchType", "City");
                                     done();
                                 };
                                 options.onFailure = function (error) {
@@ -267,15 +312,12 @@ define([
                                 options.filterOptions = {
                                     type : "StreetAddress"
                                 };
-                                options.location = "Saint-Mandé";
+
                                 options.onSuccess = function (response) {
                                     console.log(response);
-                                    functionResponseAssert(response);
+                                    functionAssertCommon(response);
+                                    functionAssertSA(response);
                                     expect(response.locations[0]).to.have.property("type", "StreetAddress");
-                                    expect(response.locations[0].placeAttributes).to.have.property("commune", "Saint-Mandé");
-                                    expect(response.locations[0].placeAttributes).to.have.property("department", "94");
-                                    expect(response.locations[0].placeAttributes).to.have.property("postalCode", "94160");
-                                    expect(response.locations[0]).to.have.property("matchType", "City");
                                     done();
                                 };
                                 options.onFailure = function (error) {
@@ -296,15 +338,12 @@ define([
                                 options.filterOptions = {
                                     type : "PositionOfInterest"
                                 };
-                                options.location = "Saint-Mandé";
+
                                 options.onSuccess = function (response) {
                                     console.log(response);
-                                    functionResponseAssert(response);
+                                    functionAssertCommon(response);
+                                    functionAssertPOI(response);
                                     expect(response.locations[0]).to.have.property("type", "PositionOfInterest");
-                                    expect(response.locations[0].placeAttributes).to.have.property("commune", "Vievy-le-Rayé");
-                                    expect(response.locations[0].placeAttributes).to.have.property("department", "41");
-                                    expect(response.locations[0].placeAttributes).to.have.property("postalCode", "41290");
-                                    expect(response.locations[0]).to.have.property("matchType", "City");
                                     done();
                                 };
                                 options.onFailure = function (error) {
@@ -325,10 +364,12 @@ define([
                                 options.filterOptions = {
                                     type : "CadastralParcel"
                                 };
-                                options.location = "94";
+                                options.location = "94001000AC0101";
+                                options.httpMethod = "GET";
                                 options.onSuccess = function (response) {
                                     console.log(response);
-                                    functionResponseAssert(response);
+                                    functionAssertCommon(response);
+                                    functionAssertCADASTRAL(response);
                                     expect(response.locations[0]).to.have.property("type", "CadastralParcel");
                                     expect(response.locations[0].placeAttributes).to.have.property("cadastralParcel", "94001000AC0101");
                                     expect(response.locations[0].placeAttributes).to.have.property("commune", "001");
@@ -348,7 +389,7 @@ define([
                                 }
                             });
 
-                            xit("TODO type = Administratif", function (done) {
+                            xit("type = Administratif", function (done) {
                                 // description du test : on ne cherche que des géolocalisations de type "Administratif"
                             });
 
@@ -358,29 +399,10 @@ define([
                                 options.filterOptions = {
                                     type : ["StreetAddress", "PositionOfInterest"]
                                 };
-                                options.location = "Saint-Mandé";
-                                options.maximumResponses = 2;
+                                options.location = "Saint Mandé";
                                 options.onSuccess = function (response) {
                                     console.log(response);
-                                    should.exist(response.locations);
-                                    expect(response.locations).to.be.an("Array");
-                                    expect(response.locations).to.have.length(2);
-                                    expect(response.locations[0]).to.have.property("position");
-                                    expect(response.locations[0].position).to.be.an("object");
-                                    expect(response.locations[0]).to.have.deep.property("position.x");
-                                    expect(response.locations[0]).to.have.deep.property("position.y");
-                                    expect(response.locations[0]).to.have.property("placeAttributes");
-                                    expect(response.locations[0].placeAttributes).to.be.an("object");
-                                    expect(response.locations[0]).to.have.property("type", "StreetAddress");
-                                    expect(response.locations[0].placeAttributes).to.have.property("commune", "Saint-Mandé");
-                                    expect(response.locations[0].placeAttributes).to.have.property("department", "94");
-                                    expect(response.locations[0].placeAttributes).to.have.property("postalCode", "94160");
-                                    expect(response.locations[0]).to.have.property("matchType", "City");
-                                    expect(response.locations[1]).to.have.property("type", "PositionOfInterest");
-                                    expect(response.locations[1].placeAttributes).to.have.property("commune", "Vievy-le-Rayé");
-                                    expect(response.locations[1].placeAttributes).to.have.property("department", "41");
-                                    expect(response.locations[1].placeAttributes).to.have.property("postalCode", "41290");
-                                    expect(response.locations[1]).to.have.property("matchType", "City");
+                                    functionAssertCommon(response);
                                     done();
                                 };
                                 options.onFailure = function (error) {
@@ -407,17 +429,14 @@ define([
                                         bottom : 48.80
                                     }
                                 };
-                                options.location = "Saint-Mandé";
+                                options.location = "2 avenue pasteur, Saint-Mandé";
                                 options.maximumResponses = 1;
 
                                 options.onSuccess = function (response) {
                                     console.log(response);
-                                    functionResponseAssert(response);
+                                    functionAssertCommon(response);
+                                    functionAssertSA(response);
                                     expect(response.locations[0]).to.have.property("type", "StreetAddress");
-                                    expect(response.locations[0].placeAttributes).to.have.property("commune", "Saint-Mandé");
-                                    expect(response.locations[0].placeAttributes).to.have.property("department", "94");
-                                    expect(response.locations[0].placeAttributes).to.have.property("postalCode", "94160");
-                                    expect(response.locations[0]).to.have.property("matchType", "City");
                                     done();
                                 };
                                 options.onFailure = function (error) {
@@ -434,7 +453,7 @@ define([
 
                         });
 
-                        describe("TODO : Des filtres sont definis", function () {
+                        describe("Des filtres sont definis", function () {
 
                             describe("filtres attributaires généraux", function() {
 
@@ -443,15 +462,18 @@ define([
                                     // on cherche des résultats de type "StreetAddress"
 
                                     options.filterOptions = {
+                                        type : ["PositionOfInterest"],
                                         insee: "94067"
                                     };
+                                    options.httpMethod = 'GET';
                                     options.location = "Saint-Mandé";
                                     options.maximumResponses = 1;
 
                                     options.onSuccess = function (response) {
                                         console.log(response);
-                                        functionResponseAssert(response);
-                                        expect(response.locations[0]).to.have.property("type", "StreetAddress");
+                                        functionAssertCommon(response);
+                                        functionAssertPOI(response);
+                                        expect(response.locations[0]).to.have.property("type", "PositionOfInterest");
                                         expect(response.locations[0].placeAttributes).to.have.property("commune", "Saint-Mandé");
                                         expect(response.locations[0].placeAttributes).to.have.property("department", "94");
                                         expect(response.locations[0].placeAttributes).to.have.property("postalCode", "94160");
@@ -466,50 +488,48 @@ define([
                                     Gp.Services.geocode(options);
 
                                     if (mock) {
-                                        requests[10].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
+                                        requests[10].respond(200, { "Content-Type": "application/xml" }, geocodeResponsePOI);
                                     }
                                 });
-                                xit("TODO filtre = 'department'", function (done) {
+                                xit("filtre = 'department'", function (done) {
                                     // description du test :
                                 });
-                                xit("TODO filtre = 'municipality'", function (done) {
+                                xit("filtre = 'municipality'", function (done) {
                                     // description du test :
                                 });
-                                xit("TODO filtre = 'accuracy'", function (done) {
+                                xit("filtre = 'accuracy'", function (done) {
                                     // description du test :
                                 });
-                                xit("TODO filtre = 'matchType'", function (done) {
+                                xit("filtre = 'matchType'", function (done) {
                                     // description du test :
                                 });
                             })
 
                             describe("filtres attributaires de type 'StreetAddress'", function() {
-                                xit("TODO filtre = 'number' ", function (done) {
+                                xit("filtre = 'number' ", function (done) {
                                     // description du test :
                                 });
-                                xit("TODO filtre = 'street'", function (done) {
+                                xit("filtre = 'street'", function (done) {
                                     // description du test :
                                 });
-                                it("TODO filtre = 'postalCode'", function (done) {
+                                xit("FIXME : filtre = 'postalCode'", function (done) {
                                     // description du test : on restreint la recherche à un code postal donné,
                                     // on cherche des résultats de type "StreetAddress"
-
-                                    // FIXME : la requête est mal construite: il faut créer une balise <PostalCode>94160</PostalCode>, et non pas <xls:Place type="postalCode">94160</xls:Place>
 
                                     options.filterOptions = {
                                         postalCode: "94160"
                                     };
-                                    options.location = "Saint-Mandé";
+                                    options.location = "2 avenue pasteur";
                                     options.maximumResponses = 1;
-
+                                    options.httpMethod = "GET";
                                     options.onSuccess = function (response) {
                                         console.log(response);
-                                        functionResponseAssert(response);
+                                        functionAssertCommon(response);
+                                        functionAssertSA(response);
                                         expect(response.locations[0]).to.have.property("type", "StreetAddress");
                                         expect(response.locations[0].placeAttributes).to.have.property("commune", "Saint-Mandé");
                                         expect(response.locations[0].placeAttributes).to.have.property("department", "94");
                                         expect(response.locations[0].placeAttributes).to.have.property("postalCode", "94160");
-                                        expect(response.locations[0]).to.have.property("matchType", "City");
                                         done();
                                     };
                                     options.onFailure = function (error) {
@@ -523,29 +543,27 @@ define([
                                         requests[11].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
                                     }
                                 });
-                                xit("TODO filtre = 'quality'", function (done) {
+                                xit("filtre = 'quality'", function (done) {
                                     // description du test :
                                 });
-                                xit("TODO filtre = 'ID'", function (done) {
+                                xit("filtre = 'ID'", function (done) {
                                     // description du test :
                                 });
-                                xit("TODO filtre = 'ID_TR'", function (done) {
+                                xit("filtre = 'ID_TR'", function (done) {
                                     // description du test :
                                 });
-                                xit("TODO filtre = 'territory'", function (done) {
+                                xit("filtre = 'territory'", function (done) {
                                     // description du test :
                                 });
                             })
 
                             describe("filtres attributaires de type 'PositionOfInterest'", function() {
-                                xit("TODO filtre = 'importance' ", function (done) {
+                                xit("filtre = 'importance' ", function (done) {
                                     // description du test :
                                 });
                                 it("filtre = 'nature'", function (done) {
                                     // description du test : on restreint la recherche à une nature de résultat (Lieu-dit habité)
                                     // on cherche des résultats de type "PositionOfInterest"
-
-                                    // FIXME : la requête est mal construite: il faut créer une balise <PostalCode>94160</PostalCode>, et non pas <xls:Place type="postalCode">94160</xls:Place>
 
                                     options.filterOptions = {
                                         type: ["PositionOfInterest"],
@@ -556,7 +574,8 @@ define([
 
                                     options.onSuccess = function (response) {
                                         console.log(response);
-                                        functionResponseAssert(response);
+                                        functionAssertCommon(response);
+                                        functionAssertPOI(response);
                                         expect(response.locations[0]).to.have.property("type", "PositionOfInterest");
                                         expect(response.locations[0].placeAttributes).to.have.property("nature", "Lieu-dit habité");
                                         done();
@@ -572,31 +591,31 @@ define([
                                         requests[12].respond(200, { "Content-Type": "application/xml" }, geocodeResponsePOI);
                                     }
                                 });
-                                xit("TODO filtre = 'postalCode'", function (done) {
+                                xit("filtre = 'postalCode'", function (done) {
                                     // description du test :
                                 });
-                                xit("TODO filtre = 'territory'", function (done) {
+                                xit("filtre = 'territory'", function (done) {
                                     // description du test :
                                 });
                             })
 
-                            describe("filtres attributaires de type 'CadastralParcel'", function() {
-                                it("filtre = 'sheet' ", function (done) {
+                            describe("FIXME : filtres attributaires de type 'CadastralParcel'", function() {
+
+                                xit("filtre = 'sheet' ", function (done) {
                                     // description du test : on restreint la recherche à une feuille cadastrale donnée,
                                     // on cherche des résultats de type "CadastralParcel"
 
-                                    // FIXME : la requête est mal construite: il faut créer une balise <PostalCode>94160</PostalCode>, et non pas <xls:Place type="postalCode">94160</xls:Place>
-
                                     options.filterOptions = {
-                                        type: ["CadastralParcel"],
-                                        sheet: "1"
+                                        type: ["CadastralParcel"]
                                     };
-                                    options.location = "Saint-Mandé";
-                                    options.maximumResponses = 1;
 
+                                    options.location = "*001000AC0101"; // 94001000AC0101
+                                    options.maximumResponses = 1;
+                                    options.httpMethod = "GET";
                                     options.onSuccess = function (response) {
                                         console.log(response);
-                                        functionResponseAssert(response);
+                                        functionAssertCommon(response);
+                                        functionAssertCADASTRAL(response);
                                         expect(response.locations[0]).to.have.property("type", "CadastralParcel");
                                         expect(response.locations[0].placeAttributes).to.have.property("sheet", "1");
                                         done();
@@ -612,15 +631,15 @@ define([
                                         requests[13].respond(200, { "Content-Type": "application/xml" }, geocodeResponseParcel);
                                     }
                                 });
-                                xit("TODO filtre = 'section'", function (done) {
+                                xit("filtre = 'section'", function (done) {
                                     // description du test :
                                 });
-                                xit("TODO filtre = 'absorbedCity'", function (done) {
+                                xit("filtre = 'absorbedCity'", function (done) {
                                     // description du test :
                                 });
                             })
 
-                            describe("TODO filtres géométriques ?", function() {
+                            describe("filtres géométriques ?", function() {
 
                             })
 
@@ -652,15 +671,16 @@ define([
 
                     describe("L'option 'returnFreeForm' est renseignée", function () {
 
-                        it("returnFreeForm=true", function (done) {
+                        it("returnFreeForm = true", function (done) {
                             // description du test : envoi d'une requête POST avec freeFormAddress="Saint-Mandé"
 
                             options.rawResponse = false;
                             options.returnFreeForm = true;
+                            options.httpMethod = "GET";
                             options.onSuccess = function (response) {
                                 console.log(response);
-                                functionResponseAssert(response);
-                                expect(response.locations[0].placeAttributes).to.have.property("freeform","94160 Saint-Mandé");
+                                functionAssertCommon(response);
+                                expect(response.locations[0].placeAttributes).to.have.property("freeform");
                                 done();
                             };
                             options.onFailure = function (error) {
@@ -678,7 +698,7 @@ define([
 
                     describe("L'option 'srs' est renseignée", function () {
 
-                        xit("TODO srs='EPSG:3857", function (done) {
+                        xit("srs='EPSG:3857", function (done) {
                             // description du test : envoi d'une requête POST avec freeFormAddress="Saint-Mandé"
 
                             options.returnFreeForm = false;

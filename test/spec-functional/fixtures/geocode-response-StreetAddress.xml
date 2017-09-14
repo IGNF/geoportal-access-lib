@@ -10,22 +10,24 @@
       <GeocodeResponseList numberOfGeocodedAddresses="1">
         <GeocodedAddress>
           <gml:Point>
-            <gml:pos>48.842835 2.417883</gml:pos>
+            <gml:pos>48.843488 2.423181</gml:pos>
           </gml:Point>
           <Address countryCode="StreetAddress">
             <StreetAddress>
-              <Street/>
+              <Building number="2"/>
+              <Street>av pasteur</Street>
             </StreetAddress>
             <Place type="Municipality">Saint-Mandé</Place>
-            <Place type="Qualite">30.0</Place>
+            <Place type="Qualite">2.5</Place>
             <Place type="Departement">94</Place>
-            <Place type="Bbox">2.411472;48.833712;2.428316;48.849392</Place>
+            <Place type="Bbox">2.423043;48.843300;2.423181;48.843706</Place>
             <Place type="Commune">Saint-Mandé</Place>
             <Place type="INSEE">94067</Place>
             <Place type="Territoire">FXX</Place>
+            <Place type="ID_TR">TRONROUT0000000004406492</Place>
             <PostalCode>94160</PostalCode>
           </Address>
-          <GeocodeMatchCode accuracy="1.0" matchType="City"/>
+          <GeocodeMatchCode accuracy="1.0" matchType="Street number"/>
         </GeocodedAddress>
       </GeocodeResponseList>
     </GeocodeResponse>

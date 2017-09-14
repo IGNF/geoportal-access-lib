@@ -4,7 +4,7 @@
     <xls:Request maximumResponses="25" methodName="GeocodeRequest" requestID="c78734fb-9b9d-45a7-8443-5cc1efe9b15b" version="1.2">
         <xls:GeocodeRequest returnFreeForm="false">
             <xls:Address countryCode="StreetAddress">
-                <xls:freeFormAddress>Saint-Mandée</xls:freeFormAddress>
+                <xls:freeFormAddress>Saint-Mandé</xls:freeFormAddress>
             </xls:Address>
         </xls:GeocodeRequest>
     </xls:Request>
