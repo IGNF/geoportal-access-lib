@@ -15,6 +15,8 @@ define([
 
             describe('Service.getAltitude : SUCCESS', function () {
 
+                this.timeout(15000);
+
                 describe("Test sur les options du Protocole", function () {
 
                     // mock sur XHR

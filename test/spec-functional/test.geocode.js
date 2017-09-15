@@ -32,8 +32,33 @@ define([
             var myKey = (mock) ? "CLE" : "jhyvi0fgmnuxvfv0zjzorvdn";
             var version = Gp.servicesVersion;
 
-            var xhr, requests;
-            var options;
+            var options = {
+                apiKey: myKey,
+                serverUrl: null,
+                protocol: 'XHR',
+                // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
+                httpMethod: 'POST',
+                timeOut: 10000,
+                rawResponse: false,
+                onSuccess: function (response) {
+                    console.log(response);
+                },
+                onFailure: function (error) {
+                    console.log(error);
+                },
+                // spécifique au service
+                location: "2 avenue pasteur, Saint-Mandé"
+                // returnFreeForm: false,
+                // filterOptions: {
+                //     // bbox : { left: 0, right : 1, top : 1, bottom : 0 },
+                //     // circle : { x : 0, y : 0, radius : 100 },
+                //     // polygon  : [{x:0,y:0}, {x:1,y:1}, {x:2,y:2}, {x:3,y:2}, {x:4,y:1}, {x:0,y:0}]
+                //     type: ['PositionOfInterest']
+                //     // type: ['StreetAddress', 'PositionOfInterest']
+                // },
+                // maximumResponses: 1,
+                // srs: 'EPSG:4326'
+            };
 
             var functionAssertCommon = function (response) {
                 console.log(response);
@@ -108,7 +133,9 @@ define([
                 expect(response.locations[0].placeAttributes).to.have.property("bbox");
             };
 
-            before(function () {
+            var xhr, requests;
+
+            beforeEach(function () {
                 if (mock) {
                     xhr = sinon.useFakeXMLHttpRequest();
                     requests = [];
@@ -117,42 +144,18 @@ define([
                         requests.push(request);
                     };
                 }
-                options = {
-                    apiKey: myKey,
-                    serverUrl: null,
-                    protocol: 'XHR',
-                    // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
-                    httpMethod: 'POST',
-                    timeOut: 10000,
-                    rawResponse: false,
-                    onSuccess: function (response) {
-                        console.log(response);
-                    },
-                    onFailure: function (error) {
-                        console.log(error);
-                    },
-                    // spécifique au service
-                    location: "2 avenue pasteur, Saint-Mandé",
-                    // returnFreeForm: false,
-                    // filterOptions: {
-                    //     // bbox : { left: 0, right : 1, top : 1, bottom : 0 },
-                    //     // circle : { x : 0, y : 0, radius : 100 },
-                    //     // polygon  : [{x:0,y:0}, {x:1,y:1}, {x:2,y:2}, {x:3,y:2}, {x:4,y:1}, {x:0,y:0}]
-                    //     type: ['PositionOfInterest']
-                    //     // type: ['StreetAddress', 'PositionOfInterest']
-                    // },
-                    // maximumResponses: 1,
-                    // srs: 'EPSG:4326'
-                };
+
             });
 
-            after(function () {
+            afterEach(function () {
                 if (mock) {
                     xhr.restore();
                 }
             });
 
             describe('Service.geocode : SUCCESS', function () {
+
+                this.timeout(15000);
 
                 describe("Tests sur les options du protocole du service", function () {
 
@@ -186,7 +189,8 @@ define([
                     });
 
                     xit("Appel du service en mode 'XHR' avec la méthode 'POST' ('OLS')", function (done) {
-                        // description du test
+                        // FIXME description du test
+                        // mode POST en 405 Method Not Allowed !?
 
                         options.protocol = 'XHR';
                         options.httpMethod = 'POST';
@@ -203,7 +207,7 @@ define([
                         Gp.Services.geocode(options);
 
                         if (mock) {
-                            requests[1].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
+                            requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
                         }
                     });
                 });
@@ -238,7 +242,7 @@ define([
                             Gp.Services.geocode(options);
 
                             if (mock) {
-                                requests[2].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
+                                requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
                             }
                         });
 
@@ -271,7 +275,7 @@ define([
                             Gp.Services.geocode(options);
 
                             if (mock) {
-                                requests[3].respond(200, { "Content-Type": "application/xml" }, geocodeResponseStructuredLocation);
+                                requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponseStructuredLocation);
                             }
                         });
                     });
@@ -302,7 +306,7 @@ define([
                                 Gp.Services.geocode(options);
 
                                 if (mock) {
-                                    requests[4].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
+                                    requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
                                 }
                             });
 
@@ -328,7 +332,7 @@ define([
                                 Gp.Services.geocode(options);
 
                                 if (mock) {
-                                    requests[5].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
+                                    requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
                                 }
                             });
 
@@ -354,7 +358,7 @@ define([
                                 Gp.Services.geocode(options);
 
                                 if (mock) {
-                                    requests[6].respond(200, { "Content-Type": "application/xml" }, geocodeResponsePOI);
+                                    requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponsePOI);
                                 }
                             });
 
@@ -385,7 +389,7 @@ define([
                                 Gp.Services.geocode(options);
 
                                 if (mock) {
-                                    requests[7].respond(200, { "Content-Type": "application/xml" }, geocodeResponseParcel);
+                                    requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponseParcel);
                                 }
                             });
 
@@ -413,7 +417,7 @@ define([
                                 Gp.Services.geocode(options);
 
                                 if (mock) {
-                                    requests[8].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA_POI);
+                                    requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA_POI);
                                 }
                             });
 
@@ -447,7 +451,7 @@ define([
                                 Gp.Services.geocode(options);
 
                                 if (mock) {
-                                    requests[9].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
+                                    requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
                                 }
                             });
 
@@ -466,7 +470,7 @@ define([
                                         insee: "94067"
                                     };
                                     options.httpMethod = 'GET';
-                                    options.location = "Saint-Mandé";
+                                    options.location = "Saint-Mande";
                                     options.maximumResponses = 1;
 
                                     options.onSuccess = function (response) {
@@ -488,7 +492,7 @@ define([
                                     Gp.Services.geocode(options);
 
                                     if (mock) {
-                                        requests[10].respond(200, { "Content-Type": "application/xml" }, geocodeResponsePOI);
+                                        requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponsePOI);
                                     }
                                 });
                                 xit("filtre = 'department'", function (done) {
@@ -540,7 +544,7 @@ define([
                                     Gp.Services.geocode(options);
 
                                     if (mock) {
-                                        requests[11].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
+                                        requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
                                     }
                                 });
                                 xit("filtre = 'quality'", function (done) {
@@ -567,17 +571,17 @@ define([
 
                                     options.filterOptions = {
                                         type: ["PositionOfInterest"],
-                                        nature: "Lieu-dit habité"
+                                        nature: "Commune"
                                     };
                                     options.location = "Saint-Mandé";
                                     options.maximumResponses = 1;
-
+                                    options.httpMethod = "GET";
                                     options.onSuccess = function (response) {
                                         console.log(response);
                                         functionAssertCommon(response);
                                         functionAssertPOI(response);
                                         expect(response.locations[0]).to.have.property("type", "PositionOfInterest");
-                                        expect(response.locations[0].placeAttributes).to.have.property("nature", "Lieu-dit habité");
+                                        expect(response.locations[0].placeAttributes).to.have.property("nature", "Commune");
                                         done();
                                     };
                                     options.onFailure = function (error) {
@@ -588,7 +592,7 @@ define([
                                     Gp.Services.geocode(options);
 
                                     if (mock) {
-                                        requests[12].respond(200, { "Content-Type": "application/xml" }, geocodeResponsePOI);
+                                        requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponsePOI);
                                     }
                                 });
                                 xit("filtre = 'postalCode'", function (done) {
@@ -628,7 +632,7 @@ define([
                                     Gp.Services.geocode(options);
 
                                     if (mock) {
-                                        requests[13].respond(200, { "Content-Type": "application/xml" }, geocodeResponseParcel);
+                                        requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponseParcel);
                                     }
                                 });
                                 xit("filtre = 'section'", function (done) {
@@ -664,7 +668,7 @@ define([
                             Gp.Services.geocode(options);
 
                             if (mock) {
-                                requests[14].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
+                                requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
                             }
                         });
                     });
@@ -691,7 +695,7 @@ define([
                             Gp.Services.geocode(options);
 
                             if (mock) {
-                                requests[15].respond(200, { "Content-Type": "application/xml" }, geocodeResponseFreeform);
+                                requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponseFreeform);
                             }
                         });
                     });
@@ -715,7 +719,7 @@ define([
                             Gp.Services.geocode(options);
 
                             if (mock) {
-                                requests[16].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
+                                requests[0].respond(200, { "Content-Type": "application/xml" }, geocodeResponseSA);
                             }
                         });
                     });

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XLS version="1.2" xmlns="http://www.opengis.net/xls"
+  xmlns:gml="http://www.opengis.net/gml"
+  xmlns:xls="http://www.opengis.net/xls"
+  xmlns:xlsext="http://www.opengis.net/xlsext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://wxs.ign.fr/schemas/olsAll.xsd">
+  <ResponseHeader/>
+  <Response requestID="c67e1b1b-45a3-4adc-94db-2fa7e005f63e" version="1.2">
+    <ReverseGeocodeResponse>
+      <ReverseGeocodedLocation>
+        <gml:Point>
+          <gml:pos>48.860033 2.349964</gml:pos>
+        </gml:Point>
+        <Address countryCode="StreetAddress">
+          <StreetAddress>
+            <Building number="25"/>
+            <Street>r quincampoix</Street>
+          </StreetAddress>
+          <Place type="Municipality">Paris</Place>
+
+          <Place type="Qualite">Plaque adresse</Place>
+          <Place type="ID">ADRNIVX_0000000270768112</Place>
+          <Place type="Departement">75</Place>
+          <Place type="Bbox">2.349964;48.860033;2.349964;48.860033</Place>
+          <Place type="Commune">Paris</Place>
+          <Place type="INSEE">75104</Place>
+          <Place type="Territoire">FXX</Place>
+          <Place type="ID_TR">TRONROUT0000000354980680</Place>
+          <PostalCode>75004</PostalCode>
+        </Address>
+        <xlsext:ExtendedGeocodeMatchCode>Street number</xlsext:ExtendedGeocodeMatchCode>
+        <SearchCentreDistance value="4.50"/>
+      </ReverseGeocodedLocation>
+    </ReverseGeocodeResponse>
+  </Response>
+</XLS>

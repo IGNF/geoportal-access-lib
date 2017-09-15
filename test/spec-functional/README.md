@@ -64,11 +64,17 @@ sous forme d'un JSON :
 |:----: |:----:	|:------:	|:----:	|:-------:	|:-------:	|:-----:	|:---:	|:--------:	|:------------:	|
 |       |      	|  JSON  	|   X  	|    -    	|    -    	|   -   	|  -  	|     -    	|       -      	|
 |       |  GET 	|        	|      	|         	|         	|       	|     	|          	|              	|
-|       |      	|   XML  	|   X  	|    X    	|    X    	|   X   	|  -  	|     X    	|       -      	|
-| OLS 	|      	|        	|      	|         	|         	|       	|     	|          	|              	|
+| OLS   |      	|   XML  	|   X  	|    X    	|    X    	|   X   	|  -  	|     X    	|       -      	|
+|   	|      	|        	|      	|         	|         	|       	|     	|          	|              	|
 | WPS   |      	|  JSON  	|   X  	|    -    	|    -    	|   -   	|  -  	|     -    	|       -      	|
 |       | POST 	|        	|      	|         	|         	|       	|     	|          	|              	|
-|       |      	|   XML  	|   X  	|    X    	|    X    	|   X   	|  -  	|     -    	|       -      	|
+|       |      	|   XML  	|   X  	|    405? 	|    405?  	|   X   	|  -  	|     -    	|       -      	|
+
+
+**FIXME**
+> 405 Method Not Allowed
+> Sur les services OLS !?
+
 
 ### AVANCEMENTS
 
@@ -99,8 +105,7 @@ TODO
 |       	| ALTI 	| GEOCODE 	| REVERSE 	| ROUTE 	| ISO 	| AUTOCONF 	| AUTOCOMPLETE 	|
 |:------:	|:----:	|:-------:	|:-------:	|:-----:	|:---:	|:--------:	|:------------:	|
 |       	|   X  	|    /    	|    /    	|   /   	|  /  	|     X    	|       X      	|
-
-
+cf. FIXME et avancements dans le code des tests...
 
 ## Tests sur les erreurs des services
 

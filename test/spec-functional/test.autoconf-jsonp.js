@@ -14,6 +14,8 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
         var myKey = (mock) ? "CLE" : "jhyvi0fgmnuxvfv0zjzorvdn";
 
         describe('Service.getConfig : SUCCESS', function () {
+            
+            this.timeout(15000);
 
             // fonction contenant les tests de la reponse
             var functionAssert = function (response) {

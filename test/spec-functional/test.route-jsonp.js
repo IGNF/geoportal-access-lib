@@ -18,6 +18,8 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
 
         describe('Service.route : SUCCESS', function () {
 
+            this.timeout(15000);
+            
             describe("Test sur l'utilisation basique du service (paramètres par défaut) ", function () {
 
                 // options par defaut (à surcharger)

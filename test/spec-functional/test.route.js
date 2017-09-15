@@ -23,6 +23,8 @@ define([
 
         describe('Service.route : SUCCESS', function () {
 
+            this.timeout(15000);
+            
             describe("Test sur les options du Protocole", function () {
 
                 var server;

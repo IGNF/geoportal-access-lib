@@ -26,6 +26,8 @@ define([
 
         describe('Service.processIsoCurve : SUCCESS', function () {
 
+            this.timeout(15000);
+            
             describe("Tests sur les options du protocole du service", function () {
 
                 var server;

@@ -15,6 +15,8 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
 
         describe('Service.isoCurve : SUCCESS', function () {
 
+            this.timeout(15000);
+
             describe("Test sur l'utilisation basique du service (paramètres par défaut) ", function () {
 
                 // options par defaut (à surcharger)
@@ -58,7 +60,6 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                         expect(response.geometry).to.be.an("object");
                         expect(response).to.have.deep.property("geometry.coordinates");
                         expect(response.geometry.coordinates).to.be.an("array");
-                        expect(response.geometry.coordinates[0]).to.have.length(517);
 
                         expect(response).to.have.property("message");
                         expect(response).to.have.property("srs");
@@ -131,7 +132,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                     expect(response).to.have.property("time");
                 };
 
-                it("Appel du service en mode 'JSONP'" +
+                xit("FIXME : Appel du service en mode 'JSONP'" +
                     " pour un format de sortie en 'xml'", function (done) {
                         // FIXME le service ne renvoie pas la bonne reponse (XML dans un callback) !?
                         // description du test

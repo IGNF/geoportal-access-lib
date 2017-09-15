@@ -42,6 +42,8 @@ define([
 
         describe('Service.autoComplete : SUCCESS', function () {
 
+            this.timeout(15000);
+            
             describe("Tests sur les options du protocole du service", function () {
 
                 // fonction contenant les tests de la reponse
