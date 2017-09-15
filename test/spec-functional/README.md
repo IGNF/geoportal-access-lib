@@ -64,16 +64,15 @@ sous forme d'un JSON :
 |:----: |:----:	|:------:	|:----:	|:-------:	|:-------:	|:-----:	|:---:	|:--------:	|:------------:	|
 |       |      	|  JSON  	|   X  	|    -    	|    -    	|   -   	|  -  	|     -    	|       -      	|
 |       |  GET 	|        	|      	|         	|         	|       	|     	|          	|              	|
-| OLS   |      	|   XML  	|   X  	|    X    	|    X    	|   X   	|  -  	|     X    	|       -      	|
-|   	|      	|        	|      	|         	|         	|       	|     	|          	|              	|
+| OLS   |      	|   XML  	|   X  	|    X    	|    X    	|   / !? 	|  -  	|     X    	|       -      	|
+|     	|      	|        	|      	|         	|         	|       	|     	|          	|              	|
 | WPS   |      	|  JSON  	|   X  	|    -    	|    -    	|   -   	|  -  	|     -    	|       -      	|
 |       | POST 	|        	|      	|         	|         	|       	|     	|          	|              	|
-|       |      	|   XML  	|   X  	|    405? 	|    405?  	|   X   	|  -  	|     -    	|       -      	|
+|       |      	|   XML  	|   X  	|    405? 	|    405?  	|   / !? 	|  -  	|     -    	|       -      	|
 
 
 **FIXME**
-> 405 Method Not Allowed
-> Sur les services OLS !?
+> 405 Method Not Allowed sur les services OLS !?
 
 
 ### AVANCEMENTS
@@ -104,7 +103,7 @@ TODO
 --------------------------------------------------------------------------------------------
 |       	| ALTI 	| GEOCODE 	| REVERSE 	| ROUTE 	| ISO 	| AUTOCONF 	| AUTOCOMPLETE 	|
 |:------:	|:----:	|:-------:	|:-------:	|:-----:	|:---:	|:--------:	|:------------:	|
-|       	|   X  	|    /    	|    /    	|   /   	|  /  	|     X    	|       X      	|
+|       	|   X  	|    /    	|    /    	|   -   	|  -  	|     X    	|       X      	|
 cf. FIXME et avancements dans le code des tests...
 
 ## Tests sur les erreurs des services
@@ -131,12 +130,14 @@ de l'API
 
 ### AVANCEMENTS
 
-TODO
 --------------------------------------------------------------------------------------------
-|       	| ALTI 	| GEOCODE 	| REVERSE 	| ROUTE 	| ISO 	| AUTOCONF 	| AUTOCOMPLETE 	|
-|:------:	|:----:	|:-------:	|:-------:	|:-----:	|:---:	|:--------:	|:------------:	|
-|       	|   /  	|    /    	|    /    	|   /   	|  /  	|     -   	|       /     	|
+|  MODE	  | ALTI 	| GEOCODE 	| REVERSE 	| ROUTE 	| ISO 	| AUTOCONF 	| AUTOCOMPLETE 	| SERVICE 	|
+|:------:	|:----:	|:-------:	|:-------:	|:-----:	|:---:	|:--------:	|:------------:	|:---------:|
+|    XHR	|   X  	|    X    	|    X    	|   X   	|  X  	|     -   	|       X     	|      X    |
+|   JSONP	|   X  	|    X    	|    X    	|   /   	|  /  	|     -   	|       X     	|      X    |
 
+**Note**
+> MODE PROXY POUR LE XHR !
 
 #### Liste des messages
 ```

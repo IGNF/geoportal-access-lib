@@ -16,7 +16,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
                 serverUrl : null,
                 protocol : 'JSONP',
-                proxyURL : null, // ex. 'http://localhost/proxy/php/proxy.php?url='
+                proxyURL : (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null, // ex. 'http://localhost/proxy/php/proxy.php?url='
                 httpMethod : 'GET',
                 timeOut : 0,
                 rawResponse : false,
@@ -45,7 +45,6 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // sauf un TimeOut...
             options.apiKey = "bidon";
             options.protocol = 'XHR';
-            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.onFailure = function (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
@@ -94,7 +93,6 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // this.timeout(1000);
             options.filterOptions.type = ['BIDON'];
             options.protocol = "XHR";
-            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.onFailure = function (e) {
                 console.log(e);
                 expect(e).not.to.be.null;
@@ -116,7 +114,6 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             options.filterOptions = null;
             options.maximumResponses = null;
             options.protocol = "XHR";
-            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.onFailure = function (e) {
                 console.log(e);
                 done(e);
@@ -135,7 +132,6 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             options.filterOptions.bbox = {};
             options.maximumResponses = null;
             options.protocol = "XHR";
-            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.onFailure = function (e) {
                 console.log(e);
                 done(e);

@@ -19,7 +19,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
                 serverUrl : null,
                 protocol : 'XHR',
-                // proxyURL : (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null,
+                proxyURL : (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null,
                 httpMethod : 'GET',
                 timeOut : 0,
                 rawResponse : false,
@@ -59,7 +59,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             options.onFailure = function (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
-                expect(e.message).to.contain("No rights for this ressource or ressource does not exist"); // Key does not exist or has expired
+                expect(e.message).to.contain("Key does not exist or has expired"); // Key does not exist or has expired
                 expect(e.type).to.be.equal("SERVICE_ERROR");
                 expect(e.status).to.be.equal(403);
                 done();

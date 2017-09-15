@@ -27,7 +27,7 @@ define([
         describe('Service.processIsoCurve : SUCCESS', function () {
 
             this.timeout(15000);
-            
+
             describe("Tests sur les options du protocole du service", function () {
 
                 var server;
@@ -243,69 +243,69 @@ define([
 
                 describe("Les options 'position' et 'time|distance' sont renseignées", function() {
 
-                    xit("TODO L'option 'time' est renseignée", function(done) {
+                    xit("L'option 'time' est renseignée", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO L'option 'distance' est renseignée", function(done) {
+                    xit("L'option 'distance' est renseignée", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO time = 0 && distance = 0", function(done) {
+                    xit("time = 0 && distance = 0", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO time = 0 && distance = 0", function(done) {
+                    xit("time = 0 && distance = 0", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO time = 200 && distance = 0", function(done) {
+                    xit("time = 200 && distance = 0", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO time = 200 && distance = 10", function(done) {
+                    xit("time = 200 && distance = 10", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO time = 0 && distance = 10", function(done) {
+                    xit("time = 0 && distance = 10", function(done) {
                         // description du test :
                     });
                 });
 
                 describe("Les options 'position' et 'graph' sont renseignées", function() {
 
-                    xit("TODO graph = Voiture", function(done) {
+                    xit("graph = Voiture", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO graph = Pieton", function(done) {
+                    xit("graph = Pieton", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO graph par defaut", function(done) {
+                    xit("graph par defaut", function(done) {
                         // description du test :
                     });
                 });
 
                 describe("Les options 'position' et 'exclusions' sont renseignées", function() {
 
-                    xit("TODO exclusions = Bridge", function(done) {
+                    xit("exclusions = Bridge", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO exclusions = Toll", function(done) {
+                    xit("exclusions = Toll", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO exclusions = Tunnel", function(done) {
+                    xit("exclusions = Tunnel", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO exclusions = Bridge, Toll, Tunnel", function(done) {
+                    xit("exclusions = Bridge, Toll, Tunnel", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO sans exclusions", function(done) {
+                    xit("sans exclusions", function(done) {
                         // description du test :
                     });
                 });

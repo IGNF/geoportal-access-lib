@@ -1,4 +1,4 @@
-// define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
+define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
 
     var assert = chai.assert;
     var expect = chai.expect;
@@ -16,7 +16,7 @@
                 apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
                 serverUrl : null,
                 protocol : 'JSONP',
-                proxyURL : null, // ex. 'http://localhost/proxy/php/proxy.php?url='
+                proxyURL : (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null, // ex. 'http://localhost/proxy/php/proxy.php?url='
                 httpMethod : 'GET',
                 timeOut : 0,
                 rawResponse : false,
@@ -51,7 +51,6 @@
             // sauf un TimeOut...
             options_reverse.apiKey = "bidon";
             options_reverse.protocol = 'XHR';
-            // options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_reverse.onFailure = function (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
@@ -142,7 +141,6 @@
             // setTimeout(done, 1500);
             options_reverse.filterOptions.type = ['BIDON'];
             options_reverse.protocol = 'XHR';
-            // options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_reverse.onFailure = function (e) {
                 console.log(e);
                 expect(e).not.to.be.null;
@@ -163,7 +161,6 @@
             options_reverse.filterOptions = null;
             options_reverse.protocol = 'XHR';
             options_reverse.httpMethod = 'POST';
-            // options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_reverse.onFailure = function (e) {
                 console.log(e);
                 done(e);
@@ -182,7 +179,6 @@
             options_reverse.filterOptions.bbox = {};
             options_reverse.protocol = 'XHR';
             options_reverse.httpMethod = 'POST';
-            // options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_reverse.onFailure = function (e) {
                 console.log(e);
                 done(e);
@@ -201,7 +197,6 @@
             options_reverse.filterOptions.bbox = null;
             options_reverse.protocol = 'XHR';
             options_reverse.httpMethod = 'POST';
-            // options_reverse.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options_reverse.onFailure = function (e) {
                 console.log(e);
                 done(e);

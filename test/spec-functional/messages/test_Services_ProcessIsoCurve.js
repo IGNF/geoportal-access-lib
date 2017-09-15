@@ -16,7 +16,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
                 serverUrl : null,
                 protocol : 'JSONP',
-                proxyURL : null, // ex. 'http://localhost/proxy/php/proxy.php?url='
+                proxyURL : (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null, // ex. 'http://localhost/proxy/php/proxy.php?url='
                 httpMethod : 'GET',
                 timeOut : 0,
                 rawResponse : false,
@@ -52,11 +52,10 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // sauf un TimeOut...
             options.apiKey = "bidon";
             options.protocol = 'XHR';
-            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.onFailure = function (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
-                expect(e.message).to.contain("No rights for this ressource or ressource does not exist"); // Key does not exist or has expired
+                expect(e.message).to.contain("Key does not exist or has expired"); // Key does not exist or has expired
                 expect(e.type).to.be.equal("SERVICE_ERROR");
                 expect(e.status).to.be.equal(403);
                 done();
@@ -161,7 +160,6 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // FIXME
             // test avec le protocole XHR car le service implemente très mal le callback avec le JSONP!
             options.protocol = 'XHR';
-            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.exclusions = ['BIDON'];
             options.onFailure = function (e) {
                 console.log(e);
@@ -191,7 +189,6 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // FIXME
             // test avec le protocole XHR car le service implemente très mal le callback avec le JSONP!
             options.protocol = 'XHR';
-            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.graph = 'BIDON';
             options.onFailure = function (e) {
                 console.log(e);
