@@ -43,13 +43,13 @@
             return params;
         };
 
-        // par defaut, les tests fonctionnels sont en mode 'mock'
-        window.mock = true;
-        window.proxy = true;
+        // par defaut, 
+        // window.mock = true;
+        window.proxy = false;
         if (hasParams()) {
             var params  = getParams();
-            window.mock = (params.mock && params.mock === "true") ? true : false;
-            window.proxy = (params.proxy && params.proxy === "true") ? true : false;
+            // window.mock = (params.mock && params.mock === "true") ? true : (!params.mock) ? true : false;
+            window.proxy =  (!params.proxy) ? false : (params.proxy && params.proxy === "true") ? true : false;
         }
 
     </script>
@@ -81,13 +81,13 @@
       }).run({
         name: 'mocha',
         tests: [
-          "spec-functional/messages/test_Services.js",
-          "spec-functional/messages/test_Services_Alti.js",
-          "spec-functional/messages/test_Services_Geocode.js",
-          "spec-functional/messages/test_Services_ReverseGeocode.js",
-          "spec-functional/messages/test_Services_Route.js",
-          "spec-functional/messages/test_Services_ProcessIsoCurve.js",
-          "spec-functional/messages/test_Services_AutoComplete.js"
+          "spec-messages/test_Services.js",
+          "spec-messages/test_Services_Alti.js",
+          "spec-messages/test_Services_Geocode.js",
+          "spec-messages/test_Services_ReverseGeocode.js",
+          "spec-messages/test_Services_Route.js",
+          "spec-messages/test_Services_ProcessIsoCurve.js",
+          "spec-messages/test_Services_AutoComplete.js"
         ]
       });
     </script>

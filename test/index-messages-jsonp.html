@@ -43,13 +43,13 @@
             return params;
         };
 
-        // par defaut, les tests fonctionnels sont en mode 'mock' avec un proxy
+        // par defaut,
         window.mock = true;
-        window.proxy = true;
+        // window.proxy = true;
         if (hasParams()) {
             var params  = getParams();
-            window.mock = (params.mock && params.mock === "true") ? true : false;
-            window.proxy = (params.proxy && params.proxy === "true") ? true : false;
+            window.mock = (!params.mock) ? true : (params.mock && params.mock === "true") ? true : false;
+            // window.proxy = (params.proxy && params.proxy === "true") ? true : false;
         }
 
     </script>
@@ -81,13 +81,13 @@
       }).run({
         name: 'mocha',
         tests: [
-          "spec-functional/messages/test_Services_JSONP.js",
-          "spec-functional/messages/test_Services_Alti_JSONP.js",
-          "spec-functional/messages/test_Services_Geocode_JSONP.js",
-          "spec-functional/messages/test_Services_ReverseGeocode_JSONP.js",
-          "spec-functional/messages/test_Services_Route_JSONP.js",
-          "spec-functional/messages/test_Services_ProcessIsoCurve_JSONP.js",
-          "spec-functional/messages/test_Services_AutoComplete_JSONP.js"
+          "spec-messages/test_Services_JSONP.js",
+          "spec-messages/test_Services_Alti_JSONP.js",
+          "spec-messages/test_Services_Geocode_JSONP.js",
+          "spec-messages/test_Services_ReverseGeocode_JSONP.js",
+          "spec-messages/test_Services_Route_JSONP.js",
+          "spec-messages/test_Services_ProcessIsoCurve_JSONP.js",
+          "spec-messages/test_Services_AutoComplete_JSONP.js"
         ]
       });
     </script>

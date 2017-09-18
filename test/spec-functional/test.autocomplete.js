@@ -22,7 +22,7 @@ define([
                 apiKey: myKey,
                 serverUrl: null,
                 protocol: 'XHR', // JSONP|XHR
-                // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
+                // proxyURL: (mock) ? null : "spec-functional/proxy/php/proxy.php?url=",
                 httpMethod: 'GET', // GET|POST
                 timeOut: 10000, // ms
                 rawResponse: false, // true|false
