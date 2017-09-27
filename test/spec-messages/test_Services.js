@@ -16,7 +16,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
                 serverUrl : null,
                 protocol : 'JSONP',
-                proxyURL : (window.proxy) ? 'spec-messages/proxy/php/proxy.php?url=' : null, // ex. 'spec-messages/proxy/php/proxy.php?url='
+                // proxyURL : (window.proxy) ? 'spec-messages/proxy/php/proxy.php?url=' : null, // ex. 'spec-messages/proxy/php/proxy.php?url='
                 httpMethod : 'GET',
                 timeOut : 0,
                 rawResponse : false,
@@ -68,7 +68,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             } finally {}
         });
 
-        it("ALTI - Erreur de clef API : clef inconnue du service", function (done) {
+        xit("ALTI - Erreur de clef API : clef inconnue du service", function (done) {
             // Exception de type ErrorService
             // Levée par le protocole (XHR)
             // Renvoyer pour le callback onFailure()
@@ -162,7 +162,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             } finally {}
         });
 
-        it("ALTI - Erreur de Proxy : url inconnu", function (done) {
+        xit("ALTI - Erreur de Proxy : url inconnu", function (done) {
             // Exception de type ErrorService
             // Levée par le protocole (XHR)
             // Renvoyer pour le callback onFailure()
@@ -221,7 +221,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
 
         });
 
-        it("ALTI - Erreur d'URL du Service : domaine inconnu", function (done) {
+        xit("ALTI - Erreur d'URL du Service : domaine inconnu", function (done) {
             // Exception de type ErrorService
             // Levée par le protocole (XHR)
             // Renvoyer pour le callback onFailure()
@@ -252,13 +252,13 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
 
         });
 
-        it("AUTOCONF - reponse longue avec un timeout", function (done) {
+        xit("AUTOCONF - reponse longue avec un timeout", function (done) {
 
             Gp.Services.getConfig({
                 protocol : 'XHR',
                 apiKey : null,
                 timeOut : 10,
-                proxyURL : (window.proxy) ? 'spec-messages/proxy/php/proxy.php?url=' : null,
+                // proxyURL : (window.proxy) ? 'spec-messages/proxy/php/proxy.php?url=' : null,
                 serverUrl : 'http://wxs.ign.fr/autoconf/',
                 onFailure : function (e) {
                     expect(e).not.to.be.null;

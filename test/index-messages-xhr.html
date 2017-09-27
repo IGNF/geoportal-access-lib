@@ -43,14 +43,14 @@
             return params;
         };
 
-        // par defaut, 
+        // par defaut,
         // window.mock = true;
-        window.proxy = false;
-        if (hasParams()) {
-            var params  = getParams();
-            // window.mock = (params.mock && params.mock === "true") ? true : (!params.mock) ? true : false;
-            window.proxy =  (!params.proxy) ? false : (params.proxy && params.proxy === "true") ? true : false;
-        }
+        // window.proxy = false;
+        // if (hasParams()) {
+        //     var params  = getParams();
+        //     window.mock = (params.mock && params.mock === "true") ? true : (!params.mock) ? true : false;
+        //     window.proxy =  (!params.proxy) ? false : (params.proxy && params.proxy === "true") ? true : false;
+        // }
 
     </script>
 

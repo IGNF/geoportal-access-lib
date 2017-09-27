@@ -16,7 +16,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
                 serverUrl : null,
                 protocol : 'JSONP',
-                proxyURL : (window.proxy) ? 'spec-messages/proxy/php/proxy.php?url=' : null, // ex. 'spec-messages/proxy/php/proxy.php?url='
+                // proxyURL : (window.proxy) ? 'spec-messages/proxy/php/proxy.php?url=' : null, // ex. 'spec-messages/proxy/php/proxy.php?url='
                 httpMethod : 'GET',
                 timeOut : 0,
                 rawResponse : false,
@@ -40,7 +40,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
 
         });
 
-        it("Erreur de clef API : clef inconnue du service", function (done) {
+        xit("Erreur de clef API : clef inconnue du service", function (done) {
             // Exception de type ErrorService
             // Levée par le protocole (XHR)
             // Renvoyer pour le callback onFailure()
@@ -147,7 +147,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             } finally {}
         });
 
-        it("Erreur sur les exclusions : valeur inconnue", function (done) {
+        xit("Erreur sur les exclusions : valeur inconnue", function (done) {
             // Exception de type ErrorService
             // Levée par XHR()
             // Renvoyer pour le callback onFailure()
@@ -176,7 +176,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             Gp.Services.isoCurve(options);
         });
 
-        it("Erreur sur le graphe : valeur inconnue", function (done) {
+        xit("Erreur sur le graphe : valeur inconnue", function (done) {
             // Exception de type ErrorService
             // Levée par XHR()
             // Renvoyer pour le callback onFailure()

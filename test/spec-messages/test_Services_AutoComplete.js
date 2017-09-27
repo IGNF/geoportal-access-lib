@@ -16,7 +16,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
                 serverUrl : null,
                 protocol : 'JSONP',
-                proxyURL : (window.proxy) ? 'spec-messages/proxy/php/proxy.php?url=' : null, // ex. 'spec-messages/proxy/php/proxy.php?url='
+                // proxyURL : (window.proxy) ? 'spec-messages/proxy/php/proxy.php?url=' : null, // ex. 'spec-messages/proxy/php/proxy.php?url='
                 httpMethod : 'GET',
                 timeOut : 0,
                 rawResponse : false,
@@ -33,7 +33,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
 
         });
 
-        it("Erreur de clef API : clef inconnue du service", function (done) {
+        xit("Erreur de clef API : clef inconnue du service", function (done) {
             // Exception de type ErrorService
             // Levée par le protocole (XHR)
             // Renvoyer pour le callback onFailure()
@@ -79,7 +79,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             } finally {}
         });
 
-        it("Erreur de countryCode : ce code n'existe pas", function (done) {
+        xit("Erreur de countryCode : ce code n'existe pas", function (done) {
             // Exception de type ErrorService
             // Levée par () car le service renvoie un 200 !
             // Renvoyer pour le callback onFailure()
@@ -109,7 +109,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             Gp.Services.autoComplete(options);
         });
 
-        it("Les filtres ne sont pas renseignés : valeurs par defaut", function (done) {
+        xit("Les filtres ne sont pas renseignés : valeurs par defaut", function (done) {
             // Pas d'exception, ni de message
             options.filterOptions = null;
             options.maximumResponses = null;
@@ -126,7 +126,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             Gp.Services.autoComplete(options);
         });
 
-        it("Les filtres sont mal renseignés : valeurs par defaut", function (done) {
+        xit("Les filtres sont mal renseignés : valeurs par defaut", function (done) {
             // Pas d'exception, ni de message
             options.filterOptions.type = null;
             options.filterOptions.bbox = {};

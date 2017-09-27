@@ -48,11 +48,11 @@ de l'API
 --------------------------------------------------------------------------------------------
 |  MODE	  | ALTI 	| GEOCODE 	| REVERSE 	| ROUTE 	| ISO 	| AUTOCONF 	| AUTOCOMPLETE 	| SERVICE 	|
 |:------:	|:----:	|:-------:	|:-------:	|:-----:	|:---:	|:--------:	|:------------:	|:---------:|
-|    XHR	|   X  	|    X    	|    X    	|   X   	|  X  	|     -   	|       X     	|      X    |
+|    XHR	|  (X) 	|   (X)    	|   (X)    	|  (X)   	| (X)  	|     -   	|      (X)     	|     (X)   |
 |   JSONP	|   X  	|    X    	|    X    	|   /   	|  /  	|     -   	|       X     	|      X    |
 
 **Note**
-> MODE PROXY POUR LE XHR !
+> LE XHR EST NON FONCTIONNEL CAR IL FAUDRAIT UN PROXY POUR EXECUTER LES TESTS !
 
 #### Liste des messages
 ```

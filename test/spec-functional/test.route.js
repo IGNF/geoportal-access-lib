@@ -58,7 +58,7 @@ define([
                         apiKey: myKey,
                         serverUrl: null,
                         protocol: 'XHR', // à surcharger : JSONP|XHR
-                        // proxyURL: (mock) ? null : "spec-functional/proxy/php/proxy.php?url=",
+                        
                         httpMethod: 'GET', // à surcharger : GET|POST
                         timeOut: 10000,
                         rawResponse: false,
@@ -277,7 +277,7 @@ define([
                         apiKey: myKey,
                         serverUrl: null,
                         protocol: 'XHR',
-                        // proxyURL: (mock) ? null : "spec-functional/proxy/php/proxy.php?url=",
+                        
                         httpMethod: 'GET',
                         timeOut: 10000,
                         rawResponse: false,

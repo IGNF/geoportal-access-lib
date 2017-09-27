@@ -16,7 +16,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
                 serverUrl : null,
                 protocol : 'JSONP',
-                proxyURL : (window.proxy) ? 'spec-messages/proxy/php/proxy.php?url=' : null, // ex. 'spec-messages/proxy/php/proxy.php?url='
+                // proxyURL : (window.proxy) ? 'spec-messages/proxy/php/proxy.php?url=' : null, // ex. 'spec-messages/proxy/php/proxy.php?url='
                 httpMethod : 'GET',
                 timeOut : 0,
                 rawResponse : false,
@@ -39,7 +39,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
 
         });
 
-        it("Erreur de clef API : clef inconnue du service", function (done) {
+        xit("Erreur de clef API : clef inconnue du service", function (done) {
             // Exception de type ErrorService
             // Levée par le protocole (XHR)
             // Renvoyer pour le callback onFailure()
@@ -127,7 +127,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             } finally {}
         });
 
-        it("INVERSE Erreur de countryCode: ce code n'existe pas", function (done) {
+        xit("INVERSE Erreur de countryCode: ce code n'existe pas", function (done) {
             // Exception de type ErrorService
             // Levée par ReverseGeocode() car le service renvoie un 200 !
             // Renvoyer pour le callback onFailure()
@@ -157,7 +157,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             Gp.Services.reverseGeocode(options_reverse);
         });
 
-        it("INVERSE Les filtres ne sont pas renseignés : valeurs par defaut", function (done) {
+        xit("INVERSE Les filtres ne sont pas renseignés : valeurs par defaut", function (done) {
             options_reverse.filterOptions = null;
             options_reverse.protocol = 'XHR';
             options_reverse.httpMethod = 'POST';
@@ -173,7 +173,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             Gp.Services.reverseGeocode(options_reverse);
         });
 
-        it("INVERSE Les filtres geometriques sont definis mais mal renseignés : valeurs par defaut", function (done) {
+        xit("INVERSE Les filtres geometriques sont definis mais mal renseignés : valeurs par defaut", function (done) {
             options_reverse.filterOptions.circle = {};
             options_reverse.filterOptions.polygon = [];
             options_reverse.filterOptions.bbox = {};
@@ -191,7 +191,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             Gp.Services.reverseGeocode(options_reverse);
         });
 
-        it("INVERSE Les filtres geometriques sont definis mais nuls : valeurs par defaut", function (done) {
+        xit("INVERSE Les filtres geometriques sont definis mais nuls : valeurs par defaut", function (done) {
             options_reverse.filterOptions.circle = null;
             options_reverse.filterOptions.polygon = null;
             options_reverse.filterOptions.bbox = null;

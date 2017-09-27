@@ -16,7 +16,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
                 serverUrl : null,
                 protocol : 'JSONP',
-                proxyURL : (window.proxy) ? 'spec-messages/proxy/php/proxy.php?url=' : null, // ex. 'spec-messages/proxy/php/proxy.php?url='
+                // proxyURL : (window.proxy) ? 'spec-messages/proxy/php/proxy.php?url=' : null, // ex. 'spec-messages/proxy/php/proxy.php?url='
                 httpMethod : 'GET',
                 timeOut : 0,
                 rawResponse : false,
@@ -68,7 +68,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             } finally {}
         });
 
-        it("Erreur de positions : coordonnées 'lon' manquantes", function (done) {
+        xit("Erreur de positions : coordonnées 'lon' manquantes", function (done) {
             // Exception de type ErrorService
             // Levée par callService() ?
             // Renvoyer pour le callback onFailure()
@@ -99,7 +99,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
 
         });
 
-        it("Erreur de positions : coordonnées 'lat' manquantes", function (done) {
+        xit("Erreur de positions : coordonnées 'lat' manquantes", function (done) {
             // Exception de type ErrorService
             // Levée par callService() ?
             // Renvoyer pour le callback onFailure()

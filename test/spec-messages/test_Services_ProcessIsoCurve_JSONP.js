@@ -19,7 +19,6 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 serverUrl : null,
                 protocol : 'JSONP',
                 callbackSuffix : "",
-                proxyURL : null, // ex. 'spec-messages/proxy/php/proxy.php?url='
                 httpMethod : 'GET',
                 timeOut : 10000,
                 rawResponse : false,
