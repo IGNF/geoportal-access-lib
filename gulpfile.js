@@ -136,7 +136,7 @@
         // la ligne de commande est la suivante :
         // $.shelljs.exec("./node_modules/.bin/mocha --recursive -R list ./test/spec/");
 
-        return gulp.src(path.join(_.test, "index.html"))
+        return gulp.src(path.join(_.test, "index-units.html"))
             .pipe($.mochaPhantomJS({
                 reporter : "spec"
             }));
@@ -406,7 +406,7 @@
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("server-test", ["connect"], function () {
         var open = require("open");
-        open("http://localhost:9001/test/index.html");
+        open("http://localhost:9001/test/index-units.html");
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
