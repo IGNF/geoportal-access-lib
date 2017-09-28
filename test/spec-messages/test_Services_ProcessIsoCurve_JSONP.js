@@ -19,7 +19,6 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 serverUrl : null,
                 protocol : 'JSONP',
                 callbackSuffix : "",
-                proxyURL : null, // ex. 'http://localhost/proxy/php/proxy.php?url='
                 httpMethod : 'GET',
                 timeOut : 10000,
                 rawResponse : false,
@@ -43,19 +42,19 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
 
         });
 
-        it("Erreur de clef API : clef inconnue du service", function (done) {
+        it("FIXME(mock=false) : Erreur de clef API : clef inconnue du service", function (done) {
             // Exception de type ErrorService
             // Levée par le protocole (XHR)
             // Renvoyer pour le callback onFailure()
             // Message : Errors Occured on Http Request (status : 'Forbidden (...)
             // Type : SERVICE_ERROR
             // Status : 403
-            if (mock) { options.serverUrl = 'spec-functional/messages/fixtures/jsonp/callback-bad-rights'; }
+            if (mock) { options.serverUrl = 'spec-functional/messages/fixtures/jsonp/callback-bad-key'; }
             options.apiKey = "bidon";
             options.onFailure = function (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
-                expect(e.message).to.contain("No rights for this ressource or ressource does not exist"); // Key does not exist or has expired
+                expect(e.message).to.contain("Key does not exist or has expired"); // Key does not exist or has expired
                 expect(e.type).to.be.equal("SERVICE_ERROR");
                 expect(e.status).to.be.equal(403);
                 done();
@@ -63,12 +62,12 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             options.onSuccess = function (response) {
                 expect(false).to.be.true;
                 done(response);
-            }
+            };
 
             Gp.Services.isoCurve(options);
         });
 
-        it("Erreur sur les exclusions : valeur inconnue", function (done) {
+        it("FIXME(mock=false) : Erreur sur les exclusions : valeur inconnue", function (done) {
             // Exception de type ErrorService
             // Levée par XHR()
             // Renvoyer pour le callback onFailure()
@@ -95,7 +94,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             Gp.Services.isoCurve(options);
         });
 
-        it("Erreur sur le graphe : valeur inconnue", function (done) {
+        it("FIXME(mock=false) : Erreur sur le graphe : valeur inconnue", function (done) {
             // Exception de type ErrorService
             // Levée par XHR()
             // Renvoyer pour le callback onFailure()

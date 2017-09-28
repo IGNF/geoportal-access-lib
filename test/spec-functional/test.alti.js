@@ -15,6 +15,8 @@ define([
 
             describe('Service.getAltitude : SUCCESS', function () {
 
+                this.timeout(15000);
+
                 describe("Test sur les options du Protocole", function () {
 
                     // mock sur XHR
@@ -58,7 +60,6 @@ define([
                         apiKey: myKey,
                         serverUrl: null,
                         protocol: 'XHR', // à surcharger : JSONP|XHR
-                        // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
                         httpMethod: 'GET', // à surcharger : GET|POST
                         nocache : true,
                         timeOut: 10000,
@@ -341,7 +342,7 @@ define([
                         apiKey: myKey,
                         serverUrl: null,
                         protocol: 'XHR', // JSONP|XHR
-                        // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
+                        
                         httpMethod: 'GET', // GET|POST
                         timeOut: 10000,
                         nocache : false,

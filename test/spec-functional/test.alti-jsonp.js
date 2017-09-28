@@ -72,7 +72,6 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                         serverUrl: null,
                         protocol: 'JSONP', // à surcharger : JSONP|XHR
                         callbackSuffix: "",
-                        // proxyURL: null,
                         httpMethod: 'GET', // à surcharger : GET|POST
                         timeOut: 10000,
                         rawResponse: false,
@@ -194,7 +193,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                         Gp.Services.getAltitude(options);
                     });
 
-                 it("Appel du service en mode 'JSONP'" +
+                 xit("FIXME : Appel du service en mode 'JSONP'" +
                     " avec l'API 'WPS'" +
                     " pour un format de sortie en 'json'", function (done) {
                         // FIXME le service ne renvoie pas une bonne reponse ?

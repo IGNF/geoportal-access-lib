@@ -5,7 +5,7 @@
         <xls:ReverseGeocodeRequest returnFreeForm="false">
             <xls:Position>
                 <gml:Point xmlns:gml="http://www.opengis.net/gml">
-                    <gml:pos>48.86118017324745 2.3242664298058053</gml:pos>
+                    <gml:pos>48.86 2.323</gml:pos>
                 </gml:Point>
             </xls:Position>
             <xls:ReverseGeocodePreference>PositionOfInterest</xls:ReverseGeocodePreference>

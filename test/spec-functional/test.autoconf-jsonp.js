@@ -14,6 +14,8 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
         var myKey = (mock) ? "CLE" : "jhyvi0fgmnuxvfv0zjzorvdn";
 
         describe('Service.getConfig : SUCCESS', function () {
+            
+            this.timeout(15000);
 
             // fonction contenant les tests de la reponse
             var functionAssert = function (response) {
@@ -69,7 +71,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                     serverUrl: null,
                     protocol: 'JSONP', // à surcharger : JSONP|XHR
                     callbackSuffix: "",
-                    // proxyURL: null,
+                    
                     httpMethod: 'GET', // à surcharger : GET|POST
                     timeOut: 10000000000,
                     rawResponse: false,

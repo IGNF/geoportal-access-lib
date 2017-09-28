@@ -18,6 +18,8 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
 
         describe('Service.route : SUCCESS', function () {
 
+            this.timeout(15000);
+            
             describe("Test sur l'utilisation basique du service (paramètres par défaut) ", function () {
 
                 // options par defaut (à surcharger)
@@ -118,7 +120,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                         // serverUrl: null,
                         protocol: 'JSONP', // à surcharger : JSONP|XHR
                         callbackSuffix: "",
-                        // proxyURL: null,
+                        
                         httpMethod: 'GET', // à surcharger : GET|POST
                         timeOut: 10000000000,
                         rawResponse: false,

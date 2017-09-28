@@ -4,43 +4,50 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
     var expect = chai.expect;
     var should = chai.should();
 
-    describe("-- Test sur les messages d'erreur spécifiques du Service de calcul d'iso --", function() {
+    describe("-- Test sur les messages d'erreur spécifiques du Service de calcul d'itineraire --", function() {
 
         var Services = null;
         var options = {};
 
         beforeEach(function() {
 
+            // FIXME uniquement en XHR ! Il n'est pas possible de lever les erreurs en JSONP
+            // sauf un TimeOut...
+
             // options par defaut du geocodage direct
             options = {
                 apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
                 serverUrl : null,
-                protocol : 'JSONP',
-                proxyURL : null, // ex. 'http://localhost/proxy/php/proxy.php?url='
+                protocol : 'XHR',
+                // proxyURL : (window.proxy) ? 'spec-messages/proxy/php/proxy.php?url=' : null,
                 httpMethod : 'GET',
                 timeOut : 0,
                 rawResponse : false,
                 onSuccess : function (response) { console.log('onSuccess() :', response); },
                 onFailure : function (error) {console.log("onFailure() : ", error.message, error.type, error.status);},
                 // spécifique au service
-                position : {
-                    x: 2.3242664298058053,
-                    y: 48.86118017324745
+                api : 'REST',          // FIXME surchargé par l'API !
+                outputFormat : 'json', // FIXME surchargé par l'API !
+                srs : "EPSG:4326",
+                startPoint: {
+                 x: 2.64,
+                 y: 48.54
                 },
-                outputFormat : 'json',
-                exclusions : ['Bridge', 'Tunnel'],
+                endPoint: {
+                 x: 3.01,
+                 y: 48.45
+                },
+                provideBbox : true,
+                exclusions : ["Tunnel", "Toll"], // "Bridge",
+                distanceUnit : "km",
                 graph : "Voiture",
-                method : 'distance',
-                distance : 200, //time : 200
-                reverse : false,
-                smoothing : false,
-                holes : false,
-                srs : 'EPSG:4326'
+                provideGeometry : false,
+                routePreference : "fastest"
             };
 
         });
 
-        it("Erreur de clef API : clef inconnue du service", function (done) {
+        xit("Erreur de clef API : clef inconnue du service", function (done) {
             // Exception de type ErrorService
             // Levée par le protocole (XHR)
             // Renvoyer pour le callback onFailure()
@@ -48,15 +55,11 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             // Type : SERVICE_ERROR
             // Status : 403
 
-            // FIXME uniquement en XHR ! Il n'est pas possible de lever les erreurs en JSONP
-            // sauf un TimeOut...
             options.apiKey = "bidon";
-            options.protocol = 'XHR';
-            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.onFailure = function (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
-                expect(e.message).to.contain("No rights for this ressource or ressource does not exist"); // Key does not exist or has expired
+                expect(e.message).to.contain("Key does not exist or has expired"); // Key does not exist or has expired
                 expect(e.type).to.be.equal("SERVICE_ERROR");
                 expect(e.status).to.be.equal(403);
                 done();
@@ -66,81 +69,81 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 done(response);
             }
 
-            Gp.Services.isoCurve(options);
+            Gp.Services.route(options);
         });
 
-        it("Erreur de position : option non renseignée", function () {
+        it("Erreur de position : option 'startPoint' non renseignée", function () {
             // Exception de type Error
-            // Levée par le constructeur ProcessIsoCurve(), on ne souhaite pas passer par le callback onFailure()
+            // Levée par le constructeur Route(), on ne souhaite pas passer par le callback onFailure()
             // Capturée UNIQUEMENT via un try/catch
-            // Message : Parameter(s) 'position' missing
+            // Message : missing parameter location !
             // (Type : ERROR_USAGE)
             // (Status : -1)
-            options.position = null;
+            options.startPoint = null;
             try {
-                Gp.Services.isoCurve(options);
-                expect(false).to.be.true;
+                Gp.Services.route(options);
+                should(false).to.be.true;
             } catch (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
-                expect(e.message).to.be.equal("Parameter(s) 'position' missing");
+                expect(e.message).to.be.equal("Parameter(s) 'startPoint' missing");
             } finally {}
         });
 
-        it("Erreur de position : coordonnée X indefinie", function () {
+        it("Erreur de position : option 'endPoint' non renseignée", function () {
             // Exception de type Error
-            // Levée par le constructeur ProcessIsoCurve(), on ne souhaite pas passer par le callback onFailure()
+            // Levée par le constructeur Route(), on ne souhaite pas passer par le callback onFailure()
             // Capturée UNIQUEMENT via un try/catch
-            // Message : Parameter(s) 'position.x' missing
+            // Message : missing parameter location !
             // (Type : ERROR_USAGE)
             // (Status : -1)
-            options.position = {
-                x: null,
-                y: null
-            };
+            options.endPoint = null;
             try {
-                Gp.Services.isoCurve(options);
-                expect(false).to.be.true;
+                Gp.Services.route(options);
+                should(false).to.be.true;
             } catch (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
-                expect(e.message).to.be.equal("Parameter(s) 'position.x' missing");
+                expect(e.message).to.be.equal("Parameter(s) 'endPoint' missing");
             } finally {}
         });
 
-        it("Erreur de position : coordonnée Y indefinie", function () {
+        xit("NOK Erreur du type d'API : valeur inconnue", function () {
             // Exception de type Error
-            // Levée par le constructeur ProcessIsoCurve(), on ne souhaite pas passer par le callback onFailure()
+            // Levée par le constructeur Route(), on ne souhaite pas passer par le callback onFailure()
             // Capturée UNIQUEMENT via un try/catch
-            // Message : Parameter(s) 'position.y' missing
+            // Message : Type API value not supported or unknown !
             // (Type : ERROR_USAGE)
             // (Status : -1)
-            options.position = {
-                x: 2.225558,
-                y: null
-            };
+
+            // FIXME
+            // les readers OLS ne sont pas implémentés. on utilise donc toujours l'API REST.
+            options.api = 'BIDON';
             try {
-                Gp.Services.isoCurve(options);
+                Gp.Services.route(options);
                 expect(false).to.be.true;
             } catch (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
-                expect(e.message).to.be.equal("Parameter(s) 'position.y' missing");
+                expect(e.message).to.be.equal("Value(s) for parameter(s) 'api' unknown");
             } finally {}
         });
 
         it("Erreur du format de sortie : valeur inconnue", function () {
             // Exception de type Error
-            // Levée par le constructeur ProcessIsoCurve(), on ne souhaite pas passer par le callback onFailure()
+            // Levée par le constructeur Route(), on ne souhaite pas passer par le callback onFailure()
             // Capturée UNIQUEMENT via un try/catch
             // Message : Url by default not found !
             // (Type : ERROR_USAGE)
             // (Status : -1)
 
+            // FIXME
+            // les readers OLS ne sont pas implémentés. on utilise donc toujours l'API REST.
+            // avec le format de sortie en json
             options.outputFormat = 'BIDON';
             try {
-                Gp.Services.isoCurve(options);
-                expect(false).to.be.true;
+                Gp.Services.route(options);
+                should(false).to.be.true;
             } catch (e) {
                 console.log(e.message);
                 expect(e).not.to.be.null;
@@ -148,7 +151,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             } finally {}
         });
 
-        it("Erreur sur les exclusions : valeur inconnue", function (done) {
+        xit("Erreur sur les exclusions : valeur inconnue", function (done) {
             // Exception de type ErrorService
             // Levée par XHR()
             // Renvoyer pour le callback onFailure()
@@ -158,10 +161,6 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
             //  ex. de message du service :
             //  {"message":"ServiceException: Error in route computation\nError in smartrouting\nFailed to execute calculateRoute\nunknown reject flag 'BIDON'","status":"ERROR"}
 
-            // FIXME
-            // test avec le protocole XHR car le service implemente très mal le callback avec le JSONP!
-            options.protocol = 'XHR';
-            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.exclusions = ['BIDON'];
             options.onFailure = function (e) {
                 console.log(e);
@@ -175,23 +174,19 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 done(response);
             };
 
-            Gp.Services.isoCurve(options);
+            Gp.Services.route(options);
         });
 
-        it("Erreur sur le graphe : valeur inconnue", function (done) {
+        xit("Erreur sur le graphe : valeur inconnue", function (done) {
             // Exception de type ErrorService
             // Levée par XHR()
             // Renvoyer pour le callback onFailure()
             // Message : (...) ServiceException (...)
             // Type : SERVICE_ERROR
-            // Status : 500 Internal Server Error
+            // Status : 500
             //  ex. de message du service :
             //  {"message":"ServiceException: Error in route computation\nError in smartrouting\nFailed to execute calculateRoute\nunknown reject flag 'BIDON'","status":"ERROR"}
 
-            // FIXME
-            // test avec le protocole XHR car le service implemente très mal le callback avec le JSONP!
-            options.protocol = 'XHR';
-            // options.proxyURL = (window.proxy) ? 'http://localhost/proxy/php/proxy.php?url=' : null;
             options.graph = 'BIDON';
             options.onFailure = function (e) {
                 console.log(e);
@@ -205,7 +200,7 @@ define(['gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                 done(response);
             };
 
-            Gp.Services.isoCurve(options);
+            Gp.Services.route(options);
         });
     });
 });

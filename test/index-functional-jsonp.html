@@ -4,12 +4,7 @@
      <meta charset="utf-8">
     <title>Mocha Spec Runner</title>
 
-
     <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
-
-    <script type="text/javascript" src="../node_modules/sinon/lib/sinon.js"></script>
-    <script type="text/javascript" src="../node_modules/chai/chai.js"></script>
-    <script type="text/javascript" src="../node_modules/mocha/mocha.js"></script>
 
   </head>
 
@@ -17,6 +12,11 @@
     <!-- content -->
     <div id="workboard"></div>
     <div id="mocha"></div>
+
+    <!-- tests -->
+
+    <script type="text/javascript" src="../node_modules/requirejs/require.js"></script>
+    <script type="text/javascript" src="../node_modules/easy-amdtest/dist/easy-amdtest.js"></script>
 
     <script>
 
@@ -43,27 +43,27 @@
             return params;
         };
 
-        // par defaut,
+        // par defaut, les tests fonctionnels sont en mode 'mock'
         window.mock = true;
         if (hasParams()) {
             var params  = getParams();
-            window.mock = (!params.mock) ? true : (params.mock && params.mock === "true") ? true : false;
+            window.mock = (params.mock && params.mock === "true") ? true : (!params.mock) ? true : false;
         }
 
     </script>
-
-    <script type="text/javascript" src="../node_modules/requirejs/require.js"></script>
-    <script type="text/javascript" src="../node_modules/easy-amdtest/dist/easy-amdtest.js"></script>
-
     <script>
 
       var testSuite = new EasyAMDTest({
         baseUrl: '../src',
         urlArgs: 'bust=' + (new Date()).getTime(),
         paths: {
+            // test
             'sinon'    : '../node_modules/sinon/lib/sinon',
             'mocha'    : '../node_modules/mocha/mocha',
             'chai'     : '../node_modules/chai/chai',
+
+            // plugin text
+            'text'     : '../node_modules/text/text',
 
             // lib external
             "log4js"   : "../node_modules/woodman/woodman-amd",
@@ -79,13 +79,14 @@
       }).run({
         name: 'mocha',
         tests: [
-          "spec-messages/test_Services_JSONP.js",
-          "spec-messages/test_Services_Alti_JSONP.js",
-          "spec-messages/test_Services_Geocode_JSONP.js",
-          "spec-messages/test_Services_ReverseGeocode_JSONP.js",
-          "spec-messages/test_Services_Route_JSONP.js",
-          "spec-messages/test_Services_ProcessIsoCurve_JSONP.js",
-          "spec-messages/test_Services_AutoComplete_JSONP.js"
+          // jsonp
+          "spec-functional/test.alti-jsonp.js",
+          "spec-functional/test.autocomplete-jsonp.js",
+          "spec-functional/test.autoconf-jsonp.js",
+          "spec-functional/test.route-jsonp.js",
+          "spec-functional/test.processisocurve-jsonp.js",
+          "spec-functional/test.reversegeocode-jsonp.js",
+          "spec-functional/test.geocode-jsonp.js"
         ]
       });
     </script>

@@ -22,6 +22,8 @@ define([
 
             describe('Service.getConfig : SUCCESS', function () {
 
+                this.timeout(15000);
+                
                 describe("Tests sur les options du protocole du service", function () {
 
                     // fonction contenant les tests de la reponse JSON
@@ -40,7 +42,7 @@ define([
                         serverUrl: null,   // à surcharger
                         protocol: 'XHR',
                         httpMethod: 'GET', // à surcharger : GET|POST
-                        // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
+                        
                         timeOut: 10000,
                         rawResponse: false,
                         onSuccess: null, // à surcharger
@@ -49,6 +51,11 @@ define([
                     };
 
                     it("Appel du service avec les options par defaut", function (done) {
+
+                        // FIXME pb de timeout !
+                        // this.timeout(15000);
+                        // setTimeout(done, 15000);
+
                         // descriptif du test
                         // reponse du service en xml pour une requête en production (en fonction de myKey)
                         var urlGet = "http://wxs.ign.fr/" + myKey + "/autoconf?gp-access-lib=" + version;
@@ -155,7 +162,7 @@ define([
                             apiKey: myKey,
                             serverUrl: null,
                             protocol: 'XHR',
-                            // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
+                            
                             httpMethod: 'GET',
                             timeOut: 10000,
                             rawResponse: false,

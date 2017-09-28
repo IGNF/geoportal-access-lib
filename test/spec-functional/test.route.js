@@ -23,6 +23,8 @@ define([
 
         describe('Service.route : SUCCESS', function () {
 
+            this.timeout(15000);
+
             describe("Test sur les options du Protocole", function () {
 
                 var server;
@@ -56,7 +58,7 @@ define([
                         apiKey: myKey,
                         serverUrl: null,
                         protocol: 'XHR', // à surcharger : JSONP|XHR
-                        // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
+                        
                         httpMethod: 'GET', // à surcharger : GET|POST
                         timeOut: 10000,
                         rawResponse: false,
@@ -275,7 +277,7 @@ define([
                         apiKey: myKey,
                         serverUrl: null,
                         protocol: 'XHR',
-                        // proxyURL: (mock) ? null : "http://localhost/proxy/php/proxy.php?url=",
+                        
                         httpMethod: 'GET',
                         timeOut: 10000,
                         rawResponse: false,
@@ -337,7 +339,7 @@ define([
 
                 describe("Les options 'startPoint|endPoint' et 'exclusions' sont renseignées", function() {
 
-                    it("TODO: exclusions = Bridge (pas implémenté par le service !)", function(done) {
+                    it("exclusions = Bridge (pas implémenté par le service !)", function(done) {
                         // description du test : envoi d'une requête GET avec les params origin, destination, exclusions=bridge calcul d'isochrone, et graph voiture (options par défaut)
                         // http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/itineraire/rest/route.json?origin=2.64,48.54&destination=3.01,48.45&method=TIME&graphName=Voiture&srs=EPSG:4326
 
@@ -381,45 +383,45 @@ define([
                         }
                     });
 
-                    xit("TODO exclusions = Tunnel", function(done) {
+                    xit("exclusions = Tunnel", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO exclusions = Bridge, Toll, Tunnel", function(done) {
+                    xit("exclusions = Bridge, Toll, Tunnel", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO sans exclusions", function(done) {
+                    xit("sans exclusions", function(done) {
                         // description du test :
                     });
                 });
 
                 describe("Les options 'startPoint|endPoint' et 'graph' sont renseignées", function() {
 
-                    xit("TODO graph = Voiture", function(done) {
+                    xit("graph = Voiture", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO graph = Pieton", function(done) {
+                    xit("graph = Pieton", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO graph par defaut", function(done) {
+                    xit("graph par defaut", function(done) {
                         // description du test :
                     });
                 });
 
                 describe("Les options 'startPoint|endPoint' et 'routePreference' sont renseignées", function() {
 
-                    xit("TODO routePreference = fastest", function(done) {
+                    xit("routePreference = fastest", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO routePreference = shortest", function(done) {
+                    xit("routePreference = shortest", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO routePreference par defaut ", function(done) {
+                    xit("routePreference par defaut ", function(done) {
                         // description du test :
                     });
                 });
@@ -427,11 +429,11 @@ define([
 
                 describe("Les options 'startPoint|endPoint' avec 'viaPoints' sont renseignées", function () {
 
-                    xit("TODO ajout d'une étape", function(done) {
+                    xit("ajout d'une étape", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO ajout de plusieurs points", function(done) {
+                    xit("ajout de plusieurs points", function(done) {
                         // description du test :
                     });
 
@@ -439,27 +441,27 @@ define([
 
                 describe("Utilisation des options : provideBbox, provideGeometry, distanceUnit", function () {
 
-                    xit("TODO provideBbox par défaut", function(done) {
+                    xit("provideBbox par défaut", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO provideBbox = true", function(done) {
+                    xit("provideBbox = true", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO provideGeometry par défaut", function(done) {
+                    xit("provideGeometry par défaut", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO provideGeometry = true", function(done) {
+                    xit("provideGeometry = true", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO distanceUnit par défaut", function(done) {
+                    xit("distanceUnit par défaut", function(done) {
                         // description du test :
                     });
 
-                    xit("TODO distanceUnit = KM", function(done) {
+                    xit("distanceUnit = KM", function(done) {
                         // description du test :
                     });
 
