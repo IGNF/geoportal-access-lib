@@ -424,9 +424,9 @@ function (
                                     if (self.options.rawResponse) {
                                         content = response;
                                     }
-                                    if (typeof self.options.onBeforeParse === "function") {
+                                    if ( typeof self.options.onBeforeParse === "function") {
                                         var newResponse = self.options.onBeforeParse(content);
-                                        if (typeof newResponse === "string") {
+                                        if ( typeof newResponse === "string") {
                                             content = newResponse;
                                         }
                                     }
