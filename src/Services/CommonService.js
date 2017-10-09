@@ -80,6 +80,10 @@ function (
      *
      * @param {Function} [options.onBeforeParse] - Fonction appelée avant le parsing de la réponse
      *      Permet de modifier la réponse avant parsing si la fonction retourne une String.
+     *      Cette fonction prend en paramètre la réponse XML telle que renvoyée par le service,
+     *      sous la forme d'une chaîne de caractères (comportement par défaut).
+     *      Si le paramètre "rawResponse" a été précisé avec la valeur "true",
+     *      la fonction prend en paramètre un Object JavaScript contenant la réponse XML.
      *
      * @example
      *   var options = {
