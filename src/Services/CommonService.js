@@ -78,6 +78,13 @@ function (
      * @param {Function} [options.onFailure] - Fonction appelée lorsque le service ne répond pas correctement
      *      (code HTTP de retour différent de 200 ou pas de réponse).
      *
+     * @param {Function} [options.onBeforeParse] - Fonction appelée avant le parsing de la réponse
+     *      Permet de modifier la réponse avant parsing si la fonction retourne une String.
+     *      Cette fonction prend en paramètre la réponse XML telle que renvoyée par le service,
+     *      sous la forme d'une chaîne de caractères (comportement par défaut).
+     *      Si le paramètre "rawResponse" a été précisé avec la valeur "true",
+     *      la fonction prend en paramètre un Object JavaScript contenant la réponse XML.
+     *
      * @example
      *   var options = {
      *      apiKey : null,
@@ -89,8 +96,9 @@ function (
      *      timeOut : 10000, // ms
      *      rawResponse : false, // true|false
      *      scope : null, // this
-     *      onSuccess : function (response) {}
-     *      onFailure : function (error) {}
+     *      onSuccess : function (response) {},
+     *      onFailure : function (error) {},
+     *      onBeforeParse : function (rawResponse) {}
      *   };
      * @private
      */
@@ -419,6 +427,12 @@ function (
                                     content = response.xml; // par defaut !
                                     if (self.options.rawResponse) {
                                         content = response;
+                                    }
+                                    if ( typeof self.options.onBeforeParse === "function") {
+                                        var newResponse = self.options.onBeforeParse(content);
+                                        if ( typeof newResponse === "string") {
+                                            content = newResponse;
+                                        }
                                     }
                                 }
                             } else {
