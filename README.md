@@ -222,7 +222,7 @@ La fonction [Gp.Services.route()](http://ignf.github.io/geoportal-access-lib/lat
 ``` javascript
 Gp.Services.route({
     apiKey : "jhyvi0fgmnuxvfv0zjzorvdn", // clef d'accès à la plateforme
-    startPoint : { x: 2, lat: 45},       // point de départ
+    startPoint : { x: 2, y: 45},       // point de départ
     viaPoints : [                        // points intermédiaires
         { x: 3, y: 46 },      
         { x: 3.5, y: 46 }
@@ -263,7 +263,7 @@ La fonction [Gp.Services.isoCurve()](http://ignf.github.io/geoportal-access-lib/
 ``` javascript
 Gp.Services.isoCurve({
     apiKey : "jhyvi0fgmnuxvfv0zjzorvdn", // clef d'accès à la plateforme
-    position : { x: 2, lat: 45},       // point de référence
+    position : { x: 2, y: 45},       // point de référence
     method : "time",                   // méthode de calcul (isochrone)
     time : 1000,                       // limite de temps (isochrone)
     graph : "Pieton",                 // grapĥe utilisé
