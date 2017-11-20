@@ -1,6 +1,6 @@
 # Contribuer
 
-Si vous souhaitez contribuer au code de la bibliothèque d'accès aux ressources du Géoportail, voici quelques conseils pratiques et guides à suivre.
+Si vous souhaitez contribuer au code de la bibliothèque d'accès aux ressources du Géoportail, voici quelques conseils pratiques et règles à suivre.
 
 
 ## Ouverture d'un ticket (issue)
@@ -32,28 +32,56 @@ Une pull request vous permet de soumettre une proposition d'évolution du code s
 
 - Créez une `nouvelle branche` pour travailler. Nommez la par exemple avec le nom de la fonctionnalité à implementer (ex. feature-tests-myfunction) ou celui de l'issue qu'elle vise à résoudre (ex. feature-issue-xx)
 
-- Implémentez, corrigez, écrivez votre `code`.
+- Dans le répertoire local du projet, installez les dépendances du projet :
+
+``` bash
+npm install
+```
+
+cf. *COMPILE.md* pour plus d'infos.
+
+
+- Ecrivez testez, corrigez votre `code` sur votre copie locale de votre fork.
+
+Les commandes :
+
+``` bash
+gulp build [--production]
+gulp publish
+```
+
+Vous permettent de générer les binaires de la bibliothèque d'accès et de les placer dans le répertoire *dist/*. Des pages html de test d'utilisation sont dans le répertoire *samples/*. Elles utilisent les binaires présents dans le répertoire *dist/*.
+
+La commande :
+
+``` bash
+gulp server-connect
+```
+
+Lance un navigateur avec les pages d'exemples servies sur l'adresse http://localhost:9001
+
 
 - Suivez les règles de codage du projet. Elles sont définies dans les fichiers : .jscsrc (style et convention de codage) et .jshintrc (syntaxe javascript). Vous pouvez vérifier le bon respect de ces règles en lançant la tache :
 
 ``` bash
-> gulp check
+gulp check
 ```
 
 - Vérifiez, ajoutez ou adaptez les tests si nécessaire.
 
     * Les tests unitaires sont dans le répertoire *test/spec/*
     * Les tests fonctionnels sont dans le répertoire *test/spec-functional/*
+    * Les pages d'exemples sont dans le répertoire *samples/*
 
 - Ajoutez ou modifiez la `documentation` si nécessaire. Si votre PR apporte une modification d'interface à la bibliothèque, mettez à jour la jsDoc en conséquences et vérifiez quelle est bien prise en compte.
 
     * La jsDoc publique des fonctions de la bibliothèque est rassemblée dans le fichier *src/Services/Services.js*, 
     * La jsDoc des classes publiques de réponse dans : *src/Services/<Service>/Response/model/*.js
 
-La tache 
+La commande 
 
-```
-> gulp doc
+``` bash
+gulp doc
 ```
 
 Vous permet de générer la jsDoc du projet dans le répertoire *target/doc/*
