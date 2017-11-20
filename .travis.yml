@@ -1,8 +1,7 @@
 language: node_js
 node_js:
-  - "node"
+  - "6"
 before_script:
-  - npm install -g npm@latest
   - npm install
 script: ./node_modules/.bin/gulp build
 cache:
