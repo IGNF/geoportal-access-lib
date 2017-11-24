@@ -8,7 +8,8 @@
 /target
 .*
 build.sh
-CHANGELOG_DRAFT.md
+CHANGELOG*
+CONTRIBUTING.md
 COMPILE.md
 gulpfile.js
 jsdoc.json
