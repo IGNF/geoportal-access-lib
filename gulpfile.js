@@ -410,6 +410,15 @@
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // | ✓ server web test-fonctionnels
+    // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+    gulp.task("server-func", ["connect"], function () {
+        var open = require("open");
+        open("http://localhost:9001/test/index-functional-xhr.html?mock=false");
+        open("http://localhost:9001/test/index-functional-jsonp.html?mock=false");
+    });
+
+    // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // | ✓ server web sample
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("server-sample", ["template-sample","connect"], function () {
