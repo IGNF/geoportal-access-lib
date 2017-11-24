@@ -3,7 +3,7 @@
  * et il est difficile de la levée..., afin de la faire apparaitre dans les tests...
  */
 
-define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
+define([ "gp", "chai", "sinon"], function (Gp, chai, sinon) {
 
     var assert = chai.assert;
     var expect = chai.expect;
@@ -13,7 +13,7 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
 
         var myKey = (mock) ? "CLE" : "jhyvi0fgmnuxvfv0zjzorvdn";
 
-        describe('Service.autoComplete : SUCCESS', function () {
+        describe("Service.autoComplete : SUCCESS", function () {
 
             this.timeout(15000);
 
@@ -44,14 +44,14 @@ define([ 'gp', 'chai', 'sinon'], function (Gp, chai, sinon) {
                         should.exist(response.suggestedLocations);
                         expect(response.suggestedLocations).to.be.an("Array");
                         expect(response.suggestedLocations).to.have.length(3);
-                        expect(response.suggestedLocations[0]).to.have.property("classification", 7);
+                        expect(response.suggestedLocations[0]).to.have.property("classification");
                         expect(response.suggestedLocations[0]).to.have.property("type", "StreetAddress");
                         expect(response.suggestedLocations[0]).to.have.property("commune", "Saint-Pierre-du-Regard");
-                        expect(response.suggestedLocations[0]).to.have.property("fullText", "saint-mande, 61790 Saint-Pierre-du-Regard");
+                        expect(response.suggestedLocations[0]).to.have.property("fullText");
                         expect(response.suggestedLocations[0]).to.have.property("kind");  // specifique à POI !
                         expect(response.suggestedLocations[0]).to.have.property("poi");   // specifique à POI !
-                        expect(response.suggestedLocations[0]).to.have.property("postalCode", "61790");
-                        expect(response.suggestedLocations[0]).to.have.property("street", "saint-mande");
+                        expect(response.suggestedLocations[0]).to.have.property("postalCode");
+                        expect(response.suggestedLocations[0]).to.have.property("street");
                         expect(response.suggestedLocations[0]).to.have.property("position");
                         expect(response.suggestedLocations[0].position).to.have.property("x");
                         expect(response.suggestedLocations[0].position).to.have.property("y");
