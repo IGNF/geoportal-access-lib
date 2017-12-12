@@ -86,6 +86,8 @@ gulp doc
 
 Vous permet de générer la jsDoc du projet dans le répertoire *target/doc/*
 
+- Rajoutez vous dans le fichier [CONTRIBUTORS.md](CONTRIBUTORS.md]) si vous n'y êtes pas déjà.
+
 - `Squash` vos commit en un seul avec le `rebase interactif` (cf. https://help.github.com/articles/interactive-rebase) ou via d'autre méthodes (cf. https://gist.github.com/patik/b8a9dc5cd356f9f6f980 par exemple)
 
 - Poussez cette branche sur votre dépôt, sur le dépôt marqué `origin`.
