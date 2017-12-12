@@ -9,7 +9,7 @@ Le fichier [CONTRIBUTING.md](CONTRIBUTING.md) définit les règles et pratiques 
   * [pjjmunier](https://github.com/pjjmunier)
   * [gcebelieu](https://github.com/gcebelieu)
 
-# Autre contributeurs
+# Autres contributeurs
 
   * [ThomasG77](https://github.com/ThomasG77)
   * [sylvainpolletvillard](https://github.com/sylvainpolletvillard)
