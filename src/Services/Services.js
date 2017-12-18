@@ -68,7 +68,7 @@ define([
             * @param {Boolean} [options.rawResponse=false] - Setting this parameter to true implies you want to handle the service response by yourself : it will be returned as an unparsed String in onSuccess callback parameter. Only use if you know what you are doing.
             * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Ignored when options.protocol is set to 'XHR' value. Only use if you know what you are doing.
             * @param {String} [options.api='REST'] - What API to use for interacting with underlying web service : 'REST' or 'WPS'. Only use if you know what you are doing.
-            * @param {String} [options.outputFormat='json'] - Output format for underlying web service response : 'xml' or 'json'. Only use if you know what you are doing.
+            * @param {String} [options.outputFormat='xml'] - Output format for underlying web service response : 'xml' or 'json'. Only use if you know what you are doing.
             */
             getAltitude : function (options) {
                 var altiService = new Alti(options);
