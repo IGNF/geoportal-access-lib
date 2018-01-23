@@ -146,9 +146,9 @@
     // | ✓ requirejs avec optimisation avec amdclean
     // | > Framework RequireJS
     // | > https:// github.com/gfranko/amdclean
-    // | > principe -> http:// requirejs.org/docs/optimization.html
-    // | > options  -> https:// github.com/jrburke/r.js/blob/master/build/example.build.js
-    // | > astuces  -> http:// stackoverflow.com/questions/23978361/using-gulp-to-build-requirejs-project-gulp-requirejs
+    // | > principe -> http://requirejs.org/docs/optimization.html
+    // | > options  -> https://github.com/jrburke/r.js/blob/master/build/example.build.js
+    // | > astuces  -> http://stackoverflow.com/questions/23978361/using-gulp-to-build-requirejs-project-gulp-requirejs
     // |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("requirejs-amdclean", function (taskReady) {
 
@@ -184,8 +184,17 @@
             findNestedDependencies : false,
             preserveLicenseComments : false, // FIXME ne semble pas fonctionner !?
             useStrict : true,
+            logLevel : 0,
+            /** onBuildWrite */
+            onBuildWrite : function (moduleName, path, contents) {
+                return contents;
+            },
             /** onBuildRead */
             onBuildRead : function (moduleName, path, contents) {
+
+                console.log("Read module", moduleName, path);
+
+                var _contentModified = null;
 
                 if (!isDebug) {
                     var groundskeeper = require("groundskeeper");
@@ -200,22 +209,32 @@
                        ] // Besides console also remove function calls in the given namespace,
                     });
                     cleaner.write(contents);
-                    return cleaner.toString();
+
+                    // entête du bundle "es6-promise" est à modifier !
+                    // ex. es6Promise = typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define('es6-promise', factory) : global.ES6Promise = factory();
+                    _contentModified = (moduleName === "es6-promise") ? cleaner.toString().replace("typeof exports === 'object'", "es6Promise = typeof exports === 'object'") : cleaner.toString();
+                    
+                } else {
+                    _contentModified = contents;
                 }
-                return contents;
+
+                return _contentModified;
             },
             /** onModuleBundleComplete */
             onModuleBundleComplete : function (data) {
 
                 var amdclean = require("amdclean") ;
                 var outputFile = data.path ;
+                var dependencies = "var es6Promise;\n";
 
                 fs.writeFileSync(outputFile, amdclean.clean({
                     filePath : outputFile,
+                    transformAMDChecks : false,
                     prefixMode : "camelCase",
                     wrap : {
-                        start : "\n/* BEGIN CODE */\n",
-                        end  : "\n/* END CODE   */\n"
+                        // on ajoute la dependance interne "es6Promise"
+                        start : dependencies,
+                        end  : ""
                     },
                     escodegen : {
                         comment : false,
