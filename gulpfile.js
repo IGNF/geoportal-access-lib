@@ -184,11 +184,6 @@
             findNestedDependencies : false,
             preserveLicenseComments : false, // FIXME ne semble pas fonctionner !?
             useStrict : true,
-            logLevel : 0,
-            /** onBuildWrite */
-            onBuildWrite : function (moduleName, path, contents) {
-                return contents;
-            },
             /** onBuildRead */
             onBuildRead : function (moduleName, path, contents) {
 

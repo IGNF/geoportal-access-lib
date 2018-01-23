@@ -27,7 +27,9 @@
   },
   "devDependencies": {
     "amdclean": "^2.7.0",
+    "chai": "^3.5.0",
     "del": "^2.2.2",
+    "easy-amdtest": "^0.1.1",
     "glob": "^7.1.1",
     "groundskeeper": "^0.1.12",
     "gulp": "^3.9.1",
@@ -50,19 +52,17 @@
     "jaguarjs-jsdoc": "^1.0.1",
     "jsdoc": "^3.4.3",
     "minimist": "^1.2.0",
+    "mocha": "^3.2.0",
     "open": "0.0.5",
     "requirejs": "^2.3.2",
     "run-sequence": "^1.2.2",
     "shelljs": "^0.2.6",
+    "sinon": "^1.17.6",
+    "text": "github:requirejs/text",
     "woodman": "^1.1.0"
   },
   "optionalDependencies": {
-    "chai": "^3.5.0",
-    "easy-amdtest": "^0.1.1",
-    "mocha": "^3.2.0",
     "request": "^2.79.0",
-    "sinon": "^1.17.6",
-    "text": "github:requirejs/text",
     "xmldom": "^0.1.27"
   }
 }
