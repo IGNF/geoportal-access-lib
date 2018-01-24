@@ -8,7 +8,7 @@ requirejs.config({
     paths : {
         // lib external
         log4js : "../node_modules/woodman/dist/woodman-amd",
-        "es6-promise" : "../lib/es6-promise/es6-promise-4.1.0",
+        "es6-promise" : "../node_modules/es6-promise/dist/es6-promise",
         // config du logger
         "logger-cfg" : "Utils/Logger.cfg"
     }
