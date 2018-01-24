@@ -24,7 +24,7 @@ A tiny implementation of Promises/A+.
 Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and cont  ributors (Conversion to ES6 API by Jake Archibald)
 Licensed under MIT license
 See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
-Version   v4.2.2+97478eb6
+Version   v4.2.4
 
 > Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors
 >
