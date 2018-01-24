@@ -23,7 +23,7 @@
   "author": "IGNF",
   "license": "CECILL-B",
   "dependencies": {
-    "es6-promise": "^4.2.2"
+    "es6-promise": "^4.2.4"
   },
   "devDependencies": {
     "amdclean": "^2.7.0",
