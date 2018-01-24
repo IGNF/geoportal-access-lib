@@ -3,3 +3,7 @@
 ### empty.js
 
 really empty javascript file used as a substitute to woodman when building geoportal-access-lib whithout debug mode (hack).
+
+### UMD.tpl
+
+update a template UMD (Universal Module Definition) used by gulp-umd (https://www.npmjs.com/package/gulp-umd).
