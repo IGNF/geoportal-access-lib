@@ -85,9 +85,8 @@
                 path.join(_.src, "**/*.js")
             ])
             .pipe($.plumber())
-            .pipe($.jshint({
-                lookup : true
-            }))
+            .pipe($.jshint(".jshintrc"))
+            // .pipe($.jshint({lookup : true})) // FIXME new version 2.1.0 !
             .pipe($.jshint.reporter("default"));
     });
 
@@ -176,6 +175,7 @@
                 output : {
                     beautify : false
                 },
+                sourceMap : {},
                 warnings : false,
                 mangle : (isProduction) ? true : false
             },
@@ -184,7 +184,8 @@
             ],
             out : path.join(build.js, (isDebug ? distFileNameDebug : distFileName)),
             findNestedDependencies : false,
-            preserveLicenseComments : false, // FIXME ne semble pas fonctionner !?
+            generateSourceMaps : true,
+            preserveLicenseComments : false,
             useStrict : true,
             /** onBuildRead */
             onBuildRead : function (moduleName, path, contents) {
@@ -209,15 +210,17 @@
                     _content = cleaner.toString();
                 }
 
-                // entête du bundle "es6-promise" est à modifier :
+                // FIXME entête du bundle "es6-promise" est à modifier :
                 //  ajouter variable
                 //  compatibilité ES6 module
+                //  desactivation du mode AMD : utile !?
 
                 if (moduleName === "es6-promise") {
                     var _contentModuleA =  _content;
                     var _contentModuleB = _contentModuleA.replace("typeof exports === 'object'", "es6Promise = typeof exports === 'object'");
                     var _contentModuleC = _contentModuleB.replace("this", "typeof self !== 'undefined' ? self : this");
-                    _content = _contentModuleC;
+                    var _contentModuleD = _contentModuleC.replace("define.amd", "define.amd && false");
+                    _content = _contentModuleD;
                 }
 
                 return _content;
@@ -236,7 +239,8 @@
                     wrap : {
                         // on ajoute la dependance interne "es6Promise"
                         start : dependencies,
-                        end  : ""
+                        // on ajoute les sources map pour le mode debug
+                        end  : (isDebug) ? "//# sourceMappingURL=" + distFileNameDebug + ".map" : ""
                     },
                     escodegen : {
                         comment : false,
@@ -334,6 +338,22 @@
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // | ✓ sources map
+    // | > copie des sources map js
+    // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+    gulp.task("map", function () {
+
+        if (!isDebug) {
+            return;
+        }
+        
+        return gulp.src([ path.join(build.js, "*.map") ])
+                .pipe(gulp.dest(build.dist))
+                .pipe($.plumber())
+                .pipe($.size()) ;
+    });
+
+    // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // | ✓ sources
     // | > copie des sources js
     // | > https://www.npmjs.com/package/gulp-replace
@@ -379,10 +399,10 @@
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // | ✓ lib
-    // | > copie des pages d"exemples
+    // | > copie des lib externes
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("lib", function () {
-        return gulp.src([ path.join(_.lib, "**") ])
+        return gulp.src([ path.join(_.lib, "**/*.js") ])
                 .pipe(gulp.dest(build.lib))
                 .pipe($.plumber())
                 .pipe($.size());
@@ -534,7 +554,7 @@
     });
 
     gulp.task("build-only", function (callback) {
-        runSequence("src", "umd", "licence", callback);
+        runSequence("src", "umd", "map", "licence", callback);
     });
 
     gulp.task("build-doc", function (callback) {
