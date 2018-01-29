@@ -83,9 +83,11 @@
 
         return gulp.src([
                 path.join(_.src, "**/*.js")
-             ])
+            ])
             .pipe($.plumber())
-            .pipe($.jshint(".jshintrc"))
+            .pipe($.jshint({
+                lookup : true
+            }))
             .pipe($.jshint.reporter("default"));
     });
 
@@ -189,7 +191,7 @@
 
                 console.log("Read module", moduleName, path);
 
-                var _contentModified = null;
+                var _content = contents;
 
                 if (!isDebug) {
                     var groundskeeper = require("groundskeeper");
@@ -204,25 +206,21 @@
                        ] // Besides console also remove function calls in the given namespace,
                     });
                     cleaner.write(contents);
-
-                    // entête du bundle "es6-promise" est à modifier :
-                    //  ajouter variable
-                    //  compatibilité ES6 module
-
-                    if (moduleName === "es6-promise") {
-                        var _contentModuleA =  cleaner.toString();
-                        var _contentModuleB = _contentModuleA.replace("typeof exports === 'object'", "es6Promise = typeof exports === 'object'");
-                        var _contentModuleC = _contentModuleB.replace("this", "typeof self !== 'undefined' ? self : this");
-                        _contentModified = _contentModuleC;
-                    } else {
-                        _contentModified = cleaner.toString();
-                    }
-
-                } else {
-                    _contentModified = contents;
+                    _content = cleaner.toString();
                 }
 
-                return _contentModified;
+                // entête du bundle "es6-promise" est à modifier :
+                //  ajouter variable
+                //  compatibilité ES6 module
+
+                if (moduleName === "es6-promise") {
+                    var _contentModuleA =  _content;
+                    var _contentModuleB = _contentModuleA.replace("typeof exports === 'object'", "es6Promise = typeof exports === 'object'");
+                    var _contentModuleC = _contentModuleB.replace("this", "typeof self !== 'undefined' ? self : this");
+                    _content = _contentModuleC;
+                }
+
+                return _content;
             },
             /** onModuleBundleComplete */
             onModuleBundleComplete : function (data) {
@@ -293,17 +291,17 @@
                     return [
                         {
                             name : "request",
-                            global : "request",
+                            global : "request", // undefined en mode global...
                             cjs : "request",
                             param : "request",
-                            amd : "require"
+                            amd : "require" // FIXME "request" !?
                         },
                         {
                             name : "xmldom",
-                            global : "xmldom",
+                            global : "xmldom", // undefined en mode global...
                             cjs : "xmldom",
                             param : "xmldom",
-                            amd : "require"
+                            amd :  "require" // FIXME "xmldom" !?
                         }
                     ];
                 }
