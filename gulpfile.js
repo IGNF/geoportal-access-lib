@@ -205,19 +205,10 @@
                     });
                     cleaner.write(contents);
 
-                    // entête du bundle "es6-promise" est à modifier :
-                    //  ajouter variable
-                    //  compatibilité ES6 module
-
-                    if (moduleName === "es6-promise") {
-                        var _contentModuleA =  cleaner.toString();
-                        var _contentModuleB = _contentModuleA.replace("typeof exports === 'object'", "es6Promise = typeof exports === 'object'");
-                        var _contentModuleC = _contentModuleB.replace("this", "typeof self !== 'undefined' ? self : this");
-                        _contentModified = _contentModuleC;
-                    } else {
-                        _contentModified = cleaner.toString();
-                    }
-
+                    // entête du bundle "es6-promise" est à modifier !
+                    // ex. es6Promise = typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define('es6-promise', factory) : global.ES6Promise = factory();
+                    _contentModified = (moduleName === "es6-promise") ? cleaner.toString().replace("typeof exports === 'object'", "es6Promise = typeof exports === 'object'") : cleaner.toString();
+                    
                 } else {
                     _contentModified = contents;
                 }
@@ -278,8 +269,6 @@
 
         return gulp.src( path.join(build.js, (isDebug ? distFileNameDebug : distFileName)) )
             .pipe(umd({
-                /** template */
-                template : path.join(_.lib, "UMD.tpl"),
                 /** exports */
                 exports : function (file) {
                     return "Gp";

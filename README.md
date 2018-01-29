@@ -41,31 +41,15 @@ Prérequis : [NodeJS](https://nodejs.org/en/) et [npm](https://www.npmjs.com/) i
 npm install geoportal-access-lib
 ```
 
+
+
 ### Intégration dans une page web
 
-Intégrez la bibliothèque d'accès dans votre page WEB classiquement à l'aide d'une balise **script**.
+Intégrez la bibliothèque d'accès dans votre page WEB classiquement à l'aide d'une balise script.
+
 
 ``` html
 <script src="chemin/vers/GpServices.js"></script>
-```
-
-### Intégration dans [NodeJS](https://nodejs.org/en/)
-
-Intégrez la bibliothèque d'accès dans votre script à l'aide de la fonction **require**.
-
-``` js
-var Gp = require("chemin/vers/GpServices.js");
-```
-
-### Intégration dans un module ES6
-
-Intégrez la bibliothèque d'accès dans votre page WEB à l'aide d'une balise **script** de type *module*.
-
-``` html
-<script src="module">
-    import * as Gp from "chemin/vers/GpServices.js";
-    // puis, utilisation de la variable globale 'Gp' dans le module ES6...
-</script>
 ```
 
 ### Utilisation
