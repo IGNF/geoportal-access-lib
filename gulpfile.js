@@ -83,9 +83,10 @@
 
         return gulp.src([
                 path.join(_.src, "**/*.js")
-             ])
+            ])
             .pipe($.plumber())
             .pipe($.jshint(".jshintrc"))
+            // .pipe($.jshint({lookup : true})) // FIXME new version 2.1.0 !
             .pipe($.jshint.reporter("default"));
     });
 
@@ -174,6 +175,7 @@
                 output : {
                     beautify : false
                 },
+                sourceMap : {},
                 warnings : false,
                 mangle : (isProduction) ? true : false
             },
@@ -182,14 +184,16 @@
             ],
             out : path.join(build.js, (isDebug ? distFileNameDebug : distFileName)),
             findNestedDependencies : false,
-            preserveLicenseComments : false, // FIXME ne semble pas fonctionner !?
+            generateSourceMaps : true,
+            preserveLicenseComments : false,
             useStrict : true,
+            useSourceUrl : false,
             /** onBuildRead */
             onBuildRead : function (moduleName, path, contents) {
 
-                console.log("Read module", moduleName, path);
+                console.log("Read module", moduleName);
 
-                var _contentModified = null;
+                var _content = contents;
 
                 if (!isDebug) {
                     var groundskeeper = require("groundskeeper");
@@ -204,16 +208,23 @@
                        ] // Besides console also remove function calls in the given namespace,
                     });
                     cleaner.write(contents);
-
-                    // entête du bundle "es6-promise" est à modifier !
-                    // ex. es6Promise = typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define('es6-promise', factory) : global.ES6Promise = factory();
-                    _contentModified = (moduleName === "es6-promise") ? cleaner.toString().replace("typeof exports === 'object'", "es6Promise = typeof exports === 'object'") : cleaner.toString();
-                    
-                } else {
-                    _contentModified = contents;
+                    _content = cleaner.toString();
                 }
 
-                return _contentModified;
+                // FIXME entête du bundle "es6-promise" modifié :
+                //  ajouter variable
+                //  compatibilité ES6 module
+                //  desactivation du mode AMD
+
+                if (moduleName === "es6-promise") {
+                    var _contentModuleA =  _content;
+                    var _contentModuleB = _contentModuleA.replace("typeof exports === 'object'", "es6Promise = typeof exports === 'object'");
+                    var _contentModuleC = _contentModuleB.replace("this", "typeof self !== 'undefined' ? self : this");
+                    var _contentModuleD = _contentModuleC.replace("define.amd", "define.amd && false");
+                    _content = _contentModuleD;
+                }
+
+                return _content;
             },
             /** onModuleBundleComplete */
             onModuleBundleComplete : function (data) {
@@ -229,7 +240,8 @@
                     wrap : {
                         // on ajoute la dependance interne "es6Promise"
                         start : dependencies,
-                        end  : ""
+                        // on ajoute les sources map
+                        end  : (isDebug) ? "//# sourceMappingURL=" + distFileNameDebug + ".map" : "//# sourceMappingURL=" + distFileName + ".map"
                     },
                     escodegen : {
                         comment : false,
@@ -269,6 +281,8 @@
 
         return gulp.src( path.join(build.js, (isDebug ? distFileNameDebug : distFileName)) )
             .pipe(umd({
+                /** template */
+                template : path.join(_.lib, "UMD.tpl"),
                 /** exports */
                 exports : function (file) {
                     return "Gp";
@@ -282,17 +296,17 @@
                     return [
                         {
                             name : "request",
-                            global : "request",
+                            global : "request", // undefined en mode global...
                             cjs : "request",
                             param : "request",
-                            amd : "require"
+                            amd : "require" // FIXME "request" !?
                         },
                         {
                             name : "xmldom",
-                            global : "xmldom",
+                            global : "xmldom", // undefined en mode global...
                             cjs : "xmldom",
                             param : "xmldom",
-                            amd : "require"
+                            amd :  "require" // FIXME "xmldom" !?
                         }
                     ];
                 }
@@ -319,6 +333,24 @@
                     date : buildDate,
                     version : npmConf.version
                 }))
+                .pipe(gulp.dest(build.dist))
+                .pipe($.plumber())
+                .pipe($.size()) ;
+    });
+
+    // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // | ✓ sources map
+    // | > copie des sources map js
+    // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+    gulp.task("map", function () {
+
+        // FIXME on desactive la publication des sources maps
+        // car le mapping entre le bundle et les sources est pourri !?
+        if (true) {
+            return;
+        }
+
+        return gulp.src([ path.join(build.js, "*.map") ])
                 .pipe(gulp.dest(build.dist))
                 .pipe($.plumber())
                 .pipe($.size()) ;
@@ -369,11 +401,23 @@
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // | ✓ samples
+    // | > copie des exemples dans target
+    // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+    gulp.task("samples", function () {
+
+        return gulp.src([ path.join(_.sample, "**/bundle*.html") ])
+                .pipe(gulp.dest(build.sample))
+                .pipe($.plumber())
+                .pipe($.size()) ;
+    });
+
+    // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // | ✓ lib
-    // | > copie des pages d"exemples
+    // | > copie des lib externes dans target
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("lib", function () {
-        return gulp.src([ path.join(_.lib, "**") ])
+        return gulp.src([ path.join(_.lib, "**/*.js") ])
                 .pipe(gulp.dest(build.lib))
                 .pipe($.plumber())
                 .pipe($.size());
@@ -511,7 +555,7 @@
     gulp.task("doc", ["build-doc"]); // sync
     gulp.task("check", ["jsonlint", "jshint", "jscs"]);
     gulp.task("src", ["sources", "lib"]);
-    gulp.task("sample", ["template-sample"]);
+    gulp.task("sample", ["template-sample", "samples"]);
     gulp.task("sample-cloud", ["server-sample"]);
     gulp.task("dist", ["build-only"]); // sync
 
@@ -525,7 +569,7 @@
     });
 
     gulp.task("build-only", function (callback) {
-        runSequence("src", "umd", "licence", callback);
+        runSequence("src", "umd", "map", "licence", callback);
     });
 
     gulp.task("build-doc", function (callback) {

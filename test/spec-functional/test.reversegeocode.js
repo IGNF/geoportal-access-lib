@@ -110,7 +110,7 @@ define([
                 apiKey: myKey,
                 serverUrl: null,
                 protocol: 'XHR', // à surcharger : JSONP|XHR
-                
+
                 httpMethod: 'GET', // à surcharger : GET|POST
                 timeOut: 10000,
                 rawResponse: false,
@@ -276,7 +276,7 @@ define([
                         }
                     });
 
-                    it("On tape sur Paris !", function (done) {
+                    it("On tape sur la boutique !", function (done) {
 
                         options.maximumResponses = 1;
                         options.httpMethod = 'GET';
@@ -289,8 +289,9 @@ define([
                             functionAssertPOI(response);
                             expect(response.locations).to.have.length(1);
                             expect(response.locations[0].placeAttributes).to.have.property("commune", "Paris");
-                            expect(response.locations[0].placeAttributes).to.have.property("nature", "Capitale d'état");
+                            expect(response.locations[0].placeAttributes).to.have.property("nature", "Géoportail");
                             expect(response.locations[0].placeAttributes).to.have.property("insee", "75056");
+                            expect(response.locations[0].placeAttributes).to.have.property("municipality", "Le monde des cartes");
                             done();
                         };
                         options.onFailure = function (error) {
