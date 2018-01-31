@@ -187,10 +187,11 @@
             generateSourceMaps : true,
             preserveLicenseComments : false,
             useStrict : true,
+            useSourceUrl : false,
             /** onBuildRead */
             onBuildRead : function (moduleName, path, contents) {
 
-                console.log("Read module", moduleName, path);
+                console.log("Read module", moduleName);
 
                 var _content = contents;
 
@@ -210,10 +211,10 @@
                     _content = cleaner.toString();
                 }
 
-                // FIXME entête du bundle "es6-promise" est à modifier :
+                // FIXME entête du bundle "es6-promise" modifié :
                 //  ajouter variable
                 //  compatibilité ES6 module
-                //  desactivation du mode AMD : utile !?
+                //  desactivation du mode AMD
 
                 if (moduleName === "es6-promise") {
                     var _contentModuleA =  _content;
@@ -239,8 +240,8 @@
                     wrap : {
                         // on ajoute la dependance interne "es6Promise"
                         start : dependencies,
-                        // on ajoute les sources map pour le mode debug
-                        end  : (isDebug) ? "//# sourceMappingURL=" + distFileNameDebug + ".map" : ""
+                        // on ajoute les sources map
+                        end  : (isDebug) ? "//# sourceMappingURL=" + distFileNameDebug + ".map" : "//# sourceMappingURL=" + distFileName + ".map"
                     },
                     escodegen : {
                         comment : false,
@@ -343,10 +344,12 @@
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("map", function () {
 
-        if (!isDebug) {
+        // FIXME on desactive la publication des sources maps
+        // car le mapping entre le bundle et les sources est pourri !?
+        if (true) {
             return;
         }
-        
+
         return gulp.src([ path.join(build.js, "*.map") ])
                 .pipe(gulp.dest(build.dist))
                 .pipe($.plumber())
@@ -398,8 +401,20 @@
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // | ✓ samples
+    // | > copie des exemples dans target
+    // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+    gulp.task("samples", function () {
+
+        return gulp.src([ path.join(_.sample, "**/bundle*.html") ])
+                .pipe(gulp.dest(build.sample))
+                .pipe($.plumber())
+                .pipe($.size()) ;
+    });
+
+    // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // | ✓ lib
-    // | > copie des lib externes
+    // | > copie des lib externes dans target
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("lib", function () {
         return gulp.src([ path.join(_.lib, "**/*.js") ])
@@ -540,7 +555,7 @@
     gulp.task("doc", ["build-doc"]); // sync
     gulp.task("check", ["jsonlint", "jshint", "jscs"]);
     gulp.task("src", ["sources", "lib"]);
-    gulp.task("sample", ["template-sample"]);
+    gulp.task("sample", ["template-sample", "samples"]);
     gulp.task("sample-cloud", ["server-sample"]);
     gulp.task("dist", ["build-only"]); // sync
 

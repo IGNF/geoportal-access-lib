@@ -94,11 +94,11 @@ function (
 
                         case "json":
                             logger.trace("analyze response : json");
+                            logger.trace("analyze response : ", typeof options.response);
 
                             var JSONResponse;
-                            if ( typeof options.response === "string" ) {
-                                // FIXME : tester l'environnement (nodejs ou browser ?)
-                                JSONResponse = window.JSON.parse(options.response);
+                            if ( typeof options.response === "string" ) {            
+                                JSONResponse = JSON.parse(options.response);
                             } else {
                                 JSONResponse = options.response;
                             }

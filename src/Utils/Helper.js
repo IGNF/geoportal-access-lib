@@ -1,5 +1,3 @@
-/* global global, window */
-
 /**
  * Classe utilitaire
  *

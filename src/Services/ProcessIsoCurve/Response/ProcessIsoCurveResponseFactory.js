@@ -104,8 +104,7 @@ function (
 
                             var JSONResponse;
                             if ( typeof options.response === "string" ) {
-                                // FIXME : tester l'environnement (nodejs ou browser ?)
-                                JSONResponse = window.JSON.parse(options.response);
+                                JSONResponse = JSON.parse(options.response);
                             } else {
                                 JSONResponse = options.response;
                             }
