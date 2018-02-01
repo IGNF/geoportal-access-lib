@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../../../node_modules/requirejs/require.js"></script>
+        <script>
+            /* global requirejs */
+            requirejs.config({
+                'baseUrl' : "../../../src/",
+                'paths': {
+                    // lib external
+                    'log4js' : "../node_modules/woodman/dist/woodman-amd",
+                    "es6-promise": "../node_modules/es6-promise/dist/es6-promise",
+                    // config du logger
+                    "logger-cfg" : "Utils/Logger.cfg"
+                }
+            });
+
+            requirejs(['Services/Alti/Alti'],
+                function (Alti) {
+
+                    var options = {
+                      apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
+                      httpMethod : 'POST',
+                      protocol : 'XHR',
+                      onSuccess : function (response) {console.log(response.elevations);},
+                      onFailure : function (error) {console.log(error.message, error.status);},
+                      // spécifique au service
+                      positions : [{lon:1.25, lat:47.48}],
+                      outputFormat : 'json', // json|xml
+                      api : 'REST', // REST|WPS
+                      zonly : false // false|true
+                    };
+
+                    var o = new Alti(options);
+                    o.call();
+            });
+            </script>
+    </head>
+    <body>
+        <h1>Utilisation des modules natifs AMD sur les services</h1>
+        <span>(Ouvrir la console)</span>
+    </body>
+</html>

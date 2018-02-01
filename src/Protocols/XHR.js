@@ -174,12 +174,15 @@ function (Logger, Helper, ES6Promise, require) {
                             options.body = options.data;
                         }
 
+                        // FIXME ERROR : self signed certificate in certificate chain
+                        options.rejectUnauthorized = false;
+
                         req(options, function (error, response, body) {
 
                             if (!error && response.statusCode == 200 && body) {
                                 resolve(body);
                             } else {
-                                reject("Errors Occured on Http Request (nodejs) : " + body);
+                                reject("Errors Occured on Http Request (nodejs) : " + error);
                             }
                         });
                     } else {
@@ -366,7 +369,8 @@ function (Logger, Helper, ES6Promise, require) {
                     .then(JSON.parse)
                     .catch( function (error) {
                         console.log("_callJSON failed on : ", options.url, error);
-                        throw error;
+                        // FIXME pas d'exception, laissons le fil se derouler...
+                        // throw error;
                     });
         },
 
@@ -402,7 +406,8 @@ function (Logger, Helper, ES6Promise, require) {
                     })
                     .catch( function (error) {
                         console.log("__callXML failed on : ", options.url, error);
-                        throw error;
+                        // FIXME pas d'exception, laissons le fil se derouler...
+                        // throw error;
                     });
         }
 
