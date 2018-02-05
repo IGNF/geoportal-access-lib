@@ -57,6 +57,23 @@ Intégrez la bibliothèque d'accès dans votre script à l'aide de la fonction *
 var Gp = require("chemin/vers/GpServices.js");
 ```
 
+> **Note :**
+Par défaut, les services sont intérrogés en HTTP. On a la possibilité de forcer le HTTPS avec l'option **ssl**.
+
+``` js
+var Gp = require("chemin/vers/GpServices.js");
+
+Gp.Services.geocode({
+    apiKey : "...",
+    ssl : true,
+    location : "...",
+    onSuccess : function (result) {
+        ...
+    }
+});
+// --> https://wxs.ign.fr/KEY/geoportail/ols?
+```
+
 ### Intégration dans un module ES6
 
 Intégrez la bibliothèque d'accès dans votre page WEB à l'aide d'une balise **script** de type *module*.
