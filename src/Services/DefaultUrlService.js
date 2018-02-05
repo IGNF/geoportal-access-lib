@@ -30,29 +30,40 @@ define([], function () {
     // -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/rest/elevationLine.xml
     // -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/wps
     //
+    // Force ssl :
+    //
+    // DefaultUrlService.ssl = true;
+    // DefaultUrlService.AutoComplete.url('efe4r54tj4uy5i78o7545eaz7e87a')
+    // output {Object|String}
+    // -> https://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/ols/apis/completion
 
-    // protocol
-    var isBrowser = typeof window !== "undefined" ? true : false;
-    var protocol  = (isBrowser) ? (location && location.protocol && location.protocol.indexOf("https:") === 0 ? "https://" : "http://") :  "http://";
     // constantes internes
-    var hostname = "wxs.ign.fr";
-    var keyname  = "%KEY%";
-    var url = protocol + hostname.concat("/", keyname);
-
-    /** fonctions de substitutions */
-    var fkey = function (key) {
-        return this._key.replace(key ? keyname : null, key);
-    };
+    var ISBROWSER = typeof window !== "undefined" ? true : false;
+    var HOSTNAME  = "wxs.ign.fr";
 
     /**
-    * Default Geoportal web services URLs acces.
+    * Default Geoportal web services URLs access.
     *
-    * @namespace 
+    * @namespace
     * @alias Gp.Services.DefaultUrl
     */
     var DefaultUrlService = {
+
+        /** if set true, require the use of https protocol (except browser) */
+        ssl : false,
+
+        /** base url of services (ssl protocol management) */
+        url : function (key, path) {
+            // en mode browser, c'est le protocole du navigateur,
+            // sinon, il est fixé par l'option 'ssl' (par défaut à false, cad en http)
+            var _protocol = (ISBROWSER) ?
+                (location && location.protocol && location.protocol.indexOf("https:") === 0 ? "https://" : "http://") :
+                (DefaultUrlService.ssl ? "https://" : "http://");
+            return _protocol + HOSTNAME.concat("/", key, path);
+        },
+
         /**
-         * Elevation web service acces
+         * Elevation web service access
          *
          * @member {Object}
          * @property {Function} url(key) - Returns elevation service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols ("elevation-json", "elevation-xml", "profil-json" or "profil-xml").
@@ -60,75 +71,82 @@ define([], function () {
         Alti : {
             _key : {
                 // rest
-                "elevation-json" : url + "/alti/rest/elevation.json",
-                "elevation-xml" : url + "/alti/rest/elevation.xml",
-                "profil-json" : url + "/alti/rest/elevationLine.json",
-                "profil-xml" : url + "/alti/rest/elevationLine.xml",
+                "elevation-json" : "/alti/rest/elevation.json",
+                "elevation-xml" : "/alti/rest/elevation.xml",
+                "profil-json" : "/alti/rest/elevationLine.json",
+                "profil-xml" : "/alti/rest/elevationLine.xml",
                 // other
-                wps : url + "/alti/wps"
+                wps : "/alti/wps"
             },
             /** url */
             url : function (key) {
                 return {
                     // rest
-                    "elevation-json" : this._key["elevation-json"].replace(key ? keyname : null, key),
-                    "elevation-xml" : this._key["elevation-xml"].replace(key ? keyname : null, key),
-                    "profil-json" : this._key["profil-json"].replace(key ? keyname : null, key),
-                    "profil-xml" : this._key["profil-xml"].replace(key ? keyname : null, key),
+                    "elevation-json" : DefaultUrlService.url(key, this._key["elevation-json"]),
+                    "elevation-xml" : DefaultUrlService.url(key, this._key["elevation-xml"]),
+                    "profil-json" : DefaultUrlService.url(key, this._key["profil-json"]),
+                    "profil-xml" : DefaultUrlService.url(key, this._key["profil-xml"]),
                     // other
-                    wps : this._key.wps.replace(key ? keyname : null, key)
+                    wps : DefaultUrlService.url(key, this._key["wps"])
                 };
             }
         },
         /**
-         * IsoCurve web service acces
+         * IsoCurve web service access
          *
          * @member {Object}
          * @property {Function} url(key) - Returns isocurve service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols ("iso-json" or "iso-xml").
          */
         ProcessIsoCurve : {
             _key : {
-                "iso-json" : url + "/isochrone/isochrone.json", // rest (geoconcept)
-                "iso-xml" : url + "/isochrone/isochrone.xml"   // rest (geoconcept)
+                "iso-json" : "/isochrone/isochrone.json", // rest (geoconcept)
+                "iso-xml" : "/isochrone/isochrone.xml"   // rest (geoconcept)
             },
             /** url */
             url : function (key) {
                 return {
-                    "iso-json" : this._key["iso-json"].replace(key ? keyname : null, key),
-                    "iso-xml" : this._key["iso-xml"].replace(key ? keyname : null, key)
+                    "iso-json" : DefaultUrlService.url(key, this._key["iso-json"]),
+                    "iso-xml" : DefaultUrlService.url(key, this._key["iso-xml"])
                 };
             }
         },
         /**
-         * Autocompletion web service acces
+         * Autocompletion web service access
          *
          * @member {Object}
          * @property {Function} url(key) - Returns autocomplete service default urls with or without geoportal access key given as a parameter. The result is a String.
          */
         AutoComplete : {
-            _key : url + "/ols/apis/completion",
-            url : fkey
+            _key : "/ols/apis/completion",
+            /** url */
+            url : function (key) {
+                return DefaultUrlService.url(key, this._key);
+            }
         },
         /**
-         * Reverse geocoding web service acces
+         * Reverse geocoding web service access
          *
          * @member {Object}
          * @property {Function} url(key) - Returns reverse geocoding service default urls with or without geoportal access key given as a parameter. The result is a String.
          */
         ReverseGeocode : {
-            _key : url + "/geoportail/ols",
-            url : fkey
+            _key : "/geoportail/ols",
+            /** url */
+            url : function (key) {
+                return DefaultUrlService.url(key, this._key);
+            }
         },
         /**
-         * Autoconfiguration web service acces
+         * Autoconfiguration web service access
          *
          * @member {Object}
          * @property {Function} url([key1,...]) - Returns autoconfiguration service default urls with geoportal access key(s) given as a String array parameter. The result is a javascript object with different urls given the access mode ("apiKey", "apiKeys" or "aggregate").
          */
         AutoConf : {
             _key : {
-                apiKey : url + "/autoconf",
-                apiKeys : url + "/autoconf?keys=%KEYS%"
+                apiKey : "/autoconf",
+                apiKeys : "/autoconf?keys=%KEYS%",
+                aggregate : "/autoconf/id/"
             },
             /** url */
             url : function (key) {
@@ -140,40 +158,43 @@ define([], function () {
                     }
                 }
                 return {
-                    apiKey : this._key["apiKey"].replace(key ? keyname : null, key), // une seule clé
-                    apiKeys : this._key["apiKeys"].replace(keyname, key[0]).replace("%KEYS%", keys), // autoconf de plusieurs clés
-                    aggregate : protocol + hostname.concat("/") + key + "/autoconf/id/"
+                    apiKey : DefaultUrlService.url(key, this._key["apiKey"]), // une seule clé
+                    apiKeys : DefaultUrlService.url(key[0], this._key["apiKeys"]).replace("%KEYS%", keys), // autoconf de plusieurs clés
+                    aggregate :  DefaultUrlService.url(key, this._key["aggregate"])
                 };
             }
         },
         /**
-         * Geocoding web service acces
+         * Geocoding web service access
          *
          * @member {Object}
          * @property {Function} url(key) - Returns geocoding service default urls with or without geoportal access key given as a parameter. The result is a String.
          */
         Geocode : {
-            _key : url + "/geoportail/ols",
-            url : fkey
+            _key : "/geoportail/ols",
+            /** url */
+            url : function (key) {
+                return DefaultUrlService.url(key, this._key);
+            }
         },
         /**
-         * Routing web service acces
+         * Routing web service access
          *
          * @member {Object}
          * @property {Function} url(key) - Returns routing service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols ("route-json" or "route-xml").
          */
         Route : {
             _key : {
-                ols : url + "/itineraire/ols", // openLS
-                "route-json" : url + "/itineraire/rest/route.json", // rest (geoconcept)
-                "route-xml" : url + "/itineraire/rest/route.xml"   // rest (geoconcept)
+                ols : "/itineraire/ols", // openLS
+                "route-json" : "/itineraire/rest/route.json", // rest (geoconcept)
+                "route-xml" : "/itineraire/rest/route.xml"   // rest (geoconcept)
             },
             /** url */
             url : function (key) {
                 return {
-                    ols : this._key.ols.replace(key ? keyname : null, key),
-                    "route-json" : this._key["route-json"].replace(key ? keyname : null, key),
-                    "route-xml" : this._key["route-xml"].replace(key ? keyname : null, key)
+                    ols : DefaultUrlService.url(key, this._key["ols"]),
+                    "route-json" : DefaultUrlService.url(key, this._key["route-json"]),
+                    "route-xml" : DefaultUrlService.url(key, this._key["route-xml"])
                 };
             }
         }

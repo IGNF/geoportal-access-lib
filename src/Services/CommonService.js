@@ -44,6 +44,11 @@ function (
      *      Par défaut, c'est le protocole XHR qui sera utilisé.
      *      Attention, le protocole JSONP n'est pas valide dans un environnement NodeJS (Utilisation du mode XHR).
      *
+     * @param {Boolean} [options.ssl] - Indique si l'on souhaite intérroger les services en https.
+     *      Ce paramètre ne fonctionne que pour une utilisation hors navigateur (ex. NodeJS).
+     *      Sur un navigateur, le protocole est automatiquement extrait de l'url du site...
+     *      Par défaut, on utilise le protocole http (ssl=false).
+     *
      * @param {String} [options.proxyURL] - Le proxy à utiliser pour pallier au problème de cross-domain dans le cas d'une requête XHR.
      *      Utile si le paramètre 'protocol' vaut 'XHR', il ne sera pas pris en compte si protocol vaut JSONP.
      *
@@ -90,6 +95,7 @@ function (
      *      apiKey : null,
      *      serverUrl : 'http://localhost/service/',
      *      protocol : 'JSONP', // JSONP|XHR
+     *      ssl : false,
      *      proxyURL : null,
      *      callbackName : null,
      *      httpMethod : 'GET', // GET|POST
@@ -122,6 +128,7 @@ function (
         this.options = {
             // protocol : "JSONP",
             protocol : "XHR",
+            ssl : false,
             proxyURL : "",
             // callbackName : "",
             callbackSuffix : null,
@@ -179,6 +186,7 @@ function (
             // gestion de l'url du service par defaut pour les services qui ne possèdent qu'une seul url par defaut
             // les cas particuliers des services avec plusieurs urls (ex. Alti) devront être traité dans la classe du composant
             // donc si l'url n'est pas renseignée, il faut utiliser les urls par defaut
+            DefaultUrlService.ssl = this.options.ssl;
             var urlByDefault = DefaultUrlService[this.CLASSNAME].url(this.options.apiKey);
             if ( typeof urlByDefault === "string" ) {
                 this.options.serverUrl = urlByDefault;

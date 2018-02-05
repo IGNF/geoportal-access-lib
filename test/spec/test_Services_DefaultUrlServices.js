@@ -1,4 +1,4 @@
-/* 
+/*
  * Test des urls par défaut des services (utilisées si aucune url n'est spécifiée par l'utilisateur)
  */
 
@@ -9,13 +9,13 @@ define(['chai'], function (chai) {
     var should = chai.should();
 
     describe("-- Test DefaultUrlService --", function() {
-        
+
         describe('URLs par defaut des services', function () {
 
             var DefaultUrlService;
             var key = "CLE";
             var keys = ["CLE1", "CLE2"];
-            
+
             beforeEach(function(done) {
                 require(['Services/DefaultUrlService'], function(_DefaultUrlService) {
                     DefaultUrlService = _DefaultUrlService;
@@ -24,7 +24,7 @@ define(['chai'], function (chai) {
             });
 
             it('DefaultUrlService', function () {
-                
+
                 expect(DefaultUrlService.Alti.url(key)['elevation-json']).to.be.equal("http://wxs.ign.fr/CLE/alti/rest/elevation.json");
                 expect(DefaultUrlService.Alti.url(key)['elevation-xml']).to.be.equal('http://wxs.ign.fr/CLE/alti/rest/elevation.xml');
                 expect(DefaultUrlService.Alti.url(key)['profil-json']).to.be.equal('http://wxs.ign.fr/CLE/alti/rest/elevationLine.json');
