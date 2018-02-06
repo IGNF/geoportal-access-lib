@@ -22,7 +22,6 @@ define(['chai'], function (chai) {
                 // test des proprietes par defaut
                 Gp.should.have.property('servicesVersion');
                 Gp.should.have.property('servicesDate');
-                Gp.should.have.property('Services');
             });
 
             it('Namespace de Gp', function () {
@@ -30,6 +29,8 @@ define(['chai'], function (chai) {
                 // test des namespace par defaut
                 Gp.should.have.property('Services');
                 Gp.should.have.property('Error');
+                Gp.should.have.property('Protocols');
+                Gp.should.have.property('Helper');
             });
         });
     });

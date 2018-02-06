@@ -5,8 +5,8 @@
 
     // gestion des paths
     var path  = require("path");
-
-    var fs = require("fs");
+    var fs    = require("fs");
+    var log   = require("fancy-log");
 
     // load plugins
     var $ = gulpLoadPlugins({
@@ -160,7 +160,7 @@
         // uglify, uglify2, closure, or closure.keepLines
         var mode = "none";
         if (isProduction) {
-            $.util.log("OK, mode optimisation...");
+            log("OK, mode optimisation...");
             mode = "uglify2";
         }
 
@@ -345,7 +345,8 @@
     gulp.task("map", function () {
 
         // FIXME on desactive la publication des sources maps
-        // car le mapping entre le bundle et les sources est pourri !?
+        // car le mapping entre le bundle et les sources est pourri
+        // avec requirejs !?
         if (true) {
             return;
         }
@@ -489,9 +490,7 @@
     // | > https://www.npmjs.com/package/gulp-watch
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("watch", ["server-test"], function () {
-        $.watch({
-            glob : [ path.join(_.test, "spec/**/*.js") ]
-        }, function () {
+        $.watch(path.join(_.test, "spec/**/*.js"), function () {
             gulp.start("mocha-phantomjs");
         });
     });
@@ -532,19 +531,19 @@
     // | ✓ help
     // "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     gulp.task("help", function () {
-        $.util.log("Liste des target principales :");
-        $.util.log(" - build : construction complète du projet.");
-        $.util.log(" -- dist : construction de la librairie.");
-        $.util.log(" -- check: controle des sources.");
-        $.util.log(" -- test : execution des tests unitaires.");
-        $.util.log(" -- sample : construction des exemples.");
-        $.util.log(" -- doc  : construction de la JSDOC.");
-        $.util.log(" -- clean  : suppression du répertoire 'target'.");
-        $.util.log("Autres target :");
-        $.util.log(" -- server-test : affichage des tests dans un navigateur.");
-        $.util.log(" -- server-sample : affichage des exemples dans un navigateur.");
-        $.util.log(" -- watch : mode developpement des tests.");
-        $.util.log(" -- publish : publication de la librairie.");
+        log("Liste des target principales :");
+        log(" - build : construction complète du projet.");
+        log(" -- dist : construction de la librairie.");
+        log(" -- check: controle des sources.");
+        log(" -- test : execution des tests unitaires.");
+        log(" -- sample : construction des exemples.");
+        log(" -- doc  : construction de la JSDOC.");
+        log(" -- clean  : suppression du répertoire 'target'.");
+        log("Autres target :");
+        log(" -- server-test : affichage des tests dans un navigateur.");
+        log(" -- server-sample : affichage des exemples dans un navigateur.");
+        log(" -- watch : mode developpement des tests.");
+        log(" -- publish : publication de la librairie.");
     });
 
     // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
