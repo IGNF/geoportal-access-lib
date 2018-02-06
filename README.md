@@ -58,7 +58,7 @@ var Gp = require("chemin/vers/GpServices.js");
 ```
 
 > **Note :**
-Par défaut, les services sont intérrogés en HTTP. On a la possibilité de forcer le HTTPS avec l'option **ssl**.
+Par défaut, les services sont intérrogés en HTTP. On a la possibilité de forcer le HTTPS avec l'option **ssl**. Ce comportement est ignoré dans les environnements clients (navigateur). Les services sont alors interrogés suivant le même protocole que la page en cours.
 
 ``` js
 var Gp = require("chemin/vers/GpServices.js");
