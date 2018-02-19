@@ -1,9 +1,9 @@
 language: node_js
 node_js:
   - "6"
-before_script:
-  - npm install
-script: ./node_modules/.bin/gulp build
+script:
+    - npm run build
+    - npm run test
 cache:
   directories:
     - node_modules
