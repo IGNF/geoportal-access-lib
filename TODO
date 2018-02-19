@@ -1,0 +1,88 @@
+-- conversion des sources
+    0 migration AMD to ES6
+    -- path
+        0 export avec main Gp.js
+        0 services
+        0 route
+        0 isochrone
+        0 geocode
+        0 autoconf
+        0 autocomplete
+        0 alti
+        0 Protocols
+        0 formats
+        0 Utils
+
+-- check
+    0 jshint runtime
+    x jscs runtime :
+        INFO projet JSCS a été mergé avec eslint !!!
+        TODO revoir les nouvelles regles
+
+-- samples
+    x migration ES6 modules
+    x faire marcher un exemple avec des sources ES6 (ex script type=module)
+    0 idem avec le bundle
+        0 browser:sourcesmap
+        0 browser:minify (prod)
+        \ ES6
+            FIXME utilisation de self !? Probleme d'export ?
+
+
+-- tests unitaires
+    0 migration ES6 modules
+    0 test avec mocha (console)
+    0 test avec mocha (browser)
+
+
+-- tests fonctionnels (test_old -> test/end-to-end)
+    x migration ES6 modules
+    x test avec mocha (browser)
+
+-- config de webpack
+        0 build du bundle
+        0 build du sourcesmap
+        0 minify :
+            FIXME comment supprimer le logger ?
+            > on le desactive uniquement..., pour le moment...
+            > cf. https://remarkablemark.org/blog/2017/02/25/webpack-ignore-module/
+        0 check avec jshint
+        x check avec jscs
+            INFO abandon du projet (cf. plus haut)
+        0 doc :
+            FIXME le plugin jsdoc-webpack-plugin v0.0.2 a un bug...
+            > on force la v0.0.1
+        x doc:serve
+        0 ajout de la licence
+        0 test unitaire
+            > ligne de commande
+            ex. ./node_modules/.bin/mocha-webpack --glob "*.js" test/spec
+            ./node_modules/.bin/mocha-webpack  test.js
+            ou npm run test:unit
+        0 test unitaire en mode browser
+            cf. https://survivejs.com/webpack/techniques/testing/
+            > ligne de commande :
+                ./node_modules/.bin/webpack-dev-server --hot --config webpack.test.js
+                ou npm run test:serve
+        x test fonctionnel
+        x sample
+            x mise en place de template
+            x en mode browser
+
+
+-- compilation : gulp ou plugin config webpack ou les 2 ?
+    0 clean     : avec webpack / npm run build / npm run build:prod
+    \ check     : avec webpack / npm run build / npm run build:prod
+    0 licence   : avec webpack / npm run build / npm run build:prod
+    0 build     : avec webpack / npm run build / npm run build:prod
+    0 doc       : avec webpack / npm run doc
+    x doc:serve : avec webpack / npm run doc:serve
+    0 test      : avec webpack / npm run test
+    0 test:serve : avec webpack / npm run test:serve
+    x test:end-to-end : avec webpack / npm run test:end-to-end
+    x sample    : avec webpack / npm run sample
+    x sample:serve : avec webpack / npm run sample:serve
+
+
+Comment supprimer le logger ?
+> https://remarkablemark.org/blog/2017/02/25/webpack-ignore-module/

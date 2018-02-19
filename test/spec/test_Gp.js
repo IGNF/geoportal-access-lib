@@ -1,37 +1,29 @@
-define(['chai'], function (chai) {
 
-    var assert = chai.assert;
-    var expect = chai.expect;
-    var should = chai.should();
+import { assert } from "chai";
+import { expect } from "chai";
+import { should } from "chai";
+should();
 
-    describe("-- Test for Gp --", function () {
+import Gp from "../../src/Gp";
 
-        var Gp;
+describe("-- Test for Gp --", function () {
 
-        before(function (done) {
-            require(['Gp'], function (_Gp) {
-                Gp = _Gp;
-                done();
-            });
+    describe("Gp", function () {
+
+        it("Proprietes de Gp", function () {
+
+            // test des proprietes par defaut
+            Gp.should.have.property("servicesVersion");
+            Gp.should.have.property("servicesDate");
         });
 
-        describe('Gp', function () {
+        it("Namespace de Gp", function () {
 
-            it('Proprietes de Gp', function () {
-
-                // test des proprietes par defaut
-                Gp.should.have.property('servicesVersion');
-                Gp.should.have.property('servicesDate');
-            });
-
-            it('Namespace de Gp', function () {
-
-                // test des namespace par defaut
-                Gp.should.have.property('Services');
-                Gp.should.have.property('Error');
-                Gp.should.have.property('Protocols');
-                Gp.should.have.property('Helper');
-            });
+            // test des namespace par defaut
+            Gp.should.have.property("Services");
+            Gp.should.have.property("Error");
+            Gp.should.have.property("Protocols");
+            Gp.should.have.property("Helper");
         });
     });
 });

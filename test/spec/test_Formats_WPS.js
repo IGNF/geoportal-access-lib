@@ -1,22 +1,13 @@
-define(['chai'], function (chai) {
+import { assert } from "chai";
+import { expect } from "chai";
+import { should } from "chai";
+should();
 
-    var assert = chai.assert;
-    var expect = chai.expect;
-    var should = chai.should();
+import WPS from "../../src/Formats/WPS";
 
-    describe("-- Test for WPS --", function () {
+describe("-- Test for WPS --", function () {
 
-        var WPS;
-
-        before(function (done) {
-            require(['Formats/WPS'], function (_WPS) {
-                WPS = _WPS;
-                done();
-            });
-        });
-
-        describe('TODO : WPS', function () {
-            xit('WPS()', function () {});
-        });
+    describe("TODO : WPS", function () {
+        xit("WPS()", function () {});
     });
 });

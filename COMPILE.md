@@ -1,7 +1,7 @@
 
 # Compilation du projet
 
-[![Gulp build](https://img.shields.io/badge/build%20with-GULP-brightgreen.svg)](https://img.shields.io/badge/build%20with-GULP-brightgreen.svg)
+[![WEBPACK build](https://img.shields.io/badge/build%20with-WEBPACK-brightgreen.svg)](https://img.shields.io/badge/build%20with-WEBPACK-brightgreen.svg)
 [![npm version](https://badge.fury.io/js/geoportal-access-lib.svg)](https://badge.fury.io/js/geoportal-access-lib)
 
 ## Prérequis (outils)
@@ -75,17 +75,17 @@ Puis, relancer l'installation...
 Pour installation manuelle, ne pas oublier de mettre l'executable _phantomjs.exe_
 dans l'environnement d'execution de windows (ex. https://www.java.com/fr/download/help/path.xml)
 
-### Compilation via GULP
+### Compilation via NPM
 
 **ouvrir une console :**
 
-    gulp [--debug | --production]
+    npm run build ou npm run build:prod
 
 Les *bundles* sont disponibles dans le répertoire :
 
 	dist/GpServices.js
 	dist/GpServices-src.js
-	dist/GpServices-debug.js
+	dist/GpServices-src.js.map
 
 #### Erreur de fin de lignes
 
@@ -95,6 +95,10 @@ modifier le paramètre du fichier _.jscs_ :
 
 #### Exécution de la JSDOC
 
+**ouvrir une console :**
+
+    npm run doc
+
 Sous *Windows*, il est possible que la *JSDoc* ne soit pas compilée correctement
 (problème de *path* du binaire), on peut l’exécuter manuellement :
 
@@ -102,38 +106,37 @@ Sous *Windows*, il est possible que la *JSDoc* ne soit pas compilée correctemen
 
     node_modules\.bin\jsdoc -c jsdoc.json
 
-#### Publication
-
-**ouvrir une console :**
-
-    gulp publish
-
 ### Exécution des exemples
 
+#### Construction des exemples
+
 **ouvrir une console :**
 
-    gulp server-sample
+    npm run sample
+
+#### Exemples sur un navigateur
+
+**ouvrir une console :**
+
+    npm run sample:serve
 
 Le navigateur s'ouvre sur la page des exemples sur l'URL suivante :
-http://localhost:9001/samples/index-samples.html
+http://localhost:9001/
 
-### Exécution des tests
 
-**ouvrir une console :**
+### Exécution des tests unitaires
 
-    gulp server-test
-
-Le navigateur s'ouvre sur la page des tests sur l'URL suivante :
-http://localhost:9001/test/index.html
-
-#### En mode développement
+#### Tests en console
 
 **ouvrir une console :**
 
-    gulp watch
+    npm run test:unit
+
+#### Tests sur un navigateur
+
+**ouvrir une console :**
+
+    npm run test:serve
 
 Le navigateur s'ouvre sur la page des tests sur l'URL suivante :
-http://localhost:9001/test/index.html
-
-> **Note :**
-Chaque modification des tests va recharger cette page automatiquement...
+http://localhost:9001/
