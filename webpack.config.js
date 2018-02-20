@@ -68,8 +68,18 @@ module.exports = env => {
             libraryExport : "default",
             umdNamedDefine : true
         },
+        // utilisation des lib pour nodeJs uniquement
+        externals : {
+            request : {
+                commonjs2 : "request",
+                commonjs : "request"
+            },
+            xmldom : {
+                commonjs2 : "xmldom",
+                commonjs : "xmldom"
+            }
+        },
         devtool : (production) ? false : "source-map",
-        externals : ["request", "xmldom"],
         module : {
             loaders : [
                 {

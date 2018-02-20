@@ -2,7 +2,7 @@
 /* global exports, require */
 
 import Logger from "../Utils/LoggerByDefault";
-import __xmldom from "xmldom";
+// import __xmldom from "xmldom";
 
 /**
  * @classdesc
@@ -189,7 +189,7 @@ function __getXMLDOC (xmlString) {
 
     if ( typeof exports === "object") {
         // env. nodejs
-        var DOMParser = __xmldom.DOMParser;
+        var DOMParser = require("xmldom").DOMParser; // __xmldom.DOMParser;
         return new DOMParser().parseFromString(xmlString, "text/xml");
     } else {
         // env. browser

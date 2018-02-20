@@ -1,5 +1,5 @@
-import XHR from "./Protocols/XHR";
 import Services from "./Services/Services";
+import DefaultUrl from "./Services/DefaultUrlService";
 import AltiResponse from "./Services/Alti/Response/model/AltiResponse";
 import Elevation from "./Services/Alti/Response/model/Elevation";
 import AutoCompleteResponse from "./Services/AutoComplete/Response/model/AutoCompleteResponse";
@@ -25,9 +25,9 @@ import ReverseGeocodedLocation from "./Services/Geocode/Response/model/ReverseGe
 import IsoCurveResponse from "./Services/ProcessIsoCurve/Response/model/ProcessIsoCurveResponse";
 import RouteResponse from "./Services/Route/Response/model/RouteResponse";
 import RouteInstruction from "./Services/Route/Response/model/RouteInstruction";
+import XHR from "./Protocols/XHR";
 import Error from "./Exceptions/ErrorService";
 import Helper from "./Utils/Helper";
-import DefaultUrl from "./Services/DefaultUrlService";
 
 var Gp = {
     servicesVersion : "__GPVERSION__" ,

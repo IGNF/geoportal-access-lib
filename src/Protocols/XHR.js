@@ -14,8 +14,8 @@
 import Logger from "../Utils/LoggerByDefault";
 import Helper from "../Utils/Helper";
 import ES6Promise from "es6-promise";
-import __request from "request";
-import __xmldom from "xmldom";
+// import __request from "request";
+// import __xmldom from "xmldom";
 
 var XHR = {
 
@@ -163,7 +163,7 @@ var XHR = {
                     // Utilisation du module :
                     // cf. http://blog.modulus.io/node.js-tutorial-how-to-use-request-module
 
-                    var req = __request;
+                    var req = require("request");// __request
 
                     // mapping data avec body param. pour le mode POST ou PUT (?)
                     if (options.data && typeof options.data === "string" && corps) {
@@ -385,7 +385,7 @@ var XHR = {
 
                 // test on env. nodejs or browser
                 if ( typeof window === "undefined") {
-                    var DOMParser = __xmldom.DOMParser;
+                    var DOMParser = require("xmldom").DOMParser; // __xmldom.DOMParser
                     xmlDoc = new DOMParser().parseFromString(response, "text/xml");
                 } else {
                     if (window.DOMParser) {

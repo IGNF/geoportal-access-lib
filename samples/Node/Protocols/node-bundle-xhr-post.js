@@ -4,7 +4,7 @@ var Gp = require("../../../dist/GpServices-src.js");
 var options = {
     url       : "http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/geoportail/ols",
     method    : "POST",
-    format    : "xml", // 'xml', 'json' ou null
+    format    : "xml", // "xml", "json" ou null
     content   : "application/xml",
     timeOut   : 0,
     scope     : this,
