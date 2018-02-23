@@ -1,11 +1,15 @@
 /doc
+/_doc
 /lib
 /_site
 /src
 /test
 /samples
+/samples-src
+/_samples
 /utils
 /target
+
 .*
 build.sh
 CHANGELOG*
@@ -13,6 +17,8 @@ CONTRIBUTING.md
 COMPILE.md
 gulpfile.js
 jsdoc.json
+webpack.*
+
 *.gz
 *.tgz
 *.sh

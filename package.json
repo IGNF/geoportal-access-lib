@@ -5,15 +5,12 @@
   "main": "dist/GpServices.js, dist/GpServices-src.js, dist/GpServices-src.js.map",
   "scripts": {
     "setup": "npm install",
-    "build": "npm run setup && webpack",
-    "build:prod": "npm run setup && webpack --env.production",
-    "test": "npm run setup && mocha-webpack --webpack-config webpack.mocha.js --glob \"*.js\" test/spec/",
-    "test:serve": "npm run setup && webpack-dev-server --hot --config webpack.test.js",
-    "test:end-to-end": "echo \"Warning: no command specified\" && exit 0",
-    "sample": "echo \"Warning: no command specified\" && exit 0",
-    "sample:serve": "npm run setup && webpack-dev-server --hot --config webpack.sample.js",
-    "doc": "echo \"Warning: no command specified\" && exit 0",
-    "doc:serve": "npm run setup && webpack-dev-server --hot --config webpack.doc.js"
+    "build": "npm run setup && webpack && gulp sample",
+    "build:prod": "npm run setup && webpack --env.production && gulp sample",
+    "test": "npm run setup && mocha-webpack --webpack-config webpack.test.js --glob \"test_*.js\" test/spec/",
+    "test:serve": "npm run setup && webpack-dev-server --hot --config webpack.test.serve.js",
+    "sample:serve": "gulp sample && webpack-dev-server --contentBase _samples --port 9001 --open",
+    "doc:serve": "webpack-dev-server --contentBase _doc --port 9001 --open"
   },
   "repository": {
     "type": "git",
@@ -28,12 +25,14 @@
   "author": "IGNF",
   "license": "CECILL-B",
   "dependencies": {
-    "es6-promise": "^4.2.4"
+    "es6-promise": "^4.2.4",
+    "loglevel": "^1.6.1",
+    "request": "^2.79.0",
+    "xmldom": "^0.1.27"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
-    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "chai": "^4.1.2",
     "clean-webpack-plugin": "^0.1.18",
@@ -46,20 +45,23 @@
     "mocha-webpack": "^1.0.1",
     "path": "^0.12.7",
     "replace-bundle-webpack-plugin": "^1.0.0",
-    "script-loader": "^0.7.2",
     "sinon": "^4.3.0",
     "sinon-es6": "0.0.3",
     "string-template": "^1.0.0",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1",
-    "webpack-merge": "^4.1.1",
-    "webpack-node-externals": "^1.6.0",
-    "webpack-plugin-replace": "^1.1.1",
-    "webpack-strip": "^0.1.0"
+    "webpack-node-externals": "^1.6.0"
   },
   "optionalDependencies": {
-    "loglevel": "^1.6.1",
-    "request": "^2.79.0",
-    "xmldom": "^0.1.27"
+    "glob": "^7.1.2",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.4.0",
+    "gulp-hb": "^7.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-template": "^5.0.0",
+    "handlebars": "^4.0.11",
+    "handlebars-helpers": "^0.10.0",
+    "handlebars-layouts": "^3.1.4",
+    "run-sequence": "^2.2.1"
   }
 }

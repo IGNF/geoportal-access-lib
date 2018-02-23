@@ -1,9 +1,24 @@
 language: node_js
 node_js:
   - "6"
+stages:
+  - name: deploy
+    # require the branch name to be master
+    if: branch = master
+before_script:
+  - npm install
 script:
-    - npm run build
     - npm run test
+    - npm run build
+    - npm run build:prod
 cache:
   directories:
     - node_modules
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $ghkey  # Set in travis-ci.org dashboard, marked secure
+  local-dir: dist/*
+  keep-history: true
+  on:
+    branch: gh-pages

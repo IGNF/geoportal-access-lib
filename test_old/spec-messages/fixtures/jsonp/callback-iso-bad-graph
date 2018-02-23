@@ -1,1 +1,0 @@
-callback({"message":"ServiceException: Error in isochron computation\nError in smartrouting\ndatasource is null","status":"ERROR"})

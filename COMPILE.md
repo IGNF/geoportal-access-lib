@@ -66,20 +66,17 @@ Pour plus d'information, cf. https://code.visualstudio.com/docs/editor/integrate
 
     npm install
 
-> **Note :** --*Windows only!*--
-Si votre connexion ne permet pas de télécharger _PhantomJS_, il est possible de
-le récuperer sur cette URL : http://phantomjs.org/download.html
-Puis, relancer l'installation...
+Si vous passez par les commandes du package.json, les dépendances sont installées :
 
-> **Attention :** --*Windows only!*--
-Pour installation manuelle, ne pas oublier de mettre l'executable _phantomjs.exe_
-dans l'environnement d'execution de windows (ex. https://www.java.com/fr/download/help/path.xml)
+    npm run <target>
 
-### Compilation via NPM
+
+### Compilation via NPM avec les scripts du package.json
 
 **ouvrir une console :**
 
-    npm run build ou npm run build:prod
+    npm run build
+    npm run build:prod
 
 Les *bundles* sont disponibles dans le répertoire :
 
@@ -87,17 +84,28 @@ Les *bundles* sont disponibles dans le répertoire :
 	dist/GpServices-src.js
 	dist/GpServices-src.js.map
 
+La jsoc et les exemples sont générés.
+
 #### Erreur de fin de lignes
 
 Si vous avez des erreurs de parsing tel que **Invalid line break**, vous devez
-modifier le paramètre du fichier _.jscs_ :
+modifier le paramètre du fichier _.jshintrc_ :
 > validateLineBreaks : { character : "CRLF" }
 
 #### Exécution de la JSDOC
 
+#### Construction de la JSDOC
+
+La jsdoc est générée lors du build dans le répertoire *_doc*.
+
+#### JSDOC sur un navigateur
+
 **ouvrir une console :**
 
-    npm run doc
+    npm run doc:serve
+
+Le navigateur s'ouvre sur la page de la JSDOC sur l'URL suivante :
+http://localhost:9001/
 
 Sous *Windows*, il est possible que la *JSDoc* ne soit pas compilée correctement
 (problème de *path* du binaire), on peut l’exécuter manuellement :
@@ -110,9 +118,7 @@ Sous *Windows*, il est possible que la *JSDoc* ne soit pas compilée correctemen
 
 #### Construction des exemples
 
-**ouvrir une console :**
-
-    npm run sample
+Les exemples sont générées lors du build dans le répertoire *_samples*.
 
 #### Exemples sur un navigateur
 
@@ -130,7 +136,7 @@ http://localhost:9001/
 
 **ouvrir une console :**
 
-    npm run test:unit
+    npm run test
 
 #### Tests sur un navigateur
 

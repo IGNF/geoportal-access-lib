@@ -1,3 +1,6 @@
+Pourquoi doit on migrer sous ES6 module (harmony) ?
+https://www.contentful.com/blog/2017/04/04/es6-modules-support-lands-in-browsers-is-it-time-to-rethink-bundling/
+
 -- conversion des sources
     0 migration AMD to ES6
     -- path
@@ -13,11 +16,13 @@
         0 formats
         0 Utils
 
+
 -- check
     0 jshint runtime
     x jscs runtime :
         INFO projet JSCS a été mergé avec eslint !!!
         TODO revoir les nouvelles regles
+
 
 -- samples
     x migration ES6 modules
@@ -27,6 +32,7 @@
         0 browser:minify (prod)
         \ ES6
             FIXME utilisation de self !? Probleme d'export ?
+            http://exploringjs.com/es6/ch_modules.html#sec_modules-in-browsers
 
 
 -- tests unitaires
@@ -52,13 +58,13 @@
         0 doc :
             FIXME le plugin jsdoc-webpack-plugin v0.0.2 a un bug...
             > on force la v0.0.1
-        x doc:serve
+        0 doc:serve
         0 ajout de la licence
         0 test unitaire
             > ligne de commande
             ex. ./node_modules/.bin/mocha-webpack --glob "*.js" test/spec
             ./node_modules/.bin/mocha-webpack  test.js
-            ou npm run test:unit
+            ou npm run test
         0 test unitaire en mode browser
             cf. https://survivejs.com/webpack/techniques/testing/
             > ligne de commande :
@@ -66,23 +72,39 @@
                 ou npm run test:serve
         x test fonctionnel
         x sample
-            x mise en place de template
-            x en mode browser
+            0 mise en place de template
+            0 en mode browser
+            INFO utilisation de gulp !
+        x reorganiser le webpack.config.js : cf. https://survivejs.com/webpack/developing/composing-configuration/
+            common ("build bundle", default),
+            merge (common, "tests unitaires", --env.test),
+            merge (common, "tests unitaires (browser)", --env.test.serve),
+            merge (common, "creation des exemples", --env.sample),
+            merge (common, "creation des exemples (browser)", --env.sample.serve),
+            merge (common, "generation de la doc", --env.doc)
+            merge (common, "generation de la doc (browser)", --env.doc.serve)
+            merge (common, "build bundle de production", --env.production)
 
 
--- compilation : gulp ou plugin config webpack ou les 2 ?
+-- compilation : gulp ou plugin config webpack ou utilisation des 2 ?
     0 clean     : avec webpack / npm run build / npm run build:prod
     \ check     : avec webpack / npm run build / npm run build:prod
     0 licence   : avec webpack / npm run build / npm run build:prod
     0 build     : avec webpack / npm run build / npm run build:prod
     0 doc       : avec webpack / npm run doc
-    x doc:serve : avec webpack / npm run doc:serve
+    0 doc:serve : avec webpack / npm run doc:serve
     0 test      : avec webpack / npm run test
     0 test:serve : avec webpack / npm run test:serve
     x test:end-to-end : avec webpack / npm run test:end-to-end
-    x sample    : avec webpack / npm run sample
-    x sample:serve : avec webpack / npm run sample:serve
+    0 sample    : avec gulp / npm run build / npm run sample:serve
+    0 sample:serve : avec webpack / npm run sample:serve
 
+-- questions
+    comment supprimer le logger ?
+    > https://remarkablemark.org/blog/2017/02/25/webpack-ignore-module/
 
-Comment supprimer le logger ?
-> https://remarkablemark.org/blog/2017/02/25/webpack-ignore-module/
+    comment notre bundle peut il être untiliser comme un import es6 module ?
+    > https://stackoverflow.com/questions/41289200/output-an-es-module-using-webpack?answertab=votes#tab-top
+
+    comment utiliser directement les modules dans une page html avec <script type=module> ?
+    https://stackoverflow.com/questions/41289200/output-an-es-module-using-webpack?answertab=votes#tab-top

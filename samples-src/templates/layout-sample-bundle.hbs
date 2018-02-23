@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {{#extend "partials-common-head"}}
+        {{/extend}}
+        {{#extend "partials-bundle-head"}}
+        {{/extend}}
+
+        {{#block "head"}}
+        {{/block}}
+        {{#block "style"}}
+        {{/block}}
+
+    </head>
+    <body>
+        {{#block "body"}}
+        {{/block}}
+
+        <textarea id="print" disabled readonly wrap="off" rows="10" cols="50"></textarea>
+
+        <script type="text/javascript">
+        {{#block "js"}}
+        {{/block}}
+        </script>
+    </body>
+</html>

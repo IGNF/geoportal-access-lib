@@ -106,4 +106,4 @@ Gp.extend("Helper", Helper);
 // Export DefaultUrls
 Gp.extend("Services.DefaultUrl", DefaultUrl);
 
-export default Gp;
+export default Gp; // = export { Gp as default };

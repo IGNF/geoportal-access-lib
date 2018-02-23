@@ -48,4 +48,13 @@
 /_doc/
 /_src/
 /_samples/
+/_samples_test/
+/_samples_old/
 /_test/
+/_test_old/
+
+# Files #
+#########
+
+TODO
+FIXME
