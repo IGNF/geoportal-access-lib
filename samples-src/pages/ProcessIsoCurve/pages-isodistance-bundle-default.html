@@ -1,0 +1,30 @@
+{{#extend "layout-sample-bundle"}}
+
+{{#content "head"}}
+        <title>Service d'isodistances</title>
+{{/content}}
+
+{{#content "style"}}
+        <style></style>
+{{/content}}
+
+{{#content "body"}}
+        <h1>Utilisation du Service d'isodistances</h1>
+        <h2>Avec les paramètres obligatoires seulement</h2>
+{{/content}}
+
+{{#content "js"}}
+        var options = {
+            apiKey : "{{ config.apiKey }}",
+            onSuccess : function (response) {
+                print(response);
+            },
+            position : {
+               x : 2.35,
+               y : 48.87
+            },
+            distance : 200
+        };
+        Gp.Services.isoCurve(options);
+{{/content}}
+{{/extend}}

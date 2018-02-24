@@ -1,0 +1,28 @@
+{{#extend "layout-sample-bundle"}}
+
+{{#content "head"}}
+        <title>Service d'autocompletion</title>
+{{/content}}
+
+{{#content "style"}}
+        <style></style>
+{{/content}}
+
+{{#content "body"}}
+        <h1>Utilisation du Service d'autocompletion</h1>
+        <h2>Avec le protocole JSONP</h2>
+{{/content}}
+
+{{#content "js"}}
+        var options = {
+            apiKey : "{{ config.apiKey }}",
+            protocol : "JSONP",
+            onSuccess : function (response) {
+                print(response);
+            },
+            // spécifique au service
+            text : "Saint-Man"
+        };
+        Gp.Services.autoComplete(options);
+{{/content}}
+{{/extend}}

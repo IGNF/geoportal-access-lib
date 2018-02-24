@@ -2,10 +2,10 @@
         <script src="{{ config.baseurl }}/lib/{{ config.bundle }}"></script>
         <!-- Function -->
         <script>
-            /** Affichage de la reponse dans la balise textarea (+ console) */
+            /** Affichage de la reponse dans la balise (+ console) */
             function print (response) {
-                var el = document.getElementById("print");
-                el.value = JSON.stringify(response);
+                var el = document.getElementById("result");
+                el.innerHTML = "<pre>" + JSON.stringify(response, null, 2) + "</pre>";
                 console.log(response);
             };
         </script>
