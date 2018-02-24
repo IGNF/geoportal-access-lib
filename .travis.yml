@@ -18,7 +18,7 @@ deploy:
   provider: pages
   skip-cleanup: true
   github-token: $ghkey  # Set in travis-ci.org dashboard, marked secure
-  local-dir: $TRAVIS_BUILD_DIR/dist/*
+  local-dir: dist/
   keep-history: true
   on:
     branch: migrate-es6
