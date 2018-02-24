@@ -4,7 +4,7 @@ node_js:
 stages:
   - name: deploy
     # require the branch name to be master
-    if: branch = migrate-es6
+    if: branch = migrate-es6 # condition on <BRANCHNAME>
 before_script:
   - npm install
 script:
@@ -14,6 +14,9 @@ script:
 cache:
   directories:
     - node_modules
+before_deploy:
+    - git clone https://github.com/IGNF/geoportal-access-lib.git repository_jsdoc/ --branch gh-pages
+    - cp -r dist/ jsdoc/
 deploy:
   provider: pages
   skip-cleanup: true
@@ -21,4 +24,6 @@ deploy:
   local-dir: dist/
   keep-history: true
   on:
-    branch: migrate-es6
+    branch: migrate-es6 # condition on <BRANCHNAME>
+after_deploy:
+    - rm -rf repository_jsdoc/
