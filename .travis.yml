@@ -17,6 +17,7 @@ cache:
 before_deploy:
     - git clone https://github.com/IGNF/geoportal-access-lib.git repository_jsdoc/ --branch gh-pages
     - cp -r dist/ repository_jsdoc/
+    - cd repository_jsdoc/ && git add dist/
 deploy:
   provider: pages
   skip-cleanup: true
