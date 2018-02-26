@@ -8,7 +8,7 @@ stages:
 before_script:
   - npm install
 script:
-    - ./build.sh -a
+    - ./build.sh -a # use script instead of npm run command...
 cache:
   directories:
     - node_modules
