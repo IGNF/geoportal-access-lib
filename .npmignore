@@ -10,7 +10,10 @@
 build.sh
 CHANGELOG*
 CONTRIBUTING.md
+CONTRIBUTORS.md
 COMPILE.md
+HISTORY.md
+History.md
 gulpfile.js
 jsdoc.json
 *.gz
