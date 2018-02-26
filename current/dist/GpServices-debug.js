@@ -9,7 +9,7 @@
  * copyright CeCILL-B
  * copyright IGN
  * @author IGN
- * @version 1.1.1
+ * @version 1.2.0
  * @date 2018-02-26
  *
  */
@@ -3897,7 +3897,7 @@ ServicesCommonService = function (Logger, Helper, _, Protocol, ErrorService, Def
             var strUrlProxified = null;
             var strData = this.request;
             var bUrlProxified = this.options.proxyURL && this.options.protocol === 'XHR' ? true : false;
-            this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, { 'gp-access-lib': '1.1.1' }, false);
+            this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, { 'gp-access-lib': '1.2.0' }, false);
             if (bUrlProxified) {
                 if (this.options.httpMethod === 'GET') {
                     strUrlProxified = this.options.proxyURL + Helper.normalyzeUrl(this.options.serverUrl, this.request, true);
@@ -10105,7 +10105,7 @@ ServicesServices = function (Alti, AutoConf, Geocode, ReverseGeocode, AutoComple
 Gp = function (XHR, Services, AltiResponse, Elevation, AutoCompleteResponse, SuggestedLocation, GetConfigResponse, Constraint, Format, Layer, Legend, Metadata, Originator, Service, Style, Territory, Thematic, TM, TMLimit, TMS, GeocodeResponse, GeocodedLocation, DirectGeocodedLocation, ReverseGeocodedLocation, IsoCurveResponse, RouteResponse, RouteInstruction, Error, Helper, DefaultUrl) {
     var scope = typeof window !== 'undefined' ? window : {};
     var Gp = scope.Gp || {
-        servicesVersion: '1.1.1',
+        servicesVersion: '1.2.0',
         servicesDate: '2018-02-26',
         extend: function (strNS, value) {
             var parts = strNS.split('.');
