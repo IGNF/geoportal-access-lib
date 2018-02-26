@@ -34,7 +34,7 @@
     "opts": {
         "template": "./doc/jaguarjs-jsdoc",
         "encoding": "utf8",
-        "destination": "./_doc/",
+        "destination": "./jsdoc/",
         "recurse": true,
         "lenient": true,
         "verbose": true,

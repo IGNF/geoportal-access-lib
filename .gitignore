@@ -43,15 +43,13 @@
 /test/bower_dependencies/
 /test/node_modules/
 /dist/
+/samples/
+/jsdoc/
+/tests/
 
 # add other directories to ignore
-/_doc/
-/_src/
-/_samples/
-/_samples_test/
-/_samples_old/
-/_test/
-/_test_old/
+/_samples_*/
+/_test_*/
 
 # Files #
 #########

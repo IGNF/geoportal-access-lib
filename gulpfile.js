@@ -5,7 +5,7 @@ var tmpl  = require("gulp-template");
 var clean = require("gulp-clean");
 var glob  = require("glob");
 var hb    = require("gulp-hb");
-var rename= require("gulp-rename");
+var rename = require("gulp-rename");
 
 // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // | ✓ samples-process-template
@@ -15,7 +15,7 @@ var rename= require("gulp-rename");
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 gulp.task("samples-process-template", function (cb) {
 
-    var builddir = path.join("_samples", "pages");
+    var builddir = path.join("samples", "pages");
     var srcdir   = path.join("samples-src");
 
     var hbStream = hb({
@@ -45,7 +45,7 @@ gulp.task("samples-process-template", function (cb) {
 // | > copie des ressources des exemples
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 gulp.task("samples-copy-resources", function () {
-    var builddir = path.join("_samples", "res");
+    var builddir = path.join("samples", "res");
     var resdir   = path.join("samples-src", "resources");
 
     var resources  = [];
@@ -60,7 +60,7 @@ gulp.task("samples-copy-resources", function () {
 // | > copie des bundles
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 gulp.task("samples-copy-bundle", function () {
-    var builddir = path.join("_samples", "lib");
+    var builddir = path.join("samples", "lib");
     var distdir  = path.join("dist");
 
     var bundles  = [];
@@ -77,7 +77,7 @@ gulp.task("samples-copy-bundle", function () {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 gulp.task("samples-process-index", function () {
 
-    var builddir = path.join("_samples");
+    var builddir = path.join("samples");
     var srcfiles = path.join("pages", "**", "*.html");
     var index    = path.join("samples-src", "pages", "index.html");
 
@@ -97,7 +97,7 @@ gulp.task("samples-process-index", function () {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 gulp.task("samples-clean", function () {
 
-    var builddir = path.join("_samples");
+    var builddir = path.join("samples");
 
     var stream = gulp.src([
         builddir

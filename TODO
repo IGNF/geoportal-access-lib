@@ -101,15 +101,7 @@ https://www.contentful.com/blog/2017/04/04/es6-modules-support-lands-in-browsers
 
 
 -- deploy binaries
-    TODO : how to deploy binary (dist) on git branch 'gh-pages' ?"
-    - git clone ${GIT_REPOSITORY_PAGES} --branch gh-pages ${GIT_REPOSITORY_DIR}
-    - mkdir -p ${GIT_REPOSITORY_DIR}/bin/current/
-    - cp  dist/* ${GIT_REPOSITORY_DIR}/bin/current/
-    - cd ${GIT_REPOSITORY_DIR}
-    - ln -s ${GIT_REPOSITORY_DIR}/bin/current/ current
-    - git add bin/ current
-    - git commit -m "add current binary"
-    - git push --force
+    TODO : how to deploy binary (dist) and jsdoc on git branch 'gh-pages' ?"
 
 -- questions
     comment supprimer le logger ?

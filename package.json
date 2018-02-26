@@ -9,8 +9,8 @@
     "build:prod": "npm run setup && webpack --env.production && gulp sample",
     "test": "npm run setup && mocha-webpack --webpack-config webpack.test.js --glob \"test_*.js\" test/spec/",
     "test:serve": "npm run setup && webpack-dev-server --hot --config webpack.test.serve.js",
-    "sample:serve": "gulp sample && webpack-dev-server --contentBase _samples --port 9001 --open",
-    "doc:serve": "webpack-dev-server --contentBase _doc --port 9001 --open"
+    "sample:serve": "webpack-dev-server --contentBase samples --port 9001 --open",
+    "doc:serve": "webpack-dev-server --contentBase jsdoc --port 9001 --open"
   },
   "repository": {
     "type": "git",

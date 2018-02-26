@@ -132,10 +132,9 @@ module.exports = env => {
             }),
             /** NETTOYAGE DES REPERTOIRES TEMPORAIRES */
             new CleanWebpackPlugin([
-                "_src",
-                "_doc",
-                "_sample",
-                "_test"
+                // "jsdoc",
+                // "samples",
+                // "tests"
             ], {
                 verbose :  true
             }),
