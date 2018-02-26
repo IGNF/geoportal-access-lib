@@ -1,9 +1,28 @@
 language: node_js
 node_js:
   - "6"
+stages:
+  - name: deploy
+    # require the branch name to be master
+    if: branch = master # condition
 before_script:
   - npm install
-script: ./node_modules/.bin/gulp build
+script:
+    - ./build.sh -a
 cache:
   directories:
     - node_modules
+before_deploy:
+    - git clone https://github.com/IGNF/geoportal-access-lib.git --branch gh-pages deploy/
+    - cp -r dist/ deploy/current/
+    - cp -r target/jsdoc/ deploy/current/
+deploy:
+  provider: pages
+  skip_cleanup: true
+  keep-history: true
+  github-token: $ghkey
+  local_dir: deploy/
+  on:
+    branch: master # condition
+after_deploy:
+    - rm -rf deploy/

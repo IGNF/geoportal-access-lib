@@ -32,9 +32,9 @@
         "hardwrap": true
     },
     "opts": {
-        "template": "./target/doc/jaguarjs-jsdoc",
+        "template": "./target/jsdoc/jaguarjs-jsdoc",
         "encoding": "utf8",
-        "destination": "./target/doc/",
+        "destination": "./target/jsdoc/",
         "recurse": true,
         "lenient": true,
         "verbose": true,
