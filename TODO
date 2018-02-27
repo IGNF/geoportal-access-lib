@@ -3,6 +3,7 @@ https://www.contentful.com/blog/2017/04/04/es6-modules-support-lands-in-browsers
 
 -- conversion des sources
     0 migration AMD to ES6
+	FIXME utile ? Webpack (babel) gère nativement le format AMD !
     -- path
         0 export avec main Gp.js
         0 services
@@ -20,17 +21,17 @@ https://www.contentful.com/blog/2017/04/04/es6-modules-support-lands-in-browsers
 -- check
     0 jshint runtime
     x jscs runtime :
-        INFO projet JSCS a été mergé avec eslint !!!
+        Le projet JSCS a été mergé avec eslint !!!
         TODO revoir les nouvelles regles
 
 
--- samples
-    x migration ES6 modules
-    x faire marcher un exemple avec des sources ES6 (ex script type=module)
-    0 idem avec le bundle
-        0 browser:sourcesmap
-        0 browser:minify (prod)
-        \ ES6
+-- samples (tests)
+    x faire marcher un exemple avec des sources ES6 
+	ex script type=module
+    0 utilisation du bundle
+        0 env browser avec le sourcesmap
+        0 env browser avec le bundle minifié
+        x env ES6
             FIXME utilisation de self !? Probleme d'export ?
             http://exploringjs.com/es6/ch_modules.html#sec_modules-in-browsers
 
@@ -46,20 +47,25 @@ https://www.contentful.com/blog/2017/04/04/es6-modules-support-lands-in-browsers
     x test avec mocha (browser)
 
 -- config de webpack
+
         0 build du bundle
         0 build du sourcesmap
         0 minify :
             FIXME comment supprimer le logger ?
             > on le desactive uniquement..., pour le moment...
             > cf. https://remarkablemark.org/blog/2017/02/25/webpack-ignore-module/
+
         0 check avec jshint
         x check avec jscs
-            INFO abandon du projet (cf. plus haut)
+            INFO cf. plus haut
+
         0 doc :
             FIXME le plugin jsdoc-webpack-plugin v0.0.2 a un bug...
             > on force la v0.0.1
         0 doc:serve
+
         0 ajout de la licence
+
         0 test unitaire
             > ligne de commande
             ex. ./node_modules/.bin/mocha-webpack --glob "*.js" test/spec
@@ -71,10 +77,13 @@ https://www.contentful.com/blog/2017/04/04/es6-modules-support-lands-in-browsers
                 ./node_modules/.bin/webpack-dev-server --hot --config webpack.test.js
                 ou npm run test:serve
         x test fonctionnel
-        x sample
+
+        0 sample
             0 mise en place de template
-            0 en mode browser
-            INFO utilisation de gulp !
+            0 execution en mode browser
+            0 utilisation de gulp
+	    / finir les exemples
+
         x reorganiser le webpack.config.js : cf. https://survivejs.com/webpack/developing/composing-configuration/
             common ("build bundle", default),
             merge (common, "tests unitaires", --env.test),
@@ -100,14 +109,14 @@ https://www.contentful.com/blog/2017/04/04/es6-modules-support-lands-in-browsers
     0 sample:serve : avec webpack / npm run sample:serve
 
 
--- deploy binaries
-    TODO : how to deploy binary (dist) and jsdoc on git branch 'gh-pages' ?"
+-- deploy binaries / jsdoc (current)
+    OK: how to deploy binary (dist) and jsdoc on git branch 'gh-pages' ?"
 
 -- questions
     comment supprimer le logger ?
     > https://remarkablemark.org/blog/2017/02/25/webpack-ignore-module/
 
-    comment notre bundle peut il être untiliser comme un import es6 module ?
+    comment notre bundle peut il être utilisé comme un import es6 module ?
     > https://stackoverflow.com/questions/41289200/output-an-es-module-using-webpack?answertab=votes#tab-top
 
     comment utiliser directement les modules dans une page html avec <script type=module> ?

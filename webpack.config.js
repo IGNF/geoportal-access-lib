@@ -1,33 +1,9 @@
 /* global module, __dirname, process */
 
 // FIXME
-// -- plugin JsDocWebPackPlugin :
-// on force la version en 0.0.1 car la version 0.0.2 semble buggée !?
-// -- On ne supprime pas le logger en production, mais on le desactive...
-
-// HOWTO
-// -- env.production ?
-// -- bundle
-//      ✓ substitution : date et version dans les sources
-//      x check syntaxe jscs
-//      ✓ check des sources jshint
-//      ✓ production ? minify : sourcesmap
-//      ✓ licence ( + substitution à faire !)
-//      > ./dist/
-// -- test
-//      ✓ execution des tests unitaires (console / browser)
-//      x execution des tests fonctionnels
-//      > ./_test/
-// -- doc
-//      ✓ generation de la JSDOC
-//      x execution de la JSDOC
-//      > ./_doc/
-// -- sample
-//      x substitution des exemples (*substitution)
-//      x execution des exemples
-//      > ./_samples
-//
-// * substitution = production ? bundle.js : bundle-src.js
+// -- Sur le plugin JsDocWebPackPlugin, on force la version en 0.0.1 car la
+// version 0.0.2 semble buggée !?
+// -- On ne supprime pas le logger lors de la minification, mais on le desactive...
 
 // -- modules
 var path    = require("path");
@@ -43,6 +19,7 @@ var IgnoreWebPackPlugin   = webpack.IgnorePlugin;
 var CleanWebpackPlugin    = require("clean-webpack-plugin");
 var DefineWebpackPlugin   = webpack.DefinePlugin;
 var ReplaceWebpackPlugin  = require("replace-bundle-webpack-plugin");
+var ShellWebpackPlugin    = require("webpack-shell-plugin");
 
 // -- variables
 var licence = path.join(__dirname, "utils", "licence.tmpl");
@@ -107,6 +84,11 @@ module.exports = env => {
             ]
         },
         plugins : [
+            /** EXECUTION DE GULP */
+            new ShellWebpackPlugin({
+                onBuildStart : [],
+                onBuildEnd : ["gulp sample"]
+            }),
             /** REPLACEMENT DE VALEURS */
             new ReplaceWebpackPlugin(
                 [
@@ -132,12 +114,9 @@ module.exports = env => {
             }),
             /** NETTOYAGE DES REPERTOIRES TEMPORAIRES */
             new CleanWebpackPlugin([
-                // "jsdoc",
-                // "samples",
-                // "tests"
-            ], {
-                verbose :  true
-            }),
+                "jsdoc",
+                "samples"
+            ], { verbose : true }),
             /** GENERATION DE LA JSDOC */
             new JsDocWebPackPlugin({
                 conf : path.join(__dirname, "jsdoc.json")

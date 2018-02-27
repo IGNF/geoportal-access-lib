@@ -66,9 +66,12 @@ Pour plus d'information, cf. https://code.visualstudio.com/docs/editor/integrate
 
     npm install
 
-Si vous passez par les commandes du package.json, les dépendances sont installées :
+Si vous passez par les commandes du package.json, les dépendances sont installées auto :
 
     npm run <target>
+        target : build, build:prod,
+                 test, 
+                 test:serve, doc:serve, sample:serve
 
 
 ### Compilation via NPM avec les scripts du package.json
@@ -96,7 +99,7 @@ modifier le paramètre du fichier _.jshintrc_ :
 
 #### Construction de la JSDOC
 
-La jsdoc est générée lors du build dans le répertoire *_doc*.
+La jsdoc est générée lors du build dans le répertoire *jsdoc*.
 
 #### JSDOC sur un navigateur
 
@@ -118,7 +121,7 @@ Sous *Windows*, il est possible que la *JSDoc* ne soit pas compilée correctemen
 
 #### Construction des exemples
 
-Les exemples sont générées lors du build dans le répertoire *_samples*.
+Les exemples sont générées lors du build dans le répertoire *samples*.
 
 #### Exemples sur un navigateur
 
@@ -128,7 +131,6 @@ Les exemples sont générées lors du build dans le répertoire *_samples*.
 
 Le navigateur s'ouvre sur la page des exemples sur l'URL suivante :
 http://localhost:9001/
-
 
 ### Exécution des tests unitaires
 

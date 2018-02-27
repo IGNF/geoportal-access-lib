@@ -5,10 +5,10 @@
   "main": "dist/GpServices.js, dist/GpServices-src.js, dist/GpServices-src.js.map",
   "scripts": {
     "setup": "npm install",
-    "build": "npm run setup && webpack && gulp sample",
-    "build:prod": "npm run setup && webpack --env.production && gulp sample",
+    "build": "npm run setup && webpack",
+    "build:prod": "npm run setup && webpack --env.production",
     "test": "npm run setup && mocha-webpack --webpack-config webpack.test.js --glob \"test_*.js\" test/spec/",
-    "test:serve": "npm run setup && webpack-dev-server --hot --config webpack.test.serve.js",
+    "test:serve": "webpack-dev-server --hot --config webpack.test.serve.js",
     "sample:serve": "webpack-dev-server --contentBase samples --port 9001 --open",
     "doc:serve": "webpack-dev-server --contentBase jsdoc --port 9001 --open"
   },
@@ -50,7 +50,8 @@
     "string-template": "^1.0.0",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1",
-    "webpack-node-externals": "^1.6.0"
+    "webpack-node-externals": "^1.6.0",
+    "webpack-shell-plugin": "^0.5.0"
   },
   "optionalDependencies": {
     "glob": "^7.1.2",
