@@ -2,57 +2,81 @@
 
 # Script de construction des bundles
 
-echo "BEGIN"
+##########
+# doCmd()
+
+doCmd () {
+    cmd2issue=$1
+    eval ${cmd2issue}
+    retour=$?
+    if [ $retour -ne 0 ] ; then
+        printTo "Erreur d'execution (code:${retour}) !..."
+        exit 100
+    fi
+}
+
+##########
+# printTo()
+
+printTo () {
+    text=$1
+    d=`date`
+    echo "[${d}] ${text}"
+}
+
+printTo "BEGIN"
 
 function debug() {
-  echo "####### DEBUG !"
-  gulp --debug
-  gulp publish --debug
+  printTo "####### DEBUG !"
+  doCmd "gulp build --debug"
+  doCmd "gulp publish --debug"
 }
 
 function production() {
-  echo "####### production !"
-  gulp --production
-  gulp publish --production
+  printTo "####### production !"
+  doCmd "gulp build --production"
+  doCmd "gulp publish --production"
 }
 
 function sources() {
-  echo "####### sources !"
-  gulp
-  gulp publish
+  printTo "####### sources !"
+  doCmd "gulp build"
+  doCmd "gulp publish"
 }
+
+doCmd "gulp clean"
 
 while getopts "adps" opts
 do
    case $opts in
      d)
-        echo "#################################"
-        echo "######## debug bundle ! ########"
+        printTo "#################################"
+        printTo "######## debug bundle ! ########"
         debug
         ;;
      p)
-        echo "#################################"
-        echo "##### production bundle ! #######"
+        printTo "#################################"
+        printTo "##### production bundle ! #######"
         production
         ;;
      s)
-        echo "#################################"
-        echo "###### sources bundle ! ######"
+        printTo "#################################"
+        printTo "###### sources bundle ! ######"
         sources
         ;;
      a)
-        echo "#################################"
-        echo "########## ALL bundle ! #########"
+        printTo "#################################"
+        printTo "########## ALL bundle ! #########"
         sources
         debug
         production
         ;;
      \?)
-        echo "$OPTARG : option invalide : a(all), s(sources), d(debug), ou p(production) !"
+        printTo "$OPTARG : option invalide : a(all), s(sources), d(debug), ou p(production) !"
         exit -1
         ;;
    esac
 done
 
-echo "END"
+printTo "END"
 exit 0
