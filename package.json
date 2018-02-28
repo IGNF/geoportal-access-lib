@@ -2,14 +2,15 @@
   "name": "geoportal-access-lib",
   "version": "1.2.0",
   "description": "French Geoportal resources access library",
-  "main": "dist/GpServices.js",
+  "main": "dist/GpServices-src.js, dist/GpServices.js",
   "scripts": {
     "setup": "npm install",
-    "build": "npm run setup && gulp build",
+    "build": "npm run setup && gulp && gulp publish",
+    "build:prod": "npm run setup && gulp --production && gulp publish",
+    "build:debug": "npm run setup && gulp --debug && gulp publish",
     "test": "npm run setup && gulp test",
     "doc": "npm run setup && gulp doc",
-    "dist": "npm run setup && gulp dist",
-    "check": "npm run setup && gulp check"
+    "sample": "npm run setup && gulp sample"
   },
   "repository": {
     "type": "git",
@@ -23,14 +24,14 @@
   "author": "IGNF",
   "license": "CECILL-B",
   "dependencies": {
-    "es6-promise": "^4.2.4",
-    "fancy-log": "^1.3.2"
+    "es6-promise": "^4.2.4"
   },
   "devDependencies": {
     "amdclean": "^2.7.0",
     "chai": "^3.5.0",
     "del": "^3.0.0",
     "easy-amdtest": "^0.1.1",
+    "fancy-log": "^1.3.2",
     "glob": "^7.1.1",
     "groundskeeper": "^0.1.12",
     "gulp": "^3.9.1",

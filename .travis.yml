@@ -6,9 +6,11 @@ stages:
     # require the branch name to be master
     if: branch = master # condition
 before_script:
-  - npm install
+  - npm run setup
 script:
-    - ./build.sh -a # use script instead of npm run command...
+    - npm run build
+    - npm run build:prod
+    - npm run build:debug
 cache:
   directories:
     - node_modules
