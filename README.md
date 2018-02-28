@@ -12,4 +12,4 @@
 * Dernière version stable publiée (release) : [https://ignf.github.io/geoportal-access-lib/latest/dist/GpServices.js](https://ignf.github.io/geoportal-access-lib/latest/dist/GpServices.js)
 ou : [https://unpkg.com/geoportal-access-lib@latest/dist/GpServices.js](https://unpkg.com/geoportal-access-lib@latest/dist/GpServices.js)
 
-* Version courante, en cours de développement (branche master) : [https://ignf.github.io/geoportal-access-lib/latest/dist/GpServices.js](https://ignf.github.io/geoportal-access-lib/latest/dist/GpServices.js)
+* Version courante, en cours de développement (branche master) : [https://ignf.github.io/geoportal-access-lib/latest/dist/GpServices.js](https://ignf.github.io/geoportal-access-lib/current/dist/GpServices.js)
