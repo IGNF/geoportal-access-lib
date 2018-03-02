@@ -6,11 +6,10 @@ stages:
     # require the branch name to be master
     if: branch = migrate-es6 # condition
 before_script:
-  - npm install
+  - npm run setup
 script:
-    - npm run test
     - npm run build
-    - npm run build:prod
+    - npm run build -- --env.production
 cache:
   directories:
     - node_modules
