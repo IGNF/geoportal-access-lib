@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Script de construction des bundles
+# FIXME incompatibilité avec un env. Windows
 
 ##########
 # doCmd()
@@ -36,6 +37,7 @@ function sources() {
   doCmd "npm run build"
 }
 
+doCmd "npm run clean"
 doCmd "npm run setup"
 
 while getopts "aps" opts

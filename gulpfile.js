@@ -7,16 +7,17 @@ var glob  = require("glob");
 var hb    = require("gulp-hb");
 var rename = require("gulp-rename");
 
-var opts = require("minimist")(process.argv.slice(1));
-var production = (opts.env) ? opts.env.production : false;
+var opts = require("minimist")(process.argv.slice(2));
+var optsProduction = (opts.env && opts.env.production) ? true : false;
+var optsClean = (opts.env && opts.env.clean) ? true : false;
 
 // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// | ✓ samples-process-template
+// | ✓ template
 // | > gestion des exemples à base de templates with handlebars
 // | > https://github.com/shannonmoeller/gulp-hb
 // | > https://github.com/shannonmoeller/handlebars-layouts
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-gulp.task("samples-process-template", function (cb) {
+gulp.task("template", function (cb) {
 
     var builddir = path.join("samples", "pages");
     var srcdir   = path.join("samples-src");
@@ -31,7 +32,7 @@ gulp.task("samples-process-template", function (cb) {
     .data({ // .data(path.join(srcdir, "config.json"));
         config : {
             baseurl : "../..",
-            bundle : (production) ? "GpServices.js" : "GpServices-src.js",
+            bundle : (optsProduction) ? "GpServices.js" : "GpServices-src.js",
             resources : "../../res",
             apiKey : "jhyvi0fgmnuxvfv0zjzorvdn" // FIXME autoconf local !
         }
@@ -44,10 +45,10 @@ gulp.task("samples-process-template", function (cb) {
 });
 
 // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// | ✓ samples-copy-resources
+// | ✓ resources
 // | > copie des ressources des exemples
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-gulp.task("samples-copy-resources", function () {
+gulp.task("resources", function () {
     var builddir = path.join("samples", "res");
     var resdir   = path.join("samples-src", "resources");
 
@@ -59,10 +60,10 @@ gulp.task("samples-copy-resources", function () {
 });
 
 // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// | ✓ samples-copy-bundle
+// | ✓ bundle
 // | > copie des bundles
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-gulp.task("samples-copy-bundle", function () {
+gulp.task("bundle", function () {
     var builddir = path.join("samples", "lib");
     var distdir  = path.join("dist");
 
@@ -74,11 +75,11 @@ gulp.task("samples-copy-bundle", function () {
 });
 
 // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// | ✓ samples-process-index
+// | ✓ index
 // | > construction de la page principale des exemples
 // | > https:// ww.npmjs.com/package/gulp-template
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-gulp.task("samples-process-index", function () {
+gulp.task("index", function () {
 
     var builddir = path.join("samples");
     var srcfiles = path.join("pages", "**", "*.html");
@@ -95,10 +96,10 @@ gulp.task("samples-process-index", function () {
 });
 
 // **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//  ✓ samples-clean
+//  ✓ clean
 //  > nettoyage du répertoire des exemples (_samples)
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-gulp.task("samples-clean", function () {
+gulp.task("clean", function () {
 
     var builddir = path.join("samples");
 
@@ -116,7 +117,11 @@ gulp.task("samples-clean", function () {
 var runSequence = require("run-sequence");
 
 gulp.task("sample", function (cb) {
-    runSequence("samples-clean", "samples-process-template", "samples-copy-resources", "samples-copy-bundle",  "samples-process-index", cb);
+    if (optsClean) {
+        runSequence("clean", "template", "resources", "bundle",  "index", cb);
+    } else {
+        runSequence("template", "resources", "bundle",  "index", cb);
+    }
 });
 
 // **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

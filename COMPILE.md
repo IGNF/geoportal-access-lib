@@ -63,10 +63,10 @@ Pour plus d'information, cf. https://code.visualstudio.com/docs/editor/integrate
 Liste des targets disponibles :
 
     npm run <target> <option>
-        target : build,
+        target : (clean), build,
                  test, sample, (doc)
                  test:serve, sample:serve, doc:serve
-        option : --env.production
+        option : --env.production, --env.clean
 
 ### Installation des dépendances
 
@@ -86,7 +86,7 @@ la target suivante :
 **ouvrir une console :**
 
     npm run build
-    npm run build -- --env.production
+    npm run build -- --env.production --env.clean
 
 Les *bundles* sont disponibles dans le répertoire :
 
@@ -135,9 +135,9 @@ Mais il est aussi possible de les executer autrement :
 **ouvrir une console :**
 
     npm run sample
-    npm run sample -- --env.production
+    npm run sample -- --env.production --env.clean
     gulp sample
-    gulp sample --env.production
+    gulp sample --env.production --env.clean
 
 #### Ouvrir les exemples sur un navigateur
 

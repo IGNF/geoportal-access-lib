@@ -28,10 +28,96 @@ var version = require(path.join(__dirname, "package.json")).version;
 
 module.exports = env => {
 
-    // -- options :
+    // -- options : minification du bundle
     // ex. webpack --env.production
-    // par defaut, false - en mode debug|source.
-    var production = (env) ? env.production : false;
+    //  par defaut, false - en mode source.
+    var _production = (env) ? env.production : false;
+    // -- options : nettoyage des répertoires temporaires
+    // ex. webpack --env.clean
+    //  par defaut, false.
+    var _clean = (env) ? env.clean : false;
+
+    // -- construction des plugins
+    var _plugins = [];
+
+    // - ajout des plugins sur l'option clean
+    if (_clean) {
+        _plugins.push(
+          /** NETTOYAGE DES REPERTOIRES TEMPORAIRES */
+          new CleanWebpackPlugin([
+              "dist",
+              "jsdoc",
+              "samples",
+              "tests"
+          ], {
+            verbose : true
+        })
+      );
+    }
+
+    // - ajout des plugins communs
+    _plugins.push(
+        /** EXECUTION DE EXEMPLES ET TESTS UNITAIRES */
+        new ShellWebpackPlugin({
+            onBuildExit : [],
+            onBuildStart : ["npm run test"],
+            onBuildEnd : (_production) ? (_clean) ?
+              ["npm run sample -- --env.production --env.clean"] :
+              ["npm run sample -- --env.production"] :
+              ["npm run sample"],
+            safe : true
+        }),
+        /** REPLACEMENT DE VALEURS */
+        new ReplaceWebpackPlugin(
+            [
+                {
+                    partten : /__GPVERSION__/g,
+                    /** replacement de la clef __GPVERSION__ par la version du package */
+                    replacement : function () {
+                        return version;
+                    }
+                },
+                {
+                    partten : /__GPDATE__/g,
+                    /** replacement de la clef __GPDATE__ par la date du build */
+                    replacement : function () {
+                        return date;
+                    }
+                }
+            ]
+        ),
+        /** GESTION DU LOGGER */
+        new DefineWebpackPlugin({
+            __PRODUCTION__ : JSON.stringify(_production)
+        }),
+        /** GENERATION DE LA JSDOC */
+        new JsDocWebPackPlugin({
+            conf : path.join(__dirname, "jsdoc.json")
+        }),
+        /** AJOUT DE LA LICENCE */
+        new BannerWebPackPlugin({
+            banner : header(fs.readFileSync(licence, "utf8"), {
+                __DATE__ : date,
+                __VERSION__ : version
+            }),
+            raw : true,
+            entryOnly : true
+        })
+    );
+
+    // - ajout des plugins sur l'option de production
+    if (_production) {
+        _plugins.push(
+            /** MINIFICATION */
+            new UglifyJsWebPackPlugin({
+                uglifyOptions : {
+                    mangle : true,
+                    warnings : false,
+                    compress : false
+                }
+            })
+        );
+    }
 
     return {
         entry : [
@@ -39,7 +125,7 @@ module.exports = env => {
         ],
         output : {
             path : path.join(__dirname, "dist"),
-            filename : (production) ? "GpServices.js" : "GpServices-src.js",
+            filename : (_production) ? "GpServices.js" : "GpServices-src.js",
             library : "Gp",
             libraryTarget : "umd",
             libraryExport : "default",
@@ -56,7 +142,7 @@ module.exports = env => {
                 commonjs : "xmldom"
             }
         },
-        devtool : (production) ? false : "source-map",
+        devtool : (_production) ? false : "source-map",
         module : {
             loaders : [
                 {
@@ -83,68 +169,6 @@ module.exports = env => {
                 }
             ]
         },
-        plugins : [
-            /** EXECUTION DE EXEMPLES ET TESTS UNITAIRES */
-            new ShellWebpackPlugin({
-                onBuildExit : [],
-                onBuildStart : ["npm run test"],
-                onBuildEnd : (production) ? ["npm run sample -- --env.production"] : ["npm run sample"],
-                safe : true
-            }),
-            /** REPLACEMENT DE VALEURS */
-            new ReplaceWebpackPlugin(
-                [
-                    {
-                        partten : /__GPVERSION__/g,
-                        /** replacement de la clef __GPVERSION__ par la version du package */
-                        replacement : function () {
-                            return version;
-                        }
-                    },
-                    {
-                        partten : /__GPDATE__/g,
-                        /** replacement de la clef __GPDATE__ par la date du build */
-                        replacement : function () {
-                            return date;
-                        }
-                    }
-                ]
-            ),
-            /** GESTION DU LOGGER */
-            new DefineWebpackPlugin({
-                __PRODUCTION__ : JSON.stringify(production)
-            }),
-            /** NETTOYAGE DES REPERTOIRES TEMPORAIRES */
-            new CleanWebpackPlugin([
-                "jsdoc",
-                "samples"
-            ], {
-                verbose : true
-            }),
-            /** GENERATION DE LA JSDOC */
-            new JsDocWebPackPlugin({
-                conf : path.join(__dirname, "jsdoc.json")
-            }),
-            /** AJOUT DE LA LICENCE */
-            new BannerWebPackPlugin({
-                banner : header(fs.readFileSync(licence, "utf8"), {
-                    __DATE__ : date,
-                    __VERSION__ : version
-                }),
-                raw : true,
-                entryOnly : true
-            })
-        ]
-        .concat(
-            (production) ?
-                /** MINIFICATION */
-                new UglifyJsWebPackPlugin({
-                    uglifyOptions : {
-                        mangle : true,
-                        warnings : false,
-                        compress : false
-                    }
-                }) : []
-        )
+        plugins : _plugins
     };
 };

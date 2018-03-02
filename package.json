@@ -4,13 +4,14 @@
   "description": "French Geoportal resources access library",
   "main": "dist/GpServices.js, dist/GpServices-src.js, dist/GpServices-src.js.map",
   "scripts": {
+    "clean":  "echo \"Warning: no yet implemented!\" && exit 1",
     "setup": "npm install",
     "build": "webpack",
     "test": "mocha-webpack --webpack-config webpack.test.js --glob \"test_*.js\" test/spec/",
     "test:serve": "webpack-dev-server --hot --config webpack.test.serve.js",
     "sample": "gulp sample",
     "sample:serve": "webpack-dev-server --contentBase samples --port 9001 --open",
-    "doc": "echo \"Info: no target specified\" && exit 1",
+    "doc": "echo \"Warning: no yet implemented!\" && exit 1",
     "doc:serve": "webpack-dev-server --contentBase jsdoc --port 9001 --open"
   },
   "repository": {
