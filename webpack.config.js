@@ -84,10 +84,12 @@ module.exports = env => {
             ]
         },
         plugins : [
-            /** EXECUTION DE GULP */
+            /** EXECUTION DE EXEMPLES ET TESTS UNITAIRES */
             new ShellWebpackPlugin({
-                onBuildStart : [],
-                onBuildEnd : ["gulp sample"]
+                onBuildExit : [],
+                onBuildStart : ["npm run test"],
+                onBuildEnd : (production) ? ["npm run sample -- --env.production"] : ["npm run sample"],
+                safe : true
             }),
             /** REPLACEMENT DE VALEURS */
             new ReplaceWebpackPlugin(
@@ -116,7 +118,9 @@ module.exports = env => {
             new CleanWebpackPlugin([
                 "jsdoc",
                 "samples"
-            ], { verbose : true }),
+            ], {
+                verbose : true
+            }),
             /** GENERATION DE LA JSDOC */
             new JsDocWebPackPlugin({
                 conf : path.join(__dirname, "jsdoc.json")

@@ -7,6 +7,9 @@ var glob  = require("glob");
 var hb    = require("gulp-hb");
 var rename = require("gulp-rename");
 
+var opts = require("minimist")(process.argv.slice(1));
+var production = (opts.env) ? opts.env.production : false;
+
 // |**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // | ✓ samples-process-template
 // | > gestion des exemples à base de templates with handlebars
@@ -28,7 +31,7 @@ gulp.task("samples-process-template", function (cb) {
     .data({ // .data(path.join(srcdir, "config.json"));
         config : {
             baseurl : "../..",
-            bundle : "GpServices-src.js", // FIXME param !
+            bundle : (production) ? "GpServices.js" : "GpServices-src.js",
             resources : "../../res",
             apiKey : "jhyvi0fgmnuxvfv0zjzorvdn" // FIXME autoconf local !
         }

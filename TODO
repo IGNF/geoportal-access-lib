@@ -26,8 +26,8 @@ https://www.contentful.com/blog/2017/04/04/es6-modules-support-lands-in-browsers
 
 
 -- samples (tests)
-    x faire marcher un exemple avec des sources ES6 
-	ex script type=module
+    x faire marcher un exemple avec des sources ES6
+	   ex script type=module
     0 utilisation du bundle
         0 env browser avec le sourcesmap
         0 env browser avec le bundle minifié
@@ -82,7 +82,9 @@ https://www.contentful.com/blog/2017/04/04/es6-modules-support-lands-in-browsers
             0 mise en place de template
             0 execution en mode browser
             0 utilisation de gulp
-	    / finir les exemples
+              TODO utilisation du loader
+                https://github.com/pcardune/handlebars-loader
+	          / finir les exemples
 
         x reorganiser le webpack.config.js : cf. https://survivejs.com/webpack/developing/composing-configuration/
             common ("build bundle", default),
@@ -105,7 +107,7 @@ https://www.contentful.com/blog/2017/04/04/es6-modules-support-lands-in-browsers
     0 test      : avec webpack / npm run test
     0 test:serve : avec webpack / npm run test:serve
     x test:end-to-end : avec webpack / npm run test:end-to-end
-    0 sample    : avec gulp / npm run build / npm run sample:serve
+    0 sample    : avec gulp / npm run build / npm run sample
     0 sample:serve : avec webpack / npm run sample:serve
 
 

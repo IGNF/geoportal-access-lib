@@ -58,28 +58,35 @@ Possibilité d'utiliser le terminal de _Visual Studio Code_ dans le menu
 _Afficahge > Integred Terminal_
 Pour plus d'information, cf. https://code.visualstudio.com/docs/editor/integrated-terminal
 
-## Commande de compilation
+## Commandes via NPM
 
-### Installation des dépendances via NPM
+Liste des targets disponibles :
+
+    npm run <target> <option>
+        target : build,
+                 test, sample, (doc)
+                 test:serve, sample:serve, doc:serve
+        option : --env.production
+
+### Installation des dépendances
 
 **ouvrir une console :**
 
     npm install
 
-Si vous passez par les commandes du package.json, les dépendances sont installées auto :
+Si vous passez par les commandes du package.json, les dépendances sont installées via
+la target suivante :
 
-    npm run <target>
-        target : build, build:prod,
-                 test, 
-                 test:serve, doc:serve, sample:serve
+**ouvrir une console :**
 
+    npm run setup
 
-### Compilation via NPM avec les scripts du package.json
+### Compilation
 
 **ouvrir une console :**
 
     npm run build
-    npm run build:prod
+    npm run build -- --env.production
 
 Les *bundles* sont disponibles dans le répertoire :
 
@@ -87,7 +94,8 @@ Les *bundles* sont disponibles dans le répertoire :
 	dist/GpServices-src.js
 	dist/GpServices-src.js.map
 
-La jsoc et les exemples sont générés.
+Les sources sont validées (jshint, jscs et/ou eslint).
+La jsoc, les tests et les exemples sont générés.
 
 #### Erreur de fin de lignes
 
@@ -95,20 +103,11 @@ Si vous avez des erreurs de parsing tel que **Invalid line break**, vous devez
 modifier le paramètre du fichier _.jshintrc_ :
 > validateLineBreaks : { character : "CRLF" }
 
-#### Exécution de la JSDOC
+#### JSDOC
 
 #### Construction de la JSDOC
 
 La jsdoc est générée lors du build dans le répertoire *jsdoc*.
-
-#### JSDOC sur un navigateur
-
-**ouvrir une console :**
-
-    npm run doc:serve
-
-Le navigateur s'ouvre sur la page de la JSDOC sur l'URL suivante :
-http://localhost:9001/
 
 Sous *Windows*, il est possible que la *JSDoc* ne soit pas compilée correctement
 (problème de *path* du binaire), on peut l’exécuter manuellement :
@@ -117,13 +116,30 @@ Sous *Windows*, il est possible que la *JSDoc* ne soit pas compilée correctemen
 
     node_modules\.bin\jsdoc -c jsdoc.json
 
-### Exécution des exemples
+#### Ouvrir la JSDOC sur un navigateur
+
+**ouvrir une console :**
+
+    npm run doc:serve
+
+Le navigateur s'ouvre sur la page de la JSDOC sur l'URL suivante :
+http://localhost:9001/
+
+### Les exemples
 
 #### Construction des exemples
 
 Les exemples sont générées lors du build dans le répertoire *samples*.
+Mais il est aussi possible de les executer autrement :
 
-#### Exemples sur un navigateur
+**ouvrir une console :**
+
+    npm run sample
+    npm run sample -- --env.production
+    gulp sample
+    gulp sample --env.production
+
+#### Ouvrir les exemples sur un navigateur
 
 **ouvrir une console :**
 
@@ -132,15 +148,15 @@ Les exemples sont générées lors du build dans le répertoire *samples*.
 Le navigateur s'ouvre sur la page des exemples sur l'URL suivante :
 http://localhost:9001/
 
-### Exécution des tests unitaires
+### Les tests unitaires
 
-#### Tests en console
+#### Tests en mode console
 
 **ouvrir une console :**
 
     npm run test
 
-#### Tests sur un navigateur
+#### Tests dans un navigateur
 
 **ouvrir une console :**
 
