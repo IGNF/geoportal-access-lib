@@ -4,7 +4,7 @@ node_js:
 stages:
   - name: deploy
     # require the branch name to be master
-    if: branch = migrate-es6 # condition
+    if: branch = master # condition
 before_script:
   - npm run setup
 script:
@@ -24,6 +24,6 @@ deploy:
   github-token: $ghkey
   local_dir: deploy/
   on:
-    branch: migrate-es6 # condition
+    branch: master # condition
 after_deploy:
     - rm -rf deploy/
