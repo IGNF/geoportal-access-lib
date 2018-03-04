@@ -187,7 +187,7 @@ XML.prototype = {
  */
 function __getXMLDOC (xmlString) {
 
-    if ( typeof exports === "object") {
+    if ( typeof window === "undefined" ) {
         // env. nodejs
         var DOMParser = require("xmldom").DOMParser; // __xmldom.DOMParser;
         return new DOMParser().parseFromString(xmlString, "text/xml");

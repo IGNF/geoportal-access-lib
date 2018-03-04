@@ -135,11 +135,13 @@ module.exports = env => {
         externals : {
             request : {
                 commonjs2 : "request",
-                commonjs : "request"
+                commonjs : "request",
+                amd : "require"
             },
             xmldom : {
                 commonjs2 : "xmldom",
-                commonjs : "xmldom"
+                commonjs : "xmldom",
+                amd : "require"
             }
         },
         devtool : (_production) ? false : "source-map",
