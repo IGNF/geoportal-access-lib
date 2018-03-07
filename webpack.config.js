@@ -110,6 +110,10 @@ module.exports = env => {
         _plugins.push(
             /** MINIFICATION */
             new UglifyJsWebPackPlugin({
+                output : {
+                    comments : false,
+                    beautify : false
+                },
                 uglifyOptions : {
                     mangle : true,
                     warnings : false,
