@@ -1,4 +1,4 @@
-# Optimize your geoportal access configuration 
+# Optimize your geoportal access configuration
 
 To use Geoportal resources, you need an access key which can be obtained on the [professionels.ign.fr web site](http://professionnels.ign.fr/ign/contrats).
 
@@ -83,6 +83,7 @@ Use it as a value of the **serverUrl** param of the [Gp.Services.getConfig()](ht
 the Gp.Services.getConfig({
     ...
     serverUrl : "path/to/autoconf.json",
+    callbackSuffix : "",
     ...
 }) ;
 ```
@@ -113,6 +114,3 @@ Gp.Map.load(
     }
 ) ;
 ```
-
-
-
