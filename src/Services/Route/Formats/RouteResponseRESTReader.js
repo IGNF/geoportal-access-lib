@@ -7,7 +7,7 @@
  * @private
  */
 
-import Logger from "../../../Utils/LoggerByDefault";
+// import Logger from "../../../Utils/LoggerByDefault";
 import MessagesResources from "../../../Utils/MessagesResources";
 import WKT from "../../../Formats/WKT";
 import ErrSrv from "../../../Exceptions/ErrorService";

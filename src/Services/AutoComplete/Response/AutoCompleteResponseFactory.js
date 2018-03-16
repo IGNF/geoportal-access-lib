@@ -9,7 +9,6 @@
 import Logger from "../../../Utils/LoggerByDefault";
 import MRes from "../../../Utils/MessagesResources";
 import ErrorService from "../../../Exceptions/ErrorService";
-import XML from "../../../Formats/XML";
 import AutoCompleteResponse from "./model/AutoCompleteResponse";
 import SuggestedLocation from "./model/SuggestedLocation";
 

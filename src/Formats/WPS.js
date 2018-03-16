@@ -1,5 +1,3 @@
-/* FIXME : faire sauter proprement le warning lie au closure ci-dessous */
-/*jshint loopfunc: true*/
 import Logger from "../Utils/LoggerByDefault";
 
 /**

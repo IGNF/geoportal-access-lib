@@ -8,7 +8,7 @@
  * @alias Gp.Services.AutoConf.Formats.AutoConfResponseReader
  */
 
-import Logger from "../../../Utils/LoggerByDefault";
+// import Logger from "../../../Utils/LoggerByDefault";
 import AutoConfResponse from "../Response/model/AutoConfResponse";
 import Constraint from "../Response/model/Constraint";
 import Format from "../Response/model/Format";

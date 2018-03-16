@@ -104,7 +104,7 @@ function AutoConf (options) {
      */
     this.options.outputFormat = (this.options.rawResponse) ? "" : "xml";
 
-};
+}
 
 /**
  * @lends module:AutoConf#

@@ -27,6 +27,7 @@ function AltiProfilRequest (options) {
     // appel du constructeur par heritage
     AltiRequest.apply(this, arguments);
 
+    this.logger = Logger.getLogger();
     this.logger.trace("[Constructeur AltiProfilRequest ()]");
 
     /**

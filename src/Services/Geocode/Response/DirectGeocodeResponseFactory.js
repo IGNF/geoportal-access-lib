@@ -8,7 +8,7 @@
  * @todo La reponse JSON peut encapsuler un XML !
  * @private
  */
-import Logger from "../../../Utils/LoggerByDefault";
+// import Logger from "../../../Utils/LoggerByDefault";
 import ErrorService from "../../../Exceptions/ErrorService";
 import MRes from "../../../Utils/MessagesResources";
 import XML from "../../../Formats/XML";

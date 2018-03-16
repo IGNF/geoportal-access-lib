@@ -1,4 +1,10 @@
-/* global Promise */
+/* global Promise, require */
+
+import Logger from "../Utils/LoggerByDefault";
+import Helper from "../Utils/Helper";
+import ES6Promise from "es6-promise";
+// import __request from "request";
+// import __xmldom from "xmldom";
 
 /**
  * Requêtes Ajax (utilisation des Promises)
@@ -10,13 +16,7 @@
  * @alias Gp.Protocols.XHR
  * @see dependance 'promise'
  */
-
-import Logger from "../Utils/LoggerByDefault";
-import Helper from "../Utils/Helper";
-import ES6Promise from "es6-promise";
-// import __request from "request";
-// import __xmldom from "xmldom";
-
+ 
 var XHR = {
 
     /**

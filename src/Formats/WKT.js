@@ -1,3 +1,5 @@
+import Logger from "../Utils/LoggerByDefault";
+
 /**
  * Lecture / Ecriture du format WKT
  *
@@ -32,8 +34,6 @@
  * @alias Gp.Formats.WKT
  * @private
  */
-
-import Logger from "../Utils/LoggerByDefault";
 
 var WKT = {
 
@@ -73,7 +73,6 @@ var WKT = {
 
             var regex;
             var subst;
-            var result;
 
             // regex coordinates
             regex = /(-?\d+\.?[0-9]*)\s(-?\d+\.?[0-9]+)/g;
@@ -82,7 +81,7 @@ var WKT = {
 
             // regex type
             regex = /^(\w+)/;
-            result = regex.exec(strWkt);
+            regex.exec(strWkt);
             if (RegExp.$1 === "POLYGON") {
                 subst = "{\"type\" : \"Polygon\",";
                 strWkt = strWkt.replace(RegExp.$1, subst);

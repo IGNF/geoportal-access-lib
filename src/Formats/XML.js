@@ -1,5 +1,4 @@
-
-/* global exports, require */
+/* global require */
 
 import Logger from "../Utils/LoggerByDefault";
 // import __xmldom from "xmldom";

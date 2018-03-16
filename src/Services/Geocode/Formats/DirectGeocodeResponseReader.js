@@ -8,7 +8,7 @@
  * @private
  */
 
-import Logger from "../../../Utils/LoggerByDefault";
+// import Logger from "../../../Utils/LoggerByDefault";
 import MR from "../../../Utils/MessagesResources";
 import ErrSrv from "../../../Exceptions/ErrorService";
 import GeocodeResponse from "../Response/model/GeocodeResponse";

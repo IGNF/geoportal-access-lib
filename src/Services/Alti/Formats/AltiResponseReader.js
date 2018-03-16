@@ -11,7 +11,7 @@
  * @private
  */
 
-import Logger from "../../../Utils/LoggerByDefault";
+// import Logger from "../../../Utils/LoggerByDefault";
 import AltiResponse from "../Response/model/AltiResponse";
 import Elevation from "../Response/model/Elevation";
 

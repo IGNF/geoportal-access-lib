@@ -86,7 +86,7 @@ Gp.extend("Services.Config.Originator", Originator);
 Gp.extend("Services.Config.Service", Service);
 Gp.extend("Services.Config.Style", Style);
 Gp.extend("Services.Config.Territory", Territory);
-Gp.extend("Services.Config.Thematic", SuggestedLocation);
+Gp.extend("Services.Config.Thematic", Thematic);
 Gp.extend("Services.Config.TileMatrix", TM);
 Gp.extend("Services.Config.TileMatrixLimit", TMLimit);
 Gp.extend("Services.Config.TileMatrixSet", TMS);

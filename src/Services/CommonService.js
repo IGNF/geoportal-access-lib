@@ -1,8 +1,3 @@
-/**
- * desativation du contrôle cf. l. 254 (fonction call ())
- * Possible strict violation. (W040)
- */
-
 import Logger from "../Utils/LoggerByDefault";
 import Helper from "../Utils/Helper";
 import _ from "../Utils/MessagesResources";

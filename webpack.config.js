@@ -1,4 +1,4 @@
-/* global module, __dirname, process */
+/* global module, __dirname, require */
 
 // FIXME
 // -- Sur le plugin JsDocWebPackPlugin, on force la version en 0.0.1 car la
@@ -43,16 +43,16 @@ module.exports = env => {
     // - ajout des plugins sur l'option clean
     if (_clean) {
         _plugins.push(
-          /** NETTOYAGE DES REPERTOIRES TEMPORAIRES */
-          new CleanWebpackPlugin([
-              "dist",
-              "jsdoc",
-              "samples",
-              "tests"
-          ], {
-            verbose : true
-        })
-      );
+            /** NETTOYAGE DES REPERTOIRES TEMPORAIRES */
+            new CleanWebpackPlugin([
+                "dist",
+                "jsdoc",
+                "samples",
+                "tests"
+            ], {
+                verbose : true
+            })
+        );
     }
 
     // - ajout des plugins communs
@@ -62,9 +62,9 @@ module.exports = env => {
             onBuildExit : [],
             onBuildStart : ["npm run test"],
             onBuildEnd : (_production) ? (_clean) ?
-              ["npm run sample -- --env.production --env.clean"] :
-              ["npm run sample -- --env.production"] :
-              ["npm run sample"],
+                ["npm run sample -- --env.production --env.clean"] :
+                ["npm run sample -- --env.production"] :
+                ["npm run sample"],
             safe : true
         }),
         /** REPLACEMENT DE VALEURS */
@@ -169,7 +169,10 @@ module.exports = env => {
                     exclude : /node_modules/,
                     use : [
                         {
-                            loader : "jshint-loader"
+                            loader : "eslint-loader",
+                            options : {
+                                emitWarning : true
+                            }
                         }
                     ]
                 }

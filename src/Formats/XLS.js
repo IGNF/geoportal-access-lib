@@ -1,5 +1,3 @@
-/* jshint multistr: true */
-
 import Logger from "../Utils/LoggerByDefault";
 import RequestHeader from "./XLS/RequestHeader";
 import Request from "./XLS/Request";
