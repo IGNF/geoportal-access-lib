@@ -3,6 +3,7 @@
   "version": "1.2.0",
   "description": "French Geoportal resources access library",
   "main": "dist/GpServices-src.js, dist/GpServices.js",
+  "homepage": "https://github.com/IGNF/geoportal-access-lib#readme",
   "scripts": {
     "setup": "npm install",
     "build": "npm run setup && gulp && gulp publish",
