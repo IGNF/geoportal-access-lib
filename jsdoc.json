@@ -17,7 +17,7 @@
         "outputSourceFiles"     : true,
         "outputSourcePath"      : true,
         "systemName"            : "Geoportal Resources Access",
-        "footer"                : "Geoportal Resources Access - version 1.0.0",
+        "footer"                : "Geoportal Resources Access - version 2.0.0",
         "copyright"             : "Copyright (c) IGN, released under the CECILL-B license",
         "navType"               : "inline",
         "theme"                 : "darkly",
