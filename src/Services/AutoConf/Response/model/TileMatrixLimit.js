@@ -1,6 +1,6 @@
 
 /**
- * Object used to describe a layer extent on a Tile Matrix. 
+ * Object used to describe a layer extent on a Tile Matrix.
  *
  * @property {Number} minTileCol - minimum column index where tile can be found on the Tile matrix.
  * @property {Number} maxTileCol - maximum column index where tile can be found on the Tile matrix.
@@ -12,7 +12,6 @@
  */
 
 function TileMatrixLimit () {
-
     if (!(this instanceof TileMatrixLimit)) {
         throw new TypeError("TileMatrixLimit constructor cannot be called as a function.");
     }
@@ -24,7 +23,6 @@ function TileMatrixLimit () {
     this.minTileCol = null;
 
     this.maxTileCol = null;
-
 }
 
 /**

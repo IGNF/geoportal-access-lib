@@ -33,7 +33,6 @@ var AutoCompleteResponseFactory = {
      *
      */
     build : function (options) {
-
         // logger
         var logger = Logger.getLogger("AutoCompleteResponseFactory");
         logger.trace(["AutoCompleteResponseFactory::build()"]);
@@ -41,15 +40,12 @@ var AutoCompleteResponseFactory = {
         var data = null;
 
         if (options.response) {
-
             if (options.rawResponse) {
                 logger.trace("analyze response : raw");
                 data = options.response;
-
             } else {
-
                 var JSONResponse;
-                if ( typeof options.response === "string") {
+                if (typeof options.response === "string") {
                     JSONResponse = JSON.parse(options.response);
                 } else {
                     JSONResponse = options.response;
@@ -57,7 +53,6 @@ var AutoCompleteResponseFactory = {
 
                 // analyse de la réponse
                 if (JSONResponse) {
-
                     // le service renvoie t il une erreur ?
                     if (JSONResponse.error) {
                         // ex. ?
@@ -81,7 +76,6 @@ var AutoCompleteResponseFactory = {
                             suggestedLocation = new SuggestedLocation();
 
                             if (suggestedLocation) {
-
                                 if (result && result.country === "StreetAddress") {
                                     suggestedLocation.street = result.street;
                                     suggestedLocation.type = "StreetAddress";
@@ -100,12 +94,10 @@ var AutoCompleteResponseFactory = {
                                 suggestedLocation.fullText = result.fulltext;
                                 suggestedLocation.postalCode = result.zipcode;
                                 suggestedLocation.classification = result.classification;
-
                             }
                             // Ajout du résultat au tableau reverseGeocodedLocations de geocodedLocation
                             data.suggestedLocations.push(suggestedLocation);
                         }
-
                     } else {
                         options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_FORMAT_3")));
                         return;
@@ -144,7 +136,6 @@ var AutoCompleteResponseFactory = {
 
         // si tout s'est bien passé, on appelle le callback de succès
         options.onSuccess.call(options.scope, data);
-        return;
     }
 };
 

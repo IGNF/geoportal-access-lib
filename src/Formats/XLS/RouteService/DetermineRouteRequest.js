@@ -87,7 +87,6 @@ import RoutePlan from "./model/RoutePlan";
  * @private
  */
 function DetermineRouteRequest (options) {
-
     this.logger = Logger.getLogger();
     this.logger.trace("[Constructeur DetermineRouteRequest ()]");
 
@@ -156,7 +155,6 @@ DetermineRouteRequest.prototype = {
      * @param {Object} oRoutePlan - RoutePlan
      */
     addRoute : function (oRoutePlan) {
-
         if (oRoutePlan instanceof RoutePlan) {
             this.oRoutePlan = oRoutePlan;
         }
@@ -173,7 +171,6 @@ DetermineRouteRequest.prototype = {
      * @returns {String}
      */
     toString : function () {
-
         var template = "";
         template = this.template.determineRouteRequest;
         template = template.replace(/__DISTANCEUNIT__/g, this.options.distanceUnit || "KM");
@@ -181,14 +178,12 @@ DetermineRouteRequest.prototype = {
         // soit on a déjà un objet RoutePlan instancié,
         // sinon, on le fabrique via les options
         if (!this.oRoutePlan) {
-
             var settings = this.options.route;
 
             this.oRoutePlan = new RoutePlan(settings);
             if (!this.oRoutePlan) {
                 throw new Error("La construction du calcul d'initineraire n'est pas correctement definie !?");
             }
-
         }
 
         // routeplan

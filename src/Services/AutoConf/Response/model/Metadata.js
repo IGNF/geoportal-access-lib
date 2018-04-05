@@ -1,6 +1,6 @@
 
 /**
- * Object used to describe a metadata file associated with a geoportal resource. 
+ * Object used to describe a metadata file associated with a geoportal resource.
  *
  * @property {String} format - mime-type of the metadata file.
  * @property {String} url - metadata file URL
@@ -10,7 +10,6 @@
  */
 
 function Metadata () {
-
     if (!(this instanceof Metadata)) {
         throw new TypeError("Metadata constructor cannot be called as a function.");
     }
@@ -18,7 +17,6 @@ function Metadata () {
     this.format = null;
 
     this.url = null;
-
 }
 
 Metadata.prototype = {

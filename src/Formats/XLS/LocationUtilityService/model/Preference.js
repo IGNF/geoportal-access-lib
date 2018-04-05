@@ -20,7 +20,6 @@ import Logger from "../../../../Utils/LoggerByDefault";
  */
 
 function Preference (type) {
-
     this.logger = Logger.getLogger("Preference");
     this.logger.trace("[Constructeur Preference ()]");
 
@@ -67,7 +66,6 @@ Preference.prototype = {
  * @returns {String}
  */
 Preference.prototype.toString = function () {
-
     var Preferences = [];
     var tmplPreference = "";
     for (var idx = 0; idx < this.type.length; idx++) {

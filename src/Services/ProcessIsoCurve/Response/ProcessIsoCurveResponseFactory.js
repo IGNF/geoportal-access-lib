@@ -35,7 +35,6 @@ var ProcessIsoCurveResponseFactory = {
      *
      */
     build : function (options) {
-
         // logger
         var logger = Logger.getLogger("ProcessIsoCurveResponseFactory");
         logger.trace(["ProcessIsoCurveResponseFactory::build()"]);
@@ -43,25 +42,21 @@ var ProcessIsoCurveResponseFactory = {
         var data = null;
 
         if (options.response) {
-
             if (options.rawResponse) {
                 logger.trace("analyze response : raw");
                 data = options.response;
-
             } else {
                 switch (options.outputFormat) {
-
                     case "xml":
                         logger.trace("analyze response : xml");
 
                         try {
-
                             var p = new XML({
                                 reader : ProcessIsoCurveResponseReader
                             });
 
                             // FIXME : mode XHR ne retourne que des string ? JSONP aussi à ce niveau ?
-                            if ( typeof options.response === "string") {
+                            if (typeof options.response === "string") {
                                 p.setXMLString(options.response);
                             } else {
                                 p.setXMLDoc(options.response);
@@ -72,9 +67,7 @@ var ProcessIsoCurveResponseFactory = {
                             if (!data) {
                                 throw new Error(MRes.getMessage("SERVICE_RESPONSE_EXCEPTION_2"));
                             }
-
                         } catch (e) {
-
                             var message = e.message;
                             message += "\n (raw response service : '" + options.response + "')";
                             options.onError.call(options.scope, new ErrorService({
@@ -91,7 +84,7 @@ var ProcessIsoCurveResponseFactory = {
                         logger.trace("analyze response : json");
 
                         var JSONResponse;
-                        if ( typeof options.response === "string") {
+                        if (typeof options.response === "string") {
                             JSONResponse = JSON.parse(options.response);
                         } else {
                             JSONResponse = options.response;
@@ -99,7 +92,6 @@ var ProcessIsoCurveResponseFactory = {
 
                         // analyse de la reponse
                         if (JSONResponse.status === "OK" || JSONResponse.status === "ok") {
-
                             // création de l'objet de réponse
                             data = new ProcessIsoCurveResponse();
 
@@ -135,21 +127,18 @@ var ProcessIsoCurveResponseFactory = {
                                 options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_ANALYSE", options.response)));
                                 return;
                             }
-
                         } else if (JSONResponse.status === "ERROR" || JSONResponse.status === "error") {
                             // JSHint bug if var message is used !?
                             var mess = JSONResponse.message;
                             mess += "\n (raw response service : '" + JSONResponse + "')";
                             options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", mess)));
                             return;
-
                         }
                         break;
 
                     default:
                         options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_FORMAT", "json", "xml")));
                         return;
-
                 }
 
                 // info : en cas de problèmes de droits (clé invalide ou autre), la réponse est au format XML !!
@@ -163,7 +152,6 @@ var ProcessIsoCurveResponseFactory = {
                     }));
                     return;
                 }
-
             }
         } else {
             // si la réponse est vide, on appelle le callback d'erreur
@@ -173,7 +161,6 @@ var ProcessIsoCurveResponseFactory = {
 
         // si tout s'est bien passé, on appelle le callback de succès
         options.onSuccess.call(options.scope, data);
-        return;
     }
 };
 

@@ -35,7 +35,6 @@ var Protocol = {
      * @param {String} options.proxyUrl -  (TODO)
      */
     send : function (options) {
-
         // INFO
         // "output" - param est interne à la classe "Protocol" (parametrable via "wrap"), et à ajouter à l"url
         //      ce param est independant du service car il est géré par le filtre LUA :
@@ -84,7 +83,7 @@ var Protocol = {
 
         // on determine l'environnement d'execution : browser ou non ?
         // et on stoppe pour nodeJS... sur un protocole JSONP !
-        if ( typeof window === "undefined" && options.protocol === "JSONP") {
+        if (typeof window === "undefined" && options.protocol === "JSONP") {
             console.log("Value (s) for parameter (s) 'protocol=JSONP (instead use XHR)' not supported to NodeJS");
             return;
         }
@@ -95,7 +94,7 @@ var Protocol = {
             settings.wrap = true;
         }
 
-        settings.callback = (options.protocol == "JSONP") ? null : null; // FIXME non géré !?
+        settings.callback = (options.protocol === "JSONP") ? null : null; // FIXME non géré !?
         settings.output = settings.wrap ? "json" : null;
 
         // on encapsule les reponses dans un objet JSON

@@ -22,10 +22,9 @@ var Helper = {
      *  });
      *  // out : "key1=value1&key2=value2&key3=value3"
      *
-     * @returns {String}
+     * @returns {String} retourne les paramètres concaténés
      */
     normalyzeParameters : function (params) {
-
         var myParams = null;
 
         if (params) {
@@ -63,10 +62,9 @@ var Helper = {
      *  });
      *  // out : "url?key1=value1&key2=value2&key3=value3"
      *
-     * @returns {String}
+     * @returns {String} retourne une url normalisée
      */
     normalyzeUrl : function (url, params, encode) {
-
         var myUrl = url;
 
         if (url) {
@@ -81,8 +79,7 @@ var Helper = {
         }
 
         if (params) {
-
-            if ( typeof params === "string") {
+            if (typeof params === "string") {
                 myUrl += params;
             } else {
                 myUrl += this.normalyzeParameters(params);
@@ -108,7 +105,7 @@ var Helper = {
      * // out
      * // ........message à indenter
      *
-     * @returns {String}
+     * @returns {String} retourne une chaine indentée
      */
     indent : function (n, msg) {
         var num = n || 0;

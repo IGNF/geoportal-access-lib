@@ -1,6 +1,6 @@
 
 /**
- * Object used to describe a style that may be used for a geoportal resource. 
+ * Object used to describe a style that may be used for a geoportal resource.
  *
  * @property {String} name - Style identifier (eg : "normal", "bdparcellaire", ...)
  * @property {String} title - human readable name of the style.
@@ -11,7 +11,6 @@
  */
 
 function Style () {
-
     if (!(this instanceof Style)) {
         throw new TypeError("Style constructor cannot be called as a function.");
     }
@@ -21,7 +20,6 @@ function Style () {
     this.title = null;
 
     this.current = null;
-
 }
 
 Style.prototype = {

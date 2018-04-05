@@ -12,7 +12,6 @@ import Logger from "../../../../Utils/LoggerByDefault";
  * @private
  */
 function RouteParamREST (options) {
-
     if (!(this instanceof RouteParamREST)) {
         throw new TypeError("RouteParamREST constructor cannot be called as a function.");
     }
@@ -108,6 +107,7 @@ RouteParamREST.prototype = {
 
     /**
      * Retourne une liste de points
+     * @returns {Array} une liste de points (sep ';')
      */
     getWaypoints : function () {
         if (!this.waypoints) {
@@ -124,6 +124,7 @@ RouteParamREST.prototype = {
 
     /**
      * Retourne la liste des exclusions
+     * @returns {Array} une liste d'exclusions (sep ';')
      */
     getExclusions : function () {
         return this.exclusions.join(";");
@@ -133,10 +134,9 @@ RouteParamREST.prototype = {
 /**
  * Tableau de clefs/valeurs pour param.
  *
- * @returns {Array}
+ * @returns {Array} liste de paramêtres
  */
 RouteParamREST.prototype.getParams = function () {
-
     var map = [];
 
     map.push({

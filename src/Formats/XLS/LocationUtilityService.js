@@ -71,7 +71,6 @@ import GeocodeFilterExtension from "./LocationUtilityService/GeocodeFilterExtens
  * @private
  */
 function LocationUtilityService (options) {
-
     this.logger = Logger.getLogger();
     this.logger.trace("[Constructeur LocationUtilityService ()]");
 
@@ -118,7 +117,6 @@ LocationUtilityService.prototype.constructor = LocationUtilityService;
  * @param {Object} oLUSRequest - objet de type LUS
  */
 LocationUtilityService.prototype.addRequest = function (oLUSRequest) {
-
     // on determine le type de geocodage
     this.CLASSTYPE = oLUSRequest.CLASSNAME;
 
@@ -131,7 +129,6 @@ LocationUtilityService.prototype.addRequest = function (oLUSRequest) {
         default:
             throw new Error("Ce n'est pas un objet de type 'LUS Request' !?");
     }
-
 };
 
 /**
@@ -140,7 +137,6 @@ LocationUtilityService.prototype.addRequest = function (oLUSRequest) {
  * @param {Object} oFilter - objet de type Filtre
  */
 LocationUtilityService.prototype.addFilter = function (oFilter) {
-
     // FIXME gestion des filtres à partir des tables de geocodages
     if (oFilter instanceof GeocodeFilterExtension) {
         this.oFilter = oFilter;
@@ -153,11 +149,9 @@ LocationUtilityService.prototype.addFilter = function (oFilter) {
  * @returns {String}
  */
 LocationUtilityService.prototype.toString = function () {
-
     // soit, on a un objet LUS Request déjà instancié
     // sinon, il faut le construire à partir des options à disposition
     if (!this.oRequest) {
-
         // il nous faut des options
         if (!this.options) {
             throw new Error("Les options ne sont pas renseignées, impossible de construire la requête !");

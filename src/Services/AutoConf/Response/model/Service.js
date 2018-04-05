@@ -10,7 +10,6 @@
  * @alias Gp.Services.Config.Service
  */
 function Service () {
-
     if (!(this instanceof Service)) {
         throw new TypeError("Service constructor cannot be called as a function.");
     }
@@ -20,7 +19,6 @@ function Service () {
     this.serverUrl = null;
 
     this.version = null;
-
 }
 
 Service.prototype = {

@@ -19,7 +19,6 @@ import Logger from "../Utils/LoggerByDefault";
  * @private
  */
 function WPS (options) {
-
     this.logger = Logger.getLogger();
     this.logger.trace("[Constructeur WPS()]");
 
@@ -200,13 +199,12 @@ WPS.prototype = {
      * @returns {Boolean}
      */
     processRequestString : function () {
-
         this.logger.trace("WPS::processRequestString ()");
 
         var template = "";
-        if (this.method == "POST") {
+        if (this.method === "POST") {
             template = this.template.post.value;
-        } else if (this.method == "GET") {
+        } else if (this.method === "GET") {
             template = this.template.get.value;
         } else {
             this.logger.error("No other method supported by the service !");
@@ -220,7 +218,7 @@ WPS.prototype = {
         template = template.replace(/__REQUEST__/g, this.paramrequest);
 
         // ajout +
-        if (this.method == "POST") {
+        if (this.method === "POST") {
             template = template.replace(/__NAMESPACE__/g, this.namespaceByDefault);
             template = template.replace(/__SCHEMALOCATION__/g, this.schemaLocationByDefault);
         }
@@ -245,12 +243,11 @@ WPS.prototype = {
      * @returns {String}
      */
     __addDataInputs : function () {
-
         this.logger.trace("WPS::__addDataInputs ()");
 
         // c'est un peu grossier...
-        var tmpl = this.method == "GET" ? this.template.get.input : this.template.post.input;
-        var sep = this.method == "GET" ? ";" : "";
+        var tmpl = this.method === "GET" ? this.template.get.input : this.template.post.input;
+        var sep = this.method === "GET" ? ";" : "";
 
         var result = "";
         var that = this;
@@ -259,7 +256,7 @@ WPS.prototype = {
             // FIXME closure ?
             (function (j) {
                 if (sep) {
-                    sep = (j == map.length - 1) ? "" : ";";
+                    sep = (j === map.length - 1) ? "" : ";";
                 }
                 result = result.concat(that.__addDataInput(tmpl, map[j].k, map[j].v), sep);
             })(i);
@@ -289,7 +286,7 @@ WPS.prototype = {
      * @param {String} method - GET|POST
      */
     setMethod : function (method) {
-        if (method == "GET" || method == "POST") {
+        if (method === "GET" || method === "POST") {
             this.method = method;
         } else {
             this.logger.warn("support only GET and POST method !");

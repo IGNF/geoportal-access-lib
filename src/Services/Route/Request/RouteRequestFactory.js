@@ -56,7 +56,6 @@ var RouteRequestFactory = {
      * @returns {String} request
      */
     build : function (options) {
-
         // logger
         var logger = Logger.getLogger("RouteRequestFactory");
         logger.trace(["RouteRequestFactory::build()"]);
@@ -66,7 +65,7 @@ var RouteRequestFactory = {
         var settings = options || {};
 
         // gestion des callback
-        var bOnError = (options.onError !== null && typeof options.onError === "function") ? true : false;
+        var bOnError = !!((options.onError !== null && typeof options.onError === "function"));
 
         var message = null;
         // choix entre les 2 types d'API pour consulter le service

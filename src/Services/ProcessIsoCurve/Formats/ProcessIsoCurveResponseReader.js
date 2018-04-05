@@ -7,7 +7,6 @@
  * @private
  */
 
-import Logger from "../../../Utils/LoggerByDefault";
 import MessagesResources from "../../../Utils/MessagesResources";
 import WKT from "../../../Formats/WKT";
 import ErrSrv from "../../../Exceptions/ErrorService";
@@ -82,7 +81,6 @@ ProcessIsoCurveResponseReader.READERS = {
         var response = new ProcessIsoCurveResponse();
 
         if (root.hasChildNodes()) {
-
             var children = root.childNodes;
             var child;
 
@@ -224,7 +222,7 @@ ProcessIsoCurveResponseReader.READERS = {
 
         // get exception message
         var textNode = node.firstChild;
-        if (textNode && textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             exceptionReport.exception = textNode.nodeValue;
         }
 
@@ -234,17 +232,14 @@ ProcessIsoCurveResponseReader.READERS = {
 
 /** TODO : jsdoc block */
 ProcessIsoCurveResponseReader.read = function (root) {
-
     var response;
 
     if (root.nodeName === "isochronResult" || root.nodeName === "isochroneResult" || root.nodeName === "IsochroneResult") {
         response = ProcessIsoCurveResponseReader.READERS["isochronResult"](root);
         return response;
-
     } else if (root.nodeName === "ExceptionReport") {
         response = ProcessIsoCurveResponseReader.READERS[root.nodeName](root);
         return response;
-
     } else if (ProcessIsoCurveResponseReader.READERS[root.nodeName]) {
         response = ProcessIsoCurveResponseReader.READERS[root.nodeName](root);
         if (response.status === "error") {
@@ -256,7 +251,6 @@ ProcessIsoCurveResponseReader.read = function (root) {
             });
         }
         return response;
-
     } else {
         throw new ErrSrv({
             message : MessagesResources.getMessage("SERVICE_RESPONSE_ANALYSE", root.nodeName),
@@ -275,13 +269,12 @@ ProcessIsoCurveResponseReader.read = function (root) {
  * @return {String} value - valeur du firstChild du noeud en entrée, ou chaîne vide.
  */
 function __getChildValue (node) {
-
     var textNode;
     var value = "";
 
     if (node.hasChildNodes()) {
         textNode = node.firstChild;
-        if (textNode && textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             value = textNode.nodeValue;
         }
     }

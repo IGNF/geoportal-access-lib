@@ -41,7 +41,6 @@ var DirectGeocodeRequestFactory = {
      * @returns {String} request
      */
     build : function (options) {
-
         // logger
         var logger = Logger.getLogger("DirectGeocodeRequestFactory");
         logger.trace(["DirectGeocodeRequestFactory::build()"]);
@@ -78,7 +77,7 @@ var DirectGeocodeRequestFactory = {
 
         // en mode GET, la requête est encodée
         // et le param. 'qxml' est ajouté
-        if (options.httpMethod == "GET") {
+        if (options.httpMethod === "GET") {
             var myRequest = "qxml=" +
                 encodeURIComponent(request)
                     .replace(/-/g, "%2D")

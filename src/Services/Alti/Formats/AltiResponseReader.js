@@ -67,12 +67,10 @@ AltiResponseReader.READERS = {
      * @memberof AltiResponseReader
      */
     elevations : function (root) {
-
         // INFO : on passe en paramètre l'objet en entrée elevations, vide, à remplir.
         var altiResponse = new AltiResponse();
 
         if (root.hasChildNodes()) {
-
             var children = root.childNodes;
             var child;
             var elevation;
@@ -100,7 +98,6 @@ AltiResponseReader.READERS = {
      * @memberof AltiResponseReader
      */
     elevation : function (node) {
-
         var elevation = new Elevation();
 
         if (node.hasChildNodes()) {
@@ -113,7 +110,6 @@ AltiResponseReader.READERS = {
                     AltiResponseReader.READERS[child.nodeName](child, elevation);
                 }
             }
-
         }
         return elevation;
     },
@@ -129,7 +125,7 @@ AltiResponseReader.READERS = {
      */
     lat : function (node, elevation) {
         var textNode = node.firstChild;
-        if (textNode && textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             elevation.lat = parseFloat(textNode.nodeValue);
         } else {
             throw new Error("Erreur dans la lecture de la réponse du service : latitude attendue mais absente");
@@ -147,7 +143,7 @@ AltiResponseReader.READERS = {
      */
     lon : function (node, elevation) {
         var textNode = node.firstChild;
-        if (textNode && textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             elevation.lon = parseFloat(textNode.nodeValue);
         } else {
             throw new Error("Erreur dans la lecture de la réponse du service : longitude attendue mais absente");
@@ -165,7 +161,7 @@ AltiResponseReader.READERS = {
      */
     z : function (node, elevation) {
         var textNode = node.firstChild;
-        if (textNode && textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             if (elevation) {
                 elevation.z = parseFloat(textNode.nodeValue);
             } else {
@@ -189,7 +185,7 @@ AltiResponseReader.READERS = {
      */
     acc : function (node, elevation) {
         var textNode = node.firstChild;
-        if (textNode && textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             elevation.acc = parseFloat(textNode.nodeValue);
         } else {
             throw new Error("Erreur dans la lecture de la réponse du service : précision (acc) attendue mais absente");
@@ -205,7 +201,6 @@ AltiResponseReader.READERS = {
      * @memberof AltiResponseReader
      */
     exceptionreport : function (node) {
-
         var response = {};
 
         if (node.hasChildNodes()) {
@@ -243,7 +238,7 @@ AltiResponseReader.READERS = {
 
         // get exception message
         var textNode = node.firstChild;
-        if (textNode && textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             exceptionReport.exception = textNode.nodeValue;
         }
 
@@ -269,16 +264,16 @@ AltiResponseReader.READERS = {
                 child = children[i];
                 var textNode;
                 // get error code
-                if (child.nodeType === 1 && child.nodeName === "code") { // 1 == node.ELEMENT_NODE
+                if (child.nodeType === 1 && child.nodeName === "code") { // 1 === node.ELEMENT_NODE
                     textNode = child.firstChild;
-                    if (textNode && textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+                    if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
                         response.error.code = textNode.nodeValue;
                     }
                 }
                 // get error description
-                if (child.nodeType === 1 && child.nodeName === "description") { // 1 == node.ELEMENT_NODE
+                if (child.nodeType === 1 && child.nodeName === "description") { // 1 === node.ELEMENT_NODE
                     textNode = child.firstChild;
-                    if (textNode && textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+                    if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
                         response.error.description = textNode.nodeValue;
                     }
                 }

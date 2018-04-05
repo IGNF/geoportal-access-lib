@@ -9,7 +9,6 @@ import GeocodeLocation from "../GeocodeLocation";
  * @private
  */
 function Administratif () {
-
     if (!(this instanceof Administratif)) {
         throw new TypeError("Administratif constructor cannot be called as a function.");
     }
@@ -38,7 +37,6 @@ function Administratif () {
     this.attributesList = ["bbox", "prefecture", "inseeRegion", "inseeDepartment", "municipality"];
 
     this.serviceAttributes = ["bbox", "Prefecture", "InseeRegion", "InseeDepartement", "Municipality"];
-
 }
 
 /**

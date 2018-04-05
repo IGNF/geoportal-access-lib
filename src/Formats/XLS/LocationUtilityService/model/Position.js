@@ -46,7 +46,6 @@ import Logger from "../../../../Utils/LoggerByDefault";
  * @private
  */
 function Position (options) {
-
     this.logger = Logger.getLogger("Position");
     this.logger.trace("[Constructeur Position ()]");
 
@@ -123,7 +122,6 @@ Position.prototype = {
  * @returns {String}
  */
 Position.prototype.toString = function () {
-
     var template = this.template.position;
 
     var tmplGmlPoint = this.template.gml.point;
@@ -132,11 +130,9 @@ Position.prototype.toString = function () {
 
     var tmplGmlFilter = "";
     if (this.options.filter) {
-
         var filter = this.options.filter;
 
         for (var name in filter) {
-
             switch (name) {
                 case "circle":
                     tmplGmlFilter = this.template.gml.filter[name];

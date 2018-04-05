@@ -229,7 +229,6 @@ import AbstractService from "./XLS/AbstractService";
  * @private
  */
 function XLS (options) {
-
     this.logger = Logger.getLogger();
     this.logger.trace("[Constructeur XLS()]");
 
@@ -335,7 +334,6 @@ XLS.prototype = {
      * @param {Object} oService - GeoceodeRequest / ReverseGeocodeRequest ou RouteRequest
      */
     setService : function (oService) {
-
         if (!oService) {
             this.logger.trace("L'objet de type Service XSL n'est pas encore defini !?");
             return;
@@ -346,7 +344,6 @@ XLS.prototype = {
         } else {
             this.logger.error("L'objet n'est pas du type 'LocationUtilityService' ou 'RouteService' !?");
         }
-
     },
 
     /**
@@ -368,7 +365,6 @@ XLS.prototype = {
  * @param {Object} ns - ex. {key:xls, url:http://www.opengis.net/xls}
  */
 XLS.prototype.addNamespace = function (ns, request) {
-
     // INFO
     // on recherche la clef dans les namespaces par defaut.
     // si la clef n'existe pas dans les namespaceByDefault (), on l'ajoute.
@@ -423,7 +419,6 @@ XLS.prototype.addNamespace = function (ns, request) {
  * Construction de la requête
  */
 XLS.prototype.build = function () {
-
     // out ->
     // <XLS xmlns="http://www.opengis.net/xls" version="1.2">
     // <RequestHeader srsName="epsg:4326"/>
@@ -433,7 +428,7 @@ XLS.prototype.build = function () {
     // </XLS>
 
     // as t on un objet de type Service XLS à disposition ?
-    var bService = this.getService() ? true : false;
+    var bService = !!this.getService();
 
     var template = "";
     template = this.template;

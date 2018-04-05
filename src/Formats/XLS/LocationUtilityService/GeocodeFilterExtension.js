@@ -54,7 +54,6 @@ import Logger from "../../../Utils/LoggerByDefault";
  * @private
  */
 function GeocodeFilterExtension () {
-
     this.logger = Logger.getLogger("GeocodeFilterExtension");
     this.logger.trace("[Constructeur GeocodeFilterExtension ()]");
 
@@ -116,13 +115,12 @@ GeocodeFilterExtension.prototype = {
     getFilter : function (name) {
         var filter = null;
         for (var idx in this.filters) {
-            if (this.filters[idx].CLASSNAME == name) {
+            if (this.filters[idx].CLASSNAME === name) {
                 filter = this.filters[idx];
             }
         }
         this.logger.trace(filter);
         return filter;
-
     },
 
     /**
@@ -144,7 +142,7 @@ GeocodeFilterExtension.prototype = {
     getAttributs : function (name) {
         var attributs = [];
         for (var idx in this.filters) {
-            if (this.filters[idx].CLASSNAME == name) {
+            if (this.filters[idx].CLASSNAME === name) {
                 attributs = this.filters[idx].attributesList;
             }
         }
@@ -159,7 +157,6 @@ GeocodeFilterExtension.prototype = {
      * @param {Object} options - options de la table de geocodage
      */
     setPlaceAttributs : function (name, options) {
-
         var filter = this.getFilter(name);
         var attributs = this.getAttributs(name);
         for (var idx in attributs) {
@@ -178,7 +175,7 @@ GeocodeFilterExtension.prototype = {
     getPlaceAttributs : function (name) {
         var places = {};
         for (var idx in this.filters) {
-            if (this.filters[idx].CLASSNAME == name) {
+            if (this.filters[idx].CLASSNAME === name) {
                 places = this.filters[idx].placeAttributes;
             }
         }

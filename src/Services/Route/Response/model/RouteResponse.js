@@ -11,7 +11,6 @@
  * @alias Gp.Services.RouteResponse
  */
 function RouteResponse () {
-
     if (!(this instanceof RouteResponse)) {
         throw new TypeError("RouteResponse constructor cannot be called as a function.");
     }

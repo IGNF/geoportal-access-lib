@@ -46,7 +46,6 @@ import ProcessIsoCurveParam from "./model/ProcessIsoCurveParam";
  * @private
  */
 function ProcessIsoCurveRequest (options) {
-
     this.logger = Logger.getLogger("ProcessIsoCurveRequest");
     this.logger.trace("[Constructeur ProcessIsoCurveRequest ()]");
 
@@ -174,12 +173,10 @@ ProcessIsoCurveRequest.prototype = {
      * @returns {String}
      */
     processRequestString : function () {
-
         var request = "";
         var i = 0;
 
         switch (this.mode) {
-
             case "GET":
                 this.logger.trace("Process GET Request");
 

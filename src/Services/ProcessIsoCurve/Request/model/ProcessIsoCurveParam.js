@@ -14,7 +14,6 @@ import Logger from "../../../../Utils/LoggerByDefault";
  *
  */
 function ProcessIsoCurveParam (options) {
-
     if (!(this instanceof ProcessIsoCurveParam)) {
         throw new TypeError("ProcessIsoCurveParam constructor cannot be called as a function.");
     }
@@ -115,7 +114,6 @@ ProcessIsoCurveParam.prototype = {
  * @returns {Object[]}
  */
 ProcessIsoCurveParam.prototype.getParams = function () {
-
     var map = [];
 
     map.push({

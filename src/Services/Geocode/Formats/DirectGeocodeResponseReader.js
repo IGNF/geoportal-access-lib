@@ -58,7 +58,6 @@ DirectGeocodeResponseReader.READERS = {
 
         /** TODO : jsdoc block */
         XLS : function (root) {
-
             var geocodeResponse = new GeocodeResponse();
 
             // vérification de la version du service, et des namespaces de l'en-tête
@@ -72,7 +71,6 @@ DirectGeocodeResponseReader.READERS = {
 
         /** TODO : jsdoc block */
         GeocodedAddress : function (node, geocodeResponse) {
-
             var geocodedLocation = new DirectGeocodedLocation();
 
             __getChildNodes(node, geocodedLocation);
@@ -146,10 +144,8 @@ DirectGeocodeResponseReader.READERS = {
             var placeName = __getChildValue(node);
 
             if (geocodedLocation && geocodedLocation.hasOwnProperty("placeAttributes")) {
-
                 if (placeType === "Municipality") {
                     geocodedLocation.placeAttributes.municipality = placeName;
-
                 } else if (placeType === "Bbox") {
                     var values = placeName.split(";");
                     if (values.length === 4) {
@@ -160,63 +156,44 @@ DirectGeocodeResponseReader.READERS = {
                             bottom : parseFloat(values[3])
                         };
                     }
-
                 } else if (placeType === "Commune") {
                     geocodedLocation.placeAttributes.commune = placeName;
-
                 } else if (placeType === "Departement") {
                     geocodedLocation.placeAttributes.department = placeName;
-
                 } else if (placeType === "INSEE") {
                     geocodedLocation.placeAttributes.insee = placeName;
-
                 } else if (placeType === "Qualite") {
                     geocodedLocation.placeAttributes.quality = placeName;
-
                 } else if (placeType === "Territoire") {
                     geocodedLocation.placeAttributes.territory = placeName;
-
                 } else if (placeType === "ID") {
                     geocodedLocation.placeAttributes.ID = placeName;
-
                 } else if (placeType === "ID_TR") {
                     geocodedLocation.placeAttributes.IDTR = placeName;
-
                 } else if (placeType === "Importance") {
                     geocodedLocation.placeAttributes.importance = parseInt(placeName, 10);
-
                 } else if (placeType === "Nature") {
                     geocodedLocation.placeAttributes.nature = placeName;
-
                 } else if (placeType === "Numero") {
                     geocodedLocation.placeAttributes.number = placeName;
-
                 } else if (placeType === "Feuille") {
                     geocodedLocation.placeAttributes.sheet = placeName;
-
                 } else if (placeType === "Section") {
                     geocodedLocation.placeAttributes.section = placeName;
-
                 } else if (placeType === "CommuneAbsorbee") {
                     geocodedLocation.placeAttributes.absorbedCity = placeName;
-
                 } else if (placeType === "Arrondissement") {
                     if (placeName) {
                         geocodedLocation.placeAttributes.arrondissement = placeName;
                     }
-
                 } else if (placeType === "Type") {
                     geocodedLocation.placeAttributes.origin = placeName;
-
                 } else if (placeType === "Prefecture") {
                     geocodedLocation.placeAttributes.prefecture = placeName;
-
                 } else if (placeType === "InseeRegion") {
                     geocodedLocation.placeAttributes.inseeRegion = placeName;
-
                 } else if (placeType === "InseeDepartment") {
                     geocodedLocation.placeAttributes.inseeDepartment = placeName;
-
                 }
             }
         },
@@ -285,7 +262,7 @@ DirectGeocodeResponseReader.READERS = {
 
         // get exception message
         var textNode = node.firstChild;
-        if (textNode && textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             exceptionReport.exception = textNode.nodeValue;
         }
 
@@ -306,7 +283,6 @@ DirectGeocodeResponseReader.READERS = {
  * @memberof DirectGeocodeResponseReader
  */
 DirectGeocodeResponseReader.read = function (root) {
-
     if (root.nodeName === "XLS") {
         var nsPrefix = root.prefix;
         if (!nsPrefix) {
@@ -314,11 +290,9 @@ DirectGeocodeResponseReader.read = function (root) {
         }
         var geocodeResponse = DirectGeocodeResponseReader.READERS[nsPrefix][root.nodeName](root);
         return geocodeResponse;
-
     } else if (root.nodeName === "ExceptionReport") {
         var exceptionReport = DirectGeocodeResponseReader.READERS[root.nodeName](root);
         return exceptionReport;
-
     } else {
         var mess = MR.getMessage("SERVICE_RESPONSE_ANALYSE", root.nodeName);
         throw new ErrSrv({
@@ -360,9 +334,7 @@ function __getAttributes (node) {
  * @param {Array|Object} [data] - an object to be filled with node data
  */
 function __getChildNodes (node, data) {
-
     if (node.hasChildNodes()) {
-
         var children = node.childNodes;
         var child;
         var childName;
@@ -371,7 +343,7 @@ function __getChildNodes (node, data) {
         for (var i = 0; i < children.length; i++) {
             child = children[i];
 
-            if (child.nodeType === 1) { // 1 == node.ELEMENT_NODE
+            if (child.nodeType === 1) { // 1 === node.ELEMENT_NODE
                 childName = child.localName || child.baseName || child.nodeName;
                 childPrefix = child.prefix || DirectGeocodeResponseReader.DEFAULTPREFIX;
 
@@ -396,13 +368,12 @@ function __getChildNodes (node, data) {
  * @return {String} value - valeur du firstChild du noeud en entrée, ou chaîne vide.
  */
 function __getChildValue (node) {
-
     var textNode;
     var value = "";
 
     if (node.hasChildNodes()) {
         textNode = node.firstChild;
-        if (textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+        if (textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             value = textNode.nodeValue;
         }
     }
@@ -419,14 +390,11 @@ function __getChildValue (node) {
  * @param {DOMElement} XLSNode - a DOM node, corresponding to XLS first tag.
  */
 function __checkServiceAttributes (XLSNode) {
-
     if (XLSNode.attributes.length > 0) {
-
         // on récupère et parcourt les attributs de la balise XLS de la réponse
         var xlsAttributes = __getAttributes(XLSNode);
         for (var att in xlsAttributes) {
             if (xlsAttributes.hasOwnProperty(att)) {
-
                 // vérification de la version
                 if (att === "version") {
                     if (xlsAttributes["version"] !== DirectGeocodeResponseReader.VERSION) {
@@ -466,7 +434,6 @@ function __checkServiceAttributes (XLSNode) {
                         return;
                     }
                 }
-
             }
         }
     }

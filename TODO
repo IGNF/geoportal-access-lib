@@ -1,63 +1,21 @@
-Pourquoi doit on migrer sous ES6 module (harmony) ?
-https://www.contentful.com/blog/2017/04/04/es6-modules-support-lands-in-browsers-is-it-time-to-rethink-bundling/
+AVANCEMENT
 
--- conversion des sources
-    0 migration AMD to ES6
-	FIXME utile ? Webpack (babel) gère nativement le format AMD !
-    -- path
-        0 export avec main Gp.js
-        0 services
-        0 route
-        0 isochrone
-        0 geocode
-        0 autoconf
-        0 autocomplete
-        0 alti
-        0 Protocols
-        0 formats
-        0 Utils
-
-
--- check
-    0 jshint runtime
-    x jscs runtime :
-        Le projet JSCS a été mergé avec eslint !!!
-        TODO revoir les nouvelles regles
-
-
--- samples (tests)
-    x faire marcher un exemple avec des sources ES6
-	   ex script type=module
-    0 utilisation du bundle
-        0 env browser avec le sourcesmap
-        0 env browser avec le bundle minifié
-        x env ES6
-            FIXME utilisation de self !? Probleme d'export ?
-            http://exploringjs.com/es6/ch_modules.html#sec_modules-in-browsers
-
-
--- tests unitaires
-    0 migration ES6 modules
-    0 test avec mocha (console)
-    0 test avec mocha (browser)
-
-
--- tests fonctionnels (test_old -> test/end-to-end)
-    x migration ES6 modules
-    x test avec mocha (browser)
-
--- config de webpack
+-- compilation / config de webpack
 
         0 build du bundle
         0 build du sourcesmap
+
         0 minify :
             FIXME comment supprimer le logger ?
             > on le desactive uniquement..., pour le moment...
             > cf. https://remarkablemark.org/blog/2017/02/25/webpack-ignore-module/
 
-        0 check avec jshint
-        x check avec jscs
-            INFO cf. plus haut
+        x check avec ESLINT
+            TODO
+            - revoir les nouvelles regles
+                https://github.com/standard/standard/blob/master/RULES.md#javascript-standard-style
+                https://standardjs.com/
+                https://eslint.org/
 
         0 doc :
             FIXME le plugin jsdoc-webpack-plugin v0.0.2 a un bug...
@@ -71,55 +29,60 @@ https://www.contentful.com/blog/2017/04/04/es6-modules-support-lands-in-browsers
             ex. ./node_modules/.bin/mocha-webpack --glob "*.js" test/spec
             ./node_modules/.bin/mocha-webpack  test.js
             ou npm run test
+
         0 test unitaire en mode browser
             cf. https://survivejs.com/webpack/techniques/testing/
             > ligne de commande :
                 ./node_modules/.bin/webpack-dev-server --hot --config webpack.test.js
                 ou npm run test:serve
+
         x test fonctionnel
 
-        0 sample
-            0 mise en place de template
-            0 execution en mode browser
-            0 utilisation de gulp
-              TODO utilisation du loader
+        / sample
+            TODO
+            x utilisation du loader
                 https://github.com/pcardune/handlebars-loader
-	          / finir les exemples
+	        x finir les exemples
+            x faire marcher un exemple avec des sources ES6
+            	   ex script type=module
+            0 utilisation du bundle
+                0 env browser avec le sourcesmap
+                0 env browser avec le bundle minifié
+                x env ES6
+                    FIXME utilisation de self !? Probleme d'export ?
+                    http://exploringjs.com/es6/ch_modules.html#sec_modules-in-browsers
 
-        x reorganiser le webpack.config.js : cf. https://survivejs.com/webpack/developing/composing-configuration/
-            common ("build bundle", default),
-            merge (common, "tests unitaires", --env.test),
-            merge (common, "tests unitaires (browser)", --env.test.serve),
-            merge (common, "creation des exemples", --env.sample),
-            merge (common, "creation des exemples (browser)", --env.sample.serve),
-            merge (common, "generation de la doc", --env.doc)
-            merge (common, "generation de la doc (browser)", --env.doc.serve)
-            merge (common, "build bundle de production", --env.production)
-
-
--- compilation : gulp ou plugin config webpack ou utilisation des 2 ?
-    0 clean     : avec webpack / npm run build / npm run build:prod
-    \ check     : avec webpack / npm run build / npm run build:prod
-    0 licence   : avec webpack / npm run build / npm run build:prod
-    0 build     : avec webpack / npm run build / npm run build:prod
-    0 doc       : avec webpack / npm run doc
-    0 doc:serve : avec webpack / npm run doc:serve
-    0 test      : avec webpack / npm run test
-    0 test:serve : avec webpack / npm run test:serve
-    x test:end-to-end : avec webpack / npm run test:end-to-end
-    0 sample    : avec gulp / npm run build / npm run sample
-    0 sample:serve : avec webpack / npm run sample:serve
+        x reorganiser le webpack.config.js
+            cf. https://survivejs.com/webpack/developing/composing-configuration/
 
 
--- deploy binaries / jsdoc (current)
-    OK: how to deploy binary (dist) and jsdoc on git branch 'gh-pages' ?"
+-- target :
+
+    0 clean      : inclu avec webpack -> npm run build / npm run build:prod
+    0 check      : inclu avec webpack -> npm run build / npm run build:prod
+    0 licence    : inclu avec webpack -> npm run build / npm run build:prod
+    0 build      : target principale avec webpack -> npm run build / npm run build:prod
+    0 doc        : inclu avec webpack -> npm run build / npm run build:prod
+    0 doc:serve  : npm run doc:serve (webpack-dev-server)
+    0 test       : npm run test (mocha)
+    0 test:serve : npm run test:serve (webpack-dev-server)
+    x test:end-to-end : npm run test:end-to-end
+    0 sample       : avec gulp / npm run build / npm run sample
+    0 sample:serve : npm run sample:serve (webpack-dev-server)
+
+
+-- deploy binaries / jsdoc (current) AVEC TRAVIS
 
 -- questions
-    comment supprimer le logger ?
+
+    Pourquoi doit on migrer sous ES6 module (harmony) ?
+    > https://www.contentful.com/blog/2017/04/04/es6-modules-support-lands-in-browsers-is-it-time-to-rethink-bundling/
+
+    Comment supprimer le logger ?
     > https://remarkablemark.org/blog/2017/02/25/webpack-ignore-module/
 
-    comment notre bundle peut il être utilisé comme un import es6 module ?
+    Comment notre bundle peut il être utilisé comme un import es6 module ?
     > https://stackoverflow.com/questions/41289200/output-an-es-module-using-webpack?answertab=votes#tab-top
 
-    comment utiliser directement les modules dans une page html avec <script type=module> ?
-    https://stackoverflow.com/questions/41289200/output-an-es-module-using-webpack?answertab=votes#tab-top
+    Comment utiliser directement les modules dans une page html avec <script type=module> ?
+    > https://stackoverflow.com/questions/41289200/output-an-es-module-using-webpack?answertab=votes#tab-top

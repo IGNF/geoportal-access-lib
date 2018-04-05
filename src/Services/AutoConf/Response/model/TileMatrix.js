@@ -15,7 +15,6 @@
  */
 
 function TileMatrix () {
-
     if (!(this instanceof TileMatrix)) {
         throw new TypeError("TileMatrix constructor cannot be called as a function.");
     }
@@ -33,7 +32,6 @@ function TileMatrix () {
     this.tileWidth = null;
 
     this.topLeftCorner = null;
-
 }
 
 TileMatrix.prototype = {

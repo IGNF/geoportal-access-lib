@@ -55,7 +55,6 @@ import AltiProfilRequest from "./model/AltiProfilRequest";
  * @private
  */
 function AltiRequestREST (options) {
-
     this.logger = Logger.getLogger("AltiRequestREST");
     this.logger.trace("[Constructeur AltiRequestREST ()]");
 
@@ -95,7 +94,6 @@ function AltiRequestREST (options) {
      * Par defaut, "GET".
      */
     this.method = this.options.method || "GET";
-
 }
 
 AltiRequestREST.prototype = {
@@ -145,13 +143,12 @@ AltiRequestREST.prototype = {
      * @returns {String}
      */
     processRequestString : function () {
-
         this.logger.trace("AltiRequestREST::processRequestString ()");
 
         var template = "";
-        if (this.method == "POST") {
+        if (this.method === "POST") {
             template = this.template.post.value;
-        } else if (this.method == "GET") {
+        } else if (this.method === "GET") {
             template = this.template.get.value;
         }
 
@@ -178,23 +175,22 @@ AltiRequestREST.prototype = {
      * @returns {String}
      */
     __addDataInputs : function () {
-
         this.logger.trace("AltiRequestREST::addDataInput ()");
 
         var myTemplate;
-        if (this.method == "POST") {
+        if (this.method === "POST") {
             myTemplate = this.template.post;
-        } else if (this.method == "GET") {
+        } else if (this.method === "GET") {
             myTemplate = this.template.get;
         } else {
             throw new Error("No other HTTP method supported by the service !");
         }
 
         var tmpl = null;
-        if (this.DataObject.CLASSNAME == "AltiElevationRequest") {
+        if (this.DataObject.CLASSNAME === "AltiElevationRequest") {
             tmpl = myTemplate.input.point;
             return tmpl.replace(/__ZONLY__/g, this.DataObject.zonly);
-        } else if (this.DataObject.CLASSNAME == "AltiProfilRequest") {
+        } else if (this.DataObject.CLASSNAME === "AltiProfilRequest") {
             tmpl = myTemplate.input.profil;
             return tmpl.replace(/__SAMPLING__/g, this.DataObject.sampling);
         } else {

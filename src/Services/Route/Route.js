@@ -99,7 +99,6 @@ import RouteResponseFactory from "./Response/RouteResponseFactory";
  * @private
  */
 function Route (options) {
-
     if (!(this instanceof Route)) {
         throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "Route"));
     }
@@ -121,11 +120,11 @@ function Route (options) {
     }
 
     // on lance une exception afin d'eviter au service de le faire...
-    if (options.startPoint.x == null) {
+    if (options.startPoint.x === null) {
         throw new Error(_.getMessage("PARAM_MISSING", "startPoint.x"));
     }
 
-    if (options.startPoint.y == null) {
+    if (options.startPoint.y === null) {
         throw new Error(_.getMessage("PARAM_MISSING", "startPoint.y"));
     }
 
@@ -134,20 +133,20 @@ function Route (options) {
     }
 
     // on lance une exception afin d'eviter au service de le faire...
-    if (options.endPoint.x == null) {
+    if (options.endPoint.x === null) {
         throw new Error(_.getMessage("PARAM_MISSING", "endPoint.x"));
     }
 
-    if (options.endPoint.y == null) {
+    if (options.endPoint.y === null) {
         throw new Error(_.getMessage("PARAM_MISSING", "endPoint.y"));
     }
 
     // options par defaut
     // on passe l'option api en majuscules afin d'éviter des exceptions.
-    this.options.api = ( typeof options.api == "string") ? options.api.toUpperCase() : "REST";
+    this.options.api = (typeof options.api === "string") ? options.api.toUpperCase() : "REST";
 
     // on passe l'option outputFormat en minuscules afin d'éviter des exceptions.
-    this.options.outputFormat = ( typeof options.outputFormat == "string") ? options.outputFormat.toLowerCase() : "json";
+    this.options.outputFormat = (typeof options.outputFormat === "string") ? options.outputFormat.toLowerCase() : "json";
 
     this.options.startPoint = options.startPoint;
     this.options.endPoint = options.endPoint;
@@ -173,7 +172,6 @@ function Route (options) {
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
     // en fonction du type d'api, REST ou OLS
     if (!this.options.serverUrl) {
-
         var lstUrlByDefault = DefaultUrlService.Route.url(this.options.apiKey);
         var urlFound = null;
         switch (this.options.api) {
@@ -235,7 +233,6 @@ Route.prototype.constructor = Route;
  * @param {Function} success - callback
  */
 Route.prototype.buildRequest = function (error, success) {
-
     var options = {
         // spécifique au service
         api : this.options.api,
@@ -269,14 +266,12 @@ Route.prototype.buildRequest = function (error, success) {
  * @param {Function} success - callback
  */
 Route.prototype.analyzeResponse = function (error, success) {
-
     // INFO
     // Factory pour masquer la complexité du retour du service qui renvoie soit
     //  - une 'string' qui contient du XML ou JSON natif en mode XHR
     //  - un objet JSON qui est natif ou encapsulé
 
     if (this.response) {
-
         var options = {
             distanceUnit : this.options.distanceUnit, // FIXME ce parametre nous permet de choisir le type d'unité dans la reponse !
             response : this.response,
@@ -289,11 +284,9 @@ Route.prototype.analyzeResponse = function (error, success) {
         };
 
         RouteResponseFactory.build(options);
-
     } else {
         error.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
     }
-
 };
 
 export default Route;

@@ -14,13 +14,12 @@
  *
  */
 function ErrorService (error) {
-
     if (!(this instanceof ErrorService)) {
         throw new TypeError("ErrorService constructor cannot be called as a function.");
     }
 
     var e = error;
-    if ( typeof error === "string" || error instanceof String) {
+    if (typeof error === "string" || error instanceof String) {
         this.message = error;
         this.status = -1;
         this.type = ErrorService.TYPE_UNKERR;
@@ -60,7 +59,7 @@ ErrorService.TYPE_USEERR = "USAGE_ERROR";
 ErrorService.TYPE_UNKERR = "UNKNOWN_ERROR";
 
 /**
- * @lends module:ErrorService#
+ * @lends module:ErrorService
  */
 ErrorService.prototype = Object.create(Error.prototype, {
     constructor : {

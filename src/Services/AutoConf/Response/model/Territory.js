@@ -19,7 +19,6 @@
  * @alias Gp.Services.Config.Territory
  */
 function Territory () {
-
     if (!(this instanceof Territory)) {
         throw new TypeError("Territory constructor cannot be called as a function.");
     }
@@ -49,7 +48,6 @@ function Territory () {
     };
 
     this.defaultLayers = [];
-
 }
 
 Territory.prototype = {

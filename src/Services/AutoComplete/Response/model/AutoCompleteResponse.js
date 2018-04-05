@@ -7,13 +7,11 @@
  * @alias Gp.Services.AutoCompleteResponse
  */
 function AutoCompleteResponse () {
-
     if (!(this instanceof AutoCompleteResponse)) {
         throw new TypeError("AutoCompleteResponse constructor cannot be called as a function.");
     }
 
     this.suggestedLocations = [];
-
 }
 
 AutoCompleteResponse.prototype = {

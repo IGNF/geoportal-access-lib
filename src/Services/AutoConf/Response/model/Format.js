@@ -10,7 +10,6 @@
  */
 
 function Format () {
-
     if (!(this instanceof Format)) {
         throw new TypeError("Format constructor cannot be called as a function.");
     }

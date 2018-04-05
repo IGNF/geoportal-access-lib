@@ -11,21 +11,20 @@
  * @property {Integer} classification - Number used to classify the importance of the place where is the suggested location from 1 (most important) to 7 (less important).
  * @property {String} street - Street name of the suggested location ("StreetAddress" only).
  * @property {String} kind - Nature of the suggested location : "prefecture", "monument", "commune", ... for instance ("PositionOfInterest" only).
- * 
+ *
  * @namespace
  * @alias Gp.Services.AutoComplete.SuggestedLocation
  */
 function SuggestedLocation () {
-
     if (!(this instanceof SuggestedLocation)) {
         throw new TypeError("SuggestedLocation constructor cannot be called as a function.");
     }
 
     /* REPONSE :
-        {  
+        {
            "status" : "OK",
-           "results" : [  
-              {  
+           "results" : [
+              {
                  "country":"PositionOfInterest",
                  "x":-1.559185,
                  "y":47.952603,
@@ -36,7 +35,7 @@ function SuggestedLocation () {
                  "fulltext":"corbe, 35150 Brie",
                  "classification":6
               },
-              {  
+              {
                  "country":"StreetAddress",
                  "x":1.538295,
                  "y":43.19646,
@@ -51,7 +50,7 @@ function SuggestedLocation () {
         }
     */
 
-    /* REPONSE EN ERREUR 
+    /* REPONSE EN ERREUR
         {
             status : "ERROR",
             results : [ ]
@@ -75,25 +74,25 @@ function SuggestedLocation () {
 
     /**
      * Suggested municipality
-     * @type {String} 
+     * @type {String}
      */
     this.commune = null;
 
     /**
      * Full text representation of the suggested location.
-     * @type {String} 
+     * @type {String}
      */
     this.fullText = null;
 
     /**
      * Suggested location postcode
-     * @type {Number}  
+     * @type {Number}
      */
     this.postalCode = null;
 
     /**
      * Number used to classify the importance of the place where is the suggested location from 1 (most important) to 7 (less important).
-     * @type {Integer} 
+     * @type {Integer}
      */
     this.classification = null;
 

@@ -202,7 +202,6 @@ import RouteRequestExtension from "./RouteService/RouteRequestExtension";
  * @private
  */
 function RouteService (options) {
-
     this.logger = Logger.getLogger();
     this.logger.trace("[Constructeur RouteService ()]");
 
@@ -223,7 +222,6 @@ function RouteService (options) {
 
     // appel du constructeur par heritage
     AbstractService.apply(this, arguments);
-
 }
 
 /**
@@ -245,14 +243,12 @@ RouteService.prototype.constructor = RouteService;
  * @param {Object} oRequest - RouteRequest
  */
 RouteService.prototype.addRequest = function (oRequest) {
-
     // on controle les types acceptés
     if (oRequest.CLASSNAME === "DetermineRouteRequest") {
         this.oRequest = oRequest;
     } else {
         throw new Error("Ce n'est pas un objet de type 'Route Request' !?");
     }
-
 };
 
 /**
@@ -261,7 +257,6 @@ RouteService.prototype.addRequest = function (oRequest) {
  * @param {Object} oFilter - RouteFilterExtension
  */
 RouteService.prototype.addFilter = function (oFilter) {
-
     // gestion des extensions (vehicle)
     if (oFilter instanceof RouteRequestExtension) {
         this.oFilter = oFilter;
@@ -274,11 +269,9 @@ RouteService.prototype.addFilter = function (oFilter) {
  * @returns {String}
  */
 RouteService.prototype.toString = function () {
-
     // soit, on a un objet Request déjà instancié
     // sinon, il faut le construire à partir des options à disposition
     if (!this.oRequest) {
-
         // il nous faut des options
         if (!this.options) {
             throw new Error("Les options ne sont pas renseignées, impossible de construire la requête !");

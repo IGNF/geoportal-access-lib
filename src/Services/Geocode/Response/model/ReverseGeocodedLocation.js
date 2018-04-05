@@ -11,7 +11,6 @@ import GeocodedLocation from "./GeocodedLocation";
  * @alias Gp.Services.Geocode.ReverseGeocodedLocation
  */
 function ReverseGeocodedLocation () {
-
     if (!(this instanceof ReverseGeocodedLocation)) {
         throw new TypeError("ReverseGeocodedLocation constructor cannot be called as a function.");
     }
@@ -28,7 +27,6 @@ function ReverseGeocodedLocation () {
     this.CLASSNAME = "ReverseGeocodedLocation";
 
     this.searchCenterDistance = null;
-
 }
 
 ReverseGeocodedLocation.prototype = Object.create(GeocodedLocation.prototype);

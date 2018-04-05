@@ -9,13 +9,12 @@
  * @property {Gp.Point} location - Position of the start or end point used for the request (expressed in "srs" coordinates system).
  * @property {String} message - message
  * @property {String} srs - Identifier of the coordinates system used for the isocurve.
- * 
+ *
  * @namespace
  * @alias Gp.Services.IsoCurveResponse
- * 
+ *
  */
 function ProcessIsoCurveResponse () {
-
     if (!(this instanceof ProcessIsoCurveResponse)) {
         throw new TypeError("ProcessIsoCurveResponse constructor cannot be called as a function.");
     }

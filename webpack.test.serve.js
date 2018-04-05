@@ -22,7 +22,7 @@ module.exports = {
         host : "localhost",
         port : 9001,
         hot : true,
-        open : true,
+        open : "google-chrome",
         watchOptions : {
             watch : true
         },

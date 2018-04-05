@@ -15,7 +15,6 @@ import AltiRequest from "./AltiRequest";
  * @private
  */
 function AltiElevationRequest (options) {
-
     if (!(this instanceof AltiElevationRequest)) {
         throw new TypeError("AltiElevationRequest constructor cannot be called as a function.");
     }
@@ -36,7 +35,6 @@ function AltiElevationRequest (options) {
      * true|false
      */
     this.zonly = this.options.zonly || false; // test des options héritées !
-
 }
 
 /**
@@ -72,7 +70,6 @@ AltiElevationRequest.prototype.constructor = AltiElevationRequest;
  * @returns {Array}
  */
 AltiElevationRequest.prototype.getData = function () {
-
     // par glop..., appel de AltiRequest::getData () !
     var map = [];
     map.push({

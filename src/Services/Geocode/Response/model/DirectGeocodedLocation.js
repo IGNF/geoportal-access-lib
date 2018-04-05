@@ -11,7 +11,6 @@ import GeocodedLocation from "./GeocodedLocation";
  * @alias Gp.Services.Geocode.DirectGeocodedLocation
  */
 function DirectGeocodedLocation () {
-
     if (!(this instanceof DirectGeocodedLocation)) {
         throw new TypeError("DirectGeocodedLocation constructor cannot be called as a function.");
     }
@@ -28,7 +27,6 @@ function DirectGeocodedLocation () {
     this.CLASSNAME = "DirectGeocodedLocation";
 
     this.accuracy = null;
-
 }
 
 DirectGeocodedLocation.prototype = Object.create(GeocodedLocation.prototype);

@@ -23,7 +23,6 @@ import Logger from "../../Utils/LoggerByDefault";
  * @private
  */
 function RequestHeader (options) {
-
     this.logger = Logger.getLogger();
     this.logger.trace("[Constructeur RequestHeader ()]");
 
@@ -72,7 +71,6 @@ RequestHeader.prototype = {
      * toString
      */
     toString : function () {
-
         var template = null;
         template = this.template;
         template = template.replace(/__SRSNAME__/g, this.options.srsName);

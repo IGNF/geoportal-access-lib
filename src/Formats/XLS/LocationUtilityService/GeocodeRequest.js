@@ -63,7 +63,6 @@ import GeocodeFilterExtension from "./GeocodeFilterExtension";
  * @private
  */
 function GeocodeRequest (options) {
-
     this.logger = Logger.getLogger();
     this.logger.trace("[Constructeur GeocodeRequest ()]");
 
@@ -129,7 +128,6 @@ GeocodeRequest.prototype = {
      * @param {Object} oAddress - Adresse
      */
     addAddress : function (oAddress) {
-
         if (oAddress instanceof Address) {
             this.oAddress = oAddress;
         }
@@ -158,14 +156,12 @@ GeocodeRequest.prototype = {
      * @returns {String}
      */
     toString : function () {
-
         var template = "";
         template = this.template;
 
         // soit on a déjà un objet Address instancié,
         // sinon, on le fabrique via les options
         if (!this.oAddress) {
-
             var settings = {};
             settings.location = this.options.location;
             settings.type = this.options.filterOptions.type || ["StreetAddress"];
@@ -174,7 +170,6 @@ GeocodeRequest.prototype = {
 
             // gestion des filtres
             if (this.oFilter) {
-
                 // on reconstruit les filtres
                 settings.filter = {};
 
@@ -216,7 +211,6 @@ GeocodeRequest.prototype = {
             if (!this.oAddress) {
                 throw new Error("La construction de l'adresse n'est pas correctement definie !?");
             }
-
         }
 
         // FIXME gestion des filtres pour un objet Address déjà instancié ?

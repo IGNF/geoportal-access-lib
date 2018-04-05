@@ -10,7 +10,6 @@ import GeocodeLocation from "../GeocodeLocation";
  * @private
  */
 function CadastralParcel () {
-
     if (!(this instanceof CadastralParcel)) {
         throw new TypeError("CadastralParcel constructor cannot be called as a function.");
     }
@@ -46,7 +45,6 @@ function CadastralParcel () {
     this.attributesList = ["absorbedCity", "sheet", "number", "section", "commune", "department", "insee", "municipality", "origin"];
 
     this.serviceAttributes = ["CommuneAbsorbee", "Feuille", "Numero", "Section", "Commune", "Departement", "INSEE", "Municipality", "Type"];
-
 }
 
 /**

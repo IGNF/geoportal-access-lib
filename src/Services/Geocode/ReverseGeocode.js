@@ -83,7 +83,6 @@ import ReverseGeocodeResponseFactory from "./Response/ReverseGeocodeResponseFact
  * @private
  */
 function ReverseGeocode (options) {
-
     if (!(this instanceof ReverseGeocode)) {
         throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "ReverseGeocode"));
     }
@@ -105,11 +104,11 @@ function ReverseGeocode (options) {
     }
 
     // on lance une exception afin d'eviter au service de le faire...
-    if (options.position.x == null) {
+    if (options.position.x === null) {
         throw new Error(_.getMessage("PARAM_MISSING", "position.x"));
     }
 
-    if (options.position.y == null) {
+    if (options.position.y === null) {
         throw new Error(_.getMessage("PARAM_MISSING", "position.y"));
     }
 
@@ -214,7 +213,6 @@ ReverseGeocode.prototype.constructor = ReverseGeocode;
  * @param {Function} success - callback
  */
 ReverseGeocode.prototype.buildRequest = function (error, success) {
-
     var options = {
         httpMethod : this.options.httpMethod,
         // options specifiques du service
@@ -228,11 +226,9 @@ ReverseGeocode.prototype.buildRequest = function (error, success) {
     this.request = ReverseGeocodeRequestFactory.build(options);
 
     // on teste si la requete a bien été construite !
-    if (!this.request) {
-        error.call(this, new ErrorService(_.getMessage("SERVICE_REQUEST_BUILD")));
-    } else {
-        success.call(this, this.request);
-    }
+    (!this.request)
+        ? error.call(this, new ErrorService(_.getMessage("SERVICE_REQUEST_BUILD")))
+        : success.call(this, this.request);
 };
 
 /**
@@ -243,9 +239,7 @@ ReverseGeocode.prototype.buildRequest = function (error, success) {
  * @param {Function} success - callback
  */
 ReverseGeocode.prototype.analyzeResponse = function (error, success) {
-
     if (this.response) {
-
         var options = {
             response : this.response,
             rawResponse : this.options.rawResponse,
@@ -255,11 +249,9 @@ ReverseGeocode.prototype.analyzeResponse = function (error, success) {
         };
 
         ReverseGeocodeResponseFactory.build(options);
-
     } else {
         error.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
     }
-
 };
 
 /**

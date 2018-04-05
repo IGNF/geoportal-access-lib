@@ -24,7 +24,6 @@
  * @alias Gp.Services.Route.RouteInstruction
  */
 function RouteInstruction () {
-
     if (!(this instanceof RouteInstruction)) {
         throw new TypeError("RouteInstruction constructor cannot be called as a function.");
     }

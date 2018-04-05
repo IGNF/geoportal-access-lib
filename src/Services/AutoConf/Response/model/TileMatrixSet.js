@@ -1,7 +1,7 @@
 
 /**
- *  
- * Object used to describe a TileMatrix set (for WMTS use). 
+ *
+ * Object used to describe a TileMatrix set (for WMTS use).
  *
  * @property {Array.<String>} matrixIds - Array of IDs for each TileMatrix of the set.
  * @property {Array.<Gp.Services.Config.TileMatrix>} tileMatrices - Array of TileMatrix descriptions.
@@ -12,7 +12,6 @@
  * @alias Gp.Services.Config.TileMatrixSet
  */
 function TileMatrixSet () {
-
     if (!(this instanceof TileMatrixSet)) {
         throw new TypeError("TileMatrixSet constructor cannot be called as a function.");
     }
@@ -24,7 +23,6 @@ function TileMatrixSet () {
     this.matrixIds = [];
 
     this.tileMatrices = {};
-
 }
 
 TileMatrixSet.prototype = {
@@ -74,7 +72,7 @@ TileMatrixSet.prototype = {
      */
     getTopLeftCorner : function () {
         var topLeftCorner;
-        var matrices = this.getTileMatrices ();
+        var matrices = this.getTileMatrices();
         if (matrices) {
             for (var id in matrices) {
                 if (matrices.hasOwnProperty(id)) {

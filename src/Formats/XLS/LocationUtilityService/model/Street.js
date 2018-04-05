@@ -1,13 +1,13 @@
 /**
  * implemented into class 'Address' !
- * 
+ *
  * Location type Street
- * 
- * options 
+ *
+ * options
  * options.location.street
- * 
+ *
  * FIXME on traite les attributs ?
- * 
+ *
  * ```
  * XSD
  * Street (balise xsd) :
@@ -18,5 +18,5 @@
  * template : "<Street>__VALUE__</Street>"
  * ```
  * @alias Gp.Formats.XLS.LocationUtilityService.Street
- * 
+ *
  */

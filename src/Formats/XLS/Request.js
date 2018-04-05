@@ -1,4 +1,4 @@
-/*jshint bitwise: false*/
+/* jshint bitwise: false */
 import Logger from "../../Utils/LoggerByDefault";
 
 /**
@@ -30,7 +30,6 @@ import Logger from "../../Utils/LoggerByDefault";
  * @private
  */
 function Request (options) {
-
     this.logger = Logger.getLogger();
     this.logger.trace("[Constructeur Request ()]");
 
@@ -97,7 +96,6 @@ Request.prototype = {
      * toString
      */
     toString : function () {
-
         var template = null;
         template = this.template;
         template = template.replace(/__MAXRESPONSES__/g, this.options.maximumResponses);

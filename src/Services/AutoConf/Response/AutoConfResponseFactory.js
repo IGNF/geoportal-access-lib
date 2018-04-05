@@ -36,7 +36,6 @@ var AutoConfReponseFactory = {
      *   };
      */
     build : function (options) {
-
         // logger
         var logger = Logger.getLogger("AutoConfResponseFactory");
         logger.trace(["AutoConfResponseFactory::build()"]);
@@ -45,31 +44,25 @@ var AutoConfReponseFactory = {
         var data = null;
 
         if (options.response) {
-
             if (options.rawResponse) {
                 data = options.response;
-
             } else {
-
                 try {
-
                     var p = new XML({
                         reader : AutoConfResponseReader
                     });
 
-                    if ( typeof options.response === "string") {
+                    if (typeof options.response === "string") {
                         p.setXMLString(options.response);
                     } else {
                         p.setXMLDoc(options.response);
                     }
 
                     data = p.parse();
-
                 } catch (e) {
-
                     // si une exception a été levée, on appelle le callback d'erreur avec le message renvoyé
                     var message = e.message;
-                    if ( typeof options.response === "string") {
+                    if (typeof options.response === "string") {
                         message += "\n (raw response service'" + options.response + "')";
                     } else {
                         message += "\n (raw response service'" + options.response.documentElement.innerHTML + "')";
@@ -105,7 +98,6 @@ var AutoConfReponseFactory = {
                     return;
                 }
             }
-
         } else {
             // si la réponse (xmlString) est vide, on appelle le callback d'erreur
             options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EMPTY")));
@@ -126,7 +118,6 @@ var AutoConfReponseFactory = {
 
         // si tout s'est bien passé, on appelle le callback de succès
         options.onSuccess.call(options.scope, scope.Gp.Config);
-        return;
     },
 
     /**
@@ -140,14 +131,12 @@ var AutoConfReponseFactory = {
      * @param {String} [layerId] - l'identifiant d'une couche agrégée dans le cas d'une 2è opération de l'autoconf
      */
     mergeConfig : function (GpConfig, data, layerId) {
-
         if (data && GpConfig) {
-
             // on boucle sur les propriétés (generalOptions, layers, projections, services, tileMatrixSets, territories)
             for (var prop in data) {
                 if (data.hasOwnProperty(prop)) {
                     // on récupère la nouvelle clé dans generalOptions
-                    if (prop == "generalOptions") {
+                    if (prop === "generalOptions") {
                         for (var key in data[prop].apiKeys) {
                             if (data[prop].apiKeys.hasOwnProperty(key) && !GpConfig.generalOptions.apiKeys[key]) {
                                 GpConfig.generalOptions.apiKeys[key] = data[prop].apiKeys[key];

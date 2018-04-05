@@ -25,7 +25,6 @@ import Logger from "../Utils/LoggerByDefault";
  * @private
  */
 function XML (options) {
-
     if (!(this instanceof XML)) {
         throw new TypeError("XML constructor cannot be called as a function.");
     }
@@ -185,8 +184,7 @@ XML.prototype = {
  * @return {DOMElement} - the corresponding XML Document
  */
 function __getXMLDOC (xmlString) {
-
-    if ( typeof window === "undefined" ) {
+    if (typeof window === "undefined") {
         // env. nodejs
         var DOMParser = require("xmldom").DOMParser; // __xmldom.DOMParser;
         return new DOMParser().parseFromString(xmlString, "text/xml");
@@ -213,7 +211,6 @@ function __getXMLDOC (xmlString) {
                 throw new Error(errorMsg);
             }
             return xmlDoc;
-
         } else if (window.DOMParser) {
             // les autres (Chrome, Mozilla, IE >= 9)
             parser = new window.DOMParser();
@@ -233,7 +230,7 @@ function __getXMLDOC (xmlString) {
                 for (var i = 0; i < parsererror.length; i++) {
                     var content = parsererror[i].innerHTML;
                     // except in case parsererror is just because of huge xml, but parsing is done.
-                    if (content.indexOf("Huge input lookup") == -1) {
+                    if (content.indexOf("Huge input lookup") === -1) {
                         errorMsg += "(" + content + ")";
                         throw new Error(errorMsg);
                     }
@@ -242,7 +239,6 @@ function __getXMLDOC (xmlString) {
                 throw new Error(errorMsg);
             }
             return xmlDoc;
-
         } else {
             // FIXME
             throw new Error("Incompatible DOM Parser pour ce navigateur !");
@@ -297,7 +293,6 @@ function __getRootNode (xmlDoc) {
  *          }
  */
 function __readDefault (node) {
-
     var data = {};
 
     // if element node has attributes, set their values to data
@@ -308,7 +303,6 @@ function __readDefault (node) {
 
     // if element node has childNodes, read them and set them to data
     if (node.hasChildNodes()) {
-
         var childData = {};
         var child;
         var children = node.childNodes;
@@ -318,14 +312,12 @@ function __readDefault (node) {
 
             if (child.nodeType === 3) { // TEXT_NODE
                 data["textContent"] = child.nodeValue;
-
             } else if (child.nodeType === 1) {
                 childData = __readDefault(child);
 
                 if (!data[child.nodeName]) {
                     // store childData in an object
                     data[child.nodeName] = childData;
-
                 } else {
                     // in case several childNodes has the same name : store them in an array.
                     // if data[nodeName] already exists but is not an array

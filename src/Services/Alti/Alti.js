@@ -71,7 +71,6 @@ import AltiResponseFactory from "./Response/AltiResponseFactory";
  * @private
  */
 function Alti (options) {
-
     if (!(this instanceof Alti)) {
         throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "Alti"));
     }
@@ -104,13 +103,13 @@ function Alti (options) {
     this.options.positions = options.positions;
 
     // format de réponse du service : "json" ou "xml" (valeur par défaut), en minuscule !
-    this.options.outputFormat = ( typeof options.outputFormat === "string") ? options.outputFormat.toLowerCase() : "xml";
+    this.options.outputFormat = (typeof options.outputFormat === "string") ? options.outputFormat.toLowerCase() : "xml";
 
     // sampling
     this.options.sampling = options.sampling || null;
 
     // type d'api utilisé pour requeter le service, en majuscule !
-    this.options.api = ( typeof options.api === "string") ? options.api.toUpperCase() : "REST";
+    this.options.api = (typeof options.api === "string") ? options.api.toUpperCase() : "REST";
 
     // l'api ne peut être interrogée qu'en GET.
     if (this.options.api === "REST") {
@@ -125,7 +124,6 @@ function Alti (options) {
     // en fonction du type d'api, REST ou WPS, du format de reponse demandé (outputFormat)
     // ainsi que sur le type de service (profil ou elevation)
     if (!this.options.serverUrl) {
-
         var lstUrlByDefault = DefaultUrlService.Alti.url(this.options.apiKey);
         var urlFound = null;
         switch (this.options.api) {
@@ -186,7 +184,6 @@ Alti.prototype.constructor = Alti;
  * @param {Function} success - callback
  */
 Alti.prototype.buildRequest = function (error, success) {
-
     // utilisation en mode callback
     var options = {
         httpMethod : this.options.httpMethod,
@@ -216,14 +213,12 @@ Alti.prototype.buildRequest = function (error, success) {
  * @param {Function} success - callback
  */
 Alti.prototype.analyzeResponse = function (error, success) {
-
     // INFO
     // Factory pour masquer la complexité du retour du service qui renvoie soit
     //  - une 'string' qui contient du XML ou JSON natif en mode XHR
     //  - un objet JSON qui est natif ou encapsulé
 
     if (this.response) {
-
         var options = {
             response : this.response,
             outputFormat : this.options.outputFormat, // utile pour parser la string en mode XHR : JSON ou XML !
@@ -234,7 +229,6 @@ Alti.prototype.analyzeResponse = function (error, success) {
         };
 
         AltiResponseFactory.build(options);
-
     } else {
         error.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
     }

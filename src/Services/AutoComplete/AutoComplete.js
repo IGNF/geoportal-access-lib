@@ -61,7 +61,6 @@ import ErrorService from "../../Exceptions/ErrorService";
  * @private
  */
 function AutoComplete (options) {
-
     if (!(this instanceof AutoComplete)) {
         throw new TypeError(MR.getMessage("CLASS_CONSTRUCTOR", "AutoComplete"));
     }
@@ -120,7 +119,6 @@ function AutoComplete (options) {
      * sauf si l'on souhaite une reponse brute (options.rawResponse)
      */
     this.options.outputFormat = (this.options.rawResponse) ? "" : "json";
-
 }
 
 /**
@@ -145,7 +143,6 @@ AutoComplete.prototype.constructor = AutoComplete;
  * @param {Function} success - callback
  */
 AutoComplete.prototype.buildRequest = function (error, success) {
-
     // ex.
     // http://wxs.ign.fr/CLEF/ols/apis/completion?
     // text=Brie-Comt&
@@ -172,7 +169,9 @@ AutoComplete.prototype.buildRequest = function (error, success) {
         maximumResponses : this.options.maximumResponses
     });
 
-    success.call(this, this.request);
+    (!this.request)
+        ? error.call(this, new ErrorService(MR.getMessage("SERVICE_REQUEST_BUILD")))
+        : success.call(this, this.request);
 };
 
 /**
@@ -183,9 +182,7 @@ AutoComplete.prototype.buildRequest = function (error, success) {
  * @param {Function} success - callback de succès de l'analyse de la réponse
  */
 AutoComplete.prototype.analyzeResponse = function (error, success) {
-
     if (this.response) {
-
         var options = {
             response : this.response,
             rawResponse : this.options.rawResponse,
@@ -195,11 +192,9 @@ AutoComplete.prototype.analyzeResponse = function (error, success) {
         };
 
         AutoCompleteResponseFactory.build(options);
-
     } else {
         error.call(this, new ErrorService(MR.getMessage("SERVICE_RESPONSE_EMPTY")));
     }
-
 };
 
 export default AutoComplete;

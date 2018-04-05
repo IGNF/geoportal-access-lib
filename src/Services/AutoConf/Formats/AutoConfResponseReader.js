@@ -302,7 +302,7 @@ AutoConfResponseReader.READERS = {
                     var childName;
                     for (var i = 0; i < children.length; i++) {
                         child = children[i];
-                        if (child.nodeType === 1) { // 1 == node.ELEMENT_NODE
+                        if (child.nodeType === 1) { // 1 === node.ELEMENT_NODE
                             childName = child.localName || child.baseName || child.nodeName;
                             if (childName === "Name") {
                                 s.name = __getChildValue(child);
@@ -437,7 +437,6 @@ AutoConfResponseReader.READERS = {
             if (data) {
                 var values = __getChildValue(node).split(",");
                 if (values.length === 4) {
-
                     // get bbox coordinates (wgs84)
                     var bbox = {
                         left : parseFloat(values[0]),
@@ -451,7 +450,6 @@ AutoConfResponseReader.READERS = {
 
                     if (data.hasOwnProperty("geoBBOX")) { // cas d'un territoire
                         data.geoBBOX = bbox;
-
                     } else if (data.hasOwnProperty("bbox")) { // cas d'une constraint
                         if (data.bbox.left || data.bbox.right || data.bbox.top || data.bbox.bottom) {
                             // si on a déjà une bbox, il faut stocker d'autres contraintes
@@ -462,13 +460,11 @@ AutoConfResponseReader.READERS = {
                             newConstraint.bbox = bbox;
                             newConstraint.temporalExtent = [minT, maxT];
                             data.multiConstraints.push(newConstraint);
-
                         } else {
                             // contrainte classique
                             data.bbox = bbox;
                             data.temporalExtent = [minT, maxT];
                         }
-
                     } else { // cas d'une layer
                         if (!data.globalConstraint) {
                             data.globalConstraint = new Constraint();
@@ -476,7 +472,6 @@ AutoConfResponseReader.READERS = {
                         data.globalConstraint.bbox = bbox;
                         data.globalConstraint.temporalExtent = [minT, maxT];
                     }
-
                 }
             }
         },
@@ -540,7 +535,6 @@ AutoConfResponseReader.READERS = {
             var c = new Constraint();
             __getChildNodes(node, c);
             if (data) {
-
                 // on peut être dans le cas d'un originator ou d'une layer, tous les deux ont l'attribut constraints
                 if (!data.constraints || !Array.isArray(data.constraints)) {
                     data.constraints = [];
@@ -548,7 +542,6 @@ AutoConfResponseReader.READERS = {
 
                 // cas de plusieurs contraintes (par ex différents territoires)
                 if (c.multiConstraints && Array.isArray(c.multiConstraints)) {
-
                     // on récupère la première contrainte, stockée normalement
                     var constraint = new Constraint();
                     constraint.crs = c.crs;
@@ -724,7 +717,6 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         Key : function (node, lyr) {
             if (lyr) {
-
                 // récupération de la clé API
                 var key = node.getAttribute("id");
                 // si on n'a pas encore ajouté de clé, on crée le tableau vide
@@ -901,7 +893,6 @@ AutoConfResponseReader.READERS = {
 
                 // ajout du TileMatrixSet à la variable config
                 data.tileMatrixSets[tmsData.identifier] = tmsData.TMS;
-
             } else { // le TileMatrixSetLink d'une couche (layer)
                 if (data && !data.wmtsOptions) {
                     data.wmtsOptions = {};
@@ -1028,7 +1019,7 @@ AutoConfResponseReader.READERS = {
 
         // get exception message
         var textNode = node.firstChild;
-        if (textNode && textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             exceptionReport.exception = textNode.nodeValue;
         }
 
@@ -1049,16 +1040,13 @@ AutoConfResponseReader.READERS = {
  * @memberof AutoConfResponseReader
  */
 AutoConfResponseReader.read = function (root) {
-
     if (root.nodeName === "ViewContext") {
         var nsPrefix = root.prefix || AutoConfResponseReader.DEFAULTPREFIX;
         var config = AutoConfResponseReader.READERS[nsPrefix][root.nodeName](root);
         return config;
-
     } else if (root.nodeName === "serviceException") {
         var exceptionReport = AutoConfResponseReader.READERS[root.nodeName](root);
         return exceptionReport;
-
     } else {
         throw new Error("Erreur lors de la lecture de la réponse : elle n'est pas au format attendu.");
     }
@@ -1095,9 +1083,7 @@ function __getAttributes (node) {
  * @param {Array|Object} [data] - an object to be filled with node data
  */
 function __getChildNodes (node, data) {
-
     if (node.hasChildNodes()) {
-
         var children = node.childNodes;
         var child;
         var childName;
@@ -1106,7 +1092,7 @@ function __getChildNodes (node, data) {
         for (var i = 0; i < children.length; i++) {
             child = children[i];
 
-            if (child.nodeType === 1) { // 1 == node.ELEMENT_NODE
+            if (child.nodeType === 1) { // 1 === node.ELEMENT_NODE
                 childName = child.localName || child.baseName || child.nodeName;
                 childPrefix = child.prefix || AutoConfResponseReader.DEFAULTPREFIX;
 
@@ -1130,14 +1116,13 @@ function __getChildNodes (node, data) {
  * @param {DOMElement} node - a DOM node
  * @return {String} value - valeur du firstChild du noeud en entrée, ou chaîne vide.
  */
-function __getChildValue(node) {
-
+function __getChildValue (node) {
     var textNode;
     var value = "";
 
     if (node.hasChildNodes()) {
         textNode = node.firstChild;
-        if (textNode.nodeType === 3 || textNode.nodeType === 4) { // 3 == node.TEXT_NODE
+        if (textNode.nodeType === 3 || textNode.nodeType === 4) { // 3 === node.TEXT_NODE
             value = textNode.nodeValue;
         }
     }
@@ -1154,14 +1139,11 @@ function __getChildValue(node) {
  * @param {DOMElement} viewContextNode - a DOM node, corresponding to XLS first tag.
  */
 function __checkServiceAttributes (viewContextNode) {
-
     if (viewContextNode.attributes.length > 0) {
-
         // on récupère et parcourt les attributs de la balise XLS de la réponse
         var xlsAttributes = __getAttributes(viewContextNode);
         for (var att in xlsAttributes) {
             if (xlsAttributes.hasOwnProperty(att)) {
-
                 // vérification de la version
                 if (att === "version") {
                     if (xlsAttributes["version"] !== AutoConfResponseReader.VERSION) {
@@ -1201,7 +1183,6 @@ function __checkServiceAttributes (viewContextNode) {
                         return;
                     }
                 }
-
             }
         }
     }

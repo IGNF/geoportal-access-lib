@@ -13,35 +13,35 @@
  * - **bbox** - Bounding Box *{@link Gp.BBox}*.
  * - **municipality** - Municipality
  *
- * *if type == "StreetAddress" : *
- * 
- * - **number** - Street number. 
+ * *if type === "StreetAddress" : *
+ *
+ * - **number** - Street number.
  * - **ID** - Identifier of the address in the [BD ADRESSE Database]{@link http://professionnels.ign.fr/bdadresse}.
  * - **IDTR** - Identifier of the lineString in the [BD ADRESSE Database]{@link http://professionnels.ign.fr/bdadresse}.
- * - **postalCode** - PostCode 
- * - **quality** - Geocoding quality ([see]{@link http://api.ign.fr/tech-docs-js/developpeur/search.html})
- * - **street** - Street name 
- * - **territory** - French Territory code 
- * - **commune** - City
- * - **department** - Department
- * - **insee** - INSEE Code
- * 
- * 
- * *if type == "PositionOfInterest" :*
- * 
- * - **importance** - Place name importance 
- * - **nature** - Place name nature
  * - **postalCode** - PostCode
- * - **territory** - French Territory code 
+ * - **quality** - Geocoding quality ([see]{@link http://api.ign.fr/tech-docs-js/developpeur/search.html})
+ * - **street** - Street name
+ * - **territory** - French Territory code
  * - **commune** - City
  * - **department** - Department
  * - **insee** - INSEE Code
  *
- * 
- * *si type = "CadastralParcel" :*    
- * 
+ *
+ * *if type === "PositionOfInterest" :*
+ *
+ * - **importance** - Place name importance
+ * - **nature** - Place name nature
+ * - **postalCode** - PostCode
+ * - **territory** - French Territory code
+ * - **commune** - City
+ * - **department** - Department
+ * - **insee** - INSEE Code
+ *
+ *
+ * *si type = "CadastralParcel" :*
+ *
  * - **absorbedCity** - when a parcel comes from a city that was absorbed by another, code of that old city. "000" otherwise.
- * - **arrondissement** - arrondissement 
+ * - **arrondissement** - arrondissement
  * - **cadastralParcel** - cadastral parcel code
  * - **district** - district
  * - **sheet** - Parcel Sheet (eg. "1").
@@ -56,7 +56,6 @@
  * @alias Gp.Services.Geocode.GeocodedLocation
  */
 function GeocodedLocation () {
-
     if (!(this instanceof GeocodedLocation)) {
         throw new TypeError("GeocodedLocation constructor cannot be called as a function.");
     }
@@ -71,7 +70,6 @@ function GeocodedLocation () {
     this.placeAttributes = {};
 
     this.type = null;
-
 }
 
 GeocodedLocation.prototype = {

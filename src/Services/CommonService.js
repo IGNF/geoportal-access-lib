@@ -92,7 +92,6 @@ import DefaultUrlService from "./DefaultUrlService";
  * @private
  */
 function CommonService (options) {
-
     if (!(this instanceof CommonService)) {
         throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR"));
     }
@@ -116,14 +115,22 @@ function CommonService (options) {
         // callbackName : "",
         callbackSuffix : null,
         httpMethod : "GET",
-        timeOut  : 0,
+        timeOut : 0,
         rawResponse : false,
         scope : this,
-        /** callback par defaut pour la reponse */
+        /**
+        * callback par defaut pour la reponse
+        * @param {Object} response - response
+        * @private
+        */
         onSuccess : function (response) {
             console.log("onSuccess - la reponse est la suivante : ", response);
         },
-        /** callback par defaut pour les erreurs */
+        /**
+        * callback par defaut pour les erreurs
+        * @param {Object} error - error
+        * @private
+        */
         onFailure : function (error) {
             if (error.status === 200 || !error.status) {
                 console.log("onFailure : ", error.message);
@@ -151,14 +158,18 @@ function CommonService (options) {
 
     // modification de la fonction de callback onSuccess dans le cas où la réponse brute est demandée
     if (this.options.rawResponse && !this.options.onSuccess) {
-        /** callback onSuccess par defaut */
+        /**
+        * callback par defaut pour la reponse
+        * @param {Object} response - response
+        * @private
+        */
         this.options.onSuccess = function (response) {
             console.log("onSuccess - la réponse brute du service est la suivante : ", response);
         };
     }
 
     // gestion du callback onSuccess
-    var bOnSuccess = (this.options.onSuccess !== null && typeof this.options.onSuccess === "function") ? true : false;
+    var bOnSuccess = !!((this.options.onSuccess !== null && typeof this.options.onSuccess === "function"));
     if (!bOnSuccess) {
         throw new Error(_.getMessage("PARAM_MISSING", "onSuccess()"));
     }
@@ -171,7 +182,7 @@ function CommonService (options) {
         // donc si l'url n'est pas renseignée, il faut utiliser les urls par defaut
         DefaultUrlService.ssl = this.options.ssl;
         var urlByDefault = DefaultUrlService[this.CLASSNAME].url(this.options.apiKey);
-        if ( typeof urlByDefault === "string") {
+        if (typeof urlByDefault === "string") {
             this.options.serverUrl = urlByDefault;
         } else {
             this.logger.trace("URL par defaut à determiner au niveau du composant...");
@@ -190,7 +201,7 @@ function CommonService (options) {
     // }
 
     // gestion de la methode HTTP
-    this.options.httpMethod = ( typeof options.httpMethod === "string") ? options.httpMethod.toUpperCase() : "GET";
+    this.options.httpMethod = (typeof options.httpMethod === "string") ? options.httpMethod.toUpperCase() : "GET";
 
     switch (this.options.httpMethod) {
         case "POST":
@@ -206,8 +217,8 @@ function CommonService (options) {
     }
 
     // gestion du protocole
-    // this.options.protocol = ( typeof options.protocol === "string" ) ? options.protocol.toUpperCase() : "JSONP";
-    this.options.protocol = ( typeof options.protocol === "string") ? options.protocol.toUpperCase() : "XHR";
+    // this.options.protocol = (typeof options.protocol === "string" ) ? options.protocol.toUpperCase() : "JSONP";
+    this.options.protocol = (typeof options.protocol === "string") ? options.protocol.toUpperCase() : "XHR";
 
     switch (this.options.protocol) {
         case "JSONP":
@@ -219,7 +230,7 @@ function CommonService (options) {
 
     // on determine l'environnement d'execution : browser ou non ?
     // et on lance une exception sur l'utilisation du protocole JSONP pour nodeJS...
-    if ( typeof window === "undefined" && this.options.protocol === "JSONP") {
+    if (typeof window === "undefined" && this.options.protocol === "JSONP") {
         throw new Error(_.getMessage("PARAM_NOT_SUPPORT_NODEJS", "protocol=JSONP (instead use XHR)"));
     }
 
@@ -263,28 +274,28 @@ CommonService.prototype = {
      * Appel du service Géoportail
      */
     call : function () {
-
         /* jshint validthis : true */
         this.logger.trace("CommonService::call ()");
 
+        var context = this;
         /** fonction d'execution */
         function run () {
             this.logger.trace("CommonService::run ()");
-            this.buildRequest.call(this, onError, onBuildRequest);
+            this.buildRequest.call(context, onError, onBuildRequest);
         }
 
-        run.call(this);
+        run.call(context);
 
         /** callback de fin de construction de la requête */
         function onBuildRequest (result) {
             this.logger.trace("CommonService::onBuildRequest : ", result);
-            this.callService.call(this, onError, onCallService);
+            this.callService.call(context, onError, onCallService);
         }
 
         /** callback de fin d'appel au service */
         function onCallService (result) {
             this.logger.trace("CommonService::onCallService : ", result);
-            this.analyzeResponse.call(this, onError, onAnalyzeResponse);
+            this.analyzeResponse.call(context, onError, onAnalyzeResponse);
         }
 
         /** callback de fin de lecture de la reponse */
@@ -307,7 +318,6 @@ CommonService.prototype = {
             }
             this.options.onFailure.call(this, e);
         }
-
     },
 
     /**
@@ -315,9 +325,12 @@ CommonService.prototype = {
      */
     buildRequest : function (error, success) {
         // INFO
-        // retourne l'objet 'this.request'
-        // error.call(this, "This method must be overwritten !");
         this.logger.error("overwritten method !");
+        // retourne l'objet 'this.request'
+        if (error) {
+            error.call(this, "This method must be overwritten !");
+        }
+        success.call(this, "This method must be overwritten !");
     },
 
     /**
@@ -345,7 +358,7 @@ CommonService.prototype = {
 
         // a t on mis en place un proxy ?
         // la proxyfication est valable uniquement en mode XHR !
-        var bUrlProxified = (this.options.proxyURL && this.options.protocol === "XHR") ? true : false;
+        var bUrlProxified = !!((this.options.proxyURL && this.options.protocol === "XHR"));
 
         // rajout de l'option gpbibaccess
         // FIXME : acces au numero de version de package.conf
@@ -380,7 +393,7 @@ CommonService.prototype = {
             timeOut : this.options.timeOut || 0,
             format : this.options.outputFormat, // ceci declenche le parsing de la reponse du service, mais on souhaite toujours une reponse brute (string) !
             nocache : this.options.nocache || false, // ceci permet d'ajouter un timestamp dans la requête
-            wrap : (this.options.protocol === "XHR") ? false : true, // ceci declenche l'encapsulation de la reponse XML du service dans du JSON, mais pas en mode XHR !
+            wrap : this.options.protocol !== "XHR", // ceci declenche l'encapsulation de la reponse XML du service dans du JSON, mais pas en mode XHR !
             callbackSuffix : this.options.callbackSuffix,
             // callbackName : this.options.callbackName || null,
             data : strData,
@@ -395,14 +408,14 @@ CommonService.prototype = {
                 var content = null;
 
                 // XHR : on renvoie la reponse brute (string)
-                if (self.options.protocol == "XHR") {
+                if (self.options.protocol === "XHR") {
                     // on ne peut pas savoir si la reponse est en XML ou JSON
                     // donc on laisse le boulot à l'analyse de la reponse !
                     content = response;
                 }
 
                 // JSONP : on doit analyser le contenu (json)
-                if (self.options.protocol == "JSONP") {
+                if (self.options.protocol === "JSONP") {
                     self.logger.trace("Response JSON", response);
                     if (response) {
                         // reponse encapsulée : {http : {status:200, error:null},xml :'réponse du service'}
@@ -419,9 +432,9 @@ CommonService.prototype = {
                                 if (self.options.rawResponse) {
                                     content = response;
                                 }
-                                if ( typeof self.options.onBeforeParse === "function") {
+                                if (typeof self.options.onBeforeParse === "function") {
                                     var newResponse = self.options.onBeforeParse(content);
-                                    if ( typeof newResponse === "string") {
+                                    if (typeof newResponse === "string") {
                                         content = newResponse;
                                     }
                                 }
@@ -456,7 +469,6 @@ CommonService.prototype = {
         };
 
         Protocol.send(options);
-
     },
 
     /**
@@ -464,9 +476,12 @@ CommonService.prototype = {
      */
     analyzeResponse : function (error, success) {
         // INFO
-        // retourne l'objet spécifique au type de composant (json)
-        // error.call(this, "This method must be overwritten !");
         this.logger.error("overwritten method !");
+        // retourne l'objet spécifique au type de composant (json)
+        if (error) {
+            error.call(this, "This method must be overwritten !");
+        }
+        success.call(this, "This method must be overwritten !");
     }
 
 };

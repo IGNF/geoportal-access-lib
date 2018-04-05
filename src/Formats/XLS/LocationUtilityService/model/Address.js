@@ -105,7 +105,6 @@ import Logger from "../../../../Utils/LoggerByDefault";
  * @private
  */
 function Address (options) {
-
     this.logger = Logger.getLogger("Address");
     this.logger.trace("[Constructeur Address ()]");
 
@@ -198,13 +197,12 @@ Address.prototype = {
  * @returns {String}
  */
 Address.prototype.toString = function () {
-
     var template = null;
     template = this.template.address;
     template = template.replace(/__COUNTRYCODE__/g, this.options.type);
 
     // on a une adresse structurée ou libre ?
-    if ( typeof this.options.location === "string") {
+    if (typeof this.options.location === "string") {
         // balise freeFormeAddress
         var tmplFreeFormAddress = this.template.location.freeFormAddress;
         tmplFreeFormAddress = tmplFreeFormAddress.replace(/__FREEFORMADDRESSVALUE__/g, this.options.location);
@@ -236,7 +234,6 @@ Address.prototype.toString = function () {
     if (this.options.location.postalCode) {
         tmplPostalCode = this.template.postalCode;
         tmplPostalCode = tmplPostalCode.replace(/__POSTALCODEVALUE__/g, this.options.location.postalCode);
-
     }
 
     // a t on un filtre de type GML::Envelope ?
@@ -258,7 +255,6 @@ Address.prototype.toString = function () {
     // a t on des filtres de type Place ?
     var tmplPlace = "";
     if (this.options.filter) {
-
         var filters = this.options.filter;
         for (var filter in filters) {
             if (filter === "bbox") {

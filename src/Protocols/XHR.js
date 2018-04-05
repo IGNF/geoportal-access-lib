@@ -16,7 +16,7 @@ import ES6Promise from "es6-promise";
  * @alias Gp.Protocols.XHR
  * @see dependance 'promise'
  */
- 
+
 var XHR = {
 
     /**
@@ -38,7 +38,6 @@ var XHR = {
      * @param {Function} settings.onFailure  - callback
      */
     call : function (settings) {
-
         // logger
         var logger = Logger.getLogger("XHR");
         logger.trace("[XHR::call()]");
@@ -138,18 +137,16 @@ var XHR = {
      * @return {Object} promise
      */
     __call : function (options) {
-
         var logger = Logger.getLogger("XHR");
         logger.trace("[XHR::__call()]");
 
         var promise = new Promise(
             function (resolve, reject) {
-
                 // traitement du corps de la requête
-                var corps = (options.method === "POST" || options.method === "PUT") ? true : false;
+                var corps = (options.method === "POST" || options.method === "PUT") ? 1 : 0;
 
                 // seulement si options.data n'est pas vide (peut être un objet ou une chaine de caractères)
-                if (options.data && (( typeof options.data === "object" && Object.keys(options.data).length) || ( typeof options.data === "string" && options.data.length)) && !corps) {
+                if (options.data && ((typeof options.data === "object" && Object.keys(options.data).length) || (typeof options.data === "string" && options.data.length)) && !corps) {
                     options.url = Helper.normalyzeUrl(options.url, options.data);
                 }
 
@@ -158,8 +155,7 @@ var XHR = {
                 var hXHR = null;
 
                 // test on env. nodejs or browser
-                if ( typeof window === "undefined") {
-
+                if (typeof window === "undefined") {
                     // Utilisation du module :
                     // cf. http://blog.modulus.io/node.js-tutorial-how-to-use-request-module
 
@@ -174,17 +170,14 @@ var XHR = {
                     options.rejectUnauthorized = false;
 
                     req(options, function (error, response, body) {
-
-                        if (!error && response.statusCode == 200 && body) {
+                        if (!error && response.statusCode === 200 && body) {
                             resolve(body);
                         } else {
                             reject("Errors Occured on Http Request (nodejs) : " + error);
                         }
                     });
                 } else {
-
                     if (window.XMLHttpRequest) {
-
                         logger.trace("XMLHttpRequest");
 
                         hXHR = new XMLHttpRequest();
@@ -224,9 +217,10 @@ var XHR = {
                         }
 
                         /**
-                         * Description
+                         * On Error
                          * FIXME ne se declenche pas !?
                          *
+                         * @param {Object} e - Event
                          * @method onerror
                          * @private
                          */
@@ -236,9 +230,10 @@ var XHR = {
                         };
 
                         /**
-                         * Description
+                         * On Timeout
                          * FIXME ne se declenche pas !?
                          *
+                         * @param {Object} e - Event
                          * @method ontimeout
                          * @private
                          */
@@ -253,9 +248,8 @@ var XHR = {
                          * @private
                          */
                         hXHR.onreadystatechange = function () {
-
-                            if (hXHR.readyState == 4) { // DONE
-                                if (hXHR.status == 200) {
+                            if (hXHR.readyState === 4) { // DONE
+                                if (hXHR.status === 200) {
                                     window.clearTimeout(onTimeOutTrigger);
                                     resolve(hXHR.response);
                                 } else {
@@ -267,14 +261,12 @@ var XHR = {
                                     });
                                 }
                             }
-
                         };
 
                         // gestion du content data
                         var data4xhr = (options.data && corps) ? options.data : null;
 
                         hXHR.send(data4xhr);
-
                     } else if (window.XDomainRequest) {
                         // worked in Internet Explorer 8–10 only !
                         logger.trace("XDomainRequest");
@@ -319,14 +311,13 @@ var XHR = {
                         };
 
                         /**
-                         * Description
+                         * On Load
                          *
                          * @method onload
                          * @private
                          */
                         hXHR.onload = function () {
-
-                            if (hXHR.status == 200) {
+                            if (hXHR.status === 200) {
                                 resolve(hXHR.responseText);
                             } else {
                                 var message = "Errors Occured on Http Request (status : '" + hXHR.status + "' | response : '" + hXHR.responseText + "')";
@@ -341,7 +332,6 @@ var XHR = {
                         var data4xdr = (options.data && corps) ? options.data : null;
 
                         hXHR.send(data4xdr);
-
                     } else {
                         throw new Error("CORS not supported");
                     }
@@ -384,7 +374,7 @@ var XHR = {
                 var xmlDoc;
 
                 // test on env. nodejs or browser
-                if ( typeof window === "undefined" ) {
+                if (typeof window === "undefined") {
                     var DOMParser = require("xmldom").DOMParser; // __xmldom.DOMParser
                     xmlDoc = new DOMParser().parseFromString(response, "text/xml");
                 } else {

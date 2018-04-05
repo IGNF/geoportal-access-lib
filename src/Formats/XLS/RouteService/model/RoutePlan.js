@@ -95,7 +95,6 @@ import Logger from "../../../../Utils/LoggerByDefault";
  * @private
  */
 function RoutePlan (options) {
-
     this.logger = Logger.getLogger("RoutePlan");
     this.logger.trace("[Constructeur RoutePlan ()]");
 
@@ -184,7 +183,6 @@ RoutePlan.prototype = {
      * @returns {String}
      */
     toString : function () {
-
         var template = "";
         template = this.template.routePlan;
 

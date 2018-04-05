@@ -17,7 +17,6 @@ import Logger from "../../../../Utils/LoggerByDefault";
  * @private
  */
 function AltiRequest (options) {
-
     if (!(this instanceof AltiRequest)) {
         throw new TypeError("AltiRequest constructor cannot be called as a function.");
     }
@@ -60,7 +59,6 @@ function AltiRequest (options) {
      * Par defaut, "json".
      */
     this.format = this.options.format || "json";
-
 }
 
 /**
@@ -108,7 +106,6 @@ AltiRequest.prototype = {
      * obj.getPositions (0); // [{lon : "", lat : ""}]
      */
     getPositions : function (pos) {
-
         // FIXME test if not a number !?
         if (!pos) {
             return this.positions;
@@ -131,7 +128,6 @@ AltiRequest.prototype = {
      * obj.addPositions ([{lon : "0.15", lat : "0.15"}, {lon : "1.15", lat : "1.15"}]);
      */
     addPositions : function (lstPosition) {
-
         for (var i = 0; i < lstPosition.length; i++) {
             var o = lstPosition[i];
             if (o.lon && o.lat) {
@@ -180,7 +176,6 @@ AltiRequest.prototype = {
  * @returns {Object[]}
  */
 AltiRequest.prototype.getData = function () {
-
     var map = [];
 
     map.push({

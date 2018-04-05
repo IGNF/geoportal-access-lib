@@ -20,7 +20,6 @@ import RouteParamREST from "./model/RouteParamREST";
  * @private
  */
 function RouteRequestREST (options) {
-
     this.logger = Logger.getLogger("RouteRequestREST");
     this.logger.trace("[Constructeur RouteRequestREST ()]");
 
@@ -60,7 +59,7 @@ RouteRequestREST.prototype = {
      * @example
      * // GET  out : origin=2.416907353809513,48.8465772142297&destination=2.4248037771493673,48.84591353161838
      * // POST out : Not yet supported method POST !
-     * @returns {String}
+     * @returns {String} request
      */
     processRequestString : function () {
         // INFO

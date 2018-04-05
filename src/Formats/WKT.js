@@ -46,25 +46,23 @@ var WKT = {
      * @param {Function} error   - fonction callback
      */
     toJson : function (strWkt, success, error) {
-
         var logger = Logger.getLogger();
 
         var json = null;
 
         try {
-
-            if (! strWkt) {
+            if (!strWkt) {
                 throw new Error("La chaine WKT n'est pas renseignée !");
             }
 
-            if (! success) {
+            if (!success) {
                 /** callback success par defaut */
                 success = function (json) {
                     console.log(json);
                 };
             }
 
-            if (! error) {
+            if (!error) {
                 /** callback error par defaut */
                 error = function (e) {
                     console.log(e);
@@ -118,20 +116,19 @@ var WKT = {
 
             json = JSON.parse(strWkt);
 
-            if (! json) {
+            if (!json) {
                 throw new Error("Le JSON est vide !");
             }
 
-            if (! json.type) {
+            if (!json.type) {
                 throw new Error("Le type de geometrie n'est pas connu !");
             }
 
-            if (! json.coordinates) {
+            if (!json.coordinates) {
                 throw new Error("La liste des points est vide !");
             }
 
             success.call(this, json);
-
         } catch (e) {
             if (e.name === "SyntaxError") {
                 error.call(this, "Erreur de parsing JSON !");

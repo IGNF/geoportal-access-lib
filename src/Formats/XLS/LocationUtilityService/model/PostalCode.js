@@ -1,13 +1,13 @@
 /**
  * implemented into class 'Address' !
- * 
+ *
  * Location type PostalCode
- * 
- * options 
+ *
+ * options
  * options.location.postalCode
- * 
+ *
  * FIXME filtre (Place) ou location ?
- * 
+ *
  * ```
  * XSD
  * PostalCode (balise xsd) :
@@ -17,5 +17,5 @@
  * template : "<PostalCode>__VALUE__</PostalCode>"
  * ```
  * @alias Gp.Formats.XLS.LocationUtilityService.PostalCode
- * 
+ *
  */

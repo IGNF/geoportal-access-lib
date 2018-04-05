@@ -40,7 +40,6 @@
  * @alias Gp.Services.Config.Layer
  */
 function Layer () {
-
     if (!(this instanceof Layer)) {
         throw new TypeError("Layer constructor cannot be called as a function.");
     }
@@ -48,7 +47,6 @@ function Layer () {
     // info : une instance de la classe Layer n'a aucune propriété au départ,.
     // les attributs possibles sont documentés ci-dessus,
     // et seront implémentés au fur et à mesure de la lecture de la réponse de l'autoconf, lorsque l'information est rencontrée.
-
 }
 
 Layer.prototype = {
@@ -166,7 +164,6 @@ Layer.prototype = {
         if (this.wmtsOptions) {
             return this.wmtsOptions.tileMatrixSetLink;
         }
-        return;
     },
 
     /**
@@ -303,7 +300,7 @@ Layer.prototype = {
         if (this.isAggregate) {
             return this.aggregatedLayers;
         } else {
-            return;
+
         }
     }
 

@@ -36,7 +36,6 @@ var ReverseGeocodeRequestFactory = {
      * @returns {String} request
      */
     build : function (options) {
-
         // logger
         var logger = Logger.getLogger("ReverseGeocodeRequestFactory");
         logger.trace(["ReverseGeocodeRequestFactory::build()"]);
@@ -66,7 +65,7 @@ var ReverseGeocodeRequestFactory = {
 
         // en mode GET, la requête est encodée
         // et le param. 'qxml' est ajouté
-        if (settings.httpMethod == "GET") {
+        if (settings.httpMethod === "GET") {
             var myRequest = "qxml=" +
                 encodeURIComponent(request)
                     .replace(/-/g, "%2D")

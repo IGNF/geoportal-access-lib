@@ -17,7 +17,6 @@
  * @alias Gp.Services.GetConfigResponse
  */
 function AutoConfResponse () {
-
     if (!(this instanceof AutoConfResponse)) {
         throw new TypeError("AutoConfResponse constructor cannot be called as a function.");
     }
@@ -37,7 +36,6 @@ function AutoConfResponse () {
     this.tileMatrixSets = {};
 
     this.services = {};
-
 }
 
 AutoConfResponse.prototype = {
@@ -83,7 +81,7 @@ AutoConfResponse.prototype = {
      */
     getLayersConf : function (apiKey) {
         var layers = {};
-        var layersIdArray = this.getLayersId (apiKey);
+        var layersIdArray = this.getLayersId(apiKey);
         if (layersIdArray) {
             for (var i = 0; i < layersIdArray.length; i++) {
                 var lyrId = layersIdArray[i];

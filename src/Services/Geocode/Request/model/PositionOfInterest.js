@@ -10,7 +10,6 @@ import GeocodeLocation from "../GeocodeLocation";
  * @private
  */
 function PositionOfInterest () {
-
     if (!(this instanceof PositionOfInterest)) {
         throw new TypeError("PositionOfInterest constructor cannot be called as a function.");
     }
@@ -41,7 +40,6 @@ function PositionOfInterest () {
     this.attributesList = ["bbox", "importance", "nature", "territory", "commune", "department", "insee", "municipality"];
 
     this.serviceAttributes = ["bbox", "Importance", "Nature", "Territoire", "Commune", "Departement", "INSEE", "Municipality"];
-
 }
 
 /**

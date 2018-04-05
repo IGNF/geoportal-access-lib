@@ -35,7 +35,6 @@ var AltiRequestFactory = {
      *
      */
     build : function (options) {
-
         // logger
         var logger = Logger.getLogger("AltiRequestFactory");
         logger.trace(["AltiRequestFactory::build()"]);
@@ -70,8 +69,8 @@ var AltiRequestFactory = {
         settings.param.zonly = options.zonly;
 
         // gestion des callback
-        var bOnError = (options.onError !== null && typeof options.onError === "function") ? true : false;
-        var bOnSuccess = (options.onSuccess !== null && typeof options.onSuccess === "function") ? true : false;
+        var bOnError = !!((options.onError !== null && typeof options.onError === "function"));
+        var bOnSuccess = !!((options.onSuccess !== null && typeof options.onSuccess === "function"));
 
         var message = null;
         switch (options.api) {

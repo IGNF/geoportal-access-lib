@@ -87,7 +87,6 @@ import DirectGeocodeResponseFactory from "./Response/DirectGeocodeResponseFactor
  * @private
  */
 function Geocode (options) {
-
     if (!(this instanceof Geocode)) {
         throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "Geocode"));
     }
@@ -109,9 +108,9 @@ function Geocode (options) {
     }
 
     // FIXME ECMAScript 5 support
-    if ( typeof options.location === "object" && Object.keys(options.location).length === 0) {
+    if (typeof options.location === "object" && Object.keys(options.location).length === 0) {
         throw new Error(_.getMessage("PARAM_EMPTY", "location"));
-    } else if ( typeof options.location === "string" && options.location.length === 0) {
+    } else if (typeof options.location === "string" && options.location.length === 0) {
         throw new Error(_.getMessage("PARAM_EMPTY", "location"));
     }
 
@@ -181,7 +180,6 @@ Geocode.prototype.constructor = Geocode;
  * @param {Function} success - callback
  */
 Geocode.prototype.buildRequest = function (error, success) {
-
     var options = {
         httpMethod : this.options.httpMethod,
         // options specifiques du service
@@ -195,11 +193,9 @@ Geocode.prototype.buildRequest = function (error, success) {
     this.request = DirectGeocodeRequestFactory.build(options);
 
     // on teste si la requete a bien été construite !
-    if (!this.request) {
-        error.call(this, new ErrorService(_.getMessage("SERVICE_REQUEST_BUILD")));
-    } else {
-        success.call(this, this.request);
-    }
+    (!this.request)
+        ? error.call(this, new ErrorService(_.getMessage("SERVICE_REQUEST_BUILD")))
+        : success.call(this, this.request);
 };
 
 /**
@@ -209,7 +205,6 @@ Geocode.prototype.buildRequest = function (error, success) {
  * @param {Function} success - callback
  */
 Geocode.prototype.analyzeResponse = function (error, success) {
-
     /* INFO :
          Etape 1 : Création de la requête
             -> Appel du format OpenLS pour créer une requête à partir des paramètres (par exemple)
@@ -221,17 +216,16 @@ Geocode.prototype.analyzeResponse = function (error, success) {
             -> récupération de la réponse xml dans la fonction onSuccess () (this.response)
             -> si code HTTP 200 et pas de message d'erreur : etape 3
             -> si code HTTP != 200 : lancement de la fonction de callback onFailure avec le message d'erreur
-         Etape 3 : Analyse de la réponse xml et construction du JSON (si rawResponse == false )
+         Etape 3 : Analyse de la réponse xml et construction du JSON (si rawResponse === false )
             -> appel du parser pour récupérer le xmlDocument
             -> appel du reader OpenLS pour lire les éléments et récupérer l'objet JSON
                correspondant au type de géocodage (défini dans les specs)
          Etape 4 : Lancement de la fonction de callback onSuccess avec la réponse :
-            -> xmlResponse (si rawResponse == true)
+            -> xmlResponse (si rawResponse === true)
             -> ou geocodedLocations
     */
 
     if (this.response) {
-
         var options = {
             response : this.response,
             rawResponse : this.options.rawResponse,
@@ -241,11 +235,9 @@ Geocode.prototype.analyzeResponse = function (error, success) {
         };
 
         DirectGeocodeResponseFactory.build(options);
-
     } else {
         error.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
     }
-
 };
 
 export default Geocode;

@@ -8,7 +8,6 @@
  * @private
  */
 function GeocodeLocation () {
-
     if (!(this instanceof GeocodeLocation)) {
         throw new TypeError("GeocodeLocation constructor cannot be called as a function.");
     }
@@ -32,7 +31,6 @@ function GeocodeLocation () {
      * @type {String[]}
      */
     this.serviceAttributes = [];
-
 }
 
 /**

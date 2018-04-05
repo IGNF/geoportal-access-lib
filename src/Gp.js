@@ -30,7 +30,7 @@ import Error from "./Exceptions/ErrorService";
 import Helper from "./Utils/Helper";
 
 var Gp = {
-    servicesVersion : "__GPVERSION__" ,
+    servicesVersion : "__GPVERSION__",
     servicesDate : "__GPDATE__",
     /**
      * Methode pour rajouter une classe / objet au namespace global.
@@ -39,6 +39,7 @@ var Gp = {
      * @param {String} strNS - nom sous lequel on veut présenter la
      *        classe / objet (Gp."strNS").
      * @param {Object} value - la classe / objet à rajouter au NS global.
+     * @returns {Object} this
      */
     extend : function (strNS, value) {
         var parts = strNS.split(".");
@@ -49,7 +50,7 @@ var Gp = {
 
         for (var i = 0; i < pl; i++) {
             // create a property if it doesn't exist
-            if ( typeof parent[parts[i]] === "undefined") {
+            if (typeof parent[parts[i]] === "undefined") {
                 parent[parts[i]] = {};
             }
 

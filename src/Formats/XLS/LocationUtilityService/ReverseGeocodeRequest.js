@@ -45,7 +45,6 @@ import Preference from "./model/Preference";
  * @private
  */
 function ReverseGeocodeRequest (options) {
-
     this.logger = Logger.getLogger();
     this.logger.trace("[Constructeur ReverseGeocodeRequest ()]");
 
@@ -114,7 +113,6 @@ ReverseGeocodeRequest.prototype = {
      * @param {Object} oPosition - Position
      */
     addPosition : function (oPosition) {
-
         if (oPosition instanceof Position) {
             this.oPosition = oPosition;
         }
@@ -127,7 +125,6 @@ ReverseGeocodeRequest.prototype = {
      * @param {Object} oPreference - Preference
      */
     addPreferences : function (oPreference) {
-
         if (oPreference instanceof Preference) {
             this.oPreference = oPreference;
         }
@@ -137,14 +134,12 @@ ReverseGeocodeRequest.prototype = {
      * toString
      */
     toString : function () {
-
         var template = "";
         template = this.template;
 
         // si on a déjà un objet Preference instancié,
         // sinon, on le fabrique via les options
         if (!this.oPreference) {
-
             this.oPreference = new Preference(this.options.filterOptions.type || ["StreetAddress"]);
             if (!this.oPreference) {
                 throw new Error("Les preferences ne sont pas definies !?");
@@ -169,7 +164,6 @@ ReverseGeocodeRequest.prototype = {
             if (!this.oPosition) {
                 throw new Error("La position et ses filtres ne sont pas definis !?");
             }
-
         }
         template = template.replace(/__POSITION__/g, this.oPosition.toString());
         template = template.replace(/__RETURNFREEFORM__/g, (this.options.returnFreeForm) ? "true" : "false");

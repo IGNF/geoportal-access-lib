@@ -10,7 +10,6 @@
  */
 
 function Thematic () {
-
     if (!(this instanceof Thematic)) {
         throw new TypeError("Thematic constructor cannot be called as a function.");
     }
@@ -18,7 +17,6 @@ function Thematic () {
     this.inspire = null;
 
     this.name = null;
-
 }
 
 Thematic.prototype = {

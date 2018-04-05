@@ -35,7 +35,6 @@ var AltiResponseFactory = {
      *
      */
     build : function (options) {
-
         // logger
         var logger = Logger.getLogger("AltiResponseFactory");
         logger.trace(["AltiResponseFactory::build()"]);
@@ -48,17 +47,15 @@ var AltiResponseFactory = {
                 data = options.response;
             } else {
                 switch (options.outputFormat) {
-
                     case "xml":
                         logger.trace("analyze response : xml");
 
                         try {
-
                             var p = new XML({
                                 reader : AltiResponseReader
                             });
 
-                            if ( typeof options.response === "string") {
+                            if (typeof options.response === "string") {
                                 p.setXMLString(options.response);
                             } else {
                                 p.setXMLDoc(options.response);
@@ -69,9 +66,7 @@ var AltiResponseFactory = {
                             if (!data) {
                                 throw new Error(MRes.getMessage("SERVICE_RESPONSE_EXCEPTION_2"));
                             }
-
                         } catch (e) {
-
                             var message = e.message;
                             options.onError.call(options.scope, new ErrorService({
                                 message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", message),
@@ -88,7 +83,7 @@ var AltiResponseFactory = {
                         logger.trace("analyze response : ", typeof options.response);
 
                         var JSONResponse;
-                        if ( typeof options.response === "string") {
+                        if (typeof options.response === "string") {
                             JSONResponse = JSON.parse(options.response);
                         } else {
                             JSONResponse = options.response;
@@ -114,7 +109,7 @@ var AltiResponseFactory = {
                                 for (var i = 0; i < elevations.length; i++) {
                                     elevation = new Elevation();
 
-                                    if ( typeof elevations[i] === "object") {
+                                    if (typeof elevations[i] === "object") {
                                         // elevations[i] est un objet elevation
                                         if (elevations[i].lon) {
                                             elevation.lon = elevations[i].lon;
@@ -128,7 +123,7 @@ var AltiResponseFactory = {
                                         if (elevations[i].acc) {
                                             elevation.acc = elevations[i].acc;
                                         }
-                                    } else if ( typeof elevations[i] === "number") {
+                                    } else if (typeof elevations[i] === "number") {
                                         // elevations[i] est un nombre, dans le cas de zonly=true notamment
                                         elevation.z = elevations[i];
                                     }
@@ -184,7 +179,6 @@ var AltiResponseFactory = {
         }
 
         options.onSuccess.call(options.scope, data);
-        return;
     }
 };
 

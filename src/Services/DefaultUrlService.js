@@ -34,7 +34,7 @@
 // -> https://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/ols/apis/completion
 
 // constantes internes
-var ISBROWSER = typeof window !== "undefined" ? true : false;
+var ISBROWSER = typeof window !== "undefined" ? 1 : 0;
 var HOSTNAME = "wxs.ign.fr";
 
 /**
@@ -48,13 +48,16 @@ var DefaultUrlService = {
     /** if set true, require the use of https protocol (except browser) */
     ssl : false,
 
-    /** base url of services (ssl protocol management) */
+    /**
+    * base url of services (ssl protocol management)
+    * @param {String} key - key
+    * @param {String} path - path
+    * @returns {String} url
+    */
     url : function (key, path) {
         // en mode browser, c'est le protocole du navigateur,
         // sinon, il est fixé par l'option 'ssl' (par défaut à false, cad en http)
-        var _protocol = (ISBROWSER) ?
-            (location && location.protocol && location.protocol.indexOf("https:") === 0 ? "https://" : "http://") :
-            (DefaultUrlService.ssl ? "https://" : "http://");
+        var _protocol = (ISBROWSER) ? (location && location.protocol && location.protocol.indexOf("https:") === 0 ? "https://" : "http://") : (DefaultUrlService.ssl ? "https://" : "http://");
         return _protocol + HOSTNAME.concat("/", key, path);
     },
 
@@ -74,7 +77,11 @@ var DefaultUrlService = {
             // other
             wps : "/alti/wps"
         },
-        /** url */
+        /**
+        * url
+        * @param {String} key - key
+        * @returns {String} url
+        */
         url : function (key) {
             return {
                 // rest
@@ -98,7 +105,11 @@ var DefaultUrlService = {
             "iso-json" : "/isochrone/isochrone.json", // rest (geoconcept)
             "iso-xml" : "/isochrone/isochrone.xml" // rest (geoconcept)
         },
-        /** url */
+        /**
+        * url
+        * @param {String} key - key
+        * @returns {String} url
+        */
         url : function (key) {
             return {
                 "iso-json" : DefaultUrlService.url(key, this._key["iso-json"]),
@@ -114,7 +125,11 @@ var DefaultUrlService = {
      */
     AutoComplete : {
         _key : "/ols/apis/completion",
-        /** url */
+        /**
+        * url
+        * @param {String} key - key
+        * @returns {String} url
+        */
         url : function (key) {
             return DefaultUrlService.url(key, this._key);
         }
@@ -127,7 +142,11 @@ var DefaultUrlService = {
      */
     ReverseGeocode : {
         _key : "/geoportail/ols",
-        /** url */
+        /**
+        * url
+        * @param {String} key - key
+        * @returns {String} url
+        */
         url : function (key) {
             return DefaultUrlService.url(key, this._key);
         }
@@ -144,7 +163,11 @@ var DefaultUrlService = {
             apiKeys : "/autoconf?keys=%KEYS%",
             aggregate : "/autoconf/id/"
         },
-        /** url */
+        /**
+        * url
+        * @param {String} key - key
+        * @returns {String} url
+        */
         url : function (key) {
             var keys = "";
             if (Array.isArray(key) && key.length > 0) {
@@ -168,7 +191,11 @@ var DefaultUrlService = {
      */
     Geocode : {
         _key : "/geoportail/ols",
-        /** url */
+        /**
+        * url
+        * @param {String} key - key
+        * @returns {String} url
+        */
         url : function (key) {
             return DefaultUrlService.url(key, this._key);
         }
@@ -185,7 +212,11 @@ var DefaultUrlService = {
             "route-json" : "/itineraire/rest/route.json", // rest (geoconcept)
             "route-xml" : "/itineraire/rest/route.xml" // rest (geoconcept)
         },
-        /** url */
+        /**
+        * url
+        * @param {String} key - key
+        * @returns {String} url
+        */
         url : function (key) {
             return {
                 ols : DefaultUrlService.url(key, this._key["ols"]),

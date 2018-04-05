@@ -131,7 +131,7 @@ RouteResponseRESTReader.READERS = {
             for (var i = 0; i < children.length; i++) {
                 child = children[i];
 
-                if (child.nodeType === 1) { // 1 == node.ELEMENT_NODE
+                if (child.nodeType === 1) { // 1 === node.ELEMENT_NODE
                     childName = child.localName || child.baseName || child.nodeName;
 
                     if (childName === "durationSeconds") {
@@ -151,7 +151,7 @@ RouteResponseRESTReader.READERS = {
         if (routeInstruction.code) {
             switch (routeInstruction.code) {
                 case "F":
-                    if (name != "Valeur non renseignée") {
+                    if (name !== "Valeur non renseignée") {
                         routeInstruction.instruction = "Tout droit " + name;
                     } else {
                         routeInstruction.instruction = "Continuer tout droit ";
@@ -202,7 +202,6 @@ RouteResponseRESTReader.READERS = {
 
 /** TODO : jsdoc block */
 RouteResponseRESTReader.read = function (root) {
-
     var response;
 
     if (root.nodeName === "routeResult") {
@@ -211,7 +210,6 @@ RouteResponseRESTReader.read = function (root) {
     } else {
         throw new Error("Erreur lors de la lecture de la réponse : elle n'est pas au format attendu.");
     }
-
 };
 
 /**
@@ -223,14 +221,13 @@ RouteResponseRESTReader.read = function (root) {
  * @param {DOMElement} node - a DOM node
  * @return {String} value - valeur du firstChild du noeud en entrée, ou chaîne vide.
  */
-function __getChildValue(node) {
-
+function __getChildValue (node) {
     var textNode;
     var value = "";
 
     if (node.hasChildNodes()) {
         textNode = node.firstChild;
-        if (textNode && textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             value = textNode.nodeValue;
         }
     }
@@ -247,9 +244,7 @@ function __getChildValue(node) {
  * @param {Array|Object} [data] - an object to be filled with node data
  */
 function __getChildNodes (node, data) {
-
     if (node.hasChildNodes()) {
-
         var children = node.childNodes;
         var child;
         var childName;
@@ -257,7 +252,7 @@ function __getChildNodes (node, data) {
         for (var i = 0; i < children.length; i++) {
             child = children[i];
 
-            if (child.nodeType === 1) { // 1 == node.ELEMENT_NODE
+            if (child.nodeType === 1) { // 1 === node.ELEMENT_NODE
                 childName = child.localName || child.baseName || child.nodeName;
 
                 if (RouteResponseRESTReader.READERS[childName]) {

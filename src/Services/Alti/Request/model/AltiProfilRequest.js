@@ -14,7 +14,6 @@ import AltiRequest from "./AltiRequest";
  * @private
  */
 function AltiProfilRequest (options) {
-
     if (!(this instanceof AltiProfilRequest)) {
         throw new TypeError("AltiProfilRequest constructor cannot be called as a function.");
     }
@@ -35,7 +34,6 @@ function AltiProfilRequest (options) {
      * Par defaut, 3
      */
     this.sampling = this.options.sampling || 3; // test des options héritées !
-
 }
 
 /**
@@ -70,7 +68,6 @@ AltiProfilRequest.prototype.constructor = AltiProfilRequest;
  * @returns {Object[]}
  */
 AltiProfilRequest.prototype.getData = function () {
-
     // par glop..., appel de AltiRequest::getData () !
     var map = [];
     map.push({

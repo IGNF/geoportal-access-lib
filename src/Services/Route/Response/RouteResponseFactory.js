@@ -37,7 +37,6 @@ var RouteResponseFactory = {
      *
      */
     build : function (options) {
-
         // logger
         var logger = Logger.getLogger("RouteResponseFactory");
         logger.trace("RouteResponseFactory::build()");
@@ -50,7 +49,6 @@ var RouteResponseFactory = {
                 data = options.response;
             } else {
                 switch (options.outputFormat) {
-
                     case "xml":
                         logger.trace("analyze response : xml");
 
@@ -58,13 +56,12 @@ var RouteResponseFactory = {
                         var routeReader = options.api === "REST" ? RouteResponseRESTReader : RouteResponseOLSReader;
 
                         try {
-
                             var p = new XML({
                                 reader : routeReader
                             });
 
                             // FIXME : mode XHR ne retourne que des string ? JSONP aussi à ce niveau ?
-                            if ( typeof options.response === "string") {
+                            if (typeof options.response === "string") {
                                 p.setXMLString(options.response);
                             } else {
                                 p.setXMLDoc(options.response);
@@ -75,7 +72,6 @@ var RouteResponseFactory = {
                             if (!data) {
                                 throw new ErrorService(MRes.getMessage("SERVICE_RESPONSE_FORMAT", "xml"));
                             }
-
                         } catch (e) {
                             options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_ANALYSE", options.response)));
                             return;
@@ -87,7 +83,7 @@ var RouteResponseFactory = {
                         logger.trace("analyze response : json");
 
                         var JSONResponse;
-                        if ( typeof options.response === "string") {
+                        if (typeof options.response === "string") {
                             JSONResponse = JSON.parse(options.response);
                         } else {
                             JSONResponse = options.response;
@@ -123,11 +119,19 @@ var RouteResponseFactory = {
                                 data.bbox.right = parseFloat(coords[2]);
                                 data.bbox.top = parseFloat(coords[3]);
                             }
-                            /** callback success */
+                            /**
+                            * callback success
+                            * @param {Object} json - json
+                            * @private
+                            */
                             var onWKTSuccess = function (json) {
                                 data.routeGeometry = json;
                             };
-                            /** callback failed */
+                            /**
+                            * callback failed
+                            * @param {Object} e - event
+                            * @private
+                            */
                             var onWKTError = function (e) {
                                 console.log(e);
                                 options.onError.call(options.scope, new ErrorService(MRes.getMessage("PARAM_FORMAT", ["geometryWkt"])));
@@ -199,7 +203,7 @@ var RouteResponseFactory = {
                                     */
 
                                     // on ne souhaite pas de ce type de valeur...
-                                    if (step.name == "Valeur non renseignée") {
+                                    if (step.name === "Valeur non renseignée") {
                                         step.name = "";
                                     }
 
@@ -272,7 +276,6 @@ var RouteResponseFactory = {
         }
 
         options.onSuccess.call(options.scope, data);
-        return;
     }
 };
 

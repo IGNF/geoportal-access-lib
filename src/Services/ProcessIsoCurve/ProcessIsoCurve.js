@@ -92,7 +92,6 @@ import ProcessIsoCurveResponseFactory from "./Response/ProcessIsoCurveResponseFa
  */
 
 function ProcessIsoCurve (options) {
-
     if (!(this instanceof ProcessIsoCurve)) {
         throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "ProcessIsoCurve"));
     }
@@ -114,11 +113,11 @@ function ProcessIsoCurve (options) {
     }
 
     // on lance une exception afin d'eviter au service de le faire...
-    if (options.position.x == null) {
+    if (options.position.x === null) {
         throw new Error(_.getMessage("PARAM_MISSING", "position.x"));
     }
 
-    if (options.position.y == null) {
+    if (options.position.y === null) {
         throw new Error(_.getMessage("PARAM_MISSING", "position.y"));
     }
 
@@ -158,12 +157,11 @@ function ProcessIsoCurve (options) {
     this.options.srs = options.srs || "EPSG:4326";
 
     // on passe l'option outputFormat en minuscules afin d'éviter des exceptions.
-    this.options.outputFormat = ( typeof options.outputFormat == "string") ? options.outputFormat.toLowerCase() : "json";
+    this.options.outputFormat = (typeof options.outputFormat === "string") ? options.outputFormat.toLowerCase() : "json";
 
     // gestion de l'url du service par defaut
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
     if (!this.options.serverUrl) {
-
         var lstUrlByDefault = DefaultUrlService.ProcessIsoCurve.url(this.options.apiKey);
 
         var urlFound = lstUrlByDefault["iso" + "-" + this.options.outputFormat];
@@ -213,16 +211,13 @@ ProcessIsoCurve.prototype.constructor = ProcessIsoCurve;
  * @param {Function} success - callback
  */
 ProcessIsoCurve.prototype.buildRequest = function (error, success) {
-
     try {
-
         var oIsoCurve = new ProcessIsoCurveRequest(this.options);
         if (!oIsoCurve.processRequestString()) {
             throw new Error(_.getMessage("SERVICE_REQUEST_BUILD"));
         }
 
         this.request = oIsoCurve.requestString;
-
     } catch (e) {
         error.call(this, new ErrorService(e.message));
         return;
@@ -239,9 +234,7 @@ ProcessIsoCurve.prototype.buildRequest = function (error, success) {
  * @param {Function} onSuccess - callback de succès de l'analyse de la réponse
  */
 ProcessIsoCurve.prototype.analyzeResponse = function (onError, onSuccess) {
-
     if (this.response) {
-
         var options = {
             response : this.response,
             outputFormat : this.options.outputFormat,
@@ -252,9 +245,7 @@ ProcessIsoCurve.prototype.analyzeResponse = function (onError, onSuccess) {
         };
 
         ProcessIsoCurveResponseFactory.build(options);
-
     } else {
-
         onError.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
     }
 };

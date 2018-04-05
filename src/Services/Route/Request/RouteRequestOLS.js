@@ -27,7 +27,6 @@ var RouteRequestOLS = {
      * @returns {String} request
      */
     build : function (options) {
-
         // logger
         var logger = Logger.getLogger("RouteRequestOLS");
         logger.trace(["RouteRequestOLS::build()"]);
@@ -64,7 +63,7 @@ var RouteRequestOLS = {
 
         // en mode GET, la requête est encodée
         // et le param. 'qxml' est ajouté
-        if (options.httpMethod == "GET") {
+        if (options.httpMethod === "GET") {
             var myRequest = "qxml=" +
                 encodeURIComponent(request)
                     .replace(/-/g, "%2D")

@@ -8,7 +8,7 @@
  * @todo La reponse JSON peut encapsuler un XML !
  * @private
  */
-import Logger from "../../../Utils/LoggerByDefault";
+
 import MRes from "../../../Utils/MessagesResources";
 import ErrorService from "../../../Exceptions/ErrorService";
 import XML from "../../../Formats/XML";
@@ -34,7 +34,6 @@ var ReverseGeocodeReponseFactory = {
      *
      */
     build : function (options) {
-
         // data de type ReverseGeocodeResponse
         var data = null;
 
@@ -42,14 +41,12 @@ var ReverseGeocodeReponseFactory = {
             if (options.rawResponse) {
                 data = options.response;
             } else {
-
                 try {
-
                     var p = new XML({
                         reader : ReverseGeocodeResponseReader
                     });
 
-                    if ( typeof options.response === "string") {
+                    if (typeof options.response === "string") {
                         p.setXMLString(options.response);
                     } else {
                         p.setXMLDoc(options.response);
@@ -98,7 +95,6 @@ var ReverseGeocodeReponseFactory = {
                         }
                     }
                 }
-
             }
         } else {
             options.onError.call(options.scope, new ErrorService({
@@ -110,7 +106,6 @@ var ReverseGeocodeReponseFactory = {
         }
 
         options.onSuccess.call(options.scope, data);
-        return;
     }
 };
 

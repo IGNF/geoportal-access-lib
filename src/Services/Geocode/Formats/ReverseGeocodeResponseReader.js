@@ -78,24 +78,22 @@ ReverseGeocodeResponseReader.READERS = {
 
         /** TODO : jsdoc block */
         XLS : function (root) {
-
-            var reverseGeocodeResponse = new ReverseGeocodeResponse ();
+            var reverseGeocodeResponse = new ReverseGeocodeResponse();
 
             // vérification de la version du service, et des namespaces de l'en-tête
-            __checkServiceAttributes (root);
+            __checkServiceAttributes(root);
 
             // puis lancement de la lecture de l'ensemble des noeuds, en bouclant sur les childNodes
-            __getChildNodes (root, reverseGeocodeResponse);
+            __getChildNodes(root, reverseGeocodeResponse);
 
             return reverseGeocodeResponse;
         },
 
         /** TODO : jsdoc block */
         ReverseGeocodedLocation : function (node, reverseGeocodeResponse) {
+            var reverseGeocodedLocation = new ReverseGeocodedLocation();
 
-            var reverseGeocodedLocation = new ReverseGeocodedLocation ();
-
-            __getChildNodes (node, reverseGeocodedLocation);
+            __getChildNodes(node, reverseGeocodedLocation);
 
             // Ajout du résultat au tableau locations de reverseGeocodeResponse
             if (reverseGeocodeResponse && Array.isArray(reverseGeocodeResponse.locations)) {
@@ -105,24 +103,24 @@ ReverseGeocodeResponseReader.READERS = {
 
         /** TODO : jsdoc block */
         Address : function (node, reverseGeocodedLocation) {
-            var countrycode = node.getAttribute ("countryCode");
+            var countrycode = node.getAttribute("countryCode");
             if (reverseGeocodedLocation && countrycode) {
                 reverseGeocodedLocation.type = countrycode;
             }
             // on va récupérer les autres informations (StreetAddress, place, postalCode...)
-            __getChildNodes (node, reverseGeocodedLocation);
+            __getChildNodes(node, reverseGeocodedLocation);
         },
 
         /** TODO : jsdoc block */
         Building : function (node, reverseGeocodedLocation) {
-            var num = node.getAttribute ("number");
+            var num = node.getAttribute("number");
             if (reverseGeocodedLocation && reverseGeocodedLocation.hasOwnProperty("placeAttributes")) {
                 if (num) {
                     reverseGeocodedLocation.placeAttributes.number = num;
-                } else if (node.getAttribute ("buildingName")) {
-                    reverseGeocodedLocation.placeAttributes.number = node.getAttribute ("buildingName");
-                } else if (node.getAttribute ("subdivision")) {
-                    reverseGeocodedLocation.placeAttributes.number = node.getAttribute ("subdivision");
+                } else if (node.getAttribute("buildingName")) {
+                    reverseGeocodedLocation.placeAttributes.number = node.getAttribute("buildingName");
+                } else if (node.getAttribute("subdivision")) {
+                    reverseGeocodedLocation.placeAttributes.number = node.getAttribute("subdivision");
                 }
             }
         },
@@ -141,14 +139,12 @@ ReverseGeocodeResponseReader.READERS = {
 
         /** TODO : jsdoc block */
         Place : function (node, reverseGeocodedLocation) {
-            var placeType = node.getAttribute ("type");
+            var placeType = node.getAttribute("type");
             var placeName = __getChildValue(node);
 
             if (reverseGeocodedLocation && reverseGeocodedLocation.hasOwnProperty("placeAttributes")) {
-
                 if (placeType === "Municipality") {
                     reverseGeocodedLocation.placeAttributes.municipality = placeName;
-
                 } else if (placeType === "Bbox") {
                     var values = placeName.split(";");
                     if (values.length === 4) {
@@ -159,63 +155,44 @@ ReverseGeocodeResponseReader.READERS = {
                             bottom : parseFloat(values[3])
                         };
                     }
-
                 } else if (placeType === "Commune") {
                     reverseGeocodedLocation.placeAttributes.commune = placeName;
-
                 } else if (placeType === "Departement") {
                     reverseGeocodedLocation.placeAttributes.department = placeName;
-
                 } else if (placeType === "INSEE") {
                     reverseGeocodedLocation.placeAttributes.insee = placeName;
-
                 } else if (placeType === "Qualite") {
                     reverseGeocodedLocation.placeAttributes.quality = placeName;
-
                 } else if (placeType === "Territoire") {
                     reverseGeocodedLocation.placeAttributes.territory = placeName;
-
                 } else if (placeType === "ID") {
                     reverseGeocodedLocation.placeAttributes.ID = placeName;
-
                 } else if (placeType === "ID_TR") {
                     reverseGeocodedLocation.placeAttributes.IDTR = placeName;
-
                 } else if (placeType === "Importance") {
-                    reverseGeocodedLocation.placeAttributes.importance = parseInt (placeName, 10);
-
+                    reverseGeocodedLocation.placeAttributes.importance = parseInt(placeName, 10);
                 } else if (placeType === "Nature") {
                     reverseGeocodedLocation.placeAttributes.nature = placeName;
-
                 } else if (placeType === "Numero") {
                     reverseGeocodedLocation.placeAttributes.number = placeName;
-
                 } else if (placeType === "Feuille") {
                     reverseGeocodedLocation.placeAttributes.sheet = placeName;
-
                 } else if (placeType === "Section") {
                     reverseGeocodedLocation.placeAttributes.section = placeName;
-
                 } else if (placeType === "CommuneAbsorbee") {
                     reverseGeocodedLocation.placeAttributes.absorbedCity = placeName;
-
                 } else if (placeType === "Arrondissement") {
                     if (placeName) {
                         reverseGeocodedLocation.placeAttributes.arrondissement = placeName;
                     }
-
                 } else if (placeType === "Type") {
                     reverseGeocodedLocation.placeAttributes.origin = placeName;
-
                 } else if (placeType === "Prefecture") {
                     reverseGeocodedLocation.placeAttributes.prefecture = placeName;
-
                 } else if (placeType === "InseeRegion") {
                     reverseGeocodedLocation.placeAttributes.inseeRegion = placeName;
-
                 } else if (placeType === "InseeDepartment") {
                     reverseGeocodedLocation.placeAttributes.inseeDepartment = placeName;
-
                 }
             }
         },
@@ -230,18 +207,18 @@ ReverseGeocodeResponseReader.READERS = {
         /** TODO : jsdoc block */
         SearchCentreDistance : function (node, reverseGeocodedLocation) {
             if (reverseGeocodedLocation) {
-                reverseGeocodedLocation.searchCenterDistance = parseFloat(node.getAttribute ("value"));
+                reverseGeocodedLocation.searchCenterDistance = parseFloat(node.getAttribute("value"));
             }
         },
 
         /** TODO : jsdoc block */
         Error : function (node) {
             // <Error message="For input string : &quot;2,45&quot;" errorCode="InternalServerError"/>
-            var srvMess = node.getAttribute ("message");
-            var errorCode = node.getAttribute ("errorCode");
+            var srvMess = node.getAttribute("message");
+            var errorCode = node.getAttribute("errorCode");
             var message = MR.getMessage("SERVICE_RESPONSE_EXCEPTION",
                 "(" + errorCode + ") : " + srvMess);
-            throw new ErrSrv ({
+            throw new ErrSrv({
                 message : message,
                 type : ErrSrv.TYPE_SRVERR
             });
@@ -292,14 +269,14 @@ ReverseGeocodeResponseReader.READERS = {
         var exceptionReport = {};
 
         // get exception code
-        var exceptionCode = node.getAttribute ("exceptionCode");
+        var exceptionCode = node.getAttribute("exceptionCode");
         if (exceptionCode) {
             exceptionReport.exceptionCode = exceptionCode;
         }
 
         // get exception message
         var textNode = node.firstChild;
-        if (textNode && textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             exceptionReport.exception = textNode.nodeValue;
         }
 
@@ -320,7 +297,6 @@ ReverseGeocodeResponseReader.READERS = {
  * @memberof ReverseGeocodeResponseReader
  */
 ReverseGeocodeResponseReader.read = function (root) {
-
     if (root.nodeName === "XLS") {
         var nsPrefix = root.prefix;
         if (!nsPrefix) {
@@ -328,11 +304,9 @@ ReverseGeocodeResponseReader.read = function (root) {
         }
         var geocodeResponse = ReverseGeocodeResponseReader.READERS[nsPrefix][root.nodeName](root);
         return geocodeResponse;
-
     } else if (root.nodeName === "ExceptionReport") {
         var exceptionReport = ReverseGeocodeResponseReader.READERS[root.nodeName](root);
         return exceptionReport;
-
     } else {
         throw new Error("Erreur lors de la lecture de la réponse : elle n'est pas au format attendu.");
     }
@@ -369,9 +343,7 @@ function __getAttributes (node) {
  * @param {Array|Object} [data] - an object to be filled with node data
  */
 function __getChildNodes (node, data) {
-
     if (node.hasChildNodes()) {
-
         var children = node.childNodes;
         var child;
         var childName;
@@ -380,15 +352,15 @@ function __getChildNodes (node, data) {
         for (var i = 0; i < children.length; i++) {
             child = children[i];
 
-            if (child.nodeType === 1) { // 1 == node.ELEMENT_NODE
+            if (child.nodeType === 1) { // 1 === node.ELEMENT_NODE
                 childName = child.localName || child.baseName || child.nodeName;
                 childPrefix = child.prefix || ReverseGeocodeResponseReader.DEFAULTPREFIX;
 
                 if (ReverseGeocodeResponseReader.READERS[childPrefix][childName]) {
                     var reader = ReverseGeocodeResponseReader.READERS[childPrefix][childName];
-                    reader (child, data);
+                    reader(child, data);
                 } else {
-                    __getChildNodes (child, data);
+                    __getChildNodes(child, data);
                 }
             }
         }
@@ -404,14 +376,13 @@ function __getChildNodes (node, data) {
  * @param {DOMElement} node - a DOM node
  * @return {String} value - valeur du firstChild du noeud en entrée, ou chaîne vide.
  */
-function __getChildValue(node) {
-
+function __getChildValue (node) {
     var textNode;
     var value = "";
 
     if (node.hasChildNodes()) {
         textNode = node.firstChild;
-        if (textNode.nodeType === 3) { // 3 == node.TEXT_NODE
+        if (textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             value = textNode.nodeValue;
         }
     }
@@ -428,14 +399,11 @@ function __getChildValue(node) {
  * @param {DOMElement} XLSNode - a DOM node, corresponding to XLS first tag.
  */
 function __checkServiceAttributes (XLSNode) {
-
     if (XLSNode.attributes.length > 0) {
-
         // on récupère et parcourt les attributs de la balise XLS de la réponse
-        var xlsAttributes = __getAttributes (XLSNode);
+        var xlsAttributes = __getAttributes(XLSNode);
         for (var att in xlsAttributes) {
             if (xlsAttributes.hasOwnProperty(att)) {
-
                 // vérification de la version
                 if (att === "version") {
                     if (xlsAttributes["version"] !== ReverseGeocodeResponseReader.VERSION) {
@@ -475,7 +443,6 @@ function __checkServiceAttributes (XLSNode) {
                         return;
                     }
                 }
-
             }
         }
     }

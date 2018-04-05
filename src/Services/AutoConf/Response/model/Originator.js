@@ -1,6 +1,6 @@
 
 /**
- * Object used to describe an Originator of geoportal resource. 
+ * Object used to describe an Originator of geoportal resource.
  *
  * @property {String} name - originator name
  * @property {String} attribution - originator full name
@@ -13,7 +13,6 @@
  */
 
 function Originator () {
-
     if (!(this instanceof Originator)) {
         throw new TypeError("Originator constructor cannot be called as a function.");
     }
@@ -27,7 +26,6 @@ function Originator () {
     this.url = null;
 
     this.constraints = [];
-
 }
 
 Originator.prototype = {

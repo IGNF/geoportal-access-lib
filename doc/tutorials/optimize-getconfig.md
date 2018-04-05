@@ -95,7 +95,7 @@ Use it with the **data-url** attribute of the script tag used to load the Geopor
 ``` html
 <script type="text/javascript" src="path/to/GpPluginLeaflet.js" data-url="path/to/autoconf.json"></script>
 <!-- or -->
-<script type="text/javascript" src="path/to/GpPluginOl3.js" data-url="path/to/autoconf.json"></script>
+<script type="text/javascript" src="path/to/GpPluginOpenLayers.js" data-url="path/to/autoconf.json"></script>
 ```
 
 

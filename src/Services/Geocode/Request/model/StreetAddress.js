@@ -10,7 +10,6 @@ import GeocodeLocation from "../GeocodeLocation";
  * @private
  */
 function StreetAddress () {
-
     if (!(this instanceof StreetAddress)) {
         throw new TypeError("StreetAddress constructor cannot be called as a function.");
     }
@@ -42,7 +41,6 @@ function StreetAddress () {
     this.attributesList = ["bbox", "ID", "IDTR", "quality", "territory", "commune", "department", "insee", "municipality"];
 
     this.serviceAttributes = ["bbox", "ID", "IDTR", "Qualite", "Territoire", "Commune", "Departement", "INSEE", "Municipality"];
-
 }
 
 /**

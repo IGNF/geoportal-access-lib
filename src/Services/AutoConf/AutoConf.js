@@ -38,7 +38,6 @@ import AutoConfResponseFactory from "./Response/AutoConfResponseFactory";
  *   };
  */
 function AutoConf (options) {
-
     if (!(this instanceof AutoConf)) {
         throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "AutoConf"));
     }
@@ -103,7 +102,6 @@ function AutoConf (options) {
      * sauf si l'on souhaite une reponse brute (options.rawResponse)
      */
     this.options.outputFormat = (this.options.rawResponse) ? "" : "xml";
-
 }
 
 /**
@@ -127,12 +125,10 @@ AutoConf.prototype.constructor = AutoConf;
  * @param {Function} success - callback de succès de la création de la requête
  */
 AutoConf.prototype.buildRequest = function (error, success) {
-
     var scope = typeof window !== "undefined" ? window : {};
 
     if (scope.Gp && scope.Gp.Config && scope.Gp.Config.generalOptions && scope.Gp.Config.layers) {
         if (scope.Gp.Config.generalOptions.apiKeys[this.options.apiKey]) {
-
             if (this.options.layerId) { // cas d'une autoconf + détaillée sur une couche agrégée
                 if (scope.Gp.Config.layers[this.options.layerId] && scope.Gp.Config.layers[this.options.layerId].aggregatedLayers) {
                     this.logger.warn("Gp.Config existe déjà pour cette clé et cette couche");
@@ -169,7 +165,10 @@ AutoConf.prototype.buildRequest = function (error, success) {
         });
     }
 
-    success.call(this, this.request);
+    // normalement pas d'erreur d'autoconf...
+    (this.request || this.request === "")
+        ? success.call(this, this.request)
+        : error.call(this, new ErrorService(_.getMessage("SERVICE_REQUEST_BUILD")));
 };
 
 /**
@@ -179,9 +178,7 @@ AutoConf.prototype.buildRequest = function (error, success) {
  * @param {Function} success - callback de succès de l'analyse de la réponse
  */
 AutoConf.prototype.analyzeResponse = function (error, success) {
-
     if (this.response) {
-
         var options = {
             layerId : this.options.layerId,
             response : this.response,
@@ -192,11 +189,9 @@ AutoConf.prototype.analyzeResponse = function (error, success) {
         };
 
         AutoConfResponseFactory.build(options);
-
     } else {
         error.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
     }
-
 };
 
 export default AutoConf;

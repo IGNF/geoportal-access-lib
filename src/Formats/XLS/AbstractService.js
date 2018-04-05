@@ -10,11 +10,10 @@ import Logger from "../../Utils/LoggerByDefault";
  * @param {Object} [options] - options
  */
 function AbstractService (options) {
-
     this.logger = Logger.getLogger();
     this.logger.trace("[Constructeur AbstractService ()]");
 
-    if (! (this instanceof AbstractService)) {
+    if (!(this instanceof AbstractService)) {
         throw new TypeError("AbstractService constructor cannot be called as a function.");
     }
 

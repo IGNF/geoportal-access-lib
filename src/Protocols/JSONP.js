@@ -60,7 +60,6 @@ var JSONP = {
      *   JSONP.call(options);
      */
     call : function (options) {
-
         // logger
         var logger = Logger.getLogger("JSONP");
         logger.trace("[JSONP::call ()]");
@@ -96,7 +95,7 @@ var JSONP = {
         // ID du callback à utiliser : null ou string.
         // si l'utilisateur a spécifié un suffixe pour le callback, on le récupère comme un ID (ex: options.callbackSuffix = "")
         // sinon, on utilise un timestamp : this.uuid ()
-        var callbackId = ( typeof options.callbackSuffix === "string") ? options.callbackSuffix : this.uuid();
+        var callbackId = (typeof options.callbackSuffix === "string") ? options.callbackSuffix : this.uuid();
 
         // on recherche le parametre callback et son nom de fonction dans l'url
         var urlHasCallbackKey = false;
@@ -104,7 +103,7 @@ var JSONP = {
 
         var idx = options.url.indexOf("callback=");
 
-        if (idx != -1) {
+        if (idx !== -1) {
             urlHasCallbackKey = true;
             // extraction callbackName de l'url : entre "callback=" et "&" ou fin de ligne
             var j = options.url.indexOf("&", idx);
@@ -162,13 +161,12 @@ var JSONP = {
         if (!options.onTimeOut) {
             logger.info("setting 'options.onTimeOut' default value");
             /** callback timeout par defaut */
-            options.onTimeOut = function ( /* error */ ) {
+            options.onTimeOut = function (/* error */) {
                 console.log("TimeOut while invoking url : " + options.url);
             };
         }
 
         if (!HasCallbackName) {
-
             var self = this;
 
             // event du timeout
@@ -187,7 +185,11 @@ var JSONP = {
 
             // FIXME le nom de la fonction n'accepte pas de namespace !
             // ex. Gp.Function.callback
-            /** fonction de reponse du service */
+            /**
+            * fonction de reponse du service
+            * @param {Object} data - data
+            * @private
+            */
             window[options.callbackName] = function (data) {
                 window.clearTimeout(onTimeOutTrigger);
                 options.onResponse(data);
@@ -198,9 +200,13 @@ var JSONP = {
         this._createScript(callbackId, options.url);
     },
 
-    /** create Script */
+    /**
+    * create Script
+    * @param {String} callbackId - callback Id
+    * @param {String} url - url
+    * @private
+    */
     _createScript : function (callbackId, url) {
-
         var scriptu;
         var scripto = document.getElementById("results" + callbackId);
 
@@ -218,12 +224,14 @@ var JSONP = {
             // s'il existe déjà, on le remplace !
             node.replaceChild(scriptu, scripto);
         }
-
     },
 
-    /** delete Script */
+    /**
+    * delete Script
+    * @param {String} callbackId - callback Id
+    * @private
+    */
     _deleteScript : function (callbackId) {
-
         var script = document.getElementById("results" + callbackId);
         if (script) {
             var node = script.parentNode || document.documentElement;

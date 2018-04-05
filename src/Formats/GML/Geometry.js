@@ -31,7 +31,6 @@ import Logger from "../../Utils/LoggerByDefault";
  * @param {Object} options - options
  */
 function Geometry (options) {
-
     this.logger = Logger.getLogger("GML.Geometry");
     this.logger.trace("[Constructeur Geometry ()]");
 
@@ -59,7 +58,7 @@ function Geometry (options) {
         throw new Error("Data is not defined !");
     }
 
-    if ( typeof this.options.data === "object" && Object.keys(this.options.data).length === 0) {
+    if (typeof this.options.data === "object" && Object.keys(this.options.data).length === 0) {
         throw new Error("Data is empty !");
     }
 }
@@ -155,7 +154,7 @@ Geometry.prototype = {
         if (!data.left || !data.bottom || !data.right || !data.top) {
             throw new Error("One coordinate is undefined !");
         }
-        var template = this.getTemplate("envelop");;
+        var template = this.getTemplate("envelop"); ;
         template = template.replace(/__LEFT__/g, data.left);
         template = template.replace(/__BOTTOM__/g, data.bottom);
         template = template.replace(/__RIGHT__/g, data.right);
@@ -219,7 +218,6 @@ Geometry.prototype = {
      * to string
      */
     toString : function () {
-
         var result = null;
 
         switch (this.options.type.toUpperCase()) {
@@ -240,7 +238,6 @@ Geometry.prototype = {
                 break;
             default:
                 this.logger.warn("Type is not supported !");
-
         }
 
         this.logger.trace("result :", result);

@@ -14,7 +14,6 @@
  */
 
 function Constraint () {
-
     if (!(this instanceof Constraint)) {
         throw new TypeError("Constraint constructor cannot be called as a function.");
     }
@@ -33,7 +32,6 @@ function Constraint () {
     this.maxScaleDenominator = null;
 
     this.temporalExtent = [null, null];
-
 }
 
 Constraint.prototype = {
