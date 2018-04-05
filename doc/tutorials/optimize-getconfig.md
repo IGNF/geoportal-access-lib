@@ -83,6 +83,7 @@ Use it as a value of the **serverUrl** param of the [Gp.Services.getConfig()](ht
 the Gp.Services.getConfig({
     ...
     serverUrl : "path/to/autoconf.json",
+    callbackSuffix : "",
     ...
 }) ;
 ```

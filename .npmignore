@@ -1,8 +1,9 @@
 /doc
-/_doc
+/jsdoc
 /lib
 /_site
 /src
+/scripts
 /test
 /samples
 /samples-src
@@ -15,8 +16,9 @@ build.sh
 CHANGELOG*
 CONTRIBUTING.md
 CONTRIBUTORS.md
-History.md
 COMPILE.md
+HISTORY.md
+History.md
 gulpfile.js
 jsdoc.json
 webpack.*
