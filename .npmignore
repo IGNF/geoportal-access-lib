@@ -5,15 +5,18 @@
 /src
 /scripts
 /test
+/_test*
 /samples
 /samples-src
-/_samples
+/_samples*
 /utils
 /target
 
 .*
 build.sh
 CHANGELOG*
+TODO*
+FIXME*
 CONTRIBUTING.md
 CONTRIBUTORS.md
 COMPILE.md

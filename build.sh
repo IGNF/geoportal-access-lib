@@ -37,7 +37,7 @@ function sources() {
   doCmd "npm run build"
 }
 
-doCmd "npm run clean"
+# doCmd "npm run clean"
 doCmd "npm run setup"
 
 while getopts "aps" opts
