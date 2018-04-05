@@ -1,11 +1,16 @@
 /doc
+/jsdoc
 /lib
 /_site
 /src
+/scripts
 /test
 /samples
+/samples-src
+/_samples
 /utils
 /target
+
 .*
 build.sh
 CHANGELOG*
@@ -16,6 +21,8 @@ HISTORY.md
 History.md
 gulpfile.js
 jsdoc.json
+webpack.*
+
 *.gz
 *.tgz
 *.sh

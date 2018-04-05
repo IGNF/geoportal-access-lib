@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {{#extend "partials-common-head"}}
+        {{/extend}}
+        {{#extend "partials-bundle-head"}}
+        {{/extend}}
+
+        {{#block "head"}}
+        {{/block}}
+        <style>
+        #result {
+            padding: 5px;
+            width: 100%;
+            height: 200px;
+            box-shadow: 0 0 10px #999;
+            font-family: monospace;
+            overflow: scroll;
+        }
+        </style>
+        {{#block "style"}}
+        {{/block}}
+
+    </head>
+    <body>
+        {{#block "body"}}
+        {{/block}}
+
+        <div id="result"></div>
+
+        <script type="text/javascript">
+        {{#block "js"}}
+        {{/block}}
+        </script>
+    </body>
+</html>

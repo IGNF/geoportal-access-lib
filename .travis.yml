@@ -9,15 +9,14 @@ before_script:
   - npm run setup
 script:
     - npm run build
-    - npm run build:prod
-    - npm run build:debug
+    - npm run build -- --env.production
 cache:
   directories:
     - node_modules
 before_deploy:
     - git clone https://github.com/IGNF/geoportal-access-lib.git --branch gh-pages deploy/
     - cp -r dist/ deploy/current/
-    - cp -r target/jsdoc/ deploy/current/
+    - cp -r jsdoc/ deploy/current/
 deploy:
   provider: pages
   skip_cleanup: true

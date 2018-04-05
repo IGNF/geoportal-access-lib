@@ -6,91 +6,84 @@
  * @alias Gp.Services.Geocode.Request.ReverseGeocodeRequestFactory
  * @private
  */
-define([
-    "Utils/LoggerByDefault",
-    "Formats/XLS",
-    "Formats/XLS/LocationUtilityService"
-],
-function ( Logger, XLS, LocationUtilityService) {
+import Logger from "../../../Utils/LoggerByDefault";
+import XLS from "../../../Formats/XLS";
+import LocationUtilityService from "../../../Formats/XLS/LocationUtilityService";
 
-    "use strict";
+var ReverseGeocodeRequestFactory = {
 
-    var ReverseGeocodeRequestFactory = {
+    /**
+     * interface unique
+     *
+     * @method build
+     * @static
+     * @param {Object} options - options definies dans le composant Geocode
+     *
+     * @example
+     *   var options = {
+     *      httpMethod :
+     *      // options specifiques du service
+     *      position :
+     *      returnFreeForm :
+     *      filterOptions :
+     *      srs :
+     *      maximumResponses :
+     *   };
+     *   var result = ReverseGeocodeRequestFactory.build(options);
+     *   if (!result) {
+     *       // error...
+     *   }
+     * @returns {String} request
+     */
+    build : function (options) {
+        // logger
+        var logger = Logger.getLogger("ReverseGeocodeRequestFactory");
+        logger.trace(["ReverseGeocodeRequestFactory::build()"]);
 
-        /**
-        * interface unique
-        *
-        * @method build
-        * @static
-        * @param {Object} options - options definies dans le composant Geocode
-        *
-        * @example
-        *   var options = {
-        *      httpMethod :
-        *      // options specifiques du service
-        *      position :
-        *      returnFreeForm :
-        *      filterOptions :
-        *      srs :
-        *      maximumResponses :
-        *   };
-        *   var result = ReverseGeocodeRequestFactory.build(options);
-        *   if(!result) {
-        *       // error...
-        *   }
-        * @returns {String} request
-        */
-        build : function (options) {
+        // options non definies
+        var settings = options || {};
 
-            // logger
-            var logger = Logger.getLogger("ReverseGeocodeRequestFactory");
-            logger.trace(["ReverseGeocodeRequestFactory::build()"]);
+        var request = null;
 
-            // options non definies
-            var settings = options || {};
+        // objet LUS
+        var oLUS = new LocationUtilityService({
+            position : settings.position,
+            returnFreeForm : settings.returnFreeForm,
+            filterOptions : settings.filterOptions
+        });
 
-            var request = null;
+        // Format XLS
+        var oXLS = new XLS({
+            srsName : settings.srs,
+            maximumResponses : settings.maximumResponses
+        });
+        oXLS.namespace = true;
+        oXLS.setService(oLUS);
 
-            // objet LUS
-            var oLUS = new LocationUtilityService({
-                position : settings.position,
-                returnFreeForm : settings.returnFreeForm,
-                filterOptions : settings.filterOptions
-            });
+        // request brute !
+        request = oXLS.build();
 
-            // Format XLS
-            var oXLS = new XLS({
-                srsName : settings.srs,
-                maximumResponses : settings.maximumResponses
-            });
-            oXLS.namespace = true;
-            oXLS.setService(oLUS);
-
-            // request brute !
-            request = oXLS.build();
-
-            // en mode GET, la requête est encodée
-            // et le param. 'qxml' est ajouté
-            if (settings.httpMethod == "GET") {
-                var myRequest = "qxml=" +
-                    encodeURIComponent(request)
-                        .replace(/\-/g, "%2D")
-                        .replace(/\_/g, "%5F")
-                        .replace(/\./g, "%2E")
-                        .replace(/\!/g, "%21")
-                        .replace(/\~/g, "%7E")
-                        .replace(/\*/g, "%2A")
-                        .replace(/\'/g, "%27")
-                        .replace(/\(/g, "%28")
-                        .replace(/\)/g, "%29");
-                request = myRequest;
-            }
-
-            logger.trace(request);
-
-            return request;
+        // en mode GET, la requête est encodée
+        // et le param. 'qxml' est ajouté
+        if (settings.httpMethod === "GET") {
+            var myRequest = "qxml=" +
+                encodeURIComponent(request)
+                    .replace(/-/g, "%2D")
+                    .replace(/_/g, "%5F")
+                    .replace(/\./g, "%2E")
+                    .replace(/!/g, "%21")
+                    .replace(/~/g, "%7E")
+                    .replace(/\*/g, "%2A")
+                    .replace(/'/g, "%27")
+                    .replace(/\(/g, "%28")
+                    .replace(/\)/g, "%29");
+            request = myRequest;
         }
-    };
 
-    return ReverseGeocodeRequestFactory;
-});
+        logger.trace(request);
+
+        return request;
+    }
+};
+
+export default ReverseGeocodeRequestFactory;

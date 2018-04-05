@@ -1,1 +1,0 @@
-myCallback({"message": "Hello World!"});

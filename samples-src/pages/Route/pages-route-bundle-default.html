@@ -1,0 +1,33 @@
+{{#extend "layout-sample-bundle"}}
+
+{{#content "head"}}
+        <title>Service de calcul d'itineraires</title>
+{{/content}}
+
+{{#content "style"}}
+        <style></style>
+{{/content}}
+
+{{#content "body"}}
+        <h1>Utilisation du Service de calcul d'itineraires</h1>
+        <h2>Avec les paramètres obligatoires seulement</h2>
+{{/content}}
+
+{{#content "js"}}
+        var options = {
+            apiKey : "{{ config.apiKey }}",
+            onSuccess : function (response) {
+                print(response);
+            },
+            startPoint : {
+               x : 2.3,
+               y : 48.8
+            },
+            endPoint : {
+               x : 2.4,
+               y : 48.9
+            }
+        };
+        Gp.Services.route(options);
+{{/content}}
+{{/extend}}

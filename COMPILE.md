@@ -1,8 +1,9 @@
 
 # Compilation du projet
 
-[![Gulp build](https://img.shields.io/badge/build%20with-GULP-brightgreen.svg)](https://img.shields.io/badge/build%20with-GULP-brightgreen.svg)
+[![WEBPACK build](https://img.shields.io/badge/build%20with-WEBPACK-brightgreen.svg)](https://img.shields.io/badge/build%20with-WEBPACK-brightgreen.svg)
 [![npm version](https://badge.fury.io/js/geoportal-access-lib.svg)](https://badge.fury.io/js/geoportal-access-lib)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 
 ## Prérequis (outils)
 
@@ -58,42 +59,56 @@ Possibilité d'utiliser le terminal de _Visual Studio Code_ dans le menu
 _Afficahge > Integred Terminal_
 Pour plus d'information, cf. https://code.visualstudio.com/docs/editor/integrated-terminal
 
-## Commande de compilation
+## Commandes via NPM
 
-### Installation des dépendances via NPM
+Liste des targets disponibles :
+
+    npm run <target> <option>
+        target : (clean), build,
+                 test, sample, (doc)
+                 test:serve, sample:serve, doc:serve
+        option : --env.production, --env.clean
+
+### Installation des dépendances
 
 **ouvrir une console :**
 
     npm install
 
-> **Note :** --*Windows only!*--
-Si votre connexion ne permet pas de télécharger _PhantomJS_, il est possible de
-le récuperer sur cette URL : http://phantomjs.org/download.html
-Puis, relancer l'installation...
-
-> **Attention :** --*Windows only!*--
-Pour installation manuelle, ne pas oublier de mettre l'executable _phantomjs.exe_
-dans l'environnement d'execution de windows (ex. https://www.java.com/fr/download/help/path.xml)
-
-### Compilation via GULP
+Si vous passez par les commandes du package.json, les dépendances sont installées via
+la target suivante :
 
 **ouvrir une console :**
 
-    gulp [--debug | --production]
+    npm run setup
+
+### Compilation
+
+**ouvrir une console :**
+
+    npm run build
+    npm run build -- --env.production --env.clean
 
 Les *bundles* sont disponibles dans le répertoire :
 
 	dist/GpServices.js
 	dist/GpServices-src.js
-	dist/GpServices-debug.js
+	dist/GpServices-src.js.map
+
+Les sources sont validées (jshint, jscs et/ou eslint).
+La jsoc, les tests et les exemples sont générés.
 
 #### Erreur de fin de lignes
 
 Si vous avez des erreurs de parsing tel que **Invalid line break**, vous devez
-modifier le paramètre du fichier _.jscs_ :
+modifier le paramètre du fichier _.jshintrc_ :
 > validateLineBreaks : { character : "CRLF" }
 
-#### Exécution de la JSDOC
+#### JSDOC
+
+#### Construction de la JSDOC
+
+La jsdoc est générée lors du build dans le répertoire *jsdoc*.
 
 Sous *Windows*, il est possible que la *JSDoc* ne soit pas compilée correctement
 (problème de *path* du binaire), on peut l’exécuter manuellement :
@@ -102,38 +117,51 @@ Sous *Windows*, il est possible que la *JSDoc* ne soit pas compilée correctemen
 
     node_modules\.bin\jsdoc -c jsdoc.json
 
-#### Publication
+#### Ouvrir la JSDOC sur un navigateur
 
 **ouvrir une console :**
 
-    gulp publish
+    npm run doc:serve
 
-### Exécution des exemples
+Le navigateur s'ouvre sur la page de la JSDOC sur l'URL suivante :
+http://localhost:9001/
+
+### Les exemples
+
+#### Construction des exemples
+
+Les exemples sont générées lors du build dans le répertoire *samples*.
+Mais il est aussi possible de les executer autrement :
 
 **ouvrir une console :**
 
-    gulp server-sample
+    npm run sample
+    npm run sample -- --env.production --env.clean
+    gulp sample
+    gulp sample --env.production --env.clean
+
+#### Ouvrir les exemples sur un navigateur
+
+**ouvrir une console :**
+
+    npm run sample:serve
 
 Le navigateur s'ouvre sur la page des exemples sur l'URL suivante :
-http://localhost:9001/samples/index-samples.html
+http://localhost:9001/
 
-### Exécution des tests
+### Les tests unitaires
 
-**ouvrir une console :**
-
-    gulp server-test
-
-Le navigateur s'ouvre sur la page des tests sur l'URL suivante :
-http://localhost:9001/test/index.html
-
-#### En mode développement
+#### Tests en mode console
 
 **ouvrir une console :**
 
-    gulp watch
+    npm run test
+
+#### Tests dans un navigateur
+
+**ouvrir une console :**
+
+    npm run test:serve
 
 Le navigateur s'ouvre sur la page des tests sur l'URL suivante :
-http://localhost:9001/test/index.html
-
-> **Note :**
-Chaque modification des tests va recharger cette page automatiquement...
+http://localhost:9001/

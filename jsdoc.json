@@ -17,8 +17,8 @@
         "outputSourceFiles"     : true,
         "outputSourcePath"      : true,
         "systemName"            : "Geoportal Resources Access",
-        "footer"                : "Geoportal Resources Access- version 1.0.0",
-        "copyright"             : "Geoportail - Copyright (c) IGN, released under the CECILL-B license",
+        "footer"                : "Geoportal Resources Access - version 1.0.0",
+        "copyright"             : "Copyright (c) IGN, released under the CECILL-B license",
         "navType"               : "inline",
         "theme"                 : "darkly",
         "linenums"              : true,
@@ -32,9 +32,9 @@
         "hardwrap": true
     },
     "opts": {
-        "template": "./target/jsdoc/jaguarjs-jsdoc",
+        "template": "./doc/jaguarjs-jsdoc",
         "encoding": "utf8",
-        "destination": "./target/jsdoc/",
+        "destination": "./jsdoc/",
         "recurse": true,
         "lenient": true,
         "verbose": true,

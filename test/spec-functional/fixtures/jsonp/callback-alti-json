@@ -1,1 +1,0 @@
-callback({"http":{"status":200,"error":null},"xml":{"elevations": [{"lon": 1.25,"lat": 47.48,"z": 103.55,"acc": 2.5}]}})

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Script de construction des bundles
+# FIXME incompatibilité avec un env. Windows
 
 ##########
 # doCmd()
@@ -26,34 +27,22 @@ printTo () {
 
 printTo "BEGIN"
 
-function debug() {
-  printTo "####### DEBUG !"
-  doCmd "gulp build --debug"
-  doCmd "gulp publish --debug"
-}
-
 function production() {
   printTo "####### production !"
-  doCmd "gulp build --production"
-  doCmd "gulp publish --production"
+  doCmd "npm run build -- --env.production"
 }
 
 function sources() {
   printTo "####### sources !"
-  doCmd "gulp build"
-  doCmd "gulp publish"
+  doCmd "npm run build"
 }
 
-doCmd "gulp clean"
+# doCmd "npm run clean"
+doCmd "npm run setup"
 
-while getopts "adps" opts
+while getopts "aps" opts
 do
    case $opts in
-     d)
-        printTo "#################################"
-        printTo "######## debug bundle ! ########"
-        debug
-        ;;
      p)
         printTo "#################################"
         printTo "##### production bundle ! #######"
@@ -68,11 +57,10 @@ do
         printTo "#################################"
         printTo "########## ALL bundle ! #########"
         sources
-        debug
         production
         ;;
      \?)
-        printTo "$OPTARG : option invalide : a(all), s(sources), d(debug), ou p(production) !"
+        printTo "$OPTARG : option invalide : a(all), s(sources) ou p(production) !"
         exit -1
         ;;
    esac
