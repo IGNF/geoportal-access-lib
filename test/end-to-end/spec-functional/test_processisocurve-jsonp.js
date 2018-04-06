@@ -11,6 +11,9 @@ import { expect } from "chai";
 import { should } from "chai";
 should();
 
+// FIXME how to pass this option from webpack ?
+var mock = true;
+
 describe("-- Tests fonctionnels du Service de Calcul d’isochrones / isodistances : JSONP --", function () {
 
     var myKey = (mock) ? "CLE" : "jhyvi0fgmnuxvfv0zjzorvdn";
@@ -46,7 +49,7 @@ describe("-- Tests fonctionnels du Service de Calcul d’isochrones / isodistanc
                 // calcul d'isochrone (time), se basant sur le graphe "voiture", sans paramètres spécifiques
                 // requête envoyée : http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/isochrone/isochrone.json?location=2.3242664298058053,48.86118017324745&smoothing=false&holes=false&reverse=false&method=time&time=200&graphName=Voiture&srs=EPSG:4326&callback=callback
 
-                if (mock) { options.serverUrl = 'spec-functional/fixtures/jsonp/callback-iso-json-default'; }
+                if (mock) { options.serverUrl = 'test/end-to-end/spec-functional/fixtures/jsonp/callback-iso-json-default'; }
 
                 options.onSuccess = function (response) {
                     console.log(response);
@@ -55,12 +58,12 @@ describe("-- Tests fonctionnels du Service de Calcul d’isochrones / isodistanc
 
                     expect(response).to.have.property("location");
                     expect(response.location).to.be.an("object");
-                    expect(response).to.have.deep.property("location.x");
-                    expect(response).to.have.deep.property("location.y");
+                    expect(response.location).to.have.property("x");
+                    expect(response.location).to.have.property("y");
 
                     expect(response).to.have.property("geometry");
                     expect(response.geometry).to.be.an("object");
-                    expect(response).to.have.deep.property("geometry.coordinates");
+                    expect(response.geometry).to.have.property("coordinates");
                     expect(response.geometry.coordinates).to.be.an("array");
 
                     expect(response).to.have.property("message");
@@ -126,8 +129,8 @@ describe("-- Tests fonctionnels du Service de Calcul d’isochrones / isodistanc
                 expect(response).to.be.an("Object");
                 expect(response).to.have.property("location");
                 expect(response.location).to.be.an("object");
-                expect(response).to.have.deep.property("location.x");
-                expect(response).to.have.deep.property("location.y");
+                expect(response.location).to.have.property("x");
+                expect(response.location).to.have.property("y");
                 expect(response).to.have.property("geometry");
                 expect(response).to.have.property("message");
                 expect(response).to.have.property("srs");
@@ -143,7 +146,7 @@ describe("-- Tests fonctionnels du Service de Calcul d’isochrones / isodistanc
                 //   var urlGet = "http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/isochrone/isochrone.xml?output=json&location=2.3242664298058053,48.86118017324745&smoothing=false&holes=false&reverse=false&method=time&time=200&graphName=Voiture&exclusions=Toll;Bridge;Tunnel&srs=EPSG:4326&callback=callback";
                 //   var okResponse =[200, { 'Content-type': 'application/javascript' }, 'callback({{"http":{"status":200,"error":null},"xml":""}})'];
 
-                if (mock) { options.serverUrl = 'spec-functional/fixtures/jsonp/callback-iso-xml'; }
+                if (mock) { options.serverUrl = 'test/end-to-end/spec-functional/fixtures/jsonp/callback-iso-xml'; }
                 options.outputFormat = 'xml';
                 options.onSuccess = function (response) {
                     functionAssert(response);
@@ -170,7 +173,7 @@ describe("-- Tests fonctionnels du Service de Calcul d’isochrones / isodistanc
                 //   var urlGet = "http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/isochrone/isochrone.json?location=2.3242664298058053,48.86118017324745&smoothing=false&holes=false&reverse=false&method=time&time=200&graphName=Voiture&exclusions=Toll;Bridge;Tunnel&srs=EPSG:4326&callback=callback";
                 //   var okResponse =[200, { 'Content-type': 'application/javascript' }, 'callback({})'];
 
-                if (mock) { options.serverUrl = 'spec-functional/fixtures/jsonp/callback-iso-json'; }
+                if (mock) { options.serverUrl = 'test/end-to-end/spec-functional/fixtures/jsonp/callback-iso-json'; }
                 options.outputFormat = 'json';
                 options.onSuccess = function (response) {
                     functionAssert(response);

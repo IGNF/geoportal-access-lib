@@ -11,6 +11,9 @@ import { expect } from "chai";
 import { should } from "chai";
 should();
 
+// FIXME how to pass this option from webpack ?
+var mock = true;
+
 describe("-- Tests fonctionnels du Service de Geocodage inverse : JSONP --", function () {
 
     var myKey = (mock) ? "CLE" : "jhyvi0fgmnuxvfv0zjzorvdn";
@@ -43,15 +46,15 @@ describe("-- Tests fonctionnels du Service de Geocodage inverse : JSONP --", fun
                 // description du test
                 // requête GET du service en XML (param xls avec la requête XML encodée)
                 // par défaut, on cherche des résultats de type StreetAddress
-                if (mock) { options.serverUrl = 'spec-functional/fixtures/jsonp/callback-reverse-xml-default'; }
+                if (mock) { options.serverUrl = 'test/end-to-end/spec-functional/fixtures/jsonp/callback-reverse-xml-default'; }
                 options.onSuccess = function (response) {
                     console.log(response);
                     should().exist(response.locations);
                     expect(response.locations).to.be.an("Array");
                     expect(response.locations[0]).to.have.property("position");
                     expect(response.locations[0].position).to.be.an("object");
-                    expect(response.locations[0]).to.have.deep.property("position.x");
-                    expect(response.locations[0]).to.have.deep.property("position.y");
+                    expect(response.locations[0].position).to.have.property("x");
+                    expect(response.locations[0].position).to.have.property("y");
                     expect(response.locations[0]).to.have.property("matchType");
                     expect(response.locations[0]).to.have.property("type", "StreetAddress");
 
@@ -95,8 +98,8 @@ describe("-- Tests fonctionnels du Service de Geocodage inverse : JSONP --", fun
                 expect(response.locations).to.be.an("Array");
                 expect(response.locations[0]).to.have.property("position");
                 expect(response.locations[0].position).to.be.an("object");
-                expect(response.locations[0]).to.have.deep.property("position.x");
-                expect(response.locations[0]).to.have.deep.property("position.y");
+                expect(response.locations[0].position).to.have.property("x");
+                expect(response.locations[0].position).to.have.property("y");
                 expect(response.locations[0]).to.have.property("matchType");
                 expect(response.locations[0]).to.have.property("placeAttributes");
                 expect(response.locations[0].placeAttributes).to.be.an("object");
@@ -141,7 +144,7 @@ describe("-- Tests fonctionnels du Service de Geocodage inverse : JSONP --", fun
                 //   var urlJsonPGet = "http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/geoportail/ols?output=json&qxml=%33%&callback=callback";
                 //   var okResponseJSONPjson =[200, { 'Content-type': 'application/javascript' }, 'callback({{"http":{"status":200,"error":null},"xml":""}})'];
 
-                if (mock) { options.serverUrl = 'spec-functional/fixtures/jsonp/callback-reverse-xml'; }
+                if (mock) { options.serverUrl = 'test/end-to-end/spec-functional/fixtures/jsonp/callback-reverse-xml'; }
                 options.onSuccess = function (response) {
                     functionAssert(response);
                     done();

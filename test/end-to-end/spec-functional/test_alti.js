@@ -1,4 +1,5 @@
 import Gp from "../../../dist/GpServices-src.js";
+import Logger from "../../../src/Utils/LoggerByDefault";
 
 import sinon from "sinon";
 import { assert } from "chai";
@@ -8,6 +9,8 @@ should();
 
 // FIXME how to pass this option from webpack ?
 var mock = true;
+
+var logger = Logger.getLogger("test-alti");
 
 describe("-- Tests fonctionnels du Service Altimétrique : OK --", function () {
 

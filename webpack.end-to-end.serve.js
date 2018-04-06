@@ -24,7 +24,8 @@ module.exports = {
         hot : true,
         open : "google-chrome",
         watchOptions : {
-            watch : true
+            watch : true,
+            poll : true
         },
         overlay : {
             errors : true,
