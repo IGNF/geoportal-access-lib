@@ -20,6 +20,7 @@ var CleanWebpackPlugin    = require("clean-webpack-plugin");
 var DefineWebpackPlugin   = webpack.DefinePlugin;
 var ReplaceWebpackPlugin  = require("replace-bundle-webpack-plugin");
 var ShellWebpackPlugin    = require("webpack-shell-plugin");
+// var SourceMapDevToolWebpackPlugin = webpack.SourceMapDevToolPlugin;
 
 // -- variables
 var licence = path.join(__dirname, "utils", "licence.tmpl");
@@ -54,6 +55,16 @@ module.exports = env => {
             })
         );
     }
+
+    // - ajout des plugins sur l'option de dev
+    // if (!_production) {
+    //     _plugins.push(
+    //         /** DEVTOOL */
+    //         new SourceMapDevToolWebpackPlugin({
+    //             filename: 'GpServices-src.js.map'
+    //         })
+    //     );
+    // }
 
     // - ajout des plugins communs
     _plugins.push(
@@ -105,6 +116,7 @@ module.exports = env => {
         })
     );
 
+
     // - ajout des plugins sur l'option de production
     if (_production) {
         _plugins.push(
@@ -114,6 +126,7 @@ module.exports = env => {
                     comments : false,
                     beautify : false
                 },
+                // sourceMap : {filename: "out.js", url: "out.js.map"},
                 uglifyOptions : {
                     mangle : true,
                     warnings : false,

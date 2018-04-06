@@ -8,11 +8,11 @@ var DefineWebpackPlugin = webpack.DefinePlugin;
 
 module.exports = {
     entry : {
-        tests : path.join(__dirname, "test", "index.js")
+        tests : path.join(__dirname, "test", "index-end-to-end.js")
     },
     output : {
         path : path.join(__dirname, "test"),
-        filename : "test_bundle.js",
+        filename : "test_end-to-end_bundle.js",
         libraryTarget : "umd"
     },
     externals : ["request", "xmldom"],
@@ -37,7 +37,7 @@ module.exports = {
             __PRODUCTION__ : JSON.stringify(false)
         }),
         new HtmlWebpackPlugin({
-            title : "Mocha Tests Units",
+            title : "Mocha Tests Functionnals",
             filename : "index.html",
             template : require.resolve(
                 "html-webpack-plugin/default_index.ejs"

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpp:ViewContext
+    xmlns="http://www.opengis.net/context"
+    xmlns:gpp="http://api.ign.fr/geoportail"
+    xmlns:ows="http://www.opengis.net/ows/1.1"
+    xmlns:sld="http://www.opengis.net/sld"
+    xmlns:wmts="http://www.opengis.net/wmts/1.0"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="autoConf" version="1.1.0" xsi:schemaLocation="http://www.opengis.net/context http://gpp3-wxs.ign.fr/schemas/extContext.xsd http://api.ign.fr/geoportail http://wxs.ign.fr/schemas/autoconf/autoconf.xsd">
+</gpp:ViewContext>    

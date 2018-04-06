@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XLS version="1.2" xmlns="http://www.opengis.net/xls"
+  xmlns:gml="http://www.opengis.net/gml"
+  xmlns:xls="http://www.opengis.net/xls"
+  xmlns:xlsext="http://www.opengis.net/xlsext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://wxs.ign.fr/schemas/olsAll.xsd">
+  <ResponseHeader/>
+  <Response requestID="c879bb6d-0c35-4dd1-ad41-fff69c53f84c" version="1.2">
+    <GeocodeResponse>
+      <GeocodeResponseList numberOfGeocodedAddresses="1">
+        <GeocodedAddress>
+          <gml:Point>
+            <gml:pos>48.843488 2.423181</gml:pos>
+          </gml:Point>
+          <Address countryCode="StreetAddress">
+            <freeFormAddress>2 av pasteur , 94160 Saint-Mandé</freeFormAddress>
+          </Address>
+          <GeocodeMatchCode accuracy="1.0" matchType="Street number"/>
+        </GeocodedAddress>
+      </GeocodeResponseList>
+    </GeocodeResponse>
+  </Response>
+</XLS>
