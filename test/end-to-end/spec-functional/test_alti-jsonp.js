@@ -11,8 +11,8 @@ import { expect } from "chai";
 import { should } from "chai";
 should();
 
-// FIXME how to pass this option from webpack ?
-var mock = true;
+// pass this option from webpack
+var mock = __MOCK__;
 
 describe("-- Tests fonctionnels du Service Altimétrique : JSONP --", function () {
 
@@ -198,7 +198,7 @@ describe("-- Tests fonctionnels du Service Altimétrique : JSONP --", function (
                 Gp.Services.getAltitude(options);
             });
 
-            xit("FIXME : Appel du service en mode 'JSONP'" +
+            it("[FIXME] Appel du service en mode 'JSONP'" +
             " avec l'API 'WPS'" +
             " pour un format de sortie en 'json'", function (done) {
                 // FIXME le service ne renvoie pas une bonne reponse ?
@@ -210,7 +210,11 @@ describe("-- Tests fonctionnels du Service Altimétrique : JSONP --", function (
                 //   var urlJsonPGet = "http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/alti/wps?service=WPS&version=1.0.0&rawdataoutput=result&identifier=gs:WPSElevation&request=Execute&datainputs=lon=1.25;lat=47.48;indent=false;crs=CRS:84;zonly=false;format=json&callback=callback";
                 //   var okResponseJSONPjson = [200, { 'Content-type': 'application/javascript' },  'callback(' + okResponseJson + ')'];
 
-                if (mock) { options.serverUrl = 'test/end-to-end/spec-functional/fixtures/jsonp/callback-alti-json'; }
+                if (mock) {
+                    options.serverUrl = 'test/end-to-end/spec-functional/fixtures/jsonp/callback-alti-json';
+                } else {
+                    this.skip();
+                }
                 options.outputFormat = 'json';
                 options.api = 'WPS';
                 options.onSuccess = function (response) {

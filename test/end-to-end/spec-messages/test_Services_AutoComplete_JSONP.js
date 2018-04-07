@@ -7,10 +7,10 @@ import { expect } from "chai";
 import { should } from "chai";
 should();
 
-// FIXME how to pass this option from webpack ?
-var mock = true;
+// pass this option from webpack
+var mock = __MOCK__;
 
-describe("-- Test sur les messages d'erreur spécifiques du Service d'AutoCompletion --", function() {
+describe("-- Test sur les messages d'erreur spécifiques du Service d'AutoCompletion : JSONP --", function() {
 
     var myKey = (mock) ? "CLE" : "jhyvi0fgmnuxvfv0zjzorvdn";
     var Services = null;

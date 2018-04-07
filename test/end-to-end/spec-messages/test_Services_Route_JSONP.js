@@ -7,10 +7,10 @@ import { expect } from "chai";
 import { should } from "chai";
 should();
 
-// FIXME how to pass this option from webpack ?
-var mock = true;
+// pass this option from webpack
+var mock = __MOCK__;
 
-describe("-- Test sur les messages d'erreur spécifiques du Service de calcul d'itineraire --", function() {
+describe("-- Test sur les messages d'erreur spécifiques du Service de calcul d'itineraire : JSONP --", function() {
 
     var myKey = (mock) ? "CLE" : "jhyvi0fgmnuxvfv0zjzorvdn";
     var Services = null;
@@ -51,14 +51,18 @@ describe("-- Test sur les messages d'erreur spécifiques du Service de calcul d'
 
     });
 
-    it("FIXME(mock=false) : Erreur de clef API : clef inconnue du service", function (done) {
+    it("[MOCK:only] Erreur de clef API : clef inconnue du service", function (done) {
         // Exception de type ErrorService
         // Levée par le protocole (XHR)
         // Renvoyer pour le callback onFailure()
         // Message : Errors Occured on Http Request (status : 'Forbidden (...)
         // Type : SERVICE_ERROR
         // Status : 403
-        if (mock) { options.serverUrl = 'test/end-to-end/spec-messages/fixtures/jsonp/callback-bad-key'; }
+        if (mock) {
+            options.serverUrl = 'test/end-to-end/spec-messages/fixtures/jsonp/callback-bad-key';
+        } else {
+            this.skip();
+        }
         options.apiKey = "bidon";
         options.onFailure = function (e) {
             console.log(e.message);
@@ -76,7 +80,7 @@ describe("-- Test sur les messages d'erreur spécifiques du Service de calcul d'
         Gp.Services.route(options);
     });
 
-    it("FIXME(mock=false) : Erreur sur les exclusions : valeur inconnue", function (done) {
+    it("[MOCK:only] Erreur sur les exclusions : valeur inconnue", function (done) {
         // Exception de type ErrorService
         // Levée par XHR()
         // Renvoyer pour le callback onFailure()
@@ -85,7 +89,11 @@ describe("-- Test sur les messages d'erreur spécifiques du Service de calcul d'
         // Status : -1
         //  ex. de message du service :
         //  {"message":"ServiceException: Error in route computation\nError in smartrouting\nFailed to execute calculateRoute\nunknown reject flag 'BIDON'","status":"ERROR"}
-        if (mock) { options.serverUrl = 'test/end-to-end/spec-messages/fixtures/jsonp/callback-route-bad-exclusions'; }
+        if (mock) {
+            options.serverUrl = 'test/end-to-end/spec-messages/fixtures/jsonp/callback-route-bad-exclusions';
+        } else {
+            this.skip();
+        }
         options.exclusions = ['BIDON'];
         options.onFailure = function (e) {
             console.log(e);
@@ -102,7 +110,7 @@ describe("-- Test sur les messages d'erreur spécifiques du Service de calcul d'
         Gp.Services.route(options);
     });
 
-    it("FIXME(mock=false) : Erreur sur le graphe : valeur inconnue", function (done) {
+    it("[MOCK:only] Erreur sur le graphe : valeur inconnue", function (done) {
         // Exception de type ErrorService
         // Levée par XHR()
         // Renvoyer pour le callback onFailure()
@@ -111,7 +119,11 @@ describe("-- Test sur les messages d'erreur spécifiques du Service de calcul d'
         // Status : -1
         //  ex. de message du service :
         //  {"message":"ServiceException: Error in route computation\nError in smartrouting\nFailed to execute calculateRoute\nunknown reject flag 'BIDON'","status":"ERROR"}
-        if (mock) { options.serverUrl = 'test/end-to-end/spec-messages/fixtures/jsonp/callback-route-bad-graph'; }
+        if (mock) {
+            options.serverUrl = 'test/end-to-end/spec-messages/fixtures/jsonp/callback-route-bad-graph';
+        } else {
+            this.skip();
+        }
         options.graph = 'BIDON';
         options.onFailure = function (e) {
             console.log(e);

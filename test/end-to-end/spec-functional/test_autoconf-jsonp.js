@@ -11,8 +11,8 @@ import { expect } from "chai";
 import { should } from "chai";
 should();
 
-// FIXME how to pass this option from webpack ?
-var mock = true;
+// pass this option from webpack
+var mock = __MOCK__;
 
 describe("-- Tests fonctionnels du Service d'autoconfiguration : JSONP --", function () {
 

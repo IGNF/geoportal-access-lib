@@ -7,8 +7,8 @@ import { expect } from "chai";
 import { should } from "chai";
 should();
 
-// FIXME how to pass this option from webpack ?
-var mock = true;
+// pass this option from webpack
+var mock = __MOCK__;
 
 var logger = Logger.getLogger("test-autoconf");
 
@@ -35,7 +35,7 @@ if (mock) {
     });
 }
 
-describe("--- Tests fonctionnels du Service d'autoconfiguration : OK --", function () {
+describe("--- Tests fonctionnels du Service d'autoconfiguration --", function () {
 
     var myKey = (mock) ? "CLE" : "jhyvi0fgmnuxvfv0zjzorvdn";
     var version = Gp.servicesVersion;
@@ -103,12 +103,12 @@ describe("--- Tests fonctionnels du Service d'autoconfiguration : OK --", functi
                 if (mock) { server.respond(); }
             });
 
-            it("MOCK Appel du service en mode 'XHR' avec la méthode 'GET' sur une sortie xml minifiée", function (done) {
+            it("[MOCK:only] Appel du service en mode 'XHR' avec la méthode 'GET' sur une sortie xml minifiée", function (done) {
                 // descriptif du test
                 // reponse du service en xml 'minify' (uniquement en mode mock !)
                 if (!mock) {
                     console.log("Test uniquement en mode 'mock' !");
-                    done();
+                    this.skip();
                 }
                 var url1Get = "http://wxs.ign.fr/CLE1/autoconf?gp-access-lib=" + version;
                 var ok1ResponseXml = [200, { 'Content-type': 'application/xml' }, autoconfminify];
@@ -130,12 +130,12 @@ describe("--- Tests fonctionnels du Service d'autoconfiguration : OK --", functi
                 server.respond();
             });
 
-            it("MOCK Appel du service en mode 'XHR' avec la méthode 'GET' sur une sortie xml indentée", function (done) {
+            it("[MOCK:only] Appel du service en mode 'XHR' avec la méthode 'GET' sur une sortie xml indentée", function (done) {
                 // descriptif du test
                 // reponse du service en xml 'beautify' (uniquement en mode mock !)
                 if (!mock) {
                     console.log("Test uniquement en mode 'mock' !");
-                    done();
+                    this.skip();
                 }
                 var url2Get = "http://wxs.ign.fr/CLE2/autoconf?gp-access-lib=" + version;
                 var ok2ResponseXml = [200, { 'Content-type': 'application/xml' }, autoconfbeautify];
@@ -160,11 +160,11 @@ describe("--- Tests fonctionnels du Service d'autoconfiguration : OK --", functi
             it("Appel du service avec un autoconf local", function (done) {
                 // descriptif du test
                 // reponse du service en xml pour une requête locale
-                var urlLGet = "spec-functional/fixtures/autoconf-beautify-light.xml?gp-access-lib=" + version;
+                var urlLGet = "test/end-to-end/spec-functional/fixtures/autoconf-beautify-light.xml?gp-access-lib=" + version;
                 var okResponseLightXml = [200, { 'Content-type': 'application/xml' }, autoconflight];
                 if (mock) { server.respondWith('GET', urlLGet, okResponseLightXml); }
 
-                options.serverUrl  = "spec-functional/fixtures/autoconf-beautify-light.xml";
+                options.serverUrl  = "test/end-to-end/spec-functional/fixtures/autoconf-beautify-light.xml";
                 options.apiKey     = null;
                 options.httpMethod = "GET";
                 options.proxyURL   = null;
