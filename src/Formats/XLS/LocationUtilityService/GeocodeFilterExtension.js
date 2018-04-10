@@ -95,7 +95,7 @@ GeocodeFilterExtension.prototype = {
     /**
      * Tableau de noms (tables de geocodage)
      *
-     * @returns {Array.<String>}
+     * @returns {Array.<String>} liste des noms de filtres
      */
     getNames : function () {
         var names = [];
@@ -110,7 +110,7 @@ GeocodeFilterExtension.prototype = {
      * Retourne une table de geocodage
      *
      * @param {String} name - nom de la table de geocodage
-     * @returns {Object}
+     * @returns {Object} filtre
      */
     getFilter : function (name) {
         var filter = null;
@@ -126,7 +126,7 @@ GeocodeFilterExtension.prototype = {
     /**
      * Tableau d'objects (tables de geocodage)
      *
-     * @returns {Array.<Object>}
+     * @returns {Array.<Object>} liste des filtres
      */
     getFilters : function () {
         this.logger.trace(this.filters);
@@ -137,7 +137,7 @@ GeocodeFilterExtension.prototype = {
      * Récupère la liste des attributs (filtres) sur une table de geocodage
      *
      * @param {String} name - nom de la table de geocodage
-     * @returns {Array}
+     * @returns {Array} liste des attributs d'un filtre
      */
     getAttributs : function (name) {
         var attributs = [];
@@ -171,6 +171,7 @@ GeocodeFilterExtension.prototype = {
      * Retourne les attributs (filtres) sur une table de geocodage
      *
      * @param {String} name - nom de la table de geocodage
+     * @returns {Array} liste des attributs d'un filtre
      */
     getPlaceAttributs : function (name) {
         var places = {};

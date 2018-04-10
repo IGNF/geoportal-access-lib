@@ -95,6 +95,7 @@ ProcessIsoCurveParam.prototype = {
 
     /**
      * Retourne la liste des exclusions
+     * @returns {String} x,y
      */
     getLocation : function () {
         return this.location.x + "," + this.location.y;
@@ -102,6 +103,7 @@ ProcessIsoCurveParam.prototype = {
 
     /**
      * Retourne la liste des exclusions
+     * @returns {String} exclusions
      */
     getExclusions : function () {
         return this.exclusions.join(";");
@@ -111,7 +113,7 @@ ProcessIsoCurveParam.prototype = {
 /**
  * Tableau de clefs/valeurs pour param.
  *
- * @returns {Object[]}
+ * @returns {Object[]} KVP
  */
 ProcessIsoCurveParam.prototype.getParams = function () {
     var map = [];

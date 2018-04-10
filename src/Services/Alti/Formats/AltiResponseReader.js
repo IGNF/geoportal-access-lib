@@ -65,6 +65,7 @@ AltiResponseReader.READERS = {
      * @param {DOMElement} root - racine de la réponse XML
      * @static
      * @memberof AltiResponseReader
+     * @returns {Object} Retourne un objet de type AltiResponse
      */
     elevations : function (root) {
         // INFO : on passe en paramètre l'objet en entrée elevations, vide, à remplir.

@@ -187,7 +187,7 @@ Alti.prototype.buildRequest = function (error, success) {
     // utilisation en mode callback
     var options = {
         httpMethod : this.options.httpMethod,
-        /** callback */
+        // callback
         onSuccess : function (result) {
             // sauvegarde de la requete !
             this.request = result;

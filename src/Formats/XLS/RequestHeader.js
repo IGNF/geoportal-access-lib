@@ -69,6 +69,7 @@ RequestHeader.prototype = {
 
     /**
      * toString
+     * @returns {String} requête
      */
     toString : function () {
         var template = null;

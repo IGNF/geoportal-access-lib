@@ -286,19 +286,19 @@ CommonService.prototype = {
 
         run.call(context);
 
-        /** callback de fin de construction de la requête */
+        // callback de fin de construction de la requête
         function onBuildRequest (result) {
             this.logger.trace("CommonService::onBuildRequest : ", result);
             this.callService.call(context, onError, onCallService);
         }
 
-        /** callback de fin d'appel au service */
+        // callback de fin d'appel au service
         function onCallService (result) {
             this.logger.trace("CommonService::onCallService : ", result);
             this.analyzeResponse.call(context, onError, onAnalyzeResponse);
         }
 
-        /** callback de fin de lecture de la reponse */
+        // callback de fin de lecture de la reponse
         function onAnalyzeResponse (result) {
             this.logger.trace("CommonService::onAnalyzeResponse : ", result);
             if (result) {
@@ -308,7 +308,7 @@ CommonService.prototype = {
             }
         }
 
-        /** callback de gestion des erreurs : renvoit un objet de type ErrorService */
+        // callback de gestion des erreurs : renvoit un objet de type ErrorService
         function onError (error) {
             this.logger.trace("CommonService::onError()");
             // error : l'objet est du type ErrorService ou Error
@@ -322,6 +322,8 @@ CommonService.prototype = {
 
     /**
      * Création de la requête
+     * @param {Function} error - callback error
+     * @param {Function} success - callback success
      */
     buildRequest : function (error, success) {
         // INFO
@@ -335,6 +337,8 @@ CommonService.prototype = {
 
     /**
      * Appel du service
+     * @param {Function} error - callback error
+     * @param {Function} success - callback success
      */
     callService : function (error, success) {
         // INFO
@@ -400,7 +404,7 @@ CommonService.prototype = {
             headers : null, // TODO...
             content : this.options.contentType || "application/xml",
             scope : this.options.scope || this,
-            /** callback de reponse */
+            // callback de reponse
             onResponse : function (response) {
                 self.logger.trace("callService::onResponse()");
 
@@ -454,7 +458,7 @@ CommonService.prototype = {
                 // on renvoie la reponse...
                 success.call(self, content);
             },
-            /** callback des erreurs */
+            // callback des erreurs
             onFailure : function (e) {
                 self.logger.trace("callService::onFailure()");
                 // on est forcement sur une erreur levée par un service !
@@ -473,6 +477,8 @@ CommonService.prototype = {
 
     /**
      * Analyse de la réponse
+     * @param {Function} error - callback error
+     * @param {Function} success - callback success
      */
     analyzeResponse : function (error, success) {
         // INFO

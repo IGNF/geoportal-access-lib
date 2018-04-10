@@ -266,7 +266,7 @@ RouteService.prototype.addFilter = function (oFilter) {
 /**
  * (overwrite) toString
  *
- * @returns {String}
+ * @returns {String} requête
  */
 RouteService.prototype.toString = function () {
     // soit, on a un objet Request déjà instancié

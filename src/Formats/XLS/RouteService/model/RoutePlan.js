@@ -180,7 +180,7 @@ RoutePlan.prototype = {
     /**
      * toString
      *
-     * @returns {String}
+     * @returns {String} requête
      */
     toString : function () {
         var template = "";

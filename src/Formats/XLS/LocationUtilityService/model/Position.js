@@ -119,7 +119,7 @@ Position.prototype = {
 /**
  * toString
  *
- * @returns {String}
+ * @returns {String} requête
  */
 Position.prototype.toString = function () {
     var template = this.template.position;

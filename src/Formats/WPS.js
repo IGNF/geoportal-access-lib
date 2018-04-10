@@ -134,7 +134,7 @@ WPS.prototype = {
     /**
      * Namespace par defaut de la requete POST.
      *
-     * @returns {String}
+     * @returns {String} namespace
      */
     namespaceByDefault : function () {
         var ns = [
@@ -155,7 +155,7 @@ WPS.prototype = {
     /**
      * Schemalocation par defaut.
      *
-     * @returns {String}
+     * @returns {String} schemaLocation
      */
     schemaLocationByDefault : function () {
         return "xsi:schemaLocation=\"http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd\"";
@@ -196,7 +196,7 @@ WPS.prototype = {
      * //                  </wps:Data>
      * //              </wps:Input>
      *
-     * @returns {Boolean}
+     * @returns {Boolean} validation de la construction de la requete
      */
     processRequestString : function () {
         this.logger.trace("WPS::processRequestString ()");
@@ -240,7 +240,7 @@ WPS.prototype = {
     /**
      * Ajout des données
      *
-     * @returns {String}
+     * @returns {String} Données concaténées dans une chaine
      */
     __addDataInputs : function () {
         this.logger.trace("WPS::__addDataInputs ()");
@@ -266,12 +266,12 @@ WPS.prototype = {
     },
 
     /**
-     * Ajout d'une données.
+     * Ajout d'une donnée.
      *
      * @param {String} tmpl - template
      * @param {String} key - clef
      * @param {String} data - valeur
-     * @returns {String}
+     * @returns {String} chaine avec les substitutions clef/valeur
      */
     __addDataInput : function (tmpl, key, data) {
         var tmp = tmpl;
@@ -296,7 +296,7 @@ WPS.prototype = {
     /**
      * Retourne le mode de requete (GET|POST).
      *
-     * @returns {AltiRequest.options.mode|String}
+     * @returns {AltiRequest.options.mode|String} methode (GET|POST)
      */
     getMethod : function () {
         return this.method;

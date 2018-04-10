@@ -68,7 +68,7 @@ module.exports = env => {
                 amd : "require"
             }
         },
-        devtool : (_production) ? false : "source-map",
+        devtool : (_production) ? false : "eval-source-map",
         module : {
             loaders : [
                 {
@@ -221,9 +221,9 @@ module.exports = env => {
             /** DEVTOOL */
             // .concat(
             //     (!_production) ? [
-            //     new SourceMapDevToolWebpackPlugin({
-            //         filename: 'GpServices-src.js.map'
-            //     })] : []
+            //         new SourceMapDevToolWebpackPlugin({
+            //             filename: 'GpServices-src.js.map'
+            //         })] : []
             // )
             /** MINIFICATION */
             .concat(

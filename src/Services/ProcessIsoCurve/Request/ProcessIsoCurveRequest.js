@@ -170,7 +170,7 @@ ProcessIsoCurveRequest.prototype = {
      *   //   <holes></holes>
      *   // </isochroneRequest>
      *
-     * @returns {String}
+     * @returns {String} request
      */
     processRequestString : function () {
         var request = "";

@@ -63,7 +63,7 @@ Preference.prototype = {
 /**
  * toString
  *
- * @returns {String}
+ * @returns {String} requête
  */
 Preference.prototype.toString = function () {
     var Preferences = [];

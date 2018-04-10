@@ -97,7 +97,11 @@ Geometry.prototype = {
         multipolygon : "<Polygon></Polygon>"
     },
 
-    /** choix du template GML */
+    /**
+    * choix du template GML
+    * @param {String} name - nom du template
+    * @returns {String} le template avec les substitutions clef/valeur
+    */
     getTemplate : function (name) {
         var template = this.template[name];
 
@@ -130,7 +134,10 @@ Geometry.prototype = {
         return template;
     },
 
-    /** creation d'un point */
+    /**
+    * creation d'un point
+    * @returns {String} le template avec les substitutions clef/valeur
+    */
     toPoint : function () {
         var data = this.options.data;
 
@@ -148,7 +155,10 @@ Geometry.prototype = {
         return template;
     },
 
-    /** creation d'une bbox */
+    /**
+    * creation d'une bbox
+    * @returns {String} le template avec les substitutions clef/valeur
+    */
     toEnvelop : function () {
         var data = this.options.data;
         if (!data.left || !data.bottom || !data.right || !data.top) {
@@ -162,7 +172,10 @@ Geometry.prototype = {
         return template;
     },
 
-    /** creation d'un cercle */
+    /**
+    * creation d'un cercle
+    * @returns {String} le contenu du template
+    */
     toCircle : function () {
         var data = this.options.data;
         if (!data.x || !data.y || !data.radius) {
@@ -175,7 +188,10 @@ Geometry.prototype = {
         return template;
     },
 
-    /** creation d'un polygone */
+    /**
+    * creation d'un polygone
+    * @returns {String} le contenu du template
+    */
     toPolygon : function () {
         var data = this.options.data;
         if (data.length === 0) {
@@ -209,13 +225,16 @@ Geometry.prototype = {
         return template;
     },
 
-    /** creation d'un polygone */
+    /**
+    * creation d'un polygone
+    */
     toMultiPolygon : function () {
         throw new Error("Not yet implemented !");
     },
 
     /**
      * to string
+     * @returns {String} le contenu du template
      */
     toString : function () {
         var result = null;

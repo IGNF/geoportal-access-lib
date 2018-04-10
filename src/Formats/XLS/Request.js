@@ -81,6 +81,7 @@ Request.prototype = {
 
     /**
      * an rfc4122 version 4 compliant guid
+     * @returns {String} guid
      */
     guid : function () {
         // INFO
@@ -94,6 +95,7 @@ Request.prototype = {
 
     /**
      * toString
+     * @returns {String} requête
      */
     toString : function () {
         var template = null;

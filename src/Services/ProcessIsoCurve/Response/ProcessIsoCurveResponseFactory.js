@@ -102,11 +102,11 @@ var ProcessIsoCurveResponseFactory = {
                                 data.message = JSONResponse.message;
                                 data.id = JSONResponse.id;
                                 data.srs = JSONResponse.srs;
-                                /** callback de la reponse */
+                                // callback de la reponse
                                 var onWKTSuccess = function (json) {
                                     data.geometry = json;
                                 };
-                                /** callback d'erreur */
+                                // callback d'erreur
                                 var onWKTError = function () {
                                     options.onError.call(options.scope, new ErrorService({
                                         message : MRes.getMessage("PARAM_FORMAT", "wktGeometry")

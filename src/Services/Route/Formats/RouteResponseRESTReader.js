@@ -33,7 +33,11 @@ var RouteResponseRESTReader = {};
 
 RouteResponseRESTReader.READERS = {
 
-    /** TODO : jsdoc block */
+    /**
+     * Route response
+     * @param {Object} node - node
+     * @returns {Object} response
+     */
     routeResult : function (node) {
         var response = new RouteResponse();
 
@@ -53,7 +57,11 @@ RouteResponseRESTReader.READERS = {
         return response;
     },
 
-    /** TODO : jsdoc block */
+    /**
+     * Route status
+     * @param {Object} node - node
+     * @param {Object} response - response
+     */
     status : function (node, response) {
         var status = __getChildValue(node);
         if (status === "ERROR" || status === "error") {
@@ -63,28 +71,44 @@ RouteResponseRESTReader.READERS = {
         }
     },
 
-    /** TODO : jsdoc block */
+    /**
+     * Route message
+     * @param {Object} node - node
+     * @param {Object} response - response
+     */
     message : function (node, response) {
         if (response) {
             response.message = __getChildValue(node);
         }
     },
 
-    /** TODO : jsdoc block */
+    /**
+     * Route distance
+     * @param {Object} node - node
+     * @param {Object} response - response
+     */
     distance : function (node, response) {
         if (response) {
             response.totalDistance = __getChildValue(node);
         }
     },
 
-    /** TODO : jsdoc block */
+    /**
+     * Route duration
+     * @param {Object} node - node
+     * @param {Object} response - response
+     */
     durationSeconds : function (node, response) {
         if (response) {
             response.totalTime = parseFloat(__getChildValue(node));
         }
     },
 
-    /** TODO : jsdoc block */
+    /**
+     * Route bounds
+     * @param {Object} node - node
+     * @param {Object} response - response
+     */
     bounds : function (node, response) {
         // get value et split et parseFloat
         if (response && response.bbox) {
@@ -96,17 +120,19 @@ RouteResponseRESTReader.READERS = {
         }
     },
 
-    /** TODO : jsdoc block */
+    /**
+     * Route geometry
+     * @param {Object} node - node
+     * @param {Object} response - response
+     */
     geometryWkt : function (node, response) {
         if (response) {
             var geomWkt = node.innerHTML;
 
-            /** TODO : jsdoc block */
             var onWKTSuccess = function (json) {
                 response.routeGeometry = json;
             };
 
-            /** TODO : jsdoc block */
             var onWKTError = function () {
                 var msg = MessagesResources.getMessage("PARAM_FORMAT", ["geometryWkt"]);
                 throw new Error(msg);
@@ -116,7 +142,11 @@ RouteResponseRESTReader.READERS = {
         }
     },
 
-    /** TODO : jsdoc block */
+    /**
+     * Route step
+     * @param {Object} node - node
+     * @param {Object} response - response
+     */
     step : function (node, response) {
         // création d'une nouvelle instruction
         var routeInstruction = new RouteInstruction();
@@ -200,7 +230,16 @@ RouteResponseRESTReader.READERS = {
 
 };
 
-/** TODO : jsdoc block */
+/**
+ * Méthode permettant de lancer la lecture d'une réponse XML du service de calcul d'itineraire,
+ * à l'aide des readers de la classe.
+ *
+ * @method RouteResponseRESTReader.read
+ * @param {DOMElement} root - racine de la réponse XML à lire
+ * @static
+ * @memberof RouteResponseRESTReader
+ * @returns {DOMElement} response
+ */
 RouteResponseRESTReader.read = function (root) {
     var response;
 

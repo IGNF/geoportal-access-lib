@@ -194,7 +194,7 @@ Address.prototype = {
 /**
  * toString
  *
- * @returns {String}
+ * @returns {String} requête
  */
 Address.prototype.toString = function () {
     var template = null;
