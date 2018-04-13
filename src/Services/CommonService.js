@@ -67,10 +67,10 @@ import DefaultUrlService from "./DefaultUrlService";
  *      (code HTTP de retour différent de 200 ou pas de réponse).
  *
  * @param {Function} [options.onBeforeParse] - Fonction appelée avant le parsing de la réponse
- *      Permet de modifier la réponse avant parsing si la fonction retourne une String.
- *      Cette fonction prend en paramètre la réponse XML telle que renvoyée par le service,
- *      sous la forme d'une chaîne de caractères (comportement par défaut).
- *      Si le paramètre "rawResponse" a été précisé avec la valeur "true",
+ *      Permet de modifier la réponse avant parsing et la fonction doit retourner une String.
+ *      Cette fonction prend en paramètre la réponse telle que renvoyée par le service
+ *      (cad au format json ou xml).
+ *      Pour le JSONP, si le paramètre "rawResponse" a été précisé avec la valeur "true",
  *      la fonction prend en paramètre un Object JavaScript contenant la réponse XML.
  *
  * @example
@@ -286,19 +286,19 @@ CommonService.prototype = {
 
         run.call(context);
 
-        /** callback de fin de construction de la requête */
+        // callback de fin de construction de la requête
         function onBuildRequest (result) {
             this.logger.trace("CommonService::onBuildRequest : ", result);
             this.callService.call(context, onError, onCallService);
         }
 
-        /** callback de fin d'appel au service */
+        // callback de fin d'appel au service
         function onCallService (result) {
             this.logger.trace("CommonService::onCallService : ", result);
             this.analyzeResponse.call(context, onError, onAnalyzeResponse);
         }
 
-        /** callback de fin de lecture de la reponse */
+        // callback de fin de lecture de la reponse
         function onAnalyzeResponse (result) {
             this.logger.trace("CommonService::onAnalyzeResponse : ", result);
             if (result) {
@@ -308,7 +308,7 @@ CommonService.prototype = {
             }
         }
 
-        /** callback de gestion des erreurs : renvoit un objet de type ErrorService */
+        // callback de gestion des erreurs : renvoit un objet de type ErrorService
         function onError (error) {
             this.logger.trace("CommonService::onError()");
             // error : l'objet est du type ErrorService ou Error
@@ -322,6 +322,8 @@ CommonService.prototype = {
 
     /**
      * Création de la requête
+     * @param {Function} error - callback
+     * @param {Function} success - callback
      */
     buildRequest : function (error, success) {
         // INFO
@@ -335,6 +337,8 @@ CommonService.prototype = {
 
     /**
      * Appel du service
+     * @param {Function} error - callback
+     * @param {Function} success - callback
      */
     callService : function (error, success) {
         // INFO
@@ -400,26 +404,26 @@ CommonService.prototype = {
             headers : null, // TODO...
             content : this.options.contentType || "application/xml",
             scope : this.options.scope || this,
-            /** callback de reponse */
+            // callback de reponse
             onResponse : function (response) {
                 self.logger.trace("callService::onResponse()");
 
                 // le contenu de la reponse à renvoyer !
                 var content = null;
 
-                // XHR : on renvoie la reponse brute (string)
+                // XHR : on renvoie la reponse brute (json, texte ou xml)
                 if (self.options.protocol === "XHR") {
-                    // on ne peut pas savoir si la reponse est en XML ou JSON
-                    // donc on laisse le boulot à l'analyse de la reponse !
-                    content = response;
+                    self.logger.trace("Response XHR", response);
+                    content = response; // par defaut, la reponse du service  !
                 }
 
                 // JSONP : on doit analyser le contenu (json)
                 if (self.options.protocol === "JSONP") {
                     self.logger.trace("Response JSON", response);
                     if (response) {
-                        // reponse encapsulée : {http : {status:200, error:null},xml :'réponse du service'}
                         if (response.http) {
+                            // reponse encapsulée : ex. reponse du service en xml
+                            // > {http : {status:200, error:null},xml :'réponse du service'}
                             if (response.http.status !== 200) {
                                 error.call(self, new ErrorService({
                                     status : response.http.status,
@@ -432,19 +436,24 @@ CommonService.prototype = {
                                 if (self.options.rawResponse) {
                                     content = response;
                                 }
-                                if (typeof self.options.onBeforeParse === "function") {
-                                    var newResponse = self.options.onBeforeParse(content);
-                                    if (typeof newResponse === "string") {
-                                        content = newResponse;
-                                    }
-                                }
                             }
                         } else {
+                            // reponse non encapsulée : ex. reponse du service en json
                             content = response;
                         }
                     } else {
                         error.call(self, new ErrorService("Le contenu de la reponse est vide !?"));
                         return;
+                    }
+                }
+
+                // si on souhaite parser la reponse du service
+                if (typeof self.options.onBeforeParse === "function") {
+                    var newResponse = self.options.onBeforeParse(content);
+                    if (typeof newResponse === "string") {
+                        // la reponse parsée par l'utilisateur est retournée sous
+                        // forme de string !
+                        content = newResponse;
                     }
                 }
 
@@ -454,14 +463,14 @@ CommonService.prototype = {
                 // on renvoie la reponse...
                 success.call(self, content);
             },
-            /** callback des erreurs */
+            // callback des erreurs
             onFailure : function (e) {
                 self.logger.trace("callService::onFailure()");
                 // on est forcement sur une erreur levée par un service !
                 e.type = ErrorService.TYPE_SRVERR;
                 error.call(self, new ErrorService(e));
             },
-            /** callback de timeOut */
+            // callback de timeOut
             onTimeOut : function () {
                 self.logger.trace("callService::onTimeOut()");
                 error.call(self, new ErrorService("TimeOut!"));
@@ -473,6 +482,8 @@ CommonService.prototype = {
 
     /**
      * Analyse de la réponse
+     * @param {Function} error - callback
+     * @param {Function} success - callback
      */
     analyzeResponse : function (error, success) {
         // INFO
