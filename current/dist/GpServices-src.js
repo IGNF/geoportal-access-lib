@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN
  * @version 2.0.0
- * @date 2018-04-05
+ * @date 2018-04-13
  *
  */
 /*!
@@ -370,10 +370,10 @@ ErrorService.prototype = Object.create(Error.prototype, {
  *      (code HTTP de retour différent de 200 ou pas de réponse).
  *
  * @param {Function} [options.onBeforeParse] - Fonction appelée avant le parsing de la réponse
- *      Permet de modifier la réponse avant parsing si la fonction retourne une String.
- *      Cette fonction prend en paramètre la réponse XML telle que renvoyée par le service,
- *      sous la forme d'une chaîne de caractères (comportement par défaut).
- *      Si le paramètre "rawResponse" a été précisé avec la valeur "true",
+ *      Permet de modifier la réponse avant parsing et la fonction doit retourner une String.
+ *      Cette fonction prend en paramètre la réponse telle que renvoyée par le service
+ *      (cad au format json ou xml).
+ *      Pour le JSONP, si le paramètre "rawResponse" a été précisé avec la valeur "true",
  *      la fonction prend en paramètre un Object JavaScript contenant la réponse XML.
  *
  * @example
@@ -589,19 +589,19 @@ CommonService.prototype = {
 
         run.call(context);
 
-        /** callback de fin de construction de la requête */
+        // callback de fin de construction de la requête
         function onBuildRequest (result) {
             this.logger.trace("CommonService::onBuildRequest : ", result);
             this.callService.call(context, onError, onCallService);
         }
 
-        /** callback de fin d'appel au service */
+        // callback de fin d'appel au service
         function onCallService (result) {
             this.logger.trace("CommonService::onCallService : ", result);
             this.analyzeResponse.call(context, onError, onAnalyzeResponse);
         }
 
-        /** callback de fin de lecture de la reponse */
+        // callback de fin de lecture de la reponse
         function onAnalyzeResponse (result) {
             this.logger.trace("CommonService::onAnalyzeResponse : ", result);
             if (result) {
@@ -611,7 +611,7 @@ CommonService.prototype = {
             }
         }
 
-        /** callback de gestion des erreurs : renvoit un objet de type ErrorService */
+        // callback de gestion des erreurs : renvoit un objet de type ErrorService
         function onError (error) {
             this.logger.trace("CommonService::onError()");
             // error : l'objet est du type ErrorService ou Error
@@ -625,6 +625,8 @@ CommonService.prototype = {
 
     /**
      * Création de la requête
+     * @param {Function} error - callback
+     * @param {Function} success - callback
      */
     buildRequest : function (error, success) {
         // INFO
@@ -638,15 +640,16 @@ CommonService.prototype = {
 
     /**
      * Appel du service
+     * @param {Function} error - callback
+     * @param {Function} success - callback
      */
     callService : function (error, success) {
         // INFO
         // retourne l'objet 'this.response'
 
         // NOTES
-        //  Pour le mode XHR, on recupère une reponse sous forme d'une string. Le content
-        //  est donc du JSON natif ou du XML en fonction du service demandé (pas d'encapsulation !).
-        //  Pour le mode JSONP, on a toujours un objet JSON mais sous 2 formats :
+        //  Pour le mode XHR, on recupère une reponse sous forme d'un json ou xml (#document).
+        //  Pour le mode JSONP, on a toujours un objet JSON mais sous 2 formes :
         //      - natif
         //      - XML encapsulé :
         //          {http : {status:200, error:null},xml :'réponse du service'}
@@ -664,11 +667,7 @@ CommonService.prototype = {
         var bUrlProxified = !!((this.options.proxyURL && this.options.protocol === "XHR"));
 
         // rajout de l'option gpbibaccess
-        // FIXME : acces au numero de version de package.conf
-        /*
-        var scope = typeof window !== "undefined" ? window : {};
-        var servicesVersion = scope.Gp ? scope.Gp.servicesVersion : "2.0.0";
-        */
+        // INFO : acces au numero de version de package.conf aprés compilation !
         this.options.serverUrl = __WEBPACK_IMPORTED_MODULE_1__Utils_Helper__["a" /* default */].normalyzeUrl(this.options.serverUrl, {
             "gp-access-lib" : "2.0.0"
         }, false);
@@ -703,26 +702,29 @@ CommonService.prototype = {
             headers : null, // TODO...
             content : this.options.contentType || "application/xml",
             scope : this.options.scope || this,
-            /** callback de reponse */
+            // callback de reponse
             onResponse : function (response) {
                 self.logger.trace("callService::onResponse()");
 
                 // le contenu de la reponse à renvoyer !
                 var content = null;
 
-                // XHR : on renvoie la reponse brute (string)
+                // XHR : on renvoie toujours la reponse brute du service (json ou xml)
+                // au parser du composant...
                 if (self.options.protocol === "XHR") {
-                    // on ne peut pas savoir si la reponse est en XML ou JSON
-                    // donc on laisse le boulot à l'analyse de la reponse !
-                    content = response;
+                    self.logger.trace("Response XHR", response);
+                    content = response; // par defaut, la reponse du service  !
                 }
 
-                // JSONP : on doit analyser le contenu (json)
+                // JSONP : on pre-analyse la reponse brute du service (encapsuler ou pas)
+                // avant de l'envoyer au parser du composant...
                 if (self.options.protocol === "JSONP") {
                     self.logger.trace("Response JSON", response);
                     if (response) {
-                        // reponse encapsulée : {http : {status:200, error:null},xml :'réponse du service'}
                         if (response.http) {
+                            // reponse encapsulée :
+                            // ex. reponse du service en xml
+                            // > {http : {status:200, error:null},xml :'réponse du service'}
                             if (response.http.status !== 200) {
                                 error.call(self, new __WEBPACK_IMPORTED_MODULE_4__Exceptions_ErrorService__["a" /* default */]({
                                     status : response.http.status,
@@ -735,14 +737,10 @@ CommonService.prototype = {
                                 if (self.options.rawResponse) {
                                     content = response;
                                 }
-                                if (typeof self.options.onBeforeParse === "function") {
-                                    var newResponse = self.options.onBeforeParse(content);
-                                    if (typeof newResponse === "string") {
-                                        content = newResponse;
-                                    }
-                                }
                             }
                         } else {
+                            // reponse non encapsulée :
+                            // ex. reponse du service en json ou xml
                             content = response;
                         }
                     } else {
@@ -751,20 +749,28 @@ CommonService.prototype = {
                     }
                 }
 
+                // si on souhaite parser la reponse du service
+                if (typeof self.options.onBeforeParse === "function") {
+                    var newResponse = self.options.onBeforeParse(content);
+                    if (typeof newResponse === "string") {
+                        // la reponse parsée par l'utilisateur est retournée sous
+                        // forme de string !
+                        content = newResponse;
+                    }
+                }
                 // sauvegarde de la reponse dans l'objet parent (CommonService)
                 self.response = content;
-
                 // on renvoie la reponse...
                 success.call(self, content);
             },
-            /** callback des erreurs */
+            // callback des erreurs
             onFailure : function (e) {
                 self.logger.trace("callService::onFailure()");
                 // on est forcement sur une erreur levée par un service !
                 e.type = __WEBPACK_IMPORTED_MODULE_4__Exceptions_ErrorService__["a" /* default */].TYPE_SRVERR;
                 error.call(self, new __WEBPACK_IMPORTED_MODULE_4__Exceptions_ErrorService__["a" /* default */](e));
             },
-            /** callback de timeOut */
+            // callback de timeOut
             onTimeOut : function () {
                 self.logger.trace("callService::onTimeOut()");
                 error.call(self, new __WEBPACK_IMPORTED_MODULE_4__Exceptions_ErrorService__["a" /* default */]("TimeOut!"));
@@ -776,6 +782,8 @@ CommonService.prototype = {
 
     /**
      * Analyse de la réponse
+     * @param {Function} error - callback
+     * @param {Function} success - callback
      */
     analyzeResponse : function (error, success) {
         // INFO
@@ -5352,7 +5360,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var Gp = {
     servicesVersion : "2.0.0",
-    servicesDate : "2018-04-05",
+    servicesDate : "2018-04-13",
     /**
      * Methode pour rajouter une classe / objet au namespace global.
      *
