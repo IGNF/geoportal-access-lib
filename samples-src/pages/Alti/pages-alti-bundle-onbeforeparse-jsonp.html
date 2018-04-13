@@ -1,0 +1,40 @@
+{{#extend "layout-sample-bundle"}}
+
+{{#content "head"}}
+        <title>Service de Calcul Altimétrique</title>
+{{/content}}
+
+{{#content "style"}}
+        <style></style>
+{{/content}}
+
+{{#content "body"}}
+        <h1>Utilisation du Service de Calcul Altimétrique</h1>
+        <h2>Avec les paramètres obligatoires seulement</h2>
+{{/content}}
+
+{{#content "js"}}
+        var options = {
+            apiKey : "{{ config.apiKey }}",
+            protocol : "JSONP",
+            outputFormat : "json",
+            onSuccess : function (response) {
+                print(response.elevations);
+            },
+            onBeforeParse : function (response) {
+                console.log(response);
+                // some stuff...
+                // ex. response.elevations[0].property = "new";
+                return (typeof response === "string")
+                    ? response
+                    : JSON.stringify(response);
+            },
+            // spécifique au service
+            positions : [{
+                lon : 1.25,
+                lat : 47.48
+            }]
+        };
+        Gp.Services.getAltitude(options);
+{{/content}}
+{{/extend}}
