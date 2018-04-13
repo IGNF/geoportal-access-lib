@@ -5,17 +5,17 @@
   "main": "dist/GpServices.js, dist/GpServices-src.js, dist/GpServices-src.js.map",
   "homepage": "https://github.com/IGNF/geoportal-access-lib#readme",
   "scripts": {
-    "clean": "echo \"Warning: no yet implemented!\" && exit 1",
+    "clean": "echo \"Warning: no yet implemented!\" && exit 0",
     "setup": "npm install",
     "build": "webpack",
     "build:prod": "webpack --env.production",
     "test": "mocha-webpack --webpack-config webpack.test.js --glob \"test_*.js\" test/spec/",
     "test:serve": "webpack-dev-server --hot --config webpack.test.serve.js",
     "test:end-to-end:serve": "webpack-dev-server --hot --config webpack.end-to-end.serve.js",
-    "sample": "echo \"Warning: no yet implemented!\" && exit 1",
+    "sample": "echo \"Warning: no yet implemented!\" && exit 0",
     "sample:serve": "webpack-dev-server --open-page samples/index-src.html --contentBase . --port 9001 --open",
     "sample:serve:prod": "webpack-dev-server --open-page samples/index.html --contentBase . --port 9001 --open --env.production",
-    "doc": "echo \"Warning: no yet implemented!\" && exit 1",
+    "doc": "echo \"Warning: no yet implemented!\" && exit 0",
     "doc:serve": "webpack-dev-server --contentBase jsdoc --port 9001 --open"
   },
   "repository": {
