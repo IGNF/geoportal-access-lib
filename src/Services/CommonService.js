@@ -345,9 +345,8 @@ CommonService.prototype = {
         // retourne l'objet 'this.response'
 
         // NOTES
-        //  Pour le mode XHR, on recupère une reponse sous forme d'une string. Le content
-        //  est donc du JSON natif ou du XML en fonction du service demandé (pas d'encapsulation !).
-        //  Pour le mode JSONP, on a toujours un objet JSON mais sous 2 formats :
+        //  Pour le mode XHR, on recupère une reponse sous forme d'un json ou xml (#document).
+        //  Pour le mode JSONP, on a toujours un objet JSON mais sous 2 formes :
         //      - natif
         //      - XML encapsulé :
         //          {http : {status:200, error:null},xml :'réponse du service'}
@@ -365,11 +364,7 @@ CommonService.prototype = {
         var bUrlProxified = !!((this.options.proxyURL && this.options.protocol === "XHR"));
 
         // rajout de l'option gpbibaccess
-        // FIXME : acces au numero de version de package.conf
-        /*
-        var scope = typeof window !== "undefined" ? window : {};
-        var servicesVersion = scope.Gp ? scope.Gp.servicesVersion : "__GPVERSION__";
-        */
+        // INFO : acces au numero de version de package.conf aprés compilation !
         this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, {
             "gp-access-lib" : "__GPVERSION__"
         }, false);
@@ -411,18 +406,21 @@ CommonService.prototype = {
                 // le contenu de la reponse à renvoyer !
                 var content = null;
 
-                // XHR : on renvoie la reponse brute (json, texte ou xml)
+                // XHR : on renvoie toujours la reponse brute du service (json ou xml)
+                // au parser du composant...
                 if (self.options.protocol === "XHR") {
                     self.logger.trace("Response XHR", response);
                     content = response; // par defaut, la reponse du service  !
                 }
 
-                // JSONP : on doit analyser le contenu (json)
+                // JSONP : on pre-analyse la reponse brute du service (encapsuler ou pas)
+                // avant de l'envoyer au parser du composant...
                 if (self.options.protocol === "JSONP") {
                     self.logger.trace("Response JSON", response);
                     if (response) {
                         if (response.http) {
-                            // reponse encapsulée : ex. reponse du service en xml
+                            // reponse encapsulée :
+                            // ex. reponse du service en xml
                             // > {http : {status:200, error:null},xml :'réponse du service'}
                             if (response.http.status !== 200) {
                                 error.call(self, new ErrorService({
@@ -438,7 +436,8 @@ CommonService.prototype = {
                                 }
                             }
                         } else {
-                            // reponse non encapsulée : ex. reponse du service en json
+                            // reponse non encapsulée :
+                            // ex. reponse du service en json ou xml
                             content = response;
                         }
                     } else {
@@ -456,10 +455,8 @@ CommonService.prototype = {
                         content = newResponse;
                     }
                 }
-
                 // sauvegarde de la reponse dans l'objet parent (CommonService)
                 self.response = content;
-
                 // on renvoie la reponse...
                 success.call(self, content);
             },

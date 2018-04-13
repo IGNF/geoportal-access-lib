@@ -17,13 +17,17 @@
         var options = {
             apiKey : "{{ config.apiKey }}",
             protocol : "JSONP",
-            outputFormat : "xml",
+            outputFormat : "json",
             onSuccess : function (response) {
                 print(response.elevations);
             },
             onBeforeParse : function (response) {
                 console.log(response);
-                return (typeof response === "string") ? response : JSON.stringify(response);
+                // some stuff...
+                // ex. response.elevations[0].property = "new";
+                return (typeof response === "string")
+                    ? response
+                    : JSON.stringify(response);
             },
             // spécifique au service
             positions : [{
