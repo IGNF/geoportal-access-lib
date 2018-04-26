@@ -41,6 +41,16 @@ Prérequis : [NodeJS](https://nodejs.org/en/) et [npm](https://www.npmjs.com/) i
 npm install geoportal-access-lib
 ```
 
+#### Accès direct
+
+Vous pouvez aussi choisir d'utiliser des fichiers hébergés en ligne, pour y accéder directement, lors de vos tests par exemple. Cependant, pour une utilisation en production, nous vous conseillons de télécharger ces fichiers et de les héberger vous-même, sur le même serveur qui héberge votre application.
+
+Par exemple sur Github Pages :
+
+https://ignf.github.io/geoportal-access-lib/latest/dist/GpServices.js
+https://ignf.github.io/geoportal-access-lib/latest/dist/GpServices-src.js
+
+
 ### Intégration dans une page web
 
 Intégrez la bibliothèque d'accès dans votre page WEB classiquement à l'aide d'une balise **script**.
