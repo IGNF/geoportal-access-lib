@@ -149,19 +149,31 @@ Mais il est aussi possible de les executer autrement :
 Le navigateur s'ouvre sur la page des exemples sur l'URL suivante :
 http://localhost:9001/
 
-### Les tests unitaires
+### Les tests
 
-#### Tests en mode console
+#### Unitaires
+
+##### en mode console
 
 **ouvrir une console :**
 
     npm run test
 
-#### Tests dans un navigateur
+##### dans un navigateur
 
 **ouvrir une console :**
 
     npm run test:serve
+
+Le navigateur s'ouvre sur la page des tests sur l'URL suivante :
+http://localhost:9001/
+
+#### Fonctionnels
+
+**ouvrir une console :**
+
+    npm run test:end-to-end:serve
+    npm run test:end-to-end:serve -- --env.mock
 
 Le navigateur s'ouvre sur la page des tests sur l'URL suivante :
 http://localhost:9001/

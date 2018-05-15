@@ -23,7 +23,7 @@
 
 {{#content "js"}}
       var span = null ;
-      var key = "{{ config.apiKey }}";
+      var key = "{{ apikey }}";
       // alti
       span = document.getElementById("alti") ;
       span.innerHTML = JSON.stringify(Gp.Services.DefaultUrl.Alti.url(key)) ;

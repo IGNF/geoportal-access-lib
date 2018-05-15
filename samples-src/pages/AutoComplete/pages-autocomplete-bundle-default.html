@@ -11,11 +11,24 @@
 {{#content "body"}}
         <h1>Utilisation du Service d'autocompletion</h1>
         <h2>Avec les paramètres obligatoires seulement</h2>
+        <pre>
+          <code>
+              var options = {
+                apiKey : "{{ apikey }}",
+                onSuccess : function (response) {
+                    print(response);
+                },
+                // spécifique au service
+                text : "Saint-Man"
+            };
+            Gp.Services.autoComplete(options);
+          </code>
+        </pre>
 {{/content}}
 
 {{#content "js"}}
         var options = {
-            apiKey : "{{ config.apiKey }}",
+            apiKey : "{{ apikey }}",
             onSuccess : function (response) {
                 print(response);
             },

@@ -6,7 +6,7 @@
 ##########
 # doCmd()
 
-doCmd () {
+function doCmd() {
     cmd2issue=$1
     eval ${cmd2issue}
     retour=$?
@@ -19,10 +19,20 @@ doCmd () {
 ##########
 # printTo()
 
-printTo () {
+function printTo() {
     text=$1
     d=`date`
     echo "[${d}] ${text}"
+}
+
+##########
+# clean()
+
+function clean() {
+    printTo "####### CLEAN !"
+    doCmd "rm -rf dist"
+    doCmd "rm -rf samples"
+    doCmd "rm -rf jsdoc"
 }
 
 printTo "BEGIN"
@@ -37,7 +47,8 @@ function sources() {
   doCmd "npm run build"
 }
 
-# doCmd "npm run clean"
+clean
+doCmd "npm run clean"
 doCmd "npm run setup"
 
 while getopts "aps" opts

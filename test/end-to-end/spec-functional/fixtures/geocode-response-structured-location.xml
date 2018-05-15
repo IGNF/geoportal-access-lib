@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XLS version="1.2" xmlns="http://www.opengis.net/xls"
+  xmlns:gml="http://www.opengis.net/gml"
+  xmlns:xls="http://www.opengis.net/xls"
+  xmlns:xlsext="http://www.opengis.net/xlsext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://wxs.ign.fr/schemas/olsAll.xsd">
+  <ResponseHeader/>
+  <Response requestID="a036f4ad-6a8f-4fae-bb68-027e3c4911b6" version="1.2">
+    <GeocodeResponse>
+      <GeocodeResponseList numberOfGeocodedAddresses="1">
+        <GeocodedAddress>
+          <gml:Point>
+            <gml:pos>48.843488 2.423181</gml:pos>
+          </gml:Point>
+          <Address countryCode="StreetAddress">
+            <StreetAddress>
+              <Building number="2"/>
+              <Street>av pasteur</Street>
+            </StreetAddress>
+            <Place type="Municipality">Saint-Mandé</Place>
+            <Place type="Qualite">2.5</Place>
+            <Place type="Departement">94</Place>
+            <Place type="Bbox">2.423043;48.843300;2.423181;48.843706</Place>
+            <Place type="Commune">Saint-Mandé</Place>
+            <Place type="INSEE">94067</Place>
+            <Place type="Territoire">FXX</Place>
+            <Place type="ID_TR">TRONROUT0000000004406492</Place>
+            <PostalCode>94160</PostalCode>
+          </Address>
+          <GeocodeMatchCode accuracy="0.9495000000000001" matchType="Street number"/>
+        </GeocodedAddress>
+      </GeocodeResponseList>
+    </GeocodeResponse>
+  </Response>
+</XLS>

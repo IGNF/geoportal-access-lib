@@ -306,7 +306,7 @@ XLS.prototype = {
     /**
      * Namespace par defaut.
      *
-     * @returns {String}
+     * @returns {String} namespace
      */
     namespaceByDefault : function () {
         var ns = [
@@ -321,7 +321,7 @@ XLS.prototype = {
     /**
      * Schemalocation par defaut
      *
-     * @returns {String}
+     * @returns {String} schemaLocation
      */
     schemaLocationByDefault : function () {
         return "xsi:schemaLocation=\"http://www.opengis.net/xls http://schemas.opengis.net/ols/1.2/olsAll.xsd\"";
@@ -351,7 +351,7 @@ XLS.prototype = {
      * Retourne un objet de type LocationUtilityService (LUS) ou RouteService
      * ex. GeoceodeRequest / ReverseGeocodeRequest ou RouteRequest
      *
-     * @returns {Object}
+     * @returns {Object} service (LocationUtilityService|RouteService)
      */
     getService : function () {
         return this.oService;
@@ -363,6 +363,8 @@ XLS.prototype = {
  *
  * @todo impl. l'ajout de namespace
  * @param {Object} ns - ex. {key:xls, url:http://www.opengis.net/xls}
+ * @param {String} request - requête
+ * @returns {String} requête
  */
 XLS.prototype.addNamespace = function (ns, request) {
     // INFO
@@ -417,6 +419,7 @@ XLS.prototype.addNamespace = function (ns, request) {
 
 /**
  * Construction de la requête
+ * @returns {String} requête
  */
 XLS.prototype.build = function () {
     // out ->

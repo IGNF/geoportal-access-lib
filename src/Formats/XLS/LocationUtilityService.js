@@ -146,7 +146,7 @@ LocationUtilityService.prototype.addFilter = function (oFilter) {
 /**
  * (overwrite) toString
  *
- * @returns {String}
+ * @returns {String} requête
  */
 LocationUtilityService.prototype.toString = function () {
     // soit, on a un objet LUS Request déjà instancié

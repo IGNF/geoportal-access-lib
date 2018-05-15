@@ -11,11 +11,24 @@
 {{#content "body"}}
         <h1>Utilisation du Service d'autoconfiguration</h1>
         <h2>Avec un fichier d'autoconfiguration local</h2>
+        <pre>
+          <code>
+              var options = {
+                serverUrl : '{{ resources }}/AutoConf.js',
+                callbackSuffix : "",
+                rawResponse : true,
+                onSuccess : function (response) {
+                    print(response);
+                }
+            };
+            Gp.Services.getConfig(options);
+          </code>
+        </pre>
 {{/content}}
 
 {{#content "js"}}
         var options = {
-            serverUrl : '{{ config.resources }}/AutoConf.js',
+            serverUrl : '{{ resources }}/AutoConf.js',
             callbackSuffix : "",
             rawResponse : true,
             onSuccess : function (response) {

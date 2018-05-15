@@ -56,14 +56,14 @@ var WKT = {
             }
 
             if (!success) {
-                /** callback success par defaut */
+                // callback success par defaut
                 success = function (json) {
                     console.log(json);
                 };
             }
 
             if (!error) {
-                /** callback error par defaut */
+                // callback error par defaut
                 error = function (e) {
                     console.log(e);
                 };

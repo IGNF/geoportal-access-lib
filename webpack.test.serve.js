@@ -8,7 +8,7 @@ var DefineWebpackPlugin = webpack.DefinePlugin;
 
 module.exports = {
     entry : {
-        tests : path.join(__dirname, "test")
+        tests : path.join(__dirname, "test", "index.js")
     },
     output : {
         path : path.join(__dirname, "test"),
@@ -16,7 +16,7 @@ module.exports = {
         libraryTarget : "umd"
     },
     externals : ["request", "xmldom"],
-    devtool : "source-map",
+    devtool : "eval-source-map",
     devServer : {
         stats : "errors-only",
         host : "localhost",
