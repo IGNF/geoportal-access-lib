@@ -11,11 +11,37 @@
 {{#content "body"}}
         <h1>Utilisation du Service de Calcul Altimétrique</h1>
         <h2>Avec les paramètres obligatoires seulement</h2>
+        <pre>
+          <code>
+              var options = {
+                  apiKey : "{{ apikey }}",
+                  protocol : "JSONP",
+                  outputFormat : "json",
+                  onSuccess : function (response) {
+                      print(response.elevations);
+                  },
+                  onBeforeParse : function (response) {
+                      console.log(response);
+                      // some stuff...
+                      // ex. response.elevations[0].property = "new";
+                      return (typeof response === "string")
+                          ? response
+                          : JSON.stringify(response);
+                  },
+                  // spécifique au service
+                  positions : [{
+                      lon : 1.25,
+                      lat : 47.48
+                  }]
+              };
+              Gp.Services.getAltitude(options);
+          </code>
+        </pre>
 {{/content}}
 
 {{#content "js"}}
         var options = {
-            apiKey : "{{ config.apiKey }}",
+            apiKey : "{{ apikey }}",
             protocol : "JSONP",
             outputFormat : "json",
             onSuccess : function (response) {

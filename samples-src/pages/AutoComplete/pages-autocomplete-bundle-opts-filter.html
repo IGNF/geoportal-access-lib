@@ -11,6 +11,23 @@
 {{#content "body"}}
         <h1>Utilisation du Service d'autocompletion</h1>
         <h2>Avec les paramètres : filtre par territoire (DOMTOM) et POI uniquement</h2>
+        <pre>
+          <code>
+              var options = {
+                apiKey : "{{ apikey }}",
+                onSuccess : function (response) {
+                    print(response);
+                },
+                // spécifique au service
+                text : "Saint-",
+                filterOptions : {
+                    type : ["PositionOfInterest"],
+                    territory : ["DOMTOM"]
+                }
+            };
+            Gp.Services.autoComplete(options);
+          </code>
+        </pre>
 {{/content}}
 
 {{#content "js"}}

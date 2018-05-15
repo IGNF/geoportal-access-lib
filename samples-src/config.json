@@ -1,6 +1,6 @@
 {
     "baseurl" : "../..",
     "bundle" : "GpServices",
-    "resources" : "../../resources",
+    "resources" : "../resources",
     "apikey" : "jhyvi0fgmnuxvfv0zjzorvdn"
 }

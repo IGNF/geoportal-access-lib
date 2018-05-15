@@ -11,6 +11,25 @@
 {{#content "body"}}
         <h1>Utilisation du Service de Calcul Altimétrique</h1>
         <h2>Avec les paramètres WPS "Profil" en mode POST</h2>
+        <pre>
+          <code>
+              var options = {
+                apiKey : "{{ apikey }}",
+                httpMethod : "POST",
+                protocol : "XHR",
+                onSuccess : function (response) {
+                    print(response.elevations);
+                },
+                // spécifique au service
+                positions : [{lon:1.25, lat:47.48}, {lon:1.35, lat:47.50}],
+                outputFormat : "xml", // json|xml
+                sampling : 3,
+                api : "REST", // REST|WPS
+                zonly : false // false|true
+            };
+            Gp.Services.getAltitude(options);
+          </code>
+        </pre>
 {{/content}}
 
 {{#content "js"}}
