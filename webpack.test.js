@@ -9,7 +9,7 @@ var nodeExternals = require("webpack-node-externals");
 module.exports = {
     target : "node",
     externals : [nodeExternals()],
-    devtool : "source-map",
+    devtool : "eval-source-map",
     module :  {
         rules : [
         {

@@ -1,0 +1,100 @@
+{{#extend "layout-sample-bundle"}}
+
+{{#content "head"}}
+        <title>Bibliothèque d'accès : Autocompletion avec parametres</title>
+{{/content}}
+
+{{#content "style"}}
+        <style>
+        #params {
+            width: 100%;
+            height: 200px;
+            box-shadow: 0 0 10px #999;
+            font-family: monospace;
+            padding: 5px;
+        }
+
+        #result {
+            padding: 5px;
+            width: 100%;
+            height: 200px;
+            box-shadow: 0 0 10px #999;
+            font-family: monospace;
+            overflow: scroll;
+        }
+        #info {
+          padding: 5px;
+          width: 100%;
+          height: 20px;
+          font-family: monospace;
+        }
+        </style>
+{{/content}}
+
+{{#content "body"}}
+        <h1>Utilisation du Service d'autocompletion</h1>
+        <h2>Utilisation de la méthode Gp.Services.autoComplete() avec options de filtrage <a href="http://jsfiddle.net/ignfgeoportail/jsjqk4wq/embedded/result,js,html,css/">(jsfiddle)</a>.</h2>
+        <div id="params">
+        <p>Restriction spatiale :</p>
+            <select id="territory">
+                <option value="no">-Aucune-</option>
+                <option value="METROPOLE">Métropole</option>
+                <option value="DOMTOM">Outre-mer</option>
+                <option value="01">Ain</option>
+                <option value="20">Corse</option>
+                <option value="30">Gard</option>
+                <option value="75">Paris</option>
+                <option value="974">La Réunion</option>
+            </select>
+        <p> Type de localisants :
+            <select id="type">
+                <option value="PositionOfInterest">Toponymes</option>
+                <option value="StreetAddress">Adresses</option>
+            </select>
+        </p>
+            <p>Localisant :
+                <input type="text" id="location" onkeyup="suggest()"/>
+            </p>
+        </div>
+        <div id="result"></div>
+        <div id="info"></div>
+{{/content}}
+
+{{#content "js"}}
+        function suggest() {
+            var location = document.getElementById("location").value;
+            var resultDiv = document.getElementById("result");
+            var typeIdx = document.getElementById("type").selectedIndex;
+            var typeValue= document.getElementById("type").options[typeIdx].value ;
+            var geoIdx = document.getElementById("territory").selectedIndex;
+            var geoValue= document.getElementById("territory").options[geoIdx].value ;
+            var fo= {} ;
+            if (geoValue && geoValue != "no") fo.territory= [geoValue] ;
+            fo.type= [typeValue] ;
+            try {
+                Gp.Services.autoComplete({
+                    text: location,
+                    apiKey: "{{ apikey }}",
+                    filterOptions: fo,
+                    onSuccess: function(result) {
+                        var resultStr= ""
+                        if (result.suggestedLocations) {
+                            for (i=0 ; i<result.suggestedLocations.length; i++) {
+                                var loc= result.suggestedLocations[i] ;
+                                resultStr+= "<p>" + loc.fullText + "</p>" ;
+                            }
+                        }
+                        resultDiv.innerHTML = resultStr ;
+                    },
+                    onFailure: function(error) {
+                        resultDiv.innerHTML = "<p>" + error + "</p>"
+                    }
+                });
+            } catch (e) {
+                resultDiv.innerHTML = "<p>" + e + "</p>"
+            }
+        }
+        var infoDiv = document.getElementById("info");
+        infoDiv.innerHTML = "<p> Bibliothèque d'accès version " + Gp.servicesVersion + " (" + Gp.servicesDate + ")</p>";
+{{/content}}
+{{/extend}}
