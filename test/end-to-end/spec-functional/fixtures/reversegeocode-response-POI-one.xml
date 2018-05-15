@@ -15,13 +15,13 @@
         <Address countryCode="PositionOfInterest">
           ￼
           <StreetAddress/>
-          <Place type="Municipality">paris</Place>
+          <Place type="Municipality">Le monde des cartes</Place>
           <Place type="Departement">75</Place>
           <Place type="Bbox">2.224217;48.815562;2.469851;48.902148</Place>
           <Place type="Importance">1</Place>
           <Place type="Commune">Paris</Place>
           <Place type="INSEE">75056</Place>
-          <Place type="Nature">Capitale d'état</Place>
+          <Place type="Nature">Géoportail</Place>
           <Place type="Territoire">FXX</Place>
           <PostalCode>75000</PostalCode>
         </Address>
