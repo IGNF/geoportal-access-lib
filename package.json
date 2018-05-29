@@ -33,7 +33,7 @@
   "dependencies": {
     "es6-promise": "^4.2.4",
     "loglevel": "^1.6.1",
-    "request": "^2.79.0",
+    "request": "^2.87.0",
     "xmldom": "^0.1.27"
   },
   "devDependencies": {

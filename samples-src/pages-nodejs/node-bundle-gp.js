@@ -1,3 +1,3 @@
-var Gp = require("../../dist/GpServices-src.js");
+var Gp = require("../../dist/GpServices.js");
 
 console.log("Loading context...", Gp);

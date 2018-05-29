@@ -84,6 +84,11 @@ Gp.Services.geocode({
 // --> https://wxs.ign.fr/KEY/geoportail/ols?
 ```
 
+> **Note :**
+Dans un environnement **NodeJS**, il faut installer les 2 dépendances suivantes dans votre projet :
+- xmldom
+- request
+
 ### Intégration dans un module ES6
 
 Intégrez la bibliothèque d'accès dans votre page WEB à l'aide d'une balise **script** de type *module*.
@@ -94,6 +99,19 @@ Intégrez la bibliothèque d'accès dans votre page WEB à l'aide d'une balise *
     // puis, utilisation de la variable globale 'Gp' dans le module ES6...
 </script>
 ```
+
+### Intégration dans un front-end type Angular ou React
+
+Intégrez la bibliothèque d'accès dans votre module à l'aide de la fonction **import**.
+
+``` js
+import * as Gp from "chemin/vers/GpServices.js";
+```
+
+> **Note :**
+Dans un environnement **Front-End**, il faut installer les 2 dépendances suivantes dans votre projet :
+- xmldom
+- request
 
 ### Utilisation
 

@@ -215,6 +215,11 @@ module.exports = env => {
                         from : path.join(__dirname, "samples-src", "resources", "**/*"),
                         to : path.join(__dirname, "samples", "resources"),
                         context : path.join(__dirname, "samples-src", "resources")
+                    },
+                    {
+                        from : path.join(__dirname, "samples-src", "pages-nodejs", "**/*.js"),
+                        to : path.join(__dirname, "samples", "NodeJS"),
+                        context : path.join(__dirname, "samples-src", "pages-nodejs")
                     }
                 ])
             )
