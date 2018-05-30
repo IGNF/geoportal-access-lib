@@ -2,7 +2,7 @@
 * Global variable Gp.
 * This is the global variable that is exposed in the browser environment.
 *
-* @namespace Gp
+* @module Gp
 * @alias Gp
 * @example
 *
