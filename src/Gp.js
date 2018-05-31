@@ -1,56 +1,55 @@
 /**
 * Global variable Gp.
-* This is the global variable that is exposed in the browser environment.
 *
 * @module Gp
 * @alias Gp
-* @example
+* @desc
 *
-* // Content is composed of constructor, functions and properties...
+* This is the global variable that is exposed in the browser environment.
+* Content is composed of constructor, functions and properties...
 *
-* Error()
-*     .TYPE_SRVERR : "SERVICE_ERROR"
-*     .TYPE_UNKERR : "UNKNOWN_ERROR"
-*     .TYPE_USEERR : "USAGE_ERROR"
+* > Error()
+*     - .TYPE_SRVERR : "SERVICE_ERROR"
+*     - .TYPE_UNKERR : "UNKNOWN_ERROR"
+*     - .TYPE_USEERR : "USAGE_ERROR"
 *
-* Helper
-*     .indent()
-*     .normalyzeParameters()
-*     .normalyzeUrl()
+* > Helper
+*     - .indent()
+*     - .normalyzeParameters()
+*     - .normalyzeUrl()
 *
-* Protocols
-*     .XHR
-*         .call()
+* > Protocols
+*     - .XHR.call()
 *
-* Services
-*     .Alti
-*         {@link Gp.Services.Alti.Elevation .Elevation()}
-*     {@link Gp.Services.AltiResponse .AltiResponse()}
-*     .AutoComplete
-*         {@link Gp.Services.AutoComplete.SuggestedLocation .SuggestedLocation()}
-*     {@link Gp.Services.AutoCompleteResponse .AutoCompleteResponse()}
-*     {@link Gp.Services.Config .Config()}
-*     {@link Gp.Services.DefaultUrl .DefaultUrl()}
-*     .Geocode
-*         {@link Gp.Services.Geocode.GeocodedLocation .GeocodedLocation()}
-*         {@link Gp.Services.Geocode.ReverseGeocodedLocation .ReverseGeocodedLocation()}
-*         {@link Gp.Services.Geocode.DirectGeocodedLocation .DirectGeocodedLocation()}
-*     {@link Gp.Services.GeocodeResponse .GeocodeResponse()}
-*     {@link Gp.Services.GetConfigResponse .GetConfigResponse()}
-*     {@link Gp.Services.IsoCurveResponse .IsoCurveResponse()}
-*     .Route
-*         {@link Gp.Services.Route.RouteInstruction .RouteInstruction()}
-*     {@link Gp.Services.RouteResponse .RouteResponse()}
-*     {@link module:Services~autoComplete .autoComplete()}
-*     {@link module:Services~geocode .geocode()}
-*     {@link module:Services~getAltitude .getAltitude()}
-*     {@link module:Services~getConfig .getConfig()}
-*     {@link module:Services~isoCurve .isoCurve()}
-*     {@link module:Services~reverseGeocode .reverseGeocode()}
-*     {@link module:Services~route .route()}
+* > Services
+*     - .Alti
+*         - {@link Gp.Services.Alti.Elevation .Elevation()}
+*     - {@link Gp.Services.AltiResponse .AltiResponse()}
+*     - .AutoComplete
+*         - {@link Gp.Services.AutoComplete.SuggestedLocation .SuggestedLocation()}
+*     - {@link Gp.Services.AutoCompleteResponse .AutoCompleteResponse()}
+*     - {@link Gp.Services.Config .Config()}
+*     - {@link Gp.Services.DefaultUrl .DefaultUrl()}
+*     - .Geocode
+*         - {@link Gp.Services.Geocode.GeocodedLocation .GeocodedLocation()}
+*         - {@link Gp.Services.Geocode.ReverseGeocodedLocation .ReverseGeocodedLocation()}
+*         - {@link Gp.Services.Geocode.DirectGeocodedLocation .DirectGeocodedLocation()}
+*     - {@link Gp.Services.GeocodeResponse .GeocodeResponse()}
+*     - {@link Gp.Services.GetConfigResponse .GetConfigResponse()}
+*     - {@link Gp.Services.IsoCurveResponse .IsoCurveResponse()}
+*     - .Route
+*         - {@link Gp.Services.Route.RouteInstruction .RouteInstruction()}
+*     - {@link Gp.Services.RouteResponse .RouteResponse()}
+*     - {@link module:Services~autoComplete .autoComplete()}
+*     - {@link module:Services~geocode .geocode()}
+*     - {@link module:Services~getAltitude .getAltitude()}
+*     - {@link module:Services~getConfig .getConfig()}
+*     - {@link module:Services~isoCurve .isoCurve()}
+*     - {@link module:Services~reverseGeocode .reverseGeocode()}
+*     - {@link module:Services~route .route()}
 *
-* servicesDate : "2018-05-29"
-* servicesVersion : "2.0.0"
+* > servicesDate : "2018-05-29"
+* > servicesVersion : "2.0.0"
 *
 */
 
@@ -91,6 +90,7 @@ var Gp = {
     /**
      * Methode pour rajouter une classe / objet au namespace global.
      *
+     * @private
      * @method extend
      * @param {String} strNS - nom sous lequel on veut présenter la
      *        classe / objet (Gp."strNS").
