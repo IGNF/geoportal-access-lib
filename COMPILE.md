@@ -182,3 +182,15 @@ http://localhost:9001/
 
 Le navigateur s'ouvre sur la page des tests sur l'URL suivante :
 http://localhost:9001/
+
+## Carte des sources et des dépendances 
+
+cf. https://github.com/webpack-contrib/webpack-bundle-analyzer
+
+**ouvrir une console :**
+
+    sudo npm install -g webpack-bundle-analyzer
+    webpack-bundle-analyzer map.json
+
+Le navigateur s'ouvre  sur l'URL suivante :
+http://localhost:8888/
