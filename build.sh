@@ -42,6 +42,11 @@ function production() {
   doCmd "npm run build -- --env.production"
 }
 
+function map() {
+  printTo "####### sourcemap !"
+  doCmd "npm run build -- --env.development"
+}
+
 function sources() {
   printTo "####### sources !"
   doCmd "npm run build"
@@ -64,14 +69,21 @@ do
         printTo "###### sources bundle ! ######"
         sources
         ;;
+     d)
+        printTo "#################################"
+        printTo "######### map bundle ! ##########"
+        map
+        ;;
+
      a)
         printTo "#################################"
         printTo "########## ALL bundle ! #########"
         sources
         production
+        map
         ;;
      \?)
-        printTo "$OPTARG : option invalide : a(all), s(sources) ou p(production) !"
+        printTo "$OPTARG : option invalide : a(all), d(development), s(sources) ou p(production) !"
         exit -1
         ;;
    esac

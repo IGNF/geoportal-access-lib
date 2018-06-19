@@ -86,7 +86,7 @@ la target suivante :
 
 **ouvrir une console :**
 
-    npm run build -- --env.clean
+    npm run build
     npm run build -- --env.production
     npm run build -- --env.development
 
@@ -142,7 +142,7 @@ Les exemples sont générées lors du build dans le répertoire *samples*.
 **ouvrir une console :**
 
     npm run sample
-    npm run sample -- --env.production --env.clean
+    npm run sample -- --env.production
     npm run sample -- --env.development
 
 ou
