@@ -64,6 +64,7 @@
     "replace-bundle-webpack-plugin": "^1.0.0",
     "sinon": "^4.3.0",
     "sinon-es6": "0.0.3",
+    "speed-measure-webpack-plugin": "^1.2.2",
     "string-template": "^1.0.0",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1",

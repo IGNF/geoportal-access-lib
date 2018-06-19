@@ -27,6 +27,10 @@ var HandlebarsLayoutPlugin = require("handlebars-layouts");
 var CopyWebpackPlugin      = require("copy-webpack-plugin");
 // var SourceMapDevToolWebpackPlugin = webpack.SourceMapDevToolPlugin;
 
+// -- performances
+var SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+var smp = new SpeedMeasurePlugin();
+
 // -- variables
 var licence = path.join(__dirname, "utils", "licence.tmpl");
 var date    = new Date().toISOString().split("T")[0];
@@ -47,7 +51,7 @@ module.exports = env => {
     //  par defaut, false.
     var _clean = (env) ? env.clean : false;
 
-    return {
+    return smp.wrap({
         entry : [
             path.join(__dirname, "src", "Gp")
         ],
@@ -249,5 +253,5 @@ module.exports = env => {
                         }
                     })] : []
             )
-    };
+    });
 };

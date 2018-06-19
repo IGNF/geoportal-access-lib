@@ -183,7 +183,7 @@ http://localhost:9001/
 Le navigateur s'ouvre sur la page des tests sur l'URL suivante :
 http://localhost:9001/
 
-## Carte des sources et des dépendances 
+## Carte des sources et des dépendances
 
 cf. https://github.com/webpack-contrib/webpack-bundle-analyzer
 
@@ -194,3 +194,10 @@ cf. https://github.com/webpack-contrib/webpack-bundle-analyzer
 
 Le navigateur s'ouvre  sur l'URL suivante :
 http://localhost:8888/
+
+## Analyse (The Official Analyse Tool)
+
+Aller sur l'URL suivante :
+http://webpack.github.io/analyse/
+
+puis, utiliser le fichier *map.json*
