@@ -67,7 +67,7 @@ Liste des targets disponibles :
         target : (clean), build,
                  test, sample, (doc)
                  test:serve, sample:serve, doc:serve
-        option : --env.production, --env.clean
+        option : --env.production, --env.development, --env.clean
 
 ### Installation des dépendances
 
@@ -86,14 +86,21 @@ la target suivante :
 
 **ouvrir une console :**
 
+    npm run build -- --env.clean
+    npm run build -- --env.production
+    npm run build -- --env.development
+
+ou
+
     npm run build
-    npm run build -- --env.production --env.clean
+    npm run build:prod
+    npm run build:dev
 
 Les *bundles* sont disponibles dans le répertoire :
 
 	dist/GpServices.js
 	dist/GpServices-src.js
-	dist/GpServices-src.js.map
+	dist/GpServices-map.js
 
 Les sources sont validées (jshint, jscs et/ou eslint).
 La jsoc, les tests et les exemples sont générés.
@@ -131,20 +138,18 @@ http://localhost:9001/
 #### Construction des exemples
 
 Les exemples sont générées lors du build dans le répertoire *samples*.
-Mais il est aussi possible de les executer autrement :
 
 **ouvrir une console :**
 
     npm run sample
     npm run sample -- --env.production --env.clean
-    gulp sample
-    gulp sample --env.production --env.clean
+    npm run sample -- --env.development
 
-#### Ouvrir les exemples sur un navigateur
-
-**ouvrir une console :**
+ou
 
     npm run sample:serve
+    npm run sample:serve:prod
+    npm run sample:serve:dev
 
 Le navigateur s'ouvre sur la page des exemples sur l'URL suivante :
 http://localhost:9001/

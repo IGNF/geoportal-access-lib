@@ -10,6 +10,7 @@ before_script:
 script:
     - npm run build
     - npm run build -- --env.production
+    - npm run build -- --env.development
 cache:
   directories:
     - node_modules

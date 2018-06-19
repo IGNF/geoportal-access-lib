@@ -36,8 +36,12 @@ module.exports = env => {
 
     // -- options : minification du bundle
     // ex. webpack --env.production
-    //  par defaut, false - en mode source.
     var _production = (env) ? env.production : false;
+    // -- options : sourcemap
+    // ex. webpack --env.development
+    // sinon, mode none cad source sans optimisation
+    var _development = (env) ? env.development : false;
+
     // -- options : nettoyage des répertoires temporaires
     // ex. webpack --env.clean
     //  par defaut, false.
@@ -49,7 +53,7 @@ module.exports = env => {
         ],
         output : {
             path : path.join(__dirname, "dist"),
-            filename : (_production) ? "GpServices.js" : "GpServices-src.js",
+            filename : (_production) ? "GpServices.js" : (_development) ? "GpServices-map.js" : "GpServices-src.js",
             library : "Gp",
             libraryTarget : "umd",
             libraryExport : "default",
@@ -68,7 +72,7 @@ module.exports = env => {
                 amd : "require"
             }
         },
-        devtool : (_production) ? false : "eval-source-map",
+        devtool : (_development) ? "eval-source-map" : false,
         module : {
             loaders : [
                 {
@@ -168,7 +172,7 @@ module.exports = env => {
                         output : {
                             path : path.join(__dirname, "samples"),
                             flatten : false,
-                            filename : (_production) ? "[name].html" : "[name]-src.html"
+                            filename : (_production) ? "[name].html" : (_development) ? "[name]-map.html" : "[name]-src.html"
                         },
                         helpers : [
                             HandlebarsLayoutPlugin
@@ -180,7 +184,7 @@ module.exports = env => {
                         context : [
                             path.join(__dirname, "samples-src", "config.json"),
                             {
-                                mode : (_production) ? "" : "-src"
+                                mode : (_production) ? "" : (_development) ? "-map" : "-src"
                             }
                         ]
                     }
@@ -190,7 +194,7 @@ module.exports = env => {
                         entry : path.join(__dirname, "samples-src", "pages", "index.html"),
                         output : {
                             path : path.join(__dirname, "samples"),
-                            filename : (_production) ? "[name].html" : "[name]-src.html"
+                            filename : (_production) ? "[name].html" : (_development) ? "[name]-map.html" : "[name]-src.html"
                         },
                         context : {
                             samples : () => {
@@ -201,7 +205,7 @@ module.exports = env => {
                                     var label = relativePath.replace("/", " -- ");
                                     var pathObj = path.parse(relativePath);
                                     return {
-                                        filePath : path.join(pathObj.dir, pathObj.name.concat((_production) ? "" : "-src").concat(pathObj.ext)),
+                                        filePath : path.join(pathObj.dir, pathObj.name.concat((_production) ? "" : (_development) ? "-map" : "-src").concat(pathObj.ext)),
                                         label : label
                                     };
                                 });
