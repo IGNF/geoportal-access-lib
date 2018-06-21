@@ -173,6 +173,44 @@ http://localhost:9001/
 Le navigateur s'ouvre sur la page des tests sur l'URL suivante :
 http://localhost:9001/
 
+##### couverture du code
+
+**ouvrir une console :**
+
+    npm run cover
+
+**Résultats :**
+
+    -----------------------------|----------|----------|----------|----------|
+    File                         |  % Stmts | % Branch |  % Funcs |  % Lines |
+    -----------------------------|----------|----------|----------|----------|
+    All files                    |    43.68 |    25.29 |    42.49 |    43.68 |
+     src                         |      100 |      100 |      100 |      100 |
+      Gp.js                      |      100 |      100 |      100 |      100 |
+     src/Exceptions              |       25 |        0 |        0 |       25 |
+      ErrorService.js            |       25 |        0 |        0 |       25 |
+     src/Formats                 |    78.21 |    63.76 |    83.87 |    78.21 |
+      WKT.js                     |    88.89 |    77.78 |    33.33 |    88.89 |
+      WPS.js                     |    83.61 |    71.05 |    77.78 |    83.61 |
+      XLS.js                     |     87.5 |    72.73 |      100 |     87.5 |
+      XML.js                     |    63.37 |    53.52 |    91.67 |    63.37 |
+     src/Formats/XLS             |    84.07 |    70.37 |    72.22 |    84.07 |
+      AbstractService.js         |    66.67 |    66.67 |       25 |    66.67 |
+      LocationUtilityService.js  |    91.89 |    79.31 |      100 |    91.89 |
+    (...)
+
+Possibilité d'ouvrir ensuite les résultats dans un navigateur :
+
+    (http|file)://{URL|PATH}/coverage/lcov-report/index.html
+
+Explications :
+
+    statements coverage :
+    http://istqbexamcertification.com/what-is-statement-coverage-advantages-and-disadvantages/
+    branchs coverage :
+    http://istqbexamcertification.com/what-is-decision-coverage-its-advantages-and-disadvantages/
+    (...)
+
 #### Fonctionnels
 
 **ouvrir une console :**

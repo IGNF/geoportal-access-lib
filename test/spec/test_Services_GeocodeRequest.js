@@ -13,10 +13,37 @@ describe("-- Test GeocodeRequest --", function () {
 
     describe("DirectGeocodeRequestFactory", function () {
 
-        it("Appel de la factory", function () {
+        it("L'appel de la factory en mode GET renvoie un chaine 'qxml'", function () {
+
+            var options = {
+                httpMethod : "GET",
+                location : "Saint-Mandée, 94166",
+                filterOptions : {
+                    type : ["PositionOfInterest"],
+                    bbox : {
+                        left : 2.40,
+                        right : 2.50,
+                        top : 49,
+                        bottom : 48
+                    }
+                }
+            };
+
+            /** validation */
+            var valide =  function (result) {
+                expect(result).to.be.a('string');
+                expect(result).to.match(/^qxml=/);
+            };
+
+            var request = DirectGeocodeRequestFactory.build(options);
+            valide(request);
+        });
+
+        it("L'appel de la factory en mode POST renvoie un XML", function () {
 
             var options = {
                 location : "Saint-Mandée, 94166",
+                httpMethod : "POST",
                 filterOptions : {
                     type : ["PositionOfInterest"],
                     bbox : {
