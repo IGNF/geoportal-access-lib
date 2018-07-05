@@ -50,6 +50,8 @@
 # add other directories to ignore
 /_samples_*/
 /_test_*/
+/coverage/
+/.nyc_output/
 
 # Files #
 #########
