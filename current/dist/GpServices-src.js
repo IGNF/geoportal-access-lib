@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN
  * @version 2.0.0
- * @date 2018-06-21
+ * @date 2018-07-05
  *
  */
 /*!
@@ -3100,7 +3100,8 @@ var XHR = {
                          * @method ontimeout
                          * @private
                          */
-                        hXHR.ontimeout = function () {
+                        hXHR.ontimeout = function (e) {
+                            console.log(e);
                             reject(new Error("TimeOut Occured on Http Request with XMLHttpRequest !"));
                         };
 
@@ -3110,14 +3111,14 @@ var XHR = {
                          * @method onreadystatechange
                          * @private
                          */
-                        hXHR.onreadystatechange = function () {
+                        hXHR.onreadystatechange = function (e) {
                             if (hXHR.readyState === 4) { // DONE
                                 if (hXHR.status === 200) {
                                     window.clearTimeout(onTimeOutTrigger);
                                     resolve(hXHR.response);
                                 } else {
-                                    var message = "Errors Occured on Http Request (status : '" + hXHR.status + "' | response : '" + hXHR.response + "')";
-                                    var status = hXHR.status;
+                                    var message = "Errors Occured on Http Request (status : '" + e.target.statusText + "' | url : '" + e.target.responseURL + "')";
+                                    var status = e.target.status;
                                     reject({
                                         message : message,
                                         status : status
@@ -3179,12 +3180,12 @@ var XHR = {
                          * @method onload
                          * @private
                          */
-                        hXHR.onload = function () {
+                        hXHR.onload = function (e) {
                             if (hXHR.status === 200) {
                                 resolve(hXHR.responseText);
                             } else {
-                                var message = "Errors Occured on Http Request (status : '" + hXHR.status + "' | response : '" + hXHR.responseText + "')";
-                                var status = hXHR.status;
+                                var message = "Errors Occured on Http Request (status : '" + e.target.statusText + "' | url : '" + e.target.responseURL + "')";
+                                var status = e.target.status;
                                 reject({
                                     message : message,
                                     status : status
@@ -5364,7 +5365,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var Gp = {
     servicesVersion : "2.0.0",
-    servicesDate : "2018-06-21",
+    servicesDate : "2018-07-05",
     /**
      * Methode pour rajouter une classe / objet au namespace global.
      *
