@@ -47,9 +47,10 @@ Vous pouvez aussi choisir d'utiliser des fichiers hébergés en ligne, pour y ac
 
 Par exemple sur Github Pages :
 
+```
 https://ignf.github.io/geoportal-access-lib/latest/dist/GpServices.js
 https://ignf.github.io/geoportal-access-lib/latest/dist/GpServices-src.js
-
+```
 
 ### Intégration dans une page web
 
