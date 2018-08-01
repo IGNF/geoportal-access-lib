@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN
  * @version 2.0.0
- * @date 2018-07-31
+ * @date 2018-08-01
  *
  */
 /*!
@@ -5332,6 +5332,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__Protocols_XHR__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__Utils_Helper__ = __webpack_require__(4);
+/**
+* Global variable Gp.
+*
+* @module Gp
+* @alias Gp
+* @desc
+*
+* This is the global variable that is exposed in the browser environment.
+* Content is composed of constructor, functions and properties...
+*
+* > Error()
+*     - .TYPE_SRVERR : "SERVICE_ERROR"
+*     - .TYPE_UNKERR : "UNKNOWN_ERROR"
+*     - .TYPE_USEERR : "USAGE_ERROR"
+*
+* > Helper
+*     - .indent()
+*     - .normalyzeParameters()
+*     - .normalyzeUrl()
+*
+* > Protocols
+*     - .XHR.call()
+*
+* > Services
+*     - .Alti
+*         - {@link Gp.Services.Alti.Elevation .Elevation()}
+*     - {@link Gp.Services.AltiResponse .AltiResponse()}
+*     - .AutoComplete
+*         - {@link Gp.Services.AutoComplete.SuggestedLocation .SuggestedLocation()}
+*     - {@link Gp.Services.AutoCompleteResponse .AutoCompleteResponse()}
+*     - {@link Gp.Services.Config .Config()}
+*     - {@link Gp.Services.DefaultUrl .DefaultUrl()}
+*     - .Geocode
+*         - {@link Gp.Services.Geocode.GeocodedLocation .GeocodedLocation()}
+*         - {@link Gp.Services.Geocode.ReverseGeocodedLocation .ReverseGeocodedLocation()}
+*         - {@link Gp.Services.Geocode.DirectGeocodedLocation .DirectGeocodedLocation()}
+*     - {@link Gp.Services.GeocodeResponse .GeocodeResponse()}
+*     - {@link Gp.Services.GetConfigResponse .GetConfigResponse()}
+*     - {@link Gp.Services.IsoCurveResponse .IsoCurveResponse()}
+*     - .Route
+*         - {@link Gp.Services.Route.RouteInstruction .RouteInstruction()}
+*     - {@link Gp.Services.RouteResponse .RouteResponse()}
+*     - {@link module:Services~autoComplete .autoComplete()}
+*     - {@link module:Services~geocode .geocode()}
+*     - {@link module:Services~getAltitude .getAltitude()}
+*     - {@link module:Services~getConfig .getConfig()}
+*     - {@link module:Services~isoCurve .isoCurve()}
+*     - {@link module:Services~reverseGeocode .reverseGeocode()}
+*     - {@link module:Services~route .route()}
+*
+* > servicesDate : "YYYY-MM-DD"
+*
+* > servicesVersion : "X.X.X"
+*
+*
+*/
+
 
 
 
@@ -5365,10 +5422,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var Gp = {
     servicesVersion : "2.0.0",
-    servicesDate : "2018-07-31",
+    servicesDate : "2018-08-01",
     /**
      * Methode pour rajouter une classe / objet au namespace global.
      *
+     * @private
      * @method extend
      * @param {String} strNS - nom sous lequel on veut présenter la
      *        classe / objet (Gp."strNS").
