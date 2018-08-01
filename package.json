@@ -1,6 +1,6 @@
 {
   "name": "geoportal-access-lib",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "French Geoportal resources access library",
   "main": "dist/GpServices.js, dist/GpServices-src.js, dist/GpServices-src.js.map",
   "homepage": "https://github.com/IGNF/geoportal-access-lib#readme",
