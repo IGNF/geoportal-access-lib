@@ -48,8 +48,10 @@
 *     - {@link module:Services~reverseGeocode .reverseGeocode()}
 *     - {@link module:Services~route .route()}
 *
-* > servicesDate : "2018-05-29"
-* > servicesVersion : "2.0.0"
+* > servicesDate : "YYYY-MM-DD"
+*
+* > servicesVersion : "X.X.X"
+*
 *
 */
 
