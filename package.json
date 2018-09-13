@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "echo \"Warning: no yet implemented!\" && exit 0",
     "setup": "npm install",
-    "cover" : "nyc --reporter=lcov --reporter=text npm run test",
+    "cover": "nyc --reporter=lcov --reporter=text npm run test",
     "build": "webpack",
     "build:prod": "webpack --env.production",
     "build:dev": "webpack --env.development",
@@ -27,7 +27,7 @@
     ],
     "instrument": false,
     "sourceMap": false
-   },
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/IGNF/geoportal-access-lib.git"
