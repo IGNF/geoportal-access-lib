@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN
  * @version 2.1.0
- * @date 2018-09-13
+ * @date 2018-10-17
  *
  */
 /*!
@@ -5422,7 +5422,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var Gp = {
     servicesVersion : "2.1.0",
-    servicesDate : "2018-09-13",
+    servicesDate : "2018-10-17",
     /**
      * Methode pour rajouter une classe / objet au namespace global.
      *
