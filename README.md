@@ -95,7 +95,7 @@ Dans un environnement **NodeJS**, il faut installer les 2 dépendances suivantes
 Intégrez la bibliothèque d'accès dans votre page WEB à l'aide d'une balise **script** de type *module*.
 
 ``` html
-<script src="module">
+<script type="module">
     import * as Gp from "chemin/vers/GpServices.js";
     // puis, utilisation de la variable globale 'Gp' dans le module ES6...
 </script>
