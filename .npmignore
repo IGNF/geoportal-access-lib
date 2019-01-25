@@ -1,18 +1,20 @@
 /doc
 /jsdoc
 /lib
-/_site
-/src
 /scripts
 /test
-/_test*
 /samples
 /samples-src
-/_samples*
 /utils
 /target
+/coverage
+
+/_test*
+/_samples*
+/_site
 
 .*
+
 build.sh
 CHANGELOG*
 TODO*
@@ -22,9 +24,9 @@ CONTRIBUTORS.md
 COMPILE.md
 HISTORY.md
 History.md
-gulpfile.js
 jsdoc.json
 webpack.*
+map.json
 
 *.gz
 *.tgz
