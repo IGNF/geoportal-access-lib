@@ -9,8 +9,8 @@
  * copyright CeCILL-B
  * copyright IGN
  * @author IGN
- * @version 2.1.0
- * @date 2018-10-17
+ * @version 2.1.1
+ * @date 2019-01-25
  *
  */
 /*!
@@ -669,7 +669,7 @@ CommonService.prototype = {
         // rajout de l'option gpbibaccess
         // INFO : acces au numero de version de package.conf aprés compilation !
         this.options.serverUrl = __WEBPACK_IMPORTED_MODULE_1__Utils_Helper__["a" /* default */].normalyzeUrl(this.options.serverUrl, {
-            "gp-access-lib" : "2.1.0"
+            "gp-access-lib" : "2.1.1"
         }, false);
 
         // si le proxy est renseigné, on proxifie l'url du service
@@ -5421,8 +5421,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var Gp = {
-    servicesVersion : "2.1.0",
-    servicesDate : "2018-10-17",
+    servicesVersion : "2.1.1",
+    servicesDate : "2019-01-25",
     /**
      * Methode pour rajouter une classe / objet au namespace global.
      *
