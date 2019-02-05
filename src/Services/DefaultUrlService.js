@@ -55,9 +55,9 @@ var DefaultUrlService = {
     * @returns {String} url
     */
     url : function (key, path) {
-        // en mode browser, c'est le protocole du navigateur,
+        // en mode browser, on met du https par défaut,
         // sinon, il est fixé par l'option 'ssl' (par défaut à false, cad en http)
-        var _protocol = (ISBROWSER) ? (location && location.protocol && location.protocol.indexOf("https:") === 0 ? "https://" : "http://") : (DefaultUrlService.ssl ? "https://" : "http://");
+        var _protocol = (ISBROWSER) ? "https://" : (DefaultUrlService.ssl ? "https://" : "http://");
         return _protocol + HOSTNAME.concat("/", key, path);
     },
 
