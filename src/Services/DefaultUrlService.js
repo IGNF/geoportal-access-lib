@@ -45,8 +45,8 @@ var HOSTNAME = "wxs.ign.fr";
  */
 var DefaultUrlService = {
 
-    /** if set true, require the use of https protocol (except browser) */
-    ssl : false,
+    /** if set true, require the use of https protocol */
+    ssl : "auto",
 
     /**
     * base url of services (ssl protocol management)
@@ -55,9 +55,16 @@ var DefaultUrlService = {
     * @returns {String} url
     */
     url : function (key, path) {
-        // en mode browser, on met du https par défaut,
-        // sinon, il est fixé par l'option 'ssl' (par défaut à false, cad en http)
-        var _protocol = (ISBROWSER) ? "https://" : (DefaultUrlService.ssl ? "https://" : "http://");
+        // comportement par défaut : en mode browser, on met du https, sinon http.
+        // sinon, il est fixé par l'option 'ssl' (true => https)
+        var _protocol;
+        
+        if ((DefaultUrlService.ssl === "auto" && ISBROWSER) || DefaultUrlService.ssl === true) {
+            _protocol = "https://";
+        } else {
+            _protocol = "http://";
+        }
+
         return _protocol + HOSTNAME.concat("/", key, path);
     },
 
