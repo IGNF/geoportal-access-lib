@@ -220,8 +220,8 @@ describe("-- Tests AutoConfResponse --", function () {
             expect(AutoConfResponseReader).to.have.property("SCHEMALOCATION");
             expect(AutoConfResponseReader.SCHEMALOCATION).to.be.an("array");
             expect(AutoConfResponseReader.SCHEMALOCATION).to.have.length(2);
-            expect(AutoConfResponseReader.SCHEMALOCATION[0]).to.equal("http://www.opengis.net/context http://gpp3-wxs.ign.fr/schemas/extContext.xsd http://api.ign.fr/geoportail http://wxs.ign.fr/schemas/autoconf/autoconf.xsd");
-            expect(AutoConfResponseReader.SCHEMALOCATION[1]).to.equal("http://www.opengis.net/context http://gpp3-wxs.ign.fr/schemas/extContext.xsd http://api.ign.fr/geoportail http://gpp3-wxs.ign.fr/schemas/autoconf.xsd");
+            expect(AutoConfResponseReader.SCHEMALOCATION[0]).to.equal("http://www.opengis.net/context http://wxs.ign.fr/schemas/extContext.xsd http://api.ign.fr/geoportail http://wxs.ign.fr/schemas/autoconf/autoconf.xsd");
+            expect(AutoConfResponseReader.SCHEMALOCATION[1]).to.equal("http://www.opengis.net/context http://wxs.ign.fr/schemas/extContext.xsd http://api.ign.fr/geoportail http://wxs.ign.fr/schemas/autoconf.xsd");
             expect(AutoConfResponseReader).to.have.property("DEFAULTPREFIX", "context");
             expect(AutoConfResponseReader).to.have.property("READERS");
 

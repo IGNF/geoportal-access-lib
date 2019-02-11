@@ -26,15 +26,16 @@
 // -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/rest/elevationLine.xml
 // -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/wps
 //
-// Force ssl :
+// ssl by default.
 //
-// DefaultUrlService.ssl = true;
+// Force to not do ssl :
+// DefaultUrlService.ssl = false;
+//
 // DefaultUrlService.AutoComplete.url('efe4r54tj4uy5i78o7545eaz7e87a')
 // output {Object|String}
 // -> https://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/ols/apis/completion
 
 // constantes internes
-var ISBROWSER = typeof window !== "undefined" ? 1 : 0;
 var HOSTNAME = "wxs.ign.fr";
 
 /**
@@ -46,7 +47,7 @@ var HOSTNAME = "wxs.ign.fr";
 var DefaultUrlService = {
 
     /** if set true, require the use of https protocol */
-    ssl : "auto",
+    ssl : true,
 
     /**
     * base url of services (ssl protocol management)
@@ -55,14 +56,14 @@ var DefaultUrlService = {
     * @returns {String} url
     */
     url : function (key, path) {
-        // comportement par défaut : en mode browser, on met du https, sinon http.
-        // sinon, il est fixé par l'option 'ssl' (true => https)
+        // comportement par défaut => https
+        // sinon, il est fixé par l'option 'ssl' (false => http)
         var _protocol;
         
-        if ((DefaultUrlService.ssl === "auto" && ISBROWSER) || DefaultUrlService.ssl === true) {
-            _protocol = "https://";
-        } else {
+        if (DefaultUrlService.ssl === false) {
             _protocol = "http://";
+        } else {
+            _protocol = "https://";
         }
 
         return _protocol + HOSTNAME.concat("/", key, path);
