@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN
  * @version 2.1.1
- * @date 2019-02-13
+ * @date 2019-02-14
  *
  */
 /*!
@@ -413,7 +413,7 @@ function CommonService (options) {
     this.options = {
         // protocol : "JSONP",
         protocol : "XHR",
-        ssl : false,
+        ssl : true,
         proxyURL : "",
         // callbackName : "",
         callbackSuffix : null,
@@ -956,15 +956,16 @@ var Helper = {
 // -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/rest/elevationLine.xml
 // -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/wps
 //
-// Force ssl :
+// ssl by default.
 //
-// DefaultUrlService.ssl = true;
+// Force to not do ssl :
+// DefaultUrlService.ssl = false;
+//
 // DefaultUrlService.AutoComplete.url('efe4r54tj4uy5i78o7545eaz7e87a')
 // output {Object|String}
 // -> https://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/ols/apis/completion
 
 // constantes internes
-var ISBROWSER = typeof window !== "undefined" ? 1 : 0;
 var HOSTNAME = "wxs.ign.fr";
 
 /**
@@ -975,8 +976,8 @@ var HOSTNAME = "wxs.ign.fr";
  */
 var DefaultUrlService = {
 
-    /** if set true, require the use of https protocol (except browser) */
-    ssl : false,
+    /** if set true, require the use of https protocol */
+    ssl : true,
 
     /**
     * base url of services (ssl protocol management)
@@ -985,9 +986,16 @@ var DefaultUrlService = {
     * @returns {String} url
     */
     url : function (key, path) {
-        // en mode browser, c'est le protocole du navigateur,
-        // sinon, il est fixé par l'option 'ssl' (par défaut à false, cad en http)
-        var _protocol = (ISBROWSER) ? (location && location.protocol && location.protocol.indexOf("https:") === 0 ? "https://" : "http://") : (DefaultUrlService.ssl ? "https://" : "http://");
+        // comportement par défaut => https
+        // sinon, il est fixé par l'option 'ssl' (false => http)
+        var _protocol;
+        
+        if (DefaultUrlService.ssl === false) {
+            _protocol = "http://";
+        } else {
+            _protocol = "https://";
+        }
+
         return _protocol + HOSTNAME.concat("/", key, path);
     },
 
@@ -5422,7 +5430,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var Gp = {
     servicesVersion : "2.1.1",
-    servicesDate : "2019-02-13",
+    servicesDate : "2019-02-14",
     /**
      * Methode pour rajouter une classe / objet au namespace global.
      *
@@ -9910,8 +9918,8 @@ AutoConfResponseReader.NAMESPACES = {
  * Localisation (URL) du schema de définition du XML (XSD)
  */
 AutoConfResponseReader.SCHEMALOCATION = [
-    "http://www.opengis.net/context http://gpp3-wxs.ign.fr/schemas/extContext.xsd http://api.ign.fr/geoportail http://wxs.ign.fr/schemas/autoconf/autoconf.xsd",
-    "http://www.opengis.net/context http://gpp3-wxs.ign.fr/schemas/extContext.xsd http://api.ign.fr/geoportail http://gpp3-wxs.ign.fr/schemas/autoconf.xsd"
+    "http://www.opengis.net/context http://wxs.ign.fr/schemas/extContext.xsd http://api.ign.fr/geoportail http://wxs.ign.fr/schemas/autoconf/autoconf.xsd",
+    "http://www.opengis.net/context http://wxs.ign.fr/schemas/extContext.xsd http://api.ign.fr/geoportail http://wxs.ign.fr/schemas/autoconf.xsd"
 ];
 
 /**
