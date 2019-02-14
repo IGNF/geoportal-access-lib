@@ -110,7 +110,7 @@ function CommonService (options) {
     this.options = {
         // protocol : "JSONP",
         protocol : "XHR",
-        ssl : false,
+        ssl : true,
         proxyURL : "",
         // callbackName : "",
         callbackSuffix : null,
