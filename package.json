@@ -3,6 +3,7 @@
   "version": "2.1.2",
   "description": "French Geoportal resources access library",
   "main": "src/Gp.js",
+  "browser": "dist/GpServices.js",
   "homepage": "https://github.com/IGNF/geoportal-access-lib#readme",
   "scripts": {
     "clean": "echo \"Warning: no yet implemented!\" && exit 0",
@@ -41,8 +42,8 @@
   "author": "IGNF",
   "license": "CECILL-B",
   "dependencies": {
-      "request": "^2.87.0",
-      "xmldom": "^0.1.27"
+    "request": "^2.87.0",
+    "xmldom": "^0.1.27"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
