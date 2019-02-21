@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN
  * @version 2.1.2
- * @date 2019-02-20
+ * @date 2019-02-21
  *
  */
 /*!
@@ -5430,7 +5430,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var Gp = {
     servicesVersion : "2.1.2",
-    servicesDate : "2019-02-20",
+    servicesDate : "2019-02-21",
     /**
      * Methode pour rajouter une classe / objet au namespace global.
      *
@@ -14917,7 +14917,6 @@ function Route (options) {
 
     /**
      * Nom de la classe (heritage)
-     * FIXME instance ou classe ?
      */
     this.CLASSNAME = "Route";
 
@@ -14974,7 +14973,7 @@ function Route (options) {
 
     // FIXME : les readers OLS ne sont pas implémentés. on utilise donc l'API REST.
     this.options.api = "REST";
-    this.logger.warn("FIXME : Surcharge option 'api' : REST");
+    this.logger.warn("Surcharge option 'api' : REST (readers OLS non implémentés)");
     if (this.options.protocol === "XHR") {
         this.options.httpMethod = "GET";
         this.logger.trace("Surcharge option 'HttpMethod' : " + this.options.httpMethod);
@@ -16225,7 +16224,7 @@ RouteRequestREST.prototype = {
         // INFO
         // construction simple sans template...,
         // mais en attendant que les services soient fixés, on taggue ce composant en mode PROTOTYPE !
-        this.logger.warn("FIXME : PROTOTYPE !");
+        this.logger.warn("PROTOTYPE !");
 
         // Mapping des options avec le service de l'API REST
         var oParams = new __WEBPACK_IMPORTED_MODULE_2__model_RouteParamREST__["a" /* default */](this.settings);
