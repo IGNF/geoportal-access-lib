@@ -989,7 +989,6 @@ var DefaultUrlService = {
         // comportement par défaut => https
         // sinon, il est fixé par l'option 'ssl' (false => http)
         var _protocol;
-        
         if (DefaultUrlService.ssl === false) {
             _protocol = "http://";
         } else {
@@ -16224,7 +16223,7 @@ RouteRequestREST.prototype = {
         // INFO
         // construction simple sans template...,
         // mais en attendant que les services soient fixés, on taggue ce composant en mode PROTOTYPE !
-        this.logger.warn("PROTOTYPE !");
+        this.logger.warn(" PROTOTYPE !");
 
         // Mapping des options avec le service de l'API REST
         var oParams = new __WEBPACK_IMPORTED_MODULE_2__model_RouteParamREST__["a" /* default */](this.settings);
