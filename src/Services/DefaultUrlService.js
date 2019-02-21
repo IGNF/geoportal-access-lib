@@ -59,7 +59,6 @@ var DefaultUrlService = {
         // comportement par défaut => https
         // sinon, il est fixé par l'option 'ssl' (false => http)
         var _protocol;
-        
         if (DefaultUrlService.ssl === false) {
             _protocol = "http://";
         } else {
