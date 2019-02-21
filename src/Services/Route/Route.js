@@ -105,7 +105,6 @@ function Route (options) {
 
     /**
      * Nom de la classe (heritage)
-     * FIXME instance ou classe ?
      */
     this.CLASSNAME = "Route";
 
@@ -162,7 +161,7 @@ function Route (options) {
 
     // FIXME : les readers OLS ne sont pas implémentés. on utilise donc l'API REST.
     this.options.api = "REST";
-    this.logger.warn("FIXME : Surcharge option 'api' : REST");
+    this.logger.warn("Surcharge option 'api' : REST (readers OLS non implémentés)");
     if (this.options.protocol === "XHR") {
         this.options.httpMethod = "GET";
         this.logger.trace("Surcharge option 'HttpMethod' : " + this.options.httpMethod);
