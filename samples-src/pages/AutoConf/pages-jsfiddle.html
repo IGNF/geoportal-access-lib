@@ -8,7 +8,7 @@
         <style>
         #params {
           width: 100%;
-          height: 50px;
+          /* height: 50px; */
           box-shadow: 0 0 10px #999;
           font-family: monospace;
           padding: 5px;
@@ -72,7 +72,7 @@
             Gp.Services.getConfig({
               apiKey: apiKey,
               onSuccess: function(result) {
-                rawResultDiv.innerHTML = "<p>" + JSON.stringify(result) + "</p>";
+                rawResultDiv.innerHTML = "<pre>" + JSON.stringify(result, null, 2) + "</pre>";
                 // interpretation des resultats
                 var strResult = "";
                 var lconf = result.getLayersConf(apiKey);

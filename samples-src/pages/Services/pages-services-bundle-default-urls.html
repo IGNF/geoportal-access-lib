@@ -26,24 +26,24 @@
       var key = "{{ apikey }}";
       // alti
       span = document.getElementById("alti") ;
-      span.innerHTML = JSON.stringify(Gp.Services.DefaultUrl.Alti.url(key)) ;
+      span.innerHTML = "<pre>" + JSON.stringify(Gp.Services.DefaultUrl.Alti.url(key), null, 2) + "</pre>";
       // autocomplete
       span = document.getElementById("autocomplete") ;
-      span.innerHTML = JSON.stringify(Gp.Services.DefaultUrl.AutoComplete.url(key)) ;
+      span.innerHTML = "<pre>" + JSON.stringify(Gp.Services.DefaultUrl.AutoComplete.url(key), null, 2) + "</pre>";
       // Autoconf (getConfig)
       span = document.getElementById("config") ;
-      span.innerHTML = JSON.stringify(Gp.Services.DefaultUrl.AutoConf.url(key)) ;
+      span.innerHTML = "<pre>" + JSON.stringify(Gp.Services.DefaultUrl.AutoConf.url(key), null, 2) + "</pre>";
       // geocode
       span = document.getElementById("geocode") ;
-      span.innerHTML = JSON.stringify(Gp.Services.DefaultUrl.Geocode.url(key)) ;
+      span.innerHTML = "<pre>" + JSON.stringify(Gp.Services.DefaultUrl.Geocode.url(key), null, 2) + "</pre>";
       // isocurve
       span = document.getElementById("iso") ;
-      span.innerHTML = JSON.stringify(Gp.Services.DefaultUrl.ProcessIsoCurve.url(key)) ;
+      span.innerHTML = "<pre>" + JSON.stringify(Gp.Services.DefaultUrl.ProcessIsoCurve.url(key), null, 2) + "</pre>";
       // reverse
       span = document.getElementById("reverse") ;
-      span.innerHTML = JSON.stringify(Gp.Services.DefaultUrl.ReverseGeocode.url(key)) ;
+      span.innerHTML = "<pre>" + JSON.stringify(Gp.Services.DefaultUrl.ReverseGeocode.url(key), null, 2) + "</pre>";
       // route
       span = document.getElementById("route") ;
-      span.innerHTML = JSON.stringify(Gp.Services.DefaultUrl.Route.url(key)) ;
+      span.innerHTML = "<pre>" + JSON.stringify(Gp.Services.DefaultUrl.Route.url(key), null, 2) + "</pre>";
 {{/content}}
 {{/extend}}
