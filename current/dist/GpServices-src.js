@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN
  * @version 2.1.2
- * @date 2019-02-21
+ * @date 2019-03-04
  *
  */
 /*!
@@ -5429,7 +5429,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var Gp = {
     servicesVersion : "2.1.2",
-    servicesDate : "2019-02-21",
+    servicesDate : "2019-03-04",
     /**
      * Methode pour rajouter une classe / objet au namespace global.
      *
@@ -6488,7 +6488,7 @@ var Protocol = {
  * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
  * @license   Licensed under MIT license
  *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
- * @version   v4.2.5+7f2b526d
+ * @version   v4.2.6+9869a4bc
  */
 
 (function (global, factory) {
