@@ -4,6 +4,8 @@ import _ from "../Utils/MessagesResources";
 import Protocol from "../Protocols/Protocol";
 import ErrorService from "../Exceptions/ErrorService";
 import DefaultUrlService from "./DefaultUrlService";
+// package.json (extract version)
+import Pkg from "../../package";
 
 /**
  * @classdesc
@@ -366,7 +368,7 @@ CommonService.prototype = {
         // rajout de l'option gpbibaccess
         // INFO : acces au numero de version de package.conf aprés compilation !
         this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, {
-            "gp-access-lib" : "__GPVERSION__"
+            "gp-access-lib" : Pkg.version
         }, false);
 
         // si le proxy est renseigné, on proxifie l'url du service

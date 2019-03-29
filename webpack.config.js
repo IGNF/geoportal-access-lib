@@ -33,7 +33,7 @@ var smp = new SpeedMeasurePlugin();
 
 // -- variables
 var licence = path.join(__dirname, "utils", "licence.tmpl");
-var date    = new Date().toISOString().split("T")[0];
+var date    = require(path.join(__dirname, "package.json")).date;
 var version = require(path.join(__dirname, "package.json")).version;
 
 module.exports = env => {
@@ -138,15 +138,15 @@ module.exports = env => {
                 new ReplaceWebpackPlugin(
                     [
                         {
-                            partten : /__GPVERSION__/g,
-                            /** replacement de la clef __GPVERSION__ par la version du package */
+                            partten : /__VERSION__/g,
+                            /** replacement de la clef __VERSION__ par la version du package */
                             replacement : function () {
                                 return version;
                             }
                         },
                         {
-                            partten : /__GPDATE__/g,
-                            /** replacement de la clef __GPDATE__ par la date du build */
+                            partten : /__DATE__/g,
+                            /** replacement de la clef __DATE__ par la date du build */
                             replacement : function () {
                                 return date;
                             }

@@ -86,9 +86,11 @@ import XHR from "./Protocols/XHR";
 import Error from "./Exceptions/ErrorService";
 import Helper from "./Utils/Helper";
 
+import Pkg from "../package";
+
 var Gp = {
-    servicesVersion : "__GPVERSION__",
-    servicesDate : "__GPDATE__",
+    servicesVersion : Pkg.version,
+    servicesDate : Pkg.date,
     /**
      * Methode pour rajouter une classe / objet au namespace global.
      *
