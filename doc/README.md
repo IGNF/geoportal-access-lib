@@ -20,7 +20,7 @@ Gp.Services.getConfig({
 
 ## Geoportal access key management
 
-Access to Geoportal resources metadata availables with one ore several keys, using [Auto-configuration service]{@link http://api.ign.fr/tech-docs-js/developpeur/geodrm.html#Available_resources_-_APIs_autoconfiguration} of the Geoportal platform.
+Access to Geoportal resources metadata availables with one ore several keys, using [Auto-configuration service](https://geoservices.ign.fr/documentation/geoservices/autoconf.html) of the Geoportal platform.
 
 | Function to invoque | Response Object (onSuccess callback param) |
 | - | - |
@@ -29,7 +29,7 @@ Access to Geoportal resources metadata availables with one ore several keys, usi
 
 ## Elevation web service usage
 
-Getting elevations in or along of one or several points on french territories using the [elevation services of the Geoportal Platform]{@link http://api.ign.fr/tech-docs-js/developpeur/alti.html}.<br/>
+Getting elevations in or along of one or several points on french territories using the [elevation services of the Geoportal Platform](https://geoservices.ign.fr/documentation/geoservices/alti.html).<br/>
 
 | Function to invoque | Response Object (onSuccess callback param) |
 | - | - |
@@ -37,7 +37,7 @@ Getting elevations in or along of one or several points on french territories us
 
 ## Geocoding web service usage
 
-Getting positon of a geographic identifier (places names, address, cadastral parcel, other...) using the [geocoding web service of the Geoportal Platform]{@link http://api.ign.fr/tech-docs-js/developpeur/search.html}.
+Getting positon of a geographic identifier (places names, address, cadastral parcel, other...) using the [geocoding web service of the Geoportal Platform](https://geoservices.ign.fr/documentation/geoservices/geocodage.html).
 
 | Function to invoque | Response Object (onSuccess callback param) |
 | - | - |
@@ -45,7 +45,7 @@ Getting positon of a geographic identifier (places names, address, cadastral par
 
 ## Reverse Geocoding web service usage
 
-Retrieving geographical identifiers (place names, address, cadastral parcels, ...) near a given position, using the [reverse geocoding web service of the Geoportal Platform]{@link http://api.ign.fr/tech-docs-js/developpeur/search.html#Recherche_inverse}.
+Retrieving geographical identifiers (place names, address, cadastral parcels, ...) near a given position, using the [reverse geocoding web service of the Geoportal Platform](https://geoservices.ign.fr/documentation/geoservices/geocodage-inverse.html).
 
 | Function to invoque | Response Object (onSuccess callback param) |
 | - | - |
@@ -53,7 +53,7 @@ Retrieving geographical identifiers (place names, address, cadastral parcels, ..
 
 ## Autocompletion web service usage
 
-Getting suggestions of probable places names or address based on uncomplete texts, using the [autocompletion service of the Geoportal Platform]{@link http://api.ign.fr/tech-docs-js/developpeur/search.html#The_autocompletion_Service}
+Getting suggestions of probable places names or address based on uncomplete texts, using the [autocompletion service of the Geoportal Platform](https://geoservices.ign.fr/documentation/geoservices/autoconf.html)
 
 | Function to invoque | Response Object (onSuccess callback param) |
 | - | - |
@@ -61,7 +61,7 @@ Getting suggestions of probable places names or address based on uncomplete text
 
 ## Routing web service usage
 
-Getting a route from one point to another using the [route service of the Geoportal Platform]{@link http://api.ign.fr/tech-docs-js/developpeur/TODO}.
+Getting a route from one point to another using the [route service of the Geoportal Platform](https://geoservices.ign.fr/documentation/geoservices/itineraires.html).
 
 | Function to invoque | Response Object (onSuccess callback param) |
 | - | - |
@@ -69,9 +69,8 @@ Getting a route from one point to another using the [route service of the Geopor
 
 ## IsoCurve web service usage
 
-Computing a set of places (curve) reachable from a given point (or from where to start to reach a given point) within a time or distance constraint.
+Computing a set of places (curve) reachable from a given point (or from where to start to reach a given point) within a time or distance constraint using [isucurve service of the Geoportal Platform](https://geoservices.ign.fr/documentation/geoservices/isochrones.html).
 
 | Function to invoque | Response Object (onSuccess callback param) |
 | - | - |
 | {@link module:Services~isoCurve Gp.Services.isoCurve()} | {@link Gp.Services.IsoCurveResponse} |
-

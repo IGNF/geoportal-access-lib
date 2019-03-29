@@ -16,6 +16,7 @@ cache:
     - node_modules
 before_deploy:
     - git clone https://github.com/IGNF/geoportal-access-lib.git --branch gh-pages deploy/
+    - cp doc/README.md jsdoc/
     - cp -r dist/ deploy/current/
     - cp -r jsdoc/ deploy/current/
 deploy:

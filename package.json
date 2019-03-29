@@ -4,7 +4,7 @@
   "date": "14/02/2018",
   "description": "French Geoportal resources access library",
   "main": "src/Gp.js",
-  "browser": "dist/GpServices.js",
+  "browser": "dist/GpServices-src.js",
   "homepage": "https://github.com/IGNF/geoportal-access-lib#readme",
   "scripts": {
     "clean": "echo \"Warning: no yet implemented!\" && exit 0",
