@@ -10,7 +10,7 @@
  * copyright IGN
  * @author IGN
  * @version 2.1.2
- * @date 2019-03-08
+ * @date 14/02/2018
  *
  */
 /*!
@@ -30,7 +30,7 @@
 		exports["Gp"] = factory(require("xmldom"), require("request"));
 	else
 		root["Gp"] = factory(root[undefined], root[undefined]);
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_20__, __WEBPACK_EXTERNAL_MODULE_52__) {
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_20__, __WEBPACK_EXTERNAL_MODULE_53__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -93,7 +93,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 43);
+/******/ 	return __webpack_require__(__webpack_require__.s = 44);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -101,7 +101,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_loglevel__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_loglevel__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_loglevel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_loglevel__);
 /* global __PRODUCTION__ */
 
@@ -298,14 +298,18 @@ ErrorService.prototype = Object.create(Error.prototype, {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils_Helper__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Utils_MessagesResources__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Protocols_Protocol__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Protocols_Protocol__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DefaultUrlService__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__package__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__package___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__package__);
 
 
 
 
 
+
+// package.json (extract version)
 
 
 /**
@@ -669,7 +673,7 @@ CommonService.prototype = {
         // rajout de l'option gpbibaccess
         // INFO : acces au numero de version de package.conf aprés compilation !
         this.options.serverUrl = __WEBPACK_IMPORTED_MODULE_1__Utils_Helper__["a" /* default */].normalyzeUrl(this.options.serverUrl, {
-            "gp-access-lib" : "2.1.2"
+            "gp-access-lib" : __WEBPACK_IMPORTED_MODULE_6__package___default.a.version
         }, false);
 
         // si le proxy est renseigné, on proxifie l'url du service
@@ -1810,8 +1814,8 @@ Elevation.prototype = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__XLS_RequestHeader__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__XLS_Request__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__XLS_RequestHeader__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__XLS_Request__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__XLS_AbstractService__ = __webpack_require__(12);
 
 
@@ -2107,11 +2111,11 @@ XLS.prototype = {
     /**
      * Template de la requête.
      * substitution des valeurs suivantes :
-     * __VERSION__, __NAMESPACE__, __SCHEMALOCATION__
+     * 2.1.2, __NAMESPACE__, __SCHEMALOCATION__
      * __REQUESTHEADER__, __REQUEST__
      */
     template : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-        "<XLS version=\"__VERSION__\"\n" +
+        "<XLS version=\"2.1.2\"\n" +
         "__NAMESPACE__ \n" +
         "__SCHEMALOCATION__>\n" +
         "__REQUESTHEADER__\n" +
@@ -2250,7 +2254,7 @@ XLS.prototype.build = function () {
 
     var template = "";
     template = this.template;
-    template = template.replace(/__VERSION__/g, XLS.VERSION);
+    template = template.replace(/2.1.2/g, XLS.VERSION);
     template = template.replace(/__NAMESPACE__/g, this.namespaceByDefault);
     template = template.replace(/__SCHEMALOCATION__/g, this.schemaLocationByDefault);
 
@@ -2866,7 +2870,7 @@ ProcessIsoCurveResponse.prototype = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils_Helper__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_es6_promise__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_es6_promise__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_es6_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_es6_promise__);
 /* global Promise, require */
 
@@ -3029,7 +3033,7 @@ var XHR = {
                     // Utilisation du module :
                     // cf. http://blog.modulus.io/node.js-tutorial-how-to-use-request-module
 
-                    var req = __webpack_require__(52);// __request
+                    var req = __webpack_require__(53);// __request
 
                     // mapping data avec body param. pour le mode POST ou PUT (?)
                     if (options.data && typeof options.data === "string" && corps) {
@@ -3281,11 +3285,17 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_20__;
 
 /***/ }),
 /* 21 */
+/***/ (function(module, exports) {
+
+module.exports = {"name":"geoportal-access-lib","version":"2.1.2","date":"14/02/2018","description":"French Geoportal resources access library","main":"src/Gp.js","browser":"dist/GpServices.js","homepage":"https://github.com/IGNF/geoportal-access-lib#readme","scripts":{"clean":"echo \"Warning: no yet implemented!\" && exit 0","setup":"npm install","cover":"nyc --reporter=lcov --reporter=text npm run test","build":"webpack","build:prod":"webpack --env.production","build:dev":"webpack --env.development","test":"mocha-webpack --webpack-config webpack.test.js --glob \"test_*.js\" test/spec/","test:serve":"webpack-dev-server --hot --config webpack.test.serve.js","test:end-to-end:serve":"webpack-dev-server --hot --config webpack.end-to-end.serve.js","sample":"npm run sample:serve","sample:serve":"webpack-dev-server --open-page samples/index-src.html --https --content-base .  --output-public-path '/dist/' --port 9001 --open 'google-chrome'","sample:serve:prod":"webpack-dev-server --env.production --open-page samples/index.html --content-base . --output-public-path '/dist/' --port 9001 --open 'google-chrome","sample:serve:dev":"webpack-dev-server --env.development --open-page samples/index-map.html --content-base . --output-public-path '/dist/' --port 9001 --open 'google-chrome","doc":"npm run doc:serve","doc:serve":"webpack-dev-server --content-base jsdoc --port 9001 --open"},"nyc":{"include":["src/**/*.js"],"instrument":false,"sourceMap":false},"repository":{"type":"git","url":"https://github.com/IGNF/geoportal-access-lib.git"},"keywords":["geoportail","webservice","javascript","es6"],"author":"IGNF","license":"CECILL-B","dependencies":{"es6-promise":"^4.2.4","request":"^2.87.0","xmldom":"^0.1.27"},"devDependencies":{"babel-core":"^6.26.3","babel-loader":"^7.1.2","babel-preset-env":"^1.7.0","chai":"^4.1.2","clean-webpack-plugin":"^0.1.18","copy-webpack-plugin":"^4.5.1","eslint":"^4.18.2","eslint-config-standard":"^11.0.0","eslint-loader":"^2.0.0","eslint-plugin-import":"^2.9.0","eslint-plugin-node":"^6.0.1","eslint-plugin-promise":"^3.7.0","eslint-plugin-standard":"^3.0.1","glob":"^7.1.2","handlebars-layouts":"^3.1.4","handlebars-webpack-plugin":"^1.4.1","html-webpack-plugin":"^2.30.1","istanbul-instrumenter-loader":"^3.0.1","jsdoc-webpack-plugin":"0.0.1","loglevel":"^1.6.1","mocha":"^4.0.0","mocha-loader":"^1.1.3","mocha-webpack":"^1.0.1","nyc":"^12.0.2","path":"^0.12.7","replace-bundle-webpack-plugin":"^1.0.0","sinon":"^4.3.0","sinon-es6":"0.0.3","speed-measure-webpack-plugin":"^1.2.2","string-template":"^1.0.0","webpack":"^3.11.0","webpack-dev-server":"^2.11.3","webpack-node-externals":"^1.6.0","webpack-shell-plugin":"^0.5.0"},"bundledDependencies":[],"peerDependencies":{},"optionalDependencies":{}}
+
+/***/ }),
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AltiRequest__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AltiRequest__ = __webpack_require__(23);
 
 
 
@@ -3393,7 +3403,7 @@ AltiElevationRequest.prototype.getData = function () {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3610,12 +3620,12 @@ AltiRequest.prototype.getData = function () {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AltiRequest__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AltiRequest__ = __webpack_require__(23);
 
 
 
@@ -3721,7 +3731,7 @@ AltiProfilRequest.prototype.getData = function () {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3906,7 +3916,7 @@ AutoConfResponse.prototype = {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3956,7 +3966,7 @@ Constraint.prototype = {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3991,7 +4001,7 @@ Format.prototype = {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4307,7 +4317,7 @@ Layer.prototype = {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4345,7 +4355,7 @@ Legend.prototype = {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4380,7 +4390,7 @@ Metadata.prototype = {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4424,7 +4434,7 @@ Originator.prototype = {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4461,7 +4471,7 @@ Service.prototype = {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4499,7 +4509,7 @@ Style.prototype = {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4565,7 +4575,7 @@ Territory.prototype = {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4600,7 +4610,7 @@ Thematic.prototype = {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4696,7 +4706,7 @@ TileMatrixSet.prototype = {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4800,7 +4810,7 @@ TileMatrix.prototype = {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4843,14 +4853,14 @@ TileMatrixLimit.prototype = {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AbstractService__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtilityService_GeocodeRequest__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtilityService_ReverseGeocodeRequest__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtilityService_GeocodeRequest__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtilityService_ReverseGeocodeRequest__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__LocationUtilityService_GeocodeFilterExtension__ = __webpack_require__(13);
 
 
@@ -5049,7 +5059,7 @@ LocationUtilityService.prototype.toString = function () {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5093,7 +5103,7 @@ DirectGeocodedLocation.prototype.constructor = DirectGeocodedLocation;
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5137,7 +5147,7 @@ ReverseGeocodedLocation.prototype.constructor = ReverseGeocodedLocation;
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5167,7 +5177,7 @@ AutoCompleteResponse.prototype = {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5297,48 +5307,50 @@ SuggestedLocation.prototype = {
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(44);
+module.exports = __webpack_require__(45);
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Services_Services__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Services_Services__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Services_DefaultUrlService__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Services_Alti_Response_model_AltiResponse__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Services_Alti_Response_model_Elevation__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Services_AutoComplete_Response_model_AutoCompleteResponse__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Services_AutoComplete_Response_model_SuggestedLocation__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Services_AutoConf_Response_model_AutoConfResponse__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Services_AutoConf_Response_model_Constraint__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Services_AutoConf_Response_model_Format__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Services_AutoConf_Response_model_Layer__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Services_AutoConf_Response_model_Legend__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Services_AutoConf_Response_model_Metadata__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Services_AutoConf_Response_model_Originator__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Services_AutoConf_Response_model_Service__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__Services_AutoConf_Response_model_Style__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__Services_AutoConf_Response_model_Territory__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__Services_AutoConf_Response_model_Thematic__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__Services_AutoConf_Response_model_TileMatrix__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__Services_AutoConf_Response_model_TileMatrixLimit__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__Services_AutoConf_Response_model_TileMatrixSet__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Services_AutoComplete_Response_model_AutoCompleteResponse__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Services_AutoComplete_Response_model_SuggestedLocation__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Services_AutoConf_Response_model_AutoConfResponse__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Services_AutoConf_Response_model_Constraint__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Services_AutoConf_Response_model_Format__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Services_AutoConf_Response_model_Layer__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Services_AutoConf_Response_model_Legend__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Services_AutoConf_Response_model_Metadata__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Services_AutoConf_Response_model_Originator__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Services_AutoConf_Response_model_Service__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__Services_AutoConf_Response_model_Style__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__Services_AutoConf_Response_model_Territory__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__Services_AutoConf_Response_model_Thematic__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__Services_AutoConf_Response_model_TileMatrix__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__Services_AutoConf_Response_model_TileMatrixLimit__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__Services_AutoConf_Response_model_TileMatrixSet__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__Services_Geocode_Response_model_GeocodeResponse__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__Services_Geocode_Response_model_GeocodedLocation__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__Services_Geocode_Response_model_DirectGeocodedLocation__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__Services_Geocode_Response_model_ReverseGeocodedLocation__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__Services_Geocode_Response_model_DirectGeocodedLocation__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__Services_Geocode_Response_model_ReverseGeocodedLocation__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__Services_ProcessIsoCurve_Response_model_ProcessIsoCurveResponse__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__Services_Route_Response_model_RouteResponse__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__Services_Route_Response_model_RouteInstruction__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__Protocols_XHR__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__Utils_Helper__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__package__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__package___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_30__package__);
 /**
 * Global variable Gp.
 *
@@ -5427,9 +5439,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+
 var Gp = {
-    servicesVersion : "2.1.2",
-    servicesDate : "2019-03-08",
+    servicesVersion : __WEBPACK_IMPORTED_MODULE_30__package___default.a.version,
+    servicesDate : __WEBPACK_IMPORTED_MODULE_30__package___default.a.date,
     /**
      * Methode pour rajouter une classe / objet au namespace global.
      *
@@ -5510,17 +5524,17 @@ Gp.extend("Services.DefaultUrl", __WEBPACK_IMPORTED_MODULE_1__Services_DefaultUr
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Alti_Alti__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AutoConf_AutoConf__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Geocode_Geocode__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Geocode_ReverseGeocode__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__AutoComplete_AutoComplete__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Route_Route__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ProcessIsoCurve_ProcessIsoCurve__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Alti_Alti__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AutoConf_AutoConf__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Geocode_Geocode__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Geocode_ReverseGeocode__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__AutoComplete_AutoComplete__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Route_Route__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ProcessIsoCurve_ProcessIsoCurve__ = __webpack_require__(97);
 /* eslint no-unused-vars: ["error", { "varsIgnorePattern": "point|circle|bbox" }] */
 
 /**
@@ -5820,7 +5834,7 @@ var bbox = {};
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5829,8 +5843,8 @@ var bbox = {};
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CommonService__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__DefaultUrlService__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Request_AltiRequestFactory__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Response_AltiResponseFactory__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Request_AltiRequestFactory__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Response_AltiResponseFactory__ = __webpack_require__(59);
 
 
 
@@ -6071,7 +6085,7 @@ Alti.prototype.analyzeResponse = function (error, success) {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -6331,13 +6345,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_Helper__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__XHR__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__JSONP__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__JSONP__ = __webpack_require__(54);
 /**
  * Protocols : Interface de dialogue avec les webservices
  *
@@ -6480,7 +6494,7 @@ var Protocol = {
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, global) {/*!
@@ -7667,10 +7681,10 @@ return Promise$1;
 
 //# sourceMappingURL=es6-promise.map
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(50), __webpack_require__(51)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(51), __webpack_require__(52)))
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -7860,7 +7874,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports) {
 
 var g;
@@ -7887,13 +7901,13 @@ module.exports = g;
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_52__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_53__;
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8147,14 +8161,14 @@ var JSONP = {
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Exceptions_ErrorService__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AltiRequestREST__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__AltiRequestWPS__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AltiRequestREST__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__AltiRequestWPS__ = __webpack_require__(57);
 /**
  * Creation d'une requête en REST ou WPS
  * (Factory)
@@ -8285,14 +8299,14 @@ var AltiRequestFactory = {
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils_MessagesResources__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_AltiElevationRequest__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model_AltiProfilRequest__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_AltiElevationRequest__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model_AltiProfilRequest__ = __webpack_require__(24);
 /* jshint multistr : true */
 
 
@@ -8498,15 +8512,15 @@ AltiRequestREST.prototype = {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils_MessagesResources__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Formats_WPS__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model_AltiElevationRequest__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model_AltiProfilRequest__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Formats_WPS__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model_AltiElevationRequest__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model_AltiProfilRequest__ = __webpack_require__(24);
 /**
  * Classe d'interface des requêtes de type WPS sur le service altimetrique.
  * (Factory)
@@ -8623,7 +8637,7 @@ var AltiRequestWPS = {
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8727,7 +8741,7 @@ WPS.prototype = {
     template : {
         get : {
             value : "service=__SERVICE__" +
-                "&version=__VERSION__" +
+                "&version=2.1.2" +
                 "&rawdataoutput=__RAWDATAOUTPUT__" +
                 "&identifier=__IDENTIFIER__" +
                 "&request=__REQUEST__" +
@@ -8739,7 +8753,7 @@ WPS.prototype = {
         post : {
 
             value : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<wps:__REQUEST__ version=\"__VERSION__\" service=\"__SERVICE__\" " +
+                "<wps:__REQUEST__ version=\"2.1.2\" service=\"__SERVICE__\" " +
                 "__NAMESPACE__ __SCHEMALOCATION__>" +
                 "<ows:Identifier>__IDENTIFIER__</ows:Identifier>" +
                 "<wps:DataInputs>" +
@@ -8797,7 +8811,7 @@ WPS.prototype = {
      * @example
      * // GET  out :
      * //  service=__SERVICE__
-     * //  &version=__VERSION__
+     * //  &version=2.1.2
      * //  &rawdataoutput=__RAWDATAOUTPUT__
      * //  &identifier=__IDENTIFIER__
      * //  &request=__REQUEST__
@@ -8806,7 +8820,7 @@ WPS.prototype = {
      *
      * // POST out :
      * //      <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-     * //      <wps:__REQUEST__ version=\"__VERSION__\" service=\"__SERVICE__\"
+     * //      <wps:__REQUEST__ version=\"2.1.2\" service=\"__SERVICE__\"
      * //         __NAMESPACE__ __SCHEMALOCATION__>
      * //          <ows:Identifier>__IDENTIFIER__</ows:Identifier>
      * //          <wps:DataInputs>
@@ -8842,7 +8856,7 @@ WPS.prototype = {
         }
 
         template = template.replace(/__SERVICE__/g, this.paramservice);
-        template = template.replace(/__VERSION__/g, this.paramversion);
+        template = template.replace(/2.1.2/g, this.paramversion);
         template = template.replace(/__RAWDATAOUTPUT__/g, this.paramrawdataoutput);
         template = template.replace(/__IDENTIFIER__/g, this.paramidentifier);
         template = template.replace(/__REQUEST__/g, this.paramrequest);
@@ -8937,7 +8951,7 @@ WPS.prototype = {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8945,7 +8959,7 @@ WPS.prototype = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils_MessagesResources__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Formats_XML__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Formats_AltiResponseReader__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Formats_AltiResponseReader__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__model_AltiResponse__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__model_Elevation__ = __webpack_require__(10);
 /**
@@ -9136,7 +9150,7 @@ var AltiResponseFactory = {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9457,7 +9471,7 @@ AltiResponseReader.read = function (root) {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9467,7 +9481,7 @@ AltiResponseReader.read = function (root) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__DefaultUrlService__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__CommonService__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Response_AutoConfResponseFactory__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Response_AutoConfResponseFactory__ = __webpack_require__(62);
 
 
 
@@ -9668,7 +9682,7 @@ AutoConf.prototype.analyzeResponse = function (error, success) {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9676,7 +9690,7 @@ AutoConf.prototype.analyzeResponse = function (error, success) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils_MessagesResources__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Formats_XML__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Formats_AutoConfResponseReader__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Formats_AutoConfResponseReader__ = __webpack_require__(63);
 /**
  * Factory pour générer une reponse JSON à partir d'un XML
  *
@@ -9856,24 +9870,24 @@ var AutoConfReponseFactory = {
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Response_model_AutoConfResponse__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Response_model_Constraint__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Response_model_Format__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Response_model_Layer__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Response_model_Legend__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Response_model_Metadata__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Response_model_Originator__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Response_model_Service__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Response_model_Style__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Response_model_Territory__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Response_model_Thematic__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Response_model_TileMatrixSet__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Response_model_TileMatrix__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Response_model_TileMatrixLimit__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Response_model_AutoConfResponse__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Response_model_Constraint__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Response_model_Format__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Response_model_Layer__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Response_model_Legend__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Response_model_Metadata__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Response_model_Originator__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Response_model_Service__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Response_model_Style__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Response_model_Territory__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Response_model_Thematic__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Response_model_TileMatrixSet__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Response_model_TileMatrix__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Response_model_TileMatrixLimit__ = __webpack_require__(38);
 
 /**
  * Fonction retournant un objet contenant des clés de lecture (readers)
@@ -11068,7 +11082,7 @@ function __checkServiceAttributes (viewContextNode) {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11076,8 +11090,8 @@ function __checkServiceAttributes (viewContextNode) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils_MessagesResources__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CommonService__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Request_DirectGeocodeRequestFactory__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Response_DirectGeocodeResponseFactory__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Request_DirectGeocodeRequestFactory__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Response_DirectGeocodeResponseFactory__ = __webpack_require__(77);
 
 
 
@@ -11324,18 +11338,18 @@ Geocode.prototype.analyzeResponse = function (error, success) {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Formats_XLS__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Formats_XLS_LocationUtilityService__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Formats_XLS_LocationUtilityService__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Formats_XLS_LocationUtilityService_GeocodeFilterExtension__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Request_model_StreetAddress__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Request_model_PositionOfInterest__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Request_model_CadastralParcel__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Request_model_Administratif__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Request_model_StreetAddress__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Request_model_PositionOfInterest__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Request_model_CadastralParcel__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Request_model_Administratif__ = __webpack_require__(76);
 /**
  * Creation d'une requête OpenLS en mode POST ou GET
  * (Factory)
@@ -11440,7 +11454,7 @@ var DirectGeocodeRequestFactory = {
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11531,7 +11545,7 @@ RequestHeader.prototype = {
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11605,10 +11619,10 @@ Request.prototype = {
     /**
      * Template de la requête.
      * substitution des valeurs suivantes :
-     * __MAXRESPONSES__, __METHODNAME__, __UUID__, __VERSION__
+     * __MAXRESPONSES__, __METHODNAME__, __UUID__, 2.1.2
      * __REQUESTSERVICE__
      */
-    template : "<Request maximumResponses=\"__MAXRESPONSES__\" methodName=\"__METHODNAME__\" requestID=\"__UUID__\" version=\"__VERSION__\">" +
+    template : "<Request maximumResponses=\"__MAXRESPONSES__\" methodName=\"__METHODNAME__\" requestID=\"__UUID__\" version=\"2.1.2\">" +
         "<!-- __REQUESTSERVICE__ -->" +
         "</Request>",
 
@@ -11641,7 +11655,7 @@ Request.prototype = {
         template = template.replace(/__MAXRESPONSES__/g, this.options.maximumResponses);
         template = template.replace(/__METHODNAME__/g, this.options.methodName);
         template = template.replace(/__UUID__/g, this.guid());
-        template = template.replace(/__VERSION__/g, this.options.version);
+        template = template.replace(/2.1.2/g, this.options.version);
 
         this.requestString = template;
         return this.requestString;
@@ -11652,12 +11666,12 @@ Request.prototype = {
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model_Address__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model_Address__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__GeocodeFilterExtension__ = __webpack_require__(13);
 
 
@@ -11888,7 +11902,7 @@ GeocodeRequest.prototype = {
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12184,13 +12198,13 @@ Address.prototype.toString = function () {
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model_Position__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_Preference__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model_Position__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_Preference__ = __webpack_require__(72);
 
 
 
@@ -12371,7 +12385,7 @@ ReverseGeocodeRequest.prototype = {
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12566,7 +12580,7 @@ Position.prototype.toString = function () {
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12655,7 +12669,7 @@ Preference.prototype.toString = function () {
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12719,7 +12733,7 @@ StreetAddress.prototype.constructor = StreetAddress;
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12782,7 +12796,7 @@ PositionOfInterest.prototype.constructor = PositionOfInterest;
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12850,7 +12864,7 @@ CadastralParcel.prototype.constructor = CadastralParcel;
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12910,14 +12924,14 @@ Administratif.prototype.constructor = Administratif;
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils_MessagesResources__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Formats_XML__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Formats_DirectGeocodeResponseReader__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Formats_DirectGeocodeResponseReader__ = __webpack_require__(78);
 /**
  * Factory pour générer une reponse JSON à partir d'un XML
  * ou d'un JSON encapsulant du XML
@@ -13019,14 +13033,14 @@ var DirectGeocodeReponseFactory = {
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_MessagesResources__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Response_model_GeocodeResponse__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Response_model_DirectGeocodedLocation__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Response_model_DirectGeocodedLocation__ = __webpack_require__(40);
 
 /**
  * Fonction retournant un objet contenant des clés de lecture (readers)
@@ -13472,7 +13486,7 @@ function __checkServiceAttributes (XLSNode) {
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13480,8 +13494,8 @@ function __checkServiceAttributes (XLSNode) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils_MessagesResources__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CommonService__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Request_ReverseGeocodeRequestFactory__ = __webpack_require__(79);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Response_ReverseGeocodeResponseFactory__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Request_ReverseGeocodeRequestFactory__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Response_ReverseGeocodeResponseFactory__ = __webpack_require__(81);
 
 
 
@@ -13747,13 +13761,13 @@ ReverseGeocode.geoEPSG = ["EPSG:4326"];
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Formats_XLS__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Formats_XLS_LocationUtilityService__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Formats_XLS_LocationUtilityService__ = __webpack_require__(39);
 /**
  * Creation d'une requête OpenLS en mode POST ou GET
  * (Factory)
@@ -13846,14 +13860,14 @@ var ReverseGeocodeRequestFactory = {
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_MessagesResources__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Formats_XML__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Formats_ReverseGeocodeResponseReader__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Formats_ReverseGeocodeResponseReader__ = __webpack_require__(82);
 /**
  * Factory pour générer une reponse JSON à partir d'un XML
  * ou d'un JSON encapsulant du XML
@@ -13969,14 +13983,14 @@ var ReverseGeocodeReponseFactory = {
 
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_MessagesResources__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Response_model_GeocodeResponse__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Response_model_ReverseGeocodedLocation__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Response_model_ReverseGeocodedLocation__ = __webpack_require__(41);
 
 /**
  * Fonction retournant un objet contenant des clés de lecture (readers)
@@ -14431,12 +14445,12 @@ function __checkServiceAttributes (XLSNode) {
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CommonService__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Response_AutoCompleteResponseFactory__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Response_AutoCompleteResponseFactory__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Utils_MessagesResources__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Utils_Helper__ = __webpack_require__(4);
@@ -14644,15 +14658,15 @@ AutoComplete.prototype.analyzeResponse = function (error, success) {
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils_MessagesResources__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Exceptions_ErrorService__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model_AutoCompleteResponse__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model_SuggestedLocation__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model_AutoCompleteResponse__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model_SuggestedLocation__ = __webpack_require__(43);
 /**
  * Factory pour générer une reponse JSON à partir d'un XML ou d'un JSON
  * (Factory)
@@ -14798,7 +14812,7 @@ var AutoCompleteResponseFactory = {
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14807,8 +14821,8 @@ var AutoCompleteResponseFactory = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CommonService__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__DefaultUrlService__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Request_RouteRequestFactory__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Response_RouteResponseFactory__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Request_RouteRequestFactory__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Response_RouteResponseFactory__ = __webpack_require__(94);
 
 
 
@@ -15103,14 +15117,14 @@ Route.prototype.analyzeResponse = function (error, success) {
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Exceptions_ErrorService__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__RouteRequestOLS__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__RouteRequestREST__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__RouteRequestOLS__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__RouteRequestREST__ = __webpack_require__(92);
 /**
  * Creation d'une requête OpenLS ou REST en mode POST ou GET
  * (Factory)
@@ -15224,13 +15238,13 @@ var RouteRequestFactory = {
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Formats_XLS__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Formats_XLS_RouteService__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Formats_XLS_RouteService__ = __webpack_require__(88);
 /**
  * Creation d'une requête OpenLS en mode POST ou GET
  * (Factory)
@@ -15319,14 +15333,14 @@ var RouteRequestOLS = {
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AbstractService__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__RouteService_DetermineRouteRequest__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__RouteService_RouteRequestExtension__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__RouteService_DetermineRouteRequest__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__RouteService_RouteRequestExtension__ = __webpack_require__(91);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__RouteService_RouteRequestExtension___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__RouteService_RouteRequestExtension__);
 
 
@@ -15643,12 +15657,12 @@ RouteService.prototype.toString = function () {
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model_RoutePlan__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model_RoutePlan__ = __webpack_require__(90);
 
 
 
@@ -15863,7 +15877,7 @@ DetermineRouteRequest.prototype = {
 
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16133,7 +16147,7 @@ RoutePlan.prototype = {
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports) {
 
 /**
@@ -16149,13 +16163,13 @@ RoutePlan.prototype = {
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils_MessagesResources__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_RouteParamREST__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_RouteParamREST__ = __webpack_require__(93);
 
 
 
@@ -16261,7 +16275,7 @@ RouteRequestREST.prototype = {
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16471,7 +16485,7 @@ RouteParamREST.prototype.getParams = function () {
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16480,8 +16494,8 @@ RouteParamREST.prototype.getParams = function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Formats_XML__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Formats_WKT__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Formats_RouteResponseRESTReader__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Formats_RouteResponseOLSReader__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Formats_RouteResponseRESTReader__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Formats_RouteResponseOLSReader__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__model_RouteResponse__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__model_RouteInstruction__ = __webpack_require__(17);
 /**
@@ -16769,7 +16783,7 @@ var RouteResponseFactory = {
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17089,7 +17103,7 @@ function __getChildNodes (node, data) {
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17171,7 +17185,7 @@ RouteResponseOLSReader.read = function (root) {
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17180,8 +17194,8 @@ RouteResponseOLSReader.read = function (root) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CommonService__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__DefaultUrlService__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Request_ProcessIsoCurveRequest__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Response_ProcessIsoCurveResponseFactory__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Request_ProcessIsoCurveRequest__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Response_ProcessIsoCurveResponseFactory__ = __webpack_require__(100);
 
 
 
@@ -17438,13 +17452,13 @@ ProcessIsoCurve.prototype.analyzeResponse = function (onError, onSuccess) {
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils_MessagesResources__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_ProcessIsoCurveParam__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_ProcessIsoCurveParam__ = __webpack_require__(99);
 
 
 
@@ -17718,7 +17732,7 @@ ProcessIsoCurveRequest.prototype = {
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17908,7 +17922,7 @@ ProcessIsoCurveParam.prototype.getParams = function () {
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17917,7 +17931,7 @@ ProcessIsoCurveParam.prototype.getParams = function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Formats_XML__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Formats_WKT__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Formats_ProcessIsoCurveResponseReader__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Formats_ProcessIsoCurveResponseReader__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__model_ProcessIsoCurveResponse__ = __webpack_require__(18);
 /**
  * Factory pour générer une reponse JSON à partir d'un XML ou d'un JSON
@@ -18089,7 +18103,7 @@ var ProcessIsoCurveResponseFactory = {
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
