@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <!-- !meta IGN -->
 
-    <title>Namespace: Legend</title>
+    <title>Module: Helper</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -2089,7 +2089,7 @@
 
     <section class="content">
         <label class="openLeftMenu" for="showLeftMenu" title="Ouvrir le menu latéral"></label>
-        <h1 class="page-title" data-filename="Gp.Services.Config.Legend.html">Namespace: Legend</h1>
+        <h1 class="page-title" data-filename="module-Helper.html">Module: Helper</h1>
         
 
 
@@ -2100,7 +2100,7 @@
 <header>
 -->
     <h1>
-    <span class="main-title" data-classname=Gp.Services.Config.Legend> Gp.Services.Config.Legend </span>
+    <span class="main-title" data-classname=Gp.Helper> Gp.Helper </span>
     </h1>
     
     
@@ -2114,109 +2114,11 @@
     
     
         
-            <div class="description"><p>Object used to describe a legend file associated with a geoportal resource (WMTS, WMS, WFS layers).</p></div>
+            <div class="description"><p>Classe utilitaire</p></div>
         
         
         
 <dl class="details">
-    
-        
-        <h5 class="subsection-title">Properties:</h5>
-        
-        <dl>
-
-<table class="props">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name">format</td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last"><p>mime-type of the legend file.</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name">url</td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last"><p>legend file URL</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name">minScaleDenominator</td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last"><p>minimum scale denominator where this legend applies.</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-</dl>
-        
     
         
     
@@ -2258,6 +2160,499 @@
     
     
     
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".indent">
+            
+            <span class="type-signature static">static</span>indent<span class="signature">(n, msg)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{String}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            Utils/Helper.js, line 96
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Indentation d'une chaine</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name">n</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>nombre de tabulation</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name">msg</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>chaine</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+<h5>Returns:</h5>
+une chaine indentée
+<br />
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Gp.Utils.Helper.indent (2, "message à indenter")
+// out
+// ........message à indenter</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".normalyzeParameters">
+            
+            <span class="type-signature static">static</span>normalyzeParameters<span class="signature">(params)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{String}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            Utils/Helper.js, line 9
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>concatenation des parametres key/value dans les urls</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name">params</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>tableau de clef/valeur</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+<h5>Returns:</h5>
+les paramètres concaténés
+<br />
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Gp.Utils.Helper.normalyzeParameters ({
+        key1:value1,
+        key2:value2,
+        key3:value3
+ });
+ // out : "key1=value1&key2=value2&key3=value3"</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".normalyzeUrl">
+            
+            <span class="type-signature static">static</span>normalyzeUrl<span class="signature">(url, params, encode)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{String}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            Utils/Helper.js, line 47
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Concaténation et encodage des urls.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name">url</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>url</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name">params</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>tableau de clef/valeur ou string</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name">encode</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>true|false, false par defaut</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+<h5>Returns:</h5>
+une url normalisée
+<br />
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code>Gp.Utils.Helper.normalyzeUrl (url, {
+        key1:value1,
+        key2=:value2,
+        key3:value3
+ });
+ // out : "url?key1=value1&key2=value2&key3=value3"</code></pre>
+    
+
+    
+</dd>
+
+        </dl>
+    
     
     
     
@@ -2278,7 +2673,7 @@
     <footer>
         Copyright (c) IGN, released under the CECILL-B license - Geoportal Resources Access - version 2.0.0
         </br>
-        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Apr 25 2019 10:57:53 GMT+0000 (UTC)
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Apr 25 2019 10:57:54 GMT+0000 (UTC)
     </footer>
 
 

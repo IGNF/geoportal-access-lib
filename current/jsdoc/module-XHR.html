@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <!-- !meta IGN -->
 
-    <title>Namespace: Legend</title>
+    <title>Module: XHR</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -2089,7 +2089,7 @@
 
     <section class="content">
         <label class="openLeftMenu" for="showLeftMenu" title="Ouvrir le menu latéral"></label>
-        <h1 class="page-title" data-filename="Gp.Services.Config.Legend.html">Namespace: Legend</h1>
+        <h1 class="page-title" data-filename="module-XHR.html">Module: XHR</h1>
         
 
 
@@ -2100,7 +2100,7 @@
 <header>
 -->
     <h1>
-    <span class="main-title" data-classname=Gp.Services.Config.Legend> Gp.Services.Config.Legend </span>
+    <span class="main-title" data-classname=Gp.Protocols.XHR> Gp.Protocols.XHR </span>
     </h1>
     
     
@@ -2114,111 +2114,13 @@
     
     
         
-            <div class="description"><p>Object used to describe a legend file associated with a geoportal resource (WMTS, WMS, WFS layers).</p></div>
+            <div class="description"><p>Ajax Request (use of Promises)</p></div>
         
         
         
 <dl class="details">
     
         
-        <h5 class="subsection-title">Properties:</h5>
-        
-        <dl>
-
-<table class="props">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name">format</td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last"><p>mime-type of the legend file.</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name">url</td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last"><p>legend file URL</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name">minScaleDenominator</td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last"><p>minimum scale denominator where this legend applies.</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-</dl>
-        
-    
-        
     
     
     
@@ -2235,6 +2137,13 @@
     
     
     
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>dependance 'es6-promise'</li>
+        </ul>
+    </dd>
     
     
     
@@ -2258,6 +2167,409 @@
     
     
     
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".call">
+            
+            <span class="type-signature static">static</span>call<span class="signature">(settings)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            Protocols/XHR.js, line 22
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Interface unique d'envoi d'une requête.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name">settings</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>options generales</p>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name">url</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>url du service</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name">method</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>GET, POST, PUT, DELETE</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name">format</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>format de la reponse du service : json, xml ou null (brute)</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name">data</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>content (post) ou param (get)</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name">proxy</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>proxy url</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name">headers</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>(post) ex. referer</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name">content</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>(post) ex. 'application/json'</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name">timeOut</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>timeout = 0 par defaut</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name">scope</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>this</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name">onResponse</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>callback</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name">onFailure</td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>callback</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
     
     
     
@@ -2278,7 +2590,7 @@
     <footer>
         Copyright (c) IGN, released under the CECILL-B license - Geoportal Resources Access - version 2.0.0
         </br>
-        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Apr 25 2019 10:57:53 GMT+0000 (UTC)
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Apr 25 2019 10:57:54 GMT+0000 (UTC)
     </footer>
 
 

@@ -813,8 +813,7 @@ CommonService.prototype = {
  * Classe utilitaire
  *
  * @module Helper
- * @private
- * @alias Gp.Utils.Helper
+ * @alias Gp.Helper
  */
 var Helper = {
 
@@ -908,6 +907,8 @@ var Helper = {
     /**
      * Indentation d'une chaine
      *
+     * @method indent
+     * @static
      * @param {Number} n - nombre de tabulation
      * @param {String} msg - chaine
      *
@@ -2881,15 +2882,15 @@ ProcessIsoCurveResponse.prototype = {
 // import __xmldom from "xmldom";
 
 /**
- * Requêtes Ajax (utilisation des Promises)
- * cf. https://xhr.spec.whatwg.org/
- * cf. https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+ * Ajax Request (use of Promises)
  *
  * @module XHR
- * @private
  * @alias Gp.Protocols.XHR
- * @see dependance 'promise'
+ * @see dependance 'es6-promise'
  */
+
+// cf. https://xhr.spec.whatwg.org/
+// cf. https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 
 var XHR = {
 
@@ -5356,25 +5357,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 *
 * @module Gp
 * @alias Gp
-* @desc
+* @description
 *
 * This is the global variable that is exposed in the browser environment.
 * Content is composed of constructor, functions and properties...
 *
-* > Error()
+* > {@link Gp.Error Error()}
 *     - .TYPE_SRVERR : "SERVICE_ERROR"
 *     - .TYPE_UNKERR : "UNKNOWN_ERROR"
 *     - .TYPE_USEERR : "USAGE_ERROR"
 *
-* > Helper
+* > {@link module:Helper Helper}
 *     - .indent()
 *     - .normalyzeParameters()
 *     - .normalyzeUrl()
 *
-* > Protocols
-*     - .XHR.call()
+* > {@link module:XHR Protocols.XHR}
+*     - .call()
 *
-* > Services
+* > {@link module:Services Services (objects)}
 *     - .Alti
 *         - {@link Gp.Services.Alti.Elevation .Elevation()}
 *     - {@link Gp.Services.AltiResponse .AltiResponse()}
@@ -5393,6 +5394,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 *     - .Route
 *         - {@link Gp.Services.Route.RouteInstruction .RouteInstruction()}
 *     - {@link Gp.Services.RouteResponse .RouteResponse()}
+*
+* > Services (factory)
 *     - {@link module:Services~autoComplete .autoComplete()}
 *     - {@link module:Services~geocode .geocode()}
 *     - {@link module:Services~getAltitude .getAltitude()}
@@ -5404,7 +5407,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 * > servicesDate : "YYYY-MM-DD"
 *
 * > servicesVersion : "X.X.X"
-*
 *
 */
 
@@ -5441,86 +5443,69 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var Gp = {
-    servicesVersion : __WEBPACK_IMPORTED_MODULE_30__package___default.a.version,
-    servicesDate : __WEBPACK_IMPORTED_MODULE_30__package___default.a.date,
-    /**
-     * Methode pour rajouter une classe / objet au namespace global.
-     *
-     * @private
-     * @method extend
-     * @param {String} strNS - nom sous lequel on veut présenter la
-     *        classe / objet (Gp."strNS").
-     * @param {Object} value - la classe / objet à rajouter au NS global.
-     * @returns {Object} this
-     */
-    extend : function (strNS, value) {
-        var parts = strNS.split(".");
-        var parent = this;
-        var pl;
+/** Version */
+const servicesVersion = __WEBPACK_IMPORTED_MODULE_30__package___default.a.version;
+/* harmony export (immutable) */ __webpack_exports__["servicesVersion"] = servicesVersion;
 
-        pl = parts.length;
+/** Publication date */
+const servicesDate = __WEBPACK_IMPORTED_MODULE_30__package___default.a.date;
+/* harmony export (immutable) */ __webpack_exports__["servicesDate"] = servicesDate;
 
-        for (var i = 0; i < pl; i++) {
-            // create a property if it doesn't exist
-            if (typeof parent[parts[i]] === "undefined") {
-                parent[parts[i]] = {};
-            }
-
-            var n = pl - 1;
-            if (i === n) {
-                parent[parts[i]] = value;
-            }
-
-            parent = parent[parts[i]];
-        }
-
-        return this;
-    }
-};
 
 // on declare les ns dans root global
-Gp.extend("Protocols", {});
-Gp.extend("Protocols.XHR", __WEBPACK_IMPORTED_MODULE_27__Protocols_XHR__["a" /* default */]);
-Gp.extend("Services", __WEBPACK_IMPORTED_MODULE_0__Services_Services__["a" /* default */]);
-// Export Alti
-Gp.extend("Services.AltiResponse", __WEBPACK_IMPORTED_MODULE_2__Services_Alti_Response_model_AltiResponse__["a" /* default */]);
-Gp.extend("Services.Alti.Elevation", __WEBPACK_IMPORTED_MODULE_3__Services_Alti_Response_model_Elevation__["a" /* default */]);
-// Export Autocomplete
-Gp.extend("Services.AutoCompleteResponse", __WEBPACK_IMPORTED_MODULE_4__Services_AutoComplete_Response_model_AutoCompleteResponse__["a" /* default */]);
-Gp.extend("Services.AutoComplete.SuggestedLocation", __WEBPACK_IMPORTED_MODULE_5__Services_AutoComplete_Response_model_SuggestedLocation__["a" /* default */]);
-// Export Autoconf
-Gp.extend("Services.GetConfigResponse", __WEBPACK_IMPORTED_MODULE_6__Services_AutoConf_Response_model_AutoConfResponse__["a" /* default */]);
-Gp.extend("Services.Config.Constraint", __WEBPACK_IMPORTED_MODULE_7__Services_AutoConf_Response_model_Constraint__["a" /* default */]);
-Gp.extend("Services.Config.Format", __WEBPACK_IMPORTED_MODULE_8__Services_AutoConf_Response_model_Format__["a" /* default */]);
-Gp.extend("Services.Config.Layer", __WEBPACK_IMPORTED_MODULE_9__Services_AutoConf_Response_model_Layer__["a" /* default */]);
-Gp.extend("Services.Config.Legend", __WEBPACK_IMPORTED_MODULE_10__Services_AutoConf_Response_model_Legend__["a" /* default */]);
-Gp.extend("Services.Config.Metadata", __WEBPACK_IMPORTED_MODULE_11__Services_AutoConf_Response_model_Metadata__["a" /* default */]);
-Gp.extend("Services.Config.Originator", __WEBPACK_IMPORTED_MODULE_12__Services_AutoConf_Response_model_Originator__["a" /* default */]);
-Gp.extend("Services.Config.Service", __WEBPACK_IMPORTED_MODULE_13__Services_AutoConf_Response_model_Service__["a" /* default */]);
-Gp.extend("Services.Config.Style", __WEBPACK_IMPORTED_MODULE_14__Services_AutoConf_Response_model_Style__["a" /* default */]);
-Gp.extend("Services.Config.Territory", __WEBPACK_IMPORTED_MODULE_15__Services_AutoConf_Response_model_Territory__["a" /* default */]);
-Gp.extend("Services.Config.Thematic", __WEBPACK_IMPORTED_MODULE_16__Services_AutoConf_Response_model_Thematic__["a" /* default */]);
-Gp.extend("Services.Config.TileMatrix", __WEBPACK_IMPORTED_MODULE_17__Services_AutoConf_Response_model_TileMatrix__["a" /* default */]);
-Gp.extend("Services.Config.TileMatrixLimit", __WEBPACK_IMPORTED_MODULE_18__Services_AutoConf_Response_model_TileMatrixLimit__["a" /* default */]);
-Gp.extend("Services.Config.TileMatrixSet", __WEBPACK_IMPORTED_MODULE_19__Services_AutoConf_Response_model_TileMatrixSet__["a" /* default */]);
-// Export Geocode
-Gp.extend("Services.GeocodeResponse", __WEBPACK_IMPORTED_MODULE_20__Services_Geocode_Response_model_GeocodeResponse__["a" /* default */]);
-Gp.extend("Services.Geocode.GeocodedLocation", __WEBPACK_IMPORTED_MODULE_21__Services_Geocode_Response_model_GeocodedLocation__["a" /* default */]);
-Gp.extend("Services.Geocode.DirectGeocodedLocation", __WEBPACK_IMPORTED_MODULE_22__Services_Geocode_Response_model_DirectGeocodedLocation__["a" /* default */]);
-Gp.extend("Services.Geocode.ReverseGeocodedLocation", __WEBPACK_IMPORTED_MODULE_23__Services_Geocode_Response_model_ReverseGeocodedLocation__["a" /* default */]);
-// Export IsoCurve
-Gp.extend("Services.IsoCurveResponse", __WEBPACK_IMPORTED_MODULE_24__Services_ProcessIsoCurve_Response_model_ProcessIsoCurveResponse__["a" /* default */]);
-// Export Route
-Gp.extend("Services.RouteResponse", __WEBPACK_IMPORTED_MODULE_25__Services_Route_Response_model_RouteResponse__["a" /* default */]);
-Gp.extend("Services.Route.RouteInstruction", __WEBPACK_IMPORTED_MODULE_26__Services_Route_Response_model_RouteInstruction__["a" /* default */]);
-// Export Erreurs et Outils
-Gp.extend("Error", __WEBPACK_IMPORTED_MODULE_28__Exceptions_ErrorService__["a" /* default */]);
-Gp.extend("Helper", __WEBPACK_IMPORTED_MODULE_29__Utils_Helper__["a" /* default */]);
-// Export DefaultUrls
-Gp.extend("Services.DefaultUrl", __WEBPACK_IMPORTED_MODULE_1__Services_DefaultUrlService__["a" /* default */]);
+var Gp = {};
 
-/* harmony default export */ __webpack_exports__["default"] = (Gp); // = export { Gp as default };
+Gp.servicesVersion = servicesVersion;
+Gp.servicesDate = servicesDate;
+
+// Export Protocols
+Gp.Protocols = {};
+Gp.Protocols.XHR = __WEBPACK_IMPORTED_MODULE_27__Protocols_XHR__["a" /* default */];
+// Export services
+Gp.Services = __WEBPACK_IMPORTED_MODULE_0__Services_Services__["a" /* default */];
+// Export DefaultUrls
+Gp.Services.DefaultUrl = __WEBPACK_IMPORTED_MODULE_1__Services_DefaultUrlService__["a" /* default */];
+// Export Alti
+Gp.Services.AltiResponse = __WEBPACK_IMPORTED_MODULE_2__Services_Alti_Response_model_AltiResponse__["a" /* default */];
+Gp.Services.Alti = {};
+Gp.Services.Alti.Elevation = __WEBPACK_IMPORTED_MODULE_3__Services_Alti_Response_model_Elevation__["a" /* default */];
+// Export Autocomplete
+Gp.Services.AutoCompleteResponse = __WEBPACK_IMPORTED_MODULE_4__Services_AutoComplete_Response_model_AutoCompleteResponse__["a" /* default */];
+Gp.Services.AutoComplete = {};
+Gp.Services.AutoComplete.SuggestedLocation = __WEBPACK_IMPORTED_MODULE_5__Services_AutoComplete_Response_model_SuggestedLocation__["a" /* default */];
+// Export Autoconf
+Gp.Services.GetConfigResponse = __WEBPACK_IMPORTED_MODULE_6__Services_AutoConf_Response_model_AutoConfResponse__["a" /* default */];
+Gp.Services.Config = {};
+Gp.Services.Config.Constraint = __WEBPACK_IMPORTED_MODULE_7__Services_AutoConf_Response_model_Constraint__["a" /* default */];
+Gp.Services.Config.Format = __WEBPACK_IMPORTED_MODULE_8__Services_AutoConf_Response_model_Format__["a" /* default */];
+Gp.Services.Config.Layer = __WEBPACK_IMPORTED_MODULE_9__Services_AutoConf_Response_model_Layer__["a" /* default */];
+Gp.Services.Config.Legend = __WEBPACK_IMPORTED_MODULE_10__Services_AutoConf_Response_model_Legend__["a" /* default */];
+Gp.Services.Config.Metadata = __WEBPACK_IMPORTED_MODULE_11__Services_AutoConf_Response_model_Metadata__["a" /* default */];
+Gp.Services.Config.Originator = __WEBPACK_IMPORTED_MODULE_12__Services_AutoConf_Response_model_Originator__["a" /* default */];
+Gp.Services.Config.Service = __WEBPACK_IMPORTED_MODULE_13__Services_AutoConf_Response_model_Service__["a" /* default */];
+Gp.Services.Config.Style = __WEBPACK_IMPORTED_MODULE_14__Services_AutoConf_Response_model_Style__["a" /* default */];
+Gp.Services.Config.Territory = __WEBPACK_IMPORTED_MODULE_15__Services_AutoConf_Response_model_Territory__["a" /* default */];
+Gp.Services.Config.Thematic = __WEBPACK_IMPORTED_MODULE_16__Services_AutoConf_Response_model_Thematic__["a" /* default */];
+Gp.Services.Config.TileMatrix = __WEBPACK_IMPORTED_MODULE_17__Services_AutoConf_Response_model_TileMatrix__["a" /* default */];
+Gp.Services.Config.TileMatrixLimit = __WEBPACK_IMPORTED_MODULE_18__Services_AutoConf_Response_model_TileMatrixLimit__["a" /* default */];
+Gp.Services.Config.TileMatrixSet = __WEBPACK_IMPORTED_MODULE_19__Services_AutoConf_Response_model_TileMatrixSet__["a" /* default */];
+// Export Geocode
+Gp.Services.GeocodeResponse = __WEBPACK_IMPORTED_MODULE_20__Services_Geocode_Response_model_GeocodeResponse__["a" /* default */];
+Gp.Services.Geocode = {};
+Gp.Services.Geocode.GeocodedLocation = __WEBPACK_IMPORTED_MODULE_21__Services_Geocode_Response_model_GeocodedLocation__["a" /* default */];
+Gp.Services.Geocode.DirectGeocodedLocation = __WEBPACK_IMPORTED_MODULE_22__Services_Geocode_Response_model_DirectGeocodedLocation__["a" /* default */];
+Gp.Services.Geocode.ReverseGeocodedLocation = __WEBPACK_IMPORTED_MODULE_23__Services_Geocode_Response_model_ReverseGeocodedLocation__["a" /* default */];
+// Export IsoCurve
+Gp.Services.IsoCurveResponse = __WEBPACK_IMPORTED_MODULE_24__Services_ProcessIsoCurve_Response_model_ProcessIsoCurveResponse__["a" /* default */];
+// Export Route
+Gp.Services.RouteResponse = __WEBPACK_IMPORTED_MODULE_25__Services_Route_Response_model_RouteResponse__["a" /* default */];
+Gp.Services.Route = {};
+Gp.Services.Route.RouteInstruction = __WEBPACK_IMPORTED_MODULE_26__Services_Route_Response_model_RouteInstruction__["a" /* default */];
+// Export Erreurs et Outils
+Gp.Error = __WEBPACK_IMPORTED_MODULE_28__Exceptions_ErrorService__["a" /* default */];
+Gp.Helper = __WEBPACK_IMPORTED_MODULE_29__Utils_Helper__["a" /* default */];
+
+/* harmony default export */ __webpack_exports__["default"] = (Gp);
 
 
 /***/ }),
@@ -6353,11 +6338,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__XHR__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__JSONP__ = __webpack_require__(54);
 /**
- * Protocols : Interface de dialogue avec les webservices
+ * Interface de dialogue avec les webservices
  *
  * @module Protocols
  * @private
- * @alias Gp.Protocols.Protocols
+ * @alias Gp.Protocols
  */
 
 
@@ -7913,7 +7898,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_53__;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils_LoggerByDefault__ = __webpack_require__(0);
 /**
- * JSONP : Implémentation du protocole JSONP de la plateforme Géoportail (cf. {@link https://github.com/sobstel/jsonp.js}).
+ * JSONP : Implémentation du protocole JSONP de la plateforme Géoportail
  *
  * @module JSONP
  * @private
@@ -7921,6 +7906,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_53__;
  */
 
 
+// cf. https://github.com/sobstel/jsonp.js
 var JSONP = {
 
     /**
