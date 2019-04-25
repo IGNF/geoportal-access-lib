@@ -198,7 +198,7 @@ module.exports = env => {
                         entry : path.join(__dirname, "samples-src", "pages", "index.html"),
                         output : {
                             path : path.join(__dirname, "samples"),
-                            filename : (_production) ? "[name].html" : (_development) ? "[name]-map.html" : "[name]-src.html"
+                            filename : (_production) ? "[name]-prod.html" : (_development) ? "[name]-map.html" : "[name]-src.html"
                         },
                         context : {
                             samples : () => {

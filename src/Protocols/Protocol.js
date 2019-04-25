@@ -1,9 +1,9 @@
 /**
- * Protocols : Interface de dialogue avec les webservices
+ * Interface de dialogue avec les webservices
  *
  * @module Protocols
  * @private
- * @alias Gp.Protocols.Protocols
+ * @alias Gp.Protocols
  */
 import Helper from "../Utils/Helper";
 import XHR from "./XHR";

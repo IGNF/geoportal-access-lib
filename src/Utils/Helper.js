@@ -2,8 +2,7 @@
  * Classe utilitaire
  *
  * @module Helper
- * @private
- * @alias Gp.Utils.Helper
+ * @alias Gp.Helper
  */
 var Helper = {
 
@@ -97,6 +96,8 @@ var Helper = {
     /**
      * Indentation d'une chaine
      *
+     * @method indent
+     * @static
      * @param {Number} n - nombre de tabulation
      * @param {String} msg - chaine
      *

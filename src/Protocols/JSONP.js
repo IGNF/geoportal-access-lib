@@ -1,5 +1,5 @@
 /**
- * JSONP : Implémentation du protocole JSONP de la plateforme Géoportail (cf. {@link https://github.com/sobstel/jsonp.js}).
+ * JSONP : Implémentation du protocole JSONP de la plateforme Géoportail
  *
  * @module JSONP
  * @private
@@ -7,6 +7,7 @@
  */
 import Logger from "../Utils/LoggerByDefault";
 
+// cf. https://github.com/sobstel/jsonp.js
 var JSONP = {
 
     /**

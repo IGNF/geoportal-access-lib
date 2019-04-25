@@ -3,25 +3,25 @@
 *
 * @module Gp
 * @alias Gp
-* @desc
+* @description
 *
 * This is the global variable that is exposed in the browser environment.
 * Content is composed of constructor, functions and properties...
 *
-* > Error()
+* > {@link Gp.Error Error()}
 *     - .TYPE_SRVERR : "SERVICE_ERROR"
 *     - .TYPE_UNKERR : "UNKNOWN_ERROR"
 *     - .TYPE_USEERR : "USAGE_ERROR"
 *
-* > Helper
+* > {@link module:Helper Helper}
 *     - .indent()
 *     - .normalyzeParameters()
 *     - .normalyzeUrl()
 *
-* > Protocols
-*     - .XHR.call()
+* > {@link module:XHR Protocols.XHR}
+*     - .call()
 *
-* > Services
+* > {@link module:Services Services (objects)}
 *     - .Alti
 *         - {@link Gp.Services.Alti.Elevation .Elevation()}
 *     - {@link Gp.Services.AltiResponse .AltiResponse()}
@@ -40,6 +40,8 @@
 *     - .Route
 *         - {@link Gp.Services.Route.RouteInstruction .RouteInstruction()}
 *     - {@link Gp.Services.RouteResponse .RouteResponse()}
+*
+* > Services (factory)
 *     - {@link module:Services~autoComplete .autoComplete()}
 *     - {@link module:Services~geocode .geocode()}
 *     - {@link module:Services~getAltitude .getAltitude()}
@@ -51,7 +53,6 @@
 * > servicesDate : "YYYY-MM-DD"
 *
 * > servicesVersion : "X.X.X"
-*
 *
 */
 
@@ -88,83 +89,62 @@ import Helper from "./Utils/Helper";
 
 import Pkg from "../package";
 
-var Gp = {
-    servicesVersion : Pkg.version,
-    servicesDate : Pkg.date,
-    /**
-     * Methode pour rajouter une classe / objet au namespace global.
-     *
-     * @private
-     * @method extend
-     * @param {String} strNS - nom sous lequel on veut présenter la
-     *        classe / objet (Gp."strNS").
-     * @param {Object} value - la classe / objet à rajouter au NS global.
-     * @returns {Object} this
-     */
-    extend : function (strNS, value) {
-        var parts = strNS.split(".");
-        var parent = this;
-        var pl;
-
-        pl = parts.length;
-
-        for (var i = 0; i < pl; i++) {
-            // create a property if it doesn't exist
-            if (typeof parent[parts[i]] === "undefined") {
-                parent[parts[i]] = {};
-            }
-
-            var n = pl - 1;
-            if (i === n) {
-                parent[parts[i]] = value;
-            }
-
-            parent = parent[parts[i]];
-        }
-
-        return this;
-    }
-};
+/** Version */
+export const servicesVersion = Pkg.version;
+/** Publication date */
+export const servicesDate = Pkg.date;
 
 // on declare les ns dans root global
-Gp.extend("Protocols", {});
-Gp.extend("Protocols.XHR", XHR);
-Gp.extend("Services", Services);
-// Export Alti
-Gp.extend("Services.AltiResponse", AltiResponse);
-Gp.extend("Services.Alti.Elevation", Elevation);
-// Export Autocomplete
-Gp.extend("Services.AutoCompleteResponse", AutoCompleteResponse);
-Gp.extend("Services.AutoComplete.SuggestedLocation", SuggestedLocation);
-// Export Autoconf
-Gp.extend("Services.GetConfigResponse", GetConfigResponse);
-Gp.extend("Services.Config.Constraint", Constraint);
-Gp.extend("Services.Config.Format", Format);
-Gp.extend("Services.Config.Layer", Layer);
-Gp.extend("Services.Config.Legend", Legend);
-Gp.extend("Services.Config.Metadata", Metadata);
-Gp.extend("Services.Config.Originator", Originator);
-Gp.extend("Services.Config.Service", Service);
-Gp.extend("Services.Config.Style", Style);
-Gp.extend("Services.Config.Territory", Territory);
-Gp.extend("Services.Config.Thematic", Thematic);
-Gp.extend("Services.Config.TileMatrix", TM);
-Gp.extend("Services.Config.TileMatrixLimit", TMLimit);
-Gp.extend("Services.Config.TileMatrixSet", TMS);
-// Export Geocode
-Gp.extend("Services.GeocodeResponse", GeocodeResponse);
-Gp.extend("Services.Geocode.GeocodedLocation", GeocodedLocation);
-Gp.extend("Services.Geocode.DirectGeocodedLocation", DirectGeocodedLocation);
-Gp.extend("Services.Geocode.ReverseGeocodedLocation", ReverseGeocodedLocation);
-// Export IsoCurve
-Gp.extend("Services.IsoCurveResponse", IsoCurveResponse);
-// Export Route
-Gp.extend("Services.RouteResponse", RouteResponse);
-Gp.extend("Services.Route.RouteInstruction", RouteInstruction);
-// Export Erreurs et Outils
-Gp.extend("Error", Error);
-Gp.extend("Helper", Helper);
-// Export DefaultUrls
-Gp.extend("Services.DefaultUrl", DefaultUrl);
+var Gp = {};
 
-export default Gp; // = export { Gp as default };
+Gp.servicesVersion = servicesVersion;
+Gp.servicesDate = servicesDate;
+
+// Export Protocols
+Gp.Protocols = {};
+Gp.Protocols.XHR = XHR;
+// Export services
+Gp.Services = Services;
+// Export DefaultUrls
+Gp.Services.DefaultUrl = DefaultUrl;
+// Export Alti
+Gp.Services.AltiResponse = AltiResponse;
+Gp.Services.Alti = {};
+Gp.Services.Alti.Elevation = Elevation;
+// Export Autocomplete
+Gp.Services.AutoCompleteResponse = AutoCompleteResponse;
+Gp.Services.AutoComplete = {};
+Gp.Services.AutoComplete.SuggestedLocation = SuggestedLocation;
+// Export Autoconf
+Gp.Services.GetConfigResponse = GetConfigResponse;
+Gp.Services.Config = {};
+Gp.Services.Config.Constraint = Constraint;
+Gp.Services.Config.Format = Format;
+Gp.Services.Config.Layer = Layer;
+Gp.Services.Config.Legend = Legend;
+Gp.Services.Config.Metadata = Metadata;
+Gp.Services.Config.Originator = Originator;
+Gp.Services.Config.Service = Service;
+Gp.Services.Config.Style = Style;
+Gp.Services.Config.Territory = Territory;
+Gp.Services.Config.Thematic = Thematic;
+Gp.Services.Config.TileMatrix = TM;
+Gp.Services.Config.TileMatrixLimit = TMLimit;
+Gp.Services.Config.TileMatrixSet = TMS;
+// Export Geocode
+Gp.Services.GeocodeResponse = GeocodeResponse;
+Gp.Services.Geocode = {};
+Gp.Services.Geocode.GeocodedLocation = GeocodedLocation;
+Gp.Services.Geocode.DirectGeocodedLocation = DirectGeocodedLocation;
+Gp.Services.Geocode.ReverseGeocodedLocation = ReverseGeocodedLocation;
+// Export IsoCurve
+Gp.Services.IsoCurveResponse = IsoCurveResponse;
+// Export Route
+Gp.Services.RouteResponse = RouteResponse;
+Gp.Services.Route = {};
+Gp.Services.Route.RouteInstruction = RouteInstruction;
+// Export Erreurs et Outils
+Gp.Error = Error;
+Gp.Helper = Helper;
+
+export default Gp;

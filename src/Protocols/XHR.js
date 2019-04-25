@@ -7,15 +7,15 @@ import ES6Promise from "es6-promise";
 // import __xmldom from "xmldom";
 
 /**
- * Requêtes Ajax (utilisation des Promises)
- * cf. https://xhr.spec.whatwg.org/
- * cf. https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+ * Ajax Request (use of Promises)
  *
  * @module XHR
- * @private
  * @alias Gp.Protocols.XHR
- * @see dependance 'promise'
+ * @see dependance 'es6-promise'
  */
+
+// cf. https://xhr.spec.whatwg.org/
+// cf. https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 
 var XHR = {
 
