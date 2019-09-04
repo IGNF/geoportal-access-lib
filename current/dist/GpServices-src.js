@@ -9,8 +9,8 @@
  * copyright CeCILL-B
  * copyright IGN
  * @author IGN
- * @version 2.1.2
- * @date 14/02/2018
+ * @version 2.1.3
+ * @date 04/09/2019
  *
  */
 /*!
@@ -2112,11 +2112,11 @@ XLS.prototype = {
     /**
      * Template de la requête.
      * substitution des valeurs suivantes :
-     * 2.1.2, __NAMESPACE__, __SCHEMALOCATION__
+     * 2.1.3, __NAMESPACE__, __SCHEMALOCATION__
      * __REQUESTHEADER__, __REQUEST__
      */
     template : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-        "<XLS version=\"2.1.2\"\n" +
+        "<XLS version=\"2.1.3\"\n" +
         "__NAMESPACE__ \n" +
         "__SCHEMALOCATION__>\n" +
         "__REQUESTHEADER__\n" +
@@ -2255,7 +2255,7 @@ XLS.prototype.build = function () {
 
     var template = "";
     template = this.template;
-    template = template.replace(/2.1.2/g, XLS.VERSION);
+    template = template.replace(/2.1.3/g, XLS.VERSION);
     template = template.replace(/__NAMESPACE__/g, this.namespaceByDefault);
     template = template.replace(/__SCHEMALOCATION__/g, this.schemaLocationByDefault);
 
@@ -3288,7 +3288,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_20__;
 /* 21 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"geoportal-access-lib","version":"2.1.2","date":"14/02/2018","description":"French Geoportal resources access library","module":"src/Gp.js","main":"dist/GpServices-src.js","homepage":"https://github.com/IGNF/geoportal-access-lib#readme","scripts":{"clean":"echo \"Warning: no yet implemented!\" && exit 0","setup":"npm install","cover":"nyc --reporter=lcov --reporter=text npm run test","build":"webpack","build:prod":"webpack --env.production","build:dev":"webpack --env.development","test":"mocha-webpack --webpack-config webpack.test.js --glob \"test_*.js\" test/spec/","test:serve":"webpack-dev-server --hot --config webpack.test.serve.js","test:end-to-end:serve":"webpack-dev-server --hot --config webpack.end-to-end.serve.js","sample":"npm run sample:serve","sample:serve":"webpack-dev-server --open-page samples/index-src.html --https --content-base .  --output-public-path '/dist/' --port 9001 --open 'google-chrome'","sample:serve:prod":"webpack-dev-server --env.production --open-page samples/index.html --content-base . --output-public-path '/dist/' --port 9001 --open 'google-chrome","sample:serve:dev":"webpack-dev-server --env.development --open-page samples/index-map.html --content-base . --output-public-path '/dist/' --port 9001 --open 'google-chrome","doc":"npm run doc:serve","doc:serve":"webpack-dev-server --content-base jsdoc --port 9001 --open"},"nyc":{"include":["src/**/*.js"],"instrument":false,"sourceMap":false},"repository":{"type":"git","url":"https://github.com/IGNF/geoportal-access-lib.git"},"keywords":["geoportail","webservice","javascript","es6"],"author":"IGNF","license":"CECILL-B","dependencies":{"es6-promise":"^4.2.4","request":"^2.87.0","xmldom":"^0.1.27"},"devDependencies":{"babel-core":"^6.26.3","babel-loader":"^7.1.2","babel-preset-env":"^1.7.0","chai":"^4.1.2","clean-webpack-plugin":"^0.1.18","copy-webpack-plugin":"^4.5.1","eslint":"^4.18.2","eslint-config-standard":"^11.0.0","eslint-loader":"^2.0.0","eslint-plugin-import":"^2.9.0","eslint-plugin-node":"^6.0.1","eslint-plugin-promise":"^3.7.0","eslint-plugin-standard":"^3.0.1","glob":"^7.1.2","handlebars-layouts":"^3.1.4","handlebars-webpack-plugin":"^1.4.1","html-webpack-plugin":"^2.30.1","istanbul-instrumenter-loader":"^3.0.1","jsdoc-webpack-plugin":"0.0.1","loglevel":"^1.6.1","mocha":"^4.0.0","mocha-loader":"^1.1.3","mocha-webpack":"^1.0.1","nyc":"^12.0.2","path":"^0.12.7","replace-bundle-webpack-plugin":"^1.0.0","sinon":"^4.3.0","sinon-es6":"0.0.3","speed-measure-webpack-plugin":"^1.2.2","string-template":"^1.0.0","webpack":"^3.11.0","webpack-dev-server":"^2.11.3","webpack-node-externals":"^1.6.0","webpack-shell-plugin":"^0.5.0"},"bundledDependencies":[],"peerDependencies":{},"optionalDependencies":{}}
+module.exports = {"name":"geoportal-access-lib","version":"2.1.3","date":"04/09/2019","description":"French Geoportal resources access library","module":"src/Gp.js","main":"dist/GpServices-src.js","homepage":"https://github.com/IGNF/geoportal-access-lib#readme","scripts":{"clean":"echo \"Warning: no yet implemented!\" && exit 0","setup":"npm install","cover":"nyc --reporter=lcov --reporter=text npm run test","build":"webpack","build:prod":"webpack --env.production","build:dev":"webpack --env.development","test":"mocha-webpack --webpack-config webpack.test.js --glob \"test_*.js\" test/spec/","test:serve":"webpack-dev-server --hot --config webpack.test.serve.js","test:end-to-end:serve":"webpack-dev-server --hot --config webpack.end-to-end.serve.js","sample":"npm run sample:serve","sample:serve":"webpack-dev-server --open-page samples/index-src.html --https --content-base .  --output-public-path '/dist/' --port 9001 --open 'google-chrome'","sample:serve:prod":"webpack-dev-server --env.production --open-page samples/index.html --content-base . --output-public-path '/dist/' --port 9001 --open 'google-chrome","sample:serve:dev":"webpack-dev-server --env.development --open-page samples/index-map.html --content-base . --output-public-path '/dist/' --port 9001 --open 'google-chrome","doc":"npm run doc:serve","doc:serve":"webpack-dev-server --content-base jsdoc --port 9001 --open"},"nyc":{"include":["src/**/*.js"],"instrument":false,"sourceMap":false},"repository":{"type":"git","url":"https://github.com/IGNF/geoportal-access-lib.git"},"keywords":["geoportail","webservice","javascript","es6"],"author":"IGNF","license":"CECILL-B","dependencies":{"es6-promise":"^4.2.4","request":"^2.87.0","xmldom":"^0.1.27"},"devDependencies":{"babel-core":"^6.26.3","babel-loader":"^7.1.2","babel-preset-env":"^1.7.0","chai":"^4.1.2","clean-webpack-plugin":"^0.1.18","copy-webpack-plugin":"^4.5.1","eslint":"^4.18.2","eslint-config-standard":"^11.0.0","eslint-loader":"^2.0.0","eslint-plugin-import":"^2.9.0","eslint-plugin-node":"^6.0.1","eslint-plugin-promise":"^3.7.0","eslint-plugin-standard":"^3.0.1","glob":"^7.1.2","handlebars-layouts":"^3.1.4","handlebars-webpack-plugin":"^1.4.1","html-webpack-plugin":"^2.30.1","istanbul-instrumenter-loader":"^3.0.1","jsdoc-webpack-plugin":"0.0.1","loglevel":"^1.6.1","mocha":"^4.0.0","mocha-loader":"^1.1.3","mocha-webpack":"^1.0.1","nyc":"^12.0.2","path":"^0.12.7","replace-bundle-webpack-plugin":"^1.0.0","sinon":"^4.3.0","sinon-es6":"0.0.3","speed-measure-webpack-plugin":"^1.2.2","string-template":"^1.0.0","webpack":"^3.11.0","webpack-dev-server":"^2.11.3","webpack-node-externals":"^1.6.0","webpack-shell-plugin":"^0.5.0"},"bundledDependencies":[],"peerDependencies":{},"optionalDependencies":{}}
 
 /***/ }),
 /* 22 */
@@ -6487,7 +6487,7 @@ var Protocol = {
  * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
  * @license   Licensed under MIT license
  *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
- * @version   v4.2.6+9869a4bc
+ * @version   v4.2.8+1e68dce6
  */
 
 (function (global, factory) {
@@ -6718,23 +6718,12 @@ var PENDING = void 0;
 var FULFILLED = 1;
 var REJECTED = 2;
 
-var TRY_CATCH_ERROR = { error: null };
-
 function selfFulfillment() {
   return new TypeError("You cannot resolve a promise with itself");
 }
 
 function cannotReturnOwn() {
   return new TypeError('A promises callback cannot return that same promise.');
-}
-
-function getThen(promise) {
-  try {
-    return promise.then;
-  } catch (error) {
-    TRY_CATCH_ERROR.error = error;
-    return TRY_CATCH_ERROR;
-  }
 }
 
 function tryThen(then$$1, value, fulfillmentHandler, rejectionHandler) {
@@ -6792,10 +6781,7 @@ function handleMaybeThenable(promise, maybeThenable, then$$1) {
   if (maybeThenable.constructor === promise.constructor && then$$1 === then && maybeThenable.constructor.resolve === resolve$1) {
     handleOwnThenable(promise, maybeThenable);
   } else {
-    if (then$$1 === TRY_CATCH_ERROR) {
-      reject(promise, TRY_CATCH_ERROR.error);
-      TRY_CATCH_ERROR.error = null;
-    } else if (then$$1 === undefined) {
+    if (then$$1 === undefined) {
       fulfill(promise, maybeThenable);
     } else if (isFunction(then$$1)) {
       handleForeignThenable(promise, maybeThenable, then$$1);
@@ -6809,7 +6795,14 @@ function resolve(promise, value) {
   if (promise === value) {
     reject(promise, selfFulfillment());
   } else if (objectOrFunction(value)) {
-    handleMaybeThenable(promise, value, getThen(value));
+    var then$$1 = void 0;
+    try {
+      then$$1 = value.then;
+    } catch (error) {
+      reject(promise, error);
+      return;
+    }
+    handleMaybeThenable(promise, value, then$$1);
   } else {
     fulfill(promise, value);
   }
@@ -6888,31 +6881,18 @@ function publish(promise) {
   promise._subscribers.length = 0;
 }
 
-function tryCatch(callback, detail) {
-  try {
-    return callback(detail);
-  } catch (e) {
-    TRY_CATCH_ERROR.error = e;
-    return TRY_CATCH_ERROR;
-  }
-}
-
 function invokeCallback(settled, promise, callback, detail) {
   var hasCallback = isFunction(callback),
       value = void 0,
       error = void 0,
-      succeeded = void 0,
-      failed = void 0;
+      succeeded = true;
 
   if (hasCallback) {
-    value = tryCatch(callback, detail);
-
-    if (value === TRY_CATCH_ERROR) {
-      failed = true;
-      error = value.error;
-      value.error = null;
-    } else {
-      succeeded = true;
+    try {
+      value = callback(detail);
+    } catch (e) {
+      succeeded = false;
+      error = e;
     }
 
     if (promise === value) {
@@ -6921,14 +6901,13 @@ function invokeCallback(settled, promise, callback, detail) {
     }
   } else {
     value = detail;
-    succeeded = true;
   }
 
   if (promise._state !== PENDING) {
     // noop
   } else if (hasCallback && succeeded) {
     resolve(promise, value);
-  } else if (failed) {
+  } else if (succeeded === false) {
     reject(promise, error);
   } else if (settled === FULFILLED) {
     fulfill(promise, value);
@@ -7006,7 +6985,15 @@ var Enumerator = function () {
 
 
     if (resolve$$1 === resolve$1) {
-      var _then = getThen(entry);
+      var _then = void 0;
+      var error = void 0;
+      var didError = false;
+      try {
+        _then = entry.then;
+      } catch (e) {
+        didError = true;
+        error = e;
+      }
 
       if (_then === then && entry._state !== PENDING) {
         this._settledAt(entry._state, i, entry._result);
@@ -7015,7 +7002,11 @@ var Enumerator = function () {
         this._result[i] = entry;
       } else if (c === Promise$1) {
         var promise = new c(noop);
-        handleMaybeThenable(promise, entry, _then);
+        if (didError) {
+          reject(promise, error);
+        } else {
+          handleMaybeThenable(promise, entry, _then);
+        }
         this._willSettleAt(promise, i);
       } else {
         this._willSettleAt(new c(function (resolve$$1) {
@@ -8727,7 +8718,7 @@ WPS.prototype = {
     template : {
         get : {
             value : "service=__SERVICE__" +
-                "&version=2.1.2" +
+                "&version=2.1.3" +
                 "&rawdataoutput=__RAWDATAOUTPUT__" +
                 "&identifier=__IDENTIFIER__" +
                 "&request=__REQUEST__" +
@@ -8739,7 +8730,7 @@ WPS.prototype = {
         post : {
 
             value : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<wps:__REQUEST__ version=\"2.1.2\" service=\"__SERVICE__\" " +
+                "<wps:__REQUEST__ version=\"2.1.3\" service=\"__SERVICE__\" " +
                 "__NAMESPACE__ __SCHEMALOCATION__>" +
                 "<ows:Identifier>__IDENTIFIER__</ows:Identifier>" +
                 "<wps:DataInputs>" +
@@ -8797,7 +8788,7 @@ WPS.prototype = {
      * @example
      * // GET  out :
      * //  service=__SERVICE__
-     * //  &version=2.1.2
+     * //  &version=2.1.3
      * //  &rawdataoutput=__RAWDATAOUTPUT__
      * //  &identifier=__IDENTIFIER__
      * //  &request=__REQUEST__
@@ -8806,7 +8797,7 @@ WPS.prototype = {
      *
      * // POST out :
      * //      <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-     * //      <wps:__REQUEST__ version=\"2.1.2\" service=\"__SERVICE__\"
+     * //      <wps:__REQUEST__ version=\"2.1.3\" service=\"__SERVICE__\"
      * //         __NAMESPACE__ __SCHEMALOCATION__>
      * //          <ows:Identifier>__IDENTIFIER__</ows:Identifier>
      * //          <wps:DataInputs>
@@ -8842,7 +8833,7 @@ WPS.prototype = {
         }
 
         template = template.replace(/__SERVICE__/g, this.paramservice);
-        template = template.replace(/2.1.2/g, this.paramversion);
+        template = template.replace(/2.1.3/g, this.paramversion);
         template = template.replace(/__RAWDATAOUTPUT__/g, this.paramrawdataoutput);
         template = template.replace(/__IDENTIFIER__/g, this.paramidentifier);
         template = template.replace(/__REQUEST__/g, this.paramrequest);
@@ -11605,10 +11596,10 @@ Request.prototype = {
     /**
      * Template de la requête.
      * substitution des valeurs suivantes :
-     * __MAXRESPONSES__, __METHODNAME__, __UUID__, 2.1.2
+     * __MAXRESPONSES__, __METHODNAME__, __UUID__, 2.1.3
      * __REQUESTSERVICE__
      */
-    template : "<Request maximumResponses=\"__MAXRESPONSES__\" methodName=\"__METHODNAME__\" requestID=\"__UUID__\" version=\"2.1.2\">" +
+    template : "<Request maximumResponses=\"__MAXRESPONSES__\" methodName=\"__METHODNAME__\" requestID=\"__UUID__\" version=\"2.1.3\">" +
         "<!-- __REQUESTSERVICE__ -->" +
         "</Request>",
 
@@ -11641,7 +11632,7 @@ Request.prototype = {
         template = template.replace(/__MAXRESPONSES__/g, this.options.maximumResponses);
         template = template.replace(/__METHODNAME__/g, this.options.methodName);
         template = template.replace(/__UUID__/g, this.guid());
-        template = template.replace(/2.1.2/g, this.options.version);
+        template = template.replace(/2.1.3/g, this.options.version);
 
         this.requestString = template;
         return this.requestString;
