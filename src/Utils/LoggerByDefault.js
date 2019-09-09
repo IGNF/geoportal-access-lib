@@ -1,4 +1,3 @@
-/* global __PRODUCTION__ */
 import * as Log from "loglevel";
 
 var LoggerByDefault = {
