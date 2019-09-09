@@ -103,7 +103,6 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_loglevel__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_loglevel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_loglevel__);
-/* global __PRODUCTION__ */
 
 
 var LoggerByDefault = {
@@ -117,7 +116,8 @@ var LoggerByDefault = {
     getLogger : function (name) {
         // Substitute global constants configured at compile time
         // cf. webpack.config.js
-        ( false) ? Log.disableAll() : __WEBPACK_IMPORTED_MODULE_0_loglevel__["enableAll"]();
+        // FIXME howtodo !? DefineWebpackPlugin ? EnvironmentWebpackPlugin ?
+        ("false".match(/true/g) ? true : false) ? __WEBPACK_IMPORTED_MODULE_0_loglevel__["disableAll"]() : __WEBPACK_IMPORTED_MODULE_0_loglevel__["enableAll"]();
         var logname = name || "default";
         return __WEBPACK_IMPORTED_MODULE_0_loglevel__["getLogger"](logname);
     }
@@ -301,8 +301,8 @@ ErrorService.prototype = Object.create(Error.prototype, {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Protocols_Protocol__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DefaultUrlService__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__package__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__package___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__package__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__package_json__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__package_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__package_json__);
 
 
 
@@ -673,7 +673,7 @@ CommonService.prototype = {
         // rajout de l'option gpbibaccess
         // INFO : acces au numero de version de package.conf aprés compilation !
         this.options.serverUrl = __WEBPACK_IMPORTED_MODULE_1__Utils_Helper__["a" /* default */].normalyzeUrl(this.options.serverUrl, {
-            "gp-access-lib" : __WEBPACK_IMPORTED_MODULE_6__package___default.a.version
+            "gp-access-lib" : __WEBPACK_IMPORTED_MODULE_6__package_json___default.a.version
         }, false);
 
         // si le proxy est renseigné, on proxifie l'url du service
@@ -5350,8 +5350,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__Protocols_XHR__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__Exceptions_ErrorService__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__Utils_Helper__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__package__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__package___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_30__package__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__package_json__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__package_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_30__package_json__);
 /**
 * Global variable Gp.
 *
@@ -5444,11 +5444,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /** Version */
-const servicesVersion = __WEBPACK_IMPORTED_MODULE_30__package___default.a.version;
+const servicesVersion = __WEBPACK_IMPORTED_MODULE_30__package_json___default.a.version;
 /* harmony export (immutable) */ __webpack_exports__["servicesVersion"] = servicesVersion;
 
 /** Publication date */
-const servicesDate = __WEBPACK_IMPORTED_MODULE_30__package___default.a.date;
+const servicesDate = __WEBPACK_IMPORTED_MODULE_30__package_json___default.a.date;
 /* harmony export (immutable) */ __webpack_exports__["servicesDate"] = servicesDate;
 
 
