@@ -5,7 +5,7 @@ import Protocol from "../Protocols/Protocol";
 import ErrorService from "../Exceptions/ErrorService";
 import DefaultUrlService from "./DefaultUrlService";
 // package.json (extract version)
-import Pkg from "../../package";
+import Pkg from "../../package.json";
 
 /**
  * @classdesc

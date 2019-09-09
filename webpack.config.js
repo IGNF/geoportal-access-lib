@@ -14,12 +14,12 @@ var glob    = require("glob");
 var webpack = require("webpack");
 
 // -- plugins
-var BannerWebPackPlugin    = webpack.BannerPlugin;
-var UglifyJsWebPackPlugin  = webpack.optimize.UglifyJsPlugin;
-var JsDocWebPackPlugin     = require("jsdoc-webpack-plugin");
-var IgnoreWebPackPlugin    = webpack.IgnorePlugin;
-var CleanWebpackPlugin     = require("clean-webpack-plugin");
-var DefineWebpackPlugin    = webpack.DefinePlugin;
+var BannerWebPackPlugin      = webpack.BannerPlugin;
+var UglifyJsWebPackPlugin    = webpack.optimize.UglifyJsPlugin;
+var JsDocWebPackPlugin       = require("jsdoc-webpack-plugin");
+var IgnoreWebPackPlugin      = webpack.IgnorePlugin;
+var CleanWebpackPlugin       = require("clean-webpack-plugin");
+var DefineWebpackPlugin      = webpack.DefinePlugin;
 var ReplaceWebpackPlugin   = require("replace-bundle-webpack-plugin");
 var ShellWebpackPlugin     = require("webpack-shell-plugin");
 var HandlebarsPlugin       = require("./scripts/webpackPlugins/handlebars-plugin");
@@ -40,16 +40,16 @@ module.exports = env => {
 
     // -- options : minification du bundle
     // ex. webpack --env.production
-    var _production = (env) ? env.production : false;
+    var production = (env) ? env.production : false;
     // -- options : sourcemap
     // ex. webpack --env.development
     // sinon, mode none cad source sans optimisation
-    var _development = (env) ? env.development : false;
+    var development = (env) ? env.development : false;
 
     // -- options : nettoyage des répertoires temporaires
     // ex. webpack --env.clean
     //  par defaut, false.
-    var _clean = (env) ? env.clean : false;
+    var clean = (env) ? env.clean : false;
 
     return smp.wrap({
         entry : [
@@ -57,7 +57,7 @@ module.exports = env => {
         ],
         output : {
             path : path.join(__dirname, "dist"),
-            filename : (_production) ? "GpServices.js" : (_development) ? "GpServices-map.js" : "GpServices-src.js",
+            filename : (production) ? "GpServices.js" : (development) ? "GpServices-map.js" : "GpServices-src.js",
             library : "Gp",
             libraryTarget : "umd",
             libraryExport : "default",
@@ -76,7 +76,7 @@ module.exports = env => {
                 amd : "require"
             }
         },
-        devtool : (_development) ? "eval-source-map" : false,
+        devtool : (development) ? "eval-source-map" : false,
         module : {
             loaders : [
                 {
@@ -109,7 +109,7 @@ module.exports = env => {
         plugins : []
             /** NETTOYAGE DES REPERTOIRES TEMPORAIRES */
             .concat(
-                (_clean) ? [
+                (clean) ? [
                     new CleanWebpackPlugin([
                         "dist",
                         "jsdoc",
@@ -150,12 +150,19 @@ module.exports = env => {
                             replacement : function () {
                                 return date;
                             }
+                        },
+                        {
+                            partten : /__PRODUCTION__/g,
+                            replacement : function () {
+                                /** replacement de la clef __PRODUCTION__ pour le LOGGER */
+                                return production;
+                            }
                         }
                     ]
                 ),
-                new DefineWebpackPlugin({
-                    __PRODUCTION__ : JSON.stringify(_production)
-                }),
+                // new DefineWebpackPlugin({
+                //     __PRODUCTION__ : JSON.stringify(production)
+                // }),
                 new JsDocWebPackPlugin({
                     conf : path.join(__dirname, "jsdoc.json")
                 }),
@@ -176,7 +183,7 @@ module.exports = env => {
                         output : {
                             path : path.join(__dirname, "samples"),
                             flatten : false,
-                            filename : (_production) ? "[name].html" : (_development) ? "[name]-map.html" : "[name]-src.html"
+                            filename : (production) ? "[name].html" : (development) ? "[name]-map.html" : "[name]-src.html"
                         },
                         helpers : [
                             HandlebarsLayoutPlugin
@@ -188,7 +195,7 @@ module.exports = env => {
                         context : [
                             path.join(__dirname, "samples-src", "config.json"),
                             {
-                                mode : (_production) ? "" : (_development) ? "-map" : "-src"
+                                mode : (production) ? "" : (development) ? "-map" : "-src"
                             }
                         ]
                     }
@@ -198,7 +205,7 @@ module.exports = env => {
                         entry : path.join(__dirname, "samples-src", "pages", "index.html"),
                         output : {
                             path : path.join(__dirname, "samples"),
-                            filename : (_production) ? "[name]-prod.html" : (_development) ? "[name]-map.html" : "[name]-src.html"
+                            filename : (production) ? "[name]-prod.html" : (development) ? "[name]-map.html" : "[name]-src.html"
                         },
                         context : {
                             samples : () => {
@@ -209,7 +216,7 @@ module.exports = env => {
                                     var label = relativePath.replace("/", " -- ");
                                     var pathObj = path.parse(relativePath);
                                     return {
-                                        filePath : path.join(pathObj.dir, pathObj.name.concat((_production) ? "" : (_development) ? "-map" : "-src").concat(pathObj.ext)),
+                                        filePath : path.join(pathObj.dir, pathObj.name.concat((production) ? "" : (development) ? "-map" : "-src").concat(pathObj.ext)),
                                         label : label
                                     };
                                 });
@@ -233,14 +240,14 @@ module.exports = env => {
             )
             /** DEVTOOL */
             // .concat(
-            //     (!_production) ? [
+            //     (!production) ? [
             //         new SourceMapDevToolWebpackPlugin({
             //             filename: 'GpServices-src.js.map'
             //         })] : []
             // )
             /** MINIFICATION */
             .concat(
-                (_production) ? [
+                (production) ? [
                     new UglifyJsWebPackPlugin({
                         output : {
                             comments : false,

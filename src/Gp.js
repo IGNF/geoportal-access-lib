@@ -87,7 +87,7 @@ import XHR from "./Protocols/XHR";
 import Error from "./Exceptions/ErrorService";
 import Helper from "./Utils/Helper";
 
-import Pkg from "../package";
+import Pkg from "../package.json";
 
 /** Version */
 export const servicesVersion = Pkg.version;

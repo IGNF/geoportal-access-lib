@@ -1,0 +1,51 @@
+{{#extend "layout-sample-bundle"}}
+
+{{#content "head"}}
+        <title>Service de geocodage</title>
+{{/content}}
+
+{{#content "style"}}
+        <style></style>
+{{/content}}
+
+{{#content "body"}}
+        <h1>Utilisation du Service de geocodage</h1>
+        <h2>Avec les paramètres obligatoires seulement</h2>
+        <pre>
+          <code>
+            var options = {
+                apiKey : "{{ apikey }}",
+                protocol : 'XHR',
+                httpMethod : 'POST',
+                outputFormat : '',
+                rawResponse : true,
+                contentType : "text/xml",
+                onSuccess : function (response) {
+                    print(response.locations);
+                },
+                location : "2 avenue de paris, 94166 Saint-Mandée"
+            };
+            Gp.Services.geocode(options);
+          </code>
+        </pre>
+{{/content}}
+
+{{#content "js"}}
+        var options = {
+            apiKey : "{{ apikey }}",
+            protocol : 'XHR',
+            httpMethod : 'POST',
+            outputFormat : '',
+            rawResponse : true,
+            contentType : "text/xml",
+            onSuccess : function (response) {
+                print(response.locations);
+            },
+            onFailure : function (error) {
+                print(error.message);
+            },
+            location : "2 avenue de paris, 94166 Saint-Mandée"
+        };
+        Gp.Services.geocode(options);
+{{/content}}
+{{/extend}}

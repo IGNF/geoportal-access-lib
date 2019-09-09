@@ -4,6 +4,7 @@ var webpack = require("webpack");
 
 // plugin
 var DefineWebpackPlugin = webpack.DefinePlugin;
+var ReplaceWebpackPlugin = require("replace-bundle-webpack-plugin");
 var nodeExternals = require("webpack-node-externals");
 
 module.exports = {
@@ -29,8 +30,17 @@ module.exports = {
     },
     plugins : [
         // on ne veut pas de logger !
-        new DefineWebpackPlugin({
-            __PRODUCTION__ : JSON.stringify(true)
-        })
+        // new DefineWebpackPlugin({
+        //     __PRODUCTION__ : JSON.stringify(true)
+        // })
+        new ReplaceWebpackPlugin(
+        [
+            {
+                partten : /__PRODUCTION__/g,
+                replacement : function () {
+                    return true;
+                }
+            }
+        ])
     ]
 };
