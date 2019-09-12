@@ -5,6 +5,7 @@ var webpack = require("webpack");
 // plugin
 var HtmlWebpackPlugin   = require("html-webpack-plugin");
 var DefineWebpackPlugin = webpack.DefinePlugin;
+var ReplaceWebpackPlugin = require("replace-bundle-webpack-plugin");
 
 module.exports = {
     entry : {
@@ -34,9 +35,18 @@ module.exports = {
     },
     plugins : [
         // on veut les logs !
-        new DefineWebpackPlugin({
-            __PRODUCTION__ : JSON.stringify(false)
-        }),
+        // new DefineWebpackPlugin({
+        //     __PRODUCTION__ : JSON.stringify(false)
+        // }),
+        new ReplaceWebpackPlugin(
+        [
+            {
+                partten : /__PRODUCTION__/g,
+                replacement : function () {
+                    return false;
+                }
+            }
+        ]),
         new HtmlWebpackPlugin({
             title : "Mocha Tests Units",
             filename : "index.html",

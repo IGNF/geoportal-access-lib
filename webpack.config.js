@@ -137,20 +137,20 @@ module.exports = env => {
                 }),
                 new ReplaceWebpackPlugin(
                     [
-                        {
-                            partten : /__VERSION__/g,
-                            /** replacement de la clef __VERSION__ par la version du package */
-                            replacement : function () {
-                                return version;
-                            }
-                        },
-                        {
-                            partten : /__DATE__/g,
-                            /** replacement de la clef __DATE__ par la date du build */
-                            replacement : function () {
-                                return date;
-                            }
-                        },
+                        // {
+                        //     partten : /__VERSION__/g,
+                        //     /** replacement de la clef __VERSION__ par la version du package */
+                        //     replacement : function () {
+                        //         return version;
+                        //     }
+                        // },
+                        // {
+                        //     partten : /__DATE__/g,
+                        //     /** replacement de la clef __DATE__ par la date du build */
+                        //     replacement : function () {
+                        //         return date;
+                        //     }
+                        // },
                         {
                             partten : /__PRODUCTION__/g,
                             replacement : function () {
