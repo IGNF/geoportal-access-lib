@@ -692,7 +692,7 @@
           </wmts:TileMatrixSet>
         </gpp:TileMatrixSets>
         <gpp:Services>
-          <Server service="MVT:TMS" title="Service TMS" version="1.0.0">
+          <Server service="GPP:TMS" title="Service TMS" version="1.0.0">
             <OnlineResource xlink:href="http://wxs.ign.fr/geoportail/tms/1.0.0" xlink:type="simple"/>
           </Server>
           <Server service="GPP:PrintMap" title="Service d'impression" version="1.0.0">
@@ -4924,7 +4924,7 @@ La BD TOPO® version 2.1 contient une description vectorielle 3D (structurée en
       </Extension>
     </Layer>
     <Layer hidden="1" queryable="0">
-      <Server service="MVT:TMS" title="Plan IGN" version="1.0.0">
+      <Server service="GPP:TMS" title="Plan IGN" version="1.0.0">
         <OnlineResource xlink:href="http://wxs.ign.fr/geoportail/tms/1.0.0" xlink:type="simple"/>
       </Server>
       <Name>PLAN.IGN</Name>
@@ -4959,7 +4959,7 @@ La BD TOPO® version 2.1 contient une description vectorielle 3D (structurée en
         <Dimension name="NoDataValue" unitSymbol="" units="" userValue="">255,255,255</Dimension>
       </DimensionList>
       <Extension>
-        <gpp:Layer id="PLAN.IGN$GEOPORTAIL:MVT:TMS">
+        <gpp:Layer id="PLAN.IGN$GEOPORTAIL:GPP:TMS">
           <gpp:Thematics>
             <gpp:Thematic>Cartes</gpp:Thematic>
           </gpp:Thematics>
