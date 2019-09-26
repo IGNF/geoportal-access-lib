@@ -4484,6 +4484,7 @@ Service.prototype = {
  * @property {String} name - Style identifier (eg : "normal", "bdparcellaire", ...)
  * @property {String} title - human readable name of the style.
  * @property {Boolean} current - true if this is the default style.
+ * @property {String} url - Url Style (eg: vectortile).
  *
  * @namespace
  * @alias Gp.Services.Config.Style
@@ -4499,6 +4500,8 @@ function Style () {
     this.title = null;
 
     this.current = null;
+
+    this.url = null;
 }
 
 Style.prototype = {
@@ -10176,6 +10179,8 @@ AutoConfResponseReader.READERS = {
                                 s.name = __getChildValue(child);
                             } else if (childName === "Title") {
                                 s.title = __getChildValue(child);
+                            } else if (childName === "URL") {
+                                s.url = __getChildValue(child);
                             }
                         }
                     }
