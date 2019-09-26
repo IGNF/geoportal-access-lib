@@ -207,6 +207,7 @@ describe("-- Tests AutoConfResponse --", function () {
             expect(s).to.have.property("name");
             expect(s).to.have.property("title");
             expect(s).to.have.property("current");
+            expect(s).to.have.property("url");
         });
 
     });

@@ -308,6 +308,8 @@ AutoConfResponseReader.READERS = {
                                 s.name = __getChildValue(child);
                             } else if (childName === "Title") {
                                 s.title = __getChildValue(child);
+                            } else if (childName === "URL") {
+                                s.url = __getChildValue(child);
                             }
                         }
                     }
