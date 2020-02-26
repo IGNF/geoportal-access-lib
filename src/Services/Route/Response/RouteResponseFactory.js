@@ -12,7 +12,6 @@ import ErrorService from "../../../Exceptions/ErrorService";
 import XML from "../../../Formats/XML";
 import WKT from "../../../Formats/WKT";
 import RouteResponseRESTReader from "../Formats/RouteResponseRESTReader";
-import RouteResponseOLSReader from "../Formats/RouteResponseOLSReader";
 import RouteResponse from "./model/RouteResponse";
 import RouteInstruction from "./model/RouteInstruction";
 
@@ -23,7 +22,7 @@ var RouteResponseFactory = {
      *
      * @method build
      * @static
-     * @param {Object} options - options definies dans le composant Alti
+     * @param {Object} options - options definies dans le composant Route
      *
      * @example
      *   var options = {
@@ -52,12 +51,9 @@ var RouteResponseFactory = {
                     case "xml":
                         logger.trace("analyze response : xml");
 
-                        // type de reader en fonction de l'API
-                        var routeReader = options.api === "REST" ? RouteResponseRESTReader : RouteResponseOLSReader;
-
                         try {
                             var p = new XML({
-                                reader : routeReader
+                                reader : RouteResponseRESTReader
                             });
 
                             // FIXME : mode XHR ne retourne que des string ? JSONP aussi à ce niveau ?
