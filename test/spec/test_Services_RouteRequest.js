@@ -36,7 +36,7 @@ describe("-- Test RouteRequest --", function () {
 
             /** validation */
             var valide =  function (result) {
-                expect(result).to.be.equal("resource=bduni-idf-osrm&start=2.64,48.54&end=3.01,48.45");
+                expect(result).to.be.equal("resource=bduni-idf-osrm&start=2.64,48.54&end=3.01,48.45&geometryFormat=geojson");
             };
 
             var request = RouteRequestFactory.build(options);
@@ -82,7 +82,7 @@ describe("-- Test RouteRequest --", function () {
 
             /** validation */
             var valide =  function (result) {
-                expect(result).to.be.equal("resource=bduni-idf-osrm&start=2.64,48.54&end=3.01,48.45&optimization=shortest&intermediates=3.02,48.46&profile=car&constraints={\"constraintType\":\"banned\",\"key\":\"wayType\",\"operator\":\"=\",\"value\":\"tunnel\"}|{\"constraintType\":\"banned\",\"key\":\"wayType\",\"operator\":\"=\",\"value\":\"pont\"}|{\"constraintType\":\"banned\",\"key\":\"wayType\",\"operator\":\"=\",\"value\":\"autoroute\"}&crs=EPSG:4326&distanceUnit=meter&timeUnit=second&waysAttributes=name");
+                expect(result).to.be.equal('resource=bduni-idf-osrm&start=2.64,48.54&end=3.01,48.45&geometryFormat=geojson&optimization=shortest&intermediates=3.02,48.46&profile=car&constraints={"constraintType":"banned","key":"wayType","operator":"=","value":"tunnel"}|{"constraintType":"banned","key":"wayType","operator":"=","value":"pont"}|{"constraintType":"banned","key":"wayType","operator":"=","value":"autoroute"}&crs=EPSG:4326&distanceUnit=meter&timeUnit=second&waysAttributes=name');
             };
 
             var request = RouteRequestFactory.build(options);

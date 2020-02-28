@@ -21,7 +21,7 @@ import RouteResponseFactory from "./Response/RouteResponseFactory";
  * 
  * @param {String} options.resource - La ressource utilisée pour le calcul. Ce paramètre devrait être obligatoire car il l'est dans l'appel au service. Mais il ne l'est pas pour des raisons de rétrocompatibilité. 
  *
- * @param {String} options.outputFormat - Le format de la réponse du service itineraire : 'xml' ou 'json'.
+ * @param {String} options.outputFormat - Le format de la réponse du service itineraire : 'json' uniquement et par défaut.
  *
  * @param {String} [options.routePreference = "fastest"] - Mode de calcul à utiliser :
  * - le plus rapide « fastest »
@@ -150,7 +150,7 @@ function Route (options) {
     // options par defaut
 
     // on passe l'option outputFormat en minuscules afin d'éviter des exceptions.
-    this.options.outputFormat = (typeof options.outputFormat === "string") ? options.outputFormat.toLowerCase() : "json";
+    this.options.outputFormat = "json";
     this.options.resource = options.resource || "bduni-idf-osrm";
     this.options.startPoint = options.startPoint;
     this.options.endPoint = options.endPoint;
@@ -167,35 +167,49 @@ function Route (options) {
     } else {
         this.options.graph = "car";
     }
-    this.options.constraints = options.constraints || [];
-    /** Gestion de l'ancien paramètre exclusion */
-    var constraintObject = {};
-    if (options.exclusions.length !== 0) {
-
-        for(var c = 0; c < options.exclusions.length; c++) {
-            if (options.exclusions[c] === "highway") {
-                constraintObject.constraintType = "banned";
-                constraintObject.key = "wayType";
-                constraintObject.operator = "=";
-                constraintObject.value = "autoroute";
-                this.options.constraints.push(JSON.stringify(constraintObject));
+    this.options.constraints = [];
+    if (options.constraints) {
+        if (Array.isArray(options.constraints)) {
+            for (var k = 0; k < options.constraints.length; k++) {
+                this.options.constraints.push(options.constraints[k]);
             }
-            if (options.exclusions[c] === "tunnel") {
-                constraintObject.constraintType = "banned";
-                constraintObject.key = "wayType";
-                constraintObject.operator = "=";
-                constraintObject.value = "tunnel";
-                this.options.constraints.push(JSON.stringify(constraintObject));
-            }
-            if (options.exclusions[c] === "bridge") {
-                constraintObject.constraintType = "banned";
-                constraintObject.key = "wayType";
-                constraintObject.operator = "=";
-                constraintObject.value = "pont";
-                this.options.constraints.push(JSON.stringify(constraintObject));
-            }
+        } else {
+            throw new Error(_.getMessage("PARAM_TYPE", "constraints"));
         }
+    }
 
+    /** Gestion de l'ancien paramètre exclusion */
+    var constraintTunnel = {};
+    var constraintPont = {};
+    var constraintAutoroute = {};
+    if (options.exclusions) {
+        if (options.exclusions.length !== 0) {
+
+            for(var c = 0; c < options.exclusions.length; c++) {
+                if (options.exclusions[c] === "toll") {
+                    constraintAutoroute.constraintType = "banned";
+                    constraintAutoroute.key = "wayType";
+                    constraintAutoroute.operator = "=";
+                    constraintAutoroute.value = "autoroute";
+                    this.options.constraints.push(constraintAutoroute);
+                }
+                if (options.exclusions[c] === "tunnel") {
+                    constraintTunnel.constraintType = "banned";
+                    constraintTunnel.key = "wayType";
+                    constraintTunnel.operator = "=";
+                    constraintTunnel.value = "tunnel";
+                    this.options.constraints.push(constraintTunnel);
+                }
+                if (options.exclusions[c] === "bridge") {
+                    constraintPont.constraintType = "banned";
+                    constraintPont.key = "wayType";
+                    constraintPont.operator = "=";
+                    constraintPont.value = "pont";
+                    this.options.constraints.push(constraintPont);
+                }
+            }
+    
+        }
     }
 
     this.options.geometryInInstructions = options.geometryInInstructions || false; 

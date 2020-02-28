@@ -18,7 +18,7 @@ function RouteParamREST (options) {
 
     this.logger = Logger.getLogger();
     this.logger.trace("[Constructeur RouteParamREST ()]");
-
+    this.logger.trace(options.constraints);
     /**
      * Options en paramêtres du constructeur.
      */
@@ -179,6 +179,11 @@ RouteParamREST.prototype.getParams = function () {
     map.push({
         k : "end",
         v : this.end
+    });
+
+    map.push({
+        k : "geometryFormat",
+        v : "geojson"
     });
 
     if (this.optimization) {

@@ -214,7 +214,7 @@ var DefaultUrlService = {
      * @property {Function} url (key) - Returns routing service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols.
      */
     Route : {
-        _key : "/itineraire/simple/1.0.0/route",
+        _key : "/simple/1.0.0/route",
         /**
         * url
         * @param {String} key - key
