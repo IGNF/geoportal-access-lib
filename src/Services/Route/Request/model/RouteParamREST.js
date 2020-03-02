@@ -27,7 +27,7 @@ function RouteParamREST (options) {
     // mapping des options avec l'API REST
 
     /** Ressource utilisée */
-    this.resource = this.options.resource; 
+    this.resource = this.options.resource;
 
     /** Coordonnées du point de départ. */
     this.start = this.options.startPoint.x + "," + this.options.startPoint.y;
@@ -61,7 +61,6 @@ function RouteParamREST (options) {
 
     /** Attributs des voies */
     this.waysAttributes = this.options.waysAttributes;
-
 }
 
 /**
@@ -82,10 +81,9 @@ RouteParamREST.prototype = {
 
     /**
      * Retourne une liste de points
-     * @returns {string} une liste de points (sep '|')
+     * @returns {String} une liste de points (sep '|')
      */
     getIntermediates : function () {
-
         var array = [];
         if (this.intermediates.length !== 0) {
             for (var i = 0; i < this.intermediates.length; i++) {
@@ -99,7 +97,7 @@ RouteParamREST.prototype = {
 
     /**
      * Retourne une liste d'attributs
-     * @returns {string} une liste d'attributs (sep '|')
+     * @returns {String} une liste d'attributs (sep '|')
      */
     getWaysAttributes : function () {
         return this.waysAttributes.join("|");
@@ -107,7 +105,7 @@ RouteParamREST.prototype = {
 
     /**
      * Retourne un profile
-     * @returns {string} profile
+     * @returns {String} profile
      */
     getProfile : function () {
         return this.profile;
@@ -115,7 +113,7 @@ RouteParamREST.prototype = {
 
     /**
      * Retourne un distanceUnit
-     * @returns {string} distanceUnit
+     * @returns {String} distanceUnit
      */
     getDistanceUnit : function () {
         if (this.distanceUnit === "m") {
@@ -129,7 +127,7 @@ RouteParamREST.prototype = {
 
     /**
      * Retourne une optimisation
-     * @returns {string} optimization
+     * @returns {String} optimization
      */
     getOptimization : function () {
         if (this.optimization) {
@@ -137,12 +135,11 @@ RouteParamREST.prototype = {
         } else {
             return "";
         }
-        
     },
 
     /**
      * Retourne la liste des constraints
-     * @returns {string} une liste des constraints (sep '|')
+     * @returns {String} une liste des constraints (sep '|')
      */
     getConstraints : function () {
         var constraintArray = [];
@@ -152,9 +149,7 @@ RouteParamREST.prototype = {
                 constraintArray.push(JSON.stringify(this.constraints[k]));
             }
         }
-
         return constraintArray.join("|");
-
     }
 };
 
