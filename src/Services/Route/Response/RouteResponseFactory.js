@@ -44,7 +44,6 @@ var RouteResponseFactory = {
                 logger.trace("analyze response : raw");
                 data = options.response;
             } else {
-  
                 logger.trace("analyze response : json");
 
                 var JSONResponse;
@@ -113,7 +112,6 @@ var RouteResponseFactory = {
                             data.routeInstructions[data.routeInstructions.length - 1].code = "";
                             data.routeInstructions[data.routeInstructions.length - 1].instruction = "";
                             data.routeInstructions[data.routeInstructions.length - 1].geometry = step.geometry;
-
                         });
                     }
                 }

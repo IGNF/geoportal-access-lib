@@ -18,8 +18,8 @@ import RouteResponseFactory from "./Response/RouteResponseFactory";
  * @constructor
  * @extends {Gp.Services.CommonService}
  * @param {Object} options - options spécifiques au service (+ les options heritées)
- * 
- * @param {String} options.resource - La ressource utilisée pour le calcul. Ce paramètre devrait être obligatoire car il l'est dans l'appel au service. Mais il ne l'est pas pour des raisons de rétrocompatibilité. 
+ *
+ * @param {String} options.resource - La ressource utilisée pour le calcul. Ce paramètre devrait être obligatoire car il l'est dans l'appel au service. Mais il ne l'est pas pour des raisons de rétrocompatibilité.
  *
  * @param {String} options.outputFormat - Le format de la réponse du service itineraire : 'json' uniquement et par défaut.
  *
@@ -46,13 +46,13 @@ import RouteResponseFactory from "./Response/RouteResponseFactory";
  * @param {String[]} [options.exclusions] - DEPRECATED: Critères d'exclusions à appliquer pour le calcul. (correspond au paramètre "avoidFeature" d'OpenLS)
  *      On précise ici le type de tronçons que l'on ne veut pas que l'itinéraire emprunte
  *      (valeurs possibles : « toll » (éviter les péages), « bridge », « tunnel »).
- *      Ce paramètre est conservé pour une rétrocompatibilité de l'api. Le nouveau paramètre à utiliser est options.constraints 
- * 
- * @param {Object[]} [options.constraints] - Critères de contraintes à appliquer sur un itinéraire. Les valeurs disponibles dépendent de la ressource utilisée. Il est donc utile de regarder le getCapabilities. 
- * @param {String} [options.constraints.constraintType] - Type de la contrainte. Généralement "banned". 
- * @param {String} [options.constraints.key] - Clé de la contrainte. Généralement "wayType". 
- * @param {String} [options.constraints.operator] - Opérateur de la contrainte. Généralement "=". 
- * @param {String} [options.constraints.value] - Valeur de la contrainte. Généralement "autoroute". 
+ *      Ce paramètre est conservé pour une rétrocompatibilité de l'api. Le nouveau paramètre à utiliser est options.constraints
+ *
+ * @param {Object[]} [options.constraints] - Critères de contraintes à appliquer sur un itinéraire. Les valeurs disponibles dépendent de la ressource utilisée. Il est donc utile de regarder le getCapabilities.
+ * @param {String} [options.constraints.constraintType] - Type de la contrainte. Généralement "banned".
+ * @param {String} [options.constraints.key] - Clé de la contrainte. Généralement "wayType".
+ * @param {String} [options.constraints.operator] - Opérateur de la contrainte. Généralement "=".
+ * @param {String} [options.constraints.value] - Valeur de la contrainte. Généralement "autoroute".
  *
  * @param {Boolean} [options.geometryInInstructions = false] - Indique si la géométrie de l'itinéraire doit être reprise morceau par morceau dans les instructions.
  *      (correspond au paramètre "provideGeometry" d'OpenLS) Par défaut : false.
@@ -65,18 +65,18 @@ import RouteResponseFactory from "./Response/RouteResponseFactory";
  * @param {String} [options.timeUnit = "standard"] - Indique si la durée doit être exprimée en seconde, minute ou heure dans la réponse. Il peut-être formatté hh:mm::ss avec la valeur standard.
  *      Les valeurs possibles sont "standard", "second", "minute" ou "hour".
  *      Par défaut : "standard".
- * 
+ *
  * @param {String} [options.srs] - Système de coordonnées dans lequel les paramètres géographiques en entrée et la réponse du service sont exprimés.
  *      Pas de valeur par défaut. Si le serveur consulté est celui du Géoportail, la valeur par défaut sera donc celle du service : 'EPSG:4326'.
- * 
- * @param {String[]} [options.waysAttributes] - Nom des attributs des voies. Les valeurs disponibles dépendent de la ressource utilisée. Il est donc utile de regarder le getCapabilities. 
- * 
+ *
+ * @param {String[]} [options.waysAttributes] - Nom des attributs des voies. Les valeurs disponibles dépendent de la ressource utilisée. Il est donc utile de regarder le getCapabilities.
+ *
  * @example
  *  var options = {
  *      // options communes aux services
  *      apiKey : null,
  *      serverUrl : 'http://localhost/service/',
- *      protocol : 'XHR', 
+ *      protocol : 'XHR',
  *      proxyURL : null,
  *      httpMethod : 'GET', // GET|POST
  *      timeOut : 10000, // ms
@@ -158,7 +158,7 @@ function Route (options) {
     this.options.resource = options.resource || "bduni-idf-osrm";
     this.options.startPoint = options.startPoint;
     this.options.endPoint = options.endPoint;
-    this.options.viaPoints = options.viaPoints || []; 
+    this.options.viaPoints = options.viaPoints || [];
     this.options.routePreference = options.routePreference || "fastest";
     /** Gestion des anciennes valeurs de graph */
     if (options.graph) {
@@ -218,12 +218,11 @@ function Route (options) {
                     this.options.constraints.push(constraintPont);
                 }
             }
-    
         }
     }
 
-    this.options.geometryInInstructions = options.geometryInInstructions || false; 
-    this.options.provideBbox = options.provideBbox || true; 
+    this.options.geometryInInstructions = options.geometryInInstructions || false;
+    this.options.provideBbox = options.provideBbox || true;
     this.options.distanceUnit = options.distanceUnit || "km";
     this.options.timeUnit = options.timeUnit || "standard";
     this.options.expectedStartTime = null; // FIXME not yet implemented !
@@ -240,7 +239,6 @@ function Route (options) {
         this.options.serverUrl = UrlByDefault;
         this.logger.trace("Serveur URL par defaut : " + this.options.serverUrl);
     }
-
 }
 
 /**
@@ -266,7 +264,7 @@ Route.prototype.constructor = Route;
 Route.prototype.buildRequest = function (error, success) {
     var options = {
         // spécifique au service
-        resource: this.options.resource,
+        resource : this.options.resource,
         startPoint : this.options.startPoint,
         endPoint : this.options.endPoint,
         viaPoints : this.options.viaPoints,
@@ -300,12 +298,12 @@ Route.prototype.buildRequest = function (error, success) {
  */
 Route.prototype.analyzeResponse = function (error, success) {
     // INFO
-    // Factory pour masquer la complexité du retour du service 
+    // Factory pour masquer la complexité du retour du service
 
     if (this.response) {
         var options = {
-            distanceUnit : this.options.distanceUnit, 
-            timeUnit : this.options.timeUnit, 
+            distanceUnit : this.options.distanceUnit,
+            timeUnit : this.options.timeUnit,
             response : this.response,
             outputFormat : this.options.outputFormat, // utile pour parser la string en mode XHR : JSON ou XML !
             rawResponse : this.options.rawResponse,
