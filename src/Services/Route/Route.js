@@ -150,7 +150,11 @@ function Route (options) {
     // options par defaut
 
     // on passe l'option outputFormat en minuscules afin d'éviter des exceptions.
+    if (options.outputFormat && options.outputFormat !== "json") {
+        this.logger.warn("options.outputFormat could only be json");
+    }
     this.options.outputFormat = "json";
+    
     this.options.resource = options.resource || "bduni-idf-osrm";
     this.options.startPoint = options.startPoint;
     this.options.endPoint = options.endPoint;
@@ -184,8 +188,14 @@ function Route (options) {
     var constraintAutoroute = {};
     if (options.exclusions) {
         if (options.exclusions.length !== 0) {
-
+            this.logger.warn("options.exclusions is DEPRECATED !!");
             for(var c = 0; c < options.exclusions.length; c++) {
+                if (typeof options.exclusions[c] === "string") {
+                    options.exclusions[c] = options.exclusions[c].toLowerCase();
+                } else {
+                    // on ne crée pas une erreur pour rétro-compatibilité avec les anciennes versions
+                    continue;
+                }
                 if (options.exclusions[c] === "toll") {
                     constraintAutoroute.constraintType = "banned";
                     constraintAutoroute.key = "wayType";

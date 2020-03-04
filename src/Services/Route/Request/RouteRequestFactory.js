@@ -35,7 +35,7 @@ var RouteRequestFactory = {
      *          y : 1.5557
      *      },
      *      provideBbox : false,
-     *      exclusions : ["Bridge", "Tunnel", "Toll"],
+     *      exclusions : ["bridge", "tunnel", "toll"],
      *      distanceUnit : "km",
      *      graph : "Voiture",
      *      geometryInInstructions : false,

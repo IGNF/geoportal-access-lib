@@ -17,7 +17,7 @@ var mock = __MOCK__;
 var logger = Logger.getLogger("test-autoconf");
 
 // xml load...
-var routeResponseJson, routeResponseJsonToll, routeResquestXml;
+var routeResponseJson, routeResponseJsonToll;
 
 if (mock) {
 
@@ -101,7 +101,7 @@ describe("-- Tests fonctionnels du Service de Calcul d’itinéraires --", funct
                     },
                     viaPoints: [],
                     provideBbox: true,
-                    exclusions: ["Toll", "Tunnel"],
+                    exclusions: ["toll", "tunnel"],
                     distanceUnit: "km",
                     graph: "Voiture",
                     provideGeometry: false,
@@ -110,7 +110,7 @@ describe("-- Tests fonctionnels du Service de Calcul d’itinéraires --", funct
                 };
 
                 // OK reponse du service REST
-                var urlGet = "http://wxs.ign.fr/" + myKey + "/itineraire/rest/route.json?gp-access-lib=" + version + "&origin=2.64,48.54&destination=3.01,48.45&method=TIME&waypoints=&graphName=Voiture&exclusions=Toll;Tunnel&srs=EPSG:4326&format=STANDARD";
+                var urlGet = "http://wxs.ign.fr/" + myKey + "/itineraire/rest/route.json?gp-access-lib=" + version + "&origin=2.64,48.54&destination=3.01,48.45&method=TIME&waypoints=&graphName=Voiture&exclusions=toll;tunnel&srs=EPSG:4326&format=STANDARD";
                 var okResponseJson = [200, { 'Content-type': 'application/json' }, routeResponseJson];
                 if (mock) { server.respondWith('GET', urlGet, okResponseJson); }
 
@@ -229,7 +229,7 @@ describe("-- Tests fonctionnels du Service de Calcul d’itinéraires --", funct
                     },
                     // viaPoints: [],
                     // provideBbox: true,
-                    // exclusions: ["Tunnel", "Toll"], // "Bridge"
+                    // exclusions: ["tunnel", "toll"], // "Bridge"
                     // distanceUnit: "km",
                     // graph: "Voiture",
                     // provideGeometry: false,
