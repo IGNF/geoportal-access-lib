@@ -1,5 +1,5 @@
 #!/bin/bash
 
 service nginx start
-sleep 1
-npm run test:serve:docker 
+bash /home/docker/watch.sh &
+cd /home/docker/geoportal-access-lib/ && npm run test:serve:docker 
