@@ -17,6 +17,7 @@ COPY ./conf/default /etc/nginx/sites-enabled/default
 RUN mkdir /var/www/html/geoportal-access-lib/ && ln -s /home/docker/geoportal-access-lib/dist/ /var/www/html/geoportal-access-lib/dist && ln -s /home/docker/geoportal-access-lib/samples/ /var/www/html/geoportal-access-lib/samples
 
 # Copie des scripts 
-COPY ./scripts/* /home/docker/
+COPY ./scripts/start.sh /home/docker/
+COPY ./scripts/watch.sh /home/docker/
 
 CMD bash /home/docker/start.sh
