@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  access-lib:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: access-lib
+    container_name: access-lib-server
+    ports:
+      - 8081:80
+      - 9012:9012
+      - 9013:9013
+    volumes:
+      - ${ACCESSLIB}/src:/home/docker/geoportal-access-lib/src
+      - ${ACCESSLIB}/test:/home/docker/geoportal-access-lib/test
+      - ${ACCESSLIB}/samples-src:/home/docker/geoportal-access-lib/samples-src
