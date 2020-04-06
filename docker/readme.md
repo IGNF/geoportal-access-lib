@@ -34,9 +34,7 @@ Encore une fois, il y a plusieurs méthodes pour lancer le container, pour chaqu
 
 ## Usage 1: Tester
 
-Pour voir le résultats des tests unitaires et des tests de bout en bout, ainsi que pour utiliser les exemples,
-
-, quand ce sera fait, il suffira de se rendre sur les urls suivantes:
+Pour voir le résultats des tests unitaires et des tests de bout en bout, ainsi que pour utiliser les exemples, il suffira de lancer le container puis de se rendre sur les urls suivantes:
 - http://localhost:8081/geoportal-access-lib/test/
 - http://localhost:8081/geoportal-access-lib/end-to-end/
 - http://localhost:8081/geoportal-access-lib/samples/
@@ -86,6 +84,12 @@ On prendra le temps de renseigner les variables du fichier `./docker/.env` en se
 - la variable `ACCESSLIB` permettra d'indiquer l'emplacement du projet `geoportal-access-lib`.
 
 Puis, il suffira de lancer la commande `docker-compose up` ou `docker-compose up -d` pour récupérer la main dans le terminal.
+
+## Erreurs possibles
+
+Lors du lancement d'un container, on pourra avoir l'erreur suivante:
+`Error starting userland proxy: listen tcp 0.0.0.0:8081: bind: address already in use.`
+Cela signifie que le port est déjà utilisé par une autre application. 
 
 # Arrêter un container 
 
