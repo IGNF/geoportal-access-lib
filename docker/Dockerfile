@@ -1,17 +1,10 @@
-FROM debian:buster-20200224 
+FROM node:12.16.1-slim
 
 # MAJ
 RUN apt update && apt -y upgrade 
 
 # Paquets utiles 
-RUN apt install -y vim git curl nginx inotify-tools 
-
-# Installation de NodeJS et NPM depuis les sources 
-WORKDIR /home/docker/nodejs
-RUN apt install -y python g++ make
-RUN curl "https://nodejs.org/dist/v12.16.1/node-v12.16.1.tar.gz" -o node-v12.16.1.tar.gz
-RUN tar -xzf /home/docker/nodejs/node-v12.16.1.tar.gz
-RUN cd node-v12.16.1  && ./configure && make -j4 && make install
+RUN apt install -y git nginx inotify-tools 
 
 # Installation de access-lib 
 WORKDIR /home/docker/
