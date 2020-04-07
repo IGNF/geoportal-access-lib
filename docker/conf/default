@@ -18,14 +18,14 @@ server {
                 proxy_set_header Host $host;
                 proxy_set_header X-Real-IP $remote_addr;
                 rewrite ^/geoportal-access-lib/test/(.*)$ /$1 break;
-                proxy_pass http://127.0.0.1:9012;
+                proxy_pass http://access-lib-server:9012;
         }
 
         location ~ /geoportal-access-lib/end-to-end/(.*) {
                 proxy_set_header Host $host;
                 proxy_set_header X-Real-IP $remote_addr;
                 rewrite ^/geoportal-access-lib/end-to-end/(.*)$ /$1 break;
-                proxy_pass http://127.0.0.1:9013;
+                proxy_pass http://access-lib-server:9013;
         }
 
 }

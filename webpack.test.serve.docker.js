@@ -20,7 +20,8 @@ module.exports = {
     devtool : "eval-source-map",
     devServer : {
         stats : "errors-only",
-        host : "localhost",
+        host : "0.0.0.0",
+        disableHostCheck: true,
         port : 9012,
         hot : true,
         watchOptions : {
