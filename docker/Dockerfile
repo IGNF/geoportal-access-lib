@@ -16,7 +16,7 @@ RUN git checkout feature-docker && npm install && npm run build
 COPY ./scripts/* /home/docker/
 
 # Volume pour partager les samples 
-VOLUME ["/home/docker/html/geoportal-access-lib"]
+VOLUME ["/home/docker/html"]
 
 WORKDIR /home/docker/geoportal-access-lib
 
