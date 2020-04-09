@@ -15,7 +15,7 @@ module.exports = env => {
 
     return {
         entry : {
-            tests : path.join(__dirname, "test", "index-end-to-end.js")
+            tests : path.join(__dirname, "../../test", "index-end-to-end.js")
         },
         output : {
             path : path.join(__dirname, "test"),

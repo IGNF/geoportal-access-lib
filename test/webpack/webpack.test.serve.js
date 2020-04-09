@@ -9,7 +9,7 @@ var ReplaceWebpackPlugin = require("replace-bundle-webpack-plugin");
 
 module.exports = {
     entry : {
-        tests : path.join(__dirname, "test", "index.js")
+        tests : path.join(__dirname, "../../test", "index.js")
     },
     output : {
         path : path.join(__dirname, "test"),
@@ -20,10 +20,10 @@ module.exports = {
     devtool : "eval-source-map",
     devServer : {
         stats : "errors-only",
-        host : "0.0.0.0",
-        disableHostCheck: true,
-        port : 9012,
+        host : "localhost",
+        port : 9001,
         hot : true,
+        open : "google-chrome",
         watchOptions : {
             watch : true,
             poll : true
