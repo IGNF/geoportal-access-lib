@@ -11,6 +11,11 @@ then
     mkdir /home/docker/html/geoportal-access-lib
     cp -rf /home/docker/geoportal-access-lib/samples /home/docker/html/geoportal-access-lib/
 fi
+if [ ! -d /home/docker/html/geoportal-access-lib/jsdoc ]
+then
+    mkdir /home/docker/html/geoportal-access-lib
+    cp -rf /home/docker/geoportal-access-lib/jsdoc /home/docker/html/geoportal-access-lib/
+fi
 
 # Observation des changements 
 bash /home/docker/watch.sh &

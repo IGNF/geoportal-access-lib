@@ -21,10 +21,11 @@ Une fois l'image construite, on pourra utiliser le container de plusieurs maniè
 
 ## Usage 1: Tester
 
-Pour voir le résultats des tests unitaires et des tests de bout en bout, ainsi que pour utiliser les exemples, il suffira de lancer le container puis de se rendre sur les urls suivantes:
+Pour voir le résultats des tests unitaires et des tests de bout en bout, ainsi que pour utiliser les exemples ou encore voir la documentation, il suffira de lancer le container puis de se rendre sur les urls suivantes:
 - http://localhost:8081/geoportal-access-lib/test/
 - http://localhost:8081/geoportal-access-lib/end-to-end/
 - http://localhost:8081/geoportal-access-lib/samples/
+- http://localhost:8081/geoportal-access-lib/jsdoc/
 
 ### Avec docker-compose 
 
@@ -49,11 +50,15 @@ On prendra le temps de renseigner les variables du fichier `./docker/.env` en se
 
 Puis, il suffira de lancer la commande `docker-compose up` ou `docker-compose up -d` pour récupérer la main dans le terminal.
 
-## Erreurs possibles
+## Problèmes possibles
 
-Lors du lancement d'un container, on pourra avoir l'erreur suivante:
+- Lors du lancement d'un container, on pourra avoir l'erreur suivante:
 `Error starting userland proxy: listen tcp 0.0.0.0:8081: bind: address already in use.`
 Cela signifie que le port est déjà utilisé par une autre application. 
+
+- Lors d'un changement du `package.json`, il sera nécessaire de commiter le changement et relancer un build de l'image sans cache: `docker-compose build --no-cache`. 
+
+- De manière plus générale, si un problème du type 'absence de changement' est observé, il sera intéressant de tenter un rebuild de l'image sans cache en ayant d'abord supprimé le volume docker associé: `docker volume rm access-lib-data-volume`.
 
 # Arrêter un container 
 

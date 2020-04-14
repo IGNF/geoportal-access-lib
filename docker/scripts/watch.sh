@@ -14,6 +14,7 @@ do
     npm run build
     cp -rf ./dist /home/docker/html/geoportal-access-lib/
     cp -rf ./samples /home/docker/html/geoportal-access-lib/
+    cp -rf ./jsdoc /home/docker/html/geoportal-access-lib/
     npm pack
     popd
     old=$message
