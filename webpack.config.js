@@ -22,7 +22,7 @@ var CleanWebpackPlugin       = require("clean-webpack-plugin");
 var DefineWebpackPlugin      = webpack.DefinePlugin;
 var ReplaceWebpackPlugin   = require("replace-bundle-webpack-plugin");
 var ShellWebpackPlugin     = require("webpack-shell-plugin");
-var HandlebarsPlugin       = require("./../../scripts/webpackPlugins/handlebars-plugin");
+var HandlebarsPlugin       = require("./scripts/webpackPlugins/handlebars-plugin");
 var HandlebarsLayoutPlugin = require("handlebars-layouts");
 var CopyWebpackPlugin      = require("copy-webpack-plugin");
 // var SourceMapDevToolWebpackPlugin = webpack.SourceMapDevToolPlugin;
@@ -32,9 +32,9 @@ var SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 var smp = new SpeedMeasurePlugin();
 
 // -- variables
-var licence = path.join(__dirname, "./../../utils", "licence.tmpl");
-var date    = require(path.join(__dirname, "./../../package.json")).date;
-var version = require(path.join(__dirname, "./../../package.json")).version;
+var licence = path.join(__dirname, "utils", "licence.tmpl");
+var date    = require(path.join(__dirname, "package.json")).date;
+var version = require(path.join(__dirname, "package.json")).version;
 
 module.exports = env => {
 
@@ -53,10 +53,10 @@ module.exports = env => {
 
     return smp.wrap({
         entry : [
-            path.join(__dirname, "./../../src", "Gp")
+            path.join(__dirname, "src", "Gp")
         ],
         output : {
-            path : path.join(__dirname, "./../../dist"),
+            path : path.join(__dirname, "dist"),
             filename : (production) ? "GpServices.js" : (development) ? "GpServices-map.js" : "GpServices-src.js",
             library : "Gp",
             libraryTarget : "umd",
@@ -81,7 +81,7 @@ module.exports = env => {
             loaders : [
                 {
                     test : /\.js$/,
-                    include : path.join(__dirname, "./../../src"),
+                    include : path.join(__dirname, "src"),
                     exclude : /node_modules/,
                     loader : "babel-loader",
                     query : {
@@ -93,7 +93,7 @@ module.exports = env => {
                 {
                     test : /\.js$/,
                     enforce : "pre",
-                    include : path.join(__dirname, "./../../src"),
+                    include : path.join(__dirname, "src"),
                     exclude : /node_modules/,
                     use : [
                         {
@@ -164,7 +164,7 @@ module.exports = env => {
                 //     __PRODUCTION__ : JSON.stringify(production)
                 // }),
                 new JsDocWebPackPlugin({
-                    conf : path.join(__dirname, "./../../jsdoc.json")
+                    conf : path.join(__dirname, "jsdoc.json")
                 }),
                 new BannerWebPackPlugin({
                     banner : header(fs.readFileSync(licence, "utf8"), {
@@ -177,11 +177,11 @@ module.exports = env => {
                 new HandlebarsPlugin(
                     {
                         entry : {
-                            path : path.join(__dirname, "./../../samples-src", "pages"),
+                            path : path.join(__dirname, "samples-src", "pages"),
                             pattern : "**/pages-*.html"
                         },
                         output : {
-                            path : path.join(__dirname, "./../../samples"),
+                            path : path.join(__dirname, "samples"),
                             flatten : false,
                             filename : (production) ? "[name].html" : (development) ? "[name]-map.html" : "[name]-src.html"
                         },
@@ -189,11 +189,11 @@ module.exports = env => {
                             HandlebarsLayoutPlugin
                         ],
                         partials : [
-                            path.join(__dirname, "./../../samples-src", "templates", "*.hbs"),
-                            path.join(__dirname, "./../../samples-src", "templates", "partials", "*.hbs")
+                            path.join(__dirname, "samples-src", "templates", "*.hbs"),
+                            path.join(__dirname, "samples-src", "templates", "partials", "*.hbs")
                         ],
                         context : [
-                            path.join(__dirname, "./../../samples-src", "config.json"),
+                            path.join(__dirname, "samples-src", "config.json"),
                             {
                                 mode : (production) ? "" : (development) ? "-map" : "-src"
                             }
@@ -202,14 +202,14 @@ module.exports = env => {
                 ),
                 new HandlebarsPlugin(
                     {
-                        entry : path.join(__dirname, "./../../samples-src", "pages", "index.html"),
+                        entry : path.join(__dirname, "samples-src", "pages", "index.html"),
                         output : {
-                            path : path.join(__dirname, "./../../samples"),
+                            path : path.join(__dirname, "samples"),
                             filename : (production) ? "[name]-prod.html" : (development) ? "[name]-map.html" : "[name]-src.html"
                         },
                         context : {
                             samples : () => {
-                                var root = path.join(__dirname, "./../../samples-src", "pages");
+                                var root = path.join(__dirname, "samples-src", "pages");
                                 var list = glob.sync(path.join(root, "**", "pages-*.html"));
                                 list = list.map(function (filePath) {
                                     var relativePath = path.relative(root, filePath);
@@ -227,14 +227,14 @@ module.exports = env => {
                 ),
                 new CopyWebpackPlugin([
                     {
-                        from : path.join(__dirname, "./../../samples-src", "resources", "**/*"),
-                        to : path.join(__dirname, "./../../samples", "resources"),
-                        context : path.join(__dirname, "./../../samples-src", "resources")
+                        from : path.join(__dirname, "samples-src", "resources", "**/*"),
+                        to : path.join(__dirname, "samples", "resources"),
+                        context : path.join(__dirname, "samples-src", "resources")
                     },
                     {
-                        from : path.join(__dirname, "./../../samples-src", "pages-nodejs", "**/*.js"),
-                        to : path.join(__dirname, "./../../samples", "NodeJS"),
-                        context : path.join(__dirname, "./../../samples-src", "pages-nodejs")
+                        from : path.join(__dirname, "samples-src", "pages-nodejs", "**/*.js"),
+                        to : path.join(__dirname, "samples", "NodeJS"),
+                        context : path.join(__dirname, "samples-src", "pages-nodejs")
                     }
                 ])
             )
