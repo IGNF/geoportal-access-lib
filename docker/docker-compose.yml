@@ -1,0 +1,46 @@
+version: "3.7"
+
+services:
+  access-lib:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: access-lib
+    container_name: access-lib-server
+    expose:
+      - 9012
+      - 9013
+    ports:
+      - 9012:9012
+      - 9013:9013
+    volumes:
+      - access-lib-data-volume:/home/docker/html
+      - ${ACCESSLIB}/src:/home/docker/geoportal-access-lib/src
+      - ${ACCESSLIB}/test:/home/docker/geoportal-access-lib/test
+      - ${ACCESSLIB}/samples-src:/home/docker/geoportal-access-lib/samples-src
+    networks:
+      - api-network
+  
+  nginx:
+    image: nginx:1.17.9
+    container_name: nginx-server
+    command: nginx-debug -g 'daemon off;'
+    ports:
+      - 8081:80
+    volumes:
+      - ./conf/default:/etc/nginx/sites-enabled/default:ro
+      - ./conf/nginx.conf:/etc/nginx/nginx.conf:ro
+      - access-lib-data-volume:/var/www/html
+    networks:
+      - api-network
+
+volumes:
+  access-lib-data-volume:
+    name: access-lib-data-volume
+
+networks:
+  api-network:
+    name: api-network
+    driver: bridge
+    ipam:
+      driver: default
