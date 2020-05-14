@@ -148,12 +148,12 @@ ProcessIsoCurveRequest.prototype = {
 
                 postRequest.point = this.settings.position.x + "," + this.settings.position.y;
 
-                if (this.options.method === "distance") {
-                    this.costType = "distance";
-                    this.costValue = this.options.distance;
+                if (this.settings.method === "distance") {
+                    postRequest.costType = "distance";
+                    postRequest.costValue = this.settings.distance;
                 } else {
-                    this.costType = "time";
-                    this.costValue = this.options.time;
+                    postRequest.costType = "time";
+                    postRequest.costValue = this.settings.time;
                 }
                 
                 postRequest.profile = this.settings.graph;

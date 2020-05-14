@@ -93,10 +93,10 @@ ProcessIsoCurveParam.prototype = {
     },
 
     /**
-     * Retourne l'unité de temps
+     * Retourne l'unité de la distance
      * @returns {String} 
      */
-    getTimeUnit : function () {
+    getDistanceUnit : function () {
         if (this.distanceUnit === "m") {
             return "meter";
         }

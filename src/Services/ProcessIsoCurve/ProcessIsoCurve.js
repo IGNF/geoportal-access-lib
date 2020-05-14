@@ -157,9 +157,9 @@ function ProcessIsoCurve (options) {
     this.options.method = this.options.method || "time";
 
     // options par defaut du service
-    // TODO: modifier lors de la mise en production du service
-    this.options.resource = options.resource || "bduni-idf-osrm";
-    this.options.exclusions = options.exclusions || null;
+    // TODO: modifier la ressource lors de la mise en production du service
+    this.options.resource = options.resource || "bduni-idf-pgr";
+    this.options.exclusions = options.exclusions || [];
     this.options.reverse = options.reverse || false;
     this.options.srs = options.srs || "EPSG:4326";
     this.options.distanceUnit = options.distanceUnit || "km";
