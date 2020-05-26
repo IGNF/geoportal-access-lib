@@ -12,10 +12,11 @@ do
   then 
     pushd /home/docker/geoportal-access-lib/
     npm run build
-    cp -rf ./dist /home/docker/html/geoportal-access-lib/
-    cp -rf ./samples /home/docker/html/geoportal-access-lib/
-    cp -rf ./jsdoc /home/docker/html/geoportal-access-lib/
+    cp -rf ./dist/* /home/docker/html/geoportal-access-lib/dist/
+    cp -rf ./samples/* /home/docker/html/geoportal-access-lib/samples/
+    cp -rf ./jsdoc/* /home/docker/html/geoportal-access-lib/jsdoc/
     npm pack
+    cp *.tgz /home/docker/html/geoportal-access-lib/package/
     popd
     old=$message
   fi
