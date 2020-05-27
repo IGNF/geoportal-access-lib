@@ -241,7 +241,7 @@ function ProcessIsoCurve (options) {
     // on passe l'option outputFormat en minuscules afin d'éviter des exceptions.
     this.options.outputFormat = (typeof options.outputFormat === "string") ? options.outputFormat.toLowerCase() : "json";
     if (options.outputFormat && options.outputFormat !== "json") {
-        this.logger.warn("options.outputFormat could only be json");
+        throw new Error(_.getMessage("PARAM_NOT_SUPPORT", "outputFormat"));
     }
     this.options.outputFormat = "json";
 

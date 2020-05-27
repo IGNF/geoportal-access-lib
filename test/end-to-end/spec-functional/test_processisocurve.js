@@ -85,9 +85,7 @@ describe("-- Tests fonctionnels du Service de Calcul d’isochrones / isodistanc
                 method: "time",
                 time: 200,
                 srs: "EPSG:4326",
-                reverse: false,
-                smoothing: false,
-                holes: false
+                reverse: false
             };
 
             it("Appel du service en mode 'XHR' avec la méthode 'GET' au format de sortie 'json'", function (done) {

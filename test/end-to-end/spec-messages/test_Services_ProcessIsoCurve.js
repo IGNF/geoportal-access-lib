@@ -146,7 +146,7 @@ describe("-- Test sur les messages d'erreur spécifiques du Service de calcul d'
         } catch (e) {
             console.log(e.message);
             expect(e).not.to.be.null;
-            expect(e.message).to.be.equal("Url by default not found !");
+            expect(e.message).to.be.equal("Value(s) for parameter(s) 'outputFormat' not supported");
         } finally {}
     });
 

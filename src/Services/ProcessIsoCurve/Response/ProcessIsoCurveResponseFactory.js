@@ -54,38 +54,30 @@ var ProcessIsoCurveResponseFactory = {
                 }
 
                 // analyse de la reponse
-                if (JSONResponse.status === "OK" || JSONResponse.status === "ok") {
-                    // création de l'objet de réponse
-                    data = new ProcessIsoCurveResponse();
+                // création de l'objet de réponse
+                data = new ProcessIsoCurveResponse();
 
-                    // remplissage de l'objet créé avec les attribtuts de la réponse du service
-                    if (data) {
-                        if (data.costValue === "distance") {
-                            data.time = "";
-                            data.distance = JSONResponse.distance;
-                        } else {
-                            data.time = JSONResponse.time;
-                            data.distance = "";
-                        }
-                        
-                        data.message = "";
-                        data.id = "";
-                        data.srs = JSONResponse.crs;
-                        data.geometry = JSONResponse.geometry;
-                        var coords = JSONResponse.point.split(",");
-                        if (data.location) {
-                            data.location.x = coords[0];
-                            data.location.y = coords[1];
-                        }
+                // remplissage de l'objet créé avec les attribtuts de la réponse du service
+                if (data) {
+                    if (data.costValue === "distance") {
+                        data.time = "";
+                        data.distance = JSONResponse.distance;
                     } else {
-                        options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_ANALYSE", options.response)));
-                        return;
+                        data.time = JSONResponse.time;
+                        data.distance = "";
                     }
-                } else if (JSONResponse.status === "ERROR" || JSONResponse.status === "error") {
-                    // JSHint bug if var message is used !?
-                    var mess = JSONResponse.message;
-                    mess += "\n (raw response service : '" + JSONResponse + "')";
-                    options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", mess)));
+                    
+                    data.message = "";
+                    data.id = "";
+                    data.srs = JSONResponse.crs;
+                    data.geometry = JSONResponse.geometry;
+                    var coords = JSONResponse.point.split(",");
+                    if (data.location) {
+                        data.location.x = coords[0];
+                        data.location.y = coords[1];
+                    }
+                } else {
+                    options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_ANALYSE", options.response)));
                     return;
                 }
 
