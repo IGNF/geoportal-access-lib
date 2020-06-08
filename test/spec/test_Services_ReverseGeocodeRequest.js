@@ -17,14 +17,15 @@ describe("-- Test ReverseGeocodeRequest --", function () {
 
             var options = {
                 geocodeMethod : "reverse",
-                position : {
-                    x : 2.48, y : 48.9
+                searchGeometry : {
+                    type: "Circle",
+                    coordinates: [2.49, 49],
+                    radius: 100
                 },
-                filterOptions : {
-                    type : ["PositionOfInterest"],
-                    circle : {
-                        x : 2.49, y : 49, radius : 100
-                    }
+                index: "PositionOfInterest",
+                position: {
+                    lon: 2.48,
+                    lat: 48.9
                 }
             };
 
