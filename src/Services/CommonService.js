@@ -367,10 +367,12 @@ CommonService.prototype = {
 
         // rajout de l'option gpbibaccess
         // INFO : acces au numero de version de package.conf aprés compilation !
-        this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, {
-            "gp-access-lib" : Pkg.version
-        }, false);
-
+        if (this.CLASSNAME !== "Geocode" && this.CLASSNAME !== "ReverseGeocode") {
+            this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, {
+                "gp-access-lib" : Pkg.version
+            }, false);
+        }
+        
         // si le proxy est renseigné, on proxifie l'url du service
         if (bUrlProxified) {
             if (this.options.httpMethod === "GET") {

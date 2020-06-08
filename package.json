@@ -20,8 +20,8 @@
     "test:end-to-end:serve:docker": "webpack-dev-server --hot --config ./test/webpack/webpack.end-to-end.serve.docker.js",
     "sample": "npm run sample:serve",
     "sample:serve": "webpack-dev-server --open-page samples/index-src.html --https --content-base .  --output-public-path '/dist/' --port 9001 --open 'google-chrome'",
-    "sample:serve:prod": "webpack-dev-server --env.production --open-page samples/index.html --content-base . --output-public-path '/dist/' --port 9001 --open 'google-chrome",
-    "sample:serve:dev": "webpack-dev-server --env.development --open-page samples/index-map.html --content-base . --output-public-path '/dist/' --port 9001 --open 'google-chrome",
+    "sample:serve:prod": "webpack-dev-server --env.production --open-page samples/index.html --content-base . --output-public-path '/dist/' --port 9001 --open 'google-chrome'",
+    "sample:serve:dev": "webpack-dev-server --env.development --open-page samples/index-map.html --content-base . --output-public-path '/dist/' --port 9001 --open 'google-chrome'",
     "doc": "npm run doc:serve",
     "doc:serve": "webpack-dev-server --content-base jsdoc --port 9001 --open"
   },
