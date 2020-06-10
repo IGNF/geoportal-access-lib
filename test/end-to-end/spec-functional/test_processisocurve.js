@@ -120,6 +120,7 @@ describe("-- Tests fonctionnels du Service de Calcul d’isochrones / isodistanc
 
                 options.protocol = 'XHR';
                 options.httpMethod = 'POST';
+                options.contentType = 'application/json',
                 options.outputFormat = 'json';
                 options.onSuccess = function (response) {
                     functionAssert(response);
