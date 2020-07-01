@@ -16,7 +16,7 @@ do
     cp -rf ./samples/* /home/docker/html/geoportal-access-lib/samples/
     cp -rf ./jsdoc/* /home/docker/html/geoportal-access-lib/jsdoc/
     npm pack
-    cp *.tgz /home/docker/html/geoportal-access-lib/package/
+    cp geoportal-access-lib*.tgz /home/docker/html/geoportal-access-lib/package/geoportal-access-lib-local.tgz
     popd
     old=$message
   fi
