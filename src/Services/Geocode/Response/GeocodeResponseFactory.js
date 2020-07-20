@@ -9,7 +9,7 @@
 // import Logger from "../../../Utils/LoggerByDefault";
 import ErrorService from "../../../Exceptions/ErrorService";
 import MRes from "../../../Utils/MessagesResources";
-import GeocodeResponseParser from "../Formats/GeocodeResponseParser"
+import GeocodeResponseParser from "../Formats/GeocodeResponseParser";
 
 var DirectGeocodeReponseFactory = {
 

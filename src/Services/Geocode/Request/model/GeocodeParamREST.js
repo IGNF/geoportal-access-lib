@@ -109,7 +109,7 @@ GeocodeParamREST.prototype = {
     },
 
     /**
-     * Retourne la géométrie de recherche 
+     * Retourne la géométrie de recherche
      * @returns {String} la géométrie de recherche au format json
      */
     getSearchGeometry : function () {

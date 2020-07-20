@@ -372,7 +372,7 @@ CommonService.prototype = {
                 "gp-access-lib" : Pkg.version
             }, false);
         }
-        
+
         // si le proxy est renseigné, on proxifie l'url du service
         if (bUrlProxified) {
             if (this.options.httpMethod === "GET") {

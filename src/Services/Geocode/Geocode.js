@@ -36,7 +36,7 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *      pour des adresses postales ou des 'CadastralParcel' pour des parcelles cadastrales.
  *      D'autres types pourront être rajoutés selon l'évolution du service.
  *      Par défaut, index = 'StreetAddress'.
- * 
+ *
  * @param {Object} options.position - Position du point de référence pour le calcul de proximité exprimée dans le système de référence spécifié par le srs.
  *      @param {Float} options.position.lon - Longitude du point de référence pour le calcul de proximité.
  *      @param {Float} options.position.lat - Latitude du point de référence pour le calcul de proximité.
@@ -44,10 +44,10 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  * @param {Number} [options.maximumResponses] - Nombre de réponses maximal que l'on souhaite recevoir.
  *      Pas de valeur par défaut.
  *      Si le serveur consulté est celui du Géoportail, la valeur par défaut sera donc celle du service : 20.
- * 
+ *
  * @param {Boolean} [options.returnTrueGeometry] - Booléen indiquant si l'on souhaite récupérer la géométrie vraie des objects géolocalisés.
  *      false par défaut.
- * 
+ *
  *
  * @example
  *   var options = {
@@ -67,7 +67,7 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *   };
  * @private
  */
-function Geocode (options) {
+function Geocode (options_) {
     if (!(this instanceof Geocode)) {
         throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "Geocode"));
     }
@@ -78,14 +78,15 @@ function Geocode (options) {
      */
     this.CLASSNAME = "Geocode";
 
-    options.serverUrl = options.serverUrl || "https://geocodage.ign.fr/look4";
-
-    // appel du constructeur par heritage
-    CommonService.apply(this, arguments);
-
     this.logger = Logger.getLogger("Gp.Services.Geocode");
     this.logger.trace("[Constructeur Geocode (options)]");
 
+    let options = this.patchOptionConvertor(options_);
+    options.serverUrl = options.serverUrl || "https://geocodage.ign.fr/look4";
+
+    // appel du constructeur par heritage
+    CommonService.apply(this, [options]);
+    
     if (!options.query) {
         throw new Error(_.getMessage("PARAM_MISSING", "query"));
     }
@@ -105,12 +106,14 @@ function Geocode (options) {
         this.options.index = options.index = "StreetAddress";
     }
 
-    var filter = Object.keys(options.filters);
-    for (var i = 0; i < filter.length; i++) {
-        var key = filter[i];
-        // on supprime les filtres vides
-        if (!options.filters[key]) {
-            delete this.options.filters[key];
+    if (options.filters) {
+        var filter = Object.keys(options.filters);
+        for (var i = 0; i < filter.length; i++) {
+            var key = filter[i];
+            // on supprime les filtres vides
+            if (!options.filters[key]) {
+                delete this.options.filters[key];
+            }
         }
     }
 
@@ -130,6 +133,83 @@ Geocode.prototype = Object.create(CommonService.prototype, {
  * Constructeur (alias)
  */
 Geocode.prototype.constructor = Geocode;
+
+/**
+ * Patch pour la convertion des options vers le nouveau formalisme.
+ *
+ * @param {Object} options_ - options du service
+ * @return {Object} - options
+ */
+Geocode.prototype.patchOptionConvertor = function (options_) {
+    const options = options_;
+
+    if (options.location) {
+        this.logger.warn("The parameter 'location' is deprecated");
+
+        if (!options.query) {
+            options.query = options.location;
+        }
+        delete options.location;
+    }
+
+    if (options.filterOptions) {
+        this.logger.warn("The parameter 'filterOptions' is deprecated");
+
+        if (!options.filters) {
+            options.filters = options.filterOptions;
+
+            if (options.filters.type) {
+                this.logger.warn("The parameter 'filterOptions.type' is deprecated");
+                if (!options.index) {
+                    if (Array.isArray(options.filters.type) && options.filters.type.length > 0) {
+                        options.index = options.filters.type[0];
+                    } else {
+                        options.index = options.filters.type;
+                    }
+                }
+                delete options.filters.type;
+            }
+
+            if (options.filters.bbox) {
+                this.logger.warn("The parameter 'filterOptions.bbox' is deprecated");
+                delete options.filters.bbox;
+            }
+        }
+        delete options.filterOptions;
+    }
+
+    if (options.position) {
+        if (options.position.x) {
+            this.logger.warn("The parameter 'position.x' is deprecated");
+
+            if (!options.position.lon) {
+                options.position.lon = options.position.x;
+            }
+            delete options.position.x;
+        }
+
+        if (options.position.y) {
+            this.logger.warn("The parameter 'position.y' is deprecated");
+
+            if (!options.position.lat) {
+                options.position.lat = options.position.y;
+            }
+            delete options.position.y;
+        }
+    }
+
+    if (options.returnFreeForm) {
+        this.logger.warn("The parameter 'returnFreeForm' is deprecated");
+        delete options.returnFreeForm;
+    }
+
+    if (options.srs) {
+        this.logger.warn("The parameter 'srs' is deprecated");
+        delete options.srs;
+    }
+
+    return options;
+};
 
 /**
  * Création de la requête (overwrite)

@@ -48,13 +48,12 @@ GeocodeResponseParser.prototype = {
      *      sous la forme d'un objet GeocodeResponse, ou un objet littéral exceptionReport si le service a renvoyé une exception.
      */
     parse : function (json) {
-
         let geocodeResponse = new GeocodeResponse();
 
         const obj = JSON.parse(json);
 
         if (obj.type === "FeatureCollection") {
-            for (let i = 0 ; i < obj.features.length ; ++i) {
+            for (let i = 0; i < obj.features.length; ++i) {
                 _parseFeature(obj.features[i], geocodeResponse);
             }
         } else if (obj.type === "Feature") {
@@ -76,12 +75,12 @@ GeocodeResponseParser.prototype = {
 
 /**
  * Méthode permettant de parser un feature
- * 
+ *
  * @private
- * 
+ *
  * @param {Object} feature
  * @param {Object} geocodeResponse
- * 
+ *
  * @memberof GeocodeResponseParser
  * @return {Object} objet GeocodedLocation
  */
@@ -89,9 +88,9 @@ function _parseFeature (feature, geocodeResponse) {
     let location = new GeocodedLocation();
     if (feature.geometry && feature.geometry.type === "Point") {
         location.position = {
-            lon: feature.geometry.coordinates[0],
-            lat: feature.geometry.coordinates[1]
-        }
+            lon : feature.geometry.coordinates[0],
+            lat : feature.geometry.coordinates[1]
+        };
     }
     if (feature.properties) {
         for (let prop in feature.properties) {
@@ -112,26 +111,24 @@ function _parseFeature (feature, geocodeResponse) {
         if (feature.properties._type === "address") {
             location.matchType = feature.properties.number !== undefined && feature.properties.number !== null ? "street number" : "street";
         }
-        
     }
-    
     geocodeResponse.locations.push(location);
 }
 
 /**
  * Méthode permettant de parser une erreur
- * 
+ *
  * @private
- * 
+ *
  * @param {Object} error
- * 
+ *
  * @memberof GeocodeResponseParser
  * @return {Object}
  */
 function _parseError (error) {
-    return { 
-        exceptionReport: error
-    }
+    return {
+        exceptionReport : error
+    };
 }
 
 export default GeocodeResponseParser;

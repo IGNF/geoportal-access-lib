@@ -11,7 +11,7 @@
  * *Common attributes : *
  *
  * - **trueGeometry** - the 'real life' geometry if different from 'Point' type.
- * 
+ *
  * *if type === "StreetAddress" :*
  *
  * - **number** - Street number.

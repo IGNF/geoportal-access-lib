@@ -30,7 +30,7 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *          "postalCode", "inseeCode", "type".
  *      Enfin, il permet de filtrer les parcelles cadastrales avec les propriétés :
  *          "codeDepartement", "codeCommune", "nomCommune", "codeCommuneAbs", "codeArrondissement", "section", "numero", "feuille".
- * 
+ *
  * @param {Object} [options.searchGeometry] - Emprise dans laquelle on souhaite effectuer la recherche.
  *      Les propriétés possibles de cet objet sont décrites ci-après.
  *      @param {String} options.searchGeometry.type   - Type de géometrie (Point|Circle|Linestring|Polygon)
@@ -45,7 +45,7 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *
  * @param {Number} [options.maximumResponses] - Nombre de réponses maximal que l'on souhaite recevoir.
  *      Pas de valeur par défaut. Si le serveur consulté est celui du Géoportail, la valeur par défaut sera donc celle du service : 20s.
- * 
+ *
  * @param {Boolean} [options.returnTrueGeometry] - Booléen indiquant si l'on souhaite récupérer la géométrie vraie des objects géolocalisés.
  *      false par défaut.
  *
@@ -74,7 +74,7 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *
  * @private
  */
-function ReverseGeocode (options) {
+function ReverseGeocode (options_) {
     if (!(this instanceof ReverseGeocode)) {
         throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "ReverseGeocode"));
     }
@@ -85,14 +85,15 @@ function ReverseGeocode (options) {
      */
     this.CLASSNAME = "ReverseGeocode";
 
-    options.serverUrl = options.serverUrl || "https://geocodage.ign.fr/look4";
-
-    // appel du constructeur par heritage
-    CommonService.apply(this, arguments);
-
     this.logger = Logger.getLogger("Gp.Services.ReverseGeocode");
     this.logger.trace("[Constructeur ReverseGeocode (options)]");
 
+    let options = this.patchOptionConvertor(options_);
+    options.serverUrl = options.serverUrl || "https://geocodage.ign.fr/look4";
+    
+    // appel du constructeur par heritage
+    CommonService.apply(this, [options]);
+    
     if (!options.searchGeometry) {
         throw new Error(_.getMessage("PARAM_MISSING", "searchGeometry"));
     }
@@ -106,15 +107,17 @@ function ReverseGeocode (options) {
     }
 
     // on teste pour chaque filtre, les conditions suivantes : null ou vide !
-    var filter = Object.keys(options.filters);
-    for (var i = 0; i < filter.length; i++) {
-        var key = filter[i];
-        // on supprime les filtres vides
-        if (!options.filters[key] || Object.keys(options.filters[key]).length === 0) {
-            delete this.options.filters[key];
+    if (options.filters) {
+        var filter = Object.keys(options.filters);
+        for (var i = 0; i < filter.length; i++) {
+            var key = filter[i];
+            // on supprime les filtres vides
+            if (!options.filters[key] || Object.keys(options.filters[key]).length === 0) {
+                delete this.options.filters[key];
+            }
         }
     }
-
+    s
     this.options.position = options.position;
     this.options.index = options.index || "StreetAddress";
     this.options.maximumResponses = options.maximumResponses || 20;
@@ -132,6 +135,84 @@ ReverseGeocode.prototype = Object.create(CommonService.prototype, {
  * Constructeur (alias)
  */
 ReverseGeocode.prototype.constructor = ReverseGeocode;
+
+/**
+ * Patch pour la convertion des options vers le nouveau formalisme.
+ *
+ * @param {Object} options_ - options du service
+ * @return {Object} - options
+ */
+ReverseGeocode.prototype.patchOptionConvertor = function (options_) {
+    const options = options_;
+
+    if (options.filterOptions) {
+        this.logger.warn("The parameter 'filterOptions' is deprecated");
+
+        if (options.filterOptions.type) {
+            this.logger.warn("The parameter 'filterOptions.type' is deprecated");
+            if (!options.index) {
+                if (Array.isArray(options.filterOptions.type) && options.filterOptions.type.length > 0) {
+                    options.index = options.filterOptions.type[0];
+                } else {
+                    options.index = options.filterOptions.type;
+                }
+            }
+        }
+
+        if (options.filterOptions.bbox) {
+            this.logger.warn("The parameter 'filterOptions.bbox' is deprecated");
+            if (!options.searchGeometry) {
+                // convertir la geometrie
+                options.searchGeometry = this.bbox2Json(options.filterOptions.bbox);
+            }
+        }
+
+        if (options.filterOptions.circle) {
+            this.logger.warn("The parameter 'filterOptions.circle' is deprecated");
+            if (!options.searchGeometry) {
+                // convertir la geometrie
+                options.searchGeometry = this.circle2Json(options.filterOptions.circle);
+            }
+        }
+
+        if (options.filterOptions.polygon) {
+            this.logger.warn("The parameter 'filterOptions.polygon' is deprecated");
+            if (!options.searchGeometry) {
+                // convertir la geometrie
+                options.searchGeometry = this.polygon2Json(options.filterOptions.polygon);
+            }
+        }
+
+        delete options.filterOptions;
+    }
+
+    if (options.position) {
+        if (options.position.x) {
+            this.logger.warn("The parameter 'position.x' is deprecated");
+
+            if (!options.position.lon) {
+                options.position.lon = options.position.x;
+            }
+            delete options.position.x;
+        }
+
+        if (options.position.y) {
+            this.logger.warn("The parameter 'position.y' is deprecated");
+
+            if (!options.position.lat) {
+                options.position.lat = options.position.y;
+            }
+            delete options.position.y;
+        }
+    }
+
+    if (options.srs) {
+        this.logger.warn("The parameter 'srs' is deprecated");
+        delete options.srs;
+    }
+
+    return options;
+};
 
 /**
  * (overwrite)
@@ -182,6 +263,58 @@ ReverseGeocode.prototype.analyzeResponse = function (error, success) {
     } else {
         error.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
     }
+};
+
+/**
+ * Patch pour la convertion des options vers le nouveau formalisme.
+ *
+ * @param {Array} bbox - bbox
+ * @return {Object} - geometrie au format json
+ */
+ReverseGeocode.prototype.bbox2Json = function (bbox) {
+    return {
+        type : "Polygon",
+        coordinates : [[
+            [bbox.left, bbox.top],
+            [bbox.right, bbox.top],
+            [bbox.right, bbox.bottom],
+            [bbox.left, bbox.bottom],
+            [bbox.left, bbox.top]
+        ]]
+    };
+};
+
+/**
+ * Patch pour la convertion des options vers le nouveau formalisme.
+ *
+ * @param {Object} circle - circle
+ * @return {Object} - geometrie au format json
+ */
+ReverseGeocode.prototype.circle2Json = function (circle) {
+    return {
+        type : "Circle",
+        radius : circle.radius,
+        coordinates : [[circle.x, circle.y]]
+    };
+};
+
+/**
+ * Patch pour la convertion des options vers le nouveau formalisme.
+ *
+ * @param {Array} polygon - polygon
+ * @return {Object} - geometrie au format json
+ */
+ReverseGeocode.prototype.polygon2Json = function (polygon) {
+    let jsonGeom = {
+        type : "Polygon",
+        coordinates : [[]]
+    };
+
+    for (let coords in polygon) {
+        jsonGeom.coordinates[0].push([coords.x, coords.y]);
+    }
+
+    return jsonGeom;
 };
 
 /**
