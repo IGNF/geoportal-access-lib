@@ -88,12 +88,12 @@ function ReverseGeocode (options_) {
     this.logger = Logger.getLogger("Gp.Services.ReverseGeocode");
     this.logger.trace("[Constructeur ReverseGeocode (options)]");
 
-    let options = this.patchOptionConvertor(options_);
+    var options = this.patchOptionConvertor(options_);
     options.serverUrl = options.serverUrl || "https://geocodage.ign.fr/look4";
-    
+
     // appel du constructeur par heritage
     CommonService.apply(this, [options]);
-    
+
     if (!options.searchGeometry) {
         throw new Error(_.getMessage("PARAM_MISSING", "searchGeometry"));
     }
@@ -117,7 +117,7 @@ function ReverseGeocode (options_) {
             }
         }
     }
-    s
+
     this.options.position = options.position;
     this.options.index = options.index || "StreetAddress";
     this.options.maximumResponses = options.maximumResponses || 20;
@@ -305,12 +305,12 @@ ReverseGeocode.prototype.circle2Json = function (circle) {
  * @return {Object} - geometrie au format json
  */
 ReverseGeocode.prototype.polygon2Json = function (polygon) {
-    let jsonGeom = {
+    var jsonGeom = {
         type : "Polygon",
         coordinates : [[]]
     };
 
-    for (let coords in polygon) {
+    for (var coords in polygon) {
         jsonGeom.coordinates[0].push([coords.x, coords.y]);
     }
 

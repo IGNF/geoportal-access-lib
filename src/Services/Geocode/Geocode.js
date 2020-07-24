@@ -81,12 +81,12 @@ function Geocode (options_) {
     this.logger = Logger.getLogger("Gp.Services.Geocode");
     this.logger.trace("[Constructeur Geocode (options)]");
 
-    let options = this.patchOptionConvertor(options_);
+    var options = this.patchOptionConvertor(options_);
     options.serverUrl = options.serverUrl || "https://geocodage.ign.fr/look4";
 
     // appel du constructeur par heritage
     CommonService.apply(this, [options]);
-    
+
     if (!options.query) {
         throw new Error(_.getMessage("PARAM_MISSING", "query"));
     }

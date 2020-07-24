@@ -48,12 +48,12 @@ GeocodeResponseParser.prototype = {
      *      sous la forme d'un objet GeocodeResponse, ou un objet littéral exceptionReport si le service a renvoyé une exception.
      */
     parse : function (json) {
-        let geocodeResponse = new GeocodeResponse();
+        var geocodeResponse = new GeocodeResponse();
 
         const obj = JSON.parse(json);
 
         if (obj.type === "FeatureCollection") {
-            for (let i = 0; i < obj.features.length; ++i) {
+            for (var i = 0; i < obj.features.length; ++i) {
                 _parseFeature(obj.features[i], geocodeResponse);
             }
         } else if (obj.type === "Feature") {
@@ -85,7 +85,7 @@ GeocodeResponseParser.prototype = {
  * @return {Object} objet GeocodedLocation
  */
 function _parseFeature (feature, geocodeResponse) {
-    let location = new GeocodedLocation();
+    var location = new GeocodedLocation();
     if (feature.geometry && feature.geometry.type === "Point") {
         location.position = {
             lon : feature.geometry.coordinates[0],
@@ -93,7 +93,7 @@ function _parseFeature (feature, geocodeResponse) {
         };
     }
     if (feature.properties) {
-        for (let prop in feature.properties) {
+        for (var prop in feature.properties) {
             if (prop === "_score") {
                 location.accuracy = feature.properties[prop];
             } else if (prop === "_type") {

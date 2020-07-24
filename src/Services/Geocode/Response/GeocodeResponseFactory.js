@@ -11,7 +11,7 @@ import ErrorService from "../../../Exceptions/ErrorService";
 import MRes from "../../../Utils/MessagesResources";
 import GeocodeResponseParser from "../Formats/GeocodeResponseParser";
 
-var DirectGeocodeReponseFactory = {
+var GeocodeReponseFactory = {
 
     /**
      * interface unique
@@ -83,4 +83,4 @@ var DirectGeocodeReponseFactory = {
     }
 };
 
-export default DirectGeocodeReponseFactory;
+export default GeocodeReponseFactory;

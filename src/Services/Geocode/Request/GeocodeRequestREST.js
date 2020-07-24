@@ -59,21 +59,21 @@ GeocodeRequestREST.prototype = {
      * @returns {String} request
      */
     processRequestString : function () {
-        let request = "";
+        var request = "";
 
         // Mapping des options avec le service de l'API REST
         const oParams = new GeocodeParamREST(this.settings);
 
         const params = oParams.getParams();
-        for (let i = 0; i < params.length; i++) {
-            let o = params[i];
+        for (var i = 0; i < params.length; i++) {
+            var o = params[i];
             if (request) {
                 request += "&";
             }
             request += o.k + "=" + o.v;
         }
 
-        let index = oParams.getIndex();
+        var index = oParams.getIndex();
 
         if (!this.settings.geocodeMethod || (this.settings.geocodeMethod !== "search" && this.settings.geocodeMethod !== "reverse")) {
             throw new Error("Error geocodeMethod not valid");

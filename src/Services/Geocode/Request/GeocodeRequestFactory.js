@@ -43,7 +43,7 @@ var GeocodeRequestFactory = {
         if (!myReq.processRequestString()) {
             throw new Error("Error process request (rest) !");
         }
-        let request = myReq.requestString;
+        var request = myReq.requestString;
 
         logger.trace(request);
 

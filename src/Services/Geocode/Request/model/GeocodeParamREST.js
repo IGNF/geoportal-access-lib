@@ -81,9 +81,9 @@ GeocodeParamREST.prototype = {
      * @returns {String} les filtres
      */
     getFilters : function () {
-        let filters = {};
+        var filters = {};
         for (var prop in this.filters) {
-            if (this.filters.hasOwnProperty(prop) && prop !== "type") {
+            if (this.filters.hasOwnProperty(prop)) {
                 filters["filters[" + prop + "]"] = this.filters[prop];
             }
         }
