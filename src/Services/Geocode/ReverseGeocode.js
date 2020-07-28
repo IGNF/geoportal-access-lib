@@ -143,7 +143,7 @@ ReverseGeocode.prototype.constructor = ReverseGeocode;
  * @return {Object} - options
  */
 ReverseGeocode.prototype.patchOptionConvertor = function (options_) {
-    const options = options_;
+    var options = options_;
 
     if (options.filterOptions) {
         this.logger.warn("The parameter 'filterOptions' is deprecated");
@@ -157,6 +157,7 @@ ReverseGeocode.prototype.patchOptionConvertor = function (options_) {
                     options.index = options.filterOptions.type;
                 }
             }
+            delete options.filterOptions.type;
         }
 
         if (options.filterOptions.bbox) {
@@ -165,6 +166,7 @@ ReverseGeocode.prototype.patchOptionConvertor = function (options_) {
                 // convertir la geometrie
                 options.searchGeometry = this.bbox2Json(options.filterOptions.bbox);
             }
+            delete options.filterOptions.bbox;
         }
 
         if (options.filterOptions.circle) {
@@ -173,6 +175,7 @@ ReverseGeocode.prototype.patchOptionConvertor = function (options_) {
                 // convertir la geometrie
                 options.searchGeometry = this.circle2Json(options.filterOptions.circle);
             }
+            delete options.filterOptions.circle;
         }
 
         if (options.filterOptions.polygon) {
@@ -181,6 +184,11 @@ ReverseGeocode.prototype.patchOptionConvertor = function (options_) {
                 // convertir la geometrie
                 options.searchGeometry = this.polygon2Json(options.filterOptions.polygon);
             }
+            delete options.filterOptions.polygon;
+        }
+
+        if (!options.filters && Object.keys(options.filterOptions).length > 0) {
+            options.filters = options.filterOptions;
         }
 
         delete options.filterOptions;
@@ -294,7 +302,7 @@ ReverseGeocode.prototype.circle2Json = function (circle) {
     return {
         type : "Circle",
         radius : circle.radius,
-        coordinates : [[circle.x, circle.y]]
+        coordinates : [circle.x, circle.y]
     };
 };
 
@@ -310,8 +318,8 @@ ReverseGeocode.prototype.polygon2Json = function (polygon) {
         coordinates : [[]]
     };
 
-    for (var coords in polygon) {
-        jsonGeom.coordinates[0].push([coords.x, coords.y]);
+    for (var i = 0; i < polygon.length; ++i) {
+        jsonGeom.coordinates[0].push([polygon[i].x, polygon[i].y]);
     }
 
     return jsonGeom;
