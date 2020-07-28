@@ -10,13 +10,13 @@ RUN apt install -y git inotify-tools
 WORKDIR /home/docker/
 RUN git clone https://github.com/IGNF/geoportal-access-lib.git
 WORKDIR /home/docker/geoportal-access-lib
-RUN git checkout feature-docker && npm install && npm run build 
+RUN git checkout develop && npm install
 
 # Copie des scripts 
-COPY ./scripts/* /home/docker/
+COPY ./docker/scripts/* /home/docker/
 
 # Volume pour partager les samples 
-VOLUME ["/home/docker/html"]
+VOLUME ["/home/docker/html/geoportal-access-lib"]
 
 WORKDIR /home/docker/geoportal-access-lib
 
