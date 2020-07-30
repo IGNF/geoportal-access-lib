@@ -87,7 +87,7 @@ function Geocode (options_) {
     // appel du constructeur par heritage
     CommonService.apply(this, [options]);
 
-    if (!options.query) {
+    if (!options.hasOwnProperty(query)) {
         throw new Error(_.getMessage("PARAM_MISSING", "query"));
     }
 
@@ -111,7 +111,11 @@ function Geocode (options_) {
         for (var i = 0; i < filter.length; i++) {
             var key = filter[i];
             // on supprime les filtres vides
-            if (!options.filters[key]) {
+            if (typeof options.filters[key] === "undefined" || 
+                (typeof options.filters[key] === "object" && Object.keys(options.filters[key]).length === 0) ||
+                (typeof options.filters[key] === "string" && options.filters[key].length === 0) ||
+                (Array.isArray(options.filters[key]) && options.filters[key].length === 0)
+                ) {
                 delete this.options.filters[key];
             }
         }

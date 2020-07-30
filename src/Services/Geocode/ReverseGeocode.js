@@ -106,13 +106,16 @@ function ReverseGeocode (options_) {
         this.options.index = options.index = "StreetAddress";
     }
 
-    // on teste pour chaque filtre, les conditions suivantes : null ou vide !
     if (options.filters) {
         var filter = Object.keys(options.filters);
         for (var i = 0; i < filter.length; i++) {
             var key = filter[i];
             // on supprime les filtres vides
-            if (!options.filters[key] || Object.keys(options.filters[key]).length === 0) {
+            if (typeof options.filters[key] === "undefined" || 
+                (typeof options.filters[key] === "object" && Object.keys(options.filters[key]).length === 0) ||
+                (typeof options.filters[key] === "string" && options.filters[key].length === 0) ||
+                (Array.isArray(options.filters[key]) && options.filters[key].length === 0)
+                ) {
                 delete this.options.filters[key];
             }
         }
@@ -294,7 +297,7 @@ ReverseGeocode.prototype.circle2Json = function (circle) {
     return {
         type : "Circle",
         radius : circle.radius,
-        coordinates : [[circle.x, circle.y]]
+        coordinates : [circle.x, circle.y]
     };
 };
 
@@ -310,8 +313,8 @@ ReverseGeocode.prototype.polygon2Json = function (polygon) {
         coordinates : [[]]
     };
 
-    for (var coords in polygon) {
-        jsonGeom.coordinates[0].push([coords.x, coords.y]);
+    for (var i = 0; i < polygon.length; ++i) {
+        jsonGeom.coordinates[0].push([polygon[i].x, polygon[i].y]);
     }
 
     return jsonGeom;
