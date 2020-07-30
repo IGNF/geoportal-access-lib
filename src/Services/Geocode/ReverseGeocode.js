@@ -146,7 +146,7 @@ ReverseGeocode.prototype.constructor = ReverseGeocode;
  * @return {Object} - options
  */
 ReverseGeocode.prototype.patchOptionConvertor = function (options_) {
-    const options = options_;
+    var options = options_;
 
     if (options.filterOptions) {
         this.logger.warn("The parameter 'filterOptions' is deprecated");
@@ -160,6 +160,7 @@ ReverseGeocode.prototype.patchOptionConvertor = function (options_) {
                     options.index = options.filterOptions.type;
                 }
             }
+            delete options.filterOptions.type;
         }
 
         if (options.filterOptions.bbox) {
@@ -168,6 +169,7 @@ ReverseGeocode.prototype.patchOptionConvertor = function (options_) {
                 // convertir la geometrie
                 options.searchGeometry = this.bbox2Json(options.filterOptions.bbox);
             }
+            delete options.filterOptions.bbox;
         }
 
         if (options.filterOptions.circle) {
@@ -176,6 +178,7 @@ ReverseGeocode.prototype.patchOptionConvertor = function (options_) {
                 // convertir la geometrie
                 options.searchGeometry = this.circle2Json(options.filterOptions.circle);
             }
+            delete options.filterOptions.circle;
         }
 
         if (options.filterOptions.polygon) {
@@ -184,6 +187,11 @@ ReverseGeocode.prototype.patchOptionConvertor = function (options_) {
                 // convertir la geometrie
                 options.searchGeometry = this.polygon2Json(options.filterOptions.polygon);
             }
+            delete options.filterOptions.polygon;
+        }
+
+        if (!options.filters && Object.keys(options.filterOptions).length > 0) {
+            options.filters = options.filterOptions;
         }
 
         delete options.filterOptions;

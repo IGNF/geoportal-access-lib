@@ -104,6 +104,8 @@ GeocodeParamREST.prototype = {
             return "parcel";
         } else if (this.index === "PositionOfInterest") {
             return "poi";
+        } else if (this.index === "location") {
+            return "location";
         }
         return this.index;
     },
