@@ -87,15 +87,8 @@ function Geocode (options_) {
     // appel du constructeur par heritage
     CommonService.apply(this, [options]);
 
-    if (!options.hasOwnProperty(query)) {
+    if (!options.hasOwnProperty("query")) {
         throw new Error(_.getMessage("PARAM_MISSING", "query"));
-    }
-
-    // FIXME ECMAScript 5 support
-    if (typeof options.query === "object" && Object.keys(options.query).length === 0) {
-        throw new Error(_.getMessage("PARAM_EMPTY", "query"));
-    } else if (typeof options.query === "string" && options.query.length === 0) {
-        throw new Error(_.getMessage("PARAM_EMPTY", "query"));
     }
 
     // ajout des options spécifiques au service
@@ -111,11 +104,11 @@ function Geocode (options_) {
         for (var i = 0; i < filter.length; i++) {
             var key = filter[i];
             // on supprime les filtres vides
-            if (typeof options.filters[key] === "undefined" || 
+            if (typeof options.filters[key] === "undefined" ||
                 (typeof options.filters[key] === "object" && Object.keys(options.filters[key]).length === 0) ||
                 (typeof options.filters[key] === "string" && options.filters[key].length === 0) ||
                 (Array.isArray(options.filters[key]) && options.filters[key].length === 0)
-                ) {
+            ) {
                 delete this.options.filters[key];
             }
         }
@@ -147,7 +140,7 @@ Geocode.prototype.constructor = Geocode;
 Geocode.prototype.patchOptionConvertor = function (options_) {
     const options = options_;
 
-    if (options.location) {
+    if (options.hasOwnProperty("location")) {
         this.logger.warn("The parameter 'location' is deprecated");
 
         if (!options.query) {

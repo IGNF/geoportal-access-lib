@@ -111,11 +111,11 @@ function ReverseGeocode (options_) {
         for (var i = 0; i < filter.length; i++) {
             var key = filter[i];
             // on supprime les filtres vides
-            if (typeof options.filters[key] === "undefined" || 
+            if (typeof options.filters[key] === "undefined" ||
                 (typeof options.filters[key] === "object" && Object.keys(options.filters[key]).length === 0) ||
                 (typeof options.filters[key] === "string" && options.filters[key].length === 0) ||
                 (Array.isArray(options.filters[key]) && options.filters[key].length === 0)
-                ) {
+            ) {
                 delete this.options.filters[key];
             }
         }
