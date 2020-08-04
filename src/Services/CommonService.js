@@ -367,7 +367,7 @@ CommonService.prototype = {
 
         // rajout de l'option gpbibaccess
         // INFO : acces au numero de version de package.conf aprés compilation !
-        if (this.CLASSNAME !== "Geocode" && this.CLASSNAME !== "ReverseGeocode") {
+        if (this.CLASSNAME !== "Geocode" && this.CLASSNAME !== "ReverseGeocode" && this.CLASSNAME !== "AutoComplete") {
             this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, {
                 "gp-access-lib" : Pkg.version
             }, false);

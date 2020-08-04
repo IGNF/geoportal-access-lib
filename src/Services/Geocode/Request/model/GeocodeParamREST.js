@@ -31,7 +31,7 @@ function GeocodeParamREST (options) {
     this.geocodeMethod = this.options.geocodeMethod;
 
     // mapping des options avec l'API REST
-    this.query = (typeof this.options !== "undefined")? this.options.query : null;
+    this.query = (typeof this.options !== "undefined") ? this.options.query : null;
 
     this.searchGeometry = this.options.searchGeometry || null;
 
