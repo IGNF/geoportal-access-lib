@@ -22,7 +22,7 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  * @param {String|Object} options.query - Nom de l'adresse, du toponyme, de l'unité administrative ou de la parcelle cadastrale recherchée.
  *
  * @param {Object} [options.filters] - Les propriétés possibles de cet objet sont décrites ci-après.
- * @param {String} [options.filters.[proprietes du filtre]] - Critère supplémentaire pour filtrer la recherche sous la forme
+ * @param {String} [options.filters.[prop]] - Critère supplémentaire pour filtrer la recherche sous la forme
  *      d'un couple clé/valeur à définir selon les possibilités du serveur ajouté à la requête.
  *      Le service de géocodage du Géoportail permet de filtrer les adresses postales avec les propriétés :
  *          "postalCode", "inseeCode", "city".
@@ -31,9 +31,10 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *      Enfin, il permet de filtrer les parcelles cadastrales avec les propriétés :
  *          "codeDepartement", "codeCommune", "nomCommune", "codeCommuneAbs", "codeArrondissement", "section", "numero", "feuille".
  *
- * @param {Array.<String>} [options.index = "StreetAddress"] - Type de l'objet recherché.
+ * @param {String} [options.index = "StreetAddress"] - Type de l'objet recherché.
  *      Le service de géocodage du Géoportail permet de rechercher des 'PositionOfInterest' pour des toponymes, des 'StreetAddress'
  *      pour des adresses postales ou des 'CadastralParcel' pour des parcelles cadastrales.
+ *      L'index 'location' regroupe les indexes 'StreetAddress' et 'PositionOfInterest'.
  *      D'autres types pourront être rajoutés selon l'évolution du service.
  *      Par défaut, index = 'StreetAddress'.
  *
@@ -45,7 +46,7 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *      Pas de valeur par défaut.
  *      Si le serveur consulté est celui du Géoportail, la valeur par défaut sera donc celle du service : 20.
  *
- * @param {Boolean} [options.returnTrueGeometry] - Booléen indiquant si l'on souhaite récupérer la géométrie vraie des objects géolocalisés.
+ * @param {Boolean} [options.returnTrueGeometry = false] - Booléen indiquant si l'on souhaite récupérer la géométrie vraie des objects géolocalisés.
  *      false par défaut.
  *
  *
@@ -53,9 +54,7 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *   var options = {
  *      apiKey : null,
  *      serverUrl : 'http://localhost/service/',
- *      protocol : 'JSONP', // JSONP|XHR
  *      proxyURL : null,
- *      httpMethod : 'GET', // GET|POST
  *      timeOut : 10000, // ms
  *      rawResponse : false, // true|false
  *      scope : null, // this
@@ -63,6 +62,8 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *      onFailure : function (error) {},
  *      // spécifique au service
  *      position : {lon:, lat:},
+ *      index : 'StreetAddress',
+ *      query : '10 rue du pont Machin-ville'
  *      (...)
  *   };
  * @private
@@ -243,22 +244,17 @@ Geocode.prototype.buildRequest = function (error, success) {
  */
 Geocode.prototype.analyzeResponse = function (error, success) {
     /* INFO :
-         Etape 1 : Création de la requête
-            -> Appel du format OpenLS pour créer une requête à partir des paramètres (par exemple)
-              (soit directement une URL si GET, soit une requête XML si POST)
-            /!\ tester si apiKey && serverUrl => on ne garde que serverUrl
+         Etape 1 : Création de la requête (URL)
             -> stockage de la requête dans this.request
-         Etape 2 : Envoi de la requête selon le bon protocole
-            -> appel du protocol JSONP ou XHR, et envoi (par ex send ()) (this.protocol)
-            -> récupération de la réponse xml dans la fonction onSuccess () (this.response)
+         Etape 2 : Envoi de la requête
+            -> appel du protocol XHR, et envoi (par ex send ())
+            -> récupération de la réponse JSON dans la fonction onSuccess () (this.response)
             -> si code HTTP 200 et pas de message d'erreur : etape 3
             -> si code HTTP != 200 : lancement de la fonction de callback onFailure avec le message d'erreur
-         Etape 3 : Analyse de la réponse xml et construction du JSON (si rawResponse === false )
-            -> appel du parser pour récupérer le xmlDocument
-            -> appel du reader OpenLS pour lire les éléments et récupérer l'objet JSON
-               correspondant au type de géocodage (défini dans les specs)
+         Etape 3 : Analyse de la réponse JSON (si rawResponse === false )
+            -> appel du parser pour récupérer le document
          Etape 4 : Lancement de la fonction de callback onSuccess avec la réponse :
-            -> xmlResponse (si rawResponse === true)
+            -> JSON (si rawResponse === true)
             -> ou geocodedLocations
     */
 
