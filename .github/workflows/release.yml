@@ -1,0 +1,217 @@
+name: Create release ...
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use nodejs
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Build production
+        run: npm run build:prod
+
+      - name: Build development
+        run: npm run build:dev
+
+      - name: Build package # FIXME inutile ou commit ?
+        run: npm pack
+
+      - name: Create Zip # FIXME inutile ?
+        if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+        run: |
+          zip --junk-paths bundles dist/*
+
+      - name: Upload JSDoc artifacts
+        if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+        uses: actions/upload-artifact@v2
+        with:
+          name: jsdoc
+          path: jsdoc
+
+      - name: Upload Binary artifacts
+        if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+      - name: Upload Bundles artifacts # FIXME inutile ?
+        if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+        uses: actions/upload-artifact@v2
+        with:
+          name: bundles
+          path: bundles.zip
+
+  publish_gh-pages:
+    if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: IGNF/geoportal-access-lib
+          ref: gh-pages
+
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo v${GITHUB_REF##*/})
+
+      - name: Initialize
+        run: |
+          mkdir -p tmp/jsdoc
+          mkdir -p tmp/dist
+          mkdir ${{ steps.get_version.outputs.VERSION }}
+
+      - name: Download JSDoc artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: jsdoc
+          path: tmp/jsdoc
+
+      - name: Build jsdoc
+        run: |
+          cp -r tmp/jsdoc current
+          cp -r tmp/jsdoc ${{ steps.get_version.outputs.VERSION }}
+
+      - name: Download bundles artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: tmp/dist
+
+      - name: Build bundles
+        run: |
+          cp -r tmp/dist current
+          cp -r tmp/dist ${{ steps.get_version.outputs.VERSION }}
+
+      - name: Link versions
+        run: |
+          rm latest
+          ln -s ${{ steps.get_version.outputs.VERSION }} latest
+
+      - name: Clean and publish
+        run: |
+          rm -rf tmp/
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add -A
+          git commit -m "update jsdoc and bundles to release ${{ steps.get_version.outputs.VERSION }}"
+          git push
+
+  create_release:
+    if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1.1.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body_path: DRAFT_CHANGELOG.md
+          draft: false
+          prerelease: false
+
+      - name: Download bundles artifacts # FIXME inutile ?
+        uses: actions/download-artifact@v2
+        with:
+          name: bundles
+
+      - name: Download bundles artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+
+      - name: Upload Release Asset (bundles) # FIXME inutile ?
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./bundles.zip
+          asset_name: bundles.zip
+          asset_content_type: application/zip
+
+      - name: Upload Release Asset (1)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./GpServices.js
+          asset_name: GpServices.js
+          asset_content_type: application/javascript
+
+      - name: Upload Release Asset (2)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./GpServices-src.js
+          asset_name: GpServices-src.js
+          asset_content_type: application/javascript
+
+      - name: Upload Release Asset (3)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./GpServices-map.js
+          asset_name: GpServices-map.js
+          asset_content_type: application/javascript
+
+  publish_package:
+    if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+    needs: create_release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Initialize
+        run: |
+          mkdir dist
+
+      - name: Download bundles artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+      - name: Use registry npm
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+          registry-url: 'https://registry.npmjs.org'
+          # scope: '@ignf-geoportal'
+
+      - name: Publish on npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
