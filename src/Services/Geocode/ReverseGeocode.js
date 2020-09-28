@@ -39,7 +39,8 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *
  * @param {Array.<String>} [options.index = "StreetAddress"] - Type de l'objet recherché.
  *      Le service de géocodage du Géoportail permet de rechercher des 'PositionOfInterest' pour des toponymes, des 'StreetAddress'
- *      pour des adresses postales ou des 'CadastralParcel' pour des parcelles cadastrales.
+ *      pour des adresses postales ou des 'CadastralParcel' pour des parcelles cadastrales. L'index 'location' permet une recherche
+ *      multi-indexes en regroupant les indexes 'PositionOfInterest' et 'StreetAddress'.
  *      D'autres types pourront être rajoutés selon l'évolution du service.
  *      Par défaut, index = 'StreetAddress'.
  *
