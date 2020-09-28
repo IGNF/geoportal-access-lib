@@ -37,10 +37,15 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *      @param {Array.<Float>|Array.Array.<Float>} options.searchGeometry.coordinates - Coordonnées des points constituant la géométrie.
  *      @param {Float} options.searchGeometry.radius    - Rayon. Paramètre applicable uniquement pour le type 'Circle'.
  *
- * @param {Array.<String>} [options.index = "StreetAddress"] - Type de l'objet recherché.
+ * @param {String} [options.index = "StreetAddress"] - Type de l'objet recherché.
  *      Le service de géocodage du Géoportail permet de rechercher des 'PositionOfInterest' pour des toponymes, des 'StreetAddress'
+<<<<<<< HEAD
  *      pour des adresses postales ou des 'CadastralParcel' pour des parcelles cadastrales. L'index 'location' permet une recherche
  *      multi-indexes en regroupant les indexes 'PositionOfInterest' et 'StreetAddress'.
+=======
+ *      pour des adresses postales ou des 'CadastralParcel' pour des parcelles cadastrales.
+ *      L'index 'location' regroupe les indexes 'StreetAddress' et 'PositionOfInterest'.
+>>>>>>> 7e7c74ead3f22e15fb999397e1722641861dbe6d
  *      D'autres types pourront être rajoutés selon l'évolution du service.
  *      Par défaut, index = 'StreetAddress'.
  *
@@ -54,9 +59,7 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *   var options = {
  *      apiKey : null,
  *      serverUrl : 'http://localhost/service/',
- *      protocol : 'JSONP', // JSONP|XHR
  *      proxyURL : null,
- *      httpMethod : 'GET', // GET|POST
  *      timeOut : 10000, // ms
  *      rawResponse : false, // true|false
  *      scope : null, // this
