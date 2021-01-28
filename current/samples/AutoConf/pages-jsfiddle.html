@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta charset="UTF-8"> 
+
+        <!-- Library -->
+        <script src="../../dist/GpServices.js"></script>
+        <!-- Function -->
+        <script>
+            /** Affichage de la reponse dans la balise (+ console) */
+            function print (response) {
+                var el = document.getElementById("result");
+                el.innerHTML = "<pre>" + JSON.stringify(response, null, 2) + "</pre>";
+                console.log(response);
+            };
+        </script>
+
+        <title>Bibliothèque d'accès : autoconfiguration</title>
+        <style>
+        #params {
+          width: 100%;
+          /* height: 50px; */
+          box-shadow: 0 0 10px #999;
+          font-family: monospace;
+          padding: 5px;
+        }
+
+        #go {
+          padding: 5px;
+          float: center;
+          width: 100%;
+          height: 30px;
+        }
+
+        #result {
+          padding: 5px;
+          width: 100%;
+          height: 350px;
+          box-shadow: 0 0 10px #999;
+          font-family: monospace;
+          overflow: scroll;
+        }
+
+        #rawResult {
+          padding: 5px;
+          width: 100%;
+          height: 300px;
+          box-shadow: 0 0 10px #999;
+          font-family: monospace;
+          overflow: scroll;
+        }
+        #info {
+            height : 20px;
+            width: 100%;
+            font-family: monospace;
+            font-size: 10px;
+        }
+        </style>
+
+    </head>
+    <body>
+        <h1>Utilisation du Service d'autoconfiguration</h1>
+        <h2>Utilisation de Gp.Services.getConfig() <a href="http://jsfiddle.net/ignfgeoportail/0hsanbv2/embedded/result,js,html,css/">(jsfiddle)</a>.</h2>
+        <div id="params">
+          <p>Clef Géoportail :
+            <input type="text" id="apiKey" value="jhyvi0fgmnuxvfv0zjzorvdn" />
+          </p>
+        </div>
+        <div id="go">
+          <input type="button" value="GetConfig" onclick="go()" />
+        </div>
+        <div id="result"></div>
+        <div id="rawResult"></div>
+        <div id="info"></div>
+
+        <script type="text/javascript">
+        function go() {
+          var apiKey = document.getElementById("apiKey").value;
+          var resultDiv = document.getElementById("result");
+          var rawResultDiv = document.getElementById("rawResult");
+          try {
+            Gp.Services.getConfig({
+              apiKey: apiKey,
+              onSuccess: function(result) {
+                rawResultDiv.innerHTML = "<pre>" + JSON.stringify(result, null, 2) + "</pre>";
+                // interpretation des resultats
+                var strResult = "";
+                var lconf = result.getLayersConf(apiKey);
+                // droits
+                strResult += "<b>Ressources disponibles (" + Object.keys(lconf).length + ")</b> : <br/>";
+                for (var lk in lconf) {
+                  var lstr = "";
+                  lstr += lconf[lk].title + ' (' + lconf[lk].name + ') - service : ' + lconf[lk].serviceParams.id;
+                  strResult += "* " + lstr + "<br/>";
+                }
+                // WMTS layer conf
+                strResult += "<br/><b>Paramètres de la couche WMTS ORTHOIMAGERY.ORTHOPHOTOS</b> :</br>";
+                var lortho = lconf["ORTHOIMAGERY.ORTHOPHOTOS$GEOPORTAIL:OGC:WMTS"];
+                if (lortho) {
+                  strResult += "* server URL : " + lortho.serviceParams.serverUrl[apiKey] + "<br/>";
+                  strResult += "* layerName : " + lortho.name + "</br>";
+                  strResult += "* projection : " + lortho.defaultProjection + "</br>";
+                  strResult += "* format : " + lortho.formats[0].name + "</br>";
+                  strResult += "* style : " + lortho.styles[0].name + "</br>";
+                  strResult += "* tms : " + lortho.wmtsOptions.tileMatrixSetLink + "</br>...";
+                }
+                // TMS..
+                strResult += "<br/><b>TileMatrixSets disponibles</b> :</br>";
+                var tmss = result.getTileMatrixSets();
+                for (tms in tmss) {
+                  strResult += "* " + tms + " (" + tmss[tms].projection + ")<br/>";
+                }
+
+                resultDiv.innerHTML = "<p>" + strResult + "</p>";
+
+              },
+              onFailure: function(error) {
+                rawResultDiv.innerHTML = "<p>" + error + "</p>";
+              }
+            });
+          } catch (e) {
+            rawResultDiv.innerHTML = "<p>" + e + "</p>";
+          }
+        }
+        // affichage version bibliothèque
+        var infoDiv= document.getElementById("info") ;
+        infoDiv.innerHTML= "<p>Biblitohèque d'acces "+Gp.servicesVersion+" ("+Gp.servicesDate+")</p>" ;
+        </script>
+    </body>
+</html>

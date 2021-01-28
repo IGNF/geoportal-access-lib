@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta charset="UTF-8"> 
+
+        <!-- Library -->
+        <script src="../../dist/GpServices.js"></script>
+        <!-- Function -->
+        <script>
+            /** Affichage de la reponse dans la balise (+ console) */
+            function print (response) {
+                var el = document.getElementById("result");
+                el.innerHTML = "<pre>" + JSON.stringify(response, null, 2) + "</pre>";
+                console.log(response);
+            };
+        </script>
+
+        <title>Bibliothèque d'accès : Alticodage avec paramètres</title>
+        <style>
+        #params {
+          width: 100%;
+          /* height: 100px; */
+          box-shadow: 0 0 10px #999;
+          font-family: monospace;
+          padding: 5px;
+        }
+
+        #go {
+          padding: 5px;
+          float: center;
+          width: 100%;
+          height: 30px;
+        }
+
+        #result {
+          padding: 5px;
+          width: 100%;
+          height: 200px;
+          box-shadow: 0 0 10px #999;
+          font-family: monospace;
+          overflow: scroll;
+        }
+        #info {
+          padding: 5px;
+          width: 100%;
+          height: 20px;
+          font-family: monospace;
+        }
+        </style>
+
+    </head>
+    <body>
+        <h1>Utilisation du Service de Calcul Altimétrique</h1>
+        <h2>Utilisation de Gp.Services.getAltitude() avec en jouant sur les paramètres de la fonction <a href="http://jsfiddle.net/ignfgeoportail/owxffaf3/embedded/result,js,html,css/">(jsfiddle)</a>.</h2>
+        <div id="params">
+          <p>
+            longitude 1 :
+            <input type="text" id="lon1" size="10" /> latitude 1 :
+            <input type="text" id="lat1" size="10" />
+          </p>
+          <p>
+            longitude 2 :
+            <input type="text" id="lon2" size="10" /> latitude 2 :
+            <input type="text" id="lat2" size="10" />
+          </p>
+          <p>
+            sampling (nombre de points intermédaires) :
+            <input type="text" id="sampling" size="5" />
+          </p>
+          <p>
+            <input type="checkbox" id="zonly" value="true" />zonly
+          </p>
+        </div>
+        <div id="go">
+          <input type="button" value="getAltitude" onclick="go()" />
+        </div>
+        <div id="result"></div>
+        <div id="info"></div>
+
+
+        <script type="text/javascript">
+        function go() {
+          var lon1 = document.getElementById("lon1").value;
+          var lat1 = document.getElementById("lat1").value;
+          var lon2 = document.getElementById("lon2").value;
+          var lat2 = document.getElementById("lat2").value;
+          var zonly= document.getElementById("zonly").checked;
+          var sampling = document.getElementById("sampling").value;
+          var resultDiv = document.getElementById("result");
+          var positions = [];
+          if (lon1 && lat1) positions.push({
+            lon: lon1,
+            lat: lat1
+          });
+          if (lon2 && lat2) positions.push({
+            lon: lon2,
+            lat: lat2
+          });
+          try {
+            Gp.Services.getAltitude({
+              positions: positions,
+              sampling: sampling,
+              apiKey: "jhyvi0fgmnuxvfv0zjzorvdn",
+              zonly:zonly,
+              onSuccess: function(result) {
+                resultDiv.innerHTML = "<p>" + JSON.stringify(result) + "</p>"
+              },
+              onFailure: function(error) {
+                resultDiv.innerHTML = "<p>" + error + "</p>"
+              }
+            });
+          } catch (e) {
+            resultDiv.innerHTML = "<p>" + e + "</p>"
+          }
+        }
+        var infoDiv = document.getElementById("info");
+        infoDiv.innerHTML = "<p> Bibliothèque d'accès version " + Gp.servicesVersion + " (" + Gp.servicesDate + ")</p>";
+        </script>
+    </body>
+</html>

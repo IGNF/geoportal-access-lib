@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta charset="UTF-8"> 
+
+        <!-- Library -->
+        <script src="../../dist/GpServices.js"></script>
+        <!-- Function -->
+        <script>
+            /** Affichage de la reponse dans la balise (+ console) */
+            function print (response) {
+                var el = document.getElementById("result");
+                el.innerHTML = "<pre>" + JSON.stringify(response, null, 2) + "</pre>";
+                console.log(response);
+            };
+        </script>
+
+        <title>Bibliothèque d'accès : Calcul d'itinéraire avec paramètres</title>
+        <style>
+        #params {
+          width: 100%;
+          /* height: 200px; */
+          box-shadow: 0 0 10px #999;
+          font-family: monospace;
+          padding: 5px;
+        }
+
+        #go {
+          padding: 5px;
+          float: center;
+          width: 100%;
+          height: 30px;
+        }
+
+        #result {
+          padding: 5px;
+          width: 100%;
+          height: 200px;
+          box-shadow: 0 0 10px #999;
+          font-family: monospace;
+          overflow: scroll;
+        }
+
+        #info {
+          padding: 5px;
+          width: 100%;
+          height: 20px;
+          font-family: monospace;
+        }
+        </style>
+
+    </head>
+    <body>
+        <h1>Utilisation du Service de calcul d'itineraires</h1>
+        <h2>Utilisation de Gp.Services.route() avec modulation des paramètres <a href="http://jsfiddle.net/ignfgeoportail/g51jh882/embedded/result,js,html,css/">(jsfiddle)</a>.</h2>
+        <div id="params">
+          <p>
+            lon départ:
+            <input type="text" id="lon1" size="10" /> lat départ :
+            <input type="text" id="lat1" size="10" />
+          </p>
+          <p>
+            lon inter :
+            <input type="text" id="lon2" size="10" /> lat inter :
+            <input type="text" id="lat2" size="10" />
+          </p>
+          <p>
+            lon arrivée:
+            <input type="text" id="lon3" size="10" /> lat arrivée :
+            <input type="text" id="lat3" size="10" />
+          </p>
+          <p> Eviter :
+            <input type="checkbox" value="true" id="toll"> péages
+            <input type="checkbox" value="true" id="bridge"> ponts
+            <input type="checkbox" value="true" id="tunnel"> tunnels
+          </p>
+          <p>Graphe :
+            <select id="graph">
+              <option value="Pieton">Piéton</option>
+              <option value="Voiture">Voiture</option>
+            </select>
+            Methode de calcul :
+            <select id="method">
+              <option value="fastest">le plus rapide</option>
+              <option value="shortest">le plus court</option>
+            </select>
+          </p>
+        </div>
+        <div id="go">
+          <input type="button" value="Itinéraire" onclick="go()" />
+        </div>
+        <div id="result"></div>
+        <div id="info"></div>
+
+        <script type="text/javascript">
+            function go() {
+              var lon1 = document.getElementById("lon1").value;
+              var lat1 = document.getElementById("lat1").value;
+              var lon2 = document.getElementById("lon2").value;
+              var lat2 = document.getElementById("lat2").value;
+              var lon3 = document.getElementById("lon3").value;
+              var lat3 = document.getElementById("lat3").value;
+              var avoidFeatures = [];
+              var noToll = document.getElementById("toll").checked;
+              if (noToll) avoidFeatures.push("toll");
+              var noBridge = document.getElementById("bridge").checked;
+              if (noBridge) avoidFeatures.push("bridge");
+              var noTunnel = document.getElementById("tunnel").checked;
+              if (noTunnel) avoidFeatures.push("tunnel");
+              var graphIdx = document.getElementById("graph").selectedIndex;
+              var graph = document.getElementById("graph").options[graphIdx].value;
+              var methodIdx = document.getElementById("method").selectedIndex;
+              var method = document.getElementById("method").options[methodIdx].value;
+              var resultDiv = document.getElementById("result");
+              try {
+                Gp.Services.route({
+                  startPoint: {
+                    x: lon1,
+                    y: lat1
+                  },
+                  endPoint: {
+                    x: lon3,
+                    y: lat3
+                  },
+                  viaPoints: [{
+                    x: lon2,
+                    y: lat2
+                  }],
+                  graph: graph,
+                  avoidFeature: avoidFeatures,
+                  routePreference: method,
+                  apiKey: "jhyvi0fgmnuxvfv0zjzorvdn",
+                  onSuccess: function(result) {
+                    resultDiv.innerHTML = "<p>" + JSON.stringify(result) + "</p>" ;
+                  },
+                  onFailure: function(error) {
+                    resultDiv.innerHTML = "<p>" + error + "</p>" ;
+                  }
+                });
+              } catch (e) {
+                resultDiv.innerHTML = "<p>" + e + "</p>"
+              }
+            } ;
+
+
+            var infoDiv = document.getElementById("info");
+            infoDiv.innerHTML = "<p> Bibliothèque d'accès version " + Gp.servicesVersion + " (" + Gp.servicesDate + ")</p>";
+        </script>
+    </body>
+</html>

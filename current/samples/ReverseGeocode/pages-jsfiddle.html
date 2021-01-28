@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta charset="UTF-8"> 
+
+        <!-- Library -->
+        <script src="../../dist/GpServices.js"></script>
+        <!-- Function -->
+        <script>
+            /** Affichage de la reponse dans la balise (+ console) */
+            function print (response) {
+                var el = document.getElementById("result");
+                el.innerHTML = "<pre>" + JSON.stringify(response, null, 2) + "</pre>";
+                console.log(response);
+            };
+        </script>
+
+        <title>Bibliothèque d'accès : Géocodage inverse</title>
+        <style>
+        #params {
+          width: 100%;
+          /* height: 140px; */
+          box-shadow: 0 0 10px #999;
+          font-family: monospace;
+          padding: 5px;
+        }
+
+        #go {
+          padding: 5px;
+          float: center;
+          width: 100%;
+          height: 30px;
+        }
+
+        #result {
+          padding: 5px;
+          width: 100%;
+          height: 200px;
+          box-shadow: 0 0 10px #999;
+          font-family: monospace;
+          overflow: scroll;
+        }
+        #info {
+          padding: 5px;
+          width: 100%;
+          height: 20px;
+          font-family: monospace;
+        }
+        </style>
+
+    </head>
+    <body>
+        <h1>Utilisation du Service de geocodage inverse</h1>
+        <h2>Utilisation de Gp.Services.reverseGeocode() avec critères <a href="http://jsfiddle.net/ignfgeoportail/4t0wfey5/embedded/result,js,html,css/">(jsfiddle)</a>.</h2>
+        <div id="params">
+          <p>
+            longitude :
+            <input type="text" id="lon" size="10" /> latitude :
+            <input type="text" id="lat" size="10" />
+          </p>
+          <p>Type de Géocodage :
+            <select id="type">
+              <option value="PositionOfInterest">Toponymes</option>
+              <option value="StreetAddress">Adresses</option>
+              <option value="CadastralParcel">Parcelles Cadastrales</option>
+            </select>
+          </p>
+          <p>
+            rayon de recherche :
+            <input type="text" id="rayon" size="5" />
+          </p>
+        </div>
+        <div id="go">
+          <input type="button" value="Géocodage Inverse" onclick="go()" />
+        </div>
+        <div id="result"></div>
+        <div id="info"></div>
+
+        <script type="text/javascript">
+        function go() {
+          var lon = document.getElementById("lon").value;
+          var lat = document.getElementById("lat").value;
+          var typeIdx = document.getElementById("type").selectedIndex;
+          var fo = {
+            type: [document.getElementById("type").options[typeIdx].value]
+          } ;
+          var rayon= document.getElementById("rayon").value;
+          if (rayon) {
+              fo.circle= {
+                  x: lat,
+                  y: lon,
+                  radius: rayon
+              };
+          }
+          var resultDiv = document.getElementById("result");
+          try {
+            Gp.Services.reverseGeocode({
+              position: {
+                  x: lat,
+                  y: lon
+              },
+              filterOptions: fo,
+        	  srs: 'EPSG:4326',
+              apiKey: "jhyvi0fgmnuxvfv0zjzorvdn",
+              onSuccess: function(result) {
+                resultDiv.innerHTML = "<p>" + JSON.stringify(result) + "</p>"
+              },
+              onFailure: function(error) {
+                resultDiv.innerHTML = "<p>" + error + "</p>"
+              }
+            });
+          } catch (e) {
+            resultDiv.innerHTML = "<p>" + e + "</p>"
+          }
+        }
+        var infoDiv = document.getElementById("info");
+        infoDiv.innerHTML = "<p> Bibliothèque d'accès version " + Gp.servicesVersion + " (" + Gp.servicesDate + ")</p>";
+        </script>
+    </body>
+</html>

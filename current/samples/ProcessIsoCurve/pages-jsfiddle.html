@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta charset="UTF-8"> 
+
+        <!-- Library -->
+        <script src="../../dist/GpServices.js"></script>
+        <!-- Function -->
+        <script>
+            /** Affichage de la reponse dans la balise (+ console) */
+            function print (response) {
+                var el = document.getElementById("result");
+                el.innerHTML = "<pre>" + JSON.stringify(response, null, 2) + "</pre>";
+                console.log(response);
+            };
+        </script>
+
+        <title>Bibliothèque d'accès : Calcul d'isochrones avec paramètres</title>
+        <style>
+        #params {
+          width: 100%;
+          /* height: 200px; */
+          box-shadow: 0 0 10px #999;
+          font-family: monospace;
+          padding: 5px;
+        }
+
+        #go {
+          padding: 5px;
+          float: center;
+          width: 100%;
+          height: 30px;
+        }
+
+        #result {
+          padding: 5px;
+          width: 100%;
+          height: 200px;
+          box-shadow: 0 0 10px #999;
+          font-family: monospace;
+          overflow: scroll;
+        }
+        #info {
+          padding: 5px;
+          width: 100%;
+        </style>
+
+    </head>
+    <body>
+        <h1>Utilisation du Service d'isochrones</h1>
+        <h2>Utilisation de Gp.Services.isoCurve() avec modulation des paramètres <a href="http://jsfiddle.net/ignfgeoportail/od5pf6qw/embedded/result,js,html,css/">(jsfiddle)</a>.</h2>
+        <div id="params">
+          <p>
+            longitude :
+            <input type="text" id="lon" size="10"/>
+            latitude :
+            <input type="text" id="lat" size="10"/>
+          </p>
+          <p>
+            <input type="checkbox" value="true" id="reverse"> Position d'arrivée
+          </p>
+          <p>Methode de calcul :
+            <select id="method">
+              <option value="time">Isochrones</option>
+              <option value="distance">Isodistances</option>
+            </select>
+          </p>
+          <p>
+            Limite de temps (secondes) ou de distance (m)
+            <input type="text" id="limit" size="10"/>
+          </p>
+          <p>Graphe :
+            <select id="graph">
+              <option value="Pieton">Piéton</option>
+              <option value="Voiture">Voiture</option>
+            </select>
+          </p>
+        </div>
+        <div id="go">
+          <input type="button" value="IsoChrone" onclick="go()" />
+        </div>
+        <div id="result"></div>
+        <div id="info"></div>
+
+        <script type="text/javascript">
+        function go() {
+          var lon = document.getElementById("lon").value;
+          var lat = document.getElementById("lat").value;
+          var reverse= document.getElementById("reverse").checked;
+          var limit = document.getElementById("limit").value;
+          var graphIdx = document.getElementById("graph").selectedIndex;
+          var graph = document.getElementById("graph").options[graphIdx].value ;
+          var methodIdx = document.getElementById("method").selectedIndex;
+          var method = document.getElementById("method").options[methodIdx].value ;
+          var resultDiv = document.getElementById("result");
+          try {
+            Gp.Services.isoCurve({
+              position: {
+                x: lon,
+                y: lat
+              },
+              time: (method=="time" ? limit : null),
+              distance: (method=="distance" ? limit : null),
+              graph: graph,
+              reverse: reverse,
+              apiKey: "jhyvi0fgmnuxvfv0zjzorvdn",
+              onSuccess: function(result) {
+                resultDiv.innerHTML = "<p>" + JSON.stringify(result) + "</p>"
+              },
+              onFailure: function(error) {
+                resultDiv.innerHTML = "<p>" + error + "</p>"
+              }
+            });
+          } catch (e) {
+            resultDiv.innerHTML = "<p>" + e + "</p>"
+          }
+        }
+
+        var infoDiv = document.getElementById("info");
+        infoDiv.innerHTML = "<p> Bibliothèque d'accès version " + Gp.servicesVersion + " (" + Gp.servicesDate + ")</p>";
+        </script>
+    </body>
+</html>
