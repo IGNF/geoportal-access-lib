@@ -21,7 +21,7 @@ ou : [https://unpkg.com/geoportal-access-lib@latest/dist/GpServices.js](https://
 ## Accès rapport 
 
 * Couverture du code : 
-        [http://ignf.github.io/geoportal-access-lib/current/coverage/](http://ignf.github.io/geoportal-access-lib/current/coverage/)
+        [http://ignf.github.io/geoportal-access-lib/current/coverage/](http://ignf.github.io/geoportal-access-lib/current/coverage/index.html)
 
 * Rapport de tests :
-        [http://ignf.github.io/geoportal-access-lib/current/test-report/](http://ignf.github.io/geoportal-access-lib/current/test-report/)
+        [http://ignf.github.io/geoportal-access-lib/current/test-report/](http://ignf.github.io/geoportal-access-lib/current/test-report/index.html)
