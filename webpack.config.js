@@ -77,7 +77,7 @@ module.exports = (env, argv) => {
             }
         },
         devtool : (development) ? "eval-source-map" : false,
-        stats : "verbose", // "none",
+        stats : "none", // "verbose"
         optimization : {
             /** MINIFICATION */
             minimizer: [
@@ -114,7 +114,7 @@ module.exports = (env, argv) => {
                                 "@babel/preset-env", {
                                     // "useBuiltIns": "usage",
                                     "corejs": { version: '3.6', proposals: false },
-                                    "debug": true,
+                                    "debug": false
                                     // "loose": true,
                                     // "exclude": ['transform-typeof-symbol'],
                                     // "targets": {

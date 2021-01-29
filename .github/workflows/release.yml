@@ -30,6 +30,12 @@ jobs:
       - name: Build development
         run: npm run build:dev
 
+      - name: ESlint
+        run: npm run eslint
+
+      - name: Units test
+        run: npm run test
+
       - name: Build package # FIXME inutile ou commit ?
         run: npm pack
 
@@ -58,6 +64,20 @@ jobs:
         with:
           name: bundles
           path: bundles.zip
+      
+      - name: Upload Reporter Coverage artifacts
+        if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: coverage/lcov-report
+
+      - name: Upload Reporter Test artifacts
+        if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-report
+          path: test-report
 
   publish_gh-pages:
     if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
@@ -78,6 +98,8 @@ jobs:
         run: |
           mkdir -p tmp/jsdoc
           mkdir -p tmp/dist
+          mkdir -p tmp/coverage
+          mkdir -p tmp/test-report
           mkdir ${{ steps.get_version.outputs.VERSION }}
 
       - name: Download JSDoc artifacts
@@ -107,6 +129,28 @@ jobs:
           rm latest
           ln -s ${{ steps.get_version.outputs.VERSION }} latest
 
+      - name: Download coverage artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: coverage
+          path: tmp/coverage
+
+      - name: Build coverage
+        run: |
+          rm -rf current/coverage
+          cp -r tmp/coverage current
+      
+      - name: Download test-report artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: test-report
+          path: tmp/test-report
+
+      - name: Build test-report
+        run: |
+          rm -rf current/test-report
+          cp -r tmp/test-report current
+      
       - name: Clean and publish
         run: |
           rm -rf tmp/

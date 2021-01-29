@@ -52,6 +52,8 @@
 /_test_*/
 /coverage/
 /.nyc_output/
+/mochawesome-report
+/test-report
 
 # Files #
 #########
