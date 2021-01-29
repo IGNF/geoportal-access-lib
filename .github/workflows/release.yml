@@ -34,7 +34,7 @@ jobs:
         run: npm run eslint
 
       - name: Units test
-        run: npm run test
+        run: npm run cover
 
       - name: Build package # FIXME inutile ou commit ?
         run: npm pack
