@@ -262,3 +262,31 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GEOPORTAL_TOKEN }}
+
+  publish_samples:
+    if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+    needs: publish_package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: IGNF/geoportal-access-lib-samples
+          ref: master
+      
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo ${GITHUB_REF##*/})
+      
+      - name: Update package.json
+        run: |
+          sed -i -e "s/\"geoportal-access-lib\": \".*\"/\"geoportal-access-lib\": \"${{ steps.get_version.outputs.VERSION }}\"/" package.json
+
+      - name: Publish
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add -A
+          git commit -m "update geoportal-access-lib release v${{ steps.get_version.outputs.VERSION }}"
+          git push
+
