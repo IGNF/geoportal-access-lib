@@ -25,3 +25,8 @@ ou : [https://unpkg.com/geoportal-access-lib@latest/dist/GpServices.js](https://
 
 * Rapport de tests :
         [http://ignf.github.io/geoportal-access-lib/current/test-report/](http://ignf.github.io/geoportal-access-lib/current/test-report/index.html)
+
+## Exemples 
+
+Liste des exemples pour la bibliothèque d'accès aux services du Géoportail : 
+[http://ignf.github.io/geoportal-access-lib-samples/](http://ignf.github.io/geoportal-access-lib-samples)
