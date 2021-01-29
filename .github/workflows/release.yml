@@ -80,6 +80,7 @@ jobs:
           path: test-report
 
   publish_gh-pages:
+    # if: false
     if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
     needs: build
     runs-on: ubuntu-latest
@@ -161,8 +162,8 @@ jobs:
           git push
 
   create_release:
-    if: false
-    # if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+    # if: false
+    if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -232,8 +233,8 @@ jobs:
           asset_content_type: application/javascript
 
   publish_package:
-    if: false
-    # if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+    # if: false
+    if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
     needs: create_release
     runs-on: ubuntu-latest
     steps:
