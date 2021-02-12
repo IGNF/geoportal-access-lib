@@ -30,6 +30,12 @@ jobs:
       - name: Build development
         run: npm run build:dev
 
+      - name: ESlint
+        run: npm run eslint
+
+      - name: Units test
+        run: npm run cover
+
       - name: Build package # FIXME inutile ou commit ?
         run: npm pack
 
@@ -58,8 +64,23 @@ jobs:
         with:
           name: bundles
           path: bundles.zip
+      
+      - name: Upload Reporter Coverage artifacts
+        if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: coverage/lcov-report
+
+      - name: Upload Reporter Test artifacts
+        if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-report
+          path: test-report
 
   publish_gh-pages:
+    # if: false
     if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
     needs: build
     runs-on: ubuntu-latest
@@ -78,6 +99,8 @@ jobs:
         run: |
           mkdir -p tmp/jsdoc
           mkdir -p tmp/dist
+          mkdir -p tmp/coverage
+          mkdir -p tmp/test-report
           mkdir ${{ steps.get_version.outputs.VERSION }}
 
       - name: Download JSDoc artifacts
@@ -107,6 +130,28 @@ jobs:
           rm latest
           ln -s ${{ steps.get_version.outputs.VERSION }} latest
 
+      - name: Download coverage artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: coverage
+          path: tmp/coverage
+
+      - name: Build coverage
+        run: |
+          rm -rf current/coverage
+          cp -r tmp/coverage current
+      
+      - name: Download test-report artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: test-report
+          path: tmp/test-report
+
+      - name: Build test-report
+        run: |
+          rm -rf current/test-report
+          cp -r tmp/test-report current
+      
       - name: Clean and publish
         run: |
           rm -rf tmp/
@@ -117,6 +162,7 @@ jobs:
           git push
 
   create_release:
+    # if: false
     if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
     needs: build
     runs-on: ubuntu-latest
@@ -187,6 +233,7 @@ jobs:
           asset_content_type: application/javascript
 
   publish_package:
+    # if: false
     if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
     needs: create_release
     runs-on: ubuntu-latest
@@ -215,3 +262,31 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GEOPORTAL_TOKEN }}
+
+  publish_samples:
+    if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
+    needs: publish_package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: IGNF/geoportal-access-lib-samples
+          ref: master
+      
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo ${GITHUB_REF##*/})
+      
+      - name: Update package.json
+        run: |
+          sed -i -e "s/\"geoportal-access-lib\": \".*\"/\"geoportal-access-lib\": \"${{ steps.get_version.outputs.VERSION }}\"/" package.json
+
+      - name: Publish
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add -A
+          git commit -m "update geoportal-access-lib release v${{ steps.get_version.outputs.VERSION }}"
+          git push
+
