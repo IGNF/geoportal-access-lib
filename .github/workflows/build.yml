@@ -28,8 +28,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Build production
-        run: npm run build:prod
+      - name: Test
+        run: npm run cover
 
-      - name: Build development
-        run: npm run build:dev
+      - name: ESlint
+        run: npm run eslint

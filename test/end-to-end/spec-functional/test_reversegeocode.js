@@ -322,7 +322,7 @@ describe("-- Tests fonctionnels du Service du Geocodage inverse --", function ()
                 }
             });
 
-            it("On tape sur la boutique !", function (done) {
+            xit("On tape sur la boutique !", function (done) {
 
                 options.maximumResponses = 1;
                 options.httpMethod = 'GET';
