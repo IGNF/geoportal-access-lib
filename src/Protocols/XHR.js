@@ -1,4 +1,4 @@
-/* global Promise, require */
+/* global Promise, require, XDomainRequest */
 
 import Logger from "../Utils/LoggerByDefault";
 import Helper from "../Utils/Helper";
@@ -80,9 +80,7 @@ var XHR = {
             case "POST":
                 // on force sur ces params spécifiques au mode POST
                 options.content = settings.content ? settings.content : "application/x-www-form-urlencoded"; // FIXME en attente des services : bascule en "application/xml" ou "application/json"
-                options.headers = settings.headers ? settings.headers : {
-                    referer : "http://localhost" // todo ...
-                };
+                options.headers = settings.headers ? settings.headers : { referer : "http://localhost" }; // FIXME parametrable...
                 break;
             case "HEAD":
             case "OPTIONS":

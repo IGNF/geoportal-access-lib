@@ -17,6 +17,7 @@
     },
     "rules": {
         "curly": "error",
+        "dot-notation" : "off",
         "key-spacing": [
             "error",
             {
@@ -39,6 +40,9 @@
             }
         ],
         "no-console": "warn",
+        "no-proto": "off",
+        "no-var": "off",
+        "no-prototype-builtins": "off",
         "linebreak-style": [
             "error",
             "unix"
@@ -77,13 +81,14 @@
             }
         ],
         "valid-jsdoc": [
-            "warn",
+            "off",
             {
                 "preferType": {
                     "boolean": "Boolean",
                     "number": "Number",
                     "object": "Object",
-                    "string": "String"
+                    "string": "String",
+                    "array": "Array"
                 },
                 "requireReturn": false
             }

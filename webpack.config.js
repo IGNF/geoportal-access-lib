@@ -15,7 +15,7 @@ var webpack = require("webpack");
 
 // -- plugins
 var BannerWebPackPlugin      = webpack.BannerPlugin;
-var UglifyJsWebPackPlugin    = webpack.optimize.UglifyJsPlugin;
+var TerserJsWebPackPlugin    = require("terser-webpack-plugin");
 var JsDocWebPackPlugin       = require("jsdoc-webpack-plugin");
 var IgnoreWebPackPlugin      = webpack.IgnorePlugin;
 var CleanWebpackPlugin       = require("clean-webpack-plugin");
@@ -36,15 +36,15 @@ var licence = path.join(__dirname, "utils", "licence.tmpl");
 var date    = require(path.join(__dirname, "package.json")).date;
 var version = require(path.join(__dirname, "package.json")).version;
 
-module.exports = env => {
+module.exports = (env, argv) => {
 
     // -- options : minification du bundle
-    // ex. webpack --env.production
-    var production = (env) ? env.production : false;
+    // ex. webpack --mode=production
+    var production = (argv.mode === "production") ? true : false;
     // -- options : sourcemap
-    // ex. webpack --env.development
+    // ex. webpack --mode=development
     // sinon, mode none cad source sans optimisation
-    var development = (env) ? env.development : false;
+    var development = (argv.mode === "development") ? true : false;
 
     // -- options : nettoyage des répertoires temporaires
     // ex. webpack --env.clean
@@ -77,20 +77,59 @@ module.exports = env => {
             }
         },
         devtool : (development) ? "eval-source-map" : false,
-        module : {
-            loaders : [
-                {
-                    test : /\.js$/,
-                    include : path.join(__dirname, "src"),
-                    exclude : /node_modules/,
-                    loader : "babel-loader",
-                    query : {
-                        presets : ["env"]
+        stats : "none", // "verbose"
+        optimization : {
+            /** MINIFICATION */
+            minimizer: [
+                new TerserJsWebPackPlugin({
+                    extractComments: false,
+                    terserOptions: {
+                        output: {
+                            // FIXME avec les banner !
+                            comments: "some",
+                            // drop_console: true
+                        },
+                        mangle: true
                     }
-                }
-            ],
+                })
+            ]
+        },
+        module : {
             rules : [
                 {
+                    /**
+                    * transpilation avec babel des sources.
+                    * (on exclut les dependances...)
+                    */
+                    test : /\.js$/,
+                    include : [
+                        path.join(__dirname, "src")
+                    ],
+                    exclude : /node_modules/,
+                    use : {
+                        loader : "babel-loader",
+                        options : {
+                            compact : false,
+                            presets : [[
+                                "@babel/preset-env", {
+                                    // "useBuiltIns": "usage",
+                                    "corejs": { version: '3.6', proposals: false },
+                                    "debug": false
+                                    // "loose": true,
+                                    // "exclude": ['transform-typeof-symbol'],
+                                    // "targets": {
+                                    //     "ie" : "10"
+                                    // }
+                                }
+                            ]]
+                        }
+                    }
+                },
+                {
+                    /**
+                    * controle des JS en mode warning.
+                    * (on exclut les dependances)
+                    */
                     test : /\.js$/,
                     enforce : "pre",
                     include : path.join(__dirname, "src"),
@@ -131,7 +170,7 @@ module.exports = env => {
             .concat(
                 new ShellWebpackPlugin({
                     onBuildExit : [],
-                    onBuildStart : ["npm run test"],
+                    onBuildStart : [/* "npm run test" */],
                     onBuildEnd : [],
                     safe : true
                 }),
@@ -245,20 +284,5 @@ module.exports = env => {
             //             filename: 'GpServices-src.js.map'
             //         })] : []
             // )
-            /** MINIFICATION */
-            .concat(
-                (production) ? [
-                    new UglifyJsWebPackPlugin({
-                        output : {
-                            comments : false,
-                            beautify : false
-                        },
-                        uglifyOptions : {
-                            mangle : true,
-                            warnings : false,
-                            compress : false
-                        }
-                    })] : []
-            )
     });
 };

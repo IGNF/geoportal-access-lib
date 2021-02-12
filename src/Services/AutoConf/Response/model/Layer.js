@@ -300,7 +300,7 @@ Layer.prototype = {
         if (this.isAggregate) {
             return this.aggregatedLayers;
         } else {
-
+            // ...
         }
     }
 
