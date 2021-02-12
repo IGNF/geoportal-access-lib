@@ -9,7 +9,7 @@ var ReplaceWebpackPlugin = require("replace-bundle-webpack-plugin");
 
 module.exports = {
     entry : {
-        tests : path.join(__dirname, "test", "index.js")
+        tests : path.join(__dirname, "../../test", "index.js")
     },
     output : {
         path : path.join(__dirname, "test"),

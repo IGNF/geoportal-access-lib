@@ -44,8 +44,8 @@ describe("-- Tests fonctionnels du Service Altimétrique --", function () {
             });
 
             // reponse du service
-            var okResponseXml = '<elevations><elevation><lon>1.25</lon><lat>47.48</lat><z>103.55</z><acc>2.5</acc></elevation></elevations>';
-            var okResponseJson = '{"elevations": [{"lon": 1.25,"lat": 47.48,"z": 103.55,"acc": 2.5}]}';
+            var okResponseXml = '<elevations><elevation><lon>1.25</lon><lat>47.48</lat><z>104.17</z><acc>2.5</acc></elevation></elevations>';
+            var okResponseJson = '{"elevations": [{"lon": 1.25,"lat": 47.48,"z": 104.17,"acc": 2.5}]}';
 
             // fonction contenant les tests de la reponse
             var functionAssert = function (response) {
@@ -57,7 +57,7 @@ describe("-- Tests fonctionnels du Service Altimétrique --", function () {
                 expect(response.elevations[0]).to.have.property("lat");
                 expect(response.elevations[0]).to.have.property("z");
                 expect(response.elevations[0]).to.have.property("acc");
-                expect(response.elevations[0].z).to.equal(103.55);
+                expect(response.elevations[0].z).to.equal(104.17);
             };
             // options par defaut (à surcharger)
             var options = {
