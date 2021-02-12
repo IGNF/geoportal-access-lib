@@ -3,8 +3,8 @@ version: "3.7"
 services:
   access-lib:
     build:
-      context: .
-      dockerfile: ./Dockerfile
+      context: ..
+      dockerfile: ./docker/Dockerfile
     image: access-lib
     container_name: access-lib-server
     expose:

@@ -1,4 +1,5 @@
 /doc
+/docker
 /jsdoc
 /lib
 /scripts
@@ -9,6 +10,8 @@
 /target
 /coverage
 /package
+/mochawesome-report
+/test-report
 
 /_test*
 /_samples*
