@@ -708,7 +708,7 @@ AutoConfResponseReader.READERS = {
                     }
                 }
                 // si aucune metadata n'a été ajoutée, on crée le tableau vide
-                if (!lyr.metadata && !Array.isArray(lyr.metadata)) {
+                if (!lyr.metadata) {
                     lyr.metadata = [];
                 }
                 lyr.metadata.push(m);

@@ -69,8 +69,8 @@ var AltiRequestFactory = {
         settings.param.zonly = options.zonly;
 
         // gestion des callback
-        var bOnError = !!((options.onError !== null && typeof options.onError === "function"));
-        var bOnSuccess = !!((options.onSuccess !== null && typeof options.onSuccess === "function"));
+        var bOnError = !!(options.onError !== null && typeof options.onError === "function"); // cast variable to boolean
+        var bOnSuccess = !!(options.onSuccess !== null && typeof options.onSuccess === "function");
 
         var message = null;
         switch (options.api) {

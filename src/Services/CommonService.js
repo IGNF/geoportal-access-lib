@@ -171,7 +171,7 @@ function CommonService (options) {
     }
 
     // gestion du callback onSuccess
-    var bOnSuccess = !!((this.options.onSuccess !== null && typeof this.options.onSuccess === "function"));
+    var bOnSuccess = !!(this.options.onSuccess !== null && typeof this.options.onSuccess === "function");
     if (!bOnSuccess) {
         throw new Error(_.getMessage("PARAM_MISSING", "onSuccess()"));
     }
@@ -363,7 +363,7 @@ CommonService.prototype = {
 
         // a t on mis en place un proxy ?
         // la proxyfication est valable uniquement en mode XHR !
-        var bUrlProxified = !!((this.options.proxyURL && this.options.protocol === "XHR"));
+        var bUrlProxified = !!(this.options.proxyURL && this.options.protocol === "XHR");
 
         // rajout de l'option gpbibaccess
         // INFO : acces au numero de version de package.conf aprés compilation !
