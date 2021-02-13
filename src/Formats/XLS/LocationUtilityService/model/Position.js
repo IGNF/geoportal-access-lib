@@ -57,15 +57,8 @@ function Position (options) {
     this.options = options || {};
 
     // param obligatoire
-    if (!options.position) {
+    if (!this.options.position) {
         throw new Error("l'option 'position' n'est pas renseignée !");
-    }
-
-    // et on ajoute les options en paramètre aux options par défaut
-    for (var opt in options) {
-        if (options.hasOwnProperty(opt)) {
-            this.options[opt] = options[opt];
-        }
     }
 }
 
