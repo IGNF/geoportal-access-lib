@@ -12,6 +12,7 @@ on:
 jobs:
 
   build:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,7 +36,7 @@ jobs:
         run: npm run eslint
 
   publish_samples:
-    needs: build
+    # needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -43,8 +44,8 @@ jobs:
         with:
           repository: IGNF/geoportal-access-lib-samples
           ref: develop
-          persist-credentials: false
-          fetch-depth: 0
+          # persist-credentials: false
+          # fetch-depth: 0
           token : ${{ secrets.ADMIN_GEOPORTAL_TOKEN }}
     
       - name: Get info
