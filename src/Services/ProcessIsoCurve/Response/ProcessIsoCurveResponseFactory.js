@@ -83,7 +83,7 @@ var ProcessIsoCurveResponseFactory = {
                     case "json":
                         logger.trace("analyze response : json");
 
-                        var JSONResponse;
+                        var JSONResponse = null;
                         if (typeof options.response === "string") {
                             JSONResponse = JSON.parse(options.response);
                         } else {
@@ -91,43 +91,39 @@ var ProcessIsoCurveResponseFactory = {
                         }
 
                         // analyse de la reponse
-                        if (JSONResponse.status === "OK" || JSONResponse.status === "ok") {
+                        if (JSONResponse && (JSONResponse.status === "OK" || JSONResponse.status === "ok")) {
                             // création de l'objet de réponse
                             data = new ProcessIsoCurveResponse();
 
                             // remplissage de l'objet créé avec les attribtuts de la réponse du service
-                            if (data) {
-                                data.time = JSONResponse.time;
-                                data.distance = JSONResponse.distance;
-                                data.message = JSONResponse.message;
-                                data.id = JSONResponse.id;
-                                data.srs = JSONResponse.srs;
-                                // callback de la reponse
-                                var onWKTSuccess = function (json) {
-                                    data.geometry = json;
-                                };
-                                // callback d'erreur
-                                var onWKTError = function () {
-                                    options.onError.call(options.scope, new ErrorService({
-                                        message : MRes.getMessage("PARAM_FORMAT", "wktGeometry")
-                                    }));
-                                };
-                                if (data.hasOwnProperty("geometry")) {
-                                    WKT.toJson(JSONResponse.wktGeometry, onWKTSuccess, onWKTError);
-                                    if (!data.geometry) {
-                                        return;
-                                    }
+                            data.time = JSONResponse.time;
+                            data.distance = JSONResponse.distance;
+                            data.message = JSONResponse.message;
+                            data.id = JSONResponse.id;
+                            data.srs = JSONResponse.srs;
+                            // callback de la reponse
+                            var onWKTSuccess = function (json) {
+                                data.geometry = json;
+                            };
+                            // callback d'erreur
+                            var onWKTError = function () {
+                                options.onError.call(options.scope, new ErrorService({
+                                    message : MRes.getMessage("PARAM_FORMAT", "wktGeometry")
+                                }));
+                            };
+                            if (data.hasOwnProperty("geometry")) {
+                                WKT.toJson(JSONResponse.wktGeometry, onWKTSuccess, onWKTError);
+                                if (!data.geometry) {
+                                    options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_ANALYSE", options.response)));
+                                    return;
                                 }
-                                var coords = JSONResponse.location.split(",");
-                                if (data.location) {
-                                    data.location.x = coords[0];
-                                    data.location.y = coords[1];
-                                }
-                            } else {
-                                options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_ANALYSE", options.response)));
-                                return;
                             }
-                        } else if (JSONResponse.status === "ERROR" || JSONResponse.status === "error") {
+                            var coords = JSONResponse.location.split(",");
+                            if (data.location) {
+                                data.location.x = coords[0];
+                                data.location.y = coords[1];
+                            }
+                        } else if (JSONResponse && (JSONResponse.status === "ERROR" || JSONResponse.status === "error")) {
                             // JSHint bug if var message is used !?
                             var mess = JSONResponse.message;
                             mess += "\n (raw response service : '" + JSONResponse + "')";
