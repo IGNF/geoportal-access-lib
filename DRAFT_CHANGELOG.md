@@ -12,6 +12,8 @@
 
 * [Added]
 
+    - ajout des badges DeepScan et de build dans le README
+
 * [Changed]
 
 * [Removed]
