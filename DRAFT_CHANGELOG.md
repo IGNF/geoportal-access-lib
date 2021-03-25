@@ -6,22 +6,19 @@
 
 ## Summary
 
-* Modifications sur les processus de dev et de déploiement
+* correctif sur la jsdoc
  
 ## Changelog
 
 * [Added]
 
-    - déploiement git/npm via github actions  (568f8f44e4d7d20058918c40b48f55317b291cdd)
-    - ajout de tests E2E, avec rapports de tests, et exemples automatiques (6b4e47cb6773d0f68e3539fd24f3a2bd8e74fe01)
-
 * [Changed]
-
-   - dockerisation des exemples de dev (6cddae1e520980af11269404131c4fee864937f7)
 
 * [Removed]
 
 * [Fixed]
+
+    - correctif sur la jsdoc / tutorial : optimize-getconfig
   
 * [Deprecated]
 
