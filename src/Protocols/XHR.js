@@ -154,26 +154,47 @@ var XHR = {
 
                 // test on env. nodejs or browser
                 if (typeof window === "undefined") {
-                    // Utilisation du module :
-                    // cf. http://blog.modulus.io/node.js-tutorial-how-to-use-request-module
 
-                    var req = require("request");// __request
+                    var nodefetch = require('node-fetch');
 
-                    // mapping data avec body param. pour le mode POST ou PUT (?)
+                    var opts = {
+                        headers : {
+                            "Referer" : "https://localhost"
+                        } 
+                    }; 
                     if (options.data && typeof options.data === "string" && corps) {
-                        options.body = options.data;
+                        opts = {
+                            method : options.method,
+                            body : options.data,
+                            headers : {
+                                "Content-Type" : options.content,
+                                "Referer" : "https://localhost"
+                            }
+                        };
                     }
 
-                    // FIXME ERROR : self signed certificate in certificate chain
-                    options.rejectUnauthorized = false;
+                    return nodefetch(options.url, opts)
+                        .then(function (response) {
+                            if (response.ok) { // res.status >= 200 && res.status < 300
+                                resolve(response.text());
+                            } else {
+                                var message = "Errors Occured on Http Request (status : '" + response.statusText + "' | url : '" + response.url + "')";
+                                var status = response.status;
+                                reject({
+                                    message : message,
+                                    status : status
+                                });
+                            }
+                        })
+                        .catch(function (e) {
+                            var message = "Errors Occured on Http Request (status : '" + response.statusText + "' | url : '" + response.url + "')";
+                            var status = response.status;
+                            reject({
+                                message : message,
+                                status : status
+                            });
+                        });
 
-                    req(options, function (error, response, body) {
-                        if (!error && response.statusCode === 200 && body) {
-                            resolve(body);
-                        } else {
-                            reject("Errors Occured on Http Request (nodejs) : " + error);
-                        }
-                    });
                 } else {
                     if (window.XMLHttpRequest) {
                         logger.trace("XMLHttpRequest");
