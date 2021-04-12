@@ -16,11 +16,14 @@
 
 * [Changed]
 
+    - remplacement de la dépendance *request* (depréciée) par *node-fetch* pour une meilleure utilisation sous nodeJS
+
 * [Removed]
 
 * [Fixed]
 
     - correctif sur la jsdoc / tutorial : optimize-getconfig
+    - correctif header UMD des bundles sous webpack 4
   
 * [Deprecated]
 

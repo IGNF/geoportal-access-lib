@@ -154,21 +154,21 @@ var XHR = {
 
                 // test on env. nodejs or browser
                 if (typeof window === "undefined") {
-
-                    var nodefetch = require('node-fetch');
+                    var nodefetch = require("node-fetch");
 
                     var opts = {
                         headers : {
-                            "Referer" : "https://localhost"
-                        } 
-                    }; 
+                            Referer : "https://localhost"
+                        }
+                    };
+
                     if (options.data && typeof options.data === "string" && corps) {
                         opts = {
                             method : options.method,
                             body : options.data,
                             headers : {
                                 "Content-Type" : options.content,
-                                "Referer" : "https://localhost"
+                                Referer : "https://localhost"
                             }
                         };
                     }
@@ -187,14 +187,11 @@ var XHR = {
                             }
                         })
                         .catch(function (e) {
-                            var message = "Errors Occured on Http Request (status : '" + response.statusText + "' | url : '" + response.url + "')";
-                            var status = response.status;
                             reject({
-                                message : message,
-                                status : status
+                                message : e,
+                                status : -1
                             });
                         });
-
                 } else {
                     if (window.XMLHttpRequest) {
                         logger.trace("XMLHttpRequest");
