@@ -140,6 +140,7 @@ Les "gros" bug fixes ou refacto sont à considérer comme des features: c'est à
 ~~~
 git checkout develop
 git checkout -b release-X.Y.Z
+git push origin release-X.Y.Z
 ~~~
 
 2 - Réaliser sur cette branche release les tests habituels liés à la publication d'une release
@@ -187,7 +188,14 @@ git merge release-X.Y.Z --no-ff
 git branch -d release-X.Y.Z
 ~~~
 
-8 - Sur master, on réalise les étapes habituelles de **publication de la jsdoc et de la release**
+8 - Vérification de la publication lancée par le tag sur master :
+    - suivre en direct via les githubs actions
+    - vérifier page de publication de la release github
+    - vérifier page de publication de la release npm
+    - vérifier que le projet exemples a été mis à jour avec la nouvelle release (https://github.com/IGNF/geoportal-access-lib-samples)
+    - vérifier que la jsdoc (gh-pages) est à jour
+    - vérifier que le DRAFT_CHANGELOG a été vidé et que le CHANGELOG a été mis à jour
+
 
 ## Realisation d'un hotfix
 
@@ -197,6 +205,7 @@ Dans quel cas : Je remarque un problème à corriger de toute urgence sur la der
 ~~~
 
 git checkout -b hotfix-MYHOTFIX master
+git push origin hotfix-MYHOTFIX
 ~~~
 
 2 - Sur cette branche hotfix-MYHOTFIX, j'incrémente la version de la release package.json
@@ -220,12 +229,20 @@ git merge hotfix-MYHOTFIX --no-ff
 git checkout master
 git merge hotfix-MYHOTFIX --no-ff
 git tag X.Y.Z
+git push origin X.Y.Z
 ~~~
 
-6 - On supprime la branche hotfix mergée
+6 - Vérification de la publication lancée par le tag sur master :
+    - suivre en direct via les githubs actions
+    - vérifier page de publication de la release github
+    - vérifier page de publication de la release npm
+    - vérifier que le projet exemples a été mis à jour avec la nouvelle release (https://github.com/IGNF/geoportal-access-lib-samples)
+    - vérifier que la jsdoc (gh-pages) est à jour
+    - vérifier que le DRAFT_CHANGELOG a été vidé et que le CHANGELOG a été mis à jour
+
+7 - On supprime la branche hotfix mergée
 
 ~~~
 git branch -d hotfix-MYHOTFIX
 ~~~
 
-7 - Sur master, on réalise les étapes habituelles de **publication de la jsdoc et de la release**
