@@ -1,6 +1,6 @@
-# Bibliothèque d'accès aux services Géoportail, version 2.1.7
+# Bibliothèque d'accès aux services Géoportail, version 2.1.8
 
-**12/02/2021 : 2.1.7** 
+**14/04/2021 : 2.1.8** 
 
 > release of geoportal access library
 
