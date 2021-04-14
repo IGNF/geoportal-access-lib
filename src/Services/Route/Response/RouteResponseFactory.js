@@ -82,7 +82,7 @@ var RouteResponseFactory = {
                     case "json":
                         logger.trace("analyze response : json");
 
-                        var JSONResponse;
+                        var JSONResponse = null;
                         if (typeof options.response === "string") {
                             JSONResponse = JSON.parse(options.response);
                         } else {
@@ -90,7 +90,7 @@ var RouteResponseFactory = {
                         }
 
                         // le service renvoie t il une erreur ?
-                        if (JSONResponse.message) {
+                        if (JSONResponse && JSONResponse.message) {
                             // ex. {"message":"message not null", "status":"ERROR"}
                             options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", JSONResponse.message)));
                             return;
@@ -155,12 +155,12 @@ var RouteResponseFactory = {
                                         legs.push(legList[i]);
                                     }
                                 }
-                                if (Array.isArray(legs) && legs.length) {
+                                if (legs.length) {
                                     for (i = 0; i < legs.length; i++) {
                                         legSteps.push(legs[i].steps);
                                     }
                                 }
-                                if (Array.isArray(legSteps) && legSteps.length) {
+                                if (legSteps.length) {
                                     for (i = 0; i < legSteps.length; i++) {
                                         steps = steps.concat(legSteps[i]);
                                     }
@@ -179,7 +179,7 @@ var RouteResponseFactory = {
                                             points.push(point);
                                         }
                                     }
-                                    if (points && points.length !== 0) {
+                                    if (points.length !== 0) {
                                         data.routeInstructions[data.routeInstructions.length - 1].geometry = {
                                             coordinates : points,
                                             type : "LineString"

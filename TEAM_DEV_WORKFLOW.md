@@ -160,10 +160,12 @@ git merge release-X.Y.Z
 5 - On recommence autant de fois que necessaire les etapes 3 et 4
 
 6 - Quand on estime que tout est ok, on prépare la future publication npm en construisant les binaires :
-* cd build/script/release
-* vérifier date et version dans les package.json
-* ./build-pack.sh
-* commiter
+```bash
+$> ./build.sh
+$> npm pack
+```
+
+Puis, commiter...
 
 6 - Quand on estime que la release est OK, on merge la branche sans fast-forward sur **develop**
 

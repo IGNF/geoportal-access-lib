@@ -67,7 +67,7 @@ Liste des targets disponibles :
         target : (clean), build,
                  test, sample, (doc)
                  test:serve, sample:serve, doc:serve
-        option : --env.production, --env.development, --env.clean
+        option : --mode=production, --mode=development, --env.clean
 
 ### Installation des dépendances
 
@@ -87,8 +87,8 @@ la target suivante :
 **ouvrir une console :**
 
     npm run build
-    npm run build -- --env.production
-    npm run build -- --env.development
+    npm run build -- --mode=production
+    npm run build -- --mode=development
 
 ou
 
@@ -142,8 +142,8 @@ Les exemples sont générées lors du build dans le répertoire *samples*.
 **ouvrir une console :**
 
     npm run sample
-    npm run sample -- --env.production
-    npm run sample -- --env.development
+    npm run sample -- --mode=production
+    npm run sample -- --mode=development
 
 ou
 

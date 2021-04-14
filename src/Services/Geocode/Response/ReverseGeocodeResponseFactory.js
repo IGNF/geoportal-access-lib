@@ -79,7 +79,7 @@ var ReverseGeocodeReponseFactory = {
                 if (options.scope && options.scope.options && options.scope.options.srs && options.scope.options.srs !== "EPSG:4326") {
                     var location;
                     var pos;
-                    if (data || data.locations || data.locations.length) {
+                    if (data.locations) {
                         for (var i = 0; i < data.locations.length; i++) {
                             location = data.locations[i];
                             if (location) {

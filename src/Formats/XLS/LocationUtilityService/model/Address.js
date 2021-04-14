@@ -120,15 +120,8 @@ function Address (options) {
     };
 
     // param obligatoire
-    if (!options.location) {
+    if (!this.options.location || Object.keys(this.options.location).length === 0) {
         throw new Error("l'option 'location' n'est pas renseignée !");
-    }
-
-    // et on ajoute les options en paramètre aux options par défaut
-    for (var opt in options) {
-        if (options.hasOwnProperty(opt)) {
-            this.options[opt] = options[opt];
-        }
     }
 }
 

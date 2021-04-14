@@ -1,7 +1,8 @@
 # Bibliothèque d'accès aux ressources du Géoportail
 
-[![Build Status](https://travis-ci.org/IGNF/geoportal-access-lib.png?branch=master)](https://travis-ci.org/IGNF/geoportal-access-lib)
+[![Build](https://github.com/IGNF/geoportal-access-lib/actions/workflows/build.yml/badge.svg)](https://github.com/IGNF/geoportal-access-lib/actions/workflows/build.yml)
 [![GitHub release](https://img.shields.io/github/release/IGNF/geoportal-access-lib.svg)](https://github.com/IGNF/geoportal-access-lib)
+[![DeepScan grade](https://deepscan.io/api/teams/12425/projects/15468/branches/309615/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=12425&pid=15468&bid=309615)
 
 La bibliothèque d’accès aux ressources de la plateforme Géoportail est une bibliothèque de fonctions javascript permettant d'accéder aux ressources délivrées par les services web du Géoportail.
 
