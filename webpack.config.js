@@ -58,13 +58,14 @@ module.exports = (env, argv) => {
             library : "Gp",
             libraryTarget : "umd",
             libraryExport : "default",
-            umdNamedDefine : true
+            umdNamedDefine : true,
+            globalObject: 'this'
         },
         // utilisation des lib pour nodeJs uniquement
         externals : {
-            request : {
-                commonjs2 : "request",
-                commonjs : "request",
+            "node-fetch" : {
+                commonjs2 : "node-fetch",
+                commonjs : "node-fetch",
                 amd : "require"
             },
             xmldom : {

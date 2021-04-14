@@ -7,6 +7,7 @@
 ## Summary
 
 * correctif sur la jsdoc
+* suppression de la dependance dépréciée *request*
  
 ## Changelog
 
@@ -16,11 +17,14 @@
 
 * [Changed]
 
+    - remplacement de la dépendance *request* (depréciée) par *node-fetch* pour une meilleure utilisation sous nodeJS
+
 * [Removed]
 
 * [Fixed]
 
     - correctif sur la jsdoc / tutorial : optimize-getconfig
+    - correctif header UMD des bundles sous webpack 4
   
 * [Deprecated]
 
