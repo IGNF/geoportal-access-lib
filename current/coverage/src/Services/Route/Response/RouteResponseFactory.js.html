@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0.83% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/120</span>
+                <span class='fraction'>1/121</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/79</span>
+                <span class='fraction'>0/75</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0.83% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/120</span>
+                <span class='fraction'>1/121</span>
             </div>
         
             
@@ -423,7 +423,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -705,7 +705,7 @@ var RouteResponseFactory = {
                     case "json":
 <span class="cstat-no" title="statement not covered" >                        logger.</span>trace("analyze response : json");
 &nbsp;
-                        var JSONResponse;
+                        var JSONResponse = <span class="cstat-no" title="statement not covered" >null;</span>
 <span class="cstat-no" title="statement not covered" >                        if (typeof options.response === "string") {</span>
 <span class="cstat-no" title="statement not covered" >                            JSONResponse </span>= JSON.parse(options.response);
                         } else {
@@ -713,7 +713,7 @@ var RouteResponseFactory = {
                         }
 &nbsp;
                         // le service renvoie t il une erreur ?
-<span class="cstat-no" title="statement not covered" >                        if (JSONResponse.message) {</span>
+<span class="cstat-no" title="statement not covered" >                        if (JSONResponse &amp;&amp; JSONResponse.message) {</span>
                             // ex. {"message":"message not null", "status":"ERROR"}
 <span class="cstat-no" title="statement not covered" >                            options.</span>onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", JSONResponse.message)));
 <span class="cstat-no" title="statement not covered" >                            return;</span>
@@ -778,12 +778,12 @@ var RouteResponseFactory = {
 <span class="cstat-no" title="statement not covered" >                                        legs.</span>push(legList[i]);
                                     }
                                 }
-<span class="cstat-no" title="statement not covered" >                                if (Array.isArray(legs) &amp;&amp; legs.length) {</span>
+<span class="cstat-no" title="statement not covered" >                                if (legs.length) {</span>
 <span class="cstat-no" title="statement not covered" >                                    for (i = 0; i &lt; legs.length; i++) {</span>
 <span class="cstat-no" title="statement not covered" >                                        legSteps.</span>push(legs[i].steps);
                                     }
                                 }
-<span class="cstat-no" title="statement not covered" >                                if (Array.isArray(legSteps) &amp;&amp; legSteps.length) {</span>
+<span class="cstat-no" title="statement not covered" >                                if (legSteps.length) {</span>
 <span class="cstat-no" title="statement not covered" >                                    for (i = 0; i &lt; legSteps.length; i++) {</span>
 <span class="cstat-no" title="statement not covered" >                                        steps </span>= steps.concat(legSteps[i]);
                                     }
@@ -802,7 +802,7 @@ var RouteResponseFactory = {
 <span class="cstat-no" title="statement not covered" >                                            points.</span>push(point);
                                         }
                                     }
-<span class="cstat-no" title="statement not covered" >                                    if (points &amp;&amp; points.length !== 0) {</span>
+<span class="cstat-no" title="statement not covered" >                                    if (points.length !== 0) {</span>
 <span class="cstat-no" title="statement not covered" >                                        data.</span>routeInstructions[data.routeInstructions.length - 1].geometry = {
                                             coordinates : points,
                                             type : "LineString"
@@ -910,7 +910,7 @@ export default RouteResponseFactory;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Feb 12 2021 16:45:31 GMT+0000 (Coordinated Universal Time)
+                at Wed Apr 14 2021 13:06:36 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>
