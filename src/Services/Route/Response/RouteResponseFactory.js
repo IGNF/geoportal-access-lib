@@ -112,6 +112,105 @@ var RouteResponseFactory = {
                             data.routeInstructions[data.routeInstructions.length - 1].code = "";
                             data.routeInstructions[data.routeInstructions.length - 1].instruction = "";
                             data.routeInstructions[data.routeInstructions.length - 1].geometry = step.geometry;
+
+                            // on ne souhaite pas de ce type de valeur...
+                            if (step.name === "Valeur non renseignée") {
+                                step.name = "";
+                            }
+
+                            switch (step.instruction.type) {
+                                case "turn":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Tourner";
+                                    break;
+                                case "new name":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Continuer tout droit";
+                                    break;
+                                case "depart":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Départ";
+                                    break;
+                                case "arrive":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Arrivée";
+                                    break;
+                                case "merge":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Rejoindre";
+                                    break;
+                                case "ramp":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Prendre la bretelle";
+                                    break;
+                                case "on ramp":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Prendre la bretelle";
+                                    break;
+                                case "off ramp":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Prendre la sortie";
+                                    break;
+                                case "fork":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Sur la bifurcation, prendre";
+                                    break;
+                                case "end of road":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "À la fin de la route, prendre";
+                                    break;
+                                case "use lane":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Utiliser la file";
+                                    break;
+                                case "continue":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Continuer";
+                                    break;
+                                case "roundabout":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Au rond-point";
+                                    break;
+                                case "rotary":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Au rond-point";
+                                    break;
+                                case "roundabout turn":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Au rond point, tourner";
+                                    break;
+                                case "notification":
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "";
+                                    break;
+                                default:
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "?" + step.instruction.type + "?";
+                                    break;
+                            }
+
+                            if (step.instruction.modifier) {
+                                switch (step.instruction.modifier) {
+                                    case "uturn":
+                                        data.routeInstructions[data.routeInstructions.length - 1].instruction = "Faire demi-tour";
+                                        break;
+                                    case "sharp right":
+                                        data.routeInstructions[data.routeInstructions.length - 1].instruction += " complètement à droite";
+                                        break;
+                                    case "right":
+                                        data.routeInstructions[data.routeInstructions.length - 1].instruction += " à droite";
+                                        break;
+                                    case "slight right":
+                                        data.routeInstructions[data.routeInstructions.length - 1].instruction += " légèrement à droite";
+                                        break;
+                                    case "straight":
+                                        data.routeInstructions[data.routeInstructions.length - 1].instruction = "Continuer tout droit";
+                                        break;
+                                    case "slight left":
+                                        data.routeInstructions[data.routeInstructions.length - 1].instruction += " lègèrement à gauche";
+                                        break;
+                                    case "left":
+                                        data.routeInstructions[data.routeInstructions.length - 1].instruction += " à gauche";
+                                        break;
+                                    case "sharp left":
+                                        data.routeInstructions[data.routeInstructions.length - 1].instruction += " complètement à gauche";
+                                        break;
+                                    default:
+                                        data.routeInstructions[data.routeInstructions.length - 1].instruction += " ?" + step.instruction.modifier + "?";
+                                        break;
+                                }
+                            }
+
+                            if (step.instruction.exit) {
+                                data.routeInstructions[data.routeInstructions.length - 1].instruction += `${step.instruction.exit}e sortie` ;
+                            }
+
+                            if (step.name) {
+                                data.routeInstructions[data.routeInstructions.length - 1].instruction += ' sur ' + step.name;
+                            }
                         });
                     }
                 }
