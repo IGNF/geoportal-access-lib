@@ -5,28 +5,19 @@
 > release of geoportal access library
 
 ## Summary
-
-* correctif sur la jsdoc
-* suppression de la dependance dépréciée *request*
  
 ## Changelog
 
 * [Added]
 
-    - ajout des badges DeepScan et de build dans le README
-
 * [Changed]
 
-    - remplacement de la dépendance *request* (depréciée) par *node-fetch* pour une meilleure utilisation sous nodeJS
+    - mise à jour des liens *NameSpace* sur les schemas du service d'autoconfiguation
 
 * [Removed]
 
 * [Fixed]
-
-    - correctif sur la jsdoc / tutorial : optimize-getconfig
-    - correctif header UMD des bundles sous webpack 4
   
 * [Deprecated]
 
 * [Security]
-
