@@ -53,15 +53,14 @@ var RouteResponseFactory = {
                     JSONResponse = options.response;
                 }
 
-                // le service renvoie t il une erreur ?
-                if (JSONResponse.message) {
-                    // ex. {"message":"message not null", "status":"ERROR"}
-                    options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", JSONResponse.message)));
-                    return;
-                }
-
                 // construction de l'objet réponse JSON
                 if (JSONResponse) {
+                    // le service renvoie t il une erreur ?
+                    if (JSONResponse.message) {
+                        // ex. {"message":"message not null", "status":"ERROR"}
+                        options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", JSONResponse.message)));
+                        return;
+                    }
                     var legs = [];
                     var legSteps = [];
                     var steps = [];

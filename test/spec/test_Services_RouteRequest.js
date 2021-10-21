@@ -6,7 +6,6 @@ import { expect } from "chai";
 import { should } from "chai";
 should();
 
-import XML from "../../src/Formats/XML";
 import RouteRequestFactory from "../../src/Services/Route/Request/RouteRequestFactory";
 
 describe("-- Test RouteRequest --", function () {
