@@ -154,8 +154,8 @@ function Route (options) {
         this.logger.warn("options.outputFormat could only be json");
     }
     this.options.outputFormat = "json";
-    
-    this.options.resource = options.resource || "bduni-idf-osrm";
+
+    this.options.resource = options.resource || "bdtopo-osrm";
     this.options.startPoint = options.startPoint;
     this.options.endPoint = options.endPoint;
     this.options.viaPoints = options.viaPoints || [];
