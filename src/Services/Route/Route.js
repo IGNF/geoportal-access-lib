@@ -60,9 +60,9 @@ import RouteResponseFactory from "./Response/RouteResponseFactory";
  * @param {Boolean} [options.provideBbox = true] - Indique si les instructions doivent être localisées par une bbox dans la réponse.
  *      Par défaut : true.
  *
- * @param {String} [options.distanceUnit = "km"] - Indique si la distance doit être exprimée en km ou m dans la réponse.
- *      Par défaut : km.
- * @param {String} [options.timeUnit = "standard"] - Indique si la durée doit être exprimée en seconde, minute ou heure dans la réponse. Il peut-être formatté hh:mm::ss avec la valeur standard.
+ * @param {String} [options.distanceUnit = "m"] - Indique si la distance doit être exprimée en km ou m dans la réponse.
+ *      Par défaut : m.
+ * @param {String} [options.timeUnit = "second"] - Indique si la durée doit être exprimée en seconde, minute ou heure dans la réponse. Il peut-être formatté hh:mm::ss avec la valeur standard.
  *      Les valeurs possibles sont "standard", "second", "minute" ou "hour".
  *      Par défaut : "standard".
  *
@@ -223,8 +223,8 @@ function Route (options) {
 
     this.options.geometryInInstructions = options.geometryInInstructions || false;
     this.options.provideBbox = options.provideBbox || true;
-    this.options.distanceUnit = options.distanceUnit || "km";
-    this.options.timeUnit = options.timeUnit || "standard";
+    this.options.distanceUnit = options.distanceUnit || "m";
+    this.options.timeUnit = options.timeUnit || "second";
     this.options.expectedStartTime = null; // FIXME not yet implemented !
     this.options.srs = options.srs || "EPSG:4326";
     this.options.waysAttributes = options.waysAttributes || [];

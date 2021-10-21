@@ -72,7 +72,7 @@ var RouteResponseFactory = {
                         data.totalTime = parseFloat(JSONResponse.duration);
                     }
                     if (data.hasOwnProperty("totalDistance")) {
-                        data.totalDistance = JSONResponse.distance + " " + options.distanceUnit;
+                        data.totalDistance = parseFloat(JSONResponse.distance);
                     }
 
                     if (data.hasOwnProperty("bbox")) {
@@ -108,7 +108,7 @@ var RouteResponseFactory = {
                         steps.forEach(function (step) {
                             data.routeInstructions.push(new RouteInstruction());
                             data.routeInstructions[data.routeInstructions.length - 1].duration = step.duration;
-                            data.routeInstructions[data.routeInstructions.length - 1].distance = step.distance + " " + options.distanceUnit;
+                            data.routeInstructions[data.routeInstructions.length - 1].distance = step.distance;
                             data.routeInstructions[data.routeInstructions.length - 1].code = "";
                             data.routeInstructions[data.routeInstructions.length - 1].instruction = "";
                             data.routeInstructions[data.routeInstructions.length - 1].geometry = step.geometry;
