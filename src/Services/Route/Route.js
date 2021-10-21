@@ -189,7 +189,7 @@ function Route (options) {
     if (options.exclusions) {
         if (options.exclusions.length !== 0) {
             this.logger.warn("options.exclusions is DEPRECATED !!");
-            for(var c = 0; c < options.exclusions.length; c++) {
+            for (var c = 0; c < options.exclusions.length; c++) {
                 if (typeof options.exclusions[c] === "string") {
                     options.exclusions[c] = options.exclusions[c].toLowerCase();
                 } else {

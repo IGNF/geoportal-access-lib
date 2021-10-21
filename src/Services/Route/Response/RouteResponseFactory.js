@@ -205,11 +205,11 @@ var RouteResponseFactory = {
                             }
 
                             if (step.instruction.exit) {
-                                data.routeInstructions[data.routeInstructions.length - 1].instruction += `${step.instruction.exit}e sortie` ;
+                                data.routeInstructions[data.routeInstructions.length - 1].instruction += `${step.instruction.exit}e sortie`;
                             }
 
                             if (step.name) {
-                                data.routeInstructions[data.routeInstructions.length - 1].instruction += ' sur ' + step.name;
+                                data.routeInstructions[data.routeInstructions.length - 1].instruction += " sur " + step.name;
                             }
                         });
                     }
