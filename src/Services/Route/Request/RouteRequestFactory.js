@@ -63,7 +63,7 @@ var RouteRequestFactory = {
         var settings = options || {};
 
         // gestion des callback
-        var bOnError = !!((options.onError !== null && typeof options.onError === "function"));
+        var bOnError = !!(options.onError !== null && typeof options.onError === "function");
 
         var message = null;
 

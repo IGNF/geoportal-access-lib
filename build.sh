@@ -39,12 +39,12 @@ printTo "BEGIN"
 
 function production() {
   printTo "####### production !"
-  doCmd "npm run build -- --env.production"
+  doCmd "npm run build:prod"
 }
 
 function map() {
   printTo "####### sourcemap !"
-  doCmd "npm run build -- --env.development"
+  doCmd "npm run build:dev"
 }
 
 function sources() {

@@ -94,7 +94,7 @@ var Protocol = {
             settings.wrap = true;
         }
 
-        settings.callback = (options.protocol === "JSONP") ? null : null; // FIXME non géré !?
+        settings.callback = null; // FIXME non géré !?
         settings.output = settings.wrap ? "json" : null;
 
         // on encapsule les reponses dans un objet JSON

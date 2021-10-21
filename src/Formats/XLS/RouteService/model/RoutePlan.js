@@ -106,19 +106,12 @@ function RoutePlan (options) {
     this.options = options || {};
 
     // param obligatoire
-    if (!options.startPoint) {
+    if (!this.options.startPoint) {
         throw new Error("l'option 'startPoint' n'est pas renseignée !");
     }
 
-    if (!options.endPoint) {
+    if (!this.options.endPoint) {
         throw new Error("l'option 'endPoint' n'est pas renseignée !");
-    }
-
-    // et on ajoute les options en paramètre aux options par défaut
-    for (var opt in options) {
-        if (options.hasOwnProperty(opt)) {
-            this.options[opt] = options[opt];
-        }
     }
 }
 

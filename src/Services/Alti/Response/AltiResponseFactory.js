@@ -82,7 +82,7 @@ var AltiResponseFactory = {
                         logger.trace("analyze response : json");
                         logger.trace("analyze response : ", typeof options.response);
 
-                        var JSONResponse;
+                        var JSONResponse = null;
                         if (typeof options.response === "string") {
                             JSONResponse = JSON.parse(options.response);
                         } else {
@@ -90,7 +90,7 @@ var AltiResponseFactory = {
                         }
 
                         // le service renvoie t il une erreur ?
-                        if (JSONResponse.error) {
+                        if (JSONResponse && JSONResponse.error) {
                             // ex. {"error": {"code": "BAD_PARAMETER","description": "The values () cannot be parsed as a valid longitude (double value such as -180 < lat < 180)."}}
                             options.onError.call(options.scope, new ErrorService({
                                 message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", JSONResponse.error.description),
