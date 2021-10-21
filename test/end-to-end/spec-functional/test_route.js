@@ -76,7 +76,7 @@ describe("-- Tests fonctionnels du Service de Calcul d’itinéraires --", funct
                 if (mock) { server = sinon.fakeServer.create(); }
                 options = {
                     apiKey: myKey,
-                    serverUrl: 'http://localhost:8080/simple/1.0.0/route',
+                    serverUrl: 'https://wxs.ign.fr/calcul/geoportail/itineraire/rest/1.0.0/route',
                     protocol: 'XHR', // à surcharger : JSONP|XHR
 
                     httpMethod: 'GET', // à surcharger : GET|POST
@@ -89,8 +89,8 @@ describe("-- Tests fonctionnels du Service de Calcul d’itinéraires --", funct
                         console.log(error);
                     },
                     // spécifique au service
-                    api: 'REST', 
-                    outputFormat: 'json', 
+                    api: 'REST',
+                    outputFormat: 'json',
                     startPoint: {
                         x: 2.64,
                         y: 48.54
@@ -204,7 +204,7 @@ describe("-- Tests fonctionnels du Service de Calcul d’itinéraires --", funct
                 // options par défaut (à surcharger)
                 options = {
                     apiKey: myKey,
-                    serverUrl: 'http://localhost:8080/simple/1.0.0/route',
+                    serverUrl: 'https://wxs.ign.fr/calcul/geoportail/itineraire/rest/1.0.0/route',
                     protocol: 'XHR',
 
                     httpMethod: 'GET',
