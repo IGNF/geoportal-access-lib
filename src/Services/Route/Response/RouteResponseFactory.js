@@ -207,16 +207,18 @@ var RouteResponseFactory = {
                                 data.routeInstructions[data.routeInstructions.length - 1].instruction += `${step.instruction.exit}e sortie`;
                             }
 
-                            if (step.name.nom_1_droite || step.name.toponyme) {
-                                data.routeInstructions[data.routeInstructions.length - 1].instruction += " sur";
-                            }
+                            if (step.attributes.name) {
+                                if (step.attributes.name.nom_1_droite || step.attributes.name.toponyme) {
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += " sur";
+                                }
 
-                            if (step.name.nom_1_droite) {
-                                data.routeInstructions[data.routeInstructions.length - 1].instruction += ` ${step.name.nom_1_droite}`;
-                            }
+                                if (step.attributes.name.nom_1_droite) {
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += ` ${step.attributes.name.nom_1_droite}`;
+                                }
 
-                            if (step.name.toponyme) {
-                                data.routeInstructions[data.routeInstructions.length - 1].instruction += ` ${step.name.toponyme}`;
+                                if (step.attributes.name.toponyme) {
+                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += ` ${step.attributes.name.toponyme}`;
+                                }
                             }
                         });
                     }
