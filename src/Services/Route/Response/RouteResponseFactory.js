@@ -207,8 +207,16 @@ var RouteResponseFactory = {
                                 data.routeInstructions[data.routeInstructions.length - 1].instruction += `${step.instruction.exit}e sortie`;
                             }
 
-                            if (step.name) {
-                                data.routeInstructions[data.routeInstructions.length - 1].instruction += " sur " + step.name;
+                            if (step.name.nom_1_droite || step.name.toponyme) {
+                                data.routeInstructions[data.routeInstructions.length - 1].instruction += " sur";
+                            }
+
+                            if (step.name.nom_1_droite) {
+                                data.routeInstructions[data.routeInstructions.length - 1].instruction += ` ${step.name.nom_1_droite}`;
+                            }
+
+                            if (step.name.toponyme) {
+                                data.routeInstructions[data.routeInstructions.length - 1].instruction += ` ${step.name.toponyme}`;
                             }
                         });
                     }
