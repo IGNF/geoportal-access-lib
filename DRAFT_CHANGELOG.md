@@ -1,6 +1,6 @@
-# Bibliothèque d'accès aux services Géoportail, version 2.1.8
+# Bibliothèque d'accès aux services Géoportail, version 3.0.0
 
-**14/04/2021 : 2.1.8** 
+**02/11/2021 : 3.0.0** 
 
 > release of geoportal access library
 
@@ -12,7 +12,7 @@
 
 * [Changed]
 
-    - mise à jour des liens *NameSpace* sur les schemas du service d'autoconfiguation
+    - [BREAKING CHANGE] utilisation du service itinéraire v2, adaptation de l'interface
 
 * [Removed]
 

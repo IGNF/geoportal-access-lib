@@ -8,6 +8,8 @@ Le fichier [CONTRIBUTING.md](CONTRIBUTING.md) définit les règles et pratiques 
   * [elias75015](https://github.com/elias75015)
   * [pjjmunier](https://github.com/pjjmunier)
   * [gcebelieu](https://github.com/gcebelieu)
+  * [lgrd](https://github.com/lgrd)
+  * [azarz](https://github.com/azarz)
 
 # Autres contributeurs
 
