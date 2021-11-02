@@ -12,7 +12,7 @@
 
 * [Changed]
 
-    - [BREAKING CHANGE] utilisation du service itinéraire v2, adaptation de l'interface
+    - [BREAKING CHANGE] utilisation du service itinéraire v2, adaptation de l'interface (#68)
 
 * [Removed]
 
