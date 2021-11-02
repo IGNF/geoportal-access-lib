@@ -1,6 +1,6 @@
-# Bibliothèque d'accès aux services Géoportail, version 3.0.0
+# Bibliothèque d'accès aux services Géoportail, version 3.0.1
 
-**02/11/2021 : 3.0.0** 
+**02/11/2021 : 3.0.1** 
 
 > release of geoportal access library
 
