@@ -36,8 +36,8 @@ AutoConfResponseReader.VERSION = "1.1.0";
  */
 AutoConfResponseReader.NAMESPACES = {
     xmlns : "http://www.opengis.net/context",
-    gpp : "http://api.ign.fr/geoportail",
-    ows : "http://www.opengis.net/ows/1.1",
+    gpp : "http://api.ign.fr/geoportail", // FIXME remplacer par https://www.geoportail.gouv.fr/gpp
+    ows : "http://www.opengis.net/ows/2.0",
     sld : "http://www.opengis.net/sld",
     wmts : "http://www.opengis.net/wmts/1.0",
     xlink : "http://www.w3.org/1999/xlink",
