@@ -81,11 +81,11 @@ var RouteResponseFactory = {
                         data.bbox.top = parseFloat(JSONResponse.bbox[3]);
                     }
 
-                    if (data.hasOwnProperty("routeGeometry")) {
+                    if (data.hasOwnProperty("routeGeometry") && !options.geometryInInstructions) {
                         data.routeGeometry = JSONResponse.geometry;
                     }
 
-                    if (data.hasOwnProperty("routeInstructions")) {
+                    if (data.hasOwnProperty("routeInstructions") && options.geometryInInstructions) {
                         var legList = JSONResponse.portions;
                         var i;
                         if (Array.isArray(legList) && legList.length) {
