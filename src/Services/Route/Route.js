@@ -309,7 +309,8 @@ Route.prototype.analyzeResponse = function (error, success) {
             rawResponse : this.options.rawResponse,
             onError : error,
             onSuccess : success,
-            scope : this
+            scope : this,
+            geometryInInstructions : this.options.geometryInInstructions
         };
 
         RouteResponseFactory.build(options);
