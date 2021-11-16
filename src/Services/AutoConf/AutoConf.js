@@ -60,6 +60,11 @@ function AutoConf (options) {
     this.logger = Logger.getLogger("Gp.Services.AutoConf");
     this.logger.trace("[Constructeur AutoConf (options)]");
 
+    // si on a une liste de plusieurs clés en options, on la transforme en tableau (multiKeys)
+    if (Array.isArray(this.options.apiKey.split(',')) && this.options.apiKey.split(',').length > 1) {
+        this.options.apiKey = this.options.apiKey.split(',');
+    }
+
     // #####################
     // analyse des options
     // #####################
