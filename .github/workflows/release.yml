@@ -273,6 +273,7 @@ jobs:
         with:
           repository: IGNF/geoportal-access-lib-samples
           ref: master
+          token : ${{ secrets.ADMIN_GEOPORTAL_TOKEN }}
       
       - name: Get the version
         id: get_version

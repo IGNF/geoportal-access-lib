@@ -19,7 +19,6 @@ Click the "Get Config File" button.
 <input type="button" onclick="doIt()" id="key-button" value="Get Config File" class="key-button" ></input></p>
 <script type="text/javascript" src="./../dist/GpServices.js"></script>
 <script type="text/javascript">
-
 function doIt() {
     var kelem = document.getElementById("apiKey") ;
     if (!kelem.value || kelem.value.trim().length == 0) {

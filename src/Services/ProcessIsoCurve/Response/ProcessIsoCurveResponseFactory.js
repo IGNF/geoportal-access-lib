@@ -43,7 +43,6 @@ var ProcessIsoCurveResponseFactory = {
                 logger.trace("analyze response : raw");
                 data = options.response;
             } else {
-  
                 logger.trace("analyze response : json");
 
                 var JSONResponse;
@@ -66,7 +65,7 @@ var ProcessIsoCurveResponseFactory = {
                         data.time = JSONResponse.time;
                         data.distance = "";
                     }
-                    
+
                     data.message = "";
                     data.id = "";
                     data.srs = JSONResponse.crs;
