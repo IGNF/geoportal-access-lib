@@ -93,7 +93,7 @@ ProcessIsoCurveRequest.prototype = {
      *   //  (http://wxs.ign.fr/KEY/isochrone?)
      *   //  resource=&
      *   //  point=&
-     *   //  costValue=& 
+     *   //  costValue=&
      *   //  costType=&
      *   //  profile=&
      *   //  constraints=&
@@ -155,7 +155,7 @@ ProcessIsoCurveRequest.prototype = {
                     postRequest.costType = "time";
                     postRequest.costValue = this.settings.time;
                 }
-                
+
                 postRequest.profile = this.settings.graph;
 
                 if (this.settings.reverse) {

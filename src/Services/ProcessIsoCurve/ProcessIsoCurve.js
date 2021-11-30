@@ -6,7 +6,6 @@ import CommonService from "../CommonService";
 import DefaultUrlService from "../DefaultUrlService";
 import ProcessIsoCurveRequest from "./Request/ProcessIsoCurveRequest";
 import ProcessIsoCurveResponseFactory from "./Response/ProcessIsoCurveResponseFactory";
-import TileMatrixSet from "../AutoConf/Response/model/TileMatrixSet";
 
 /**
  * @classdesc
@@ -18,7 +17,7 @@ import TileMatrixSet from "../AutoConf/Response/model/TileMatrixSet";
  * @extends {Gp.Services.CommonService}
  * @alias Gp.Services.ProcessIsoCurve
  * @param {Object} options - options spécifiques au service (+ les options heritées)
- * 
+ *
  * @param {String} options.resource - La ressource utilisée pour le calcul. Ce paramètre devrait être obligatoire car il l'est dans l'appel au service. Mais il ne l'est pas pour des raisons de rétrocompatibilité.
  *
  * @param {String} options.outputFormat - Le format de la réponse du service iso : 'json' uniquement et par défaut.
@@ -46,15 +45,15 @@ import TileMatrixSet from "../AutoConf/Response/model/TileMatrixSet";
  *      @param {String} [options.constraints.key] - Clé de la contrainte. Généralement "wayType".
  *      @param {String} [options.constraints.operator] - Opérateur de la contrainte. Généralement "=".
  *      @param {String} [options.constraints.value] - Valeur de la contrainte. Généralement "autoroute".
- * 
+ *
  * @param {String} [options.method = "time"] - Méthode utilisée pour le calcul de la courbe iso.
  *      Les valeurs possible sont "time" pour un calcul d'isochrone, "distance" pour un calcul d'isodistance.
  *      Pas de valeur spécifié équivaut à un calcul d'isochrone.
- * 
+ *
  * @param {String} [options.distanceUnit = "km"] - Indique si la distance doit être exprimée en km ou m dans la réponse ("m" or "km").
- * 
+ *
  * @param {String} [options.timeUnit = "standard"] - Indique si la durée doit être exprimée en seconde, minute ou heure dans la réponse ("standard", "second", "minute", "hour"). Il peut-être formatté hh:mm::ss avec la valeur standard.
- * 
+ *
  * @param {Float} options.time - Durée maximum (exprimée en secondes) à utiliser pour le calcul de la courbe à partir du ou jusqu'au point « location ».
  *      Ce paramètre doit être renseigné si l'option "méthod" a la valeur "time".
  *      Si l'option method n'est pas renseignée, ce paramètre doit être renseigné.
@@ -165,14 +164,14 @@ function ProcessIsoCurve (options) {
     this.options.distanceUnit = options.distanceUnit || "km";
     this.options.timeUnit = options.timeUnit || "standard";
 
-    //options depreciees
+    // options depreciees
     if (options.smoothing) {
         this.logger.warn("options.smoothing is DEPRECATED");
-    } 
+    }
     this.options.smoothing = false;
     if (options.holes) {
         this.logger.warn("options.holes is DEPRECATED");
-    } 
+    }
     this.options.holes = false;
 
     // Gestion du graphe
@@ -187,7 +186,7 @@ function ProcessIsoCurve (options) {
         this.options.graph = "car";
     }
 
-    // Gestions des contraintes 
+    // Gestions des contraintes
     this.options.constraints = [];
     if (options.constraints) {
         if (Array.isArray(options.constraints)) {
@@ -206,7 +205,7 @@ function ProcessIsoCurve (options) {
     if (options.exclusions) {
         if (options.exclusions.length !== 0) {
             this.logger.warn("options.exclusions is DEPRECATED !!");
-            for(var c = 0; c < options.exclusions.length; c++) {
+            for (var c = 0; c < options.exclusions.length; c++) {
                 if (typeof options.exclusions[c] === "string") {
                     options.exclusions[c] = options.exclusions[c].toLowerCase();
                 } else {
@@ -255,7 +254,6 @@ function ProcessIsoCurve (options) {
         this.options.serverUrl = urlFound;
         this.logger.trace("Serveur URL par defaut : " + this.options.serverUrl);
     }
-
 }
 
 /**

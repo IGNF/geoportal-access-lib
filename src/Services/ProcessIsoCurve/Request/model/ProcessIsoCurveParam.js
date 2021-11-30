@@ -31,7 +31,7 @@ function ProcessIsoCurveParam (options) {
     /** Identifiant de l’isochrone */
     this.id = this.options.id;
 
-    /** Resource */ 
+    /** Resource */
     this.resource = this.options.resource;
 
     /** Coordonnées de départ (ou arrivée si le reverse est à true). */
@@ -94,7 +94,7 @@ ProcessIsoCurveParam.prototype = {
 
     /**
      * Retourne l'unité de la distance
-     * @returns {String} 
+     * @returns {String}
      */
     getDistanceUnit : function () {
         if (this.distanceUnit === "m") {
@@ -108,7 +108,7 @@ ProcessIsoCurveParam.prototype = {
 
     /**
      * Retourne la liste des contraintes
-     * @returns {String} 
+     * @returns {String}
      */
     getConstraints : function () {
         var constraintArray = [];
@@ -123,7 +123,7 @@ ProcessIsoCurveParam.prototype = {
 
     /**
      * Retourne la direction
-     * @returns {String} 
+     * @returns {String}
      */
     getDirection : function () {
         if (this.reverse) {
