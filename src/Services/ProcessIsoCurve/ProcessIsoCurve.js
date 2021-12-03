@@ -157,7 +157,7 @@ function ProcessIsoCurve (options) {
 
     // options par defaut du service
     // TODO: modifier la ressource lors de la mise en production du service
-    this.options.resource = options.resource || "bduni-idf-pgr";
+    this.options.resource = options.resource || "bdtopo-iso";
     this.options.exclusions = options.exclusions || [];
     this.options.reverse = options.reverse || false;
     this.options.srs = options.srs || "EPSG:4326";

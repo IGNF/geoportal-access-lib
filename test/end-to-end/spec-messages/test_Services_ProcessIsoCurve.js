@@ -17,7 +17,7 @@ describe("-- Test sur les messages d'erreur spécifiques du Service de calcul d'
         // options par defaut du geocodage direct
         options = {
             apiKey : 'jhyvi0fgmnuxvfv0zjzorvdn',
-            serverUrl : "https://itineraire.ign.fr/simple/1.0.0/isochrone",
+            serverUrl : "https://wxs.ign.fr/calcul/geoportail/isochrone/rest/1.0.0/isochrone",
             protocol : 'JSONP',
             // proxyURL : (window.proxy) ? 'spec-messages/proxy/php/proxy.php?url=' : null, // ex. 'spec-messages/proxy/php/proxy.php?url='
             httpMethod : 'GET',

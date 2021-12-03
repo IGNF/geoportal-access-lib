@@ -62,7 +62,7 @@ describe("-- Tests fonctionnels du Service de Calcul d’isochrones / isodistanc
             // options par defaut (à surcharger)
             var options = {
                 apiKey: myKey,
-                serverUrl: "https://itineraire.ign.fr/simple/1.0.0/isochrone",
+                serverUrl: "https://wxs.ign.fr/calcul/geoportail/isochrone/rest/1.0.0/isochrone",
                 protocol: 'XHR', // à surcharger : JSONP|XHR
 
                 httpMethod: 'GET', // à surcharger : GET|POST

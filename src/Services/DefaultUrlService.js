@@ -108,7 +108,7 @@ var DefaultUrlService = {
      * @property {Function} url (key) - Returns isocurve service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols ("iso-json" or "iso-xml").
      */
     ProcessIsoCurve : {
-        _key : "/simple/1.0.0/isochrone",
+        _key : "/geoportail/isochrone/rest/1.0.0/isochrone",
         /**
         * url
         * @param {String} key - key
