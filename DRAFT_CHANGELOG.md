@@ -1,22 +1,22 @@
-# Bibliothèque d'accès aux services Géoportail, version 3.0.3
+# Bibliothèque d'accès aux services Géoportail, version 3.0.4
 
-**10/11/2021 : 3.0.3** 
+**03/12/2021 : 3.0.4**
 
 > release of geoportal access library
 
 ## Summary
- 
+
 ## Changelog
 
 * [Added]
+
+  - En options en entrée de l'autoconf, il y a possibilité désormais de passer une liste de clés sous forme de string. ex. "key1,key2,key3" (#77)
 
 * [Changed]
 
 * [Removed]
 
 * [Fixed]
-  
-    - seule la geometrie complete est renvoyée par le service si la geometrie par portion n'est pas demandée (49c0059be9e0a2aa3f5e41af9ebfdb28152a7452)
 
 * [Deprecated]
 
