@@ -1,6 +1,6 @@
-# Bibliothèque d'accès aux services Géoportail, version 3.0.5
+# Bibliothèque d'accès aux services Géoportail, version 3.0.6
 
-**03/12/2021 : 3.0.5**
+**xx/xx/2022 : 3.0.6**
 
 > release of geoportal access library
 
@@ -10,9 +10,9 @@
 
 * [Added]
 
-  - En options en entrée de l'autoconf, il y a possibilité désormais de passer une liste de clés sous forme de string. ex. "key1,key2,key3" (#77)
-
 * [Changed]
+
+    - refactorisation de la page de documentation pour récupérer l'autoconf en local (#78)
 
 * [Removed]
 

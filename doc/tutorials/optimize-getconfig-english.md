@@ -1,35 +1,33 @@
-# Optimisez votre configuration d'accès à la plateforme géoportail
+# Optimize your geoportal access configuration
 
-Pour utiliser les ressources du Géoportail, vous devez utiliser une ou plusieurs clefs d'accès gratuites qui répondent à vos besoins et qui peuvent être obtenues sur [le site geoservices.ign.fr](https://geoservices.ign.fr/services-web).
+To use Geoportal resources, you need one or several access keys which can be obtained on the [geoservices.ign.fr web site](https://geoservices.ign.fr/services-web).
 
-Vous pouvez accélerer votre application géoportail en récupérant la configuration associée à vos clefs d'accès géoportail.
+You can speed up your geoportal application by caching your the configuration associated to your geoportal access key(s) on your server.
 
-Voici comment faire.
+Here is how you can do.
 
 
-### 1. Récupérer le fichier d'autoconfiguration
+### 1. Get the configuration file
 
-Sélectionnez le nombre de clefs d'accès que vous souhaitez utiliser dans votre application géoportail.
+Fill the input text below with your geoportal access key ; if you want Geoportal Services to be accessed by default in https, check the "https access" check box.
 
-Pour chaque clé, remplissez le champ correspondant avec son nom. Si vous voulez que les services géoportail soient requêtés en https par défaut, cliquez sur la case "accès https".
-
-Cliquez sur le bouton "Récupérer le fichier de configuration".
+Click the "Get Config File" button.
 
 <form>
     <section>
-        <label for="keyNumber">Nombre de clefs : </label>
+        <label for="keyNumber">Number of keys : </label>
         <input type="number" min="1" max="10" id="keyNumber" value="1">
     </section>
     <section id="keyInputSection">
         <p id="keyInputPara1">
-            <label for="keyInput1" class="key-label">Clef 1 : </label>
-            <input type="text" class="form-control input-sm key-value" placeholder="Clef d'accès Géoportail 1"
+            <label for="keyInput1" class="key-label">Key 1 : </label>
+            <input type="text" class="form-control input-sm key-value" placeholder="Geoportail access key 1"
                 size="30" id="apiKey1">
         </p>
     </section>
     <section>
-        <input type="checkbox" id="https-cb">accès https</input>
-        <input type="button" onclick="doIt()" id="key-button" value="Récupérer le fichier de configuration" class="key-button"></input>
+        <input type="checkbox" id="https-cb">https access</input>
+        <input type="button" onclick="doIt()" id="key-button" value="Get Config File" class="key-button"></input>
         </p>
     </section>
 </form>
@@ -58,12 +56,12 @@ Cliquez sur le bouton "Récupérer le fichier de configuration".
             // create label for key input
             var keyLabel = document.createElement("div");
             keyLabel.className = "key-label";
-            keyLabel.innerHTML = "Clef " + i + " : ";
+            keyLabel.innerHTML = "Key " + i + " : ";
             // create key input 
             var keyInput = document.createElement("input");
             keyInput.type = "text";
             keyInput.className = "form-control input-sm key-value"; // set the CSS class
-            keyInput.placeholder = "Clef d'accès Géoportail " + i;
+            keyInput.placeholder = "Geoportail access key " + i;
             keyInput.size = "30";
             keyInput.id = "apiKey" + i;
             // add the form elements to the DOM
@@ -126,17 +124,18 @@ Cliquez sur le bouton "Récupérer le fichier de configuration".
 </script>
 
 
-Une fois chargé, sauvegardez le fichier "autoconf.json" (ou "autoconf-https.json") sur votre plateforme.
+
+When prompted, save the file "autoconf.json" (or "autoconf-https.json") on your platform.
 
 
-### 2. Configurez les fonctions géoportail pour utiliser ce fichier
+### 2. Configure geoportal functions to use that file
 
-Que ce soit avec [la bibliothèque d'accès aux services Géoportail](https://github.com/ignf/geoportal-access-lib), [les extensions Géoportail](https://github.com/IGNF/geoportal-extensions) ou [le SDK Géoportail](http://ignf.github.io/evolution-apigeoportail/sdk/presentation.html), vous pouvez utiliser ce fichier pour configurer votre application.
+Be it [Geoportal access lib](https://github.com/ignf/geoportal-access-lib), [Geoportal extensions](https://github.com/IGNF/geoportal-extensions) or [Geoportal SDK](http://ignf.github.io/evolution-apigeoportail/sdk/presentation.html), you can use that file to configure your application :
 
 
-#### Avec la bibliothèque d'accès aux services Géoportail
+#### With Geoportal access lib
 
-Utilisez le chemin vers votre fichier d'autoconfiguration comme une valeur du paramètre **serverUrl** de la fonction [Gp.Services.getConfig()](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~getConfig) (à la place du paramètre **apiKey**) :
+Use it as a value of the **serverUrl** param of the [Gp.Services.getConfig()](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~getConfig) function (instead of the **apiKey** param) :
 
 ``` javascript
 the Gp.Services.getConfig({
@@ -148,9 +147,9 @@ the Gp.Services.getConfig({
 ```
 
 
-#### Avec les extensions Géoportail
+#### With Geoportal extensions
 
-Utilisez le chemin vers votre fichier d'autoconfiguration dans l'attribut **data-url** du tag script qui permet de charger les extensions Géoportail (à la place de l'attribut **dataKey**) :
+Use it with the **data-url** attribute of the script tag used to load the Geoportal extension (instead of the **data-key** attribute) :
 
 ``` html
 <script type="text/javascript" src="path/to/GpPluginLeaflet.js" data-url="path/to/autoconf.json"></script>
@@ -159,9 +158,9 @@ Utilisez le chemin vers votre fichier d'autoconfiguration dans l'attribut **data
 ```
 
 
-#### Avec le SDK Géoportail
+#### With Geoportal SDK
 
-Utilisez le chemin vers votre fichier d'autoconfiguration comme une valeur du paramètre **configUrl** de l'objet Gp.MapOptions utilisé dans la fonction Gp.Map.load() (à la place du paramètre **apiKey**) :
+Use it as a value of the **configUrl** param of the Gp.MapOptions object used in the Gp.Map.load() function (instead of the **apiKey** param) :
 
 ``` javascript
 Gp.Map.load(
