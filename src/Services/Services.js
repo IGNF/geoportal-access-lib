@@ -20,7 +20,7 @@ var Services = {
      *
      * @method getConfig
      * @param {Object} options - Options for function call.
-     * @param {String} options.apiKey - Access key to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/ign/contrats}.
+     * @param {String} options.apiKey - Access key(s) ("," as separator, no spaces) to Geoportal platform, obtained [here]{@link http://professionnels.ign.fr/ign/contrats}.
      * @param {Function} options.onSuccess - Callback function for getting successful service response. Takes a {@link Gp.Services.GetConfigResponse} object as a parameter except if "rawResponse" parameter is set to true : a String will be returned.
      * @param {Function} [options.onFailure] - Callback function for handling unsuccessful service responses (timeOut, missing rights, ...). Takes a {@link Gp.Error} object as parameter.
      * @param {Number} [options.timeOut=0] - Number of milliseconds above which a timeOut response will be returned with onFailure callback (see above). Default value is 0 which means timeOut will not be handled.
