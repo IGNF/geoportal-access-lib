@@ -15,25 +15,25 @@
 
 // Example :
 //
-// DefaultUrlService.Alti.url('efe4r54tj4uy5i78o7545eaz7e87a')[elevation-json]
-//  output {String} -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/rest/elevation.json
+// DefaultUrlService.Alti.url('alti')[elevation-json]
+//  output {String} -> http://wxs.ign.fr/calcul/alti/rest/elevation.json
 //
-// DefaultUrlService.Alti.url('efe4r54tj4uy5i78o7545eaz7e87a')
+// DefaultUrlService.Alti.url('calcul')
 // output {Object|String}
-// -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/rest/elevation.json
-// -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/rest/elevation.xml
-// -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/rest/elevationLine.json
-// -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/rest/elevationLine.xml
-// -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/wps
+// -> http://wxs.ign.fr/calcul/alti/rest/elevation.json
+// -> http://wxs.ign.fr/calcul/alti/rest/elevation.xml
+// -> http://wxs.ign.fr/calcul/alti/rest/elevationLine.json
+// -> http://wxs.ign.fr/calcul/alti/rest/elevationLine.xml
+// -> http://wxs.ign.fr/calcul/alti/wps
 //
 // ssl by default.
 //
 // Force to not do ssl :
 // DefaultUrlService.ssl = false;
 //
-// DefaultUrlService.AutoComplete.url('efe4r54tj4uy5i78o7545eaz7e87a')
+// DefaultUrlService.AutoComplete.url('calcul')
 // output {Object|String}
-// -> https://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/ols/apis/completion
+// -> https://wxs.ign.fr/calcul/ols/apis/completion
 
 // constantes internes
 var HOSTNAME = "wxs.ign.fr";
