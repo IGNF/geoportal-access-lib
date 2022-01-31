@@ -33,7 +33,7 @@ Cliquez sur le bouton "Récupérer le fichier de configuration".
         </p>
     </section>
 </form>
-<script type="text/javascript" src="../../dist/GpServices.js"></script>
+<script type="text/javascript" src="./../dist/GpServices.js"></script>
 <script type="text/javascript">
     document.getElementById("keyNumber").addEventListener('change', createInput);
     document.getElementById("keyNumber").value = 1; //reset the key number input
