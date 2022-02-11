@@ -242,7 +242,7 @@ var Services = {
      * @param {Float} options.distance - Maximum distance (expressed in meters) to use when options.method is set to "distance".
      * @param {Boolean} [options.reverse = false] - Set this parameter to true if you want options.position to be the destination (instead of departure) for the computing.
      * @param {String} [options.distanceUnit = "km"] - The unit used to provide distances in the response ("m" or "km").
-     * @param {String} [options.timeUnit = "standard"] - The unit used to provide duration in the response ("standard", "second", "minute", "hour").
+     * @param {String} [options.timeUnit = "second"] - The unit used to provide duration in the response ("standard", "second", "minute", "hour").
      * @param {Boolean} [options.smoothing = false] - DEPRECATED: Set this parameter to true if you want the resulting geometry to be smoothed.
      * @param {Boolean} [options.holes = false] - DEPRECATED: Set this parameter to true if you want the resulting geometry (polygon) to have holes if pertinent.
      * @param {Function} options.onSuccess - Callback function for getting successful service response. Takes a {@link Gp.Services.IsoCurveResponse} object as a parameter except if "rawResponse" is set to true.

@@ -52,7 +52,7 @@ import ProcessIsoCurveResponseFactory from "./Response/ProcessIsoCurveResponseFa
  *
  * @param {String} [options.distanceUnit = "km"] - Indique si la distance doit être exprimée en km ou m dans la réponse ("m" or "km").
  *
- * @param {String} [options.timeUnit = "standard"] - Indique si la durée doit être exprimée en seconde, minute ou heure dans la réponse ("standard", "second", "minute", "hour"). Il peut-être formatté hh:mm::ss avec la valeur standard.
+ * @param {String} [options.timeUnit = "second"] - Indique si la durée doit être exprimée en seconde, minute ou heure dans la réponse ("standard", "second", "minute", "hour"). Il peut-être formatté hh:mm::ss avec la valeur standard.
  *
  * @param {Float} options.time - Durée maximum (exprimée en secondes) à utiliser pour le calcul de la courbe à partir du ou jusqu'au point « location ».
  *      Ce paramètre doit être renseigné si l'option "méthod" a la valeur "time".
@@ -162,7 +162,7 @@ function ProcessIsoCurve (options) {
     this.options.reverse = options.reverse || false;
     this.options.srs = options.srs || "EPSG:4326";
     this.options.distanceUnit = options.distanceUnit || "km";
-    this.options.timeUnit = options.timeUnit || "standard";
+    this.options.timeUnit = options.timeUnit || "second";
 
     // options depreciees
     if (options.smoothing) {
