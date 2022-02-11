@@ -23,7 +23,7 @@ describe("-- Test DefaultUrlService --", function () {
             expect(DefaultUrlService.Alti.url(key)["profil-json"]).to.be.equal("https://wxs.ign.fr/CLE/alti/rest/elevationLine.json");
             expect(DefaultUrlService.Alti.url(key)["profil-xml"]).to.be.equal("https://wxs.ign.fr/CLE/alti/rest/elevationLine.xml");
             expect(DefaultUrlService.Alti.url(key)["wps"]).to.be.equal("https://wxs.ign.fr/CLE/alti/wps");
-            expect(DefaultUrlService.ProcessIsoCurve.url(key)).to.be.equal("https://wxs.ign.fr/CLE/simple/1.0.0/isochrone");
+            expect(DefaultUrlService.ProcessIsoCurve.url(key)).to.be.equal("https://wxs.ign.fr/CLE/geoportail/isochrone/rest/1.0.0/isochrone");
             expect(DefaultUrlService.AutoComplete.url(key)).to.be.equal("https://wxs.ign.fr/CLE/ols/apis/completion" );
             expect(DefaultUrlService.ReverseGeocode.url(key)).to.be.equal("https://wxs.ign.fr/CLE/geoportail/ols");
             expect(DefaultUrlService.AutoConf.url(key)["apiKey"]).to.be.equal("https://wxs.ign.fr/CLE/autoconf");
