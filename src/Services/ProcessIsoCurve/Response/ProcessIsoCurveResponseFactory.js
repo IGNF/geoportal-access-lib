@@ -57,12 +57,12 @@ var ProcessIsoCurveResponseFactory = {
                 data = new ProcessIsoCurveResponse();
 
                 // remplissage de l'objet créé avec les attribtuts de la réponse du service
-                if (data) {
-                    if (data.costValue === "distance") {
+                if (JSONResponse) {
+                    if (JSONResponse.costType === "distance") {
                         data.time = "";
-                        data.distance = JSONResponse.distance;
+                        data.distance = JSONResponse.costValue;
                     } else {
-                        data.time = JSONResponse.time;
+                        data.time = JSONResponse.costValue;
                         data.distance = "";
                     }
 
@@ -83,7 +83,7 @@ var ProcessIsoCurveResponseFactory = {
                 // info : en cas de problèmes de droits (clé invalide ou autre), la réponse est au format XML !!
                 // ex. <ExceptionReport><Exception exceptionCode="MissingParameter">Key does not exist or has expired</Exception></ExceptionReport>
                 // mais le statut est 403, l'erreur est donc remontée plus tôt.
-                if (data && data.exceptionReport) {
+                if (data.exceptionReport) {
                     options.onError.call(options.scope, new ErrorService({
                         message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", data.exceptionReport),
                         type : ErrorService.TYPE_SRVERR,
