@@ -50,7 +50,7 @@ import ProcessIsoCurveResponseFactory from "./Response/ProcessIsoCurveResponseFa
  *      Les valeurs possible sont "time" pour un calcul d'isochrone, "distance" pour un calcul d'isodistance.
  *      Pas de valeur spécifié équivaut à un calcul d'isochrone.
  *
- * @param {String} [options.distanceUnit = "km"] - Indique si la distance doit être exprimée en km ou m dans la réponse ("m" or "km").
+ * @param {String} [options.distanceUnit = "m"] - Indique si la distance doit être exprimée en km ou m dans la réponse ("m" or "km").
  *
  * @param {String} [options.timeUnit = "second"] - Indique si la durée doit être exprimée en seconde, minute ou heure dans la réponse ("standard", "second", "minute", "hour"). Il peut-être formatté hh:mm::ss avec la valeur standard.
  *
@@ -161,7 +161,7 @@ function ProcessIsoCurve (options) {
     this.options.exclusions = options.exclusions || [];
     this.options.reverse = options.reverse || false;
     this.options.srs = options.srs || "EPSG:4326";
-    this.options.distanceUnit = options.distanceUnit || "km";
+    this.options.distanceUnit = options.distanceUnit || "m";
     this.options.timeUnit = options.timeUnit || "second";
 
     // options depreciees
