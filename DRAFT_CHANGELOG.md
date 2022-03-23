@@ -12,11 +12,13 @@
 
 * [Changed]
 
+    - utilisation du service d'isochrone v2 (#70)
+
 * [Removed]
 
 * [Fixed]
 
-    - fix coquille chemin vers GpServices dans le tutorial getconfig locale
+    - fix coquille chemin vers GpServices dans le tutorial getconfig local
 
 * [Deprecated]
 
