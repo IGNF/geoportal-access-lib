@@ -94,6 +94,7 @@
               graph: graph,
               reverse: reverse,
               apiKey: "{{ apikey }}",
+              serverUrl : "https://wxs.ign.fr/calcul/geoportail/isochrone/rest/1.0.0/isochrone",
               onSuccess: function(result) {
                 resultDiv.innerHTML = "<p>" + JSON.stringify(result) + "</p>"
               },

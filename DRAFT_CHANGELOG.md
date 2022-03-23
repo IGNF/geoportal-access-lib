@@ -1,12 +1,10 @@
-# Bibliothèque d'accès aux services Géoportail, version 3.0.6
+# Bibliothèque d'accès aux services Géoportail, version 3.1.0
 
-**25/01/2022 : 3.0.6**
+**23/03/2022 : 3.1.0**
 
 > release of geoportal access library
 
 ## Summary
-
-Mise à jour de la documentation pour utilisation de clefs génériques multiples
 
 ## Changelog
 
@@ -14,12 +12,13 @@ Mise à jour de la documentation pour utilisation de clefs génériques multiple
 
 * [Changed]
 
-    - refactorisation de la page de documentation pour récupérer l'autoconf en local (#78)
-    - mise à jour du readme et de la jsdoc (#79 et #80)
+    - utilisation du service d'isochrone v2 (#70)
 
 * [Removed]
 
 * [Fixed]
+
+    - fix coquille chemin vers GpServices dans le tutorial getconfig local
 
 * [Deprecated]
 
