@@ -41,7 +41,7 @@ function GeocodeParamREST (options) {
 
     this.lat = this.options.position && this.options.position.lat ? this.options.position.lat : null;
 
-    this.maxResp = this.options.maximumResponses || null;
+    this.maxResp = this.options.maxResp || null;
 
     this.returnTrueGeometry = this.options.returnTrueGeometry || null;
 
@@ -134,6 +134,13 @@ GeocodeParamREST.prototype.getParams = function () {
         });
     }
 
+    if (this.index) {
+        map.push({
+            k : "index",
+            v : this.getIndex()
+        });
+    }
+
     if (this.geocodeMethod === "reverse") {
         map.push({
             k : "searchGeom",
@@ -150,7 +157,7 @@ GeocodeParamREST.prototype.getParams = function () {
 
     if (this.maxResp) {
         map.push({
-            k : "maxResp",
+            k : "limit",
             v : this.maxResp
         });
     }

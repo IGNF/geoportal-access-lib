@@ -73,13 +73,11 @@ GeocodeRequestREST.prototype = {
             request += o.k + "=" + o.v;
         }
 
-        var index = oParams.getIndex();
-
         if (!this.settings.geocodeMethod || (this.settings.geocodeMethod !== "search" && this.settings.geocodeMethod !== "reverse")) {
             throw new Error("Error geocodeMethod not valid");
         }
 
-        this.requestString = "/" + index + "/" + this.settings.geocodeMethod + "/?" + request;
+        this.requestString = "/geocode/" + this.settings.geocodeMethod + "/?" + request;
         this.logger.trace(this.requestString);
 
         return this.requestString;

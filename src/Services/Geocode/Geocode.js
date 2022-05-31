@@ -83,7 +83,7 @@ function Geocode (options_) {
     this.logger.trace("[Constructeur Geocode (options)]");
 
     var options = this.patchOptionConvertor(options_);
-    options.serverUrl = options.serverUrl || "https://geocodage.ign.fr/look4";
+    options.serverUrl = options.serverUrl || "http://geoinfra.oshimae.rie.agri/look4";
 
     // appel du constructeur par heritage
     CommonService.apply(this, [options]);
@@ -224,7 +224,7 @@ Geocode.prototype.buildRequest = function (error, success) {
         index : this.options.index,
         returnTrueGeometry : this.options.returnTrueGeometry,
         position : this.options.position,
-        maximumResponses : this.options.maximumResponses,
+        maxResp : this.options.maximumResponses,
         filters : this.options.filters
     };
 

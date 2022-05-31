@@ -50,9 +50,9 @@
         </p>
         <p>Type de Géocodage :
             <select id="type">
-                <option value="PositionOfInterest">Toponymes</option>
-                <option value="StreetAddress">Adresses</option>
-                <option value="CadastralParcel">Parcelles Cadastrales</option>
+                <option value="poi">Toponymes</option>
+                <option value="address">Adresses</option>
+                <option value="parcel">Parcelles Cadastrales</option>
             </select>
         </p>
         </div>
@@ -72,10 +72,11 @@
             var location = document.getElementById("location").value;
             var fo = {};
             if (filterProp && filterValue) fo[filterProp] = filterValue;
-            fo.type = [document.getElementById("type").options[typeIdx].value];
+            var index = [document.getElementById("type").options[typeIdx].value];
             try {
                 Gp.Services.geocode({
                     apiKey: "{{ apikey }}",
+                    index: index,
                     location: location,
                     filters: fo,
                     onSuccess: function(result) {
