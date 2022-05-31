@@ -72,7 +72,7 @@ GeocodeParamREST.prototype = {
         var filters = {};
         for (var prop in this.filters) {
             if (this.filters.hasOwnProperty(prop)) {
-                filters["filters[" + prop + "]"] = this.filters[prop];
+                filters[prop] = this.filters[prop];
             }
         }
         return filters;

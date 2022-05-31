@@ -19,8 +19,7 @@
                     // returnTrueGeometry: true,
                     filters: {
                         type: "CadastralParcel", // CadastralParcel, PositionOfInterest, StreetAddress
-                        postalCode: 94160,
-                        codeDepartement: 75,
+                        departmentcode: 75,
                     },
                     onSuccess : function (response) {
                         print(response.features);
@@ -43,7 +42,7 @@
             index : "CadastralParcel", // CadastralParcel, PositionOfInterest, StreetAddress
             filters: {
                 // postalCode: 94160,
-                codeDepartement: 75,
+                departmentcode: 75,
             },
             onSuccess : function (response) {
                 print(response);
