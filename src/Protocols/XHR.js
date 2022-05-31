@@ -158,26 +158,44 @@ var XHR = {
 
                 // test on env. nodejs or browser
                 if (typeof window === "undefined") {
-                    // Utilisation du module :
-                    // cf. http://blog.modulus.io/node.js-tutorial-how-to-use-request-module
+                    var nodefetch = require("node-fetch");
 
-                    var req = require("request");// __request
+                    var opts = {
+                        headers : {
+                            Referer : "https://localhost"
+                        }
+                    };
 
-                    // mapping data avec body param. pour le mode POST ou PUT (?)
                     if (options.data && typeof options.data === "string" && corps) {
-                        options.body = options.data;
+                        opts = {
+                            method : options.method,
+                            body : options.data,
+                            headers : {
+                                "Content-Type" : options.content,
+                                Referer : "https://localhost"
+                            }
+                        };
                     }
 
-                    // FIXME ERROR : self signed certificate in certificate chain
-                    options.rejectUnauthorized = false;
-
-                    req(options, function (error, response, body) {
-                        if (!error && response.statusCode === 200 && body) {
-                            resolve(body);
-                        } else {
-                            reject("Errors Occured on Http Request (nodejs) : " + error);
-                        }
-                    });
+                    return nodefetch(options.url, opts)
+                        .then(function (response) {
+                            if (response.ok) { // res.status >= 200 && res.status < 300
+                                resolve(response.text());
+                            } else {
+                                var message = "Errors Occured on Http Request (status : '" + response.statusText + "' | url : '" + response.url + "')";
+                                var status = response.status;
+                                reject({
+                                    message : message,
+                                    status : status
+                                });
+                            }
+                        })
+                        .catch(function (e) {
+                            reject({
+                                message : e,
+                                status : -1
+                            });
+                        });
                 } else {
                     if (window.XMLHttpRequest) {
                         logger.trace("XMLHttpRequest");

@@ -14,18 +14,15 @@ var glob    = require("glob");
 var webpack = require("webpack");
 
 // -- plugins
-var BannerWebPackPlugin      = webpack.BannerPlugin;
-var TerserJsWebPackPlugin    = require("terser-webpack-plugin");
-var JsDocWebPackPlugin       = require("jsdoc-webpack-plugin");
-var IgnoreWebPackPlugin      = webpack.IgnorePlugin;
-var CleanWebpackPlugin       = require("clean-webpack-plugin");
-var DefineWebpackPlugin      = webpack.DefinePlugin;
+var BannerWebPackPlugin    = webpack.BannerPlugin;
+var TerserJsWebPackPlugin  = require("terser-webpack-plugin");
+var JsDocWebPackPlugin     = require("jsdoc-webpack-plugin");
+var CleanWebpackPlugin     = require("clean-webpack-plugin");
 var ReplaceWebpackPlugin   = require("replace-bundle-webpack-plugin");
 var ShellWebpackPlugin     = require("webpack-shell-plugin");
 var HandlebarsPlugin       = require("./scripts/webpackPlugins/handlebars-plugin");
 var HandlebarsLayoutPlugin = require("handlebars-layouts");
 var CopyWebpackPlugin      = require("copy-webpack-plugin");
-// var SourceMapDevToolWebpackPlugin = webpack.SourceMapDevToolPlugin;
 
 // -- performances
 var SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
@@ -61,13 +58,14 @@ module.exports = (env, argv) => {
             library : "Gp",
             libraryTarget : "umd",
             libraryExport : "default",
-            umdNamedDefine : true
+            umdNamedDefine : true,
+            globalObject: 'this'
         },
         // utilisation des lib pour nodeJs uniquement
         externals : {
-            request : {
-                commonjs2 : "request",
-                commonjs : "request",
+            "node-fetch" : {
+                commonjs2 : "node-fetch",
+                commonjs : "node-fetch",
                 amd : "require"
             },
             xmldom : {

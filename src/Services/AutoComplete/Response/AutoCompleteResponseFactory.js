@@ -44,7 +44,7 @@ var AutoCompleteResponseFactory = {
                 logger.trace("analyze response : raw");
                 data = options.response;
             } else {
-                var JSONResponse;
+                var JSONResponse = null;
                 if (typeof options.response === "string") {
                     JSONResponse = JSON.parse(options.response);
                 } else {
@@ -69,17 +69,17 @@ var AutoCompleteResponseFactory = {
 
                     // boucle sur les résultats de l'autocomplétion
                     if (JSONResponse.results && Array.isArray(JSONResponse.results)) {
-                        var suggestedLocation;
+                        var suggestedLocation = null;
 
                         for (var i = 0; i < JSONResponse.results.length; i++) {
                             var result = JSONResponse.results[i];
                             suggestedLocation = new SuggestedLocation();
 
-                            if (suggestedLocation) {
-                                if (result && result.country === "StreetAddress") {
+                            if (result) {
+                                if (result.country === "StreetAddress") {
                                     suggestedLocation.street = result.street;
                                     suggestedLocation.type = "StreetAddress";
-                                } else if (result && result.country === "PositionOfInterest") {
+                                } else if (result.country === "PositionOfInterest") {
                                     suggestedLocation.poi = result.street;
                                     suggestedLocation.kind = result.kind;
                                     suggestedLocation.type = "PositionOfInterest";

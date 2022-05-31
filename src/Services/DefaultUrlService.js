@@ -15,25 +15,25 @@
 
 // Example :
 //
-// DefaultUrlService.Alti.url('efe4r54tj4uy5i78o7545eaz7e87a')[elevation-json]
-//  output {String} -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/rest/elevation.json
+// DefaultUrlService.Alti.url('alti')[elevation-json]
+//  output {String} -> http://wxs.ign.fr/calcul/alti/rest/elevation.json
 //
-// DefaultUrlService.Alti.url('efe4r54tj4uy5i78o7545eaz7e87a')
+// DefaultUrlService.Alti.url('calcul')
 // output {Object|String}
-// -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/rest/elevation.json
-// -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/rest/elevation.xml
-// -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/rest/elevationLine.json
-// -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/rest/elevationLine.xml
-// -> http://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/alti/wps
+// -> http://wxs.ign.fr/calcul/alti/rest/elevation.json
+// -> http://wxs.ign.fr/calcul/alti/rest/elevation.xml
+// -> http://wxs.ign.fr/calcul/alti/rest/elevationLine.json
+// -> http://wxs.ign.fr/calcul/alti/rest/elevationLine.xml
+// -> http://wxs.ign.fr/calcul/alti/wps
 //
 // ssl by default.
 //
 // Force to not do ssl :
 // DefaultUrlService.ssl = false;
 //
-// DefaultUrlService.AutoComplete.url('efe4r54tj4uy5i78o7545eaz7e87a')
+// DefaultUrlService.AutoComplete.url('calcul')
 // output {Object|String}
-// -> https://wxs.ign.fr/efe4r54tj4uy5i78o7545eaz7e87a/ols/apis/completion
+// -> https://wxs.ign.fr/calcul/ols/apis/completion
 
 // constantes internes
 var HOSTNAME = "wxs.ign.fr";
@@ -108,20 +108,14 @@ var DefaultUrlService = {
      * @property {Function} url (key) - Returns isocurve service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols ("iso-json" or "iso-xml").
      */
     ProcessIsoCurve : {
-        _key : {
-            "iso-json" : "/isochrone/isochrone.json", // rest (geoconcept)
-            "iso-xml" : "/isochrone/isochrone.xml" // rest (geoconcept)
-        },
+        _key : "/geoportail/isochrone/rest/1.0.0/isochrone",
         /**
         * url
         * @param {String} key - key
         * @returns {String} url
         */
         url : function (key) {
-            return {
-                "iso-json" : DefaultUrlService.url(key, this._key["iso-json"]),
-                "iso-xml" : DefaultUrlService.url(key, this._key["iso-xml"])
-            };
+            return DefaultUrlService.url(key, this._key);
         }
     },
     /**
@@ -211,25 +205,17 @@ var DefaultUrlService = {
      * Routing web service access
      *
      * @member {Object}
-     * @property {Function} url (key) - Returns routing service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols ("route-json" or "route-xml").
+     * @property {Function} url (key) - Returns routing service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols.
      */
     Route : {
-        _key : {
-            ols : "/itineraire/ols", // openLS
-            "route-json" : "/itineraire/rest/route.json", // rest (geoconcept)
-            "route-xml" : "/itineraire/rest/route.xml" // rest (geoconcept)
-        },
+        _key : "/geoportail/itineraire/rest/1.0.0/route",
         /**
         * url
         * @param {String} key - key
         * @returns {String} url
         */
         url : function (key) {
-            return {
-                ols : DefaultUrlService.url(key, this._key["ols"]),
-                "route-json" : DefaultUrlService.url(key, this._key["route-json"]),
-                "route-xml" : DefaultUrlService.url(key, this._key["route-xml"])
-            };
+            return DefaultUrlService.url(key, this._key);
         }
     }
 };
