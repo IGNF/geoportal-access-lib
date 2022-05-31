@@ -93,7 +93,7 @@ function ReverseGeocode (options_) {
     this.logger.trace("[Constructeur ReverseGeocode (options)]");
 
     var options = this.patchOptionConvertor(options_);
-    options.serverUrl = options.serverUrl || "https://geocodage.ign.fr/look4";
+    options.serverUrl = options.serverUrl || "http://geoinfra.oshimae.rie.agri/look4";
 
     // appel du constructeur par heritage
     CommonService.apply(this, [options]);

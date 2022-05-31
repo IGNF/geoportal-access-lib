@@ -73,7 +73,7 @@ function AutoComplete (options_) {
     this.logger.trace("[Constructeur AutoComplete (options)]");
 
     var options = this.patchOptionConvertor(options_);
-    options.serverUrl = options.serverUrl || "https://geocodage.ign.fr/look4/completion";
+    options.serverUrl = options.serverUrl || "http://geoinfra.oshimae.rie.agri/look4/completion";
 
     // appel du constructeur par heritage
     CommonService.apply(this, arguments);
@@ -87,7 +87,7 @@ function AutoComplete (options_) {
 
     // on definit des parametres par defaut
     if (!options.type) {
-        options.type = ["StreetAddress"];
+        options.type = ["StreetAddress,PositionOfInterest"];
     }
 
     this.options.type = options.type;

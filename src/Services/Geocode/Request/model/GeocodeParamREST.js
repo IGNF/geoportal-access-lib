@@ -65,18 +65,6 @@ GeocodeParamREST.prototype = {
     constructor : GeocodeParamREST,
 
     /**
-     * Retourne le paramètre lonlat
-     * @returns {String} Le paramètre lonlat
-     */
-    getLonlat : function () {
-        if (!this.lon || !this.lat) {
-            return null;
-        }
-
-        return this.lon + "," + this.lat;
-    },
-
-    /**
      * Retourne les filtres
      * @returns {String} les filtres
      */
@@ -150,8 +138,12 @@ GeocodeParamREST.prototype.getParams = function () {
 
     if (this.lon && this.lat) {
         map.push({
-            k : "lonlat",
-            v : this.getLonlat()
+            k : "lon",
+            v : this.lon
+        });
+        map.push({
+            k : "lat",
+            v : this.lat
         });
     }
 
