@@ -6,7 +6,6 @@ import { expect } from "chai";
 import { should } from "chai";
 should();
 
-import XML from "../../src/Formats/XML";
 import GeocodeRequestFactory from "../../src/Services/Geocode/Request/GeocodeRequestFactory";
 
 describe("-- Test GeocodeRequest --", function () {
