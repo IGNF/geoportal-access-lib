@@ -245,7 +245,7 @@ ReverseGeocode.prototype.buildRequest = function (error, success) {
         index : this.options.index,
         position : this.options.position,
         returnTrueGeometry : this.options.returnTrueGeometry,
-        maximumResponses : this.options.maximumResponses,
+        maxResp : this.options.maximumResponses,
         filters : this.options.filters
     };
 
