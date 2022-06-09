@@ -156,7 +156,7 @@ GeocodeParamREST.prototype.getParams = function () {
 
     if (this.returnTrueGeometry) {
         map.push({
-            k : "returnTrueGeometry",
+            k : "returntruegeometry",
             v : this.returnTrueGeometry
         });
     }
