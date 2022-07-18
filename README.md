@@ -248,7 +248,7 @@ La fonction [Gp.Services.getAltitude()](http://ignf.github.io/geoportal-access-l
 
 ``` javascript
 Gp.Services.getAltitude({
-    apiKey : "carte", // clef d'accès à la plateforme
+    apiKey : "altimetrie", // clef d'accès à la plateforme
     positions : [                        // positions pour le calcul alti
         { lon: 2.29, lat: 48.85 },      
         { lon: 2.3, lat: 48.9 },
