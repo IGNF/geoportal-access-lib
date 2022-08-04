@@ -77,7 +77,7 @@ GeocodeRequestREST.prototype = {
             throw new Error("Error geocodeMethod not valid");
         }
 
-        this.requestString = "/geocode/" + this.settings.geocodeMethod + "?" + request;
+        this.requestString = "?" + request;
         this.logger.trace(this.requestString);
 
         return this.requestString;

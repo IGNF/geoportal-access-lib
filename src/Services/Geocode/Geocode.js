@@ -83,7 +83,7 @@ function Geocode (options_) {
     this.logger.trace("[Constructeur Geocode (options)]");
 
     var options = this.patchOptionConvertor(options_);
-    options.serverUrl = options.serverUrl || "http://geoinfra.oshimae.rie.agri/look4";
+    options.serverUrl = options.serverUrl || "https://wxs.ign.fr/calcul/geoportail/geocodage/rest/0.1/search";
 
     // appel du constructeur par heritage
     CommonService.apply(this, [options]);

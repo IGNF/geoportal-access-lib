@@ -39,13 +39,8 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *
  * @param {String} [options.index = "StreetAddress"] - Type de l'objet recherché.
  *      Le service de géocodage du Géoportail permet de rechercher des 'PositionOfInterest' pour des toponymes, des 'StreetAddress'
-<<<<<<< HEAD
  *      pour des adresses postales ou des 'CadastralParcel' pour des parcelles cadastrales. L'index 'location' permet une recherche
  *      multi-indexes en regroupant les indexes 'PositionOfInterest' et 'StreetAddress'.
-=======
- *      pour des adresses postales ou des 'CadastralParcel' pour des parcelles cadastrales.
- *      L'index 'location' regroupe les indexes 'StreetAddress' et 'PositionOfInterest'.
->>>>>>> 7e7c74ead3f22e15fb999397e1722641861dbe6d
  *      D'autres types pourront être rajoutés selon l'évolution du service.
  *      Par défaut, index = 'StreetAddress'.
  *
@@ -93,7 +88,7 @@ function ReverseGeocode (options_) {
     this.logger.trace("[Constructeur ReverseGeocode (options)]");
 
     var options = this.patchOptionConvertor(options_);
-    options.serverUrl = options.serverUrl || "http://geoinfra.oshimae.rie.agri/look4";
+    options.serverUrl = options.serverUrl || "https://wxs.ign.fr/calcul/geoportail/geocodage/rest/0.1/reverse";
 
     // appel du constructeur par heritage
     CommonService.apply(this, [options]);

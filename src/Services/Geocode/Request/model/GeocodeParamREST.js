@@ -131,7 +131,7 @@ GeocodeParamREST.prototype.getParams = function () {
 
     if (this.geocodeMethod === "reverse") {
         map.push({
-            k : "searchGeom",
+            k : "searchgeom",
             v : this.getSearchGeometry()
         });
     }
