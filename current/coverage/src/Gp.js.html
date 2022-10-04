@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>41/41</span>
+                <span class='fraction'>36/36</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>41/41</span>
+                <span class='fraction'>36/36</span>
             </div>
         
             
@@ -199,29 +199,7 @@
 <a name='L134'></a><a href='#L134'>134</a>
 <a name='L135'></a><a href='#L135'>135</a>
 <a name='L136'></a><a href='#L136'>136</a>
-<a name='L137'></a><a href='#L137'>137</a>
-<a name='L138'></a><a href='#L138'>138</a>
-<a name='L139'></a><a href='#L139'>139</a>
-<a name='L140'></a><a href='#L140'>140</a>
-<a name='L141'></a><a href='#L141'>141</a>
-<a name='L142'></a><a href='#L142'>142</a>
-<a name='L143'></a><a href='#L143'>143</a>
-<a name='L144'></a><a href='#L144'>144</a>
-<a name='L145'></a><a href='#L145'>145</a>
-<a name='L146'></a><a href='#L146'>146</a>
-<a name='L147'></a><a href='#L147'>147</a>
-<a name='L148'></a><a href='#L148'>148</a>
-<a name='L149'></a><a href='#L149'>149</a>
-<a name='L150'></a><a href='#L150'>150</a>
-<a name='L151'></a><a href='#L151'>151</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L137'></a><a href='#L137'>137</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -341,12 +319,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -395,10 +367,6 @@
 *     - {@link Gp.Services.AutoCompleteResponse .AutoCompleteResponse()}
 *     - {@link Gp.Services.Config .Config()}
 *     - {@link Gp.Services.DefaultUrl .DefaultUrl()}
-*     - .Geocode
-*         - {@link Gp.Services.Geocode.GeocodedLocation .GeocodedLocation()}
-*         - {@link Gp.Services.Geocode.ReverseGeocodedLocation .ReverseGeocodedLocation()}
-*         - {@link Gp.Services.Geocode.DirectGeocodedLocation .DirectGeocodedLocation()}
 *     - {@link Gp.Services.GeocodeResponse .GeocodeResponse()}
 *     - {@link Gp.Services.GetConfigResponse .GetConfigResponse()}
 *     - {@link Gp.Services.IsoCurveResponse .IsoCurveResponse()}
@@ -441,10 +409,6 @@ import Thematic from "./Services/AutoConf/Response/model/Thematic";
 import TM from "./Services/AutoConf/Response/model/TileMatrix";
 import TMLimit from "./Services/AutoConf/Response/model/TileMatrixLimit";
 import TMS from "./Services/AutoConf/Response/model/TileMatrixSet";
-import GeocodeResponse from "./Services/Geocode/Response/model/GeocodeResponse";
-import GeocodedLocation from "./Services/Geocode/Response/model/GeocodedLocation";
-import DirectGeocodedLocation from "./Services/Geocode/Response/model/DirectGeocodedLocation";
-import ReverseGeocodedLocation from "./Services/Geocode/Response/model/ReverseGeocodedLocation";
 import IsoCurveResponse from "./Services/ProcessIsoCurve/Response/model/ProcessIsoCurveResponse";
 import RouteResponse from "./Services/Route/Response/model/RouteResponse";
 import RouteInstruction from "./Services/Route/Response/model/RouteInstruction";
@@ -496,12 +460,6 @@ Gp.Services.Config.Thematic = Thematic;
 Gp.Services.Config.TileMatrix = TM;
 Gp.Services.Config.TileMatrixLimit = TMLimit;
 Gp.Services.Config.TileMatrixSet = TMS;
-// Export Geocode
-Gp.Services.GeocodeResponse = GeocodeResponse;
-Gp.Services.Geocode = {};
-Gp.Services.Geocode.GeocodedLocation = GeocodedLocation;
-Gp.Services.Geocode.DirectGeocodedLocation = DirectGeocodedLocation;
-Gp.Services.Geocode.ReverseGeocodedLocation = ReverseGeocodedLocation;
 // Export IsoCurve
 Gp.Services.IsoCurveResponse = IsoCurveResponse;
 // Export Route
@@ -520,7 +478,7 @@ export default Gp;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Mar 23 2022 17:55:33 GMT+0000 (Coordinated Universal Time)
+                at 2022-10-04T17:02:14.136Z
             </div>
         <script src="../prettify.js"></script>
         <script>
