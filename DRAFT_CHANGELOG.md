@@ -14,7 +14,7 @@ Mise à jour vers le service de Geocodage V2
 
 * [Changed]
 
-    - utilisation du service de geocodage v2.2 (#71)
+    - utilisation du service de geocodage v2 (#71)
 
 * [Removed]
 
