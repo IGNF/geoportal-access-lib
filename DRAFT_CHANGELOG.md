@@ -1,10 +1,12 @@
-# Bibliothèque d'accès aux services Géoportail, version 3.1.0
+# Bibliothèque d'accès aux services Géoportail, version 3.2.0
 
-**23/03/2022 : 3.1.0**
+**04/10/2022 : 3.2.0**
 
 > release of geoportal access library
 
 ## Summary
+
+Mise à jour vers le service de Geocodage V2
 
 ## Changelog
 
@@ -12,13 +14,11 @@
 
 * [Changed]
 
-    - utilisation du service d'isochrone v2 (#70)
+    - utilisation du service de geocodage v2 (#71)
 
 * [Removed]
 
 * [Fixed]
-
-    - fix coquille chemin vers GpServices dans le tutorial getconfig local
 
 * [Deprecated]
 
