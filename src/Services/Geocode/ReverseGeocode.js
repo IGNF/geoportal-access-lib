@@ -94,11 +94,12 @@ function ReverseGeocode (options_) {
     CommonService.apply(this, [options]);
 
     if (!options.searchGeometry) {
-        throw new Error(_.getMessage("PARAM_MISSING", "searchGeometry"));
+        if (!options.position) {
+            throw new Error(_.getMessage("PARAM_MISSING", "searchGeometry"));
+        }
+    } else {
+        this.options.searchGeometry = options.searchGeometry;
     }
-
-    // ajout des options spécifiques au service
-    this.options.searchGeometry = options.searchGeometry;
 
     // on definit l'index par defaut
     if (!options.index) {
