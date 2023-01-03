@@ -15,11 +15,6 @@ import Pkg from "../../package.json";
  * @alias Gp.Services.CommonService
  * @param {Object} options - options communes à tous les services
  *
- * @param {String} options.apiKey - Clef d'accès à la plateforme Géoportail,
- *      nécessaire pour franchir la couche de contrôle des accès pour avoir une réponse du service invoqué.
- *      Plusieurs clefs peuvent être passées dans le cas de l'invocation du service d'autoconfiguration.
- *      Si ce paramètre n'est pas renseigné, alors le paramètre serverUrl doit être renseigné (comprenant alors, si nécessaire la clef API).
- *
  * @param {String} options.serverUrl - URL d'accès au service.
  *      Permet de forcer l'utilisation d'un service équivalent déployé derrière une éventuelle autre URL d'accès.
  *      Si ce paramètre est renseigné alors, le paramètre apiKey est ignoré.

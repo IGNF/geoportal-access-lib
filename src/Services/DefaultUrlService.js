@@ -153,38 +153,6 @@ var DefaultUrlService = {
         }
     },
     /**
-     * Autoconfiguration web service access
-     *
-     * @member {Object}
-     * @property {Function} url ([key1,...]) - Returns autoconfiguration service default urls with geoportal access key (s) given as a String array parameter. The result is a javascript object with different urls given the access mode ("apiKey", "apiKeys" or "aggregate").
-     */
-    AutoConf : {
-        _key : {
-            apiKey : "/autoconf",
-            apiKeys : "/autoconf?keys=%KEYS%",
-            aggregate : "/autoconf/id/"
-        },
-        /**
-        * url
-        * @param {String} key - key
-        * @returns {String} url
-        */
-        url : function (key) {
-            var keys = "";
-            if (Array.isArray(key) && key.length > 0) {
-                keys = key[0];
-                for (var i = 1; i < key.length; i++) {
-                    keys += "," + key[i];
-                }
-            }
-            return {
-                apiKey : DefaultUrlService.url(key, this._key["apiKey"]), // une seule clé
-                apiKeys : DefaultUrlService.url(key[0], this._key["apiKeys"]).replace("%KEYS%", keys), // autoconf de plusieurs clés
-                aggregate : DefaultUrlService.url(key, this._key["aggregate"])
-            };
-        }
-    },
-    /**
      * Geocoding web service access
      *
      * @member {Object}
