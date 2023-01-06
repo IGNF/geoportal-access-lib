@@ -178,7 +178,7 @@ function CommonService (options) {
         // les cas particuliers des services avec plusieurs urls (ex. Alti) devront être traité dans la classe du composant
         // donc si l'url n'est pas renseignée, il faut utiliser les urls par defaut
         DefaultUrlService.ssl = this.options.ssl;
-        var urlByDefault = DefaultUrlService[this.CLASSNAME].url(this.options.apiKey);
+        var urlByDefault = DefaultUrlService[this.CLASSNAME].url("calcul");
         if (typeof urlByDefault === "string") {
             this.options.serverUrl = urlByDefault;
         } else {

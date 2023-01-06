@@ -232,7 +232,7 @@ function Route (options) {
     // gestion de l'url du service par defaut
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
     if (!this.options.serverUrl) {
-        var UrlByDefault = DefaultUrlService.Route.url(this.options.apiKey);
+        var UrlByDefault = DefaultUrlService.Route.url("calcul");
         if (!UrlByDefault) {
             throw new Error("Url by default not found !");
         }
