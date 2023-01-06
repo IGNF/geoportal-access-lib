@@ -149,9 +149,9 @@ function CommonService (options) {
     // #####################
 
     // gestion des clefs API
-    if (!this.options.apiKey && !this.options.serverUrl) {
-        throw new Error(_.getMessage("PARAM_MISSING", "apiKey", "serverUrl"));
-    }
+    // if (!this.options.apiKey && !this.options.serverUrl) {
+    //     throw new Error(_.getMessage("PARAM_MISSING", "apiKey", "serverUrl"));
+    // }
 
     // modification de la fonction de callback onSuccess dans le cas où la réponse brute est demandée
     if (this.options.rawResponse && !this.options.onSuccess) {
