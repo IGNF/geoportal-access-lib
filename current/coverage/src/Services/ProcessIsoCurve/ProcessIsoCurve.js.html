@@ -799,103 +799,103 @@ import ProcessIsoCurveResponseFactory from "./Response/ProcessIsoCurveResponseFa
  * @private
  */
 &nbsp;
-function <span class="fstat-no" title="function not covered" >ProcessIsoCurve (o</span>ptions) {
+function <span class="fstat-no" title="function not covered" >ProcessIsoCurve </span>(options) {
 <span class="cstat-no" title="statement not covered" >    if (!(this instanceof ProcessIsoCurve)) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew TypeError(_.getMessage("CLASS_CONSTRUCTOR", "ProcessIsoCurve"));
+<span class="cstat-no" title="statement not covered" >        throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "ProcessIsoCurve"));</span>
     }
 &nbsp;
     /**
      * Nom de la classe (heritage)
      * FIXME instance ou classe ?
      */
-<span class="cstat-no" title="statement not covered" >    this.C</span>LASSNAME = "ProcessIsoCurve";
+<span class="cstat-no" title="statement not covered" >    this.CLASSNAME = "ProcessIsoCurve";</span>
 &nbsp;
     // appel du constructeur par heritage
-<span class="cstat-no" title="statement not covered" >    CommonService.</span>apply(this, arguments);
+<span class="cstat-no" title="statement not covered" >    CommonService.apply(this, arguments);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this.l</span>ogger = Logger.getLogger("Gp.Services.ProcessIsoCurve");
-<span class="cstat-no" title="statement not covered" >    this.l</span>ogger.trace("[Constructeur ProcessIsoCurve (options)]");
+<span class="cstat-no" title="statement not covered" >    this.logger = Logger.getLogger("Gp.Services.ProcessIsoCurve");</span>
+<span class="cstat-no" title="statement not covered" >    this.logger.trace("[Constructeur ProcessIsoCurve (options)]");</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (!options.position) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(_.getMessage("PARAM_MISSING", "position"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(_.getMessage("PARAM_MISSING", "position"));</span>
     }
 &nbsp;
     // on lance une exception afin d'eviter au service de le faire...
 <span class="cstat-no" title="statement not covered" >    if (options.position.x === null) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(_.getMessage("PARAM_MISSING", "position.x"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(_.getMessage("PARAM_MISSING", "position.x"));</span>
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (options.position.y === null) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(_.getMessage("PARAM_MISSING", "position.y"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(_.getMessage("PARAM_MISSING", "position.y"));</span>
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (!options.time &amp;&amp; !options.distance) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error("Parameter (s) 'distance' missing. Parameter time to calculate an isochrone, parameter distance for an isodistance");
+<span class="cstat-no" title="statement not covered" >        throw new Error("Parameter (s) 'distance' missing. Parameter time to calculate an isochrone, parameter distance for an isodistance");</span>
     }
 &nbsp;
     // si on a que le paramètre "distance" en entrée, on calcule une isodistance.
     // Le paramètre "méthode" doit pour avoir une réponse du service, être passé à "distance"
 <span class="cstat-no" title="statement not covered" >    if (!options.time &amp;&amp; options.distance) {</span>
-<span class="cstat-no" title="statement not covered" >        this.o</span>ptions.method = "distance";
+<span class="cstat-no" title="statement not covered" >        this.options.method = "distance";</span>
         // on supprime l'éventuel attribut time, résidu d'un appel antérieur
 <span class="cstat-no" title="statement not covered" >        if (this.options.time) {</span>
-<span class="cstat-no" title="statement not covered" >            delete t</span>his.options.time;
+<span class="cstat-no" title="statement not covered" >            delete this.options.time;</span>
         }
     }
 &nbsp;
     // si on a que le paramètre "time" en entrée, on calcule une isochrone.
     // Le paramètre "méthode" doit pour avoir une réponse du service, être passé à "time"
 <span class="cstat-no" title="statement not covered" >    if (options.time &amp;&amp; !options.distance) {</span>
-<span class="cstat-no" title="statement not covered" >        this.o</span>ptions.method = "time";
+<span class="cstat-no" title="statement not covered" >        this.options.method = "time";</span>
         // on supprime l'éventuel attribut time, résidu d'un appel antérieur
 <span class="cstat-no" title="statement not covered" >        if (this.options.distance) {</span>
-<span class="cstat-no" title="statement not covered" >            delete t</span>his.options.distance;
+<span class="cstat-no" title="statement not covered" >            delete this.options.distance;</span>
         }
     }
 &nbsp;
     // au cas où on a ni l'un, ni l'autre...
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.method = this.options.method || "time";
+<span class="cstat-no" title="statement not covered" >    this.options.method = this.options.method || "time";</span>
 &nbsp;
     // options par defaut du service
     // TODO: modifier la ressource lors de la mise en production du service
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.resource = options.resource || "bdtopo-iso";
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.exclusions = options.exclusions || [];
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.reverse = options.reverse || false;
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.srs = options.srs || "EPSG:4326";
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.distanceUnit = options.distanceUnit || "m";
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.timeUnit = options.timeUnit || "second";
+<span class="cstat-no" title="statement not covered" >    this.options.resource = options.resource || "bdtopo-iso";</span>
+<span class="cstat-no" title="statement not covered" >    this.options.exclusions = options.exclusions || [];</span>
+<span class="cstat-no" title="statement not covered" >    this.options.reverse = options.reverse || false;</span>
+<span class="cstat-no" title="statement not covered" >    this.options.srs = options.srs || "EPSG:4326";</span>
+<span class="cstat-no" title="statement not covered" >    this.options.distanceUnit = options.distanceUnit || "m";</span>
+<span class="cstat-no" title="statement not covered" >    this.options.timeUnit = options.timeUnit || "second";</span>
 &nbsp;
     // options depreciees
 <span class="cstat-no" title="statement not covered" >    if (options.smoothing) {</span>
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.warn("options.smoothing is DEPRECATED");
+<span class="cstat-no" title="statement not covered" >        this.logger.warn("options.smoothing is DEPRECATED");</span>
     }
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.smoothing = false;
+<span class="cstat-no" title="statement not covered" >    this.options.smoothing = false;</span>
 <span class="cstat-no" title="statement not covered" >    if (options.holes) {</span>
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.warn("options.holes is DEPRECATED");
+<span class="cstat-no" title="statement not covered" >        this.logger.warn("options.holes is DEPRECATED");</span>
     }
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.holes = false;
+<span class="cstat-no" title="statement not covered" >    this.options.holes = false;</span>
 &nbsp;
     // Gestion du graphe
 <span class="cstat-no" title="statement not covered" >    if (options.graph) {</span>
 <span class="cstat-no" title="statement not covered" >        if (options.graph === "Voiture") {</span>
-<span class="cstat-no" title="statement not covered" >            this.o</span>ptions.graph = "car";
+<span class="cstat-no" title="statement not covered" >            this.options.graph = "car";</span>
         }
 <span class="cstat-no" title="statement not covered" >        if (options.graph === "Pieton") {</span>
-<span class="cstat-no" title="statement not covered" >            this.o</span>ptions.graph = "pedestrian";
+<span class="cstat-no" title="statement not covered" >            this.options.graph = "pedestrian";</span>
         }
     } else {
-<span class="cstat-no" title="statement not covered" >        this.o</span>ptions.graph = "car";
+<span class="cstat-no" title="statement not covered" >        this.options.graph = "car";</span>
     }
 &nbsp;
     // Gestions des contraintes
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.constraints = [];
+<span class="cstat-no" title="statement not covered" >    this.options.constraints = [];</span>
 <span class="cstat-no" title="statement not covered" >    if (options.constraints) {</span>
 <span class="cstat-no" title="statement not covered" >        if (Array.isArray(options.constraints)) {</span>
 <span class="cstat-no" title="statement not covered" >            for (var k = 0; k &lt; options.constraints.length; k++) {</span>
-<span class="cstat-no" title="statement not covered" >                this.o</span>ptions.constraints.push(options.constraints[k]);
+<span class="cstat-no" title="statement not covered" >                this.options.constraints.push(options.constraints[k]);</span>
             }
         } else {
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error(_.getMessage("PARAM_TYPE", "constraints"));
+<span class="cstat-no" title="statement not covered" >            throw new Error(_.getMessage("PARAM_TYPE", "constraints"));</span>
         }
     }
 &nbsp;
@@ -905,55 +905,55 @@ function <span class="fstat-no" title="function not covered" >ProcessIsoCurve (o
     var constraintAutoroute = <span class="cstat-no" title="statement not covered" >{};</span>
 <span class="cstat-no" title="statement not covered" >    if (options.exclusions) {</span>
 <span class="cstat-no" title="statement not covered" >        if (options.exclusions.length !== 0) {</span>
-<span class="cstat-no" title="statement not covered" >            this.l</span>ogger.warn("options.exclusions is DEPRECATED !!");
+<span class="cstat-no" title="statement not covered" >            this.logger.warn("options.exclusions is DEPRECATED !!");</span>
 <span class="cstat-no" title="statement not covered" >            for (var c = 0; c &lt; options.exclusions.length; c++) {</span>
 <span class="cstat-no" title="statement not covered" >                if (typeof options.exclusions[c] === "string") {</span>
-<span class="cstat-no" title="statement not covered" >                    options.</span>exclusions[c] = options.exclusions[c].toLowerCase();
+<span class="cstat-no" title="statement not covered" >                    options.exclusions[c] = options.exclusions[c].toLowerCase();</span>
                 } else {
                     // on ne crée pas une erreur pour rétro-compatibilité avec les anciennes versions
 <span class="cstat-no" title="statement not covered" >                    continue;</span>
                 }
 <span class="cstat-no" title="statement not covered" >                if (options.exclusions[c] === "toll") {</span>
-<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.</span>constraintType = "banned";
-<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.</span>key = "wayType";
-<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.</span>operator = "=";
-<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.</span>value = "autoroute";
-<span class="cstat-no" title="statement not covered" >                    this.o</span>ptions.constraints.push(constraintAutoroute);
+<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.constraintType = "banned";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.key = "wayType";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.operator = "=";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.value = "autoroute";</span>
+<span class="cstat-no" title="statement not covered" >                    this.options.constraints.push(constraintAutoroute);</span>
                 }
 <span class="cstat-no" title="statement not covered" >                if (options.exclusions[c] === "tunnel") {</span>
-<span class="cstat-no" title="statement not covered" >                    constraintTunnel.</span>constraintType = "banned";
-<span class="cstat-no" title="statement not covered" >                    constraintTunnel.</span>key = "wayType";
-<span class="cstat-no" title="statement not covered" >                    constraintTunnel.</span>operator = "=";
-<span class="cstat-no" title="statement not covered" >                    constraintTunnel.</span>value = "tunnel";
-<span class="cstat-no" title="statement not covered" >                    this.o</span>ptions.constraints.push(constraintTunnel);
+<span class="cstat-no" title="statement not covered" >                    constraintTunnel.constraintType = "banned";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintTunnel.key = "wayType";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintTunnel.operator = "=";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintTunnel.value = "tunnel";</span>
+<span class="cstat-no" title="statement not covered" >                    this.options.constraints.push(constraintTunnel);</span>
                 }
 <span class="cstat-no" title="statement not covered" >                if (options.exclusions[c] === "bridge") {</span>
-<span class="cstat-no" title="statement not covered" >                    constraintPont.</span>constraintType = "banned";
-<span class="cstat-no" title="statement not covered" >                    constraintPont.</span>key = "wayType";
-<span class="cstat-no" title="statement not covered" >                    constraintPont.</span>operator = "=";
-<span class="cstat-no" title="statement not covered" >                    constraintPont.</span>value = "pont";
-<span class="cstat-no" title="statement not covered" >                    this.o</span>ptions.constraints.push(constraintPont);
+<span class="cstat-no" title="statement not covered" >                    constraintPont.constraintType = "banned";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintPont.key = "wayType";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintPont.operator = "=";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintPont.value = "pont";</span>
+<span class="cstat-no" title="statement not covered" >                    this.options.constraints.push(constraintPont);</span>
                 }
             }
         }
     }
 &nbsp;
     // on passe l'option outputFormat en minuscules afin d'éviter des exceptions.
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.outputFormat = (typeof options.outputFormat === "string") ? options.outputFormat.toLowerCase() : "json";
+<span class="cstat-no" title="statement not covered" >    this.options.outputFormat = (typeof options.outputFormat === "string") ? options.outputFormat.toLowerCase() : "json";</span>
 <span class="cstat-no" title="statement not covered" >    if (options.outputFormat &amp;&amp; options.outputFormat !== "json") {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(_.getMessage("PARAM_NOT_SUPPORT", "outputFormat"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(_.getMessage("PARAM_NOT_SUPPORT", "outputFormat"));</span>
     }
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.outputFormat = "json";
+<span class="cstat-no" title="statement not covered" >    this.options.outputFormat = "json";</span>
 &nbsp;
     // gestion de l'url du service par defaut
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
 <span class="cstat-no" title="statement not covered" >    if (!this.options.serverUrl) {</span>
-        var urlFound = <span class="cstat-no" title="statement not covered" >DefaultUrlService.</span>ProcessIsoCurve.url(this.options.apiKey);
+        var urlFound = <span class="cstat-no" title="statement not covered" >DefaultUrlService.ProcessIsoCurve.url(this.options.apiKey);</span>
 <span class="cstat-no" title="statement not covered" >        if (!urlFound) {</span>
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error("Url by default not found !");
+<span class="cstat-no" title="statement not covered" >            throw new Error("Url by default not found !");</span>
         }
-<span class="cstat-no" title="statement not covered" >        this.o</span>ptions.serverUrl = urlFound;
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.trace("Serveur URL par defaut : " + this.options.serverUrl);
+<span class="cstat-no" title="statement not covered" >        this.options.serverUrl = urlFound;</span>
+<span class="cstat-no" title="statement not covered" >        this.logger.trace("Serveur URL par defaut : " + this.options.serverUrl);</span>
     }
 }
 &nbsp;
@@ -978,18 +978,18 @@ ProcessIsoCurve.prototype.constructor = ProcessIsoCurve;
  */
 ProcessIsoCurve.prototype.buildRequest = <span class="fstat-no" title="function not covered" >function (e</span>rror, success) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
-        var oIsoCurve = <span class="cstat-no" title="statement not covered" >new P</span>rocessIsoCurveRequest(this.options);
+        var oIsoCurve = <span class="cstat-no" title="statement not covered" >new ProcessIsoCurveRequest(this.options);</span>
 <span class="cstat-no" title="statement not covered" >        if (!oIsoCurve.processRequestString()) {</span>
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error(_.getMessage("SERVICE_REQUEST_BUILD"));
+<span class="cstat-no" title="statement not covered" >            throw new Error(_.getMessage("SERVICE_REQUEST_BUILD"));</span>
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        this.r</span>equest = oIsoCurve.requestString;
+<span class="cstat-no" title="statement not covered" >        this.request = oIsoCurve.requestString;</span>
     } catch (e) {
-<span class="cstat-no" title="statement not covered" >        error.</span>call(this, new ErrorService(e.message));
+<span class="cstat-no" title="statement not covered" >        error.call(this, new ErrorService(e.message));</span>
 <span class="cstat-no" title="statement not covered" >        return;</span>
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    success.</span>call(this, this.request);
+<span class="cstat-no" title="statement not covered" >    success.call(this, this.request);</span>
 };
 &nbsp;
 /**
@@ -1010,9 +1010,9 @@ ProcessIsoCurve.prototype.analyzeResponse = <span class="fstat-no" title="functi
             scope : this
         };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        ProcessIsoCurveResponseFactory.</span>build(options);
+<span class="cstat-no" title="statement not covered" >        ProcessIsoCurveResponseFactory.build(options);</span>
     } else {
-<span class="cstat-no" title="statement not covered" >        onError.</span>call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
+<span class="cstat-no" title="statement not covered" >        onError.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));</span>
     }
 };
 &nbsp;
@@ -1024,7 +1024,7 @@ export default ProcessIsoCurve;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

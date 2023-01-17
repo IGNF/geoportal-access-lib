@@ -724,7 +724,7 @@
  */
 function Layer () {
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!(this instanceof Layer)) {
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew TypeError("Layer constructor cannot be called as a function.");
+<span class="cstat-no" title="statement not covered" >        throw new TypeError("Layer constructor cannot be called as a function.");</span>
     }
 &nbsp;
     // info : une instance de la classe Layer n'a aucune propriété au départ,.
@@ -742,7 +742,7 @@ Layer.prototype = {
      * @returns {String} name - name of the resource to use with the webservice that serves it (eg : "GEOGRAPHICALGRIDSYSTEMS.MAPS").
      */
     getName : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        return t</span>his.name;
+<span class="cstat-no" title="statement not covered" >        return this.name;</span>
     },
 &nbsp;
     /**
@@ -751,7 +751,7 @@ Layer.prototype = {
      * @returns {String} title - Human readable name for the resource.
      */
     getTitle : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        return t</span>his.title;
+<span class="cstat-no" title="statement not covered" >        return this.title;</span>
     },
 &nbsp;
     /**
@@ -760,7 +760,7 @@ Layer.prototype = {
      * @returns {String} description - Resource description.
      */
     getDescription : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        return t</span>his.description;
+<span class="cstat-no" title="statement not covered" >        return this.description;</span>
     },
 &nbsp;
     /**
@@ -769,7 +769,7 @@ Layer.prototype = {
      * @returns {String} layerId - Unique resource Identifier (eg : "GEOGRAPHICALGRIDSYSTEMS.MAPS$GEOPORTAIL:OGC:WMTS")
      */
     getLayerId : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        return t</span>his.layerId;
+<span class="cstat-no" title="statement not covered" >        return this.layerId;</span>
     },
 &nbsp;
     /**
@@ -778,7 +778,7 @@ Layer.prototype = {
      * @returns {String} quicklookUrl - Image URL for the resource.
      */
     getQuicklookUrl : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        return t</span>his.quicklookUrl;
+<span class="cstat-no" title="statement not covered" >        return this.quicklookUrl;</span>
     },
 &nbsp;
     /**
@@ -787,7 +787,7 @@ Layer.prototype = {
      * @returns {String} defaultProjection - coordinates system ID used by default for the resource (WMS or WFS layer) or of the TileMatrixSet used by the WMTS layer.
      */
     getDefaultProjection : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        return t</span>his.defaultProjection;
+<span class="cstat-no" title="statement not covered" >        return this.defaultProjection;</span>
     },
 &nbsp;
     /**
@@ -797,9 +797,9 @@ Layer.prototype = {
      */
     getProjections : <span class="fstat-no" title="function not covered" >function () {</span>
         var projections = <span class="cstat-no" title="statement not covered" >[];</span>
-<span class="cstat-no" title="statement not covered" >        projections.</span>push(this.defaultProjection);
-        var proj = <span class="cstat-no" title="statement not covered" >projections.</span>concat(this.additionalProjections);
-<span class="cstat-no" title="statement not covered" >        return p</span>roj;
+<span class="cstat-no" title="statement not covered" >        projections.push(this.defaultProjection);</span>
+        var proj = <span class="cstat-no" title="statement not covered" >projections.concat(this.additionalProjections);</span>
+<span class="cstat-no" title="statement not covered" >        return proj;</span>
     },
 &nbsp;
     /**
@@ -811,7 +811,7 @@ Layer.prototype = {
 <span class="cstat-no" title="statement not covered" >        if (!this.globalConstraint) {</span>
 <span class="cstat-no" title="statement not covered" >            return;</span>
         }
-<span class="cstat-no" title="statement not covered" >        return t</span>his.globalConstraint.bbox;
+<span class="cstat-no" title="statement not covered" >        return this.globalConstraint.bbox;</span>
     },
 &nbsp;
     /**
@@ -823,7 +823,7 @@ Layer.prototype = {
 <span class="cstat-no" title="statement not covered" >        if (!this.globalConstraint) {</span>
 <span class="cstat-no" title="statement not covered" >            return;</span>
         }
-<span class="cstat-no" title="statement not covered" >        return t</span>his.globalConstraint.minScaleDenominator;
+<span class="cstat-no" title="statement not covered" >        return this.globalConstraint.minScaleDenominator;</span>
     },
 &nbsp;
     /**
@@ -835,7 +835,7 @@ Layer.prototype = {
 <span class="cstat-no" title="statement not covered" >        if (!this.globalConstraint) {</span>
 <span class="cstat-no" title="statement not covered" >            return;</span>
         }
-<span class="cstat-no" title="statement not covered" >        return t</span>his.globalConstraint.maxScaleDenominator;
+<span class="cstat-no" title="statement not covered" >        return this.globalConstraint.maxScaleDenominator;</span>
     },
 &nbsp;
     /**
@@ -845,7 +845,7 @@ Layer.prototype = {
      */
     getTMSID : <span class="fstat-no" title="function not covered" >function () {</span>
 <span class="cstat-no" title="statement not covered" >        if (this.wmtsOptions) {</span>
-<span class="cstat-no" title="statement not covered" >            return t</span>his.wmtsOptions.tileMatrixSetLink;
+<span class="cstat-no" title="statement not covered" >            return this.wmtsOptions.tileMatrixSetLink;</span>
         }
     },
 &nbsp;
@@ -855,7 +855,7 @@ Layer.prototype = {
      * @returns {Object} serviceParams - Information about the webservice that serves the resource (OpenLS, WFS, WMTS)
      */
     getServiceParams : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        return t</span>his.serviceParams;
+<span class="cstat-no" title="statement not covered" >        return this.serviceParams;</span>
     },
 &nbsp;
     /**
@@ -868,7 +868,7 @@ Layer.prototype = {
 <span class="cstat-no" title="statement not covered" >        if (!apiKey || !this.serviceParams || !this.serviceParams.serverUrl) {</span>
 <span class="cstat-no" title="statement not covered" >            return;</span>
         }
-<span class="cstat-no" title="statement not covered" >        return t</span>his.serviceParams.serverUrl[apiKey];
+<span class="cstat-no" title="statement not covered" >        return this.serviceParams.serverUrl[apiKey];</span>
     },
 &nbsp;
     /**
@@ -877,7 +877,7 @@ Layer.prototype = {
      * @returns {Array.&lt;Gp.Services.Config.Legend&gt;} legends - Informations about legends associated to the resource.
      */
     getLegends : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        return t</span>his.legends;
+<span class="cstat-no" title="statement not covered" >        return this.legends;</span>
     },
 &nbsp;
     /**
@@ -886,7 +886,7 @@ Layer.prototype = {
      * @returns {Array.&lt;Gp.Services.Config.Metadata&gt;} metadata - Informations about metadata associated to the resource.
      */
     getMetadata : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        return t</span>his.metadata;
+<span class="cstat-no" title="statement not covered" >        return this.metadata;</span>
     },
 &nbsp;
     /**
@@ -895,7 +895,7 @@ Layer.prototype = {
      * @returns {Array.&lt;Gp.Services.Config.Style&gt;} styles - Informations about styles availables for the resources (WMS, WFS and WMTS only).
      */
     getStyles : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        return t</span>his.styles;
+<span class="cstat-no" title="statement not covered" >        return this.styles;</span>
     },
 &nbsp;
     /**
@@ -911,11 +911,11 @@ Layer.prototype = {
         var s = <span class="cstat-no" title="statement not covered" >this.styles;</span>
 <span class="cstat-no" title="statement not covered" >        for (var i = 0; i &lt; s.length; i++) {</span>
 <span class="cstat-no" title="statement not covered" >            if (s[i].current === true) {</span>
-<span class="cstat-no" title="statement not covered" >                style </span>= s[i].name;
+<span class="cstat-no" title="statement not covered" >                style = s[i].name;</span>
 <span class="cstat-no" title="statement not covered" >                break;</span>
             }
         }
-<span class="cstat-no" title="statement not covered" >        return s</span>tyle;
+<span class="cstat-no" title="statement not covered" >        return style;</span>
     },
 &nbsp;
     /**
@@ -924,7 +924,7 @@ Layer.prototype = {
      * @returns {Array.&lt;Gp.Services.Config.Thematic&gt;} thematics - Informations about thematics associated to the resource.
      */
     getThematics : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        return t</span>his.thematics;
+<span class="cstat-no" title="statement not covered" >        return this.thematics;</span>
     },
 &nbsp;
     /**
@@ -940,11 +940,11 @@ Layer.prototype = {
         var f = <span class="cstat-no" title="statement not covered" >this.formats;</span>
 <span class="cstat-no" title="statement not covered" >        for (var i = 0; i &lt; f.length; i++) {</span>
 <span class="cstat-no" title="statement not covered" >            if (f[i].current === true) {</span>
-<span class="cstat-no" title="statement not covered" >                format </span>= f[i].name;
+<span class="cstat-no" title="statement not covered" >                format = f[i].name;</span>
 <span class="cstat-no" title="statement not covered" >                break;</span>
             }
         }
-<span class="cstat-no" title="statement not covered" >        return f</span>ormat;
+<span class="cstat-no" title="statement not covered" >        return format;</span>
     },
 &nbsp;
     /**
@@ -953,7 +953,7 @@ Layer.prototype = {
      * @returns {Array.&lt;Gp.Services.Config.Constraint&gt;} constraints - Informations about geographical or temporal constraints for the resource
      */
     getConstraints : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        return t</span>his.constraints;
+<span class="cstat-no" title="statement not covered" >        return this.constraints;</span>
     },
 &nbsp;
     /**
@@ -962,7 +962,7 @@ Layer.prototype = {
      * @returns {Array.&lt;Gp.Services.Config.Originator&gt;} originators - Informations about originators of this resource
      */
     getOriginators : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        return t</span>his.originators;
+<span class="cstat-no" title="statement not covered" >        return this.originators;</span>
     },
 &nbsp;
     /**
@@ -971,7 +971,7 @@ Layer.prototype = {
      * @returns {Object} dimensions - Dimensions informations associated with the resource.
      */
     getDimensions : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        return t</span>his.dimensions;
+<span class="cstat-no" title="statement not covered" >        return this.dimensions;</span>
     },
 &nbsp;
     /**
@@ -981,7 +981,7 @@ Layer.prototype = {
      */
     getAggregatedLayers : <span class="fstat-no" title="function not covered" >function () {</span>
 <span class="cstat-no" title="statement not covered" >        if (this.isAggregate) {</span>
-<span class="cstat-no" title="statement not covered" >            return t</span>his.aggregatedLayers;
+<span class="cstat-no" title="statement not covered" >            return this.aggregatedLayers;</span>
         } else {
             // ...
         }
@@ -997,7 +997,7 @@ export default Layer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

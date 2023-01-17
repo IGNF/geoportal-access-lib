@@ -310,50 +310,50 @@ var ProcessIsoCurveResponseFactory = {
      */
     build : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
         // logger
-        var logger = <span class="cstat-no" title="statement not covered" >Logger.</span>getLogger("ProcessIsoCurveResponseFactory");
-<span class="cstat-no" title="statement not covered" >        logger.</span>trace(["ProcessIsoCurveResponseFactory::build()"]);
+        var logger = <span class="cstat-no" title="statement not covered" >Logger.getLogger("ProcessIsoCurveResponseFactory");</span>
+<span class="cstat-no" title="statement not covered" >        logger.trace(["ProcessIsoCurveResponseFactory::build()"]);</span>
 &nbsp;
         var data = <span class="cstat-no" title="statement not covered" >null;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (options.response) {</span>
 <span class="cstat-no" title="statement not covered" >            if (options.rawResponse) {</span>
-<span class="cstat-no" title="statement not covered" >                logger.</span>trace("analyze response : raw");
-<span class="cstat-no" title="statement not covered" >                data </span>= options.response;
+<span class="cstat-no" title="statement not covered" >                logger.trace("analyze response : raw");</span>
+<span class="cstat-no" title="statement not covered" >                data = options.response;</span>
             } else {
-<span class="cstat-no" title="statement not covered" >                logger.</span>trace("analyze response : json");
+<span class="cstat-no" title="statement not covered" >                logger.trace("analyze response : json");</span>
 &nbsp;
                 var JSONResponse;
 <span class="cstat-no" title="statement not covered" >                if (typeof options.response === "string") {</span>
-<span class="cstat-no" title="statement not covered" >                    JSONResponse </span>= JSON.parse(options.response);
+<span class="cstat-no" title="statement not covered" >                    JSONResponse = JSON.parse(options.response);</span>
                 } else {
-<span class="cstat-no" title="statement not covered" >                    JSONResponse </span>= options.response;
+<span class="cstat-no" title="statement not covered" >                    JSONResponse = options.response;</span>
                 }
 &nbsp;
                 // analyse de la reponse
                 // création de l'objet de réponse
-<span class="cstat-no" title="statement not covered" >                data </span>= new ProcessIsoCurveResponse();
+<span class="cstat-no" title="statement not covered" >                data = new ProcessIsoCurveResponse();</span>
 &nbsp;
                 // remplissage de l'objet créé avec les attribtuts de la réponse du service
 <span class="cstat-no" title="statement not covered" >                if (JSONResponse) {</span>
 <span class="cstat-no" title="statement not covered" >                    if (JSONResponse.costType === "distance") {</span>
-<span class="cstat-no" title="statement not covered" >                        data.</span>time = "";
-<span class="cstat-no" title="statement not covered" >                        data.</span>distance = JSONResponse.costValue;
+<span class="cstat-no" title="statement not covered" >                        data.time = "";</span>
+<span class="cstat-no" title="statement not covered" >                        data.distance = JSONResponse.costValue;</span>
                     } else {
-<span class="cstat-no" title="statement not covered" >                        data.</span>time = JSONResponse.costValue;
-<span class="cstat-no" title="statement not covered" >                        data.</span>distance = "";
+<span class="cstat-no" title="statement not covered" >                        data.time = JSONResponse.costValue;</span>
+<span class="cstat-no" title="statement not covered" >                        data.distance = "";</span>
                     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                    data.</span>message = "";
-<span class="cstat-no" title="statement not covered" >                    data.</span>id = "";
-<span class="cstat-no" title="statement not covered" >                    data.</span>srs = JSONResponse.crs;
-<span class="cstat-no" title="statement not covered" >                    data.</span>geometry = JSONResponse.geometry;
-                    var coords = <span class="cstat-no" title="statement not covered" >JSONResponse.</span>point.split(",");
+<span class="cstat-no" title="statement not covered" >                    data.message = "";</span>
+<span class="cstat-no" title="statement not covered" >                    data.id = "";</span>
+<span class="cstat-no" title="statement not covered" >                    data.srs = JSONResponse.crs;</span>
+<span class="cstat-no" title="statement not covered" >                    data.geometry = JSONResponse.geometry;</span>
+                    var coords = <span class="cstat-no" title="statement not covered" >JSONResponse.point.split(",");</span>
 <span class="cstat-no" title="statement not covered" >                    if (data.location) {</span>
-<span class="cstat-no" title="statement not covered" >                        data.</span>location.x = coords[0];
-<span class="cstat-no" title="statement not covered" >                        data.</span>location.y = coords[1];
+<span class="cstat-no" title="statement not covered" >                        data.location.x = coords[0];</span>
+<span class="cstat-no" title="statement not covered" >                        data.location.y = coords[1];</span>
                     }
                 } else {
-<span class="cstat-no" title="statement not covered" >                    options.</span>onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_ANALYSE", options.response)));
+<span class="cstat-no" title="statement not covered" >                    options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_ANALYSE", options.response)));</span>
 <span class="cstat-no" title="statement not covered" >                    return;</span>
                 }
 &nbsp;
@@ -361,7 +361,7 @@ var ProcessIsoCurveResponseFactory = {
                 // ex. &lt;ExceptionReport&gt;&lt;Exception exceptionCode="MissingParameter"&gt;Key does not exist or has expired&lt;/Exception&gt;&lt;/ExceptionReport&gt;
                 // mais le statut est 403, l'erreur est donc remontée plus tôt.
 <span class="cstat-no" title="statement not covered" >                if (data.exceptionReport) {</span>
-<span class="cstat-no" title="statement not covered" >                    options.</span>onError.call(options.scope, new ErrorService({
+<span class="cstat-no" title="statement not covered" >                    options.onError.call(options.scope, new ErrorService({</span>
                         message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", data.exceptionReport),
                         type : ErrorService.TYPE_SRVERR,
                         status : 200
@@ -371,12 +371,12 @@ var ProcessIsoCurveResponseFactory = {
             }
         } else {
             // si la réponse est vide, on appelle le callback d'erreur
-<span class="cstat-no" title="statement not covered" >            options.</span>onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EMPTY")));
+<span class="cstat-no" title="statement not covered" >            options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EMPTY")));</span>
 <span class="cstat-no" title="statement not covered" >            return;</span>
         }
 &nbsp;
         // si tout s'est bien passé, on appelle le callback de succès
-<span class="cstat-no" title="statement not covered" >        options.</span>onSuccess.call(options.scope, data);
+<span class="cstat-no" title="statement not covered" >        options.onSuccess.call(options.scope, data);</span>
     }
 };
 &nbsp;
@@ -388,7 +388,7 @@ export default ProcessIsoCurveResponseFactory;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

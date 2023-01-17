@@ -454,38 +454,38 @@ var AutoConfReponseFactory = {
      */
     build : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
         // logger
-        var logger = <span class="cstat-no" title="statement not covered" >Logger.</span>getLogger("AutoConfResponseFactory");
-<span class="cstat-no" title="statement not covered" >        logger.</span>trace(["AutoConfResponseFactory::build()"]);
+        var logger = <span class="cstat-no" title="statement not covered" >Logger.getLogger("AutoConfResponseFactory");</span>
+<span class="cstat-no" title="statement not covered" >        logger.trace(["AutoConfResponseFactory::build()"]);</span>
 &nbsp;
         // data de type AutoConfResponse
         var data = <span class="cstat-no" title="statement not covered" >null;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (options.response) {</span>
 <span class="cstat-no" title="statement not covered" >            if (options.rawResponse) {</span>
-<span class="cstat-no" title="statement not covered" >                data </span>= options.response;
+<span class="cstat-no" title="statement not covered" >                data = options.response;</span>
             } else {
 <span class="cstat-no" title="statement not covered" >                try {</span>
-                    var p = <span class="cstat-no" title="statement not covered" >new X</span>ML({
+                    var p = <span class="cstat-no" title="statement not covered" >new XML({</span>
                         reader : AutoConfResponseReader
                     });
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                    if (typeof options.response === "string") {</span>
-<span class="cstat-no" title="statement not covered" >                        p.</span>setXMLString(options.response);
+<span class="cstat-no" title="statement not covered" >                        p.setXMLString(options.response);</span>
                     } else {
-<span class="cstat-no" title="statement not covered" >                        p.</span>setXMLDoc(options.response);
+<span class="cstat-no" title="statement not covered" >                        p.setXMLDoc(options.response);</span>
                     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                    data </span>= p.parse();
+<span class="cstat-no" title="statement not covered" >                    data = p.parse();</span>
                 } catch (e) {
                     // si une exception a été levée, on appelle le callback d'erreur avec le message renvoyé
                     var message = <span class="cstat-no" title="statement not covered" >e.message;</span>
 <span class="cstat-no" title="statement not covered" >                    if (typeof options.response === "string") {</span>
-<span class="cstat-no" title="statement not covered" >                        message </span>+= "\n (raw response service'" + options.response + "')";
+<span class="cstat-no" title="statement not covered" >                        message += "\n (raw response service'" + options.response + "')";</span>
                     } else {
-<span class="cstat-no" title="statement not covered" >                        message </span>+= "\n (raw response service'" + options.response.documentElement.innerHTML + "')";
+<span class="cstat-no" title="statement not covered" >                        message += "\n (raw response service'" + options.response.documentElement.innerHTML + "')";</span>
                     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                    options.</span>onError.call(options.scope, new ErrorService({
+<span class="cstat-no" title="statement not covered" >                    options.onError.call(options.scope, new ErrorService({</span>
                         message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", message),
                         status : 200,
                         type : ErrorService.TYPE_SRVERR
@@ -497,17 +497,17 @@ var AutoConfReponseFactory = {
                 var isEmpty = <span class="cstat-no" title="statement not covered" >true;</span>
 <span class="cstat-no" title="statement not covered" >                for (var key in data) {</span>
 <span class="cstat-no" title="statement not covered" >                    if (data.hasOwnProperty(key)) {</span>
-<span class="cstat-no" title="statement not covered" >                        isEmpty </span>= false;
+<span class="cstat-no" title="statement not covered" >                        isEmpty = false;</span>
                     }
                 }
 <span class="cstat-no" title="statement not covered" >                if (isEmpty) {</span>
-<span class="cstat-no" title="statement not covered" >                    options.</span>onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EMPTY_2")));
+<span class="cstat-no" title="statement not covered" >                    options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EMPTY_2")));</span>
 <span class="cstat-no" title="statement not covered" >                    return;</span>
                 }
 &nbsp;
                 // Si la réponse contenait une exception renvoyée par le service, on appelle le callback d'erreur
 <span class="cstat-no" title="statement not covered" >                if (data.exceptionReport) {</span>
-<span class="cstat-no" title="statement not covered" >                    options.</span>onError.call(options.scope, new ErrorService({
+<span class="cstat-no" title="statement not covered" >                    options.onError.call(options.scope, new ErrorService({</span>
                         message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", data.exceptionReport),
                         type : ErrorService.TYPE_SRVERR,
                         status : 200
@@ -517,7 +517,7 @@ var AutoConfReponseFactory = {
             }
         } else {
             // si la réponse (xmlString) est vide, on appelle le callback d'erreur
-<span class="cstat-no" title="statement not covered" >            options.</span>onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EMPTY")));
+<span class="cstat-no" title="statement not covered" >            options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EMPTY")));</span>
 <span class="cstat-no" title="statement not covered" >            return;</span>
         }
 &nbsp;
@@ -525,16 +525,16 @@ var AutoConfReponseFactory = {
         var scope = <span class="cstat-no" title="statement not covered" >typeof window !== "undefined" ? window : {};</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (!scope.Gp) {</span>
-<span class="cstat-no" title="statement not covered" >            scope.</span>Gp = {};
+<span class="cstat-no" title="statement not covered" >            scope.Gp = {};</span>
         }
 <span class="cstat-no" title="statement not covered" >        if (!scope.Gp.Config) {</span>
-<span class="cstat-no" title="statement not covered" >            scope.</span>Gp.Config = data;
+<span class="cstat-no" title="statement not covered" >            scope.Gp.Config = data;</span>
         } else {
-<span class="cstat-no" title="statement not covered" >            this.m</span>ergeConfig(scope.Gp.Config, data, options.layerId);
+<span class="cstat-no" title="statement not covered" >            this.mergeConfig(scope.Gp.Config, data, options.layerId);</span>
         }
 &nbsp;
         // si tout s'est bien passé, on appelle le callback de succès
-<span class="cstat-no" title="statement not covered" >        options.</span>onSuccess.call(options.scope, scope.Gp.Config);
+<span class="cstat-no" title="statement not covered" >        options.onSuccess.call(options.scope, scope.Gp.Config);</span>
     },
 &nbsp;
     /**
@@ -556,7 +556,7 @@ var AutoConfReponseFactory = {
 <span class="cstat-no" title="statement not covered" >                    if (prop === "generalOptions") {</span>
 <span class="cstat-no" title="statement not covered" >                        for (var key in data[prop].apiKeys) {</span>
 <span class="cstat-no" title="statement not covered" >                            if (data[prop].apiKeys.hasOwnProperty(key) &amp;&amp; !GpConfig.generalOptions.apiKeys[key]) {</span>
-<span class="cstat-no" title="statement not covered" >                                GpConfig.</span>generalOptions.apiKeys[key] = data[prop].apiKeys[key];
+<span class="cstat-no" title="statement not covered" >                                GpConfig.generalOptions.apiKeys[key] = data[prop].apiKeys[key];</span>
                             }
                         }
                         // on récupère les nouveaux objets (TMS, layers, projections...)
@@ -564,7 +564,7 @@ var AutoConfReponseFactory = {
 <span class="cstat-no" title="statement not covered" >                        if (GpConfig[prop]) {</span>
 <span class="cstat-no" title="statement not covered" >                            for (var obj in data[prop]) {</span>
 <span class="cstat-no" title="statement not covered" >                                if (data[prop].hasOwnProperty(obj) &amp;&amp; !GpConfig[prop][obj]) {</span>
-<span class="cstat-no" title="statement not covered" >                                    GpConfig[</span>prop][obj] = data[prop][obj];
+<span class="cstat-no" title="statement not covered" >                                    GpConfig[prop][obj] = data[prop][obj];</span>
                                 }
                             }
                         }
@@ -578,12 +578,12 @@ var AutoConfReponseFactory = {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                for (var lyr in data.layers) {</span>
 <span class="cstat-no" title="statement not covered" >                    if (data.layers.hasOwnProperty(lyr)) {</span>
-<span class="cstat-no" title="statement not covered" >                        aggregatedLayers.</span>push(lyr);
+<span class="cstat-no" title="statement not covered" >                        aggregatedLayers.push(lyr);</span>
                     }
                 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                if (GpConfig.layers[layerId]) {</span>
-<span class="cstat-no" title="statement not covered" >                    GpConfig.</span>layers[layerId].aggregatedLayers = aggregatedLayers;
+<span class="cstat-no" title="statement not covered" >                    GpConfig.layers[layerId].aggregatedLayers = aggregatedLayers;</span>
                 }
             }
         }
@@ -598,7 +598,7 @@ export default AutoConfReponseFactory;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

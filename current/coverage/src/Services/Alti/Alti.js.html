@@ -609,95 +609,95 @@ import AltiResponseFactory from "./Response/AltiResponseFactory";
  *
  * @private
  */
-function <span class="fstat-no" title="function not covered" >Alti (o</span>ptions) {
+function <span class="fstat-no" title="function not covered" >Alti </span>(options) {
 <span class="cstat-no" title="statement not covered" >    if (!(this instanceof Alti)) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew TypeError(_.getMessage("CLASS_CONSTRUCTOR", "Alti"));
+<span class="cstat-no" title="statement not covered" >        throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "Alti"));</span>
     }
 &nbsp;
     /**
      * Nom de la classe (heritage)
      * FIXME instance ou classe ?
      */
-<span class="cstat-no" title="statement not covered" >    this.C</span>LASSNAME = "Alti";
+<span class="cstat-no" title="statement not covered" >    this.CLASSNAME = "Alti";</span>
 &nbsp;
     // appel du constructeur par heritage
-<span class="cstat-no" title="statement not covered" >    CommonService.</span>apply(this, arguments);
+<span class="cstat-no" title="statement not covered" >    CommonService.apply(this, arguments);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this.l</span>ogger = Logger.getLogger("Gp.Services.Alti");
-<span class="cstat-no" title="statement not covered" >    this.l</span>ogger.trace("[Constructeur Alti (options)]");
+<span class="cstat-no" title="statement not covered" >    this.logger = Logger.getLogger("Gp.Services.Alti");</span>
+<span class="cstat-no" title="statement not covered" >    this.logger.trace("[Constructeur Alti (options)]");</span>
 &nbsp;
     // #####################
     // analyse des options
     // #####################
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (!options.positions) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(_.getMessage("PARAM_MISSING", "positions"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(_.getMessage("PARAM_MISSING", "positions"));</span>
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (options.positions.length === 0) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(_.getMessage("PARAM_EMPTY", "positions"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(_.getMessage("PARAM_EMPTY", "positions"));</span>
     }
 &nbsp;
     // ajout des options spécifiques au service
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.positions = options.positions;
+<span class="cstat-no" title="statement not covered" >    this.options.positions = options.positions;</span>
 &nbsp;
     // format de réponse du service : "json" ou "xml" (valeur par défaut), en minuscule !
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.outputFormat = (typeof options.outputFormat === "string") ? options.outputFormat.toLowerCase() : "xml";
+<span class="cstat-no" title="statement not covered" >    this.options.outputFormat = (typeof options.outputFormat === "string") ? options.outputFormat.toLowerCase() : "xml";</span>
 &nbsp;
     // sampling
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.sampling = options.sampling || null;
+<span class="cstat-no" title="statement not covered" >    this.options.sampling = options.sampling || null;</span>
 &nbsp;
     // type d'api utilisé pour requeter le service, en majuscule !
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.api = (typeof options.api === "string") ? options.api.toUpperCase() : "REST";
+<span class="cstat-no" title="statement not covered" >    this.options.api = (typeof options.api === "string") ? options.api.toUpperCase() : "REST";</span>
 &nbsp;
     // l'api ne peut être interrogée qu'en GET.
 <span class="cstat-no" title="statement not covered" >    if (this.options.api === "REST") {</span>
-<span class="cstat-no" title="statement not covered" >        this.o</span>ptions.httpMethod = "GET";
+<span class="cstat-no" title="statement not covered" >        this.options.httpMethod = "GET";</span>
     }
 &nbsp;
     // param. zonly
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.zonly = options.zonly || false;
+<span class="cstat-no" title="statement not covered" >    this.options.zonly = options.zonly || false;</span>
 &nbsp;
     // gestion de l'url du service par defaut
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
     // en fonction du type d'api, REST ou WPS, du format de reponse demandé (outputFormat)
     // ainsi que sur le type de service (profil ou elevation)
 <span class="cstat-no" title="statement not covered" >    if (!this.options.serverUrl) {</span>
-        var lstUrlByDefault = <span class="cstat-no" title="statement not covered" >DefaultUrlService.</span>Alti.url(this.options.apiKey);
+        var lstUrlByDefault = <span class="cstat-no" title="statement not covered" >DefaultUrlService.Alti.url(this.options.apiKey);</span>
         var urlFound = <span class="cstat-no" title="statement not covered" >null;</span>
-<span class="cstat-no" title="statement not covered" >        switch (t</span>his.options.api) {
+<span class="cstat-no" title="statement not covered" >        switch (this.options.api) {</span>
             case "WPS":
-<span class="cstat-no" title="statement not covered" >                urlFound </span>= lstUrlByDefault.wps;
+<span class="cstat-no" title="statement not covered" >                urlFound = lstUrlByDefault.wps;</span>
 <span class="cstat-no" title="statement not covered" >                break;</span>
             case "REST":
                 var key = <span class="cstat-no" title="statement not covered" >(options.sampling ? "profil" : "elevation") + "-" + this.options.outputFormat;</span>
-<span class="cstat-no" title="statement not covered" >                urlFound </span>= lstUrlByDefault[key];
+<span class="cstat-no" title="statement not covered" >                urlFound = lstUrlByDefault[key];</span>
 <span class="cstat-no" title="statement not covered" >                break;</span>
             default:
-<span class="cstat-no" title="statement not covered" >                throw n</span>ew Error(_.getMessage("PARAM_UNKNOWN", "api"));
+<span class="cstat-no" title="statement not covered" >                throw new Error(_.getMessage("PARAM_UNKNOWN", "api"));</span>
         }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (!urlFound) {</span>
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error("Url by default not found !");
+<span class="cstat-no" title="statement not covered" >            throw new Error("Url by default not found !");</span>
         }
-<span class="cstat-no" title="statement not covered" >        this.o</span>ptions.serverUrl = urlFound;
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.trace("Server URL by default : " + this.options.serverUrl);
+<span class="cstat-no" title="statement not covered" >        this.options.serverUrl = urlFound;</span>
+<span class="cstat-no" title="statement not covered" >        this.logger.trace("Server URL by default : " + this.options.serverUrl);</span>
     }
 &nbsp;
     // gestion du type de service
     // si l'extension de l'url est .json ou .xml, on surcharge le format de sortie (outputFormat)
-    var idx = <span class="cstat-no" title="statement not covered" >this.o</span>ptions.serverUrl.lastIndexOf(".");
+    var idx = <span class="cstat-no" title="statement not covered" >this.options.serverUrl.lastIndexOf(".");</span>
 <span class="cstat-no" title="statement not covered" >    if (idx !== -1) {</span>
-        var extension = <span class="cstat-no" title="statement not covered" >this.o</span>ptions.serverUrl.substring(idx + 1);
+        var extension = <span class="cstat-no" title="statement not covered" >this.options.serverUrl.substring(idx + 1);</span>
 <span class="cstat-no" title="statement not covered" >        if (extension &amp;&amp; extension.length &lt; 5) { // FIXME extension de moins de 4 car. ...</span>
-<span class="cstat-no" title="statement not covered" >            this.l</span>ogger.trace("Server Extension URL : " + extension);
-<span class="cstat-no" title="statement not covered" >            switch (e</span>xtension.toLowerCase()) {
+<span class="cstat-no" title="statement not covered" >            this.logger.trace("Server Extension URL : " + extension);</span>
+<span class="cstat-no" title="statement not covered" >            switch (extension.toLowerCase()) {</span>
                 case "json":
                 case "xml":
-<span class="cstat-no" title="statement not covered" >                    this.o</span>ptions.outputFormat = extension.toLowerCase();
+<span class="cstat-no" title="statement not covered" >                    this.options.outputFormat = extension.toLowerCase();</span>
 <span class="cstat-no" title="statement not covered" >                    break;</span>
                 default:
-<span class="cstat-no" title="statement not covered" >                    throw n</span>ew Error("type of service : unknown or unsupported (json or xml) !");
+<span class="cstat-no" title="statement not covered" >                    throw new Error("type of service : unknown or unsupported (json or xml) !");</span>
             }
         }
     }
@@ -729,8 +729,8 @@ Alti.prototype.buildRequest = <span class="fstat-no" title="function not covered
         // callback
         onSuccess : <span class="fstat-no" title="function not covered" >function (r</span>esult) {
             // sauvegarde de la requete !
-<span class="cstat-no" title="statement not covered" >            this.r</span>equest = result;
-<span class="cstat-no" title="statement not covered" >            success.</span>call(this, this.request);
+<span class="cstat-no" title="statement not covered" >            this.request = result;</span>
+<span class="cstat-no" title="statement not covered" >            success.call(this, this.request);</span>
         },
         onError : error,
         scope : this,
@@ -742,7 +742,7 @@ Alti.prototype.buildRequest = <span class="fstat-no" title="function not covered
         zonly : this.options.zonly
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    AltiRequestFactory.</span>build(options);
+<span class="cstat-no" title="statement not covered" >    AltiRequestFactory.build(options);</span>
 };
 &nbsp;
 /**
@@ -767,9 +767,9 @@ Alti.prototype.analyzeResponse = <span class="fstat-no" title="function not cove
             scope : this
         };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        AltiResponseFactory.</span>build(options);
+<span class="cstat-no" title="statement not covered" >        AltiResponseFactory.build(options);</span>
     } else {
-<span class="cstat-no" title="statement not covered" >        error.</span>call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
+<span class="cstat-no" title="statement not covered" >        error.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));</span>
     }
 };
 &nbsp;
@@ -781,7 +781,7 @@ export default Alti;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

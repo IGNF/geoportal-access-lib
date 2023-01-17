@@ -1162,7 +1162,7 @@ import Pkg from "../../package.json";
  */
 function CommonService (options) {
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!(this instanceof CommonService)) {
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew TypeError(_.getMessage("CLASS_CONSTRUCTOR"));
+<span class="cstat-no" title="statement not covered" >        throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR"));</span>
     }
 &nbsp;
     this.logger = Logger.getLogger("CommonService");
@@ -1193,7 +1193,7 @@ function CommonService (options) {
         * @private
         */
         onSuccess : <span class="fstat-no" title="function not covered" >function (r</span>esponse) {
-<span class="cstat-no" title="statement not covered" >            console.</span>log("onSuccess - la reponse est la suivante : ", response);
+<span class="cstat-no" title="statement not covered" >            console.log("onSuccess - la reponse est la suivante : ", response);</span>
         },
         /**
         * callback par defaut pour les erreurs
@@ -1202,9 +1202,9 @@ function CommonService (options) {
         */
         onFailure : <span class="fstat-no" title="function not covered" >function (e</span>rror) {
 <span class="cstat-no" title="statement not covered" >            if (error.status === 200 || !error.status) {</span>
-<span class="cstat-no" title="statement not covered" >                console.</span>log("onFailure : ", error.message);
+<span class="cstat-no" title="statement not covered" >                console.log("onFailure : ", error.message);</span>
             } else {
-<span class="cstat-no" title="statement not covered" >                console.</span>log("onFailure - Erreur (", error.status, ") : ", error.message);
+<span class="cstat-no" title="statement not covered" >                console.log("onFailure - Erreur (", error.status, ") : ", error.message);</span>
             }
         }
     };
@@ -1226,14 +1226,14 @@ function CommonService (options) {
     }
 &nbsp;
     // modification de la fonction de callback onSuccess dans le cas où la réponse brute est demandée
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (this.options.rawResponse &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >!this.options.onSuccess) {</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (this.options.rawResponse &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >!this.options.onSuccess)</span> {
         /**
         * callback par defaut pour la reponse
         * @param {Object} response - response
         * @private
         */
-<span class="cstat-no" title="statement not covered" >        this.o</span>ptions.onSuccess = <span class="fstat-no" title="function not covered" >function (r</span>esponse) {
-<span class="cstat-no" title="statement not covered" >            console.</span>log("onSuccess - la réponse brute du service est la suivante : ", response);
+<span class="cstat-no" title="statement not covered" >        this.options.onSuccess = <span class="fstat-no" title="function not covered" >function (r</span>esponse) {</span>
+<span class="cstat-no" title="statement not covered" >            console.log("onSuccess - la réponse brute du service est la suivante : ", response);</span>
         };
     }
 &nbsp;
@@ -1249,12 +1249,12 @@ function CommonService (options) {
         // gestion de l'url du service par defaut pour les services qui ne possèdent qu'une seul url par defaut
         // les cas particuliers des services avec plusieurs urls (ex. Alti) devront être traité dans la classe du composant
         // donc si l'url n'est pas renseignée, il faut utiliser les urls par defaut
-<span class="cstat-no" title="statement not covered" >        DefaultUrlService.</span>ssl = this.options.ssl;
-        var urlByDefault = <span class="cstat-no" title="statement not covered" >DefaultUrlService[</span>this.CLASSNAME].url(this.options.apiKey);
+<span class="cstat-no" title="statement not covered" >        DefaultUrlService.ssl = this.options.ssl;</span>
+        var urlByDefault = <span class="cstat-no" title="statement not covered" >DefaultUrlService[this.CLASSNAME].url(this.options.apiKey);</span>
 <span class="cstat-no" title="statement not covered" >        if (typeof urlByDefault === "string") {</span>
-<span class="cstat-no" title="statement not covered" >            this.o</span>ptions.serverUrl = urlByDefault;
+<span class="cstat-no" title="statement not covered" >            this.options.serverUrl = urlByDefault;</span>
         } else {
-<span class="cstat-no" title="statement not covered" >            this.l</span>ogger.trace("URL par defaut à determiner au niveau du composant...");
+<span class="cstat-no" title="statement not covered" >            this.logger.trace("URL par defaut à determiner au niveau du composant...");</span>
         }
     }
 &nbsp;
@@ -1273,7 +1273,7 @@ function CommonService (options) {
     this.options.httpMethod = (typeof options.httpMethod === "string") ? options.httpMethod.toUpperCase() : <span class="branch-1 cbranch-no" title="branch not covered" >"GET";</span>
 &nbsp;
     switch (this.options.httpMethod) {
-<span class="branch-0 cbranch-no" title="branch not covered" >        case "</span>POST":
+<span class="branch-0 cbranch-no" title="branch not covered" >        case "POST":</span>
         case "GET":
             break;
         case "PUT":
@@ -1290,7 +1290,7 @@ function CommonService (options) {
     this.options.protocol = (typeof options.protocol === "string") ? options.protocol.toUpperCase() : <span class="branch-1 cbranch-no" title="branch not covered" >"XHR";</span>
 &nbsp;
     switch (this.options.protocol) {
-<span class="branch-0 cbranch-no" title="branch not covered" >        case "</span>JSONP":
+<span class="branch-0 cbranch-no" title="branch not covered" >        case "JSONP":</span>
         case "XHR":
             break;
         default:
@@ -1300,12 +1300,12 @@ function CommonService (options) {
     // on determine l'environnement d'execution : browser ou non ?
     // et on lance une exception sur l'utilisation du protocole JSONP pour nodeJS...
     <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof window === "undefined" &amp;&amp; this.options.protocol === "JSONP") {
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(_.getMessage("PARAM_NOT_SUPPORT_NODEJS", "protocol=JSONP (instead use XHR)"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(_.getMessage("PARAM_NOT_SUPPORT_NODEJS", "protocol=JSONP (instead use XHR)"));</span>
     }
 &nbsp;
     // le protocole JSONP ne fonctionne qu'en GET.
     <span class="missing-if-branch" title="if path not taken" >I</span>if (this.options.protocol === "JSONP") {
-<span class="cstat-no" title="statement not covered" >        this.o</span>ptions.httpMethod = "GET";
+<span class="cstat-no" title="statement not covered" >        this.options.httpMethod = "GET";</span>
     }
 &nbsp;
     // gestion du cache
@@ -1344,48 +1344,48 @@ CommonService.prototype = {
      */
     call : <span class="fstat-no" title="function not covered" >function () {</span>
         /* jshint validthis : true */
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.trace("CommonService::call ()");
+<span class="cstat-no" title="statement not covered" >        this.logger.trace("CommonService::call ()");</span>
 &nbsp;
         var context = <span class="cstat-no" title="statement not covered" >this;</span>
         /** fonction d'execution */
-        function <span class="fstat-no" title="function not covered" >run () {</span>
-<span class="cstat-no" title="statement not covered" >            this.l</span>ogger.trace("CommonService::run ()");
-<span class="cstat-no" title="statement not covered" >            this.b</span>uildRequest.call(context, onError, onBuildRequest);
+        function <span class="fstat-no" title="function not covered" >run </span>() {
+<span class="cstat-no" title="statement not covered" >            this.logger.trace("CommonService::run ()");</span>
+<span class="cstat-no" title="statement not covered" >            this.buildRequest.call(context, onError, onBuildRequest);</span>
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        run.</span>call(context);
+<span class="cstat-no" title="statement not covered" >        run.call(context);</span>
 &nbsp;
         // callback de fin de construction de la requête
-        function <span class="fstat-no" title="function not covered" >onBuildRequest (r</span>esult) {
-<span class="cstat-no" title="statement not covered" >            this.l</span>ogger.trace("CommonService::onBuildRequest : ", result);
-<span class="cstat-no" title="statement not covered" >            this.c</span>allService.call(context, onError, onCallService);
+        function <span class="fstat-no" title="function not covered" >onBuildRequest </span>(result) {
+<span class="cstat-no" title="statement not covered" >            this.logger.trace("CommonService::onBuildRequest : ", result);</span>
+<span class="cstat-no" title="statement not covered" >            this.callService.call(context, onError, onCallService);</span>
         }
 &nbsp;
         // callback de fin d'appel au service
-        function <span class="fstat-no" title="function not covered" >onCallService (r</span>esult) {
-<span class="cstat-no" title="statement not covered" >            this.l</span>ogger.trace("CommonService::onCallService : ", result);
-<span class="cstat-no" title="statement not covered" >            this.a</span>nalyzeResponse.call(context, onError, onAnalyzeResponse);
+        function <span class="fstat-no" title="function not covered" >onCallService </span>(result) {
+<span class="cstat-no" title="statement not covered" >            this.logger.trace("CommonService::onCallService : ", result);</span>
+<span class="cstat-no" title="statement not covered" >            this.analyzeResponse.call(context, onError, onAnalyzeResponse);</span>
         }
 &nbsp;
         // callback de fin de lecture de la reponse
-        function <span class="fstat-no" title="function not covered" >onAnalyzeResponse (r</span>esult) {
-<span class="cstat-no" title="statement not covered" >            this.l</span>ogger.trace("CommonService::onAnalyzeResponse : ", result);
+        function <span class="fstat-no" title="function not covered" >onAnalyzeResponse </span>(result) {
+<span class="cstat-no" title="statement not covered" >            this.logger.trace("CommonService::onAnalyzeResponse : ", result);</span>
 <span class="cstat-no" title="statement not covered" >            if (result) {</span>
-<span class="cstat-no" title="statement not covered" >                this.o</span>ptions.onSuccess.call(this, result);
+<span class="cstat-no" title="statement not covered" >                this.options.onSuccess.call(this, result);</span>
             } else {
-<span class="cstat-no" title="statement not covered" >                return o</span>nError.call(this, new ErrorService("Analyse de la reponse en échec !?"));
+<span class="cstat-no" title="statement not covered" >                return onError.call(this, new ErrorService("Analyse de la reponse en échec !?"));</span>
             }
         }
 &nbsp;
         // callback de gestion des erreurs : renvoit un objet de type ErrorService
-        function <span class="fstat-no" title="function not covered" >onError (e</span>rror) {
-<span class="cstat-no" title="statement not covered" >            this.l</span>ogger.trace("CommonService::onError()");
+        function <span class="fstat-no" title="function not covered" >onError </span>(error) {
+<span class="cstat-no" title="statement not covered" >            this.logger.trace("CommonService::onError()");</span>
             // error : l'objet est du type ErrorService ou Error
             var e = <span class="cstat-no" title="statement not covered" >error;</span>
 <span class="cstat-no" title="statement not covered" >            if (!(e instanceof ErrorService)) {</span>
-<span class="cstat-no" title="statement not covered" >                e </span>= new ErrorService(error.message);
+<span class="cstat-no" title="statement not covered" >                e = new ErrorService(error.message);</span>
             }
-<span class="cstat-no" title="statement not covered" >            this.o</span>ptions.onFailure.call(this, e);
+<span class="cstat-no" title="statement not covered" >            this.options.onFailure.call(this, e);</span>
         }
     },
 &nbsp;
@@ -1396,12 +1396,12 @@ CommonService.prototype = {
      */
     buildRequest : <span class="fstat-no" title="function not covered" >function (e</span>rror, success) {
         // INFO
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.error("overwritten method !");
+<span class="cstat-no" title="statement not covered" >        this.logger.error("overwritten method !");</span>
         // retourne l'objet 'this.request'
 <span class="cstat-no" title="statement not covered" >        if (error) {</span>
-<span class="cstat-no" title="statement not covered" >            error.</span>call(this, "This method must be overwritten !");
+<span class="cstat-no" title="statement not covered" >            error.call(this, "This method must be overwritten !");</span>
         }
-<span class="cstat-no" title="statement not covered" >        success.</span>call(this, "This method must be overwritten !");
+<span class="cstat-no" title="statement not covered" >        success.call(this, "This method must be overwritten !");</span>
     },
 &nbsp;
     /**
@@ -1430,12 +1430,12 @@ CommonService.prototype = {
 &nbsp;
         // a t on mis en place un proxy ?
         // la proxyfication est valable uniquement en mode XHR !
-        var bUrlProxified = <span class="cstat-no" title="statement not covered" >!!(t</span>his.options.proxyURL &amp;&amp; this.options.protocol === "XHR");
+        var bUrlProxified = <span class="cstat-no" title="statement not covered" >!!(this.options.proxyURL &amp;&amp; this.options.protocol === "XHR");</span>
 &nbsp;
         // rajout de l'option gpbibaccess
         // INFO : acces au numero de version de package.conf aprés compilation !
 <span class="cstat-no" title="statement not covered" >        if (this.CLASSNAME !== "Geocode" &amp;&amp; this.CLASSNAME !== "ReverseGeocode" &amp;&amp; this.CLASSNAME !== "AutoComplete") {</span>
-<span class="cstat-no" title="statement not covered" >            this.o</span>ptions.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, {
+<span class="cstat-no" title="statement not covered" >            this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, {</span>
                 "gp-access-lib" : Pkg.version
             }, false);
         }
@@ -1443,13 +1443,13 @@ CommonService.prototype = {
         // si le proxy est renseigné, on proxifie l'url du service
 <span class="cstat-no" title="statement not covered" >        if (bUrlProxified) {</span>
 <span class="cstat-no" title="statement not covered" >            if (this.options.httpMethod === "GET") {</span>
-<span class="cstat-no" title="statement not covered" >                strUrlProxified </span>= this.options.proxyURL + Helper.normalyzeUrl(this.options.serverUrl, this.request, true);
-<span class="cstat-no" title="statement not covered" >                strData </span>= null;
+<span class="cstat-no" title="statement not covered" >                strUrlProxified = this.options.proxyURL + Helper.normalyzeUrl(this.options.serverUrl, this.request, true);</span>
+<span class="cstat-no" title="statement not covered" >                strData = null;</span>
             }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            if (this.options.httpMethod === "POST") {</span>
-<span class="cstat-no" title="statement not covered" >                strUrlProxified </span>= this.options.proxyURL + Helper.normalyzeUrl(this.options.serverUrl, null, true);
-<span class="cstat-no" title="statement not covered" >                strData </span>= this.request;
+<span class="cstat-no" title="statement not covered" >                strUrlProxified = this.options.proxyURL + Helper.normalyzeUrl(this.options.serverUrl, null, true);</span>
+<span class="cstat-no" title="statement not covered" >                strData = this.request;</span>
             }
         }
 &nbsp;
@@ -1472,7 +1472,7 @@ CommonService.prototype = {
             scope : this.options.scope || this,
             // callback de reponse
             onResponse : <span class="fstat-no" title="function not covered" >function (r</span>esponse) {
-<span class="cstat-no" title="statement not covered" >                self.</span>logger.trace("callService::onResponse()");
+<span class="cstat-no" title="statement not covered" >                self.logger.trace("callService::onResponse()");</span>
 &nbsp;
                 // le contenu de la reponse à renvoyer !
                 var content = <span class="cstat-no" title="statement not covered" >null;</span>
@@ -1480,72 +1480,72 @@ CommonService.prototype = {
                 // XHR : on renvoie toujours la reponse brute du service (json ou xml)
                 // au parser du composant...
 <span class="cstat-no" title="statement not covered" >                if (self.options.protocol === "XHR") {</span>
-<span class="cstat-no" title="statement not covered" >                    self.</span>logger.trace("Response XHR", response);
-<span class="cstat-no" title="statement not covered" >                    content </span>= response; // par defaut, la reponse du service  !
+<span class="cstat-no" title="statement not covered" >                    self.logger.trace("Response XHR", response);</span>
+<span class="cstat-no" title="statement not covered" >                    content = response; </span>// par defaut, la reponse du service  !
                 }
 &nbsp;
                 // JSONP : on pre-analyse la reponse brute du service (encapsuler ou pas)
                 // avant de l'envoyer au parser du composant...
 <span class="cstat-no" title="statement not covered" >                if (self.options.protocol === "JSONP") {</span>
-<span class="cstat-no" title="statement not covered" >                    self.</span>logger.trace("Response JSON", response);
+<span class="cstat-no" title="statement not covered" >                    self.logger.trace("Response JSON", response);</span>
 <span class="cstat-no" title="statement not covered" >                    if (response) {</span>
 <span class="cstat-no" title="statement not covered" >                        if (response.http) {</span>
                             // reponse encapsulée :
                             // ex. reponse du service en xml
                             // &gt; {http : {status:200, error:null},xml :'réponse du service'}
 <span class="cstat-no" title="statement not covered" >                            if (response.http.status !== 200) {</span>
-<span class="cstat-no" title="statement not covered" >                                error.</span>call(self, new ErrorService({
+<span class="cstat-no" title="statement not covered" >                                error.call(self, new ErrorService({</span>
                                     status : response.http.status,
                                     message : response.http.error,
                                     type : ErrorService.TYPE_SRVERR
                                 }));
 <span class="cstat-no" title="statement not covered" >                                return;</span>
                             } else {
-<span class="cstat-no" title="statement not covered" >                                content </span>= response.xml; // par defaut !
+<span class="cstat-no" title="statement not covered" >                                content = response.xml; </span>// par defaut !
 <span class="cstat-no" title="statement not covered" >                                if (self.options.rawResponse) {</span>
-<span class="cstat-no" title="statement not covered" >                                    content </span>= response;
+<span class="cstat-no" title="statement not covered" >                                    content = response;</span>
                                 }
                             }
                         } else {
                             // reponse non encapsulée :
                             // ex. reponse du service en json ou xml
-<span class="cstat-no" title="statement not covered" >                            content </span>= response;
+<span class="cstat-no" title="statement not covered" >                            content = response;</span>
                         }
                     } else {
-<span class="cstat-no" title="statement not covered" >                        error.</span>call(self, new ErrorService("Le contenu de la reponse est vide !?"));
+<span class="cstat-no" title="statement not covered" >                        error.call(self, new ErrorService("Le contenu de la reponse est vide !?"));</span>
 <span class="cstat-no" title="statement not covered" >                        return;</span>
                     }
                 }
 &nbsp;
                 // si on souhaite parser la reponse du service
 <span class="cstat-no" title="statement not covered" >                if (typeof self.options.onBeforeParse === "function") {</span>
-                    var newResponse = <span class="cstat-no" title="statement not covered" >self.</span>options.onBeforeParse(content);
+                    var newResponse = <span class="cstat-no" title="statement not covered" >self.options.onBeforeParse(content);</span>
 <span class="cstat-no" title="statement not covered" >                    if (typeof newResponse === "string") {</span>
                         // la reponse parsée par l'utilisateur est retournée sous
                         // forme de string !
-<span class="cstat-no" title="statement not covered" >                        content </span>= newResponse;
+<span class="cstat-no" title="statement not covered" >                        content = newResponse;</span>
                     }
                 }
                 // sauvegarde de la reponse dans l'objet parent (CommonService)
-<span class="cstat-no" title="statement not covered" >                self.</span>response = content;
+<span class="cstat-no" title="statement not covered" >                self.response = content;</span>
                 // on renvoie la reponse...
-<span class="cstat-no" title="statement not covered" >                success.</span>call(self, content);
+<span class="cstat-no" title="statement not covered" >                success.call(self, content);</span>
             },
             // callback des erreurs
             onFailure : <span class="fstat-no" title="function not covered" >function (e</span>) {
-<span class="cstat-no" title="statement not covered" >                self.</span>logger.trace("callService::onFailure()");
+<span class="cstat-no" title="statement not covered" >                self.logger.trace("callService::onFailure()");</span>
                 // on est forcement sur une erreur levée par un service !
-<span class="cstat-no" title="statement not covered" >                e.</span>type = ErrorService.TYPE_SRVERR;
-<span class="cstat-no" title="statement not covered" >                error.</span>call(self, new ErrorService(e));
+<span class="cstat-no" title="statement not covered" >                e.type = ErrorService.TYPE_SRVERR;</span>
+<span class="cstat-no" title="statement not covered" >                error.call(self, new ErrorService(e));</span>
             },
             // callback de timeOut
             onTimeOut : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >                self.</span>logger.trace("callService::onTimeOut()");
-<span class="cstat-no" title="statement not covered" >                error.</span>call(self, new ErrorService("TimeOut!"));
+<span class="cstat-no" title="statement not covered" >                self.logger.trace("callService::onTimeOut()");</span>
+<span class="cstat-no" title="statement not covered" >                error.call(self, new ErrorService("TimeOut!"));</span>
             }
         };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        Protocol.</span>send(options);
+<span class="cstat-no" title="statement not covered" >        Protocol.send(options);</span>
     },
 &nbsp;
     /**
@@ -1555,12 +1555,12 @@ CommonService.prototype = {
      */
     analyzeResponse : <span class="fstat-no" title="function not covered" >function (e</span>rror, success) {
         // INFO
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.error("overwritten method !");
+<span class="cstat-no" title="statement not covered" >        this.logger.error("overwritten method !");</span>
         // retourne l'objet spécifique au type de composant (json)
 <span class="cstat-no" title="statement not covered" >        if (error) {</span>
-<span class="cstat-no" title="statement not covered" >            error.</span>call(this, "This method must be overwritten !");
+<span class="cstat-no" title="statement not covered" >            error.call(this, "This method must be overwritten !");</span>
         }
-<span class="cstat-no" title="statement not covered" >        success.</span>call(this, "This method must be overwritten !");
+<span class="cstat-no" title="statement not covered" >        success.call(this, "This method must be overwritten !");</span>
     }
 &nbsp;
 };
@@ -1573,7 +1573,7 @@ export default CommonService;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

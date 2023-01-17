@@ -950,90 +950,90 @@ var XHR = {
      */
     call : <span class="fstat-no" title="function not covered" >function (s</span>ettings) {
         // logger
-        var logger = <span class="cstat-no" title="statement not covered" >Logger.</span>getLogger("XHR");
-<span class="cstat-no" title="statement not covered" >        logger.</span>trace("[XHR::call()]");
+        var logger = <span class="cstat-no" title="statement not covered" >Logger.getLogger("XHR");</span>
+<span class="cstat-no" title="statement not covered" >        logger.trace("[XHR::call()]");</span>
 &nbsp;
         // FIXME
         // To polyfill the global environment
-<span class="cstat-no" title="statement not covered" >        ES6Promise.</span>polyfill();
+<span class="cstat-no" title="statement not covered" >        ES6Promise.polyfill();</span>
 &nbsp;
         // test sur les settings obligatoires
 <span class="cstat-no" title="statement not covered" >        if (!settings.url) {</span>
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error("missing parameter : url is not defined !");
+<span class="cstat-no" title="statement not covered" >            throw new Error("missing parameter : url is not defined !");</span>
         }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (!settings.method) {</span>
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error("missing parameter : method is not defined !");
+<span class="cstat-no" title="statement not covered" >            throw new Error("missing parameter : method is not defined !");</span>
         }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (!settings.format) {</span>
-<span class="cstat-no" title="statement not covered" >            settings.</span>format = "text"; // reponse brute !
+<span class="cstat-no" title="statement not covered" >            settings.format = "text"; </span>// reponse brute !
         }
 &nbsp;
         var options = <span class="cstat-no" title="statement not covered" >{};</span>
-<span class="cstat-no" title="statement not covered" >        options.</span>url = settings.url;
-<span class="cstat-no" title="statement not covered" >        options.</span>data = settings.data ? settings.data : null;
-<span class="cstat-no" title="statement not covered" >        options.</span>method = settings.method;
-<span class="cstat-no" title="statement not covered" >        options.</span>timeOut = settings.timeOut || 0;
-<span class="cstat-no" title="statement not covered" >        options.</span>scope = settings.scope || this;
-<span class="cstat-no" title="statement not covered" >        options.</span>proxy = settings.proxy || null;
-<span class="cstat-no" title="statement not covered" >        options.</span>content = settings.content || null;
-<span class="cstat-no" title="statement not covered" >        options.</span>headers = settings.headers || {
+<span class="cstat-no" title="statement not covered" >        options.url = settings.url;</span>
+<span class="cstat-no" title="statement not covered" >        options.data = settings.data ? settings.data : null;</span>
+<span class="cstat-no" title="statement not covered" >        options.method = settings.method;</span>
+<span class="cstat-no" title="statement not covered" >        options.timeOut = settings.timeOut || 0;</span>
+<span class="cstat-no" title="statement not covered" >        options.scope = settings.scope || this;</span>
+<span class="cstat-no" title="statement not covered" >        options.proxy = settings.proxy || null;</span>
+<span class="cstat-no" title="statement not covered" >        options.content = settings.content || null;</span>
+<span class="cstat-no" title="statement not covered" >        options.headers = settings.headers || {</span>
             referer : "http://localhost"
         };
 &nbsp;
         // test sur les valeurs de 'settings.method'
-<span class="cstat-no" title="statement not covered" >        switch (s</span>ettings.method) {
+<span class="cstat-no" title="statement not covered" >        switch (settings.method) {</span>
             case "DELETE":
             case "GET":
 <span class="cstat-no" title="statement not covered" >                break;</span>
             case "PUT":
             case "POST":
                 // on force sur ces params spécifiques au mode POST
-<span class="cstat-no" title="statement not covered" >                options.</span>content = settings.content ? settings.content : "application/x-www-form-urlencoded"; // FIXME en attente des services : bascule en "application/xml" ou "application/json"
-<span class="cstat-no" title="statement not covered" >                options.</span>headers = settings.headers ? settings.headers : { referer : "http://localhost" }; // FIXME parametrable...
+<span class="cstat-no" title="statement not covered" >                options.content = settings.content ? settings.content : "application/x-www-form-urlencoded"; </span>// FIXME en attente des services : bascule en "application/xml" ou "application/json"
+<span class="cstat-no" title="statement not covered" >                options.headers = settings.headers ? settings.headers : { referer : "http://localhost" }; </span>// FIXME parametrable...
 <span class="cstat-no" title="statement not covered" >                break;</span>
             case "HEAD":
             case "OPTIONS":
-<span class="cstat-no" title="statement not covered" >                throw n</span>ew Error("HTTP method not yet supported !");
+<span class="cstat-no" title="statement not covered" >                throw new Error("HTTP method not yet supported !");</span>
             default:
-<span class="cstat-no" title="statement not covered" >                throw n</span>ew Error("HTTP method unknown !");
+<span class="cstat-no" title="statement not covered" >                throw new Error("HTTP method unknown !");</span>
         }
 &nbsp;
         // test sur les valeurs de 'settings.format'
-<span class="cstat-no" title="statement not covered" >        switch (s</span>ettings.format) {
+<span class="cstat-no" title="statement not covered" >        switch (settings.format) {</span>
             case "text":
-<span class="cstat-no" title="statement not covered" >                this._</span>_call(options)
+<span class="cstat-no" title="statement not covered" >                this.__call(options)</span>
                     .then(<span class="fstat-no" title="function not covered" >function (r</span>esponse) {
-<span class="cstat-no" title="statement not covered" >                        logger.</span>trace(response);
-<span class="cstat-no" title="statement not covered" >                        settings.</span>onResponse.call(this, response);
+<span class="cstat-no" title="statement not covered" >                        logger.trace(response);</span>
+<span class="cstat-no" title="statement not covered" >                        settings.onResponse.call(this, response);</span>
                     })
                     .catch(<span class="fstat-no" title="function not covered" >function (e</span>rror) {
-<span class="cstat-no" title="statement not covered" >                        settings.</span>onFailure.call(this, error);
+<span class="cstat-no" title="statement not covered" >                        settings.onFailure.call(this, error);</span>
                     });
 <span class="cstat-no" title="statement not covered" >                break;</span>
             case "json":
-<span class="cstat-no" title="statement not covered" >                this._</span>_callJSON(options)
+<span class="cstat-no" title="statement not covered" >                this.__callJSON(options)</span>
                     .then(<span class="fstat-no" title="function not covered" >function (r</span>esponse) {
-<span class="cstat-no" title="statement not covered" >                        logger.</span>trace(response);
-<span class="cstat-no" title="statement not covered" >                        settings.</span>onResponse.call(this, response);
+<span class="cstat-no" title="statement not covered" >                        logger.trace(response);</span>
+<span class="cstat-no" title="statement not covered" >                        settings.onResponse.call(this, response);</span>
                     })
                     .catch(<span class="fstat-no" title="function not covered" >function (e</span>rror) {
-<span class="cstat-no" title="statement not covered" >                        settings.</span>onFailure.call(this, error);
+<span class="cstat-no" title="statement not covered" >                        settings.onFailure.call(this, error);</span>
                     });
 <span class="cstat-no" title="statement not covered" >                break;</span>
             case "xml":
-<span class="cstat-no" title="statement not covered" >                this._</span>_callXML(options)
+<span class="cstat-no" title="statement not covered" >                this.__callXML(options)</span>
                     .then(<span class="fstat-no" title="function not covered" >function (r</span>esponse) {
-<span class="cstat-no" title="statement not covered" >                        logger.</span>trace(response);
-<span class="cstat-no" title="statement not covered" >                        settings.</span>onResponse.call(this, response);
+<span class="cstat-no" title="statement not covered" >                        logger.trace(response);</span>
+<span class="cstat-no" title="statement not covered" >                        settings.onResponse.call(this, response);</span>
                     })
                     .catch(<span class="fstat-no" title="function not covered" >function (e</span>rror) {
-<span class="cstat-no" title="statement not covered" >                        settings.</span>onFailure.call(this, error);
+<span class="cstat-no" title="statement not covered" >                        settings.onFailure.call(this, error);</span>
                     });
 <span class="cstat-no" title="statement not covered" >                break;</span>
             default:
-<span class="cstat-no" title="statement not covered" >                throw n</span>ew Error("This output Format is not yet supported !");
+<span class="cstat-no" title="statement not covered" >                throw new Error("This output Format is not yet supported !");</span>
         }
     },
 &nbsp;
@@ -1046,10 +1046,10 @@ var XHR = {
      * @return {Object} promise
      */
     __call : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
-        var logger = <span class="cstat-no" title="statement not covered" >Logger.</span>getLogger("XHR");
-<span class="cstat-no" title="statement not covered" >        logger.</span>trace("[XHR::__call()]");
+        var logger = <span class="cstat-no" title="statement not covered" >Logger.getLogger("XHR");</span>
+<span class="cstat-no" title="statement not covered" >        logger.trace("[XHR::__call()]");</span>
 &nbsp;
-        var promise = <span class="cstat-no" title="statement not covered" >new P</span>romise(
+        var promise = <span class="cstat-no" title="statement not covered" >new Promise(</span>
 <span class="fstat-no" title="function not covered" >            function (r</span>esolve, reject) {
                 // traitement du corps de la requête
                 var corps = (<span class="cstat-no" title="statement not covered" >options.method === "POST" || options.method === "PUT") ? 1 : 0;</span>
@@ -1057,19 +1057,19 @@ var XHR = {
                 // seulement si options.data n'est pas vide (peut être un objet ou une chaine de caractères)
 <span class="cstat-no" title="statement not covered" >                if (options.data &amp;&amp; ((typeof options.data === "object" &amp;&amp; Object.keys(options.data).length) || (typeof options.data === "string" &amp;&amp; options.data.length)) &amp;&amp; !corps) {</span>
 <span class="cstat-no" title="statement not covered" >                    if (options.scope.CLASSNAME === "Geocode" || options.scope.CLASSNAME === "ReverseGeocode") {</span>
-<span class="cstat-no" title="statement not covered" >                        options.</span>url = options.url + options.data;
+<span class="cstat-no" title="statement not covered" >                        options.url = options.url + options.data;</span>
                     } else {
-<span class="cstat-no" title="statement not covered" >                        options.</span>url = Helper.normalyzeUrl(options.url, options.data);
+<span class="cstat-no" title="statement not covered" >                        options.url = Helper.normalyzeUrl(options.url, options.data);</span>
                     }
                 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                logger.</span>trace("URL = ", options.url);
+<span class="cstat-no" title="statement not covered" >                logger.trace("URL = ", options.url);</span>
 &nbsp;
                 var hXHR = <span class="cstat-no" title="statement not covered" >null;</span>
 &nbsp;
                 // test on env. nodejs or browser
 <span class="cstat-no" title="statement not covered" >                if (typeof window === "undefined") {</span>
-                    var nodefetch = <span class="cstat-no" title="statement not covered" >require("</span>node-fetch");
+                    var nodefetch = <span class="cstat-no" title="statement not covered" >require("node-fetch");</span>
 &nbsp;
                     var opts = <span class="cstat-no" title="statement not covered" >{</span>
                         headers : {
@@ -1078,7 +1078,7 @@ var XHR = {
                     };
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                    if (options.data &amp;&amp; typeof options.data === "string" &amp;&amp; corps) {</span>
-<span class="cstat-no" title="statement not covered" >                        opts </span>= {
+<span class="cstat-no" title="statement not covered" >                        opts = {</span>
                             method : options.method,
                             body : options.data,
                             headers : {
@@ -1088,49 +1088,49 @@ var XHR = {
                         };
                     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                    return n</span>odefetch(options.url, opts)
+<span class="cstat-no" title="statement not covered" >                    return nodefetch(options.url, opts)</span>
                         .then(<span class="fstat-no" title="function not covered" >function (r</span>esponse) {
 <span class="cstat-no" title="statement not covered" >                            if (response.ok) { // res.status &gt;= 200 &amp;&amp; res.status &lt; 300</span>
-<span class="cstat-no" title="statement not covered" >                                resolve(</span>response.text());
+<span class="cstat-no" title="statement not covered" >                                resolve(response.text());</span>
                             } else {
                                 var message = <span class="cstat-no" title="statement not covered" >"Errors Occured on Http Request (status : '" + response.statusText + "' | url : '" + response.url + "')";</span>
                                 var status = <span class="cstat-no" title="statement not covered" >response.status;</span>
-<span class="cstat-no" title="statement not covered" >                                reject(</span>{
+<span class="cstat-no" title="statement not covered" >                                reject({</span>
                                     message : message,
                                     status : status
                                 });
                             }
                         })
                         .catch(<span class="fstat-no" title="function not covered" >function (e</span>) {
-<span class="cstat-no" title="statement not covered" >                            reject(</span>{
+<span class="cstat-no" title="statement not covered" >                            reject({</span>
                                 message : e,
                                 status : -1
                             });
                         });
                 } else {
 <span class="cstat-no" title="statement not covered" >                    if (window.XMLHttpRequest) {</span>
-<span class="cstat-no" title="statement not covered" >                        logger.</span>trace("XMLHttpRequest");
+<span class="cstat-no" title="statement not covered" >                        logger.trace("XMLHttpRequest");</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                        hXHR </span>= new XMLHttpRequest();
-<span class="cstat-no" title="statement not covered" >                        hXHR.</span>open(options.method, options.url, true); // async
-<span class="cstat-no" title="statement not covered" >                        hXHR.</span>overrideMimeType = options.content;
+<span class="cstat-no" title="statement not covered" >                        hXHR = new XMLHttpRequest();</span>
+<span class="cstat-no" title="statement not covered" >                        hXHR.open(options.method, options.url, true); </span>// async
+<span class="cstat-no" title="statement not covered" >                        hXHR.overrideMimeType = options.content;</span>
 &nbsp;
                         // gestion du timeout
                         var onTimeOutTrigger = <span class="cstat-no" title="statement not covered" >null;</span>
 <span class="cstat-no" title="statement not covered" >                        if (options.timeOut &gt; 0) {</span>
                             // FIXME le timeout interne ne me permet pas de declencher le bon message...
                             // hXHR.timeout = options.timeOut;
-<span class="cstat-no" title="statement not covered" >                            logger.</span>trace("XHR - TimeOut actif !");
+<span class="cstat-no" title="statement not covered" >                            logger.trace("XHR - TimeOut actif !");</span>
                             /**
                              * Description
                              *
                              * @method onTimeOutTrigger
                              * @private
                              */
-<span class="cstat-no" title="statement not covered" >                            onTimeOutTrigger </span>= window.setTimeout(
+<span class="cstat-no" title="statement not covered" >                            onTimeOutTrigger = window.setTimeout(</span>
 <span class="fstat-no" title="function not covered" >                                function () {</span>
                                     var message = <span class="cstat-no" title="statement not covered" >"TimeOut Occured on Http Request with XMLHttpRequest !";</span>
-<span class="cstat-no" title="statement not covered" >                                    reject(</span>{
+<span class="cstat-no" title="statement not covered" >                                    reject({</span>
                                         message : message,
                                         status : -1
                                     });
@@ -1140,8 +1140,8 @@ var XHR = {
 <span class="cstat-no" title="statement not covered" >                        if (corps) {</span>
                             // headers, data, content of data
                             // cf. https://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html#dom-xmlhttprequest-setrequestheader
-<span class="cstat-no" title="statement not covered" >                            logger.</span>trace("data = ", options.data);
-<span class="cstat-no" title="statement not covered" >                            hXHR.</span>setRequestHeader("Content-type", options.content);
+<span class="cstat-no" title="statement not covered" >                            logger.trace("data = ", options.data);</span>
+<span class="cstat-no" title="statement not covered" >                            hXHR.setRequestHeader("Content-type", options.content);</span>
                             // FIXME refused to set unsafe header content-length javascript
                             // hXHR.setRequestHeader ("Content-length", options.data.length);
                             // hXHR.setRequestHeader ("Referer", options.headers.referer);
@@ -1155,9 +1155,9 @@ var XHR = {
                          * @method onerror
                          * @private
                          */
-<span class="cstat-no" title="statement not covered" >                        hXHR.</span>onerror = <span class="fstat-no" title="function not covered" >function (e</span>) {
-<span class="cstat-no" title="statement not covered" >                            console.</span>log(e);
-<span class="cstat-no" title="statement not covered" >                            reject(</span>new Error("Errors Occured on Http Request with XMLHttpRequest !"));
+<span class="cstat-no" title="statement not covered" >                        hXHR.onerror = <span class="fstat-no" title="function not covered" >function (e</span>) {</span>
+<span class="cstat-no" title="statement not covered" >                            console.log(e);</span>
+<span class="cstat-no" title="statement not covered" >                            reject(new Error("Errors Occured on Http Request with XMLHttpRequest !"));</span>
                         };
 &nbsp;
                         /**
@@ -1168,9 +1168,9 @@ var XHR = {
                          * @method ontimeout
                          * @private
                          */
-<span class="cstat-no" title="statement not covered" >                        hXHR.</span>ontimeout = <span class="fstat-no" title="function not covered" >function (e</span>) {
-<span class="cstat-no" title="statement not covered" >                            console.</span>log(e);
-<span class="cstat-no" title="statement not covered" >                            reject(</span>new Error("TimeOut Occured on Http Request with XMLHttpRequest !"));
+<span class="cstat-no" title="statement not covered" >                        hXHR.ontimeout = <span class="fstat-no" title="function not covered" >function (e</span>) {</span>
+<span class="cstat-no" title="statement not covered" >                            console.log(e);</span>
+<span class="cstat-no" title="statement not covered" >                            reject(new Error("TimeOut Occured on Http Request with XMLHttpRequest !"));</span>
                         };
 &nbsp;
                         /**
@@ -1179,15 +1179,15 @@ var XHR = {
                          * @method onreadystatechange
                          * @private
                          */
-<span class="cstat-no" title="statement not covered" >                        hXHR.</span>onreadystatechange = <span class="fstat-no" title="function not covered" >function (e</span>) {
+<span class="cstat-no" title="statement not covered" >                        hXHR.onreadystatechange = <span class="fstat-no" title="function not covered" >function (e</span>) {</span>
 <span class="cstat-no" title="statement not covered" >                            if (hXHR.readyState === 4) { // DONE</span>
 <span class="cstat-no" title="statement not covered" >                                if (hXHR.status === 200) {</span>
-<span class="cstat-no" title="statement not covered" >                                    window.</span>clearTimeout(onTimeOutTrigger);
-<span class="cstat-no" title="statement not covered" >                                    resolve(</span>hXHR.response);
+<span class="cstat-no" title="statement not covered" >                                    window.clearTimeout(onTimeOutTrigger);</span>
+<span class="cstat-no" title="statement not covered" >                                    resolve(hXHR.response);</span>
                                 } else {
                                     var message = <span class="cstat-no" title="statement not covered" >"Errors Occured on Http Request (status : '" + e.target.statusText + "' | url : '" + e.target.responseURL + "' | response : '" + e.target.response + "')";</span>
                                     var status = <span class="cstat-no" title="statement not covered" >e.target.status;</span>
-<span class="cstat-no" title="statement not covered" >                                    reject(</span>{
+<span class="cstat-no" title="statement not covered" >                                    reject({</span>
                                         message : message,
                                         status : status
                                     });
@@ -1198,25 +1198,25 @@ var XHR = {
                         // gestion du content data
                         var data4xhr = (<span class="cstat-no" title="statement not covered" >options.data &amp;&amp; corps) ? options.data : null;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                        hXHR.</span>send(data4xhr);
+<span class="cstat-no" title="statement not covered" >                        hXHR.send(data4xhr);</span>
                     } else <span class="cstat-no" title="statement not covered" >if (window.XDomainRequest) {</span>
                         // worked in Internet Explorer 8–10 only !
-<span class="cstat-no" title="statement not covered" >                        logger.</span>trace("XDomainRequest");
+<span class="cstat-no" title="statement not covered" >                        logger.trace("XDomainRequest");</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                        hXHR </span>= new XDomainRequest();
-<span class="cstat-no" title="statement not covered" >                        hXHR.</span>open(options.method, options.url);
+<span class="cstat-no" title="statement not covered" >                        hXHR = new XDomainRequest();</span>
+<span class="cstat-no" title="statement not covered" >                        hXHR.open(options.method, options.url);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                        hXHR.</span>overrideMimeType = options.content;
+<span class="cstat-no" title="statement not covered" >                        hXHR.overrideMimeType = options.content;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                        if (options.timeOut &gt; 0) {</span>
-<span class="cstat-no" title="statement not covered" >                            hXHR.</span>timeout = options.timeout;
-<span class="cstat-no" title="statement not covered" >                            logger.</span>trace("XHR - TimeOut actif !");
+<span class="cstat-no" title="statement not covered" >                            hXHR.timeout = options.timeout;</span>
+<span class="cstat-no" title="statement not covered" >                            logger.trace("XHR - TimeOut actif !");</span>
                         }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                        if (corps) {</span>
                             // headers, data, content of data
                             // cf. https://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html#dom-xmlhttprequest-setrequestheader
-<span class="cstat-no" title="statement not covered" >                            hXHR.</span>setRequestHeader("Content-type", options.content);
+<span class="cstat-no" title="statement not covered" >                            hXHR.setRequestHeader("Content-type", options.content);</span>
                             // FIXME refused to set unsafe header content-length javascript
                             // hXHR.setRequestHeader ("Content-length", options.data.length);
                             // hXHR.setRequestHeader ("Referer", options.headers.referer);
@@ -1228,8 +1228,8 @@ var XHR = {
                          * @method onerror
                          * @private
                          */
-<span class="cstat-no" title="statement not covered" >                        hXHR.</span>onerror = <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >                            reject(</span>new Error("Errors Occured on Http Request with XMLHttpRequest !"));
+<span class="cstat-no" title="statement not covered" >                        hXHR.onerror = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >                            reject(new Error("Errors Occured on Http Request with XMLHttpRequest !"));</span>
                         };
 &nbsp;
                         /**
@@ -1238,8 +1238,8 @@ var XHR = {
                          * @method ontimeout
                          * @private
                          */
-<span class="cstat-no" title="statement not covered" >                        hXHR.</span>ontimeout = <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >                            reject(</span>new Error("TimeOut Occured on Http Request with XMLHttpRequest !"));
+<span class="cstat-no" title="statement not covered" >                        hXHR.ontimeout = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >                            reject(new Error("TimeOut Occured on Http Request with XMLHttpRequest !"));</span>
                         };
 &nbsp;
                         /**
@@ -1248,13 +1248,13 @@ var XHR = {
                          * @method onload
                          * @private
                          */
-<span class="cstat-no" title="statement not covered" >                        hXHR.</span>onload = <span class="fstat-no" title="function not covered" >function (e</span>) {
+<span class="cstat-no" title="statement not covered" >                        hXHR.onload = <span class="fstat-no" title="function not covered" >function (e</span>) {</span>
 <span class="cstat-no" title="statement not covered" >                            if (hXHR.status === 200) {</span>
-<span class="cstat-no" title="statement not covered" >                                resolve(</span>hXHR.responseText);
+<span class="cstat-no" title="statement not covered" >                                resolve(hXHR.responseText);</span>
                             } else {
                                 var message = <span class="cstat-no" title="statement not covered" >"Errors Occured on Http Request (status : '" + e.target.statusText + "' | url : '" + e.target.responseURL + "')";</span>
                                 var status = <span class="cstat-no" title="statement not covered" >e.target.status;</span>
-<span class="cstat-no" title="statement not covered" >                                reject(</span>{
+<span class="cstat-no" title="statement not covered" >                                reject({</span>
                                     message : message,
                                     status : status
                                 });
@@ -1263,15 +1263,15 @@ var XHR = {
 &nbsp;
                         var data4xdr = (<span class="cstat-no" title="statement not covered" >options.data &amp;&amp; corps) ? options.data : null;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                        hXHR.</span>send(data4xdr);
+<span class="cstat-no" title="statement not covered" >                        hXHR.send(data4xdr);</span>
                     } else {
-<span class="cstat-no" title="statement not covered" >                        throw n</span>ew Error("CORS not supported");
+<span class="cstat-no" title="statement not covered" >                        throw new Error("CORS not supported");</span>
                     }
                 }
             }
         );
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        return p</span>romise;
+<span class="cstat-no" title="statement not covered" >        return promise;</span>
     },
 &nbsp;
     /**
@@ -1283,10 +1283,10 @@ var XHR = {
      * @return {Object} promise
      */
     __callJSON : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
-<span class="cstat-no" title="statement not covered" >        return t</span>his.__call(options)
+<span class="cstat-no" title="statement not covered" >        return this.__call(options)</span>
             .then(JSON.parse)
             .catch(<span class="fstat-no" title="function not covered" >function (e</span>rror) {
-<span class="cstat-no" title="statement not covered" >                console.</span>log("_callJSON failed on : ", options.url, error);
+<span class="cstat-no" title="statement not covered" >                console.log("_callJSON failed on : ", options.url, error);</span>
                 // FIXME pas d'exception, laissons le fil se derouler...
                 // throw error;
             });
@@ -1301,29 +1301,29 @@ var XHR = {
      * @return {Object} promise
      */
     __callXML : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
-<span class="cstat-no" title="statement not covered" >        return t</span>his.__call(options)
+<span class="cstat-no" title="statement not covered" >        return this.__call(options)</span>
             .then(<span class="fstat-no" title="function not covered" >function (r</span>esponse) {
                 var xmlDoc;
 &nbsp;
                 // test on env. nodejs or browser
 <span class="cstat-no" title="statement not covered" >                if (typeof window === "undefined") {</span>
-                    var DOMParser = <span class="cstat-no" title="statement not covered" >require("xmldom").DOMParser; /</span>/ __xmldom.DOMParser
-<span class="cstat-no" title="statement not covered" >                    xmlDoc </span>= new DOMParser().parseFromString(response, "text/xml");
+                    var DOMParser = <span class="cstat-no" title="statement not covered" >require("xmldom").DOMParser;</span> // __xmldom.DOMParser
+<span class="cstat-no" title="statement not covered" >                    xmlDoc = new DOMParser().parseFromString(response, "text/xml");</span>
                 } else {
 <span class="cstat-no" title="statement not covered" >                    if (window.DOMParser) {</span>
-                        var parser = <span class="cstat-no" title="statement not covered" >new w</span>indow.DOMParser();
-<span class="cstat-no" title="statement not covered" >                        xmlDoc </span>= parser.parseFromString(response, "text/xml");
+                        var parser = <span class="cstat-no" title="statement not covered" >new window.DOMParser();</span>
+<span class="cstat-no" title="statement not covered" >                        xmlDoc = parser.parseFromString(response, "text/xml");</span>
                     } else { // IE
-<span class="cstat-no" title="statement not covered" >                        xmlDoc </span>= new window.ActiveXObject("Microsoft.XMLDOM");
-<span class="cstat-no" title="statement not covered" >                        xmlDoc.</span>async = false;
-<span class="cstat-no" title="statement not covered" >                        xmlDoc.</span>loadXML(response);
+<span class="cstat-no" title="statement not covered" >                        xmlDoc = new window.ActiveXObject("Microsoft.XMLDOM");</span>
+<span class="cstat-no" title="statement not covered" >                        xmlDoc.async = false;</span>
+<span class="cstat-no" title="statement not covered" >                        xmlDoc.loadXML(response);</span>
                     }
                 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                return x</span>mlDoc;
+<span class="cstat-no" title="statement not covered" >                return xmlDoc;</span>
             })
             .catch(<span class="fstat-no" title="function not covered" >function (e</span>rror) {
-<span class="cstat-no" title="statement not covered" >                console.</span>log("__callXML failed on : ", options.url, error);
+<span class="cstat-no" title="statement not covered" >                console.log("__callXML failed on : ", options.url, error);</span>
                 // FIXME pas d'exception, laissons le fil se derouler...
                 // throw error;
             });
@@ -1339,7 +1339,7 @@ export default XHR;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

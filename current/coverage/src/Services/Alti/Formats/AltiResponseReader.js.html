@@ -818,7 +818,7 @@ AltiResponseReader.READERS = {
         <span class="missing-if-branch" title="else path not taken" >E</span>if (textNode &amp;&amp; textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             elevation.lat = parseFloat(textNode.nodeValue);
         } else {
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error("Erreur dans la lecture de la réponse du service : latitude attendue mais absente");
+<span class="cstat-no" title="statement not covered" >            throw new Error("Erreur dans la lecture de la réponse du service : latitude attendue mais absente");</span>
         }
     },
 &nbsp;
@@ -836,7 +836,7 @@ AltiResponseReader.READERS = {
         <span class="missing-if-branch" title="else path not taken" >E</span>if (textNode &amp;&amp; textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             elevation.lon = parseFloat(textNode.nodeValue);
         } else {
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error("Erreur dans la lecture de la réponse du service : longitude attendue mais absente");
+<span class="cstat-no" title="statement not covered" >            throw new Error("Erreur dans la lecture de la réponse du service : longitude attendue mais absente");</span>
         }
     },
 &nbsp;
@@ -855,12 +855,12 @@ AltiResponseReader.READERS = {
             <span class="missing-if-branch" title="else path not taken" >E</span>if (elevation) {
                 elevation.z = parseFloat(textNode.nodeValue);
             } else {
-<span class="cstat-no" title="statement not covered" >                elevation </span>= new Elevation();
-<span class="cstat-no" title="statement not covered" >                elevation.</span>z = parseFloat(textNode.nodeValue);
-<span class="cstat-no" title="statement not covered" >                return e</span>levation;
+<span class="cstat-no" title="statement not covered" >                elevation = new Elevation();</span>
+<span class="cstat-no" title="statement not covered" >                elevation.z = parseFloat(textNode.nodeValue);</span>
+<span class="cstat-no" title="statement not covered" >                return elevation;</span>
             }
         } else {
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error("Erreur dans la lecture de la réponse du service : altitude attendue mais absente");
+<span class="cstat-no" title="statement not covered" >            throw new Error("Erreur dans la lecture de la réponse du service : altitude attendue mais absente");</span>
         }
     },
 &nbsp;
@@ -878,7 +878,7 @@ AltiResponseReader.READERS = {
         <span class="missing-if-branch" title="else path not taken" >E</span>if (textNode &amp;&amp; textNode.nodeType === 3) { // 3 === node.TEXT_NODE
             elevation.acc = parseFloat(textNode.nodeValue);
         } else {
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error("Erreur dans la lecture de la réponse du service : précision (acc) attendue mais absente");
+<span class="cstat-no" title="statement not covered" >            throw new Error("Erreur dans la lecture de la réponse du service : précision (acc) attendue mais absente");</span>
         }
     },
 &nbsp;
@@ -951,25 +951,25 @@ AltiResponseReader.READERS = {
             var children = <span class="cstat-no" title="statement not covered" >node.childNodes;</span>
             var child;
 <span class="cstat-no" title="statement not covered" >            for (var i = 0; i &lt; children.length; i++) {</span>
-<span class="cstat-no" title="statement not covered" >                child </span>= children[i];
+<span class="cstat-no" title="statement not covered" >                child = children[i];</span>
                 var textNode;
                 // get error code
 <span class="cstat-no" title="statement not covered" >                if (child.nodeType === 1 &amp;&amp; child.nodeName === "code") { // 1 === node.ELEMENT_NODE</span>
-<span class="cstat-no" title="statement not covered" >                    textNode </span>= child.firstChild;
+<span class="cstat-no" title="statement not covered" >                    textNode = child.firstChild;</span>
 <span class="cstat-no" title="statement not covered" >                    if (textNode &amp;&amp; textNode.nodeType === 3) { // 3 === node.TEXT_NODE</span>
-<span class="cstat-no" title="statement not covered" >                        response.</span>error.code = textNode.nodeValue;
+<span class="cstat-no" title="statement not covered" >                        response.error.code = textNode.nodeValue;</span>
                     }
                 }
                 // get error description
 <span class="cstat-no" title="statement not covered" >                if (child.nodeType === 1 &amp;&amp; child.nodeName === "description") { // 1 === node.ELEMENT_NODE</span>
-<span class="cstat-no" title="statement not covered" >                    textNode </span>= child.firstChild;
+<span class="cstat-no" title="statement not covered" >                    textNode = child.firstChild;</span>
 <span class="cstat-no" title="statement not covered" >                    if (textNode &amp;&amp; textNode.nodeType === 3) { // 3 === node.TEXT_NODE</span>
-<span class="cstat-no" title="statement not covered" >                        response.</span>error.description = textNode.nodeValue;
+<span class="cstat-no" title="statement not covered" >                        response.error.description = textNode.nodeValue;</span>
                     }
                 }
             }
         }
-<span class="cstat-no" title="statement not covered" >        return r</span>esponse;
+<span class="cstat-no" title="statement not covered" >        return response;</span>
     }
 &nbsp;
 };
@@ -991,10 +991,10 @@ AltiResponseReader.read = function (root) {
         var exceptionReport = AltiResponseReader.READERS.exceptionreport(root);
         return exceptionReport;
     } else <span class="cstat-no" title="statement not covered" >if (root.nodeName === "error") {</span>
-        var error = <span class="cstat-no" title="statement not covered" >AltiResponseReader.</span>READERS.error(root);
-<span class="cstat-no" title="statement not covered" >        return e</span>rror;
+        var error = <span class="cstat-no" title="statement not covered" >AltiResponseReader.READERS.error(root);</span>
+<span class="cstat-no" title="statement not covered" >        return error;</span>
     } else {
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error("Erreur lors de la lecture de la réponse : elle n'est pas au format attendu.");
+<span class="cstat-no" title="statement not covered" >        throw new Error("Erreur lors de la lecture de la réponse : elle n'est pas au format attendu.");</span>
     }
 };
 &nbsp;
@@ -1006,7 +1006,7 @@ export default AltiResponseReader;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

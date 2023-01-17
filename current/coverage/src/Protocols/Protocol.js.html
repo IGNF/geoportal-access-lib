@@ -427,53 +427,53 @@ var Protocol = {
         // on determine l'environnement d'execution : browser ou non ?
         // et on stoppe pour nodeJS... sur un protocole JSONP !
 <span class="cstat-no" title="statement not covered" >        if (typeof window === "undefined" &amp;&amp; options.protocol === "JSONP") {</span>
-<span class="cstat-no" title="statement not covered" >            console.</span>log("Value (s) for parameter (s) 'protocol=JSONP (instead use XHR)' not supported to NodeJS");
+<span class="cstat-no" title="statement not covered" >            console.log("Value (s) for parameter (s) 'protocol=JSONP (instead use XHR)' not supported to NodeJS");</span>
 <span class="cstat-no" title="statement not covered" >            return;</span>
         }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (options.protocol === "XHR" || options.format === "json") {</span>
-<span class="cstat-no" title="statement not covered" >            settings.</span>wrap = false;
+<span class="cstat-no" title="statement not covered" >            settings.wrap = false;</span>
         } else <span class="cstat-no" title="statement not covered" >if (options.protocol === "JSONP" &amp;&amp; options.format === "xml") {</span>
-<span class="cstat-no" title="statement not covered" >            settings.</span>wrap = true;
+<span class="cstat-no" title="statement not covered" >            settings.wrap = true;</span>
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        settings.</span>callback = null; // FIXME non géré !?
-<span class="cstat-no" title="statement not covered" >        settings.</span>output = settings.wrap ? "json" : null;
+<span class="cstat-no" title="statement not covered" >        settings.callback = null; </span>// FIXME non géré !?
+<span class="cstat-no" title="statement not covered" >        settings.output = settings.wrap ? "json" : null;</span>
 &nbsp;
         // on encapsule les reponses dans un objet JSON
 <span class="cstat-no" title="statement not covered" >        if (settings.wrap) {</span>
             var params = <span class="cstat-no" title="statement not covered" >{};</span>
-<span class="cstat-no" title="statement not covered" >            params.</span>output = settings.output;
-<span class="cstat-no" title="statement not covered" >            params.</span>callback = settings.callback;
-<span class="cstat-no" title="statement not covered" >            delete p</span>arams.callback; // FIXME non géré !?
-<span class="cstat-no" title="statement not covered" >            settings.</span>url = Helper.normalyzeUrl(options.url, params);
+<span class="cstat-no" title="statement not covered" >            params.output = settings.output;</span>
+<span class="cstat-no" title="statement not covered" >            params.callback = settings.callback;</span>
+<span class="cstat-no" title="statement not covered" >            delete params.callback; </span>// FIXME non géré !?
+<span class="cstat-no" title="statement not covered" >            settings.url = Helper.normalyzeUrl(options.url, params);</span>
         }
 &nbsp;
         // choix de l"implementation :
         // XHR ou JSONP
-<span class="cstat-no" title="statement not covered" >        switch (s</span>ettings.protocol) {
+<span class="cstat-no" title="statement not covered" >        switch (settings.protocol) {</span>
             case "XHR":
                 // on normalise l'url (gestion du cache)
 <span class="cstat-no" title="statement not covered" >                if (options.method === "GET" &amp;&amp; options.nocache) {</span>
-<span class="cstat-no" title="statement not covered" >                    settings.</span>url = Helper.normalyzeUrl(settings.url, {
+<span class="cstat-no" title="statement not covered" >                    settings.url = Helper.normalyzeUrl(settings.url, {</span>
                         t : new Date().getTime()
                     });
                 }
                 // appel du service en XHR
-<span class="cstat-no" title="statement not covered" >                XHR.</span>call(settings);
+<span class="cstat-no" title="statement not covered" >                XHR.call(settings);</span>
 <span class="cstat-no" title="statement not covered" >                break;</span>
             case "JSONP":
 &nbsp;
                 // on normalise l'url si les params. sont renseignés dans la string|object "data"
 <span class="cstat-no" title="statement not covered" >                if (settings.data) {</span>
-<span class="cstat-no" title="statement not covered" >                    settings.</span>url = Helper.normalyzeUrl(settings.url, settings.data);
+<span class="cstat-no" title="statement not covered" >                    settings.url = Helper.normalyzeUrl(settings.url, settings.data);</span>
                 }
 &nbsp;
                 // appel du service en JSONP
-<span class="cstat-no" title="statement not covered" >                JSONP.</span>call(settings);
+<span class="cstat-no" title="statement not covered" >                JSONP.call(settings);</span>
 <span class="cstat-no" title="statement not covered" >                break;</span>
             default:
-<span class="cstat-no" title="statement not covered" >                throw n</span>ew Error("protocol not supported (XHR|JSONP) !");
+<span class="cstat-no" title="statement not covered" >                throw new Error("protocol not supported (XHR|JSONP) !");</span>
         }
     }
 &nbsp;
@@ -487,7 +487,7 @@ export default Protocol;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

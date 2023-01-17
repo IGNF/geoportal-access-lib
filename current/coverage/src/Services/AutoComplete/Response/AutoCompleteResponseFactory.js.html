@@ -383,21 +383,21 @@ var AutoCompleteResponseFactory = {
      */
     build : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
         // logger
-        var logger = <span class="cstat-no" title="statement not covered" >Logger.</span>getLogger("AutoCompleteResponseFactory");
-<span class="cstat-no" title="statement not covered" >        logger.</span>trace(["AutoCompleteResponseFactory::build()"]);
+        var logger = <span class="cstat-no" title="statement not covered" >Logger.getLogger("AutoCompleteResponseFactory");</span>
+<span class="cstat-no" title="statement not covered" >        logger.trace(["AutoCompleteResponseFactory::build()"]);</span>
 &nbsp;
         var data = <span class="cstat-no" title="statement not covered" >null;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (options.response) {</span>
 <span class="cstat-no" title="statement not covered" >            if (options.rawResponse) {</span>
-<span class="cstat-no" title="statement not covered" >                logger.</span>trace("analyze response : raw");
-<span class="cstat-no" title="statement not covered" >                data </span>= options.response;
+<span class="cstat-no" title="statement not covered" >                logger.trace("analyze response : raw");</span>
+<span class="cstat-no" title="statement not covered" >                data = options.response;</span>
             } else {
                 var JSONResponse = <span class="cstat-no" title="statement not covered" >null;</span>
 <span class="cstat-no" title="statement not covered" >                if (typeof options.response === "string") {</span>
-<span class="cstat-no" title="statement not covered" >                    JSONResponse </span>= JSON.parse(options.response);
+<span class="cstat-no" title="statement not covered" >                    JSONResponse = JSON.parse(options.response);</span>
                 } else {
-<span class="cstat-no" title="statement not covered" >                    JSONResponse </span>= options.response;
+<span class="cstat-no" title="statement not covered" >                    JSONResponse = options.response;</span>
                 }
 &nbsp;
                 // analyse de la réponse
@@ -405,7 +405,7 @@ var AutoCompleteResponseFactory = {
                     // le service renvoie t il une erreur ?
 <span class="cstat-no" title="statement not covered" >                    if (JSONResponse.error) {</span>
                         // ex. ?
-<span class="cstat-no" title="statement not covered" >                        options.</span>onError.call(options.scope, new ErrorService({
+<span class="cstat-no" title="statement not covered" >                        options.onError.call(options.scope, new ErrorService({</span>
                             message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", JSONResponse.error.description),
                             status : JSONResponse.error.code,
                             type : ErrorService.TYPE_SRVERR
@@ -414,52 +414,52 @@ var AutoCompleteResponseFactory = {
                     }
 &nbsp;
                     // création de l'objet réponse
-<span class="cstat-no" title="statement not covered" >                    data </span>= new AutoCompleteResponse();
+<span class="cstat-no" title="statement not covered" >                    data = new AutoCompleteResponse();</span>
 &nbsp;
                     // boucle sur les résultats de l'autocomplétion
 <span class="cstat-no" title="statement not covered" >                    if (JSONResponse.results &amp;&amp; Array.isArray(JSONResponse.results)) {</span>
                         var suggestedLocation = <span class="cstat-no" title="statement not covered" >null;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                        for (var i = 0; i &lt; JSONResponse.results.length; i++) {</span>
-                            var result = <span class="cstat-no" title="statement not covered" >JSONResponse.</span>results[i];
-<span class="cstat-no" title="statement not covered" >                            suggestedLocation </span>= new SuggestedLocation();
+                            var result = <span class="cstat-no" title="statement not covered" >JSONResponse.results[i];</span>
+<span class="cstat-no" title="statement not covered" >                            suggestedLocation = new SuggestedLocation();</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                            if (result) {</span>
 <span class="cstat-no" title="statement not covered" >                                if (result.country === "StreetAddress") {</span>
-<span class="cstat-no" title="statement not covered" >                                    suggestedLocation.</span>street = result.street;
-<span class="cstat-no" title="statement not covered" >                                    suggestedLocation.</span>type = "StreetAddress";
+<span class="cstat-no" title="statement not covered" >                                    suggestedLocation.street = result.street;</span>
+<span class="cstat-no" title="statement not covered" >                                    suggestedLocation.type = "StreetAddress";</span>
                                 } else <span class="cstat-no" title="statement not covered" >if (result.country === "PositionOfInterest") {</span>
-<span class="cstat-no" title="statement not covered" >                                    suggestedLocation.</span>poi = result.street;
-<span class="cstat-no" title="statement not covered" >                                    suggestedLocation.</span>kind = result.kind;
-<span class="cstat-no" title="statement not covered" >                                    suggestedLocation.</span>type = "PositionOfInterest";
+<span class="cstat-no" title="statement not covered" >                                    suggestedLocation.poi = result.street;</span>
+<span class="cstat-no" title="statement not covered" >                                    suggestedLocation.kind = result.kind;</span>
+<span class="cstat-no" title="statement not covered" >                                    suggestedLocation.type = "PositionOfInterest";</span>
                                 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                                if (suggestedLocation.position) {</span>
-<span class="cstat-no" title="statement not covered" >                                    suggestedLocation.</span>position.x = result.x;
-<span class="cstat-no" title="statement not covered" >                                    suggestedLocation.</span>position.y = result.y;
+<span class="cstat-no" title="statement not covered" >                                    suggestedLocation.position.x = result.x;</span>
+<span class="cstat-no" title="statement not covered" >                                    suggestedLocation.position.y = result.y;</span>
                                 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                                suggestedLocation.</span>commune = result.city;
-<span class="cstat-no" title="statement not covered" >                                suggestedLocation.</span>fullText = result.fulltext;
-<span class="cstat-no" title="statement not covered" >                                suggestedLocation.</span>postalCode = result.zipcode;
-<span class="cstat-no" title="statement not covered" >                                suggestedLocation.</span>classification = result.classification;
+<span class="cstat-no" title="statement not covered" >                                suggestedLocation.commune = result.city;</span>
+<span class="cstat-no" title="statement not covered" >                                suggestedLocation.fullText = result.fulltext;</span>
+<span class="cstat-no" title="statement not covered" >                                suggestedLocation.postalCode = result.zipcode;</span>
+<span class="cstat-no" title="statement not covered" >                                suggestedLocation.classification = result.classification;</span>
                             }
                             // Ajout du résultat au tableau reverseGeocodedLocations de geocodedLocation
-<span class="cstat-no" title="statement not covered" >                            data.</span>suggestedLocations.push(suggestedLocation);
+<span class="cstat-no" title="statement not covered" >                            data.suggestedLocations.push(suggestedLocation);</span>
                         }
                     } else {
-<span class="cstat-no" title="statement not covered" >                        options.</span>onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_FORMAT_3")));
+<span class="cstat-no" title="statement not covered" >                        options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_FORMAT_3")));</span>
 <span class="cstat-no" title="statement not covered" >                        return;</span>
                     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                    if (!data.suggestedLocations.length) {</span>
-<span class="cstat-no" title="statement not covered" >                        options.</span>onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_FORMAT_3")));
+<span class="cstat-no" title="statement not covered" >                        options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_FORMAT_3")));</span>
 <span class="cstat-no" title="statement not covered" >                        return;</span>
                     }
                 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                if (!data) {</span>
-<span class="cstat-no" title="statement not covered" >                    options.</span>onError.call(options.scope, new ErrorService({
+<span class="cstat-no" title="statement not covered" >                    options.onError.call(options.scope, new ErrorService({</span>
                         message : MRes.getMessage("SERVICE_RESPONSE_ANALYSE_2"),
                         type : ErrorService.TYPE_UNKERR,
                         status : -1
@@ -469,7 +469,7 @@ var AutoCompleteResponseFactory = {
 &nbsp;
                 // Si la réponse contenait une exception renvoyée par le service
 <span class="cstat-no" title="statement not covered" >                if (data.exceptionReport) {</span>
-<span class="cstat-no" title="statement not covered" >                    options.</span>onError.call(options.scope, new ErrorService({
+<span class="cstat-no" title="statement not covered" >                    options.onError.call(options.scope, new ErrorService({</span>
                         message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", data.exceptionReport),
                         type : ErrorService.TYPE_SRVERR,
                         status : 200
@@ -479,12 +479,12 @@ var AutoCompleteResponseFactory = {
             }
         } else {
             // si la réponse (xmlString) est vide, on appelle le callback d'erreur
-<span class="cstat-no" title="statement not covered" >            options.</span>onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EMPTY")));
+<span class="cstat-no" title="statement not covered" >            options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EMPTY")));</span>
 <span class="cstat-no" title="statement not covered" >            return;</span>
         }
 &nbsp;
         // si tout s'est bien passé, on appelle le callback de succès
-<span class="cstat-no" title="statement not covered" >        options.</span>onSuccess.call(options.scope, data);
+<span class="cstat-no" title="statement not covered" >        options.onSuccess.call(options.scope, data);</span>
     }
 };
 &nbsp;
@@ -496,7 +496,7 @@ export default AutoCompleteResponseFactory;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

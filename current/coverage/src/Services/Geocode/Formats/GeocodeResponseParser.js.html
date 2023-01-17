@@ -356,9 +356,9 @@ import GeocodedLocation from "../Response/model/GeocodedLocation";
  *
  * @private
  */
-function <span class="fstat-no" title="function not covered" >GeocodeResponseParser () {</span>
+function <span class="fstat-no" title="function not covered" >GeocodeResponseParser </span>() {
 <span class="cstat-no" title="statement not covered" >    if (!(this instanceof GeocodeResponseParser)) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew TypeError("GeocodeResponseParser constructor cannot be called as a function.");
+<span class="cstat-no" title="statement not covered" >        throw new TypeError("GeocodeResponseParser constructor cannot be called as a function.");</span>
     }
 }
 &nbsp;
@@ -381,28 +381,28 @@ GeocodeResponseParser.prototype = {
      *      sous la forme d'un objet GeocodeResponse, ou un objet littéral exceptionReport si le service a renvoyé une exception.
      */
     parse : <span class="fstat-no" title="function not covered" >function (j</span>son) {
-        var geocodeResponse = <span class="cstat-no" title="statement not covered" >new G</span>eocodeResponse();
+        var geocodeResponse = <span class="cstat-no" title="statement not covered" >new GeocodeResponse();</span>
 &nbsp;
-        const obj = <span class="cstat-no" title="statement not covered" >JSON.</span>parse(json);
+        const obj = <span class="cstat-no" title="statement not covered" >JSON.parse(json);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (obj.type === "FeatureCollection") {</span>
 <span class="cstat-no" title="statement not covered" >            for (var i = 0; i &lt; obj.features.length; ++i) {</span>
-<span class="cstat-no" title="statement not covered" >                _parseFeature(</span>obj.features[i], geocodeResponse);
+<span class="cstat-no" title="statement not covered" >                _parseFeature(obj.features[i], geocodeResponse);</span>
             }
         } else <span class="cstat-no" title="statement not covered" >if (obj.type === "Feature") {</span>
-<span class="cstat-no" title="statement not covered" >            _parseFeature(</span>obj, geocodeResponse);
+<span class="cstat-no" title="statement not covered" >            _parseFeature(obj, geocodeResponse);</span>
         } else <span class="cstat-no" title="statement not covered" >if (obj.type === "SERVICE_ERROR") {</span>
-<span class="cstat-no" title="statement not covered" >            return _</span>parseError(obj);
+<span class="cstat-no" title="statement not covered" >            return _parseError(obj);</span>
         } else {
-            var mess = <span class="cstat-no" title="statement not covered" >MR.</span>getMessage("SERVICE_RESPONSE_ANALYSE", obj.type);
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew ErrSrv({
+            var mess = <span class="cstat-no" title="statement not covered" >MR.getMessage("SERVICE_RESPONSE_ANALYSE", obj.type);</span>
+<span class="cstat-no" title="statement not covered" >            throw new ErrSrv({</span>
                 message : mess,
                 type : ErrSrv.TYPE_UNKERR,
                 status : 200
             });
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        return g</span>eocodeResponse;
+<span class="cstat-no" title="statement not covered" >        return geocodeResponse;</span>
     }
 };
 &nbsp;
@@ -417,10 +417,10 @@ GeocodeResponseParser.prototype = {
  * @memberof GeocodeResponseParser
  * @return {Object} objet GeocodedLocation
  */
-function <span class="fstat-no" title="function not covered" >_parseFeature (f</span>eature, geocodeResponse) {
-    var location = <span class="cstat-no" title="statement not covered" >new G</span>eocodedLocation();
+function <span class="fstat-no" title="function not covered" >_parseFeature </span>(feature, geocodeResponse) {
+    var location = <span class="cstat-no" title="statement not covered" >new GeocodedLocation();</span>
 <span class="cstat-no" title="statement not covered" >    if (feature.geometry &amp;&amp; feature.geometry.type === "Point") {</span>
-<span class="cstat-no" title="statement not covered" >        location.</span>position = {
+<span class="cstat-no" title="statement not covered" >        location.position = {</span>
             lon : feature.geometry.coordinates[0],
             lat : feature.geometry.coordinates[1]
         };
@@ -428,24 +428,24 @@ function <span class="fstat-no" title="function not covered" >_parseFeature (f</
 <span class="cstat-no" title="statement not covered" >    if (feature.properties) {</span>
 <span class="cstat-no" title="statement not covered" >        for (var prop in feature.properties) {</span>
 <span class="cstat-no" title="statement not covered" >            if (prop === "_score") {</span>
-<span class="cstat-no" title="statement not covered" >                location.</span>accuracy = feature.properties[prop];
+<span class="cstat-no" title="statement not covered" >                location.accuracy = feature.properties[prop];</span>
             } else <span class="cstat-no" title="statement not covered" >if (prop === "_type") {</span>
 <span class="cstat-no" title="statement not covered" >                if (feature.properties[prop] === "address") {</span>
-<span class="cstat-no" title="statement not covered" >                    location.</span>type = "StreetAddress";
+<span class="cstat-no" title="statement not covered" >                    location.type = "StreetAddress";</span>
                 } else <span class="cstat-no" title="statement not covered" >if (feature.properties[prop] === "poi") {</span>
-<span class="cstat-no" title="statement not covered" >                    location.</span>type = "PositionOfInterest";
+<span class="cstat-no" title="statement not covered" >                    location.type = "PositionOfInterest";</span>
                 } else <span class="cstat-no" title="statement not covered" >if (feature.properties[prop] === "parcel") {</span>
-<span class="cstat-no" title="statement not covered" >                    location.</span>type = "CadastralParcel";
+<span class="cstat-no" title="statement not covered" >                    location.type = "CadastralParcel";</span>
                 }
             } else {
-<span class="cstat-no" title="statement not covered" >                location.</span>placeAttributes[prop] = feature.properties[prop];
+<span class="cstat-no" title="statement not covered" >                location.placeAttributes[prop] = feature.properties[prop];</span>
             }
         }
 <span class="cstat-no" title="statement not covered" >        if (feature.properties._type === "address") {</span>
-<span class="cstat-no" title="statement not covered" >            location.</span>matchType = feature.properties.number !== undefined &amp;&amp; feature.properties.number !== null ? "street number" : "street";
+<span class="cstat-no" title="statement not covered" >            location.matchType = feature.properties.number !== undefined &amp;&amp; feature.properties.number !== null ? "street number" : "street";</span>
         }
     }
-<span class="cstat-no" title="statement not covered" >    geocodeResponse.</span>locations.push(location);
+<span class="cstat-no" title="statement not covered" >    geocodeResponse.locations.push(location);</span>
 }
 &nbsp;
 /**
@@ -458,7 +458,7 @@ function <span class="fstat-no" title="function not covered" >_parseFeature (f</
  * @memberof GeocodeResponseParser
  * @return {Object}
  */
-function <span class="fstat-no" title="function not covered" >_parseError (e</span>rror) {
+function <span class="fstat-no" title="function not covered" >_parseError </span>(error) {
 <span class="cstat-no" title="statement not covered" >    return {</span>
         exceptionReport : error
     };
@@ -472,7 +472,7 @@ export default GeocodeResponseParser;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

@@ -565,47 +565,47 @@ import ErrorService from "../../Exceptions/ErrorService";
  *   };
  * @private
  */
-function <span class="fstat-no" title="function not covered" >AutoComplete (o</span>ptions_) {
+function <span class="fstat-no" title="function not covered" >AutoComplete </span>(options_) {
 <span class="cstat-no" title="statement not covered" >    if (!(this instanceof AutoComplete)) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew TypeError(MR.getMessage("CLASS_CONSTRUCTOR", "AutoComplete"));
+<span class="cstat-no" title="statement not covered" >        throw new TypeError(MR.getMessage("CLASS_CONSTRUCTOR", "AutoComplete"));</span>
     }
 &nbsp;
     /**
      * Nom de la classe (heritage)
      * FIXME instance ou classe ?
      */
-<span class="cstat-no" title="statement not covered" >    this.C</span>LASSNAME = "AutoComplete";
+<span class="cstat-no" title="statement not covered" >    this.CLASSNAME = "AutoComplete";</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this.l</span>ogger = Logger.getLogger("Gp.Services.AutoComplete");
-<span class="cstat-no" title="statement not covered" >    this.l</span>ogger.trace("[Constructeur AutoComplete (options)]");
+<span class="cstat-no" title="statement not covered" >    this.logger = Logger.getLogger("Gp.Services.AutoComplete");</span>
+<span class="cstat-no" title="statement not covered" >    this.logger.trace("[Constructeur AutoComplete (options)]");</span>
 &nbsp;
-    var options = <span class="cstat-no" title="statement not covered" >this.p</span>atchOptionConvertor(options_);
-<span class="cstat-no" title="statement not covered" >    options.</span>serverUrl = options.serverUrl || "https://wxs.ign.fr/calcul/geoportail/geocodage/rest/0.1/completion";
+    var options = <span class="cstat-no" title="statement not covered" >this.patchOptionConvertor(options_);</span>
+<span class="cstat-no" title="statement not covered" >    options.serverUrl = options.serverUrl || "https://wxs.ign.fr/calcul/geoportail/geocodage/rest/0.1/completion";</span>
 &nbsp;
     // appel du constructeur par heritage
-<span class="cstat-no" title="statement not covered" >    CommonService.</span>apply(this, arguments);
+<span class="cstat-no" title="statement not covered" >    CommonService.apply(this, arguments);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (!options.text) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(MR.getMessage("PARAM_MISSING", "text"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(MR.getMessage("PARAM_MISSING", "text"));</span>
     }
 &nbsp;
     // ajout des options spécifiques au service
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.text = options.text;
+<span class="cstat-no" title="statement not covered" >    this.options.text = options.text;</span>
 &nbsp;
     // on definit des parametres par defaut
 <span class="cstat-no" title="statement not covered" >    if (!options.type) {</span>
-<span class="cstat-no" title="statement not covered" >        options.</span>type = ["StreetAddress,PositionOfInterest"];
+<span class="cstat-no" title="statement not covered" >        options.type = ["StreetAddress,PositionOfInterest"];</span>
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.type = options.type;
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.territory = options.territory || "";
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.maximumResponses = options.maximumResponses || 10;
+<span class="cstat-no" title="statement not covered" >    this.options.type = options.type;</span>
+<span class="cstat-no" title="statement not covered" >    this.options.territory = options.territory || "";</span>
+<span class="cstat-no" title="statement not covered" >    this.options.maximumResponses = options.maximumResponses || 10;</span>
 &nbsp;
     // INFO
     // le service ne repond pas en mode POST (405 Method Not Allowed)
 <span class="cstat-no" title="statement not covered" >    if (this.options.protocol === "XHR" &amp;&amp; this.options.httpMethod === "POST") {</span>
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.warn("Le service ne gére pas le mode d'interrogation en POST, on bascule sur du GET !");
-<span class="cstat-no" title="statement not covered" >        this.o</span>ptions.httpMethod = "GET"; // on surcharge !
+<span class="cstat-no" title="statement not covered" >        this.logger.warn("Le service ne gére pas le mode d'interrogation en POST, on bascule sur du GET !");</span>
+<span class="cstat-no" title="statement not covered" >        this.options.httpMethod = "GET"; </span>// on surcharge !
     }
 &nbsp;
     // attributs d'instances
@@ -614,7 +614,7 @@ function <span class="fstat-no" title="function not covered" >AutoComplete (o</s
      * Format forcé de la réponse du service : "json"
      * sauf si l'on souhaite une reponse brute (options.rawResponse)
      */
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.outputFormat = (this.options.rawResponse) ? "" : "json";
+<span class="cstat-no" title="statement not covered" >    this.options.outputFormat = (this.options.rawResponse) ? "" : "json";</span>
 }
 &nbsp;
 /**
@@ -641,26 +641,26 @@ AutoComplete.prototype.patchOptionConvertor = <span class="fstat-no" title="func
     const options = <span class="cstat-no" title="statement not covered" >options_;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (options.filterOptions) {</span>
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.warn("The parameter 'filterOptions' is deprecated");
+<span class="cstat-no" title="statement not covered" >        this.logger.warn("The parameter 'filterOptions' is deprecated");</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (options.filterOptions.type) {</span>
-<span class="cstat-no" title="statement not covered" >            this.l</span>ogger.warn("The parameter 'filterOptions.type' is deprecated");
+<span class="cstat-no" title="statement not covered" >            this.logger.warn("The parameter 'filterOptions.type' is deprecated");</span>
 <span class="cstat-no" title="statement not covered" >            if (!options.type) {</span>
-<span class="cstat-no" title="statement not covered" >                options.</span>type = options.filterOptions.type;
+<span class="cstat-no" title="statement not covered" >                options.type = options.filterOptions.type;</span>
             }
         }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (options.filterOptions.territory) {</span>
-<span class="cstat-no" title="statement not covered" >            this.l</span>ogger.warn("The parameter 'filterOptions.territory' is deprecated");
+<span class="cstat-no" title="statement not covered" >            this.logger.warn("The parameter 'filterOptions.territory' is deprecated");</span>
 <span class="cstat-no" title="statement not covered" >            if (!options.terr) {</span>
-<span class="cstat-no" title="statement not covered" >                options.</span>terr = options.filterOptions.territory;
+<span class="cstat-no" title="statement not covered" >                options.terr = options.filterOptions.territory;</span>
             }
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        delete o</span>ptions.filterOptions;
+<span class="cstat-no" title="statement not covered" >        delete options.filterOptions;</span>
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return o</span>ptions;
+<span class="cstat-no" title="statement not covered" >    return options;</span>
 };
 &nbsp;
 /**
@@ -681,16 +681,16 @@ AutoComplete.prototype.buildRequest = <span class="fstat-no" title="function not
     // traitement des param KPV sous forme de tableau
     var territory = <span class="cstat-no" title="statement not covered" >"";</span>
 <span class="cstat-no" title="statement not covered" >    if (this.options.territory) {</span>
-<span class="cstat-no" title="statement not covered" >        territory </span>= this.options.territory;
+<span class="cstat-no" title="statement not covered" >        territory = this.options.territory;</span>
     }
 &nbsp;
     var type = <span class="cstat-no" title="statement not covered" >"";</span>
 <span class="cstat-no" title="statement not covered" >    if (this.options.type) {</span>
-<span class="cstat-no" title="statement not covered" >        type </span>= this.options.type.join(",");
+<span class="cstat-no" title="statement not covered" >        type = this.options.type.join(",");</span>
     }
 &nbsp;
     // normalisation de la requete avec param KPV
-<span class="cstat-no" title="statement not covered" >    this.r</span>equest = Helper.normalyzeParameters({
+<span class="cstat-no" title="statement not covered" >    this.request = Helper.normalyzeParameters({</span>
         text : encodeURIComponent(this.options.text),
         type : type,
         terr : territory,
@@ -719,9 +719,9 @@ AutoComplete.prototype.analyzeResponse = <span class="fstat-no" title="function 
             scope : this
         };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        AutoCompleteResponseFactory.</span>build(options);
+<span class="cstat-no" title="statement not covered" >        AutoCompleteResponseFactory.build(options);</span>
     } else {
-<span class="cstat-no" title="statement not covered" >        error.</span>call(this, new ErrorService(MR.getMessage("SERVICE_RESPONSE_EMPTY")));
+<span class="cstat-no" title="statement not covered" >        error.call(this, new ErrorService(MR.getMessage("SERVICE_RESPONSE_EMPTY")));</span>
     }
 };
 &nbsp;
@@ -733,7 +733,7 @@ export default AutoComplete;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

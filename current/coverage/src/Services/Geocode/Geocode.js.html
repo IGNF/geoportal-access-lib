@@ -685,55 +685,55 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *   };
  * @private
  */
-function <span class="fstat-no" title="function not covered" >Geocode (o</span>ptions_) {
+function <span class="fstat-no" title="function not covered" >Geocode </span>(options_) {
 <span class="cstat-no" title="statement not covered" >    if (!(this instanceof Geocode)) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew TypeError(_.getMessage("CLASS_CONSTRUCTOR", "Geocode"));
+<span class="cstat-no" title="statement not covered" >        throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "Geocode"));</span>
     }
 &nbsp;
     /**
      * Nom de la classe (heritage)
      * FIXME instance ou classe ?
      */
-<span class="cstat-no" title="statement not covered" >    this.C</span>LASSNAME = "Geocode";
+<span class="cstat-no" title="statement not covered" >    this.CLASSNAME = "Geocode";</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this.l</span>ogger = Logger.getLogger("Gp.Services.Geocode");
-<span class="cstat-no" title="statement not covered" >    this.l</span>ogger.trace("[Constructeur Geocode (options)]");
+<span class="cstat-no" title="statement not covered" >    this.logger = Logger.getLogger("Gp.Services.Geocode");</span>
+<span class="cstat-no" title="statement not covered" >    this.logger.trace("[Constructeur Geocode (options)]");</span>
 &nbsp;
-    var options = <span class="cstat-no" title="statement not covered" >this.p</span>atchOptionConvertor(options_);
-<span class="cstat-no" title="statement not covered" >    options.</span>serverUrl = options.serverUrl || "https://wxs.ign.fr/calcul/geoportail/geocodage/rest/0.1/search";
+    var options = <span class="cstat-no" title="statement not covered" >this.patchOptionConvertor(options_);</span>
+<span class="cstat-no" title="statement not covered" >    options.serverUrl = options.serverUrl || "https://wxs.ign.fr/calcul/geoportail/geocodage/rest/0.1/search";</span>
 &nbsp;
     // appel du constructeur par heritage
-<span class="cstat-no" title="statement not covered" >    CommonService.</span>apply(this, [options]);
+<span class="cstat-no" title="statement not covered" >    CommonService.apply(this, [options]);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (!options.hasOwnProperty("query")) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(_.getMessage("PARAM_MISSING", "query"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(_.getMessage("PARAM_MISSING", "query"));</span>
     }
 &nbsp;
     // ajout des options spécifiques au service
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.query = options.query;
+<span class="cstat-no" title="statement not covered" >    this.options.query = options.query;</span>
 &nbsp;
     // on definit l'index par defaut
 <span class="cstat-no" title="statement not covered" >    if (!options.index) {</span>
-<span class="cstat-no" title="statement not covered" >        this.o</span>ptions.index = options.index = "StreetAddress";
+<span class="cstat-no" title="statement not covered" >        this.options.index = options.index = "StreetAddress";</span>
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (options.filters) {</span>
-        var filter = <span class="cstat-no" title="statement not covered" >Object.</span>keys(options.filters);
+        var filter = <span class="cstat-no" title="statement not covered" >Object.keys(options.filters);</span>
 <span class="cstat-no" title="statement not covered" >        for (var i = 0; i &lt; filter.length; i++) {</span>
-            var key = <span class="cstat-no" title="statement not covered" >filter[i</span>];
+            var key = <span class="cstat-no" title="statement not covered" >filter[i];</span>
             // on supprime les filtres vides
 <span class="cstat-no" title="statement not covered" >            if (typeof options.filters[key] === "undefined" ||</span>
                 (typeof options.filters[key] === "object" &amp;&amp; Object.keys(options.filters[key]).length === 0) ||
                 (typeof options.filters[key] === "string" &amp;&amp; options.filters[key].length === 0) ||
                 (Array.isArray(options.filters[key]) &amp;&amp; options.filters[key].length === 0)
             ) {
-<span class="cstat-no" title="statement not covered" >                delete t</span>his.options.filters[key];
+<span class="cstat-no" title="statement not covered" >                delete this.options.filters[key];</span>
             }
         }
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.index = options.index || "StreetAddress";
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.maximumResponses = options.maximumResponses || 20;
+<span class="cstat-no" title="statement not covered" >    this.options.index = options.index || "StreetAddress";</span>
+<span class="cstat-no" title="statement not covered" >    this.options.maximumResponses = options.maximumResponses || 20;</span>
 }
 &nbsp;
 /**
@@ -759,71 +759,71 @@ Geocode.prototype.patchOptionConvertor = <span class="fstat-no" title="function 
     const options = <span class="cstat-no" title="statement not covered" >options_;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (options.hasOwnProperty("location")) {</span>
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.warn("The parameter 'location' is deprecated");
+<span class="cstat-no" title="statement not covered" >        this.logger.warn("The parameter 'location' is deprecated");</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (!options.query) {</span>
-<span class="cstat-no" title="statement not covered" >            options.</span>query = options.location;
+<span class="cstat-no" title="statement not covered" >            options.query = options.location;</span>
         }
-<span class="cstat-no" title="statement not covered" >        delete o</span>ptions.location;
+<span class="cstat-no" title="statement not covered" >        delete options.location;</span>
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (options.filterOptions) {</span>
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.warn("The parameter 'filterOptions' is deprecated");
+<span class="cstat-no" title="statement not covered" >        this.logger.warn("The parameter 'filterOptions' is deprecated");</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (!options.filters) {</span>
-<span class="cstat-no" title="statement not covered" >            options.</span>filters = options.filterOptions;
+<span class="cstat-no" title="statement not covered" >            options.filters = options.filterOptions;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            if (options.filters.type) {</span>
-<span class="cstat-no" title="statement not covered" >                this.l</span>ogger.warn("The parameter 'filterOptions.type' is deprecated");
+<span class="cstat-no" title="statement not covered" >                this.logger.warn("The parameter 'filterOptions.type' is deprecated");</span>
 <span class="cstat-no" title="statement not covered" >                if (!options.index) {</span>
 <span class="cstat-no" title="statement not covered" >                    if (Array.isArray(options.filters.type) &amp;&amp; options.filters.type.length &gt; 0) {</span>
-<span class="cstat-no" title="statement not covered" >                        options.</span>index = options.filters.type[0];
+<span class="cstat-no" title="statement not covered" >                        options.index = options.filters.type[0];</span>
                     } else {
-<span class="cstat-no" title="statement not covered" >                        options.</span>index = options.filters.type;
+<span class="cstat-no" title="statement not covered" >                        options.index = options.filters.type;</span>
                     }
                 }
-<span class="cstat-no" title="statement not covered" >                delete o</span>ptions.filters.type;
+<span class="cstat-no" title="statement not covered" >                delete options.filters.type;</span>
             }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            if (options.filters.bbox) {</span>
-<span class="cstat-no" title="statement not covered" >                this.l</span>ogger.warn("The parameter 'filterOptions.bbox' is deprecated");
-<span class="cstat-no" title="statement not covered" >                delete o</span>ptions.filters.bbox;
+<span class="cstat-no" title="statement not covered" >                this.logger.warn("The parameter 'filterOptions.bbox' is deprecated");</span>
+<span class="cstat-no" title="statement not covered" >                delete options.filters.bbox;</span>
             }
         }
-<span class="cstat-no" title="statement not covered" >        delete o</span>ptions.filterOptions;
+<span class="cstat-no" title="statement not covered" >        delete options.filterOptions;</span>
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (options.position) {</span>
 <span class="cstat-no" title="statement not covered" >        if (options.position.x) {</span>
-<span class="cstat-no" title="statement not covered" >            this.l</span>ogger.warn("The parameter 'position.x' is deprecated");
+<span class="cstat-no" title="statement not covered" >            this.logger.warn("The parameter 'position.x' is deprecated");</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            if (!options.position.lon) {</span>
-<span class="cstat-no" title="statement not covered" >                options.</span>position.lon = options.position.x;
+<span class="cstat-no" title="statement not covered" >                options.position.lon = options.position.x;</span>
             }
-<span class="cstat-no" title="statement not covered" >            delete o</span>ptions.position.x;
+<span class="cstat-no" title="statement not covered" >            delete options.position.x;</span>
         }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (options.position.y) {</span>
-<span class="cstat-no" title="statement not covered" >            this.l</span>ogger.warn("The parameter 'position.y' is deprecated");
+<span class="cstat-no" title="statement not covered" >            this.logger.warn("The parameter 'position.y' is deprecated");</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            if (!options.position.lat) {</span>
-<span class="cstat-no" title="statement not covered" >                options.</span>position.lat = options.position.y;
+<span class="cstat-no" title="statement not covered" >                options.position.lat = options.position.y;</span>
             }
-<span class="cstat-no" title="statement not covered" >            delete o</span>ptions.position.y;
+<span class="cstat-no" title="statement not covered" >            delete options.position.y;</span>
         }
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (options.returnFreeForm) {</span>
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.warn("The parameter 'returnFreeForm' is deprecated");
-<span class="cstat-no" title="statement not covered" >        delete o</span>ptions.returnFreeForm;
+<span class="cstat-no" title="statement not covered" >        this.logger.warn("The parameter 'returnFreeForm' is deprecated");</span>
+<span class="cstat-no" title="statement not covered" >        delete options.returnFreeForm;</span>
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (options.srs) {</span>
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.warn("The parameter 'srs' is deprecated");
-<span class="cstat-no" title="statement not covered" >        delete o</span>ptions.srs;
+<span class="cstat-no" title="statement not covered" >        this.logger.warn("The parameter 'srs' is deprecated");</span>
+<span class="cstat-no" title="statement not covered" >        delete options.srs;</span>
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return o</span>ptions;
+<span class="cstat-no" title="statement not covered" >    return options;</span>
 };
 &nbsp;
 /**
@@ -845,7 +845,7 @@ Geocode.prototype.buildRequest = <span class="fstat-no" title="function not cove
         filters : this.options.filters
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this.r</span>equest = GeocodeRequestFactory.build(options);
+<span class="cstat-no" title="statement not covered" >    this.request = GeocodeRequestFactory.build(options);</span>
 &nbsp;
     // on teste si la requete a bien été construite !
     (<span class="cstat-no" title="statement not covered" >!this.request)</span>
@@ -884,9 +884,9 @@ Geocode.prototype.analyzeResponse = <span class="fstat-no" title="function not c
             scope : this
         };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        GeocodeResponseFactory.</span>build(options);
+<span class="cstat-no" title="statement not covered" >        GeocodeResponseFactory.build(options);</span>
     } else {
-<span class="cstat-no" title="statement not covered" >        error.</span>call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
+<span class="cstat-no" title="statement not covered" >        error.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));</span>
     }
 };
 &nbsp;
@@ -898,7 +898,7 @@ export default Geocode;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -593,23 +593,23 @@ var RouteResponseFactory = {
      */
     build : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
         // logger
-        var logger = <span class="cstat-no" title="statement not covered" >Logger.</span>getLogger("RouteResponseFactory");
-<span class="cstat-no" title="statement not covered" >        logger.</span>trace("RouteResponseFactory::build()");
+        var logger = <span class="cstat-no" title="statement not covered" >Logger.getLogger("RouteResponseFactory");</span>
+<span class="cstat-no" title="statement not covered" >        logger.trace("RouteResponseFactory::build()");</span>
 &nbsp;
         var data = <span class="cstat-no" title="statement not covered" >null;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (options.response) {</span>
 <span class="cstat-no" title="statement not covered" >            if (options.rawResponse) {</span>
-<span class="cstat-no" title="statement not covered" >                logger.</span>trace("analyze response : raw");
-<span class="cstat-no" title="statement not covered" >                data </span>= options.response;
+<span class="cstat-no" title="statement not covered" >                logger.trace("analyze response : raw");</span>
+<span class="cstat-no" title="statement not covered" >                data = options.response;</span>
             } else {
-<span class="cstat-no" title="statement not covered" >                logger.</span>trace("analyze response : json");
+<span class="cstat-no" title="statement not covered" >                logger.trace("analyze response : json");</span>
 &nbsp;
                 var JSONResponse;
 <span class="cstat-no" title="statement not covered" >                if (typeof options.response === "string") {</span>
-<span class="cstat-no" title="statement not covered" >                    JSONResponse </span>= JSON.parse(options.response);
+<span class="cstat-no" title="statement not covered" >                    JSONResponse = JSON.parse(options.response);</span>
                 } else {
-<span class="cstat-no" title="statement not covered" >                    JSONResponse </span>= options.response;
+<span class="cstat-no" title="statement not covered" >                    JSONResponse = options.response;</span>
                 }
 &nbsp;
                 // construction de l'objet réponse JSON
@@ -617,31 +617,31 @@ var RouteResponseFactory = {
                     // le service renvoie t il une erreur ?
 <span class="cstat-no" title="statement not covered" >                    if (JSONResponse.message) {</span>
                         // ex. {"message":"message not null", "status":"ERROR"}
-<span class="cstat-no" title="statement not covered" >                        options.</span>onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", JSONResponse.message)));
+<span class="cstat-no" title="statement not covered" >                        options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", JSONResponse.message)));</span>
 <span class="cstat-no" title="statement not covered" >                        return;</span>
                     }
                     var legs = <span class="cstat-no" title="statement not covered" >[];</span>
                     var legSteps = <span class="cstat-no" title="statement not covered" >[];</span>
                     var steps = <span class="cstat-no" title="statement not covered" >[];</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                    data </span>= new RouteResponse();
+<span class="cstat-no" title="statement not covered" >                    data = new RouteResponse();</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                    if (data.hasOwnProperty("totalTime")) {</span>
-<span class="cstat-no" title="statement not covered" >                        data.</span>totalTime = parseFloat(JSONResponse.duration);
+<span class="cstat-no" title="statement not covered" >                        data.totalTime = parseFloat(JSONResponse.duration);</span>
                     }
 <span class="cstat-no" title="statement not covered" >                    if (data.hasOwnProperty("totalDistance")) {</span>
-<span class="cstat-no" title="statement not covered" >                        data.</span>totalDistance = parseFloat(JSONResponse.distance);
+<span class="cstat-no" title="statement not covered" >                        data.totalDistance = parseFloat(JSONResponse.distance);</span>
                     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                    if (data.hasOwnProperty("bbox")) {</span>
-<span class="cstat-no" title="statement not covered" >                        data.</span>bbox.left = parseFloat(JSONResponse.bbox[0]);
-<span class="cstat-no" title="statement not covered" >                        data.</span>bbox.bottom = parseFloat(JSONResponse.bbox[1]);
-<span class="cstat-no" title="statement not covered" >                        data.</span>bbox.right = parseFloat(JSONResponse.bbox[2]);
-<span class="cstat-no" title="statement not covered" >                        data.</span>bbox.top = parseFloat(JSONResponse.bbox[3]);
+<span class="cstat-no" title="statement not covered" >                        data.bbox.left = parseFloat(JSONResponse.bbox[0]);</span>
+<span class="cstat-no" title="statement not covered" >                        data.bbox.bottom = parseFloat(JSONResponse.bbox[1]);</span>
+<span class="cstat-no" title="statement not covered" >                        data.bbox.right = parseFloat(JSONResponse.bbox[2]);</span>
+<span class="cstat-no" title="statement not covered" >                        data.bbox.top = parseFloat(JSONResponse.bbox[3]);</span>
                     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                    if (data.hasOwnProperty("routeGeometry") &amp;&amp; !options.geometryInInstructions) {</span>
-<span class="cstat-no" title="statement not covered" >                        data.</span>routeGeometry = JSONResponse.geometry;
+<span class="cstat-no" title="statement not covered" >                        data.routeGeometry = JSONResponse.geometry;</span>
                     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                    if (data.hasOwnProperty("routeInstructions") &amp;&amp; options.geometryInInstructions) {</span>
@@ -649,134 +649,134 @@ var RouteResponseFactory = {
                         var i;
 <span class="cstat-no" title="statement not covered" >                        if (Array.isArray(legList) &amp;&amp; legList.length) {</span>
 <span class="cstat-no" title="statement not covered" >                            for (i = 0; i &lt; legList.length; i++) {</span>
-<span class="cstat-no" title="statement not covered" >                                legs.</span>push(legList[i]);
+<span class="cstat-no" title="statement not covered" >                                legs.push(legList[i]);</span>
                             }
                         }
 <span class="cstat-no" title="statement not covered" >                        if (legs.length) {</span>
 <span class="cstat-no" title="statement not covered" >                            for (i = 0; i &lt; legs.length; i++) {</span>
-<span class="cstat-no" title="statement not covered" >                                legSteps.</span>push(legs[i].steps);
+<span class="cstat-no" title="statement not covered" >                                legSteps.push(legs[i].steps);</span>
                             }
                         }
 <span class="cstat-no" title="statement not covered" >                        if (legSteps.length) {</span>
 <span class="cstat-no" title="statement not covered" >                            for (i = 0; i &lt; legSteps.length; i++) {</span>
-<span class="cstat-no" title="statement not covered" >                                steps </span>= steps.concat(legSteps[i]);
+<span class="cstat-no" title="statement not covered" >                                steps = steps.concat(legSteps[i]);</span>
                             }
                         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                        steps.</span>forEach(<span class="fstat-no" title="function not covered" >function (s</span>tep) {
-<span class="cstat-no" title="statement not covered" >                            data.</span>routeInstructions.push(new RouteInstruction());
-<span class="cstat-no" title="statement not covered" >                            data.</span>routeInstructions[data.routeInstructions.length - 1].duration = step.duration;
-<span class="cstat-no" title="statement not covered" >                            data.</span>routeInstructions[data.routeInstructions.length - 1].distance = step.distance;
-<span class="cstat-no" title="statement not covered" >                            data.</span>routeInstructions[data.routeInstructions.length - 1].code = "";
-<span class="cstat-no" title="statement not covered" >                            data.</span>routeInstructions[data.routeInstructions.length - 1].instruction = "";
-<span class="cstat-no" title="statement not covered" >                            data.</span>routeInstructions[data.routeInstructions.length - 1].geometry = step.geometry;
+<span class="cstat-no" title="statement not covered" >                        steps.forEach(<span class="fstat-no" title="function not covered" >function (s</span>tep) {</span>
+<span class="cstat-no" title="statement not covered" >                            data.routeInstructions.push(new RouteInstruction());</span>
+<span class="cstat-no" title="statement not covered" >                            data.routeInstructions[data.routeInstructions.length - 1].duration = step.duration;</span>
+<span class="cstat-no" title="statement not covered" >                            data.routeInstructions[data.routeInstructions.length - 1].distance = step.distance;</span>
+<span class="cstat-no" title="statement not covered" >                            data.routeInstructions[data.routeInstructions.length - 1].code = "";</span>
+<span class="cstat-no" title="statement not covered" >                            data.routeInstructions[data.routeInstructions.length - 1].instruction = "";</span>
+<span class="cstat-no" title="statement not covered" >                            data.routeInstructions[data.routeInstructions.length - 1].geometry = step.geometry;</span>
 &nbsp;
                             // on ne souhaite pas de ce type de valeur...
 <span class="cstat-no" title="statement not covered" >                            if (step.name === "Valeur non renseignée") {</span>
-<span class="cstat-no" title="statement not covered" >                                step.</span>name = "";
+<span class="cstat-no" title="statement not covered" >                                step.name = "";</span>
                             }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                            switch (s</span>tep.instruction.type) {
+<span class="cstat-no" title="statement not covered" >                            switch (step.instruction.type) {</span>
                                 case "turn":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "Tourner";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Tourner";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "new name":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "Continuer tout droit";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Continuer tout droit";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "depart":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "Départ";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Départ";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "arrive":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "Arrivée";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Arrivée";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "merge":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "Rejoindre";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Rejoindre";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "ramp":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "Prendre la bretelle";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Prendre la bretelle";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "on ramp":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "Prendre la bretelle";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Prendre la bretelle";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "off ramp":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "Prendre la sortie";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Prendre la sortie";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "fork":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "Sur la bifurcation, prendre";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Sur la bifurcation, prendre";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "end of road":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "À la fin de la route, prendre";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "À la fin de la route, prendre";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "use lane":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "Utiliser la file";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Utiliser la file";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "continue":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "Continuer";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Continuer";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "roundabout":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "Au rond-point";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Au rond-point";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "rotary":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "Au rond-point";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Au rond-point";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "roundabout turn":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "Au rond point, tourner";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "Au rond point, tourner";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 case "notification":
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                                 default:
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += "?" + step.instruction.type + "?";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += "?" + step.instruction.type + "?";</span>
 <span class="cstat-no" title="statement not covered" >                                    break;</span>
                             }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                            if (step.instruction.modifier) {</span>
-<span class="cstat-no" title="statement not covered" >                                switch (s</span>tep.instruction.modifier) {
+<span class="cstat-no" title="statement not covered" >                                switch (step.instruction.modifier) {</span>
                                     case "uturn":
-<span class="cstat-no" title="statement not covered" >                                        data.</span>routeInstructions[data.routeInstructions.length - 1].instruction = "Faire demi-tour";
+<span class="cstat-no" title="statement not covered" >                                        data.routeInstructions[data.routeInstructions.length - 1].instruction = "Faire demi-tour";</span>
 <span class="cstat-no" title="statement not covered" >                                        break;</span>
                                     case "sharp right":
-<span class="cstat-no" title="statement not covered" >                                        data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += " complètement à droite";
+<span class="cstat-no" title="statement not covered" >                                        data.routeInstructions[data.routeInstructions.length - 1].instruction += " complètement à droite";</span>
 <span class="cstat-no" title="statement not covered" >                                        break;</span>
                                     case "right":
-<span class="cstat-no" title="statement not covered" >                                        data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += " à droite";
+<span class="cstat-no" title="statement not covered" >                                        data.routeInstructions[data.routeInstructions.length - 1].instruction += " à droite";</span>
 <span class="cstat-no" title="statement not covered" >                                        break;</span>
                                     case "slight right":
-<span class="cstat-no" title="statement not covered" >                                        data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += " légèrement à droite";
+<span class="cstat-no" title="statement not covered" >                                        data.routeInstructions[data.routeInstructions.length - 1].instruction += " légèrement à droite";</span>
 <span class="cstat-no" title="statement not covered" >                                        break;</span>
                                     case "straight":
-<span class="cstat-no" title="statement not covered" >                                        data.</span>routeInstructions[data.routeInstructions.length - 1].instruction = "Continuer tout droit";
+<span class="cstat-no" title="statement not covered" >                                        data.routeInstructions[data.routeInstructions.length - 1].instruction = "Continuer tout droit";</span>
 <span class="cstat-no" title="statement not covered" >                                        break;</span>
                                     case "slight left":
-<span class="cstat-no" title="statement not covered" >                                        data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += " lègèrement à gauche";
+<span class="cstat-no" title="statement not covered" >                                        data.routeInstructions[data.routeInstructions.length - 1].instruction += " lègèrement à gauche";</span>
 <span class="cstat-no" title="statement not covered" >                                        break;</span>
                                     case "left":
-<span class="cstat-no" title="statement not covered" >                                        data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += " à gauche";
+<span class="cstat-no" title="statement not covered" >                                        data.routeInstructions[data.routeInstructions.length - 1].instruction += " à gauche";</span>
 <span class="cstat-no" title="statement not covered" >                                        break;</span>
                                     case "sharp left":
-<span class="cstat-no" title="statement not covered" >                                        data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += " complètement à gauche";
+<span class="cstat-no" title="statement not covered" >                                        data.routeInstructions[data.routeInstructions.length - 1].instruction += " complètement à gauche";</span>
 <span class="cstat-no" title="statement not covered" >                                        break;</span>
                                     default:
-<span class="cstat-no" title="statement not covered" >                                        data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += " ?" + step.instruction.modifier + "?";
+<span class="cstat-no" title="statement not covered" >                                        data.routeInstructions[data.routeInstructions.length - 1].instruction += " ?" + step.instruction.modifier + "?";</span>
 <span class="cstat-no" title="statement not covered" >                                        break;</span>
                                 }
                             }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                            if (step.instruction.exit) {</span>
-<span class="cstat-no" title="statement not covered" >                                data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += `${step.instruction.exit}e sortie`;
+<span class="cstat-no" title="statement not covered" >                                data.routeInstructions[data.routeInstructions.length - 1].instruction += `${step.instruction.exit}e sortie`;</span>
                             }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                            if (step.attributes.name) {</span>
 <span class="cstat-no" title="statement not covered" >                                if (step.attributes.name.nom_1_droite || step.attributes.name.toponyme) {</span>
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += " sur";
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += " sur";</span>
                                 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                                if (step.attributes.name.nom_1_droite) {</span>
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += ` ${step.attributes.name.nom_1_droite}`;
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += ` ${step.attributes.name.nom_1_droite}`;</span>
                                 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                                if (step.attributes.name.toponyme) {</span>
-<span class="cstat-no" title="statement not covered" >                                    data.</span>routeInstructions[data.routeInstructions.length - 1].instruction += ` ${step.attributes.name.toponyme}`;
+<span class="cstat-no" title="statement not covered" >                                    data.routeInstructions[data.routeInstructions.length - 1].instruction += ` ${step.attributes.name.toponyme}`;</span>
                                 }
                             }
                         });
@@ -784,22 +784,22 @@ var RouteResponseFactory = {
                 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                if (!data) {</span>
-<span class="cstat-no" title="statement not covered" >                    options.</span>onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_ANALYSE", "json")));
+<span class="cstat-no" title="statement not covered" >                    options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_ANALYSE", "json")));</span>
 <span class="cstat-no" title="statement not covered" >                    return;</span>
                 }
 &nbsp;
                 // Si la réponse contenait une exception renvoyée par le service
 <span class="cstat-no" title="statement not covered" >                if (data.exceptionReport) {</span>
-<span class="cstat-no" title="statement not covered" >                    options.</span>onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EXCEPTION_2")));
+<span class="cstat-no" title="statement not covered" >                    options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EXCEPTION_2")));</span>
 <span class="cstat-no" title="statement not covered" >                    return;</span>
                 }
             }
         } else {
-<span class="cstat-no" title="statement not covered" >            options.</span>onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EMPTY")));
+<span class="cstat-no" title="statement not covered" >            options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EMPTY")));</span>
 <span class="cstat-no" title="statement not covered" >            return;</span>
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        options.</span>onSuccess.call(options.scope, data);
+<span class="cstat-no" title="statement not covered" >        options.onSuccess.call(options.scope, data);</span>
     }
 };
 &nbsp;
@@ -811,7 +811,7 @@ export default RouteResponseFactory;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

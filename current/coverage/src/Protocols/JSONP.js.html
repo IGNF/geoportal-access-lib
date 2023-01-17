@@ -576,7 +576,7 @@ var JSONP = {
     uuid : (function () {
         var id = Math.floor(Date.now());
         return <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >            return i</span>d++;
+<span class="cstat-no" title="statement not covered" >            return id++;</span>
         };
     })(),
 &nbsp;
@@ -621,31 +621,31 @@ var JSONP = {
      */
     call : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
         // logger
-        var logger = <span class="cstat-no" title="statement not covered" >Logger.</span>getLogger("JSONP");
-<span class="cstat-no" title="statement not covered" >        logger.</span>trace("[JSONP::call ()]");
+        var logger = <span class="cstat-no" title="statement not covered" >Logger.getLogger("JSONP");</span>
+<span class="cstat-no" title="statement not covered" >        logger.trace("[JSONP::call ()]");</span>
 &nbsp;
         // analyse parametres
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (!options) {</span>
-<span class="cstat-no" title="statement not covered" >            logger.</span>error("missing parameter : options !");
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error("missing parameter : options !");
+<span class="cstat-no" title="statement not covered" >            logger.error("missing parameter : options !");</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("missing parameter : options !");</span>
         }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (!options.url) {</span>
-<span class="cstat-no" title="statement not covered" >            logger.</span>error("missing parameter : options.url !");
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error("missing parameter : options.url !");
+<span class="cstat-no" title="statement not covered" >            logger.error("missing parameter : options.url !");</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("missing parameter : options.url !");</span>
         }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (!options.timeOut) {</span>
-<span class="cstat-no" title="statement not covered" >            logger.</span>info("setting 'options.timeOut' default value");
-<span class="cstat-no" title="statement not covered" >            options.</span>timeOut = 0;
+<span class="cstat-no" title="statement not covered" >            logger.info("setting 'options.timeOut' default value");</span>
+<span class="cstat-no" title="statement not covered" >            options.timeOut = 0;</span>
         }
 &nbsp;
         // FIXME si un callback coté client a été mis en place,
         // cette condition sur cette methode n'a pas de sens !?
 <span class="cstat-no" title="statement not covered" >        if (!options.onResponse) {</span>
-<span class="cstat-no" title="statement not covered" >            logger.</span>error("missing parameter : options.onResponse !");
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error("missing parameter : options.onResponse !");
+<span class="cstat-no" title="statement not covered" >            logger.error("missing parameter : options.onResponse !");</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("missing parameter : options.onResponse !");</span>
             // FIXME doit on definir un callback interne par defaut !?
             // options.onResponse = function (data) {
             //    console.log("response callback (inner) : ", data);
@@ -655,47 +655,47 @@ var JSONP = {
         // ID du callback à utiliser : null ou string.
         // si l'utilisateur a spécifié un suffixe pour le callback, on le récupère comme un ID (ex: options.callbackSuffix = "")
         // sinon, on utilise un timestamp : this.uuid ()
-        var callbackId = (<span class="cstat-no" title="statement not covered" >typeof options.callbackSuffix === "string") ? options.callbackSuffix : this.u</span>uid();
+        var callbackId = (<span class="cstat-no" title="statement not covered" >typeof options.callbackSuffix === "string") ? options.callbackSuffix : this.uuid();</span>
 &nbsp;
         // on recherche le parametre callback et son nom de fonction dans l'url
         var urlHasCallbackKey = <span class="cstat-no" title="statement not covered" >false;</span>
         var urlHasCallbackName = <span class="cstat-no" title="statement not covered" >false;</span>
 &nbsp;
-        var idx = <span class="cstat-no" title="statement not covered" >options.</span>url.indexOf("callback=");
+        var idx = <span class="cstat-no" title="statement not covered" >options.url.indexOf("callback=");</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (idx !== -1) {</span>
-<span class="cstat-no" title="statement not covered" >            urlHasCallbackKey </span>= true;
+<span class="cstat-no" title="statement not covered" >            urlHasCallbackKey = true;</span>
             // extraction callbackName de l'url : entre "callback=" et "&amp;" ou fin de ligne
-            var j = <span class="cstat-no" title="statement not covered" >options.</span>url.indexOf("&amp;", idx);
+            var j = <span class="cstat-no" title="statement not covered" >options.url.indexOf("&amp;", idx);</span>
 <span class="cstat-no" title="statement not covered" >            if (j === -1) {</span>
-<span class="cstat-no" title="statement not covered" >                j </span>= options.url.length;
+<span class="cstat-no" title="statement not covered" >                j = options.url.length;</span>
             }
 &nbsp;
             // on ecrase le parametre options.callbackName s'il avait été défini
-            var callbackName = <span class="cstat-no" title="statement not covered" >options.</span>url.substring(idx + 9, j);
+            var callbackName = <span class="cstat-no" title="statement not covered" >options.url.substring(idx + 9, j);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            if (callbackName) {</span>
-<span class="cstat-no" title="statement not covered" >                urlHasCallbackName </span>= true;
-<span class="cstat-no" title="statement not covered" >                options.</span>callbackName = callbackName;
-<span class="cstat-no" title="statement not covered" >                logger.</span>info("setting 'options.callbackName' value (" + options.callbackName + ") from 'options.url' parameter");
+<span class="cstat-no" title="statement not covered" >                urlHasCallbackName = true;</span>
+<span class="cstat-no" title="statement not covered" >                options.callbackName = callbackName;</span>
+<span class="cstat-no" title="statement not covered" >                logger.info("setting 'options.callbackName' value (" + options.callbackName + ") from 'options.url' parameter");</span>
             }
         }
 &nbsp;
         // on ajoute le parametre callback dans l'URL s'il n'existe pas
 <span class="cstat-no" title="statement not covered" >        if (!urlHasCallbackKey) {</span>
             // gestion des autres param. et "?"
-            var k = <span class="cstat-no" title="statement not covered" >options.</span>url.indexOf("?");
+            var k = <span class="cstat-no" title="statement not covered" >options.url.indexOf("?");</span>
 <span class="cstat-no" title="statement not covered" >            if (k === -1) {</span>
                 // aucun param., ni de '?'
-<span class="cstat-no" title="statement not covered" >                options.</span>url = options.url + "?" + "callback=";
+<span class="cstat-no" title="statement not covered" >                options.url = options.url + "?" + "callback=";</span>
             } else <span class="cstat-no" title="statement not covered" >if (k === options.url.length) {</span>
                 // uniquement le '?'
-<span class="cstat-no" title="statement not covered" >                options.</span>url = options.url + "callback=";
+<span class="cstat-no" title="statement not covered" >                options.url = options.url + "callback=";</span>
             } else {
                 // le '?' et les param. existent
-<span class="cstat-no" title="statement not covered" >                options.</span>url = options.url + "&amp;" + "callback=";
+<span class="cstat-no" title="statement not covered" >                options.url = options.url + "&amp;" + "callback=";</span>
             }
-<span class="cstat-no" title="statement not covered" >            logger.</span>info("setting callback default key in 'options.url' : " + options.url);
+<span class="cstat-no" title="statement not covered" >            logger.info("setting callback default key in 'options.url' : " + options.url);</span>
         }
 &nbsp;
         // utilisation de la fonction callback coté client ?
@@ -705,24 +705,24 @@ var JSONP = {
 <span class="cstat-no" title="statement not covered" >        if (!urlHasCallbackName) {</span>
             // fonction callback par defaut
 <span class="cstat-no" title="statement not covered" >            if (!options.callbackName) {</span>
-<span class="cstat-no" title="statement not covered" >                logger.</span>info("setting 'options.callbackName' default value");
-<span class="cstat-no" title="statement not covered" >                options.</span>callbackName = "callback"; // ou "gp.protocol.jsonp" ?
+<span class="cstat-no" title="statement not covered" >                logger.info("setting 'options.callbackName' default value");</span>
+<span class="cstat-no" title="statement not covered" >                options.callbackName = "callback"; </span>// ou "gp.protocol.jsonp" ?
                 // info : si on ne veut pas gerer d'ID dans le callback,
                 // options.callbackSuffix = ""
 <span class="cstat-no" title="statement not covered" >                if (callbackId || callbackId === "") {</span>
-<span class="cstat-no" title="statement not covered" >                    options.</span>callbackName += callbackId;
+<span class="cstat-no" title="statement not covered" >                    options.callbackName += callbackId;</span>
                 }
             }
-<span class="cstat-no" title="statement not covered" >            options.</span>url = options.url.replace("callback=", "callback=" + options.callbackName);
-<span class="cstat-no" title="statement not covered" >            logger.</span>info("setting callback function name in 'options.url' : " + options.url);
+<span class="cstat-no" title="statement not covered" >            options.url = options.url.replace("callback=", "callback=" + options.callbackName);</span>
+<span class="cstat-no" title="statement not covered" >            logger.info("setting callback function name in 'options.url' : " + options.url);</span>
         }
 &nbsp;
         // timeOut par defaut
 <span class="cstat-no" title="statement not covered" >        if (!options.onTimeOut) {</span>
-<span class="cstat-no" title="statement not covered" >            logger.</span>info("setting 'options.onTimeOut' default value");
+<span class="cstat-no" title="statement not covered" >            logger.info("setting 'options.onTimeOut' default value");</span>
             /** callback timeout par defaut */
-<span class="cstat-no" title="statement not covered" >            options.</span>onTimeOut = <span class="fstat-no" title="function not covered" >function (/</span>* error */) {
-<span class="cstat-no" title="statement not covered" >                console.</span>log("TimeOut while invoking url : " + options.url);
+<span class="cstat-no" title="statement not covered" >            options.onTimeOut = <span class="fstat-no" title="function not covered" >function (/</span>* error */) {</span>
+<span class="cstat-no" title="statement not covered" >                console.log("TimeOut while invoking url : " + options.url);</span>
             };
         }
 &nbsp;
@@ -734,12 +734,12 @@ var JSONP = {
 &nbsp;
             // declenche le timeout si &gt; à 0 !
 <span class="cstat-no" title="statement not covered" >            if (options.timeOut &gt; 0) {</span>
-<span class="cstat-no" title="statement not covered" >                onTimeOutTrigger </span>= window.setTimeout(
+<span class="cstat-no" title="statement not covered" >                onTimeOutTrigger = window.setTimeout(</span>
 <span class="fstat-no" title="function not covered" >                    function () {</span>
                         /** fonction de reponse du service */
-<span class="cstat-no" title="statement not covered" >                        window[</span>options.callbackName] = <span class="fstat-no" title="function not covered" >function () {</span>};
-<span class="cstat-no" title="statement not covered" >                        options.</span>onTimeOut();
-<span class="cstat-no" title="statement not covered" >                        self.</span>_deleteScript(callbackId);
+<span class="cstat-no" title="statement not covered" >                        window[options.callbackName] = <span class="fstat-no" title="function not covered" >function () {</span>};</span>
+<span class="cstat-no" title="statement not covered" >                        options.onTimeOut();</span>
+<span class="cstat-no" title="statement not covered" >                        self._deleteScript(callbackId);</span>
                     }, options.timeOut);
             }
 &nbsp;
@@ -750,14 +750,14 @@ var JSONP = {
             * @param {Object} data - data
             * @private
             */
-<span class="cstat-no" title="statement not covered" >            window[</span>options.callbackName] = <span class="fstat-no" title="function not covered" >function (d</span>ata) {
-<span class="cstat-no" title="statement not covered" >                window.</span>clearTimeout(onTimeOutTrigger);
-<span class="cstat-no" title="statement not covered" >                options.</span>onResponse(data);
-<span class="cstat-no" title="statement not covered" >                self.</span>_deleteScript(callbackId);
+<span class="cstat-no" title="statement not covered" >            window[options.callbackName] = <span class="fstat-no" title="function not covered" >function (d</span>ata) {</span>
+<span class="cstat-no" title="statement not covered" >                window.clearTimeout(onTimeOutTrigger);</span>
+<span class="cstat-no" title="statement not covered" >                options.onResponse(data);</span>
+<span class="cstat-no" title="statement not covered" >                self._deleteScript(callbackId);</span>
             };
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        this._</span>createScript(callbackId, options.url);
+<span class="cstat-no" title="statement not covered" >        this._createScript(callbackId, options.url);</span>
     },
 &nbsp;
     /**
@@ -768,21 +768,21 @@ var JSONP = {
     */
     _createScript : <span class="fstat-no" title="function not covered" >function (c</span>allbackId, url) {
         var scriptu;
-        var scripto = <span class="cstat-no" title="statement not covered" >document.</span>getElementById("results" + callbackId);
+        var scripto = <span class="cstat-no" title="statement not covered" >document.getElementById("results" + callbackId);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        scriptu </span>= document.createElement("script");
-<span class="cstat-no" title="statement not covered" >        scriptu.</span>setAttribute("type", "text/javascript");
-<span class="cstat-no" title="statement not covered" >        scriptu.</span>setAttribute("src", url);
-<span class="cstat-no" title="statement not covered" >        scriptu.</span>setAttribute("charset", "UTF-8");
-<span class="cstat-no" title="statement not covered" >        scriptu.</span>setAttribute("id", "results" + callbackId);
-<span class="cstat-no" title="statement not covered" >        scriptu.</span>setAttribute("async", "true"); // FIXME async ?
+<span class="cstat-no" title="statement not covered" >        scriptu = document.createElement("script");</span>
+<span class="cstat-no" title="statement not covered" >        scriptu.setAttribute("type", "text/javascript");</span>
+<span class="cstat-no" title="statement not covered" >        scriptu.setAttribute("src", url);</span>
+<span class="cstat-no" title="statement not covered" >        scriptu.setAttribute("charset", "UTF-8");</span>
+<span class="cstat-no" title="statement not covered" >        scriptu.setAttribute("id", "results" + callbackId);</span>
+<span class="cstat-no" title="statement not covered" >        scriptu.setAttribute("async", "true"); </span>// FIXME async ?
         // head ou body ou autres ?
-        var node = <span class="cstat-no" title="statement not covered" >document.documentElement || document.</span>getElementsByTagName("head")[0];
+        var node = <span class="cstat-no" title="statement not covered" >document.documentElement || document.getElementsByTagName("head")[0];</span>
 <span class="cstat-no" title="statement not covered" >        if (scripto === null) {</span>
-<span class="cstat-no" title="statement not covered" >            node.</span>appendChild(scriptu);
+<span class="cstat-no" title="statement not covered" >            node.appendChild(scriptu);</span>
         } else {
             // s'il existe déjà, on le remplace !
-<span class="cstat-no" title="statement not covered" >            node.</span>replaceChild(scriptu, scripto);
+<span class="cstat-no" title="statement not covered" >            node.replaceChild(scriptu, scripto);</span>
         }
     },
 &nbsp;
@@ -792,13 +792,13 @@ var JSONP = {
     * @private
     */
     _deleteScript : <span class="fstat-no" title="function not covered" >function (c</span>allbackId) {
-        var script = <span class="cstat-no" title="statement not covered" >document.</span>getElementById("results" + callbackId);
+        var script = <span class="cstat-no" title="statement not covered" >document.getElementById("results" + callbackId);</span>
 <span class="cstat-no" title="statement not covered" >        if (script) {</span>
             var node = <span class="cstat-no" title="statement not covered" >script.parentNode || document.documentElement;</span>
 <span class="cstat-no" title="statement not covered" >            if (!node) {</span>
 <span class="cstat-no" title="statement not covered" >                return;</span>
             }
-<span class="cstat-no" title="statement not covered" >            node.</span>removeChild(script);
+<span class="cstat-no" title="statement not covered" >            node.removeChild(script);</span>
         }
     }
 };
@@ -811,7 +811,7 @@ export default JSONP;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

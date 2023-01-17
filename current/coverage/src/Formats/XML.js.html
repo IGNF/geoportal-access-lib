@@ -811,7 +811,7 @@ import Logger from "../Utils/LoggerByDefault";
  */
 function XML (options) {
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!(this instanceof XML)) {
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew TypeError("XML constructor cannot be called as a function.");
+<span class="cstat-no" title="statement not covered" >        throw new TypeError("XML constructor cannot be called as a function.");</span>
     }
 &nbsp;
     // FIXME : notion de singleton
@@ -921,7 +921,7 @@ XML.prototype = {
      * Setter
      */
     setXMLDoc : <span class="fstat-no" title="function not covered" >function (d</span>oc) {
-<span class="cstat-no" title="statement not covered" >        this.x</span>mlDoc = doc;
+<span class="cstat-no" title="statement not covered" >        this.xmlDoc = doc;</span>
     },
     /**
      * Méthode initialisant la lecture du XML, à partir d'un XML Document :
@@ -934,8 +934,8 @@ XML.prototype = {
      */
     parse : function () {
         // build xml document from xmlString
-        <span class="missing-if-branch" title="if path not taken" >I</span>if (!this.xmlDoc &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >this.xmlString) {</span>
-<span class="cstat-no" title="statement not covered" >            this.x</span>mlDoc = __getXMLDOC(this.xmlString);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!this.xmlDoc &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >this.xmlString)</span> {
+<span class="cstat-no" title="statement not covered" >            this.xmlDoc = __getXMLDOC(this.xmlString);</span>
         }
         <span class="missing-if-branch" title="else path not taken" >E</span>if (this.xmlDoc) {
             var root = __getRootNode(this.xmlDoc);
@@ -950,7 +950,7 @@ XML.prototype = {
                 }
                 return parserOutput;
             } else {
-<span class="cstat-no" title="statement not covered" >                return {</span>};
+<span class="cstat-no" title="statement not covered" >                return {};</span>
             }
         }
     }
@@ -982,51 +982,51 @@ function __getXMLDOC (xmlString) {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (window.ActiveXObject) {</span>
             // Internet Explorer &lt; 9
-<span class="cstat-no" title="statement not covered" >            xmlDoc </span>= new window.ActiveXObject("Microsoft.XMLDOM");
-<span class="cstat-no" title="statement not covered" >            xmlDoc.</span>async = false;
-<span class="cstat-no" title="statement not covered" >            xmlDoc.</span>loadXML(xmlString);
+<span class="cstat-no" title="statement not covered" >            xmlDoc = new window.ActiveXObject("Microsoft.XMLDOM");</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc.async = false;</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc.loadXML(xmlString);</span>
             var parseError = <span class="cstat-no" title="statement not covered" >xmlDoc.parseError;</span>
 <span class="cstat-no" title="statement not covered" >            if (parseError.errorCode) {</span>
 <span class="cstat-no" title="statement not covered" >                if (parseError.line &amp;&amp; parseError.linepos) {</span>
-<span class="cstat-no" title="statement not covered" >                    errorMsg </span>+= "( ligne " + parseError.line + ", colonne " + parseError.linepos;
+<span class="cstat-no" title="statement not covered" >                    errorMsg += "( ligne " + parseError.line + ", colonne " + parseError.linepos;</span>
                 }
 <span class="cstat-no" title="statement not covered" >                if (parseError.reason) {</span>
-<span class="cstat-no" title="statement not covered" >                    errorMsg </span>+= ":  " + parseError.reason + ")";
+<span class="cstat-no" title="statement not covered" >                    errorMsg += ":  " + parseError.reason + ")";</span>
                 }
-<span class="cstat-no" title="statement not covered" >                throw n</span>ew Error(errorMsg);
+<span class="cstat-no" title="statement not covered" >                throw new Error(errorMsg);</span>
             }
-<span class="cstat-no" title="statement not covered" >            return x</span>mlDoc;
+<span class="cstat-no" title="statement not covered" >            return xmlDoc;</span>
         } else <span class="cstat-no" title="statement not covered" >if (window.DOMParser) {</span>
             // les autres (Chrome, Mozilla, IE &gt;= 9)
-<span class="cstat-no" title="statement not covered" >            parser </span>= new window.DOMParser();
+<span class="cstat-no" title="statement not covered" >            parser = new window.DOMParser();</span>
 <span class="cstat-no" title="statement not covered" >            try {</span>
-<span class="cstat-no" title="statement not covered" >                xmlDoc </span>= parser.parseFromString(xmlString, "text/xml");
+<span class="cstat-no" title="statement not covered" >                xmlDoc = parser.parseFromString(xmlString, "text/xml");</span>
             } catch (e) {
                 // Internet Explorer browser raises exception if xmlString is not valid XML
 <span class="cstat-no" title="statement not covered" >                if (e.message === "SyntaxError") {</span>
-<span class="cstat-no" title="statement not covered" >                    throw n</span>ew Error(errorMsg);
+<span class="cstat-no" title="statement not covered" >                    throw new Error(errorMsg);</span>
                 } else {
-<span class="cstat-no" title="statement not covered" >                    throw n</span>ew Error("Erreur lors du parsing de la réponse du service : " + e.message);
+<span class="cstat-no" title="statement not covered" >                    throw new Error("Erreur lors du parsing de la réponse du service : " + e.message);</span>
                 }
             }
             // look for parsing error in case no exception was raised
 <span class="cstat-no" title="statement not covered" >            if (xmlDoc.getElementsByTagName("parsererror").length &gt; 0) {</span>
-                var parsererror = <span class="cstat-no" title="statement not covered" >xmlDoc.</span>getElementsByTagName("parsererror");
+                var parsererror = <span class="cstat-no" title="statement not covered" >xmlDoc.getElementsByTagName("parsererror");</span>
 <span class="cstat-no" title="statement not covered" >                for (var i = 0; i &lt; parsererror.length; i++) {</span>
                     var content = <span class="cstat-no" title="statement not covered" >parsererror[i].innerHTML;</span>
                     // except in case parsererror is just because of huge xml, but parsing is done.
 <span class="cstat-no" title="statement not covered" >                    if (content.indexOf("Huge input lookup") === -1) {</span>
-<span class="cstat-no" title="statement not covered" >                        errorMsg </span>+= "(" + content + ")";
-<span class="cstat-no" title="statement not covered" >                        throw n</span>ew Error(errorMsg);
+<span class="cstat-no" title="statement not covered" >                        errorMsg += "(" + content + ")";</span>
+<span class="cstat-no" title="statement not covered" >                        throw new Error(errorMsg);</span>
                     }
                 }
             } else <span class="cstat-no" title="statement not covered" >if (!xmlDoc.documentElement) { // may happen in chrome browser</span>
-<span class="cstat-no" title="statement not covered" >                throw n</span>ew Error(errorMsg);
+<span class="cstat-no" title="statement not covered" >                throw new Error(errorMsg);</span>
             }
-<span class="cstat-no" title="statement not covered" >            return x</span>mlDoc;
+<span class="cstat-no" title="statement not covered" >            return xmlDoc;</span>
         } else {
             // FIXME
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error("Incompatible DOM Parser pour ce navigateur !");
+<span class="cstat-no" title="statement not covered" >            throw new Error("Incompatible DOM Parser pour ce navigateur !");</span>
         }
     }
 }
@@ -1047,7 +1047,7 @@ function __getRootNode (xmlDoc) {
         // INFO : nodeType 9 represents the entire document (the root-node of the DOM tree)
         root = xmlDoc.documentElement;
     } else <span class="cstat-no" title="statement not covered" >if (xmlDoc.nodeType === 1) {</span>
-<span class="cstat-no" title="statement not covered" >        root </span>= xmlDoc;
+<span class="cstat-no" title="statement not covered" >        root = xmlDoc;</span>
     }
     return root;
 }
@@ -1150,7 +1150,7 @@ export default XML;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

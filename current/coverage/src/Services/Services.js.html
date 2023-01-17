@@ -698,8 +698,8 @@ var Services = {
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
     getConfig : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
-        var autoconfService = <span class="cstat-no" title="statement not covered" >new A</span>utoConf(options);
-<span class="cstat-no" title="statement not covered" >        autoconfService.</span>call();
+        var autoconfService = <span class="cstat-no" title="statement not covered" >new AutoConf(options);</span>
+<span class="cstat-no" title="statement not covered" >        autoconfService.call();</span>
     },
 &nbsp;
     /**
@@ -731,8 +731,8 @@ var Services = {
      * @param {String} [options.outputFormat='xml'] - Output format for underlying web service response : 'xml' or 'json'. Only use if you know what you are doing.
      */
     getAltitude : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
-        var altiService = <span class="cstat-no" title="statement not covered" >new A</span>lti(options);
-<span class="cstat-no" title="statement not covered" >        altiService.</span>call();
+        var altiService = <span class="cstat-no" title="statement not covered" >new Alti(options);</span>
+<span class="cstat-no" title="statement not covered" >        altiService.call();</span>
     },
     /**
      * Getting positon of a geographic identifier (places names, address, cadastral parcel, other...) using the [geocoding web service of the Geoportal Platform]{@link https://geoservices.ign.fr/documentation/geoservices/geocodage.html}.
@@ -777,8 +777,8 @@ var Services = {
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
     geocode : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
-        var geocodeService = <span class="cstat-no" title="statement not covered" >new G</span>eocode(options);
-<span class="cstat-no" title="statement not covered" >        geocodeService.</span>call();
+        var geocodeService = <span class="cstat-no" title="statement not covered" >new Geocode(options);</span>
+<span class="cstat-no" title="statement not covered" >        geocodeService.call();</span>
     },
     /**
      * Retrieving geographical identifiers (place names, address, cadastral parcels, ...) near a given position, using the [reverse geocoding web service of the Geoportal Platform]{@link https://geoservices.ign.fr/documentation/geoservices/geocodage-inverse.html}.
@@ -817,8 +817,8 @@ var Services = {
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
     reverseGeocode : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
-        var reverseGeocodeService = <span class="cstat-no" title="statement not covered" >new R</span>everseGeocode(options);
-<span class="cstat-no" title="statement not covered" >        reverseGeocodeService.</span>call();
+        var reverseGeocodeService = <span class="cstat-no" title="statement not covered" >new ReverseGeocode(options);</span>
+<span class="cstat-no" title="statement not covered" >        reverseGeocodeService.call();</span>
     },
     /**
      * Getting suggestions of probable places names or address based on uncomplete texts, using the [autocompletion service of the Geoportal Platform]{@link https://geoservices.ign.fr/documentation/geoservices/autocompletion.html}
@@ -844,8 +844,8 @@ var Services = {
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
     autoComplete : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
-        var autoCompleteService = <span class="cstat-no" title="statement not covered" >new A</span>utoComplete(options);
-<span class="cstat-no" title="statement not covered" >        autoCompleteService.</span>call();
+        var autoCompleteService = <span class="cstat-no" title="statement not covered" >new AutoComplete(options);</span>
+<span class="cstat-no" title="statement not covered" >        autoCompleteService.call();</span>
     },
     /**
      * Getting a route from one point to another using the [route service of the Geoportal Platform]{@link https://geoservices.ign.fr/documentation/geoservices/itineraires.html}.
@@ -881,8 +881,8 @@ var Services = {
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
     route : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
-        var routeService = <span class="cstat-no" title="statement not covered" >new R</span>oute(options);
-<span class="cstat-no" title="statement not covered" >        routeService.</span>call();
+        var routeService = <span class="cstat-no" title="statement not covered" >new Route(options);</span>
+<span class="cstat-no" title="statement not covered" >        routeService.call();</span>
     },
     /**
      * Computing a set of places (curve) reachable from a given point (or from where to start to reach a given point) within a time or distance constraint using the [isochrone service of the Geoportal Platform]{@link https://geoservices.ign.fr/documentation/geoservices/isochrones.html}.
@@ -918,8 +918,8 @@ var Services = {
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
     isoCurve : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
-        var processIsoCurveService = <span class="cstat-no" title="statement not covered" >new P</span>rocessIsoCurve(options);
-<span class="cstat-no" title="statement not covered" >        processIsoCurveService.</span>call();
+        var processIsoCurveService = <span class="cstat-no" title="statement not covered" >new ProcessIsoCurve(options);</span>
+<span class="cstat-no" title="statement not covered" >        processIsoCurveService.call();</span>
     }
 };
 &nbsp;
@@ -967,7 +967,7 @@ export default Services;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

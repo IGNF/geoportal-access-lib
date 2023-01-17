@@ -499,7 +499,7 @@ function GeocodeFilterExtension () {
     this.logger.trace("[Constructeur GeocodeFilterExtension ()]");
 &nbsp;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!(this instanceof GeocodeFilterExtension)) {
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew TypeError("GeocodeFilterExtension constructor cannot be called as a function.");
+<span class="cstat-no" title="statement not covered" >        throw new TypeError("GeocodeFilterExtension constructor cannot be called as a function.");</span>
     }
 &nbsp;
     /**
@@ -541,10 +541,10 @@ GeocodeFilterExtension.prototype = {
     getNames : <span class="fstat-no" title="function not covered" >function () {</span>
         var names = <span class="cstat-no" title="statement not covered" >[];</span>
 <span class="cstat-no" title="statement not covered" >        for (var idx in this.filters) {</span>
-<span class="cstat-no" title="statement not covered" >            names.</span>push(this.filters[idx].CLASSNAME);
+<span class="cstat-no" title="statement not covered" >            names.push(this.filters[idx].CLASSNAME);</span>
         }
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.trace(names);
-<span class="cstat-no" title="statement not covered" >        return n</span>ames;
+<span class="cstat-no" title="statement not covered" >        this.logger.trace(names);</span>
+<span class="cstat-no" title="statement not covered" >        return names;</span>
     },
 &nbsp;
     /**
@@ -570,8 +570,8 @@ GeocodeFilterExtension.prototype = {
      * @returns {Array.&lt;Object&gt;} liste des filtres
      */
     getFilters : <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.trace(this.filters);
-<span class="cstat-no" title="statement not covered" >        return t</span>his.filters;
+<span class="cstat-no" title="statement not covered" >        this.logger.trace(this.filters);</span>
+<span class="cstat-no" title="statement not covered" >        return this.filters;</span>
     },
 &nbsp;
     /**
@@ -584,11 +584,11 @@ GeocodeFilterExtension.prototype = {
         var attributs = <span class="cstat-no" title="statement not covered" >[];</span>
 <span class="cstat-no" title="statement not covered" >        for (var idx in this.filters) {</span>
 <span class="cstat-no" title="statement not covered" >            if (this.filters[idx].CLASSNAME === name) {</span>
-<span class="cstat-no" title="statement not covered" >                attributs </span>= this.filters[idx].attributesList;
+<span class="cstat-no" title="statement not covered" >                attributs = this.filters[idx].attributesList;</span>
             }
         }
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.trace(attributs);
-<span class="cstat-no" title="statement not covered" >        return a</span>ttributs;
+<span class="cstat-no" title="statement not covered" >        this.logger.trace(attributs);</span>
+<span class="cstat-no" title="statement not covered" >        return attributs;</span>
     },
 &nbsp;
     /**
@@ -598,12 +598,12 @@ GeocodeFilterExtension.prototype = {
      * @param {Object} options - options de la table de geocodage
      */
     setPlaceAttributs : <span class="fstat-no" title="function not covered" >function (n</span>ame, options) {
-        var filter = <span class="cstat-no" title="statement not covered" >this.g</span>etFilter(name);
-        var attributs = <span class="cstat-no" title="statement not covered" >this.g</span>etAttributs(name);
+        var filter = <span class="cstat-no" title="statement not covered" >this.getFilter(name);</span>
+        var attributs = <span class="cstat-no" title="statement not covered" >this.getAttributs(name);</span>
 <span class="cstat-no" title="statement not covered" >        for (var idx in attributs) {</span>
-            var value = <span class="cstat-no" title="statement not covered" >attributs[i</span>dx];
+            var value = <span class="cstat-no" title="statement not covered" >attributs[idx];</span>
 <span class="cstat-no" title="statement not covered" >            if (options[value]) {</span>
-<span class="cstat-no" title="statement not covered" >                filter.</span>placeAttributes[value] = options[value];
+<span class="cstat-no" title="statement not covered" >                filter.placeAttributes[value] = options[value];</span>
             }
         }
     },
@@ -618,11 +618,11 @@ GeocodeFilterExtension.prototype = {
         var places = <span class="cstat-no" title="statement not covered" >{};</span>
 <span class="cstat-no" title="statement not covered" >        for (var idx in this.filters) {</span>
 <span class="cstat-no" title="statement not covered" >            if (this.filters[idx].CLASSNAME === name) {</span>
-<span class="cstat-no" title="statement not covered" >                places </span>= this.filters[idx].placeAttributes;
+<span class="cstat-no" title="statement not covered" >                places = this.filters[idx].placeAttributes;</span>
             }
         }
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.trace(places);
-<span class="cstat-no" title="statement not covered" >        return p</span>laces;
+<span class="cstat-no" title="statement not covered" >        this.logger.trace(places);</span>
+<span class="cstat-no" title="statement not covered" >        return places;</span>
     }
 };
 &nbsp;
@@ -634,7 +634,7 @@ export default GeocodeFilterExtension;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

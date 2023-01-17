@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.9% </span>
+                <span class="strong">71.92% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>39/55</span>
+                <span class='fraction'>41/57</span>
             </div>
         
             
@@ -428,7 +428,7 @@ import Logger from "../../../../Utils/LoggerByDefault";
  */
 function GeocodeParamREST (options) {
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!(this instanceof GeocodeParamREST)) {
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew TypeError("GeocodeParamREST constructor cannot be called as a function.");
+<span class="cstat-no" title="statement not covered" >        throw new TypeError("GeocodeParamREST constructor cannot be called as a function.");</span>
     }
 &nbsp;
     this.logger = Logger.getLogger();
@@ -441,7 +441,7 @@ function GeocodeParamREST (options) {
 &nbsp;
     // methode de geocodage
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!this.options.geocodeMethod || (this.options.geocodeMethod !== "search" &amp;&amp; this.options.geocodeMethod !== "reverse")) {
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error("Error geocodeMethod not valid");
+<span class="cstat-no" title="statement not covered" >        throw new Error("Error geocodeMethod not valid");</span>
     }
     this.geocodeMethod = this.options.geocodeMethod;
 &nbsp;
@@ -487,7 +487,7 @@ GeocodeParamREST.prototype = {
         var filters = {};
         for (var prop in this.filters) {
 <span class="cstat-no" title="statement not covered" >            if (this.filters.hasOwnProperty(prop)) {</span>
-<span class="cstat-no" title="statement not covered" >                filters[</span>prop] = this.filters[prop];
+<span class="cstat-no" title="statement not covered" >                filters[prop] = this.filters[prop];</span>
             }
         }
         return filters;
@@ -499,18 +499,18 @@ GeocodeParamREST.prototype = {
      */
     getIndex : function () {
         <span class="missing-if-branch" title="if path not taken" >I</span>if (this.index === undefined) {
-<span class="cstat-no" title="statement not covered" >            return n</span>ull;
+<span class="cstat-no" title="statement not covered" >            return null;</span>
         }
         <span class="missing-if-branch" title="if path not taken" >I</span>if (this.index === "StreetAddress") {
-<span class="cstat-no" title="statement not covered" >            return "</span>address";
+<span class="cstat-no" title="statement not covered" >            return "address";</span>
         } else <span class="missing-if-branch" title="if path not taken" >I</span>if (this.index === "CadastralParcel") {
-<span class="cstat-no" title="statement not covered" >            return "</span>parcel";
+<span class="cstat-no" title="statement not covered" >            return "parcel";</span>
         } else <span class="missing-if-branch" title="else path not taken" >E</span>if (this.index === "PositionOfInterest") {
             return "poi";
         } else <span class="cstat-no" title="statement not covered" >if (this.index === "location") {</span>
-<span class="cstat-no" title="statement not covered" >            return "</span>location";
+<span class="cstat-no" title="statement not covered" >            return "location";</span>
         }
-<span class="cstat-no" title="statement not covered" >        return t</span>his.index;
+<span class="cstat-no" title="statement not covered" >        return this.index;</span>
     },
 &nbsp;
     /**
@@ -544,7 +544,7 @@ GeocodeParamREST.prototype.getParams = function () {
         });
     }
 &nbsp;
-    if (this.geocodeMethod === "reverse") {
+    if (this.geocodeMethod === "reverse" &amp;&amp; this.searchGeometry) {
         map.push({
             k : "searchgeom",
             v : this.getSearchGeometry()
@@ -563,14 +563,14 @@ GeocodeParamREST.prototype.getParams = function () {
     }
 &nbsp;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (this.maxResp) {
-<span class="cstat-no" title="statement not covered" >        map.</span>push({
+<span class="cstat-no" title="statement not covered" >        map.push({</span>
             k : "limit",
             v : this.maxResp
         });
     }
 &nbsp;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (this.returnTrueGeometry) {
-<span class="cstat-no" title="statement not covered" >        map.</span>push({
+<span class="cstat-no" title="statement not covered" >        map.push({</span>
             k : "returntruegeometry",
             v : this.returnTrueGeometry
         });
@@ -578,7 +578,7 @@ GeocodeParamREST.prototype.getParams = function () {
 &nbsp;
     const filters = this.getFilters();
     for (var key in filters) {
-<span class="cstat-no" title="statement not covered" >        map.</span>push({
+<span class="cstat-no" title="statement not covered" >        map.push({</span>
             k : key,
             v : filters[key]
         });
@@ -595,7 +595,7 @@ export default GeocodeParamREST;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

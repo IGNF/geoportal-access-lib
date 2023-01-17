@@ -471,39 +471,39 @@ var AltiResponseFactory = {
      */
     build : <span class="fstat-no" title="function not covered" >function (o</span>ptions) {
         // logger
-        var logger = <span class="cstat-no" title="statement not covered" >Logger.</span>getLogger("AltiResponseFactory");
-<span class="cstat-no" title="statement not covered" >        logger.</span>trace(["AltiResponseFactory::build()"]);
+        var logger = <span class="cstat-no" title="statement not covered" >Logger.getLogger("AltiResponseFactory");</span>
+<span class="cstat-no" title="statement not covered" >        logger.trace(["AltiResponseFactory::build()"]);</span>
 &nbsp;
         var data = <span class="cstat-no" title="statement not covered" >null;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (options.response) {</span>
 <span class="cstat-no" title="statement not covered" >            if (options.rawResponse) {</span>
-<span class="cstat-no" title="statement not covered" >                logger.</span>trace("analyze response : raw");
-<span class="cstat-no" title="statement not covered" >                data </span>= options.response;
+<span class="cstat-no" title="statement not covered" >                logger.trace("analyze response : raw");</span>
+<span class="cstat-no" title="statement not covered" >                data = options.response;</span>
             } else {
-<span class="cstat-no" title="statement not covered" >                switch (o</span>ptions.outputFormat) {
+<span class="cstat-no" title="statement not covered" >                switch (options.outputFormat) {</span>
                     case "xml":
-<span class="cstat-no" title="statement not covered" >                        logger.</span>trace("analyze response : xml");
+<span class="cstat-no" title="statement not covered" >                        logger.trace("analyze response : xml");</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                        try {</span>
-                            var p = <span class="cstat-no" title="statement not covered" >new X</span>ML({
+                            var p = <span class="cstat-no" title="statement not covered" >new XML({</span>
                                 reader : AltiResponseReader
                             });
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                            if (typeof options.response === "string") {</span>
-<span class="cstat-no" title="statement not covered" >                                p.</span>setXMLString(options.response);
+<span class="cstat-no" title="statement not covered" >                                p.setXMLString(options.response);</span>
                             } else {
-<span class="cstat-no" title="statement not covered" >                                p.</span>setXMLDoc(options.response);
+<span class="cstat-no" title="statement not covered" >                                p.setXMLDoc(options.response);</span>
                             }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                            data </span>= p.parse();
+<span class="cstat-no" title="statement not covered" >                            data = p.parse();</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                            if (!data) {</span>
-<span class="cstat-no" title="statement not covered" >                                throw n</span>ew Error(MRes.getMessage("SERVICE_RESPONSE_EXCEPTION_2"));
+<span class="cstat-no" title="statement not covered" >                                throw new Error(MRes.getMessage("SERVICE_RESPONSE_EXCEPTION_2"));</span>
                             }
                         } catch (e) {
                             var message = <span class="cstat-no" title="statement not covered" >e.message;</span>
-<span class="cstat-no" title="statement not covered" >                            options.</span>onError.call(options.scope, new ErrorService({
+<span class="cstat-no" title="statement not covered" >                            options.onError.call(options.scope, new ErrorService({</span>
                                 message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", message),
                                 status : 200,
                                 type : ErrorService.TYPE_SRVERR
@@ -514,20 +514,20 @@ var AltiResponseFactory = {
 <span class="cstat-no" title="statement not covered" >                        break;</span>
 &nbsp;
                     case "json":
-<span class="cstat-no" title="statement not covered" >                        logger.</span>trace("analyze response : json");
-<span class="cstat-no" title="statement not covered" >                        logger.</span>trace("analyze response : ", typeof options.response);
+<span class="cstat-no" title="statement not covered" >                        logger.trace("analyze response : json");</span>
+<span class="cstat-no" title="statement not covered" >                        logger.trace("analyze response : ", typeof options.response);</span>
 &nbsp;
                         var JSONResponse = <span class="cstat-no" title="statement not covered" >null;</span>
 <span class="cstat-no" title="statement not covered" >                        if (typeof options.response === "string") {</span>
-<span class="cstat-no" title="statement not covered" >                            JSONResponse </span>= JSON.parse(options.response);
+<span class="cstat-no" title="statement not covered" >                            JSONResponse = JSON.parse(options.response);</span>
                         } else {
-<span class="cstat-no" title="statement not covered" >                            JSONResponse </span>= options.response;
+<span class="cstat-no" title="statement not covered" >                            JSONResponse = options.response;</span>
                         }
 &nbsp;
                         // le service renvoie t il une erreur ?
 <span class="cstat-no" title="statement not covered" >                        if (JSONResponse &amp;&amp; JSONResponse.error) {</span>
                             // ex. {"error": {"code": "BAD_PARAMETER","description": "The values () cannot be parsed as a valid longitude (double value such as -180 &lt; lat &lt; 180)."}}
-<span class="cstat-no" title="statement not covered" >                            options.</span>onError.call(options.scope, new ErrorService({
+<span class="cstat-no" title="statement not covered" >                            options.onError.call(options.scope, new ErrorService({</span>
                                 message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", JSONResponse.error.description),
                                 status : 200,
                                 type : ErrorService.TYPE_SRVERR
@@ -538,41 +538,41 @@ var AltiResponseFactory = {
                         // analyse de la reponse
 <span class="cstat-no" title="statement not covered" >                        if (JSONResponse) {</span>
                             var elevations = <span class="cstat-no" title="statement not covered" >JSONResponse.elevations;</span>
-                            var altiResponse = <span class="cstat-no" title="statement not covered" >new A</span>ltiResponse();
+                            var altiResponse = <span class="cstat-no" title="statement not covered" >new AltiResponse();</span>
                             var elevation;
 <span class="cstat-no" title="statement not covered" >                            if (Array.isArray(elevations) &amp;&amp; elevations.length) {</span>
 <span class="cstat-no" title="statement not covered" >                                for (var i = 0; i &lt; elevations.length; i++) {</span>
-<span class="cstat-no" title="statement not covered" >                                    elevation </span>= new Elevation();
+<span class="cstat-no" title="statement not covered" >                                    elevation = new Elevation();</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                                    if (typeof elevations[i] === "object") {</span>
                                         // elevations[i] est un objet elevation
 <span class="cstat-no" title="statement not covered" >                                        if (elevations[i].lon) {</span>
-<span class="cstat-no" title="statement not covered" >                                            elevation.</span>lon = elevations[i].lon;
+<span class="cstat-no" title="statement not covered" >                                            elevation.lon = elevations[i].lon;</span>
                                         }
 <span class="cstat-no" title="statement not covered" >                                        if (elevations[i].lat) {</span>
-<span class="cstat-no" title="statement not covered" >                                            elevation.</span>lat = elevations[i].lat;
+<span class="cstat-no" title="statement not covered" >                                            elevation.lat = elevations[i].lat;</span>
                                         }
 <span class="cstat-no" title="statement not covered" >                                        if (elevations[i].z) {</span>
-<span class="cstat-no" title="statement not covered" >                                            elevation.</span>z = elevations[i].z;
+<span class="cstat-no" title="statement not covered" >                                            elevation.z = elevations[i].z;</span>
                                         }
 <span class="cstat-no" title="statement not covered" >                                        if (elevations[i].acc) {</span>
-<span class="cstat-no" title="statement not covered" >                                            elevation.</span>acc = elevations[i].acc;
+<span class="cstat-no" title="statement not covered" >                                            elevation.acc = elevations[i].acc;</span>
                                         }
                                     } else <span class="cstat-no" title="statement not covered" >if (typeof elevations[i] === "number") {</span>
                                         // elevations[i] est un nombre, dans le cas de zonly=true notamment
-<span class="cstat-no" title="statement not covered" >                                        elevation.</span>z = elevations[i];
+<span class="cstat-no" title="statement not covered" >                                        elevation.z = elevations[i];</span>
                                     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                                    if (Array.isArray(altiResponse.elevations)) {</span>
-<span class="cstat-no" title="statement not covered" >                                        altiResponse.</span>elevations.push(elevation);
+<span class="cstat-no" title="statement not covered" >                                        altiResponse.elevations.push(elevation);</span>
                                     }
                                 }
                             }
-<span class="cstat-no" title="statement not covered" >                            data </span>= altiResponse;
+<span class="cstat-no" title="statement not covered" >                            data = altiResponse;</span>
                         }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                        if (!data) {</span>
-<span class="cstat-no" title="statement not covered" >                            options.</span>onError.call(options.scope, new ErrorService({
+<span class="cstat-no" title="statement not covered" >                            options.onError.call(options.scope, new ErrorService({</span>
                                 message : MRes.getMessage("SERVICE_RESPONSE_ANALYSE_2"),
                                 type : ErrorService.TYPE_UNKERR,
                                 status : -1
@@ -582,7 +582,7 @@ var AltiResponseFactory = {
 <span class="cstat-no" title="statement not covered" >                        break;</span>
 &nbsp;
                     default:
-<span class="cstat-no" title="statement not covered" >                        options.</span>onError.call(options.scope, new ErrorService({
+<span class="cstat-no" title="statement not covered" >                        options.onError.call(options.scope, new ErrorService({</span>
                             message : MRes.getMessage("SERVICE_RESPONSE_FORMAT_2"),
                             type : ErrorService.TYPE_UNKERR,
                             status : -1
@@ -592,7 +592,7 @@ var AltiResponseFactory = {
 &nbsp;
                 // Si la réponse contenait une exception renvoyée par le service
 <span class="cstat-no" title="statement not covered" >                if (data.exceptionReport) {</span>
-<span class="cstat-no" title="statement not covered" >                    options.</span>onError.call(options.scope, new ErrorService({
+<span class="cstat-no" title="statement not covered" >                    options.onError.call(options.scope, new ErrorService({</span>
                         message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", data.exceptionReport),
                         type : ErrorService.TYPE_SRVERR,
                         status : 200
@@ -600,7 +600,7 @@ var AltiResponseFactory = {
 <span class="cstat-no" title="statement not covered" >                    return;</span>
                 } else <span class="cstat-no" title="statement not covered" >if (data.error) {</span>
                     var errorMess = <span class="cstat-no" title="statement not covered" >data.error.description;</span>
-<span class="cstat-no" title="statement not covered" >                    options.</span>onError.call(options.scope, new ErrorService({
+<span class="cstat-no" title="statement not covered" >                    options.onError.call(options.scope, new ErrorService({</span>
                         message : MRes.getMessage("SERVICE_RESPONSE_EXCEPTION", errorMess),
                         type : ErrorService.TYPE_SRVERR,
                         status : 200
@@ -609,11 +609,11 @@ var AltiResponseFactory = {
                 }
             }
         } else {
-<span class="cstat-no" title="statement not covered" >            options.</span>onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EMPTY")));
+<span class="cstat-no" title="statement not covered" >            options.onError.call(options.scope, new ErrorService(MRes.getMessage("SERVICE_RESPONSE_EMPTY")));</span>
 <span class="cstat-no" title="statement not covered" >            return;</span>
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        options.</span>onSuccess.call(options.scope, data);
+<span class="cstat-no" title="statement not covered" >        options.onSuccess.call(options.scope, data);</span>
     }
 };
 &nbsp;
@@ -625,7 +625,7 @@ export default AltiResponseFactory;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

@@ -814,80 +814,80 @@ import RouteResponseFactory from "./Response/RouteResponseFactory";
  *
  * @private
  */
-function <span class="fstat-no" title="function not covered" >Route (o</span>ptions) {
+function <span class="fstat-no" title="function not covered" >Route </span>(options) {
 <span class="cstat-no" title="statement not covered" >    if (!(this instanceof Route)) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew TypeError(_.getMessage("CLASS_CONSTRUCTOR", "Route"));
+<span class="cstat-no" title="statement not covered" >        throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "Route"));</span>
     }
 &nbsp;
     /**
      * Nom de la classe (heritage)
      */
-<span class="cstat-no" title="statement not covered" >    this.C</span>LASSNAME = "Route";
+<span class="cstat-no" title="statement not covered" >    this.CLASSNAME = "Route";</span>
 &nbsp;
     // appel du constructeur par heritage
-<span class="cstat-no" title="statement not covered" >    CommonService.</span>apply(this, arguments);
+<span class="cstat-no" title="statement not covered" >    CommonService.apply(this, arguments);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this.l</span>ogger = Logger.getLogger("Gp.Services.Route");
-<span class="cstat-no" title="statement not covered" >    this.l</span>ogger.trace("[Constructeur Route (options)]");
+<span class="cstat-no" title="statement not covered" >    this.logger = Logger.getLogger("Gp.Services.Route");</span>
+<span class="cstat-no" title="statement not covered" >    this.logger.trace("[Constructeur Route (options)]");</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (!options.startPoint) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(_.getMessage("PARAM_MISSING", "startPoint"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(_.getMessage("PARAM_MISSING", "startPoint"));</span>
     }
 &nbsp;
     // on lance une exception afin d'eviter au service de le faire...
 <span class="cstat-no" title="statement not covered" >    if (options.startPoint.x === null) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(_.getMessage("PARAM_MISSING", "startPoint.x"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(_.getMessage("PARAM_MISSING", "startPoint.x"));</span>
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (options.startPoint.y === null) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(_.getMessage("PARAM_MISSING", "startPoint.y"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(_.getMessage("PARAM_MISSING", "startPoint.y"));</span>
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (!options.endPoint) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(_.getMessage("PARAM_MISSING", "endPoint"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(_.getMessage("PARAM_MISSING", "endPoint"));</span>
     }
 &nbsp;
     // on lance une exception afin d'eviter au service de le faire...
 <span class="cstat-no" title="statement not covered" >    if (options.endPoint.x === null) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(_.getMessage("PARAM_MISSING", "endPoint.x"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(_.getMessage("PARAM_MISSING", "endPoint.x"));</span>
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (options.endPoint.y === null) {</span>
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error(_.getMessage("PARAM_MISSING", "endPoint.y"));
+<span class="cstat-no" title="statement not covered" >        throw new Error(_.getMessage("PARAM_MISSING", "endPoint.y"));</span>
     }
 &nbsp;
     // options par defaut
 &nbsp;
     // on passe l'option outputFormat en minuscules afin d'éviter des exceptions.
 <span class="cstat-no" title="statement not covered" >    if (options.outputFormat &amp;&amp; options.outputFormat !== "json") {</span>
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.warn("options.outputFormat could only be json");
+<span class="cstat-no" title="statement not covered" >        this.logger.warn("options.outputFormat could only be json");</span>
     }
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.outputFormat = "json";
+<span class="cstat-no" title="statement not covered" >    this.options.outputFormat = "json";</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.resource = options.resource || "bdtopo-osrm";
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.startPoint = options.startPoint;
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.endPoint = options.endPoint;
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.viaPoints = options.viaPoints || [];
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.routePreference = options.routePreference || "fastest";
+<span class="cstat-no" title="statement not covered" >    this.options.resource = options.resource || "bdtopo-osrm";</span>
+<span class="cstat-no" title="statement not covered" >    this.options.startPoint = options.startPoint;</span>
+<span class="cstat-no" title="statement not covered" >    this.options.endPoint = options.endPoint;</span>
+<span class="cstat-no" title="statement not covered" >    this.options.viaPoints = options.viaPoints || [];</span>
+<span class="cstat-no" title="statement not covered" >    this.options.routePreference = options.routePreference || "fastest";</span>
     /** Gestion des anciennes valeurs de graph */
 <span class="cstat-no" title="statement not covered" >    if (options.graph) {</span>
 <span class="cstat-no" title="statement not covered" >        if (options.graph === "Voiture") {</span>
-<span class="cstat-no" title="statement not covered" >            this.o</span>ptions.graph = "car";
+<span class="cstat-no" title="statement not covered" >            this.options.graph = "car";</span>
         }
 <span class="cstat-no" title="statement not covered" >        if (options.graph === "Pieton") {</span>
-<span class="cstat-no" title="statement not covered" >            this.o</span>ptions.graph = "pedestrian";
+<span class="cstat-no" title="statement not covered" >            this.options.graph = "pedestrian";</span>
         }
     } else {
-<span class="cstat-no" title="statement not covered" >        this.o</span>ptions.graph = "car";
+<span class="cstat-no" title="statement not covered" >        this.options.graph = "car";</span>
     }
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.constraints = [];
+<span class="cstat-no" title="statement not covered" >    this.options.constraints = [];</span>
 <span class="cstat-no" title="statement not covered" >    if (options.constraints) {</span>
 <span class="cstat-no" title="statement not covered" >        if (Array.isArray(options.constraints)) {</span>
 <span class="cstat-no" title="statement not covered" >            for (var k = 0; k &lt; options.constraints.length; k++) {</span>
-<span class="cstat-no" title="statement not covered" >                this.o</span>ptions.constraints.push(options.constraints[k]);
+<span class="cstat-no" title="statement not covered" >                this.options.constraints.push(options.constraints[k]);</span>
             }
         } else {
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error(_.getMessage("PARAM_TYPE", "constraints"));
+<span class="cstat-no" title="statement not covered" >            throw new Error(_.getMessage("PARAM_TYPE", "constraints"));</span>
         }
     }
 &nbsp;
@@ -897,56 +897,56 @@ function <span class="fstat-no" title="function not covered" >Route (o</span>pti
     var constraintAutoroute = <span class="cstat-no" title="statement not covered" >{};</span>
 <span class="cstat-no" title="statement not covered" >    if (options.exclusions) {</span>
 <span class="cstat-no" title="statement not covered" >        if (options.exclusions.length !== 0) {</span>
-<span class="cstat-no" title="statement not covered" >            this.l</span>ogger.warn("options.exclusions is DEPRECATED !!");
+<span class="cstat-no" title="statement not covered" >            this.logger.warn("options.exclusions is DEPRECATED !!");</span>
 <span class="cstat-no" title="statement not covered" >            for (var c = 0; c &lt; options.exclusions.length; c++) {</span>
 <span class="cstat-no" title="statement not covered" >                if (typeof options.exclusions[c] === "string") {</span>
-<span class="cstat-no" title="statement not covered" >                    options.</span>exclusions[c] = options.exclusions[c].toLowerCase();
+<span class="cstat-no" title="statement not covered" >                    options.exclusions[c] = options.exclusions[c].toLowerCase();</span>
                 } else {
                     // on ne crée pas une erreur pour rétro-compatibilité avec les anciennes versions
 <span class="cstat-no" title="statement not covered" >                    continue;</span>
                 }
 <span class="cstat-no" title="statement not covered" >                if (options.exclusions[c] === "toll") {</span>
-<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.</span>constraintType = "banned";
-<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.</span>key = "wayType";
-<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.</span>operator = "=";
-<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.</span>value = "autoroute";
-<span class="cstat-no" title="statement not covered" >                    this.o</span>ptions.constraints.push(constraintAutoroute);
+<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.constraintType = "banned";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.key = "wayType";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.operator = "=";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintAutoroute.value = "autoroute";</span>
+<span class="cstat-no" title="statement not covered" >                    this.options.constraints.push(constraintAutoroute);</span>
                 }
 <span class="cstat-no" title="statement not covered" >                if (options.exclusions[c] === "tunnel") {</span>
-<span class="cstat-no" title="statement not covered" >                    constraintTunnel.</span>constraintType = "banned";
-<span class="cstat-no" title="statement not covered" >                    constraintTunnel.</span>key = "wayType";
-<span class="cstat-no" title="statement not covered" >                    constraintTunnel.</span>operator = "=";
-<span class="cstat-no" title="statement not covered" >                    constraintTunnel.</span>value = "tunnel";
-<span class="cstat-no" title="statement not covered" >                    this.o</span>ptions.constraints.push(constraintTunnel);
+<span class="cstat-no" title="statement not covered" >                    constraintTunnel.constraintType = "banned";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintTunnel.key = "wayType";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintTunnel.operator = "=";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintTunnel.value = "tunnel";</span>
+<span class="cstat-no" title="statement not covered" >                    this.options.constraints.push(constraintTunnel);</span>
                 }
 <span class="cstat-no" title="statement not covered" >                if (options.exclusions[c] === "bridge") {</span>
-<span class="cstat-no" title="statement not covered" >                    constraintPont.</span>constraintType = "banned";
-<span class="cstat-no" title="statement not covered" >                    constraintPont.</span>key = "wayType";
-<span class="cstat-no" title="statement not covered" >                    constraintPont.</span>operator = "=";
-<span class="cstat-no" title="statement not covered" >                    constraintPont.</span>value = "pont";
-<span class="cstat-no" title="statement not covered" >                    this.o</span>ptions.constraints.push(constraintPont);
+<span class="cstat-no" title="statement not covered" >                    constraintPont.constraintType = "banned";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintPont.key = "wayType";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintPont.operator = "=";</span>
+<span class="cstat-no" title="statement not covered" >                    constraintPont.value = "pont";</span>
+<span class="cstat-no" title="statement not covered" >                    this.options.constraints.push(constraintPont);</span>
                 }
             }
         }
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.geometryInInstructions = options.geometryInInstructions || false;
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.provideBbox = options.provideBbox || true;
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.distanceUnit = options.distanceUnit || "m";
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.timeUnit = options.timeUnit || "second";
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.expectedStartTime = null; // FIXME not yet implemented !
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.srs = options.srs || "EPSG:4326";
-<span class="cstat-no" title="statement not covered" >    this.o</span>ptions.waysAttributes = options.waysAttributes || [];
+<span class="cstat-no" title="statement not covered" >    this.options.geometryInInstructions = options.geometryInInstructions || false;</span>
+<span class="cstat-no" title="statement not covered" >    this.options.provideBbox = options.provideBbox || true;</span>
+<span class="cstat-no" title="statement not covered" >    this.options.distanceUnit = options.distanceUnit || "m";</span>
+<span class="cstat-no" title="statement not covered" >    this.options.timeUnit = options.timeUnit || "second";</span>
+<span class="cstat-no" title="statement not covered" >    this.options.expectedStartTime = null; </span>// FIXME not yet implemented !
+<span class="cstat-no" title="statement not covered" >    this.options.srs = options.srs || "EPSG:4326";</span>
+<span class="cstat-no" title="statement not covered" >    this.options.waysAttributes = options.waysAttributes || [];</span>
 &nbsp;
     // gestion de l'url du service par defaut
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
 <span class="cstat-no" title="statement not covered" >    if (!this.options.serverUrl) {</span>
-        var UrlByDefault = <span class="cstat-no" title="statement not covered" >DefaultUrlService.</span>Route.url(this.options.apiKey);
+        var UrlByDefault = <span class="cstat-no" title="statement not covered" >DefaultUrlService.Route.url(this.options.apiKey);</span>
 <span class="cstat-no" title="statement not covered" >        if (!UrlByDefault) {</span>
-<span class="cstat-no" title="statement not covered" >            throw n</span>ew Error("Url by default not found !");
+<span class="cstat-no" title="statement not covered" >            throw new Error("Url by default not found !");</span>
         }
-<span class="cstat-no" title="statement not covered" >        this.o</span>ptions.serverUrl = UrlByDefault;
-<span class="cstat-no" title="statement not covered" >        this.l</span>ogger.trace("Serveur URL par defaut : " + this.options.serverUrl);
+<span class="cstat-no" title="statement not covered" >        this.options.serverUrl = UrlByDefault;</span>
+<span class="cstat-no" title="statement not covered" >        this.logger.trace("Serveur URL par defaut : " + this.options.serverUrl);</span>
     }
 }
 &nbsp;
@@ -988,13 +988,13 @@ Route.prototype.buildRequest = <span class="fstat-no" title="function not covere
         waysAttributes : this.options.waysAttributes
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this.r</span>equest = RouteRequestFactory.build(options);
+<span class="cstat-no" title="statement not covered" >    this.request = RouteRequestFactory.build(options);</span>
 &nbsp;
     // on teste si la requete a bien été construite !
 <span class="cstat-no" title="statement not covered" >    if (!this.request) {</span>
-<span class="cstat-no" title="statement not covered" >        error.</span>call(this, new ErrorService(_.getMessage("SERVICE_REQUEST_BUILD")));
+<span class="cstat-no" title="statement not covered" >        error.call(this, new ErrorService(_.getMessage("SERVICE_REQUEST_BUILD")));</span>
     } else {
-<span class="cstat-no" title="statement not covered" >        success.</span>call(this, this.request);
+<span class="cstat-no" title="statement not covered" >        success.call(this, this.request);</span>
     }
 };
 &nbsp;
@@ -1022,9 +1022,9 @@ Route.prototype.analyzeResponse = <span class="fstat-no" title="function not cov
             geometryInInstructions : this.options.geometryInInstructions
         };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        RouteResponseFactory.</span>build(options);
+<span class="cstat-no" title="statement not covered" >        RouteResponseFactory.build(options);</span>
     } else {
-<span class="cstat-no" title="statement not covered" >        error.</span>call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
+<span class="cstat-no" title="statement not covered" >        error.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));</span>
     }
 };
 &nbsp;
@@ -1036,7 +1036,7 @@ export default Route;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

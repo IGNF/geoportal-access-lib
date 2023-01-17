@@ -2524,14 +2524,14 @@ AutoConfResponseReader.READERS = {
             // info : balise "racine" de la réponse de l'autoconf
 &nbsp;
             // vérification de la version du service, et des namespaces de l'en-tête
-<span class="cstat-no" title="statement not covered" >            __checkServiceAttributes(</span>viewContextNode);
+<span class="cstat-no" title="statement not covered" >            __checkServiceAttributes(viewContextNode);</span>
 &nbsp;
             // create AutoConfResponse
-            var config = <span class="cstat-no" title="statement not covered" >new A</span>utoConfResponse();
+            var config = <span class="cstat-no" title="statement not covered" >new AutoConfResponse();</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >            __getChildNodes(</span>viewContextNode, config);
+<span class="cstat-no" title="statement not covered" >            __getChildNodes(viewContextNode, config);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >            return c</span>onfig;
+<span class="cstat-no" title="statement not covered" >            return config;</span>
         },
 &nbsp;
         // info : /General/Title
@@ -2539,9 +2539,9 @@ AutoConfResponseReader.READERS = {
         /** Title */
         Title : <span class="fstat-no" title="function not covered" >function (t</span>itleNode, data) {
 <span class="cstat-no" title="statement not covered" >            if (data &amp;&amp; data.generalOptions) { // cas de la variable config générale</span>
-<span class="cstat-no" title="statement not covered" >                data.</span>generalOptions.title = __getChildValue(titleNode);
+<span class="cstat-no" title="statement not covered" >                data.generalOptions.title = __getChildValue(titleNode);</span>
             } else <span class="cstat-no" title="statement not covered" >if (data &amp;&amp; data.lyr) { // cas d'une layer</span>
-<span class="cstat-no" title="statement not covered" >                data.</span>lyr.title = __getChildValue(titleNode);
+<span class="cstat-no" title="statement not covered" >                data.lyr.title = __getChildValue(titleNode);</span>
             }
         },
 &nbsp;
@@ -2549,7 +2549,7 @@ AutoConfResponseReader.READERS = {
         /** Abstract */
         Abstract : <span class="fstat-no" title="function not covered" >function (n</span>ode, data) {
 <span class="cstat-no" title="statement not covered" >            if (data &amp;&amp; data.lyr) {</span>
-<span class="cstat-no" title="statement not covered" >                data.</span>lyr.description = __getChildValue(node);
+<span class="cstat-no" title="statement not covered" >                data.lyr.description = __getChildValue(node);</span>
             }
         },
 &nbsp;
@@ -2557,27 +2557,27 @@ AutoConfResponseReader.READERS = {
         // ou : /LayerList/Server
         /** Server */
         Server : <span class="fstat-no" title="function not covered" >function (n</span>ode, data) {
-            var serverId = <span class="cstat-no" title="statement not covered" >node.</span>getAttribute("service");
-            var title = <span class="cstat-no" title="statement not covered" >node.</span>getAttribute("title");
-            var version = <span class="cstat-no" title="statement not covered" >node.</span>getAttribute("version");
+            var serverId = <span class="cstat-no" title="statement not covered" >node.getAttribute("service");</span>
+            var title = <span class="cstat-no" title="statement not covered" >node.getAttribute("title");</span>
+            var version = <span class="cstat-no" title="statement not covered" >node.getAttribute("version");</span>
 <span class="cstat-no" title="statement not covered" >            if (serverId) {</span>
 <span class="cstat-no" title="statement not covered" >                if (data &amp;&amp; data.services &amp;&amp; typeof data.services === "object" &amp;&amp; !data.services[serverId]) {</span>
                     // on est dans la balise Services
-                    var s = <span class="cstat-no" title="statement not covered" >new S</span>ervice();
-<span class="cstat-no" title="statement not covered" >                    s.</span>title = title;
-<span class="cstat-no" title="statement not covered" >                    s.</span>version = version;
+                    var s = <span class="cstat-no" title="statement not covered" >new Service();</span>
+<span class="cstat-no" title="statement not covered" >                    s.title = title;</span>
+<span class="cstat-no" title="statement not covered" >                    s.version = version;</span>
                     // récupération de l'url du service, dans une balise enfant "OnlineResource"
-<span class="cstat-no" title="statement not covered" >                    __getChildNodes(</span>node, s);
+<span class="cstat-no" title="statement not covered" >                    __getChildNodes(node, s);</span>
                     // ajout du service à la variable config
-<span class="cstat-no" title="statement not covered" >                    data.</span>services[serverId] = s;
+<span class="cstat-no" title="statement not covered" >                    data.services[serverId] = s;</span>
                 } else <span class="cstat-no" title="statement not covered" >if (data &amp;&amp; data.lyr) {</span>
                     // on est dans la balise Layer
 <span class="cstat-no" title="statement not covered" >                    if (!data.lyr.serviceParams) {</span>
                         // si l'objet serviceParams n'a pas encore été créé, on le crée.
-<span class="cstat-no" title="statement not covered" >                        data.</span>lyr.serviceParams = {};
+<span class="cstat-no" title="statement not covered" >                        data.lyr.serviceParams = {};</span>
                     }
-<span class="cstat-no" title="statement not covered" >                    data.</span>lyr.serviceParams.id = serverId;
-<span class="cstat-no" title="statement not covered" >                    data.</span>lyr.serviceParams.version = version;
+<span class="cstat-no" title="statement not covered" >                    data.lyr.serviceParams.id = serverId;</span>
+<span class="cstat-no" title="statement not covered" >                    data.lyr.serviceParams.version = version;</span>
                 }
             }
         },
@@ -2590,7 +2590,7 @@ AutoConfResponseReader.READERS = {
         /** OnlineResource */
         OnlineResource : <span class="fstat-no" title="function not covered" >function (n</span>ode, service) {
 <span class="cstat-no" title="statement not covered" >            if (service &amp;&amp; service.hasOwnProperty("serverUrl")) {</span>
-<span class="cstat-no" title="statement not covered" >                service.</span>serverUrl = node.getAttribute("xlink:href");
+<span class="cstat-no" title="statement not covered" >                service.serverUrl = node.getAttribute("xlink:href");</span>
             }
         },
 &nbsp;
@@ -2598,25 +2598,25 @@ AutoConfResponseReader.READERS = {
         /** LayerList */
         LayerList : <span class="fstat-no" title="function not covered" >function (l</span>ayerListNode, config) {
             // liste de balises "layer"
-<span class="cstat-no" title="statement not covered" >            __getChildNodes(</span>layerListNode, config);
+<span class="cstat-no" title="statement not covered" >            __getChildNodes(layerListNode, config);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            if (config &amp;&amp; config.layers &amp;&amp; config.generalOptions &amp;&amp; config.services) {</span>
                 // récupération des clés et des couches associées
 <span class="cstat-no" title="statement not covered" >                for (var lyr in config.layers) {</span>
 <span class="cstat-no" title="statement not covered" >                    if (config.layers.hasOwnProperty(lyr)) {</span>
-                        var layerConfig = <span class="cstat-no" title="statement not covered" >config.</span>layers[lyr];
+                        var layerConfig = <span class="cstat-no" title="statement not covered" >config.layers[lyr];</span>
 &nbsp;
                         // récupération de la clé associée
                         var apiKeys = <span class="cstat-no" title="statement not covered" >layerConfig.apiKeys;</span>
 <span class="cstat-no" title="statement not covered" >                        if (apiKeys &amp;&amp; Array.isArray(apiKeys)) {</span>
 <span class="cstat-no" title="statement not covered" >                            for (var i = 0; i &lt; apiKeys.length; i++) {</span>
                                 // pour chaque clé API, on ajoute la couche
-                                var key = <span class="cstat-no" title="statement not covered" >apiKeys[i</span>];
+                                var key = <span class="cstat-no" title="statement not covered" >apiKeys[i];</span>
 <span class="cstat-no" title="statement not covered" >                                if (config.generalOptions.apiKeys) {</span>
 <span class="cstat-no" title="statement not covered" >                                    if (!config.generalOptions.apiKeys[key] || !Array.isArray(config.generalOptions.apiKeys[key])) {</span>
-<span class="cstat-no" title="statement not covered" >                                        config.</span>generalOptions.apiKeys[key] = [];
+<span class="cstat-no" title="statement not covered" >                                        config.generalOptions.apiKeys[key] = [];</span>
                                     }
-<span class="cstat-no" title="statement not covered" >                                    config.</span>generalOptions.apiKeys[key].push(lyr);
+<span class="cstat-no" title="statement not covered" >                                    config.generalOptions.apiKeys[key].push(lyr);</span>
                                 }
                             }
                         }
@@ -2625,14 +2625,14 @@ AutoConfResponseReader.READERS = {
                         var serviceParams = <span class="cstat-no" title="statement not covered" >layerConfig.serviceParams;</span>
 <span class="cstat-no" title="statement not covered" >                        if (serviceParams &amp;&amp; serviceParams.id) {</span>
 <span class="cstat-no" title="statement not covered" >                            if (!config.services[serviceParams.id]) {</span>
-                                var s = <span class="cstat-no" title="statement not covered" >new S</span>ervice();
+                                var s = <span class="cstat-no" title="statement not covered" >new Service();</span>
 <span class="cstat-no" title="statement not covered" >                                if (serviceParams.serverUrl) {</span>
-<span class="cstat-no" title="statement not covered" >                                    s.</span>serverUrl = serviceParams.serverUrl;
+<span class="cstat-no" title="statement not covered" >                                    s.serverUrl = serviceParams.serverUrl;</span>
                                 }
 <span class="cstat-no" title="statement not covered" >                                if (serviceParams.version) {</span>
-<span class="cstat-no" title="statement not covered" >                                    s.</span>version = serviceParams.version;
+<span class="cstat-no" title="statement not covered" >                                    s.version = serviceParams.version;</span>
                                 }
-<span class="cstat-no" title="statement not covered" >                                config.</span>services[serviceParams.id] = s;
+<span class="cstat-no" title="statement not covered" >                                config.services[serviceParams.id] = s;</span>
                             }
                         }
 &nbsp;
@@ -2642,7 +2642,7 @@ AutoConfResponseReader.READERS = {
                             var tileMatrixSets = <span class="cstat-no" title="statement not covered" >config.tileMatrixSets;</span>
 <span class="cstat-no" title="statement not covered" >                            for (var tms in tileMatrixSets) {</span>
 <span class="cstat-no" title="statement not covered" >                                if (tileMatrixSets.hasOwnProperty(tms) &amp;&amp; tms === tmsLink) {</span>
-<span class="cstat-no" title="statement not covered" >                                    layerConfig.</span>defaultProjection = tileMatrixSets[tms].projection;
+<span class="cstat-no" title="statement not covered" >                                    layerConfig.defaultProjection = tileMatrixSets[tms].projection;</span>
                                 }
                             }
                         }
@@ -2660,24 +2660,24 @@ AutoConfResponseReader.READERS = {
                     lyrId : null
                 };
 &nbsp;
-                var hidden = <span class="cstat-no" title="statement not covered" >layerNode.</span>getAttribute("hidden");
+                var hidden = <span class="cstat-no" title="statement not covered" >layerNode.getAttribute("hidden");</span>
 <span class="cstat-no" title="statement not covered" >                if (hidden === "1") {</span>
-<span class="cstat-no" title="statement not covered" >                    lyrData.</span>lyr.hidden = true;
+<span class="cstat-no" title="statement not covered" >                    lyrData.lyr.hidden = true;</span>
                 } else {
-<span class="cstat-no" title="statement not covered" >                    lyrData.</span>lyr.hidden = false;
+<span class="cstat-no" title="statement not covered" >                    lyrData.lyr.hidden = false;</span>
                 }
 &nbsp;
-                var queryable = <span class="cstat-no" title="statement not covered" >layerNode.</span>getAttribute("queryable");
+                var queryable = <span class="cstat-no" title="statement not covered" >layerNode.getAttribute("queryable");</span>
 <span class="cstat-no" title="statement not covered" >                if (queryable === "1") {</span>
-<span class="cstat-no" title="statement not covered" >                    lyrData.</span>lyr.queryable = true;
+<span class="cstat-no" title="statement not covered" >                    lyrData.lyr.queryable = true;</span>
                 } else {
-<span class="cstat-no" title="statement not covered" >                    lyrData.</span>lyr.queryable = false;
+<span class="cstat-no" title="statement not covered" >                    lyrData.lyr.queryable = false;</span>
                 }
 &nbsp;
                 // on peut avoir les balises : Server, Name, Title, Abstract, DataURL, MetadataURL,
                 // sld:MinScaleDenominator, sld:MaxScaleDenominator, SRS, FormatList, StyleList
                 // DimensionList, Extension
-<span class="cstat-no" title="statement not covered" >                __getChildNodes(</span>layerNode, lyrData);
+<span class="cstat-no" title="statement not covered" >                __getChildNodes(layerNode, lyrData);</span>
 &nbsp;
                 // si on a bien récupéré l'identifiant de la couche, on s'en sert pour l'ajouter au tableau associatif des couches disponibles
 <span class="cstat-no" title="statement not covered" >                if (lyrData.lyrId) {</span>
@@ -2686,15 +2686,15 @@ AutoConfResponseReader.READERS = {
                         var serviceid = <span class="cstat-no" title="statement not covered" >lyrData.lyr.serviceParams.id;</span>
 <span class="cstat-no" title="statement not covered" >                        if (serviceid.toUpperCase().indexOf("OPENLS") !== -1 || serviceid.toUpperCase().indexOf("ELEVATION") !== -1) {</span>
                             // Il faut changer l'identifiant de la ressource.
-                            var resourceId = <span class="cstat-no" title="statement not covered" >lyrData.</span>lyrId.split("$")[0];
-<span class="cstat-no" title="statement not covered" >                            lyrData.</span>lyrId = resourceId + "$" + serviceid;
+                            var resourceId = <span class="cstat-no" title="statement not covered" >lyrData.lyrId.split("$")[0];</span>
+<span class="cstat-no" title="statement not covered" >                            lyrData.lyrId = resourceId + "$" + serviceid;</span>
                         }
                     }
 &nbsp;
                     // on ajoute l'information dans les attributs de la couche
-<span class="cstat-no" title="statement not covered" >                    lyrData.</span>lyr.layerId = lyrData.lyrId;
+<span class="cstat-no" title="statement not covered" >                    lyrData.lyr.layerId = lyrData.lyrId;</span>
                     // et dans le tableau Gp.Config.layers
-<span class="cstat-no" title="statement not covered" >                    config.</span>layers[lyrData.lyrId] = lyrData.lyr;
+<span class="cstat-no" title="statement not covered" >                    config.layers[lyrData.lyrId] = lyrData.lyr;</span>
                 }
             }
         },
@@ -2703,7 +2703,7 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         Name : <span class="fstat-no" title="function not covered" >function (n</span>ode, lyrData) {
 <span class="cstat-no" title="statement not covered" >            if (lyrData &amp;&amp; lyrData.lyr) {</span>
-<span class="cstat-no" title="statement not covered" >                lyrData.</span>lyr.name = __getChildValue(node);
+<span class="cstat-no" title="statement not covered" >                lyrData.lyr.name = __getChildValue(node);</span>
             }
         },
 &nbsp;
@@ -2712,7 +2712,7 @@ AutoConfResponseReader.READERS = {
         SRS : <span class="fstat-no" title="function not covered" >function (n</span>ode, lyrData) {
             // on récupère la projection de la couche (SRS)
 <span class="cstat-no" title="statement not covered" >            if (lyrData &amp;&amp; lyrData.lyr) {</span>
-<span class="cstat-no" title="statement not covered" >                lyrData.</span>lyr.defaultProjection = __getChildValue(node);
+<span class="cstat-no" title="statement not covered" >                lyrData.lyr.defaultProjection = __getChildValue(node);</span>
             }
         },
 &nbsp;
@@ -2720,19 +2720,19 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         Format : <span class="fstat-no" title="function not covered" >function (n</span>ode, lyrData) {
 <span class="cstat-no" title="statement not covered" >            if (lyrData &amp;&amp; lyrData.lyr) {</span>
-                var f = <span class="cstat-no" title="statement not covered" >new F</span>ormat();
-                var current = <span class="cstat-no" title="statement not covered" >node.</span>getAttribute("current");
+                var f = <span class="cstat-no" title="statement not covered" >new Format();</span>
+                var current = <span class="cstat-no" title="statement not covered" >node.getAttribute("current");</span>
 <span class="cstat-no" title="statement not covered" >                if (current === "1") {</span>
-<span class="cstat-no" title="statement not covered" >                    f.</span>current = true;
+<span class="cstat-no" title="statement not covered" >                    f.current = true;</span>
                 } else {
-<span class="cstat-no" title="statement not covered" >                    f.</span>current = false;
+<span class="cstat-no" title="statement not covered" >                    f.current = false;</span>
                 }
-<span class="cstat-no" title="statement not covered" >                f.</span>name = __getChildValue(node);
+<span class="cstat-no" title="statement not covered" >                f.name = __getChildValue(node);</span>
                 // si on n'a pas encore ajouté de format, on crée le tableau vide
 <span class="cstat-no" title="statement not covered" >                if (!lyrData.lyr.formats || !Array.isArray(lyrData.lyr.formats)) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyrData.</span>lyr.formats = [];
+<span class="cstat-no" title="statement not covered" >                    lyrData.lyr.formats = [];</span>
                 }
-<span class="cstat-no" title="statement not covered" >                lyrData.</span>lyr.formats.push(f);
+<span class="cstat-no" title="statement not covered" >                lyrData.lyr.formats.push(f);</span>
             }
         },
 &nbsp;
@@ -2740,36 +2740,36 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         Style : <span class="fstat-no" title="function not covered" >function (n</span>ode, lyrData) {
 <span class="cstat-no" title="statement not covered" >            if (lyrData &amp;&amp; lyrData.lyr) {</span>
-                var s = <span class="cstat-no" title="statement not covered" >new S</span>tyle();
-                var current = <span class="cstat-no" title="statement not covered" >node.</span>getAttribute("current");
+                var s = <span class="cstat-no" title="statement not covered" >new Style();</span>
+                var current = <span class="cstat-no" title="statement not covered" >node.getAttribute("current");</span>
 <span class="cstat-no" title="statement not covered" >                if (current === "1" || current === 1) {</span>
-<span class="cstat-no" title="statement not covered" >                    s.</span>current = true;
+<span class="cstat-no" title="statement not covered" >                    s.current = true;</span>
                 } else {
-<span class="cstat-no" title="statement not covered" >                    s.</span>current = false;
+<span class="cstat-no" title="statement not covered" >                    s.current = false;</span>
                 }
 <span class="cstat-no" title="statement not covered" >                if (node.hasChildNodes) {</span>
                     var children = <span class="cstat-no" title="statement not covered" >node.childNodes;</span>
                     var child;
                     var childName;
 <span class="cstat-no" title="statement not covered" >                    for (var i = 0; i &lt; children.length; i++) {</span>
-<span class="cstat-no" title="statement not covered" >                        child </span>= children[i];
+<span class="cstat-no" title="statement not covered" >                        child = children[i];</span>
 <span class="cstat-no" title="statement not covered" >                        if (child.nodeType === 1) { // 1 === node.ELEMENT_NODE</span>
-<span class="cstat-no" title="statement not covered" >                            childName </span>= child.localName || child.baseName || child.nodeName;
+<span class="cstat-no" title="statement not covered" >                            childName = child.localName || child.baseName || child.nodeName;</span>
 <span class="cstat-no" title="statement not covered" >                            if (childName === "Name") {</span>
-<span class="cstat-no" title="statement not covered" >                                s.</span>name = __getChildValue(child);
+<span class="cstat-no" title="statement not covered" >                                s.name = __getChildValue(child);</span>
                             } else <span class="cstat-no" title="statement not covered" >if (childName === "Title") {</span>
-<span class="cstat-no" title="statement not covered" >                                s.</span>title = __getChildValue(child);
+<span class="cstat-no" title="statement not covered" >                                s.title = __getChildValue(child);</span>
                             } else <span class="cstat-no" title="statement not covered" >if (childName === "URL") {</span>
-<span class="cstat-no" title="statement not covered" >                                s.</span>url = __getChildValue(child);
+<span class="cstat-no" title="statement not covered" >                                s.url = __getChildValue(child);</span>
                             }
                         }
                     }
                 }
                 // si on n'a pas encore ajouté de style, on crée le tableau vide
 <span class="cstat-no" title="statement not covered" >                if (!lyrData.lyr.styles || !Array.isArray(lyrData.lyr.styles)) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyrData.</span>lyr.styles = [];
+<span class="cstat-no" title="statement not covered" >                    lyrData.lyr.styles = [];</span>
                 }
-<span class="cstat-no" title="statement not covered" >                lyrData.</span>lyr.styles.push(s);
+<span class="cstat-no" title="statement not covered" >                lyrData.lyr.styles.push(s);</span>
             }
         },
 &nbsp;
@@ -2778,23 +2778,23 @@ AutoConfResponseReader.READERS = {
         Dimension : <span class="fstat-no" title="function not covered" >function (n</span>ode, lyrData) {
             // possède des attributs obligatoires : name, units, unitSymbol et userValue
             // et d'autres attributs facultatifs : default, multipleValues, nearestValue, current
-            var name = <span class="cstat-no" title="statement not covered" >node.</span>getAttribute("name");
-            var dim = <span class="cstat-no" title="statement not covered" >__getChildValue(n</span>ode);
+            var name = <span class="cstat-no" title="statement not covered" >node.getAttribute("name");</span>
+            var dim = <span class="cstat-no" title="statement not covered" >__getChildValue(node);</span>
 <span class="cstat-no" title="statement not covered" >            if (lyrData &amp;&amp; lyrData.lyr) {</span>
                 // si on n'a pas encore ajouté de dimension, on crée l'objet vide
 <span class="cstat-no" title="statement not covered" >                if (!lyrData.lyr.dimensions) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyrData.</span>lyr.dimensions = {};
+<span class="cstat-no" title="statement not covered" >                    lyrData.lyr.dimensions = {};</span>
                 }
 <span class="cstat-no" title="statement not covered" >                if (name === "Type") {</span>
-<span class="cstat-no" title="statement not covered" >                    lyrData.</span>lyr.dimensions.type = dim;
+<span class="cstat-no" title="statement not covered" >                    lyrData.lyr.dimensions.type = dim;</span>
                 } else <span class="cstat-no" title="statement not covered" >if (name === "VisibilityRange") {</span>
-<span class="cstat-no" title="statement not covered" >                    lyrData.</span>lyr.dimensions.visibilityRange = dim;
+<span class="cstat-no" title="statement not covered" >                    lyrData.lyr.dimensions.visibilityRange = dim;</span>
                 } else <span class="cstat-no" title="statement not covered" >if (name === "VisibilityMode ") {</span>
-<span class="cstat-no" title="statement not covered" >                    lyrData.</span>lyr.dimensions.visibilityMode = dim;
+<span class="cstat-no" title="statement not covered" >                    lyrData.lyr.dimensions.visibilityMode = dim;</span>
                 } else <span class="cstat-no" title="statement not covered" >if (name === "GeometricType") {</span>
-<span class="cstat-no" title="statement not covered" >                    lyrData.</span>lyr.dimensions.geometricType = dim;
+<span class="cstat-no" title="statement not covered" >                    lyrData.lyr.dimensions.geometricType = dim;</span>
                 } else <span class="cstat-no" title="statement not covered" >if (name === "NoDataValue") {</span>
-<span class="cstat-no" title="statement not covered" >                    lyrData.</span>lyr.dimensions.noDataValue = dim;
+<span class="cstat-no" title="statement not covered" >                    lyrData.lyr.dimensions.noDataValue = dim;</span>
                 }
             }
         }
@@ -2807,7 +2807,7 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         Theme : <span class="fstat-no" title="function not covered" >function (t</span>hemeNode, config) {
 <span class="cstat-no" title="statement not covered" >            if (config &amp;&amp; config.generalOptions &amp;&amp; config.generalOptions.hasOwnProperty("theme")) {</span>
-<span class="cstat-no" title="statement not covered" >                config.</span>generalOptions.theme = __getChildValue(themeNode);
+<span class="cstat-no" title="statement not covered" >                config.generalOptions.theme = __getChildValue(themeNode);</span>
             }
         },
 &nbsp;
@@ -2815,7 +2815,7 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         defaultGMLGFIStyleUrl : <span class="fstat-no" title="function not covered" >function (n</span>ode, config) {
 <span class="cstat-no" title="statement not covered" >            if (config &amp;&amp; config.generalOptions &amp;&amp; config.generalOptions.hasOwnProperty("defaultGMLGFIStyle")) {</span>
-<span class="cstat-no" title="statement not covered" >                config.</span>generalOptions.defaultGMLGFIStyle = __getChildValue(node);
+<span class="cstat-no" title="statement not covered" >                config.generalOptions.defaultGMLGFIStyle = __getChildValue(node);</span>
             }
         },
 &nbsp;
@@ -2823,22 +2823,22 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         Territory : <span class="fstat-no" title="function not covered" >function (t</span>erritoryNode, config) {
             // info : Information to configure the API for this territory
-            var tid = <span class="cstat-no" title="statement not covered" >territoryNode.</span>getAttribute("id");
+            var tid = <span class="cstat-no" title="statement not covered" >territoryNode.getAttribute("id");</span>
 <span class="cstat-no" title="statement not covered" >            if (tid) {</span>
                 // create a new Territory
-                var t = <span class="cstat-no" title="statement not covered" >new T</span>erritory();
+                var t = <span class="cstat-no" title="statement not covered" >new Territory();</span>
 &nbsp;
-                var isDefault = <span class="cstat-no" title="statement not covered" >territoryNode.</span>getAttribute("default");
+                var isDefault = <span class="cstat-no" title="statement not covered" >territoryNode.getAttribute("default");</span>
 <span class="cstat-no" title="statement not covered" >                if (isDefault === "1") {</span>
-<span class="cstat-no" title="statement not covered" >                    t.</span>isDefault = true;
+<span class="cstat-no" title="statement not covered" >                    t.isDefault = true;</span>
                 } else {
-<span class="cstat-no" title="statement not covered" >                    t.</span>isDefault = false;
+<span class="cstat-no" title="statement not covered" >                    t.isDefault = false;</span>
                 }
                 // read territory informations
-<span class="cstat-no" title="statement not covered" >                __getChildNodes(</span>territoryNode, t);
+<span class="cstat-no" title="statement not covered" >                __getChildNodes(territoryNode, t);</span>
                 // add territory to config
 <span class="cstat-no" title="statement not covered" >                if (config &amp;&amp; config.territories &amp;&amp; typeof config.territories === "object") {</span>
-<span class="cstat-no" title="statement not covered" >                    config.</span>territories[tid] = t;
+<span class="cstat-no" title="statement not covered" >                    config.territories[tid] = t;</span>
                 }
             }
         },
@@ -2848,7 +2848,7 @@ AutoConfResponseReader.READERS = {
         defaultCRS : <span class="fstat-no" title="function not covered" >function (n</span>ode, territory) {
             // info : Identifier for the default Coordinate Reference System (CRS).
 <span class="cstat-no" title="statement not covered" >            if (territory &amp;&amp; territory.hasOwnProperty("defaultCRS")) {</span>
-<span class="cstat-no" title="statement not covered" >                territory.</span>defaultCRS = __getChildValue(node);
+<span class="cstat-no" title="statement not covered" >                territory.defaultCRS = __getChildValue(node);</span>
             }
         },
 &nbsp;
@@ -2858,16 +2858,16 @@ AutoConfResponseReader.READERS = {
         AdditionalCRS : <span class="fstat-no" title="function not covered" >function (n</span>ode, data) {
             // info : Identifier for additional Coordinate Reference System (CRS).
             // info : data peut être une instance de Territory.js, ou une instance de Layer.js
-            var addCRS = <span class="cstat-no" title="statement not covered" >__getChildValue(n</span>ode);
+            var addCRS = <span class="cstat-no" title="statement not covered" >__getChildValue(node);</span>
 <span class="cstat-no" title="statement not covered" >            if (addCRS &amp;&amp; data) {</span>
 <span class="cstat-no" title="statement not covered" >                if (Array.isArray(data.additionalCRS)) { // cas d'un territoire</span>
-<span class="cstat-no" title="statement not covered" >                    data.</span>additionalCRS.push(addCRS);
+<span class="cstat-no" title="statement not covered" >                    data.additionalCRS.push(addCRS);</span>
                 } else { // cas d'une couche
                     // si le tableau n'est pas encore créé
 <span class="cstat-no" title="statement not covered" >                    if (!data.additionalProjections || !Array.isArray(data.additionalProjections)) {</span>
-<span class="cstat-no" title="statement not covered" >                        data.</span>additionalProjections = [];
+<span class="cstat-no" title="statement not covered" >                        data.additionalProjections = [];</span>
                     }
-<span class="cstat-no" title="statement not covered" >                    data.</span>additionalProjections.push(addCRS);
+<span class="cstat-no" title="statement not covered" >                    data.additionalProjections.push(addCRS);</span>
                 }
             }
         },
@@ -2875,9 +2875,9 @@ AutoConfResponseReader.READERS = {
         // info : /General/Extension/gpp:General/gpp:Territories/gpp:Territory/gpp:DefaultLayer
         /** TODO : jsdoc block */
         DefaultLayer : <span class="fstat-no" title="function not covered" >function (n</span>ode, territory) {
-            var lyr = <span class="cstat-no" title="statement not covered" >node.</span>getAttribute("layerId");
+            var lyr = <span class="cstat-no" title="statement not covered" >node.getAttribute("layerId");</span>
 <span class="cstat-no" title="statement not covered" >            if (lyr &amp;&amp; territory &amp;&amp; Array.isArray(territory.defaultLayers)) {</span>
-<span class="cstat-no" title="statement not covered" >                territory.</span>defaultLayers.push(lyr);
+<span class="cstat-no" title="statement not covered" >                territory.defaultLayers.push(lyr);</span>
             }
         },
 &nbsp;
@@ -2888,7 +2888,7 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         BoundingBox : <span class="fstat-no" title="function not covered" >function (n</span>ode, data) {
 <span class="cstat-no" title="statement not covered" >            if (data) {</span>
-                var values = <span class="cstat-no" title="statement not covered" >__getChildValue(</span>node).split(",");
+                var values = <span class="cstat-no" title="statement not covered" >__getChildValue(node).split(",");</span>
 <span class="cstat-no" title="statement not covered" >                if (values.length === 4) {</span>
                     // get bbox coordinates (wgs84)
                     var bbox = <span class="cstat-no" title="statement not covered" >{</span>
@@ -2898,32 +2898,32 @@ AutoConfResponseReader.READERS = {
                         bottom : parseFloat(values[1])
                     };
                     // get temporal extent params (constraint or layer)
-                    var minT = <span class="cstat-no" title="statement not covered" >node.</span>getAttribute("minT");
-                    var maxT = <span class="cstat-no" title="statement not covered" >node.</span>getAttribute("maxT");
+                    var minT = <span class="cstat-no" title="statement not covered" >node.getAttribute("minT");</span>
+                    var maxT = <span class="cstat-no" title="statement not covered" >node.getAttribute("maxT");</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                    if (data.hasOwnProperty("geoBBOX")) { // cas d'un territoire</span>
-<span class="cstat-no" title="statement not covered" >                        data.</span>geoBBOX = bbox;
+<span class="cstat-no" title="statement not covered" >                        data.geoBBOX = bbox;</span>
                     } else <span class="cstat-no" title="statement not covered" >if (data.hasOwnProperty("bbox")) { // cas d'une constraint</span>
 <span class="cstat-no" title="statement not covered" >                        if (data.bbox.left || data.bbox.right || data.bbox.top || data.bbox.bottom) {</span>
                             // si on a déjà une bbox, il faut stocker d'autres contraintes
 <span class="cstat-no" title="statement not covered" >                            if (!data.multiConstraints) {</span>
-<span class="cstat-no" title="statement not covered" >                                data.</span>multiConstraints = [];
+<span class="cstat-no" title="statement not covered" >                                data.multiConstraints = [];</span>
                             }
-                            var newConstraint = <span class="cstat-no" title="statement not covered" >new C</span>onstraint();
-<span class="cstat-no" title="statement not covered" >                            newConstraint.</span>bbox = bbox;
-<span class="cstat-no" title="statement not covered" >                            newConstraint.</span>temporalExtent = [minT, maxT];
-<span class="cstat-no" title="statement not covered" >                            data.</span>multiConstraints.push(newConstraint);
+                            var newConstraint = <span class="cstat-no" title="statement not covered" >new Constraint();</span>
+<span class="cstat-no" title="statement not covered" >                            newConstraint.bbox = bbox;</span>
+<span class="cstat-no" title="statement not covered" >                            newConstraint.temporalExtent = [minT, maxT];</span>
+<span class="cstat-no" title="statement not covered" >                            data.multiConstraints.push(newConstraint);</span>
                         } else {
                             // contrainte classique
-<span class="cstat-no" title="statement not covered" >                            data.</span>bbox = bbox;
-<span class="cstat-no" title="statement not covered" >                            data.</span>temporalExtent = [minT, maxT];
+<span class="cstat-no" title="statement not covered" >                            data.bbox = bbox;</span>
+<span class="cstat-no" title="statement not covered" >                            data.temporalExtent = [minT, maxT];</span>
                         }
                     } else { // cas d'une layer
 <span class="cstat-no" title="statement not covered" >                        if (!data.globalConstraint) {</span>
-<span class="cstat-no" title="statement not covered" >                            data.</span>globalConstraint = new Constraint();
+<span class="cstat-no" title="statement not covered" >                            data.globalConstraint = new Constraint();</span>
                         }
-<span class="cstat-no" title="statement not covered" >                        data.</span>globalConstraint.bbox = bbox;
-<span class="cstat-no" title="statement not covered" >                        data.</span>globalConstraint.temporalExtent = [minT, maxT];
+<span class="cstat-no" title="statement not covered" >                        data.globalConstraint.bbox = bbox;</span>
+<span class="cstat-no" title="statement not covered" >                        data.globalConstraint.temporalExtent = [minT, maxT];</span>
                     }
                 }
             }
@@ -2933,27 +2933,27 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         Resolution : <span class="fstat-no" title="function not covered" >function (n</span>ode, territory) {
             // info : The default resolution to display on this territory, in CRS coordinate system
-            var res = <span class="cstat-no" title="statement not covered" >__getChildValue(n</span>ode);
+            var res = <span class="cstat-no" title="statement not covered" >__getChildValue(node);</span>
 <span class="cstat-no" title="statement not covered" >            if (res &amp;&amp; territory &amp;&amp; territory.defaultOptions &amp;&amp; territory.defaultOptions.hasOwnProperty("resolution")) {</span>
-<span class="cstat-no" title="statement not covered" >                territory.</span>defaultOptions.resolution = parseFloat(res);
+<span class="cstat-no" title="statement not covered" >                territory.defaultOptions.resolution = parseFloat(res);</span>
             }
         },
 &nbsp;
         // info : /General/Extension/gpp:General/gpp:Territories/gpp:Territory/gpp:Center/gpp:x
         /** TODO : jsdoc block */
         x : <span class="fstat-no" title="function not covered" >function (n</span>ode, territory) {
-            var lon = <span class="cstat-no" title="statement not covered" >__getChildValue(n</span>ode);
+            var lon = <span class="cstat-no" title="statement not covered" >__getChildValue(node);</span>
 <span class="cstat-no" title="statement not covered" >            if (lon &amp;&amp; territory &amp;&amp; territory.geoCenter &amp;&amp; territory.geoCenter.hasOwnProperty("lon")) {</span>
-<span class="cstat-no" title="statement not covered" >                territory.</span>geoCenter.lon = parseFloat(lon);
+<span class="cstat-no" title="statement not covered" >                territory.geoCenter.lon = parseFloat(lon);</span>
             }
         },
 &nbsp;
         // info : /General/Extension/gpp:General/gpp:Territories/gpp:Territory/gpp:Center/gpp:y
         /** TODO : jsdoc block */
         y : <span class="fstat-no" title="function not covered" >function (n</span>ode, territory) {
-            var lat = <span class="cstat-no" title="statement not covered" >__getChildValue(n</span>ode);
+            var lat = <span class="cstat-no" title="statement not covered" >__getChildValue(node);</span>
 <span class="cstat-no" title="statement not covered" >            if (lat &amp;&amp; territory &amp;&amp; territory.geoCenter &amp;&amp; territory.geoCenter.hasOwnProperty("lat")) {</span>
-<span class="cstat-no" title="statement not covered" >                territory.</span>geoCenter.lat = parseFloat(lat);
+<span class="cstat-no" title="statement not covered" >                territory.geoCenter.lat = parseFloat(lat);</span>
             }
         },
 &nbsp;
@@ -2962,7 +2962,7 @@ AutoConfResponseReader.READERS = {
         Resolutions : <span class="fstat-no" title="function not covered" >function (r</span>esNode, config) {
             // info : List of resolutions in CRS:84 (comma separated values)
 <span class="cstat-no" title="statement not covered" >            if (config &amp;&amp; config.generalOptions &amp;&amp; config.generalOptions.hasOwnProperty("wgs84Resolutions")) {</span>
-<span class="cstat-no" title="statement not covered" >                config.</span>generalOptions.wgs84Resolutions = __getChildValue(resNode).split(",");
+<span class="cstat-no" title="statement not covered" >                config.generalOptions.wgs84Resolutions = __getChildValue(resNode).split(",");</span>
             }
         },
 &nbsp;
@@ -2971,13 +2971,13 @@ AutoConfResponseReader.READERS = {
         Layer : <span class="fstat-no" title="function not covered" >function (n</span>ode, lyrData) {
             // attributs : id, opacity, order, visibleInCatalog, aggregate, more
 <span class="cstat-no" title="statement not covered" >            if (lyrData &amp;&amp; lyrData.hasOwnProperty("lyrId") &amp;&amp; lyrData.lyr) {</span>
-<span class="cstat-no" title="statement not covered" >                lyrData.</span>lyrId = node.getAttribute("id");
-                var aggregate = <span class="cstat-no" title="statement not covered" >node.</span>getAttribute("aggregate");
-                var more = <span class="cstat-no" title="statement not covered" >node.</span>getAttribute("more");
+<span class="cstat-no" title="statement not covered" >                lyrData.lyrId = node.getAttribute("id");</span>
+                var aggregate = <span class="cstat-no" title="statement not covered" >node.getAttribute("aggregate");</span>
+                var more = <span class="cstat-no" title="statement not covered" >node.getAttribute("more");</span>
 <span class="cstat-no" title="statement not covered" >                if (aggregate || more) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyrData.</span>lyr.isAggregate = true;
+<span class="cstat-no" title="statement not covered" >                    lyrData.lyr.isAggregate = true;</span>
                 }
-<span class="cstat-no" title="statement not covered" >                __getChildNodes(</span>node, lyrData.lyr);
+<span class="cstat-no" title="statement not covered" >                __getChildNodes(node, lyrData.lyr);</span>
             }
         },
 &nbsp;
@@ -2985,38 +2985,38 @@ AutoConfResponseReader.READERS = {
         // ou : /LayerList/Extension/gpp:Layer/gpp:Originators/gpp:Originator/gpp:Constraints/gpp:Constraint
         /** TODO : jsdoc block */
         Constraint : <span class="fstat-no" title="function not covered" >function (n</span>ode, data) {
-            var c = <span class="cstat-no" title="statement not covered" >new C</span>onstraint();
-<span class="cstat-no" title="statement not covered" >            __getChildNodes(</span>node, c);
+            var c = <span class="cstat-no" title="statement not covered" >new Constraint();</span>
+<span class="cstat-no" title="statement not covered" >            __getChildNodes(node, c);</span>
 <span class="cstat-no" title="statement not covered" >            if (data) {</span>
                 // on peut être dans le cas d'un originator ou d'une layer, tous les deux ont l'attribut constraints
 <span class="cstat-no" title="statement not covered" >                if (!data.constraints || !Array.isArray(data.constraints)) {</span>
-<span class="cstat-no" title="statement not covered" >                    data.</span>constraints = [];
+<span class="cstat-no" title="statement not covered" >                    data.constraints = [];</span>
                 }
 &nbsp;
                 // cas de plusieurs contraintes (par ex différents territoires)
 <span class="cstat-no" title="statement not covered" >                if (c.multiConstraints &amp;&amp; Array.isArray(c.multiConstraints)) {</span>
                     // on récupère la première contrainte, stockée normalement
-                    var constraint = <span class="cstat-no" title="statement not covered" >new C</span>onstraint();
-<span class="cstat-no" title="statement not covered" >                    constraint.</span>crs = c.crs;
-<span class="cstat-no" title="statement not covered" >                    constraint.</span>bbox = c.bbox;
-<span class="cstat-no" title="statement not covered" >                    constraint.</span>minScaleDenominator = c.minScaleDenominator;
-<span class="cstat-no" title="statement not covered" >                    constraint.</span>maxScaleDenominator = c.maxScaleDenominator;
-<span class="cstat-no" title="statement not covered" >                    constraint.</span>temporalExtent = c.temporalExtent;
-<span class="cstat-no" title="statement not covered" >                    data.</span>constraints.push(constraint);
+                    var constraint = <span class="cstat-no" title="statement not covered" >new Constraint();</span>
+<span class="cstat-no" title="statement not covered" >                    constraint.crs = c.crs;</span>
+<span class="cstat-no" title="statement not covered" >                    constraint.bbox = c.bbox;</span>
+<span class="cstat-no" title="statement not covered" >                    constraint.minScaleDenominator = c.minScaleDenominator;</span>
+<span class="cstat-no" title="statement not covered" >                    constraint.maxScaleDenominator = c.maxScaleDenominator;</span>
+<span class="cstat-no" title="statement not covered" >                    constraint.temporalExtent = c.temporalExtent;</span>
+<span class="cstat-no" title="statement not covered" >                    data.constraints.push(constraint);</span>
 &nbsp;
                     // puis on récupère les autres contraintes, à partir de multiConstraints
 <span class="cstat-no" title="statement not covered" >                    for (var i = 0; i &lt; c.multiConstraints.length; i++) {</span>
-<span class="cstat-no" title="statement not covered" >                        constraint </span>= new Constraint();
-<span class="cstat-no" title="statement not covered" >                        constraint.</span>crs = c.crs;
-<span class="cstat-no" title="statement not covered" >                        constraint.</span>minScaleDenominator = c.minScaleDenominator;
-<span class="cstat-no" title="statement not covered" >                        constraint.</span>maxScaleDenominator = c.maxScaleDenominator;
-<span class="cstat-no" title="statement not covered" >                        constraint.</span>bbox = c.multiConstraints[i].bbox;
-<span class="cstat-no" title="statement not covered" >                        constraint.</span>temporalExtent = c.multiConstraints[i].temporalExtent;
-<span class="cstat-no" title="statement not covered" >                        data.</span>constraints.push(constraint);
+<span class="cstat-no" title="statement not covered" >                        constraint = new Constraint();</span>
+<span class="cstat-no" title="statement not covered" >                        constraint.crs = c.crs;</span>
+<span class="cstat-no" title="statement not covered" >                        constraint.minScaleDenominator = c.minScaleDenominator;</span>
+<span class="cstat-no" title="statement not covered" >                        constraint.maxScaleDenominator = c.maxScaleDenominator;</span>
+<span class="cstat-no" title="statement not covered" >                        constraint.bbox = c.multiConstraints[i].bbox;</span>
+<span class="cstat-no" title="statement not covered" >                        constraint.temporalExtent = c.multiConstraints[i].temporalExtent;</span>
+<span class="cstat-no" title="statement not covered" >                        data.constraints.push(constraint);</span>
                     }
                 } else {
                     // cas d'une contrainte classique
-<span class="cstat-no" title="statement not covered" >                    data.</span>constraints.push(c);
+<span class="cstat-no" title="statement not covered" >                    data.constraints.push(c);</span>
                 }
             }
         },
@@ -3027,7 +3027,7 @@ AutoConfResponseReader.READERS = {
         CRS : <span class="fstat-no" title="function not covered" >function (n</span>ode, data) {
             // nothing to do.
 <span class="cstat-no" title="statement not covered" >            if (data &amp;&amp; data.hasOwnProperty("crs")) {</span>
-<span class="cstat-no" title="statement not covered" >                data.</span>crs = __getChildValue(node);
+<span class="cstat-no" title="statement not covered" >                data.crs = __getChildValue(node);</span>
             }
         },
 &nbsp;
@@ -3035,14 +3035,14 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         Thematic : <span class="fstat-no" title="function not covered" >function (n</span>ode, lyr) {
 <span class="cstat-no" title="statement not covered" >            if (lyr) {</span>
-                var t = <span class="cstat-no" title="statement not covered" >new T</span>hematic();
-<span class="cstat-no" title="statement not covered" >                t.</span>inspire = false;
-<span class="cstat-no" title="statement not covered" >                t.</span>name = __getChildValue(node);
+                var t = <span class="cstat-no" title="statement not covered" >new Thematic();</span>
+<span class="cstat-no" title="statement not covered" >                t.inspire = false;</span>
+<span class="cstat-no" title="statement not covered" >                t.name = __getChildValue(node);</span>
                 // si aucune thématique n'a été ajoutée, on crée le tableau vide
 <span class="cstat-no" title="statement not covered" >                if (!lyr.thematics || !Array.isArray(lyr.thematics)) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyr.</span>thematics = [];
+<span class="cstat-no" title="statement not covered" >                    lyr.thematics = [];</span>
                 }
-<span class="cstat-no" title="statement not covered" >                lyr.</span>thematics.push(t);
+<span class="cstat-no" title="statement not covered" >                lyr.thematics.push(t);</span>
             }
         },
 &nbsp;
@@ -3050,14 +3050,14 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         InspireThematic : <span class="fstat-no" title="function not covered" >function (n</span>ode, lyr) {
 <span class="cstat-no" title="statement not covered" >            if (lyr) {</span>
-                var t = <span class="cstat-no" title="statement not covered" >new T</span>hematic();
-<span class="cstat-no" title="statement not covered" >                t.</span>inspire = true;
-<span class="cstat-no" title="statement not covered" >                t.</span>name = __getChildValue(node);
+                var t = <span class="cstat-no" title="statement not covered" >new Thematic();</span>
+<span class="cstat-no" title="statement not covered" >                t.inspire = true;</span>
+<span class="cstat-no" title="statement not covered" >                t.name = __getChildValue(node);</span>
                 // si aucune thématique n'a été ajoutée, on crée le tableau vide
 <span class="cstat-no" title="statement not covered" >                if (!lyr.thematics || !Array.isArray(lyr.thematics)) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyr.</span>thematics = [];
+<span class="cstat-no" title="statement not covered" >                    lyr.thematics = [];</span>
                 }
-<span class="cstat-no" title="statement not covered" >                lyr.</span>thematics.push(t);
+<span class="cstat-no" title="statement not covered" >                lyr.thematics.push(t);</span>
             }
         },
 &nbsp;
@@ -3066,14 +3066,14 @@ AutoConfResponseReader.READERS = {
         Originator : <span class="fstat-no" title="function not covered" >function (n</span>ode, lyr) {
 <span class="cstat-no" title="statement not covered" >            if (lyr) {</span>
                 // info : contient des balises Attribution, Logo, URL, et Constraints
-                var o = <span class="cstat-no" title="statement not covered" >new O</span>riginator();
-<span class="cstat-no" title="statement not covered" >                o.</span>name = node.getAttribute("name");
-<span class="cstat-no" title="statement not covered" >                __getChildNodes(</span>node, o);
+                var o = <span class="cstat-no" title="statement not covered" >new Originator();</span>
+<span class="cstat-no" title="statement not covered" >                o.name = node.getAttribute("name");</span>
+<span class="cstat-no" title="statement not covered" >                __getChildNodes(node, o);</span>
                 // si aucun originator n'a été ajouté, on crée le tableau vide
 <span class="cstat-no" title="statement not covered" >                if (!lyr.originators || !Array.isArray(lyr.originators)) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyr.</span>originators = [];
+<span class="cstat-no" title="statement not covered" >                    lyr.originators = [];</span>
                 }
-<span class="cstat-no" title="statement not covered" >                lyr.</span>originators.push(o);
+<span class="cstat-no" title="statement not covered" >                lyr.originators.push(o);</span>
             }
         },
 &nbsp;
@@ -3081,7 +3081,7 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         Attribution : <span class="fstat-no" title="function not covered" >function (n</span>ode, originator) {
 <span class="cstat-no" title="statement not covered" >            if (originator &amp;&amp; originator.hasOwnProperty("attribution")) {</span>
-<span class="cstat-no" title="statement not covered" >                originator.</span>attribution = __getChildValue(node);
+<span class="cstat-no" title="statement not covered" >                originator.attribution = __getChildValue(node);</span>
             }
         },
 &nbsp;
@@ -3089,7 +3089,7 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         Logo : <span class="fstat-no" title="function not covered" >function (n</span>ode, originator) {
 <span class="cstat-no" title="statement not covered" >            if (originator &amp;&amp; originator.hasOwnProperty("logo")) {</span>
-<span class="cstat-no" title="statement not covered" >                originator.</span>logo = __getChildValue(node);
+<span class="cstat-no" title="statement not covered" >                originator.logo = __getChildValue(node);</span>
             }
         },
 &nbsp;
@@ -3097,7 +3097,7 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         URL : <span class="fstat-no" title="function not covered" >function (n</span>ode, originator) {
 <span class="cstat-no" title="statement not covered" >            if (originator &amp;&amp; originator.hasOwnProperty("url")) {</span>
-<span class="cstat-no" title="statement not covered" >                originator.</span>url = __getChildValue(node);
+<span class="cstat-no" title="statement not covered" >                originator.url = __getChildValue(node);</span>
             }
         },
 &nbsp;
@@ -3105,14 +3105,14 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         Legend : <span class="fstat-no" title="function not covered" >function (n</span>ode, lyr) {
             // 2 balises : sld:MinScaleDenominator et gpp:LegendURL
-            var l = <span class="cstat-no" title="statement not covered" >new L</span>egend();
-<span class="cstat-no" title="statement not covered" >            __getChildNodes(</span>node, l);
+            var l = <span class="cstat-no" title="statement not covered" >new Legend();</span>
+<span class="cstat-no" title="statement not covered" >            __getChildNodes(node, l);</span>
 <span class="cstat-no" title="statement not covered" >            if (lyr) {</span>
                 // si aucune légende n'a encore été ajoutée, on crée le tableau vide
 <span class="cstat-no" title="statement not covered" >                if (!lyr.legends || !Array.isArray(lyr.legends)) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyr.</span>legends = [];
+<span class="cstat-no" title="statement not covered" >                    lyr.legends = [];</span>
                 }
-<span class="cstat-no" title="statement not covered" >                lyr.</span>legends.push(l);
+<span class="cstat-no" title="statement not covered" >                lyr.legends.push(l);</span>
             }
         },
 &nbsp;
@@ -3120,12 +3120,12 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         LegendURL : <span class="fstat-no" title="function not covered" >function (n</span>ode, legend) {
 <span class="cstat-no" title="statement not covered" >            if (legend &amp;&amp; legend.hasOwnProperty("format")) {</span>
-<span class="cstat-no" title="statement not covered" >                legend.</span>format = node.getAttribute("format");
+<span class="cstat-no" title="statement not covered" >                legend.format = node.getAttribute("format");</span>
 <span class="cstat-no" title="statement not covered" >                if (node.hasChildNodes) {</span>
-                    var child = <span class="cstat-no" title="statement not covered" >node.</span>childNodes[0];
+                    var child = <span class="cstat-no" title="statement not covered" >node.childNodes[0];</span>
                     var childName = <span class="cstat-no" title="statement not covered" >child.localName || child.baseName || child.nodeName;</span>
 <span class="cstat-no" title="statement not covered" >                    if (childName === "OnlineResource" &amp;&amp; legend.hasOwnProperty("url")) {</span>
-<span class="cstat-no" title="statement not covered" >                        legend.</span>url = child.getAttribute("xlink:href");
+<span class="cstat-no" title="statement not covered" >                        legend.url = child.getAttribute("xlink:href");</span>
                     }
                 }
             }
@@ -3136,10 +3136,10 @@ AutoConfResponseReader.READERS = {
         QuickLook : <span class="fstat-no" title="function not covered" >function (n</span>ode, lyr) {
             // info : contient une balise OnlineResource avec l'url dans l'attribut "xlink:href"
 <span class="cstat-no" title="statement not covered" >            if (node.hasChildNodes) {</span>
-                var child = <span class="cstat-no" title="statement not covered" >node.</span>childNodes[0];
+                var child = <span class="cstat-no" title="statement not covered" >node.childNodes[0];</span>
                 var childName = <span class="cstat-no" title="statement not covered" >child.localName || child.baseName || child.nodeName;</span>
 <span class="cstat-no" title="statement not covered" >                if (childName === "OnlineResource" &amp;&amp; lyr) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyr.</span>quicklookUrl = child.getAttribute("xlink:href");
+<span class="cstat-no" title="statement not covered" >                    lyr.quicklookUrl = child.getAttribute("xlink:href");</span>
                 }
             }
         },
@@ -3149,20 +3149,20 @@ AutoConfResponseReader.READERS = {
         MetadataURL : <span class="fstat-no" title="function not covered" >function (n</span>ode, lyr) {
 <span class="cstat-no" title="statement not covered" >            if (lyr) {</span>
                 // info : contient une balise OnlineResource avec l'url dans l'attribut "xlink:href"
-                var m = <span class="cstat-no" title="statement not covered" >new M</span>etadata();
-<span class="cstat-no" title="statement not covered" >                m.</span>format = node.getAttribute("format");
+                var m = <span class="cstat-no" title="statement not covered" >new Metadata();</span>
+<span class="cstat-no" title="statement not covered" >                m.format = node.getAttribute("format");</span>
 <span class="cstat-no" title="statement not covered" >                if (node.hasChildNodes) {</span>
-                    var child = <span class="cstat-no" title="statement not covered" >node.</span>childNodes[0];
+                    var child = <span class="cstat-no" title="statement not covered" >node.childNodes[0];</span>
                     var childName = <span class="cstat-no" title="statement not covered" >child.localName || child.baseName || child.nodeName;</span>
 <span class="cstat-no" title="statement not covered" >                    if (childName === "OnlineResource") {</span>
-<span class="cstat-no" title="statement not covered" >                        m.</span>url = child.getAttribute("xlink:href");
+<span class="cstat-no" title="statement not covered" >                        m.url = child.getAttribute("xlink:href");</span>
                     }
                 }
                 // si aucune metadata n'a été ajoutée, on crée le tableau vide
 <span class="cstat-no" title="statement not covered" >                if (!lyr.metadata) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyr.</span>metadata = [];
+<span class="cstat-no" title="statement not covered" >                    lyr.metadata = [];</span>
                 }
-<span class="cstat-no" title="statement not covered" >                lyr.</span>metadata.push(m);
+<span class="cstat-no" title="statement not covered" >                lyr.metadata.push(m);</span>
             }
         },
 &nbsp;
@@ -3171,23 +3171,23 @@ AutoConfResponseReader.READERS = {
         Key : <span class="fstat-no" title="function not covered" >function (n</span>ode, lyr) {
 <span class="cstat-no" title="statement not covered" >            if (lyr) {</span>
                 // récupération de la clé API
-                var key = <span class="cstat-no" title="statement not covered" >node.</span>getAttribute("id");
+                var key = <span class="cstat-no" title="statement not covered" >node.getAttribute("id");</span>
                 // si on n'a pas encore ajouté de clé, on crée le tableau vide
 <span class="cstat-no" title="statement not covered" >                if (!lyr.apiKeys || !Array.isArray(lyr.apiKeys)) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyr.</span>apiKeys = [];
+<span class="cstat-no" title="statement not covered" >                    lyr.apiKeys = [];</span>
                 }
-<span class="cstat-no" title="statement not covered" >                lyr.</span>apiKeys.push(key);
+<span class="cstat-no" title="statement not covered" >                lyr.apiKeys.push(key);</span>
 &nbsp;
                 // récupération de l'url du service avec la clé API
-                var serverUrl = <span class="cstat-no" title="statement not covered" >__getChildValue(n</span>ode);
+                var serverUrl = <span class="cstat-no" title="statement not covered" >__getChildValue(node);</span>
 <span class="cstat-no" title="statement not covered" >                if (!lyr.serviceParams) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyr.</span>serviceParams = {};
+<span class="cstat-no" title="statement not covered" >                    lyr.serviceParams = {};</span>
                 }
 <span class="cstat-no" title="statement not covered" >                if (!lyr.serviceParams.serverUrl) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyr.</span>serviceParams.serverUrl = {};
+<span class="cstat-no" title="statement not covered" >                    lyr.serviceParams.serverUrl = {};</span>
                 }
 <span class="cstat-no" title="statement not covered" >                if (!lyr.serviceParams.serverUrl[key]) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyr.</span>serviceParams.serverUrl[key] = serverUrl;
+<span class="cstat-no" title="statement not covered" >                    lyr.serviceParams.serverUrl[key] = serverUrl;</span>
                 }
             }
         }
@@ -3198,16 +3198,16 @@ AutoConfResponseReader.READERS = {
         /** TODO : jsdoc block */
         Identifier : <span class="fstat-no" title="function not covered" >function (n</span>ode, data) {
 <span class="cstat-no" title="statement not covered" >            if (data &amp;&amp; data.hasOwnProperty("TMS")) { // dans le cas d'un TileMatrixSet</span>
-<span class="cstat-no" title="statement not covered" >                data.</span>identifier = __getChildValue(node);
+<span class="cstat-no" title="statement not covered" >                data.identifier = __getChildValue(node);</span>
             } else <span class="cstat-no" title="statement not covered" >if (data &amp;&amp; data.hasOwnProperty("matrixId")) { // dans le cas d'une TileMatrix</span>
-<span class="cstat-no" title="statement not covered" >                data.</span>matrixId = __getChildValue(node);
+<span class="cstat-no" title="statement not covered" >                data.matrixId = __getChildValue(node);</span>
             }
         },
 &nbsp;
         /** TODO : jsdoc block */
         SupportedCRS : <span class="fstat-no" title="function not covered" >function (n</span>ode, tmsData) {
 <span class="cstat-no" title="statement not covered" >            if (tmsData &amp;&amp; tmsData.TMS &amp;&amp; tmsData.TMS.hasOwnProperty("projection")) {</span>
-<span class="cstat-no" title="statement not covered" >                tmsData.</span>TMS.projection = __getChildValue(node);
+<span class="cstat-no" title="statement not covered" >                tmsData.TMS.projection = __getChildValue(node);</span>
             }
         }
     },
@@ -3219,17 +3219,17 @@ AutoConfResponseReader.READERS = {
         // ou : /LayerList/Layer/Extension/gpp:Layer/gpp:Legends/gpp:Legend/sld:MinScaleDenominator
         /** TODO : jsdoc block */
         MinScaleDenominator : <span class="fstat-no" title="function not covered" >function (n</span>ode, data) {
-            var minScale = <span class="cstat-no" title="statement not covered" >__getChildValue(n</span>ode);
+            var minScale = <span class="cstat-no" title="statement not covered" >__getChildValue(node);</span>
 <span class="cstat-no" title="statement not covered" >            if (minScale &amp;&amp; data) {</span>
 <span class="cstat-no" title="statement not covered" >                if (data.hasOwnProperty("defaultOptions")) { // cas d'un territoire</span>
-<span class="cstat-no" title="statement not covered" >                    data.</span>defaultOptions.minScaleDenominator = parseFloat(minScale);
+<span class="cstat-no" title="statement not covered" >                    data.defaultOptions.minScaleDenominator = parseFloat(minScale);</span>
                 } else <span class="cstat-no" title="statement not covered" >if (data.lyr) { // cas d'une layer</span>
 <span class="cstat-no" title="statement not covered" >                    if (!data.lyr.globalConstraint) {</span>
-<span class="cstat-no" title="statement not covered" >                        data.</span>lyr.globalConstraint = new Constraint();
+<span class="cstat-no" title="statement not covered" >                        data.lyr.globalConstraint = new Constraint();</span>
                     }
-<span class="cstat-no" title="statement not covered" >                    data.</span>lyr.globalConstraint.minScaleDenominator = parseFloat(minScale);
+<span class="cstat-no" title="statement not covered" >                    data.lyr.globalConstraint.minScaleDenominator = parseFloat(minScale);</span>
                 } else <span class="cstat-no" title="statement not covered" >if (data.hasOwnProperty("minScaleDenominator")) { // cas d'une contrainte ou d'une légende</span>
-<span class="cstat-no" title="statement not covered" >                    data.</span>minScaleDenominator = parseFloat(minScale);
+<span class="cstat-no" title="statement not covered" >                    data.minScaleDenominator = parseFloat(minScale);</span>
                 }
             }
         },
@@ -3239,17 +3239,17 @@ AutoConfResponseReader.READERS = {
         // ou : /LayerList/Layer/Extension/gpp:Layer/gpp:Originators/gpp:Originator/gpp:Constraints/sld:MaxScaleDenominator
         /** TODO : jsdoc block */
         MaxScaleDenominator : <span class="fstat-no" title="function not covered" >function (n</span>ode, data) {
-            var maxScale = <span class="cstat-no" title="statement not covered" >__getChildValue(n</span>ode);
+            var maxScale = <span class="cstat-no" title="statement not covered" >__getChildValue(node);</span>
 <span class="cstat-no" title="statement not covered" >            if (maxScale &amp;&amp; data) {</span>
 <span class="cstat-no" title="statement not covered" >                if (data.hasOwnProperty("defaultOptions")) { // cas d'un territoire</span>
-<span class="cstat-no" title="statement not covered" >                    data.</span>defaultOptions.maxScaleDenominator = parseFloat(maxScale);
+<span class="cstat-no" title="statement not covered" >                    data.defaultOptions.maxScaleDenominator = parseFloat(maxScale);</span>
                 } else <span class="cstat-no" title="statement not covered" >if (data.lyr) { // cas d'une layer</span>
 <span class="cstat-no" title="statement not covered" >                    if (!data.lyr.globalConstraint) {</span>
-<span class="cstat-no" title="statement not covered" >                        data.</span>lyr.globalConstraint = new Constraint();
+<span class="cstat-no" title="statement not covered" >                        data.lyr.globalConstraint = new Constraint();</span>
                     }
-<span class="cstat-no" title="statement not covered" >                    data.</span>lyr.globalConstraint.maxScaleDenominator = parseFloat(maxScale);
+<span class="cstat-no" title="statement not covered" >                    data.lyr.globalConstraint.maxScaleDenominator = parseFloat(maxScale);</span>
                 } else <span class="cstat-no" title="statement not covered" >if (data.hasOwnProperty("maxScaleDenominator")) { // cas d'une contrainte</span>
-<span class="cstat-no" title="statement not covered" >                    data.</span>maxScaleDenominator = parseFloat(maxScale);
+<span class="cstat-no" title="statement not covered" >                    data.maxScaleDenominator = parseFloat(maxScale);</span>
                 }
             }
         }
@@ -3264,39 +3264,39 @@ AutoConfResponseReader.READERS = {
 <span class="cstat-no" title="statement not covered" >            if (lyr) {</span>
                 var limits = <span class="cstat-no" title="statement not covered" >{};</span>
                 // on récupère les limites dans les balises TileMatrixLimits
-<span class="cstat-no" title="statement not covered" >                __getChildNodes(</span>node, limits);
+<span class="cstat-no" title="statement not covered" >                __getChildNodes(node, limits);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                if (!lyr.wmtsOptions) {</span>
-<span class="cstat-no" title="statement not covered" >                    lyr.</span>wmtsOptions = {};
+<span class="cstat-no" title="statement not covered" >                    lyr.wmtsOptions = {};</span>
                 }
-<span class="cstat-no" title="statement not covered" >                lyr.</span>wmtsOptions.tileMatrixSetLimits = limits;
+<span class="cstat-no" title="statement not covered" >                lyr.wmtsOptions.tileMatrixSetLimits = limits;</span>
             }
         },
 &nbsp;
         // info : /LayerList/Layer/Extension/gpp:Layer/wmts:TileMatrixSetLink/wmts:TileMatrixSetLimits/wmts:TileMatrixLimits
         /** TODO : jsdoc block */
         TileMatrixLimits : <span class="fstat-no" title="function not covered" >function (n</span>ode, limits) {
-            var limit = <span class="cstat-no" title="statement not covered" >new T</span>ileMatrixLimit();
+            var limit = <span class="cstat-no" title="statement not covered" >new TileMatrixLimit();</span>
             var limitId;
 <span class="cstat-no" title="statement not covered" >            if (node.hasChildNodes) {</span>
                 var children = <span class="cstat-no" title="statement not covered" >node.childNodes;</span>
 <span class="cstat-no" title="statement not covered" >                for (var i = 0; i &lt; children.length; i++) {</span>
-                    var child = <span class="cstat-no" title="statement not covered" >children[i</span>];
+                    var child = <span class="cstat-no" title="statement not covered" >children[i];</span>
                     var childName = <span class="cstat-no" title="statement not covered" >child.localName || child.baseName || child.nodeName;</span>
 <span class="cstat-no" title="statement not covered" >                    if (childName === "TileMatrix") {</span>
-<span class="cstat-no" title="statement not covered" >                        limitId </span>= __getChildValue(child);
+<span class="cstat-no" title="statement not covered" >                        limitId = __getChildValue(child);</span>
                     } else <span class="cstat-no" title="statement not covered" >if (childName === "MinTileRow") {</span>
-<span class="cstat-no" title="statement not covered" >                        limit.</span>minTileRow = __getChildValue(child);
+<span class="cstat-no" title="statement not covered" >                        limit.minTileRow = __getChildValue(child);</span>
                     } else <span class="cstat-no" title="statement not covered" >if (childName === "MaxTileRow") {</span>
-<span class="cstat-no" title="statement not covered" >                        limit.</span>maxTileRow = __getChildValue(child);
+<span class="cstat-no" title="statement not covered" >                        limit.maxTileRow = __getChildValue(child);</span>
                     } else <span class="cstat-no" title="statement not covered" >if (childName === "MinTileCol") {</span>
-<span class="cstat-no" title="statement not covered" >                        limit.</span>minTileCol = __getChildValue(child);
+<span class="cstat-no" title="statement not covered" >                        limit.minTileCol = __getChildValue(child);</span>
                     } else <span class="cstat-no" title="statement not covered" >if (childName === "MaxTileCol") {</span>
-<span class="cstat-no" title="statement not covered" >                        limit.</span>maxTileCol = __getChildValue(child);
+<span class="cstat-no" title="statement not covered" >                        limit.maxTileCol = __getChildValue(child);</span>
                     }
                 }
 <span class="cstat-no" title="statement not covered" >                if (limitId &amp;&amp; limits &amp;&amp; !limits[limitId]) {</span>
-<span class="cstat-no" title="statement not covered" >                    limits[</span>limitId] = limit;
+<span class="cstat-no" title="statement not covered" >                    limits[limitId] = limit;</span>
                 }
             }
         },
@@ -3310,17 +3310,17 @@ AutoConfResponseReader.READERS = {
 <span class="cstat-no" title="statement not covered" >            if (data &amp;&amp; data.tileMatrixSets) { // les tileMatrixSets de General</span>
                 // nouvel objet TileMatrixSet
                 var tmsData = <span class="cstat-no" title="statement not covered" >{};</span>
-<span class="cstat-no" title="statement not covered" >                tmsData.</span>TMS = new TileMatrixSet();
-<span class="cstat-no" title="statement not covered" >                tmsData.</span>resolutions = [];
+<span class="cstat-no" title="statement not covered" >                tmsData.TMS = new TileMatrixSet();</span>
+<span class="cstat-no" title="statement not covered" >                tmsData.resolutions = [];</span>
 &nbsp;
                 // lecture des informations du TMS
-<span class="cstat-no" title="statement not covered" >                __getChildNodes(</span>node, tmsData);
+<span class="cstat-no" title="statement not covered" >                __getChildNodes(node, tmsData);</span>
 &nbsp;
                 // récupération des identifiants des niveaux de matrice (pour faciliter l'accès au WMTS via les API carto)
                 var tileMatrices = <span class="cstat-no" title="statement not covered" >tmsData.TMS.tileMatrices;</span>
 <span class="cstat-no" title="statement not covered" >                for (var tm in tileMatrices) {</span>
 <span class="cstat-no" title="statement not covered" >                    if (tileMatrices.hasOwnProperty(tm)) {</span>
-<span class="cstat-no" title="statement not covered" >                        tmsData.</span>TMS.matrixIds.push(tm);
+<span class="cstat-no" title="statement not covered" >                        tmsData.TMS.matrixIds.push(tm);</span>
                     }
                 }
 &nbsp;
@@ -3329,29 +3329,29 @@ AutoConfResponseReader.READERS = {
                         var wgs84Resolutions = <span class="cstat-no" title="statement not covered" >data.generalOptions.wgs84Resolutions;</span>
 <span class="cstat-no" title="statement not covered" >                        for (var i = 0; i &lt; wgs84Resolutions.length; i++) {</span>
                             // info : les résolutions stockées dans wgs84Resolutions, issues de l'autoconf, sont des string
-<span class="cstat-no" title="statement not covered" >                            tmsData.</span>resolutions[i] = parseFloat(wgs84Resolutions[i]);
+<span class="cstat-no" title="statement not covered" >                            tmsData.resolutions[i] = parseFloat(wgs84Resolutions[i]);</span>
                         }
                     }
                 }
 &nbsp;
                 // tri des résolutions (par ordre décroissant cette fois)
 <span class="cstat-no" title="statement not covered" >                if (Array.isArray(tmsData.resolutions) &amp;&amp; tmsData.resolutions.sort !== undefined) {</span>
-<span class="cstat-no" title="statement not covered" >                    tmsData.</span>resolutions.sort(
+<span class="cstat-no" title="statement not covered" >                    tmsData.resolutions.sort(</span>
 <span class="fstat-no" title="function not covered" >                        function (x</span>, y) {
-<span class="cstat-no" title="statement not covered" >                            return y</span> - x;
+<span class="cstat-no" title="statement not covered" >                            return y - x;</span>
                         }
                     );
                 }
-<span class="cstat-no" title="statement not covered" >                tmsData.</span>TMS.nativeResolutions = tmsData.resolutions;
+<span class="cstat-no" title="statement not covered" >                tmsData.TMS.nativeResolutions = tmsData.resolutions;</span>
 &nbsp;
                 // ajout du TileMatrixSet à la variable config
-<span class="cstat-no" title="statement not covered" >                data.</span>tileMatrixSets[tmsData.identifier] = tmsData.TMS;
+<span class="cstat-no" title="statement not covered" >                data.tileMatrixSets[tmsData.identifier] = tmsData.TMS;</span>
             } else { // le TileMatrixSetLink d'une couche (layer)
 <span class="cstat-no" title="statement not covered" >                if (data &amp;&amp; !data.wmtsOptions) {</span>
-<span class="cstat-no" title="statement not covered" >                    data.</span>wmtsOptions = {};
+<span class="cstat-no" title="statement not covered" >                    data.wmtsOptions = {};</span>
                 }
                 // ajout du lien vers le TMS
-<span class="cstat-no" title="statement not covered" >                data.</span>wmtsOptions.tileMatrixSetLink = __getChildValue(node);
+<span class="cstat-no" title="statement not covered" >                data.wmtsOptions.tileMatrixSetLink = __getChildValue(node);</span>
             }
         },
 &nbsp;
@@ -3362,27 +3362,27 @@ AutoConfResponseReader.READERS = {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            if (tmsData) {</span>
                 // nouveau niveau de matrice : TileMatrix
-                var tileMatrix = <span class="cstat-no" title="statement not covered" >new T</span>ileMatrix();
+                var tileMatrix = <span class="cstat-no" title="statement not covered" >new TileMatrix();</span>
 &nbsp;
                 // lecture des information du TileMatrix
-<span class="cstat-no" title="statement not covered" >                __getChildNodes(</span>node, tileMatrix);
+<span class="cstat-no" title="statement not covered" >                __getChildNodes(node, tileMatrix);</span>
 &nbsp;
                 // calcul de la résolution associée au dénominateur d'échelle du niveau de pyramide, selon la projection.
 <span class="cstat-no" title="statement not covered" >                if (tmsData.TMS &amp;&amp; tmsData.TMS.getProjection()) {</span>
-                    var proj = <span class="cstat-no" title="statement not covered" >tmsData.</span>TMS.getProjection();
+                    var proj = <span class="cstat-no" title="statement not covered" >tmsData.TMS.getProjection();</span>
 <span class="cstat-no" title="statement not covered" >                    if (proj === "EPSG:3857" || proj === "EPSG:2154") {</span>
                         // calcul de la résolution associée, en m/px
                         // en se basant sur une "taille standard de pixel" de 0.28mm*0.28mm (standard WMTS 1.0)
                         var r = <span class="cstat-no" title="statement not covered" >tileMatrix.scaleDenominator * 0.00028;</span>
 <span class="cstat-no" title="statement not covered" >                        if (tmsData.resolutions &amp;&amp; Array.isArray(tmsData.resolutions)) {</span>
-<span class="cstat-no" title="statement not covered" >                            tmsData.</span>resolutions.push(r);
+<span class="cstat-no" title="statement not covered" >                            tmsData.resolutions.push(r);</span>
                         }
                     }
                 }
 &nbsp;
                 // ajout du TileMatrix au TileMatrixSet
 <span class="cstat-no" title="statement not covered" >                if (tmsData.TMS &amp;&amp; tmsData.TMS.tileMatrices) {</span>
-<span class="cstat-no" title="statement not covered" >                    tmsData.</span>TMS.tileMatrices[tileMatrix.matrixId] = tileMatrix;
+<span class="cstat-no" title="statement not covered" >                    tmsData.TMS.tileMatrices[tileMatrix.matrixId] = tileMatrix;</span>
                 }
             }
         },
@@ -3390,56 +3390,56 @@ AutoConfResponseReader.READERS = {
         // info : /General/Extension/gpp:General/gpp:TileMatrixSets/wmts:TileMatrixSet/wmts:TileMatrix/wmts:ScaleDenominator
         /** TODO : jsdoc block */
         ScaleDenominator : <span class="fstat-no" title="function not covered" >function (n</span>ode, tileMatrix) {
-            var scale = <span class="cstat-no" title="statement not covered" >__getChildValue(n</span>ode);
+            var scale = <span class="cstat-no" title="statement not covered" >__getChildValue(node);</span>
 <span class="cstat-no" title="statement not covered" >            if (scale &amp;&amp; tileMatrix &amp;&amp; tileMatrix.hasOwnProperty("scaleDenominator")) {</span>
-<span class="cstat-no" title="statement not covered" >                tileMatrix.</span>scaleDenominator = parseFloat(scale);
+<span class="cstat-no" title="statement not covered" >                tileMatrix.scaleDenominator = parseFloat(scale);</span>
             }
         },
 &nbsp;
         // info : /General/Extension/gpp:General/gpp:TileMatrixSets/wmts:TileMatrixSet/wmts:TileMatrix/wmts:TopLeftCorner
         /** TODO : jsdoc block */
         TopLeftCorner : <span class="fstat-no" title="function not covered" >function (n</span>ode, tileMatrix) {
-            var values = <span class="cstat-no" title="statement not covered" >__getChildValue(</span>node).split(" ");
+            var values = <span class="cstat-no" title="statement not covered" >__getChildValue(node).split(" ");</span>
 <span class="cstat-no" title="statement not covered" >            if (values &amp;&amp; tileMatrix) {</span>
-<span class="cstat-no" title="statement not covered" >                tileMatrix.</span>topLeftCorner = {};
-<span class="cstat-no" title="statement not covered" >                tileMatrix.</span>topLeftCorner.x = parseFloat(values[0]);
-<span class="cstat-no" title="statement not covered" >                tileMatrix.</span>topLeftCorner.y = parseFloat(values[1]);
+<span class="cstat-no" title="statement not covered" >                tileMatrix.topLeftCorner = {};</span>
+<span class="cstat-no" title="statement not covered" >                tileMatrix.topLeftCorner.x = parseFloat(values[0]);</span>
+<span class="cstat-no" title="statement not covered" >                tileMatrix.topLeftCorner.y = parseFloat(values[1]);</span>
             }
         },
 &nbsp;
         // info : /General/Extension/gpp:General/gpp:TileMatrixSets/wmts:TileMatrixSet/wmts:TileMatrix/wmts:TileWidth
         /** TODO : jsdoc block */
         TileWidth : <span class="fstat-no" title="function not covered" >function (n</span>ode, tileMatrix) {
-            var value = <span class="cstat-no" title="statement not covered" >__getChildValue(n</span>ode);
+            var value = <span class="cstat-no" title="statement not covered" >__getChildValue(node);</span>
 <span class="cstat-no" title="statement not covered" >            if (value &amp;&amp; tileMatrix &amp;&amp; tileMatrix.hasOwnProperty("tileWidth")) {</span>
-<span class="cstat-no" title="statement not covered" >                tileMatrix.</span>tileWidth = parseInt(value, 10);
+<span class="cstat-no" title="statement not covered" >                tileMatrix.tileWidth = parseInt(value, 10);</span>
             }
         },
 &nbsp;
         // info : /General/Extension/gpp:General/gpp:TileMatrixSets/wmts:TileMatrixSet/wmts:TileMatrix/wmts:TileHeight
         /** TODO : jsdoc block */
         TileHeight : <span class="fstat-no" title="function not covered" >function (n</span>ode, tileMatrix) {
-            var value = <span class="cstat-no" title="statement not covered" >__getChildValue(n</span>ode);
+            var value = <span class="cstat-no" title="statement not covered" >__getChildValue(node);</span>
 <span class="cstat-no" title="statement not covered" >            if (value &amp;&amp; tileMatrix &amp;&amp; tileMatrix.hasOwnProperty("tileHeight")) {</span>
-<span class="cstat-no" title="statement not covered" >                tileMatrix.</span>tileHeight = parseInt(value, 10);
+<span class="cstat-no" title="statement not covered" >                tileMatrix.tileHeight = parseInt(value, 10);</span>
             }
         },
 &nbsp;
         // info : /General/Extension/gpp:General/gpp:TileMatrixSets/wmts:TileMatrixSet/wmts:TileMatrix/wmts:MatrixWidth
         /** TODO : jsdoc block */
         MatrixWidth : <span class="fstat-no" title="function not covered" >function (n</span>ode, tileMatrix) {
-            var value = <span class="cstat-no" title="statement not covered" >__getChildValue(n</span>ode);
+            var value = <span class="cstat-no" title="statement not covered" >__getChildValue(node);</span>
 <span class="cstat-no" title="statement not covered" >            if (value &amp;&amp; tileMatrix &amp;&amp; tileMatrix.hasOwnProperty("matrixWidth")) {</span>
-<span class="cstat-no" title="statement not covered" >                tileMatrix.</span>matrixWidth = parseInt(value, 10);
+<span class="cstat-no" title="statement not covered" >                tileMatrix.matrixWidth = parseInt(value, 10);</span>
             }
         },
 &nbsp;
         // info : /General/Extension/gpp:General/gpp:TileMatrixSets/wmts:TileMatrixSet/wmts:TileMatrix/wmts:MatrixHeight
         /** TODO : jsdoc block */
         MatrixHeight : <span class="fstat-no" title="function not covered" >function (n</span>ode, tileMatrix) {
-            var value = <span class="cstat-no" title="statement not covered" >__getChildValue(n</span>ode);
+            var value = <span class="cstat-no" title="statement not covered" >__getChildValue(node);</span>
 <span class="cstat-no" title="statement not covered" >            if (value &amp;&amp; tileMatrix &amp;&amp; tileMatrix.hasOwnProperty("matrixHeight")) {</span>
-<span class="cstat-no" title="statement not covered" >                tileMatrix.</span>matrixHeight = parseInt(value, 10);
+<span class="cstat-no" title="statement not covered" >                tileMatrix.matrixHeight = parseInt(value, 10);</span>
             }
         }
     },
@@ -3451,13 +3451,13 @@ AutoConfResponseReader.READERS = {
             var children = <span class="cstat-no" title="statement not covered" >node.childNodes;</span>
             var child;
 <span class="cstat-no" title="statement not covered" >            for (var i = 0; i &lt; children.length; i++) {</span>
-<span class="cstat-no" title="statement not covered" >                child </span>= children[i];
+<span class="cstat-no" title="statement not covered" >                child = children[i];</span>
 <span class="cstat-no" title="statement not covered" >                if (child.nodeName === "exception") {</span>
-<span class="cstat-no" title="statement not covered" >                    response.</span>exceptionReport = AutoConfResponseReader.READERS["exception"](child);
+<span class="cstat-no" title="statement not covered" >                    response.exceptionReport = AutoConfResponseReader.READERS["exception"](child);</span>
                 }
             }
         }
-<span class="cstat-no" title="statement not covered" >        return r</span>esponse;
+<span class="cstat-no" title="statement not covered" >        return response;</span>
     },
 &nbsp;
     /** TODO : jsdoc block */
@@ -3465,18 +3465,18 @@ AutoConfResponseReader.READERS = {
         var exceptionReport = <span class="cstat-no" title="statement not covered" >{};</span>
 &nbsp;
         // get exception code
-        var exceptionCode = <span class="cstat-no" title="statement not covered" >node.</span>getAttribute("code");
+        var exceptionCode = <span class="cstat-no" title="statement not covered" >node.getAttribute("code");</span>
 <span class="cstat-no" title="statement not covered" >        if (exceptionCode) {</span>
-<span class="cstat-no" title="statement not covered" >            exceptionReport.</span>exceptionCode = exceptionCode;
+<span class="cstat-no" title="statement not covered" >            exceptionReport.exceptionCode = exceptionCode;</span>
         }
 &nbsp;
         // get exception message
         var textNode = <span class="cstat-no" title="statement not covered" >node.firstChild;</span>
 <span class="cstat-no" title="statement not covered" >        if (textNode &amp;&amp; textNode.nodeType === 3) { // 3 === node.TEXT_NODE</span>
-<span class="cstat-no" title="statement not covered" >            exceptionReport.</span>exception = textNode.nodeValue;
+<span class="cstat-no" title="statement not covered" >            exceptionReport.exception = textNode.nodeValue;</span>
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        return e</span>xceptionReport;
+<span class="cstat-no" title="statement not covered" >        return exceptionReport;</span>
     }
 &nbsp;
 };
@@ -3495,13 +3495,13 @@ AutoConfResponseReader.READERS = {
 AutoConfResponseReader.read = <span class="fstat-no" title="function not covered" >function (r</span>oot) {
 <span class="cstat-no" title="statement not covered" >    if (root.nodeName === "ViewContext") {</span>
         var nsPrefix = <span class="cstat-no" title="statement not covered" >root.prefix || AutoConfResponseReader.DEFAULTPREFIX;</span>
-        var config = <span class="cstat-no" title="statement not covered" >AutoConfResponseReader.</span>READERS[nsPrefix][root.nodeName](root);
-<span class="cstat-no" title="statement not covered" >        return c</span>onfig;
+        var config = <span class="cstat-no" title="statement not covered" >AutoConfResponseReader.READERS[nsPrefix][root.nodeName](root);</span>
+<span class="cstat-no" title="statement not covered" >        return config;</span>
     } else <span class="cstat-no" title="statement not covered" >if (root.nodeName === "serviceException") {</span>
-        var exceptionReport = <span class="cstat-no" title="statement not covered" >AutoConfResponseReader.</span>READERS[root.nodeName](root);
-<span class="cstat-no" title="statement not covered" >        return e</span>xceptionReport;
+        var exceptionReport = <span class="cstat-no" title="statement not covered" >AutoConfResponseReader.READERS[root.nodeName](root);</span>
+<span class="cstat-no" title="statement not covered" >        return exceptionReport;</span>
     } else {
-<span class="cstat-no" title="statement not covered" >        throw n</span>ew Error("Erreur lors de la lecture de la réponse : elle n'est pas au format attendu.");
+<span class="cstat-no" title="statement not covered" >        throw new Error("Erreur lors de la lecture de la réponse : elle n'est pas au format attendu.");</span>
     }
 };
 &nbsp;
@@ -3514,15 +3514,15 @@ AutoConfResponseReader.read = <span class="fstat-no" title="function not covered
  * @param {DOMElement} node - noeud contenant l'attribut recherché
  * @return {Object} nodeAttributes - objet contenant les noms et valeurs des différents attributs
  */
-function <span class="fstat-no" title="function not covered" >__getAttributes (n</span>ode) {
+function <span class="fstat-no" title="function not covered" >__getAttributes </span>(node) {
 <span class="cstat-no" title="statement not covered" >    if (node.attributes.length &gt; 0) {</span>
         var nodeAttributes = <span class="cstat-no" title="statement not covered" >{};</span>
         var attributes = <span class="cstat-no" title="statement not covered" >node.attributes;</span>
 <span class="cstat-no" title="statement not covered" >        for (var i = 0; i &lt; attributes.length; i++) {</span>
-            var attribute = <span class="cstat-no" title="statement not covered" >attributes[i</span>];
-<span class="cstat-no" title="statement not covered" >            nodeAttributes[</span>attribute.nodeName] = attribute.nodeValue;
+            var attribute = <span class="cstat-no" title="statement not covered" >attributes[i];</span>
+<span class="cstat-no" title="statement not covered" >            nodeAttributes[attribute.nodeName] = attribute.nodeValue;</span>
         }
-<span class="cstat-no" title="statement not covered" >        return n</span>odeAttributes;
+<span class="cstat-no" title="statement not covered" >        return nodeAttributes;</span>
     }
 }
 &nbsp;
@@ -3535,7 +3535,7 @@ function <span class="fstat-no" title="function not covered" >__getAttributes (n
  * @param {DOMElement} node - a DOM node
  * @param {Array|Object} [data] - an object to be filled with node data
  */
-function <span class="fstat-no" title="function not covered" >__getChildNodes (n</span>ode, data) {
+function <span class="fstat-no" title="function not covered" >__getChildNodes </span>(node, data) {
 <span class="cstat-no" title="statement not covered" >    if (node.hasChildNodes()) {</span>
         var children = <span class="cstat-no" title="statement not covered" >node.childNodes;</span>
         var child;
@@ -3543,17 +3543,17 @@ function <span class="fstat-no" title="function not covered" >__getChildNodes (n
         var childPrefix;
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        for (var i = 0; i &lt; children.length; i++) {</span>
-<span class="cstat-no" title="statement not covered" >            child </span>= children[i];
+<span class="cstat-no" title="statement not covered" >            child = children[i];</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            if (child.nodeType === 1) { // 1 === node.ELEMENT_NODE</span>
-<span class="cstat-no" title="statement not covered" >                childName </span>= child.localName || child.baseName || child.nodeName;
-<span class="cstat-no" title="statement not covered" >                childPrefix </span>= child.prefix || AutoConfResponseReader.DEFAULTPREFIX;
+<span class="cstat-no" title="statement not covered" >                childName = child.localName || child.baseName || child.nodeName;</span>
+<span class="cstat-no" title="statement not covered" >                childPrefix = child.prefix || AutoConfResponseReader.DEFAULTPREFIX;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                if (AutoConfResponseReader.READERS[childPrefix][childName]) {</span>
-                    var reader = <span class="cstat-no" title="statement not covered" >AutoConfResponseReader.</span>READERS[childPrefix][childName];
-<span class="cstat-no" title="statement not covered" >                    reader(</span>child, data);
+                    var reader = <span class="cstat-no" title="statement not covered" >AutoConfResponseReader.READERS[childPrefix][childName];</span>
+<span class="cstat-no" title="statement not covered" >                    reader(child, data);</span>
                 } else {
-<span class="cstat-no" title="statement not covered" >                    __getChildNodes(</span>child, data);
+<span class="cstat-no" title="statement not covered" >                    __getChildNodes(child, data);</span>
                 }
             }
         }
@@ -3569,17 +3569,17 @@ function <span class="fstat-no" title="function not covered" >__getChildNodes (n
  * @param {DOMElement} node - a DOM node
  * @return {String} value - valeur du firstChild du noeud en entrée, ou chaîne vide.
  */
-function <span class="fstat-no" title="function not covered" >__getChildValue (n</span>ode) {
+function <span class="fstat-no" title="function not covered" >__getChildValue </span>(node) {
     var textNode;
     var value = <span class="cstat-no" title="statement not covered" >"";</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (node.hasChildNodes()) {</span>
-<span class="cstat-no" title="statement not covered" >        textNode </span>= node.firstChild;
+<span class="cstat-no" title="statement not covered" >        textNode = node.firstChild;</span>
 <span class="cstat-no" title="statement not covered" >        if (textNode.nodeType === 3 || textNode.nodeType === 4) { // 3 === node.TEXT_NODE</span>
-<span class="cstat-no" title="statement not covered" >            value </span>= textNode.nodeValue;
+<span class="cstat-no" title="statement not covered" >            value = textNode.nodeValue;</span>
         }
     }
-<span class="cstat-no" title="statement not covered" >    return v</span>alue;
+<span class="cstat-no" title="statement not covered" >    return value;</span>
 }
 &nbsp;
 /**
@@ -3591,16 +3591,16 @@ function <span class="fstat-no" title="function not covered" >__getChildValue (n
  * @method __checkServiceAttributes
  * @param {DOMElement} viewContextNode - a DOM node, corresponding to XLS first tag.
  */
-function <span class="fstat-no" title="function not covered" >__checkServiceAttributes (v</span>iewContextNode) {
+function <span class="fstat-no" title="function not covered" >__checkServiceAttributes </span>(viewContextNode) {
 <span class="cstat-no" title="statement not covered" >    if (viewContextNode.attributes.length &gt; 0) {</span>
         // on récupère et parcourt les attributs de la balise XLS de la réponse
-        var xlsAttributes = <span class="cstat-no" title="statement not covered" >__getAttributes(v</span>iewContextNode);
+        var xlsAttributes = <span class="cstat-no" title="statement not covered" >__getAttributes(viewContextNode);</span>
 <span class="cstat-no" title="statement not covered" >        for (var att in xlsAttributes) {</span>
 <span class="cstat-no" title="statement not covered" >            if (xlsAttributes.hasOwnProperty(att)) {</span>
                 // vérification de la version
 <span class="cstat-no" title="statement not covered" >                if (att === "version") {</span>
 <span class="cstat-no" title="statement not covered" >                    if (xlsAttributes["version"] !== AutoConfResponseReader.VERSION) {</span>
-<span class="cstat-no" title="statement not covered" >                        console.</span>log("[AutoConfResponseReader] autoconf version is not the expected one : there may be errors in parsing");
+<span class="cstat-no" title="statement not covered" >                        console.log("[AutoConfResponseReader] autoconf version is not the expected one : there may be errors in parsing");</span>
 <span class="cstat-no" title="statement not covered" >                        return;</span>
                     }
                 }
@@ -3608,14 +3608,14 @@ function <span class="fstat-no" title="function not covered" >__checkServiceAttr
                 // on vérifie que l'uri du namespace par défaut est bien celle que l'on attend
 <span class="cstat-no" title="statement not covered" >                if (att === "xmlns") {</span>
 <span class="cstat-no" title="statement not covered" >                    if (xlsAttributes[att] !== AutoConfResponseReader.NAMESPACES.xmlns) {</span>
-<span class="cstat-no" title="statement not covered" >                        console.</span>log("[AutoConfResponseReader] autoconf response default namespace is not the expected one");
+<span class="cstat-no" title="statement not covered" >                        console.log("[AutoConfResponseReader] autoconf response default namespace is not the expected one");</span>
 <span class="cstat-no" title="statement not covered" >                        return;</span>
                     }
 <span class="cstat-no" title="statement not covered" >                    continue;</span>
                 }
 &nbsp;
-                var prefix = <span class="cstat-no" title="statement not covered" >att.</span>split(":")[0];
-                var ns = <span class="cstat-no" title="statement not covered" >att.</span>split(":")[1];
+                var prefix = <span class="cstat-no" title="statement not covered" >att.split(":")[0];</span>
+                var ns = <span class="cstat-no" title="statement not covered" >att.split(":")[1];</span>
 &nbsp;
                 // si on a un autre xmlns, on vérifie aussi les URI
 <span class="cstat-no" title="statement not covered" >                if (prefix === "xmlns" &amp;&amp; ns) {</span>
@@ -3623,7 +3623,7 @@ function <span class="fstat-no" title="function not covered" >__checkServiceAttr
 <span class="cstat-no" title="statement not covered" >                    if (AutoConfResponseReader.NAMESPACES[ns]) {</span>
                         // il faut que les URI correspondent aussi.
 <span class="cstat-no" title="statement not covered" >                        if (AutoConfResponseReader.NAMESPACES[ns] !== xlsAttributes[att]) {</span>
-<span class="cstat-no" title="statement not covered" >                            console.</span>log("[AutoConfResponseReader] autoconf response " + att + " namespace is not the expected one");
+<span class="cstat-no" title="statement not covered" >                            console.log("[AutoConfResponseReader] autoconf response " + att + " namespace is not the expected one");</span>
 <span class="cstat-no" title="statement not covered" >                            return;</span>
                         }
                     }
@@ -3632,7 +3632,7 @@ function <span class="fstat-no" title="function not covered" >__checkServiceAttr
                 // pour finir on vérifie la localisation du schema XSD du service
 <span class="cstat-no" title="statement not covered" >                if (ns === "schemaLocation") {</span>
 <span class="cstat-no" title="statement not covered" >                    if (xlsAttributes[att] !== AutoConfResponseReader.SCHEMALOCATION[0] &amp;&amp; xlsAttributes[att] !== AutoConfResponseReader.SCHEMALOCATION[1]) {</span>
-<span class="cstat-no" title="statement not covered" >                        console.</span>log("[AutoConfResponseReader] autoconf response schema location is not the expected one");
+<span class="cstat-no" title="statement not covered" >                        console.log("[AutoConfResponseReader] autoconf response schema location is not the expected one");</span>
 <span class="cstat-no" title="statement not covered" >                        return;</span>
                     }
                 }
@@ -3649,7 +3649,7 @@ export default AutoConfResponseReader;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:14.136Z
+                at 2023-01-17T13:13:24.630Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
