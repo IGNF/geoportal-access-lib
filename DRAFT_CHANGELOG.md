@@ -1,12 +1,12 @@
-# Bibliothèque d'accès aux services Géoportail, version 3.2.0
+# Bibliothèque d'accès aux services Géoportail, version 3.2.1
 
-**04/10/2022 : 3.2.0**
+**17/01/2023 : 3.2.1**
 
 > release of geoportal access library
 
 ## Summary
 
-Mise à jour vers le service de Geocodage V2
+Mise à jour pour fix sur geocodage
 
 ## Changelog
 
@@ -14,7 +14,7 @@ Mise à jour vers le service de Geocodage V2
 
 * [Changed]
 
-    - utilisation du service de geocodage v2 (#71)
+    - le paramètre searchGeom est rendu facultatif (#81)
 
 * [Removed]
 
