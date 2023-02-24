@@ -7,9 +7,6 @@
 //  DefaultUrlService.ProcessIsoCurve.url(key)
 //  DefaultUrlService.AutoComplete.url(key)
 //  DefaultUrlService.ReverseGeocode.url(key)
-//  DefaultUrlService.AutoConf.url(key)[apiKey]
-//  DefaultUrlService.AutoConf.url(key)[apiKeys]
-//  DefaultUrlService.AutoConf.url(key)[aggregate]
 //  DefaultUrlService.Geocode.url(key)
 //  DefaultUrlService.Route.url(key)
 

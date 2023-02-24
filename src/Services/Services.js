@@ -14,7 +14,105 @@ import Route from "./Route/Route";
 import ProcessIsoCurve from "./ProcessIsoCurve/ProcessIsoCurve";
 
 var Services = {
+    /**
+     * Access to Geoportal resources metadata availables with one ore several keys
+     *
+     * @method getConfig
+     * @param {Object} options - Options for function call.
+     * @param {String} [options.apiKey] - Access key(s) ("," as separator, no spaces) to Geoportal platform, obtained [here]{@link https://geoservices.ign.fr/services-web}
+     * @param {String} [options.customConfigFile] - path to a local config file. Overload the apiKey parameter
+     * @param {Function} options.onSuccess - Callback function for getting successful service response. Takes a {@link Gp.Services.GetConfigResponse} object as a parameter except if "rawResponse" parameter is set to true : a String will be returned.
+     * @param {Function} [options.onFailure] - Callback function for handling unsuccessful service responses (timeOut, missing rights, ...). Takes a {@link Gp.Error} object as parameter.
+     * @param {Number} [options.timeOut=0] - Number of milliseconds above which a timeOut response will be returned with onFailure callback (see above). Default value is 0 which means timeOut will not be handled.
+     */
+    getConfig: function (options) {
+        // on parse le fichier de config associé à la clé
+        // TODO : gérer fichier distants + multiples parsing (multikeys)
+        // TODO : gestion du timeOut ?
 
+        // chemin vers le ou les fichiers de configuration
+        var configFilePath;
+        // tableau des promesses fetch
+        var fetchPromises = [];
+        // tableau des configuration json récupérées
+        var configArray = [];
+
+        // par défaut
+        configFilePath = "https://raw.githubusercontent.com/IGNF/geoportal-configuration/main/dist/fullConfig.json";
+        if (options.customConfigFile) {
+            // si un fichier custom est donné
+            configFilePath = options.customConfigFile
+        } else if (options.apiKey) {
+            // si une clé est donnée
+            configFilePath = "https://raw.githubusercontent.com/IGNF/geoportal-configuration/main/dist/" + options.apiKey + "Config.json";
+        }
+        
+        if ((typeof options.apiKey === "string" || options.apiKey instanceof String) && Array.isArray(options.apiKey.split(",")) && options.apiKey.split(",").length > 1) {
+            // si on a une liste de plusieurs clés en options, on traite la chaine de caractères et on la transforme en tableau (multiKeys)
+            options.apiKey = options.apiKey.split(",");
+            configFilePath = [];
+            for (var i = 0; i < options.apiKey.length; i++) {
+                configFilePath.push("https://raw.githubusercontent.com/IGNF/geoportal-configuration/main/dist/" + options.apiKey[i] + "Config.json");
+            }
+        }
+
+        // Pour la suite, le traitement prend un tableau en entrée
+        if (!Array.isArray(configFilePath)) {
+            configFilePath = [configFilePath];
+        }
+
+        // remplissage de tableau de promesses fetchPromises
+        for (var i = 0; i < configFilePath.length; i++) {
+            fetchPromises.push(fetch(configFilePath[i]).then((result) => result.json()).catch((error) => {
+                if (options.onFailure) {
+                    options.onFailure(error);
+                }
+                throw new Error("Erreur dans la lecture du fichier de configuration : " + error.message);
+            }));
+        }
+
+        // une fois que les toutes les configurations sont récupérées, on traite les résultats 
+        Promise.all(fetchPromises).then(
+            (results) => results.forEach(result => configArray.push(result))
+        ).then(() => {
+            var mergedConfig = mergeArray(configArray);
+            // on remplace Gp.Config
+            Gp.Config = mergedConfig;
+            // on appelle le callback utilisateur en renvoyant la configuration récupérée
+            options.onSuccess(Gp.Config);
+        });
+
+        // fonction pour fusionner les configs récupérées en un seul objet
+        var mergeArray = function (objectsArray) {
+            // objet fusion des couches
+            var allLayersConfig = {};
+            // objet fusion des clés
+            var allKeysConfig = {};
+            // objet fusion des TMS
+            var allTMSConfig = {};
+
+            // on fusionne les résultat
+            for (var i = 0; i < objectsArray.length; i++) {
+                if (!objectsArray[i].generalOptions || !objectsArray[i].layers) {
+                    // si le fichier de configuration donné en entré ne correspond pas à la structure attendue
+                    throw new Error("Configuration non récupérée : structure de la configuration non conforme");
+                }
+                allKeysConfig = { ...allKeysConfig, ...objectsArray[i].generalOptions.apiKeys };
+                allLayersConfig = { ...allLayersConfig, ...objectsArray[i].layers };
+                allTMSConfig = { ...allTMSConfig, ...objectsArray[i].tileMatrixSets };
+            }
+
+            var mergedConfig = {
+                generalOptions: {
+                    apiKeys: allKeysConfig
+                },
+                layers: allLayersConfig,
+                tileMatrixSets: allTMSConfig
+            }
+            return mergedConfig;
+        };
+
+    },
     /**
      * Getting elevations in or along of one or several points on french territories using the [elevation services of the Geoportal Platform]{@link https://geoservices.ign.fr/documentation/geoservices/alti.html}.<br/>
      * Two use cases are availables :<br/>
@@ -43,7 +141,7 @@ var Services = {
      * @param {String} [options.api='REST'] - What API to use for interacting with underlying web service : 'REST' or 'WPS'. Only use if you know what you are doing.
      * @param {String} [options.outputFormat='xml'] - Output format for underlying web service response : 'xml' or 'json'. Only use if you know what you are doing.
      */
-    getAltitude : function (options) {
+    getAltitude: function (options) {
         var altiService = new Alti(options);
         altiService.call();
     },
@@ -89,7 +187,7 @@ var Services = {
      * @param {Boolean} [options.rawResponse=false] - Setting this parameter to true implies you want to handle the service response by yourself : it will be returned as an unparsed String in onSuccess callback parameter. Only use if you know what you are doing.
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
-    geocode : function (options) {
+    geocode: function (options) {
         var geocodeService = new Geocode(options);
         geocodeService.call();
     },
@@ -129,7 +227,7 @@ var Services = {
      * @param {Boolean} [options.rawResponse=false] - Setting this parameter to true implies you want to handle the service response by yourself : it will be returned as an unparsed String in onSuccess callback parameter. Only use if you know what you are doing.
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
-    reverseGeocode : function (options) {
+    reverseGeocode: function (options) {
         var reverseGeocodeService = new ReverseGeocode(options);
         reverseGeocodeService.call();
     },
@@ -156,7 +254,7 @@ var Services = {
      * @param {Boolean} [options.rawResponse=false] - Setting this parameter to true implies you want to handle the service response by yourself : it will be returned as an unparsed String in onSuccess callback parameter. Only use if you know what you are doing.
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
-    autoComplete : function (options) {
+    autoComplete: function (options) {
         var autoCompleteService = new AutoComplete(options);
         autoCompleteService.call();
     },
@@ -193,7 +291,7 @@ var Services = {
      * @param {Boolean} [options.rawResponse=false] - Setting this parameter to true implies you want to handle the service response by yourself : it will be returned as an unparsed String in onSuccess callback parameter. Only use if you know what you are doing.
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
-    route : function (options) {
+    route: function (options) {
         var routeService = new Route(options);
         routeService.call();
     },
@@ -230,7 +328,7 @@ var Services = {
      * @param {Boolean} [options.rawResponse=false] - Setting this parameter to true implies you want to handle the service response by yourself : it will be returned as an unparsed String in onSuccess callback parameter. Only use if you know what you are doing.
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
-    isoCurve : function (options) {
+    isoCurve: function (options) {
         var processIsoCurveService = new ProcessIsoCurve(options);
         processIsoCurveService.call();
     }

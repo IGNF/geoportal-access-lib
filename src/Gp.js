@@ -93,6 +93,8 @@ Gp.Services.Alti.Elevation = Elevation;
 Gp.Services.AutoCompleteResponse = AutoCompleteResponse;
 Gp.Services.AutoComplete = {};
 Gp.Services.AutoComplete.SuggestedLocation = SuggestedLocation;
+// Export Config
+Gp.Services.Config = {};
 // Export IsoCurve
 Gp.Services.IsoCurveResponse = IsoCurveResponse;
 // Export Route
