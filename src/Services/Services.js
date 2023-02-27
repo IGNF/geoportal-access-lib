@@ -36,15 +36,16 @@ var Services = {
         var fetchPromises = [];
         // tableau des configuration json récupérées
         var configArray = [];
-
+        // chemin par défaut des fichiers de configuration des clés Géoportail
+        var defaultConfigPath = "https://raw.githubusercontent.com/IGNF/geoportal-configuration/main/dist/"
         // par défaut
-        configFilePath = "https://raw.githubusercontent.com/IGNF/geoportal-configuration/main/dist/fullConfig.json";
+        configFilePath = defaultConfigPath + "fullConfig.json";
         if (options.customConfigFile) {
             // si un fichier custom est donné
             configFilePath = options.customConfigFile
         } else if (options.apiKey) {
             // si une clé est donnée
-            configFilePath = "https://raw.githubusercontent.com/IGNF/geoportal-configuration/main/dist/" + options.apiKey + "Config.json";
+            configFilePath = defaultConfigPath + options.apiKey + "Config.json";
         }
         
         if ((typeof options.apiKey === "string" || options.apiKey instanceof String) && Array.isArray(options.apiKey.split(",")) && options.apiKey.split(",").length > 1) {
@@ -52,7 +53,7 @@ var Services = {
             options.apiKey = options.apiKey.split(",");
             configFilePath = [];
             for (var i = 0; i < options.apiKey.length; i++) {
-                configFilePath.push("https://raw.githubusercontent.com/IGNF/geoportal-configuration/main/dist/" + options.apiKey[i] + "Config.json");
+                configFilePath.push(defaultConfigPath + options.apiKey[i] + "Config.json");
             }
         }
 
