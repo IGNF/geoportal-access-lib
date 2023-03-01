@@ -36,7 +36,7 @@ var ConfigRequestFactory = {
         // chemin vers le ou les fichiers de configuration
         var configFilePath;
         // tableau des promesses fetch
-        var fetchPromises = [];
+        var fetchFiles = [];
         // chemin par défaut des fichiers de configuration des clés Géoportail
         var defaultConfigPath = "https://raw.githubusercontent.com/IGNF/geoportal-configuration/main/dist/"
         // par défaut
@@ -62,18 +62,22 @@ var ConfigRequestFactory = {
         if (!Array.isArray(configFilePath)) {
             configFilePath = [configFilePath];
         }
-
-        // remplissage de tableau de promesses fetchPromises
+        
+        // remplissage du tableau des config
         for (var i = 0; i < configFilePath.length; i++) {
-            fetchPromises.push(fetch(configFilePath[i]).then((result) => result.json()).catch((error) => {
-                if (options.onFailure) {
-                    options.onFailure.call(options.scope, error);
-                }
-                throw new Error("Erreur dans la lecture du fichier de configuration : " + error.message);
-            }));
+            const request = new XMLHttpRequest();
+            // requête synchrone
+            request.open('GET', configFilePath[i], false); 
+            request.send(null);
+    
+            if (request.status === 200) {
+                fetchFiles.push(JSON.parse(request.response));
+            } else {
+                logger.trace("Fichier " + request.responseURL + " : " + request.responseText);
+            }
         }
-        options.onSuccess.call(options.scope, fetchPromises);
-        return fetchPromises;
+        options.onSuccess.call(options.scope, fetchFiles);
+        return fetchFiles;
     }
 };
 
