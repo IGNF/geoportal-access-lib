@@ -4,6 +4,8 @@
 [![GitHub release](https://img.shields.io/github/release/IGNF/geoportal-access-lib.svg)](https://github.com/IGNF/geoportal-access-lib)
 [![DeepScan grade](https://deepscan.io/api/teams/12425/projects/15468/branches/309615/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=12425&pid=15468&bid=309615)
 
+<a name="readme-top"></a>
+
 La bibliothèque d’accès aux ressources de la plateforme Géoportail est une bibliothèque de fonctions javascript permettant d'accéder aux ressources délivrées par les services web du Géoportail.
 
 Elle permet plus particulièrement d'effectuer les opérations suivantes utilisant les données de l'IGN :
@@ -22,15 +24,15 @@ Elle permet plus particulièrement d'effectuer les opérations suivantes utilisa
 
 * [Obtenir des informations relatives à un contrat d'accès au Géoportail](#getConfig)
 
-
 ## Mise en oeuvre
 
 Vous pouvez récupérer la bibliothèque d'accès soit en la [téléchargeant directement](#t%C3%A9l%C3%A9chargement-direct), soit en utilisant le [gestionnaire de dépendances javascript NPM](#r%C3%A9cup%C3%A9ration-avec-npm).
 
+Une documentation technique (jsdoc) et un testeur sont disponibles [ici](https://ignf.github.io/geoportal-access-lib/).
+
 ### Téléchargement direct
 
 Vous pouvez récupérer ici la version compilée et autonome de la bibliothèque d'accès : [GpServices.js](https://github.com/IGNF/geoportal-access-lib/releases/latest), dans la partie "Downloads".
-
 
 ### Récupération avec NPM
 
@@ -38,7 +40,7 @@ La bibliothèque d'accès est aussi disponible dans les dépôts [NPM](https://w
 
 Prérequis : [NodeJS](https://nodejs.org/en/) et [npm](https://www.npmjs.com/) installés.
 
-```
+``` bash
 npm install geoportal-access-lib
 ```
 
@@ -115,11 +117,11 @@ Dans un environnement **Front-End**, il faut installer les 2 dépendances suivan
 - xmldom
 - request
 
-### Utilisation
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Utilisation
 
 Le chargement de la bibliothèque d'accès vous donne accès au namespace [Gp.Services](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html) à partir duquel vous pouvez utiliser les différentes fonctions proposées.
-
-
 
 <a id="geocode"/>
 
@@ -155,6 +157,7 @@ Gp.Services.geocode({
 
 **Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/saye4oaz/embedded/result,js,html,css/)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <a id="autocomplete"/>
 
@@ -190,6 +193,7 @@ Gp.Services.autoComplete({
 
 **Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/jsjqk4wq/embedded/result,js,html,css/)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <a id="reverseGeocode"/>
 
@@ -228,6 +232,7 @@ Gp.Services.reverseGeocode({
 
 **Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/4t0wfey5/embedded/result,js,html,css/)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <a id="alti"/>
 
@@ -264,6 +269,7 @@ Gp.Services.getAltitude({
 
 **Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/owxffaf3/embedded/result,js,html,css/)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <a id="route"/>
 
@@ -301,6 +307,7 @@ Gp.Services.route({
 
 **Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/prvrjd93/embedded/result,js,html,css/)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <a id="isoCurve"/>
 
@@ -339,6 +346,7 @@ Gp.Services.isoCurve({
 
 **Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/x1hcak86/embedded/result,js,html,css/)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <a id="getConfig"/>
 
@@ -364,3 +372,5 @@ Gp.Services.getConfig({
 ```
 
 **Exemple d'utilisation** [![jsFiddle](http://jsfiddle.net/img/embeddable/logo-dark.png)](http://jsfiddle.net/ignfgeoportail/0hsanbv2/embedded/result,js,html,css/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
