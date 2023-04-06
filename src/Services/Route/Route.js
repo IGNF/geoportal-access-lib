@@ -103,7 +103,6 @@ import RouteResponseFactory from "./Response/RouteResponseFactory";
  *      routePreference : "fastest"
  *  };
  *
- * @private
  */
 function Route (options) {
     if (!(this instanceof Route)) {

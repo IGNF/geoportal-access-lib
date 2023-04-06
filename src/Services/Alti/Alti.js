@@ -68,7 +68,6 @@ import AltiResponseFactory from "./Response/AltiResponseFactory";
  *      zonly : false // false|true
  *   };
  *
- * @private
  */
 function Alti (options) {
     if (!(this instanceof Alti)) {

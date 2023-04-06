@@ -66,7 +66,6 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *      query : '10 rue du pont Machin-ville'
  *      (...)
  *   };
- * @private
  */
 function Geocode (options_) {
     if (!(this instanceof Geocode)) {

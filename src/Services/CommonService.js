@@ -85,7 +85,6 @@ import Pkg from "../../package.json";
  *      onFailure : function (error) {},
  *      onBeforeParse : function (rawResponse) {}
  *   };
- * @private
  */
 function CommonService (options) {
     if (!(this instanceof CommonService)) {

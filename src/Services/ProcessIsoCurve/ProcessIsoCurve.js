@@ -95,7 +95,6 @@ import ProcessIsoCurveResponseFactory from "./Response/ProcessIsoCurveResponseFa
  *      graph : "voiture",
  *      reverse : false
  *  };
- * @private
  */
 
 function ProcessIsoCurve (options) {

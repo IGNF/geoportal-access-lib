@@ -28,7 +28,6 @@ import ConfigRequestFactory from "./Request/ConfigRequestFactory";
  *      onFailure : function (error) {},
  *   };
  *
- * @private
  */
 function Config(options) {
     if (!(this instanceof Config)) {
