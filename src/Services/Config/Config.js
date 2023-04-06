@@ -4,6 +4,7 @@ import ErrorService from "../../Exceptions/ErrorService";
 import CommonService from "../CommonService";
 import DefaultUrlService from "../DefaultUrlService";
 import ConfigRequestFactory from "./Request/ConfigRequestFactory";
+import Gp from "../../Gp";
 
 /**
  * @classdesc
@@ -29,7 +30,7 @@ import ConfigRequestFactory from "./Request/ConfigRequestFactory";
  *   };
  *
  */
-function Config(options) {
+function Config (options) {
     if (!(this instanceof Config)) {
         throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "Alti"));
     }
@@ -61,7 +62,7 @@ function Config(options) {
 
     // gestion de l'url du service par defaut (on prend un tableau d'urls vers les fichiers)
     if (!options.customConfigFile) {
-        var urlFound = DefaultUrlService.Config.url(options.apiKey.split(','));
+        var urlFound = DefaultUrlService.Config.url(options.apiKey.split(","));
         if (!urlFound) {
             throw new Error("Url by default not found !");
         }
@@ -95,15 +96,15 @@ Config.prototype.constructor = Config;
 Config.prototype.buildRequest = function (error, success) {
     // utilisation en mode callback
     var options = {
-        serverUrl: this.options.serverUrl,
+        serverUrl : this.options.serverUrl,
         // callback
-        onSuccess: function (result) {
+        onSuccess : function (result) {
             // sauvegarde de la requete !
             this.request = result;
             success.call(this, this.request);
         },
-        onFailure: error,
-        scope: this
+        onFailure : error,
+        scope : this
     };
 
     ConfigRequestFactory.build(options);
@@ -123,6 +124,8 @@ Config.prototype.callService = function (error, success) {
     ).then(() => {
         this.result = configArray;
         success.call(this, this.result);
+    }).catch(() => {
+        error.call();
     });
 };
 
@@ -133,7 +136,6 @@ Config.prototype.callService = function (error, success) {
  * @param {Function} success - callback
  */
 Config.prototype.analyzeResponse = function (error, success) {
-
     var mergeArray = function (objectsArray) {
         // objet fusion des couches
         var allLayersConfig = {};
@@ -154,12 +156,12 @@ Config.prototype.analyzeResponse = function (error, success) {
         }
 
         var mergedConfig = {
-            generalOptions: {
-                apiKeys: allKeysConfig
+            generalOptions : {
+                apiKeys : allKeysConfig
             },
-            layers: allLayersConfig,
-            tileMatrixSets: allTMSConfig
-        }
+            layers : allLayersConfig,
+            tileMatrixSets : allTMSConfig
+        };
         return mergedConfig;
     };
 
@@ -170,9 +172,8 @@ Config.prototype.analyzeResponse = function (error, success) {
         // on appelle le callback utilisateur en renvoyant la configuration récupérée
         success.call(this, Gp.Config);
     } else {
-        error.call(this, new ErrorService(MR.getMessage("SERVICE_RESPONSE_EMPTY")));
+        error.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
     }
-
 };
 
 Config.prototype.call = function () {
@@ -181,7 +182,7 @@ Config.prototype.call = function () {
 
     var context = this;
     /** fonction d'execution */
-    function run() {
+    function run () {
         this.logger.trace("CommonService::run ()");
         this.buildRequest.call(context, onError, onBuildRequest);
     }
@@ -189,19 +190,19 @@ Config.prototype.call = function () {
     run.call(context);
 
     // callback de fin de construction de la requête
-    function onBuildRequest(result) {
+    function onBuildRequest (result) {
         this.logger.trace("CommonService::onBuildRequest : ", result);
         this.callService.call(context, onError, onCallService);
     }
 
     // callback de fin d'appel au service
-    function onCallService(result) {
+    function onCallService (result) {
         this.logger.trace("CommonService::onCallService : ", result);
         this.analyzeResponse.call(context, onError, onAnalyzeResponse);
     }
 
     // callback de fin de lecture de la reponse
-    function onAnalyzeResponse(result) {
+    function onAnalyzeResponse (result) {
         this.logger.trace("CommonService::onAnalyzeResponse : ", result);
         if (result) {
             this.options.onSuccess.call(this, result);
@@ -211,7 +212,7 @@ Config.prototype.call = function () {
     }
 
     // callback de gestion des erreurs : renvoit un objet de type ErrorService
-    function onError(error) {
+    function onError (error) {
         this.logger.trace("CommonService::onError()");
         // error : l'objet est du type ErrorService ou Error
         var e = error;

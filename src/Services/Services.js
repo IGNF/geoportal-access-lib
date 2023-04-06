@@ -26,7 +26,7 @@ var Services = {
      * @param {Function} [options.onFailure] - Callback function for handling unsuccessful service responses (timeOut, missing rights, ...). Takes a {@link Gp.Error} object as parameter.
      * @param {Number} [options.timeOut=0] - Number of milliseconds above which a timeOut response will be returned with onFailure callback (see above). Default value is 0 which means timeOut will not be handled.
      */
-    getConfig: function (options) {
+    getConfig : function (options) {
         var configService = new Config(options);
         configService.call();
     },
@@ -58,7 +58,7 @@ var Services = {
      * @param {String} [options.api='REST'] - What API to use for interacting with underlying web service : 'REST' or 'WPS'. Only use if you know what you are doing.
      * @param {String} [options.outputFormat='xml'] - Output format for underlying web service response : 'xml' or 'json'. Only use if you know what you are doing.
      */
-    getAltitude: function (options) {
+    getAltitude : function (options) {
         var altiService = new Alti(options);
         altiService.call();
     },
@@ -104,7 +104,7 @@ var Services = {
      * @param {Boolean} [options.rawResponse=false] - Setting this parameter to true implies you want to handle the service response by yourself : it will be returned as an unparsed String in onSuccess callback parameter. Only use if you know what you are doing.
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
-    geocode: function (options) {
+    geocode : function (options) {
         var geocodeService = new Geocode(options);
         geocodeService.call();
     },
@@ -144,7 +144,7 @@ var Services = {
      * @param {Boolean} [options.rawResponse=false] - Setting this parameter to true implies you want to handle the service response by yourself : it will be returned as an unparsed String in onSuccess callback parameter. Only use if you know what you are doing.
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
-    reverseGeocode: function (options) {
+    reverseGeocode : function (options) {
         var reverseGeocodeService = new ReverseGeocode(options);
         reverseGeocodeService.call();
     },
@@ -171,7 +171,7 @@ var Services = {
      * @param {Boolean} [options.rawResponse=false] - Setting this parameter to true implies you want to handle the service response by yourself : it will be returned as an unparsed String in onSuccess callback parameter. Only use if you know what you are doing.
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
-    autoComplete: function (options) {
+    autoComplete : function (options) {
         var autoCompleteService = new AutoComplete(options);
         autoCompleteService.call();
     },
@@ -208,7 +208,7 @@ var Services = {
      * @param {Boolean} [options.rawResponse=false] - Setting this parameter to true implies you want to handle the service response by yourself : it will be returned as an unparsed String in onSuccess callback parameter. Only use if you know what you are doing.
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
-    route: function (options) {
+    route : function (options) {
         var routeService = new Route(options);
         routeService.call();
     },
@@ -245,7 +245,7 @@ var Services = {
      * @param {Boolean} [options.rawResponse=false] - Setting this parameter to true implies you want to handle the service response by yourself : it will be returned as an unparsed String in onSuccess callback parameter. Only use if you know what you are doing.
      * @param {Function} [options.onBeforeParse] - Callback function for handling service response before parsing (as an unparsed String). Takes a String as a parameter (the raw service response). Returns a String that will be parsed as the service response. Only use if you know what you are doing.
      */
-    isoCurve: function (options) {
+    isoCurve : function (options) {
         var processIsoCurveService = new ProcessIsoCurve(options);
         processIsoCurveService.call();
     }

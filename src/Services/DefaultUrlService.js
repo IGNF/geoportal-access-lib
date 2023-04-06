@@ -130,7 +130,7 @@ var DefaultUrlService = {
         */
         url : function (key) {
             // not homogeneous with others geoportal services URLs
-            var url = []; 
+            var url = [];
             for (var i = 0; i < key.length; i++) {
                 url[i] = this._key + key[i] + "Config.json";
             }

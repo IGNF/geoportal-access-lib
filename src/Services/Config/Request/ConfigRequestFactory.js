@@ -24,23 +24,23 @@ var ConfigRequestFactory = {
      *   };
      *
      */
-    build: function (options) {
+    build : function (options) {
         // logger
         var logger = Logger.getLogger("ConfigRequestFactory");
         logger.trace(["ConfigRequestFactory::build()"]);
-        
+
         // tableau des URLs vers les fichiers de config
         var configFilePath = options.serverUrl;
         // tableau des promesses fetch
         var fetchFiles = [];
-        
+
         // remplissage du tableau des config
         for (var i = 0; i < configFilePath.length; i++) {
             const request = new XMLHttpRequest();
             // requête synchrone
-            request.open('GET', configFilePath[i], false); 
+            request.open("GET", configFilePath[i], false);
             request.send(null);
-    
+
             if (request.status === 200) {
                 fetchFiles.push(JSON.parse(request.response));
             } else {
