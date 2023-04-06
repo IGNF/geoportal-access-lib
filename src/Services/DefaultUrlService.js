@@ -116,6 +116,28 @@ var DefaultUrlService = {
         }
     },
     /**
+     * Config web service access
+     *
+     * @member {Object}
+     * @property {Function} url (key) - Returns config service default urls with or without geoportal access key given as a parameter.
+     */
+    Config : {
+        _key : "https://raw.githubusercontent.com/IGNF/geoportal-configuration/main/dist/",
+        /**
+        * url
+        * @param {String} key - key
+        * @returns {String} url
+        */
+        url : function (key) {
+            // not homogeneous with others geoportal services URLs
+            var url = []; 
+            for (var i = 0; i < key.length; i++) {
+                url[i] = this._key + key[i] + "Config.json";
+            }
+            return url;
+        }
+    },
+    /**
      * Autocompletion web service access
      *
      * @member {Object}

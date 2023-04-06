@@ -15,9 +15,9 @@ import Pkg from "../../package.json";
  * @alias Gp.Services.CommonService
  * @param {Object} options - options communes à tous les services
  *
- * @param {String} options.serverUrl - URL d'accès au service.
+ * @param {String} options.serverUrl - URL d'accès au service. Par défaut "https://wxs.ign.fr/calcul/geoportail/SERVICE/".
  *      Permet de forcer l'utilisation d'un service équivalent déployé derrière une éventuelle autre URL d'accès.
- *      Si ce paramètre est renseigné alors, le paramètre apiKey est ignoré.
+ *      Si ce paramètre est renseigné alors, le paramètre par défaut est ignoré.
  *
  * @param {String} [options.protocol] - Le protocole à utiliser pour récupérer les informations du service :
  *      peut valoir 'JSONP' ou 'XHR'.
@@ -72,7 +72,6 @@ import Pkg from "../../package.json";
  *
  * @example
  *   var options = {
- *      apiKey : null,
  *      serverUrl : 'http://localhost/service/',
  *      protocol : 'JSONP', // JSONP|XHR
  *      ssl : false,
@@ -148,10 +147,10 @@ function CommonService (options) {
     // analyse des options
     // #####################
 
-    // gestion des clefs API
-    // if (!this.options.apiKey && !this.options.serverUrl) {
-    //     throw new Error(_.getMessage("PARAM_MISSING", "apiKey", "serverUrl"));
-    // }
+    // vérification de la présence du paramètre serverUrl
+    if (!this.options.serverUrl) {
+        throw new Error(_.getMessage("PARAM_MISSING", "serverUrl"));
+    }
 
     // modification de la fonction de callback onSuccess dans le cas où la réponse brute est demandée
     if (this.options.rawResponse && !this.options.onSuccess) {

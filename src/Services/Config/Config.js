@@ -2,12 +2,13 @@ import Logger from "../../Utils/LoggerByDefault";
 import _ from "../../Utils/MessagesResources";
 import ErrorService from "../../Exceptions/ErrorService";
 import CommonService from "../CommonService";
+import DefaultUrlService from "../DefaultUrlService";
 import ConfigRequestFactory from "./Request/ConfigRequestFactory";
 
 /**
  * @classdesc
  *
- * Recupération de la configuration de clés Géoportail
+ * Recupération de la configuration de clés Géoportail sous forme de JSON
  *
  *
  * @constructor
@@ -53,13 +54,24 @@ function Config(options) {
         throw new Error(_.getMessage("PARAM_MISSING", "onSuccess()"));
     }
     if (!options.apiKey && !options.customConfigFile) {
-        throw new Error(_.getMessage("PARAM_MISSING", "apiKey"));
+        throw new Error(_.getMessage("PARAM_MISSING", "apiKey", "customConfigFile"));
     }
     this.options = {};
     this.options.onSuccess = options.onSuccess;
     this.options.onFailure = options.onFailure;
-    this.options.apiKey = options.apiKey;
-    this.options.customConfigFile = options.customConfigFile;
+
+    // gestion de l'url du service par defaut (on prend un tableau d'urls vers les fichiers)
+    if (!options.customConfigFile) {
+        var urlFound = DefaultUrlService.Config.url(options.apiKey.split(','));
+        if (!urlFound) {
+            throw new Error("Url by default not found !");
+        }
+        this.options.serverUrl = urlFound;
+        this.logger.trace("Config file by default : " + this.options.serverUrl);
+    } else {
+        this.options.serverUrl = [options.customConfigFile];
+        this.logger.trace("Custom config file : " + this.options.serverUrl);
+    }
 }
 
 /**
@@ -84,8 +96,7 @@ Config.prototype.constructor = Config;
 Config.prototype.buildRequest = function (error, success) {
     // utilisation en mode callback
     var options = {
-        apiKey: this.options.apiKey,
-        customConfigFile: this.options.customConfigFile,
+        serverUrl: this.options.serverUrl,
         // callback
         onSuccess: function (result) {
             // sauvegarde de la requete !
