@@ -167,10 +167,8 @@ Config.prototype.analyzeResponse = function (error, success) {
 
     if (this.result) {
         var mergedConfig = mergeArray(this.result);
-        // on remplace Gp.Config
-        Gp.Config.configuration = mergedConfig;
         // on appelle le callback utilisateur en renvoyant la configuration récupérée
-        success.call(this, Gp.Config.configuration);
+        success.call(this, mergedConfig);
     } else {
         error.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
     }
@@ -205,6 +203,7 @@ Config.prototype.call = function () {
     function onAnalyzeResponse (result) {
         this.logger.trace("CommonService::onAnalyzeResponse : ", result);
         if (result) {
+            Gp.Services.Config = result;
             this.options.onSuccess.call(this, result);
         } else {
             return onError.call(this, new ErrorService("Analyse de la reponse en échec !?"));

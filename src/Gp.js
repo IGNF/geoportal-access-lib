@@ -28,7 +28,7 @@
 *     - .AutoComplete
 *         - {@link Gp.Services.AutoComplete.SuggestedLocation .SuggestedLocation()}
 *     - {@link Gp.Services.AutoCompleteResponse .AutoCompleteResponse()}
-*     - {@link Gp.Config .Config()}
+*     - {@link Gp.Services.Config .Config()}
 *     - {@link Gp.Services.DefaultUrl .DefaultUrl()}
 *     - {@link Gp.Services.GeocodeResponse .GeocodeResponse()}
 *     - {@link Gp.Services.GetConfigResponse .GetConfigResponse()}
@@ -94,7 +94,7 @@ Gp.Services.AutoCompleteResponse = AutoCompleteResponse;
 Gp.Services.AutoComplete = {};
 Gp.Services.AutoComplete.SuggestedLocation = SuggestedLocation;
 // Export Config
-Gp.Config = {};
+Gp.Services.Config = {};
 // Export IsoCurve
 Gp.Services.IsoCurveResponse = IsoCurveResponse;
 // Export Route
