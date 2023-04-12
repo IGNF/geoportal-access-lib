@@ -168,9 +168,9 @@ Config.prototype.analyzeResponse = function (error, success) {
     if (this.result) {
         var mergedConfig = mergeArray(this.result);
         // on remplace Gp.Config
-        Gp.Config = mergedConfig;
+        Gp.Config.configuration = mergedConfig;
         // on appelle le callback utilisateur en renvoyant la configuration récupérée
-        success.call(this, Gp.Config);
+        success.call(this, Gp.Config.configuration);
     } else {
         error.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
     }
