@@ -1,7 +1,7 @@
-var Gp = require("../../../dist/GpServices.js");
+var Gp = require("../../../dist/GpServices-src.js");
 
 var options = {
-    apiKey : "jhyvi0fgmnuxvfv0zjzorvdn",
+    apiKey : "calcul",
     protocol : "XHR",
     onSuccess : function (response) {
         console.log(response);

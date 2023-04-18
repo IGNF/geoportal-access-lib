@@ -61,6 +61,7 @@ import SuggestedLocation from "./Services/AutoComplete/Response/model/SuggestedL
 import IsoCurveResponse from "./Services/ProcessIsoCurve/Response/model/ProcessIsoCurveResponse";
 import RouteResponse from "./Services/Route/Response/model/RouteResponse";
 import RouteInstruction from "./Services/Route/Response/model/RouteInstruction";
+import Config from "./Services/Config/Config";
 import XHR from "./Protocols/XHR";
 import Error from "./Exceptions/ErrorService";
 import Helper from "./Utils/Helper";
@@ -94,7 +95,7 @@ Gp.Services.AutoCompleteResponse = AutoCompleteResponse;
 Gp.Services.AutoComplete = {};
 Gp.Services.AutoComplete.SuggestedLocation = SuggestedLocation;
 // Export Config
-Gp.Services.Config = {};
+Gp.Services.Config = Config;
 // Export IsoCurve
 Gp.Services.IsoCurveResponse = IsoCurveResponse;
 // Export Route

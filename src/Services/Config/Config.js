@@ -1,26 +1,20 @@
 import Logger from "../../Utils/LoggerByDefault";
 import _ from "../../Utils/MessagesResources";
-import ErrorService from "../../Exceptions/ErrorService";
 import CommonService from "../CommonService";
 import DefaultUrlService from "../DefaultUrlService";
-import ConfigRequestFactory from "./Request/ConfigRequestFactory";
-import Gp from "../../Gp";
+import ConfigInterface from "./ConfigInterface";
 
 /**
  * @classdesc
  *
  * Recupération de la configuration de clés Géoportail sous forme de JSON
  *
- *
  * @constructor
  * @extends {Gp.Services.CommonService}
  * @alias Gp.Services.Config
  * @param {Object} options - options spécifiques au service (+ les options heritées)
- *
  * @param {Sting} options.apiKey - clé(s) dont on veut obtenir la configuration. Si plusieurs clés, séparer chacune par une virgule
- *
  * @param {String} options.customConfigFile - chemin vers un fichier de configuration personnalisé. Surcharge le paramètre apiKey.
- *
  *
  * @example
  *   var options = {
@@ -32,12 +26,11 @@ import Gp from "../../Gp";
  */
 function Config (options) {
     if (!(this instanceof Config)) {
-        throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "Alti"));
+        throw new TypeError(_.getMessage("CLASS_CONSTRUCTOR", "Config"));
     }
 
     /**
      * Nom de la classe (heritage)
-     * FIXME instance ou classe ?
      */
     this.CLASSNAME = "Config";
 
@@ -60,18 +53,8 @@ function Config (options) {
     this.options.onSuccess = options.onSuccess;
     this.options.onFailure = options.onFailure;
 
-    // gestion de l'url du service par defaut (on prend un tableau d'urls vers les fichiers)
-    if (!options.customConfigFile) {
-        var urlFound = DefaultUrlService.Config.url(options.apiKey.split(","));
-        if (!urlFound) {
-            throw new Error("Url by default not found !");
-        }
-        this.options.serverUrl = urlFound;
-        this.logger.trace("Config file by default : " + this.options.serverUrl);
-    } else {
-        this.options.serverUrl = [options.customConfigFile];
-        this.logger.trace("Custom config file : " + this.options.serverUrl);
-    }
+    // gestion d'un tableau d'url des fichiers de configuration
+    this.options.listConfigUrls = (options.customConfigFile) ? [options.customConfigFile] : DefaultUrlService.Config.url(options.apiKey.split(","));
 }
 
 /**
@@ -88,55 +71,111 @@ Config.prototype = Object.create(CommonService.prototype, {
 Config.prototype.constructor = Config;
 
 /**
- * Création de la requête (overwrite)
+ * Création de la requête
  *
  * @param {Function} error   - callback des erreurs
  * @param {Function} success - callback
+ * @overload
  */
 Config.prototype.buildRequest = function (error, success) {
-    // utilisation en mode callback
-    var options = {
-        serverUrl : this.options.serverUrl,
-        // callback
-        onSuccess : function (result) {
-            // sauvegarde de la requete !
-            this.request = result;
-            success.call(this, this.request);
-        },
-        onFailure : error,
-        scope : this
-    };
+    // liste des urls des fichiers de configuration en JSON
+    this.listConfigUrls = this.options.listConfigUrls;
 
-    ConfigRequestFactory.build(options);
+    if (!this.listConfigUrls) {
+        error.call(this, new Error("url by default not found !"));
+        return;
+    }
+
+    // INFO :
+    // il n'y a pas de construction de requête,
+    // on passe directement à l'appel des requêtes
+    success.call(this, this.listConfigUrls);
 };
 
 /**
- * Récupération des configuration (overwrite)
+ * Récupération des configuration
  *
  * @param {Function} error   - callback des erreurs
  * @param {Function} success - callback
+ * @overload
  */
 Config.prototype.callService = function (error, success) {
-    // tableau des configuration json récupérées
-    var configArray = [];
-    Promise.all(this.request).then(
-        (results) => results.forEach(result => configArray.push(result))
-    ).then(() => {
-        this.result = configArray;
-        success.call(this, this.result);
-    }).catch(() => {
-        error.call();
-    });
+    // liste des resultats au format JSON
+    this.listConfigResults = [];
+
+    // test on env. nodejs or browser
+    let Fetch = null;
+    if (typeof window === "undefined") {
+        var nodefetch = require("node-fetch");
+        Fetch = nodefetch;
+    } else {
+        Fetch = window.fetch;
+    }
+
+    // the factory of fetch !
+    var fetchFactory = (url) => {
+        return Fetch(url, { credentials : "same-origin" })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json()
+                        .then((json) => {
+                            // TODO :
+                            // tester le contenu !
+                            return json;
+                        })
+                        .catch((error) => {
+                            throw new Error("Exception Json : " + error);
+                        });
+                } else {
+                    throw new Error("Exception HTTP : " + response.status + " (status code) !");
+                }
+            })
+            .catch((error) => {
+                return new Promise((resolve, reject) => {
+                    // eslint-disable-line no-unused-vars
+                    reject(error);
+                });
+            });
+    };
+
+    // construction des promises fetch
+    var promises = [];
+    for (let index = 0; index < this.listConfigUrls.length; index++) {
+        const url = this.listConfigUrls[index];
+        promises.push(fetchFactory(url));
+    }
+
+    Promise.all(promises)
+        .then((results) => {
+            if (!results) {
+                throw new Error("results config empty !?");
+            }
+            results.forEach((result) => {
+                // TODO :
+                // verification des resultats
+                this.listConfigResults.push(result);
+            });
+        })
+        .then(() => {
+            success.call(this, this.listConfigResults);
+        })
+        .catch((e) => {
+            // TODO :
+            // construction d'un message
+            error.call(this, e);
+        });
 };
 
 /**
- * Analyse et mise en forme de la réponse (fusion des configurations)
+ * Analyse et mise en forme de la réponse en fusionnant les configurations
  *
  * @param {Function} error   - callback des erreurs
  * @param {Function} success - callback
+ * @overload
  */
 Config.prototype.analyzeResponse = function (error, success) {
-    var mergeArray = function (objectsArray) {
+    // fonction de merge des objects JSON
+    var mergeConfig = function (objects) {
         // objet fusion des couches
         var allLayersConfig = {};
         // objet fusion des clés
@@ -145,14 +184,22 @@ Config.prototype.analyzeResponse = function (error, success) {
         var allTMSConfig = {};
 
         // on fusionne les résultat
-        for (var i = 0; i < objectsArray.length; i++) {
-            if (!objectsArray[i].generalOptions || !objectsArray[i].layers) {
-                // si le fichier de configuration donné en entré ne correspond pas à la structure attendue
-                throw new Error("Configuration non récupérée : structure de la configuration non conforme");
+        for (var i = 0; i < objects.length; i++) {
+            if (!objects[i].generalOptions || !objects[i].layers) {
+                return;
             }
-            allKeysConfig = { ...allKeysConfig, ...objectsArray[i].generalOptions.apiKeys };
-            allLayersConfig = { ...allLayersConfig, ...objectsArray[i].layers };
-            allTMSConfig = { ...allTMSConfig, ...objectsArray[i].tileMatrixSets };
+            allKeysConfig = {
+                ...allKeysConfig,
+                ...objects[i].generalOptions.apiKeys
+            };
+            allLayersConfig = {
+                ...allLayersConfig,
+                ...objects[i].layers
+            };
+            allTMSConfig = {
+                ...allTMSConfig,
+                ...objects[i].tileMatrixSets
+            };
         }
 
         var mergedConfig = {
@@ -165,63 +212,31 @@ Config.prototype.analyzeResponse = function (error, success) {
         return mergedConfig;
     };
 
-    if (this.result) {
-        var mergedConfig = mergeArray(this.result);
-        // on appelle le callback utilisateur en renvoyant la configuration récupérée
-        success.call(this, mergedConfig);
-    } else {
-        error.call(this, new ErrorService(_.getMessage("SERVICE_RESPONSE_EMPTY")));
-    }
-};
-
-Config.prototype.call = function () {
-    /* jshint validthis : true */
-    this.logger.trace("CommonService::call ()");
-
-    var context = this;
-    /** fonction d'execution */
-    function run () {
-        this.logger.trace("CommonService::run ()");
-        this.buildRequest.call(context, onError, onBuildRequest);
+    // fusion des configurations JSON
+    var ConfigJSON = mergeConfig(this.listConfigResults);
+    if (!ConfigJSON) {
+        error.call(this, new Error("configuration structure not conforme !"));
+        return;
     }
 
-    run.call(context);
+    // creation des interfaces
+    var IConfig = new ConfigInterface();
+    // ajout des interfaces avec la configuration JSON
+    Object.assign(IConfig, ConfigJSON);
 
-    // callback de fin de construction de la requête
-    function onBuildRequest (result) {
-        this.logger.trace("CommonService::onBuildRequest : ", result);
-        this.callService.call(context, onError, onCallService);
+    // définition de la variable globale Gp.Config
+    var scope = typeof window !== "undefined" ? window : {};
+    if (!scope.Gp) {
+        scope.Gp = {};
     }
 
-    // callback de fin d'appel au service
-    function onCallService (result) {
-        this.logger.trace("CommonService::onCallService : ", result);
-        this.analyzeResponse.call(context, onError, onAnalyzeResponse);
-    }
+    // enregistrement
+    scope.Gp.Config = IConfig;
 
-    // callback de fin de lecture de la reponse
-    function onAnalyzeResponse (result) {
-        this.logger.trace("CommonService::onAnalyzeResponse : ", result);
-        if (result) {
-            Gp.Services.Config = result;
-            this.options.onSuccess.call(this, result);
-        } else {
-            return onError.call(this, new ErrorService("Analyse de la reponse en échec !?"));
-        }
-    }
-
-    // callback de gestion des erreurs : renvoit un objet de type ErrorService
-    function onError (error) {
-        this.logger.trace("CommonService::onError()");
-        // error : l'objet est du type ErrorService ou Error
-        var e = error;
-        if (!(e instanceof ErrorService)) {
-            e = new ErrorService(error.message);
-        }
-        if (this.options.onFailure) {
-            this.options.onFailure.call(this, e);
-        }
-    }
+    // INFO :
+    // il n'y a pas d'analyse des résultats,
+    // on passe directement à l'appel de la callback utilisateur
+    success.call(this, scope.Gp.Config);
 };
 
 export default Config;

@@ -1,3 +1,7 @@
+import Logger from "../../../Utils/LoggerByDefault";
+import ErrorService from "../../../Exceptions/ErrorService";
+import RouteRequestREST from "./RouteRequestREST";
+
 /**
  * Creation d'une requête REST en mode POST ou GET
  * (Factory)
@@ -6,10 +10,6 @@
  * @alias Gp.Services.Route.Request.RouteRequestFactory
  * @private
  */
-import Logger from "../../../Utils/LoggerByDefault";
-import ErrorService from "../../../Exceptions/ErrorService";
-import RouteRequestREST from "./RouteRequestREST";
-
 var RouteRequestFactory = {
 
     /**

@@ -1,7 +1,7 @@
 var Gp = require("../../../dist/GpServices.js");
 
 var options = {
-    apiKey : "jhyvi0fgmnuxvfv0zjzorvdn",
+    apiKey : "calcul",
     // httpMethod : "GET",
     // outputFormat : "json",
     onSuccess : function (response) {
