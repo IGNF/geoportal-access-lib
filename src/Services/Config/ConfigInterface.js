@@ -9,9 +9,7 @@
  * @property {String} generalOptions.theme - default theme (FIXME : for what ?)
  * @property {Array.<Float>} generalOptions.wgs84Resolutions - geographical resolutions Array for each [zoom level of the Geoportal platform]{@link http://api.ign.fr/tech-docs-js/webmaster/layers.html#Geoportal_resolutions} from 0 to 21. Expressed in degrees/pixel.
  * @property {Object} layers - Associative array mapping resources availables IDs (keys) with their properties (values given as {@link Gp.Services.Config.Layer}).
- * @property {Object} territories - Associative array mapping french territories IDs (keys) with their properties (values given as {@link Gp.Services.Config.Territory}).
  * @property {Object} tileMatrixSets - Associative Array mapping TileMatrixSets IDs (keys) availables with their properties (values given as {@link Gp.Services.Config.TileMatrixSet}).
- * @property {Object} services - Associative Array mapping Geoportal web services IDs (keys) availables with their properties (values given as {@link Gp.Services.Config.Service}).
  *
  * @namespace
  * @alias Gp.Services.GetConfigInterface
@@ -31,11 +29,7 @@ function ConfigInterface () {
 
     this.layers = {};
 
-    this.territories = {};
-
     this.tileMatrixSets = {};
-
-    this.services = {};
 }
 
 ConfigInterface.prototype = {
@@ -125,52 +119,6 @@ ConfigInterface.prototype = {
             return;
         }
         return this.tileMatrixSets[tmsID];
-    },
-
-    /**
-     * Returns an associative array of territories configurations.
-     *
-     * @return {Object} territories - Object which properties are territory identifiers,
-     *      and corresponding values are instances of {@link Gp.Services.Config.Territory}.
-     */
-    getTerritories : function () {
-        return this.territories;
-    },
-
-    /**
-     * Returns a territory configuration, given its identifier.
-     *
-     * @param {String} territoryID - territory identifier (e.g. "FXX")
-     * @return {Object} territory - Territory configuration, instance of {@link Gp.Services.Config.Territory}
-     */
-    getTerritoryConf : function (territoryID) {
-        if (!this.territories) {
-            return;
-        }
-        return this.territories[territoryID];
-    },
-
-    /**
-     * Returns an associative array of services configurations.
-     *
-     * @return {Object} services - Object which properties are services identifiers,
-     *      and corresponding values are instances of {@link Gp.Services.Config.Service}.
-     */
-    getServices : function () {
-        return this.services;
-    },
-
-    /**
-     * Returns a service configuration, given its identifier.
-     *
-     * @param {String} serviceID - service identifier (e.g. "OGC:WMTS")
-     * @return {Object} service - service configuration, instance of {@link Gp.Services.Config.Service}
-     */
-    getServiceConf : function (serviceID) {
-        if (!this.services) {
-            return;
-        }
-        return this.services[serviceID];
     }
 
 };
