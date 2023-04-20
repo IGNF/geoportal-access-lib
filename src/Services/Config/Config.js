@@ -34,7 +34,7 @@ function Config (options) {
      */
     this.CLASSNAME = "Config";
 
-    this.logger = Logger.getLogger("Gp.Services.Config");
+    this.logger = Logger.getLogger("Gp.Config");
     this.logger.trace("[Constructeur Config (options)]");
 
     // #####################
