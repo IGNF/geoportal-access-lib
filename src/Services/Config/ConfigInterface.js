@@ -40,19 +40,6 @@ ConfigInterface.prototype = {
     constructor : ConfigInterface,
 
     /**
-     * Check if the configuration is loaded
-     *
-     * @returns {Boolean} True if Config is loaded, false otherwise
-     */
-    isConfigLoaded : function () {
-        var scope = typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : typeof global !== "undefined" ? global : {};
-        if (scope.Gp && scope.Gp.Config && scope.Gp && scope.Gp.Config && scope.Gp.Config.layers && Object.keys(scope.Gp.Config.layers).length !== 0) {
-            return true;
-        }
-        return false;
-    },
-
-    /**
      * Check if config is loaded for a given key
      *
      * @param {String} apiKey - Access key to Geoportal platform
