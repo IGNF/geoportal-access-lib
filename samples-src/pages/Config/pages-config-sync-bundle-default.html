@@ -29,6 +29,7 @@
 {{#content "js"}}
         var options = {
             apiKey : "cartes,essentiels",
+            sync : true,
             onSuccess : function (response) {
                 print(response);
             },
@@ -37,6 +38,6 @@
           }
         };
         Gp.Services.getConfig(options);
-        console.log("En mode ASYNC, ce message peut s'afficher n'importe où dans la pile !");
+        console.log("En mode SYNC, ce message doit s'afficher en dernier !");
 {{/content}}
 {{/extend}}

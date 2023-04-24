@@ -14,11 +14,13 @@ import ConfigInterface from "./ConfigInterface";
  * @alias Gp.Services.Config
  * @param {Object} options - options spécifiques au service (+ les options heritées)
  * @param {Sting} options.apiKey - clé(s) dont on veut obtenir la configuration. Si plusieurs clés, séparer chacune par une virgule
+ * @param {Boolean} [options.sync=false] - force le mode synchrone
  * @param {String} options.customConfigFile - chemin vers un fichier de configuration personnalisé. Surcharge le paramètre apiKey.
  *
  * @example
  *   var options = {
  *      apiKey : "cartes,ortho",
+ *      sync : false,
  *      onSuccess : function (response) {},
  *      onFailure : function (error) {},
  *   };
@@ -52,6 +54,9 @@ function Config (options) {
     this.options = {};
     this.options.onSuccess = options.onSuccess;
     this.options.onFailure = options.onFailure;
+
+    // mode sync
+    this.options.sync = options.sync || false;
 
     // gestion d'un tableau d'url des fichiers de configuration
     this.options.listConfigUrls = (options.customConfigFile) ? [options.customConfigFile] : DefaultUrlService.Config.url(options.apiKey.split(","));
@@ -100,6 +105,21 @@ Config.prototype.buildRequest = function (error, success) {
  * @overload
  */
 Config.prototype.callService = function (error, success) {
+    if (this.options.sync) {
+        __callServiceSync.call(this, error, success);
+    } else {
+        __callService.call(this, error, success);
+    }
+}
+
+/**
+ * Requêtes en mode asynchrone
+ * 
+ * @param {*} error 
+ * @param {*} success 
+ * @private
+ */
+var __callService = function (error, success) {
     // liste des resultats au format JSON
     this.listConfigResults = [];
 
@@ -164,6 +184,41 @@ Config.prototype.callService = function (error, success) {
             // construction d'un message
             error.call(this, e);
         });
+};
+
+/**
+ * Requêtes en mode synchrone
+ * 
+ * @param {*} error 
+ * @param {*} success 
+ * @private
+ */
+var __callServiceSync = function (error, success) {
+    // liste des resultats au format JSON
+    this.listConfigResults = [];
+
+    // FIXME :
+    // boucle synchrone !
+    for (var i = 0; i < this.listConfigUrls.length; i++) {
+        const url = this.listConfigUrls[i];
+        // TODO :
+        // prévoir le CORS, headers, ...
+        const request = new XMLHttpRequest();
+        request.open("GET", url, false);
+        request.send(null);
+        if (request.status === 200) {
+            // TODO :
+            // tester la reponse !
+            var response = JSON.parse(request.responseText);
+            this.listConfigResults.push(response);
+        }
+    }
+    // callback
+    if (this.listConfigResults.length !== 0) {
+        success.call(this, this.listConfigResults);
+    } else {
+        error.call(this, new Error("..."));
+    }
 };
 
 /**
