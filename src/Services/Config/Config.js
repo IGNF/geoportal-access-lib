@@ -286,7 +286,11 @@ Config.prototype.analyzeResponse = function (error, success) {
     }
 
     // enregistrement
-    scope.Gp.Config = IConfig;
+    if (scope.Gp.Config) {
+        Object.assign(scope.Gp.Config, IConfig);
+    } else {
+        scope.Gp.Config = IConfig;
+    }
 
     // INFO :
     // il n'y a pas d'analyse des résultats,
