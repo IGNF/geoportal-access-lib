@@ -110,13 +110,13 @@ Config.prototype.callService = function (error, success) {
     } else {
         __callService.call(this, error, success);
     }
-}
+};
 
 /**
  * Requêtes en mode asynchrone
- * 
- * @param {*} error 
- * @param {*} success 
+ *
+ * @param {*} error
+ * @param {*} success
  * @private
  */
 var __callService = function (error, success) {
@@ -188,9 +188,9 @@ var __callService = function (error, success) {
 
 /**
  * Requêtes en mode synchrone
- * 
- * @param {*} error 
- * @param {*} success 
+ *
+ * @param {*} error
+ * @param {*} success
  * @private
  */
 var __callServiceSync = function (error, success) {
