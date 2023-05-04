@@ -129,6 +129,10 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         url : function (key) {
+            // key must be an array of one or several keys
+            if (!Array.isArray(key)) {
+                key = key.split(',');
+            }
             // not homogeneous with others geoportal services URLs
             var url = [];
             for (var i = 0; i < key.length; i++) {
