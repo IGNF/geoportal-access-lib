@@ -187,10 +187,10 @@ ConfigInterface.prototype = {
                 }
 
                 // get services params
-                for (var key in keys) {
+                for (var i = 0; i < keys.length; i++) {
                     // only one serverUrl is saved in Gp.Config : with multiKeys, we have to retrieve the key used in the serverUrl property
-                    if (layerConf.serviceParams.serverUrl[keys[key]]) {
-                        params.url = layerConf.serviceParams.serverUrl[keys[key]];
+                    if (layerConf.serviceParams.serverUrl[keys[i]]) {
+                        params.url = layerConf.serviceParams.serverUrl[keys[i]];
                     }
                 }
                 params.version = layerConf.serviceParams.version;
