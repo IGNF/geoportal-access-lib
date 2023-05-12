@@ -1,12 +1,12 @@
-# Bibliothèque d'accès aux services Géoportail, version 3.2.1
+# Bibliothèque d'accès aux services Géoportail, version 3.2.2
 
-**17/01/2023 : 3.2.1**
+**12/05/2023 : 3.2.2**
 
 > release of geoportal access library
 
 ## Summary
 
-Mise à jour pour fix sur geocodage
+Minor fixes on documentation and dockerfile
 
 ## Changelog
 
@@ -14,11 +14,12 @@ Mise à jour pour fix sur geocodage
 
 * [Changed]
 
-    - le paramètre searchGeom est rendu facultatif (#81)
-
 * [Removed]
 
 * [Fixed]
+
+    - documentation (#82)
+    - dockerfile best practice violation (#84)
 
 * [Deprecated]
 
