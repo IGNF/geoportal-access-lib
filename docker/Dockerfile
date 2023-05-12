@@ -20,4 +20,4 @@ VOLUME ["/home/docker/html/geoportal-access-lib"]
 
 WORKDIR /home/docker/geoportal-access-lib
 
-CMD bash /home/docker/start.sh
+CMD ["bash", "/home/docker/start.sh"]
