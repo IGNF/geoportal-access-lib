@@ -2,7 +2,7 @@
 var Gp = require("../../../dist/GpServices.js");
 
 var options = {
-    url       : "http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/alti/rest/elevation.json?lon=3.30&lat=49.97",
+    url       : "http://wxs.ign.fr/calcul/alti/rest/elevation.json?lon=3.30&lat=49.97",
     method    : "GET",
     format    : "json", // "xml", "json" ou null
     content   : null,

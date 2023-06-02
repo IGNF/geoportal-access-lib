@@ -1,3 +1,9 @@
+// import Logger from "../../../Utils/LoggerByDefault";
+import MR from "../../../Utils/MessagesResources";
+import ErrSrv from "../../../Exceptions/ErrorService";
+import GeocodeResponse from "../Response/model/GeocodeResponse";
+import GeocodedLocation from "../Response/model/GeocodedLocation";
+
 /**
  * Fonction retournant un objet contenant des clés de lecture (readers)
  *      qui permettent de parser des réponses XML du service de géocodage direct du Géoportail
@@ -6,12 +12,6 @@
  * @alias Gp.Services.Geocode.Formats.GeocodeResponseParser
  * @private
  */
-
-// import Logger from "../../../Utils/LoggerByDefault";
-import MR from "../../../Utils/MessagesResources";
-import ErrSrv from "../../../Exceptions/ErrorService";
-import GeocodeResponse from "../Response/model/GeocodeResponse";
-import GeocodedLocation from "../Response/model/GeocodedLocation";
 
 /**
  * @classdesc

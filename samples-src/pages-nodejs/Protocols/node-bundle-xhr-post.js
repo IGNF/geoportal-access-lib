@@ -2,7 +2,7 @@
 var Gp = require("../../../dist/GpServices.js");
 
 var options = {
-    url       : "http://wxs.ign.fr/jhyvi0fgmnuxvfv0zjzorvdn/geoportail/ols",
+    url       : "http://wxs.ign.fr/calcul/geoportail/ols",
     method    : "POST",
     format    : "xml", // "xml", "json" ou null
     content   : "application/xml",

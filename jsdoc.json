@@ -37,7 +37,5 @@
         "destination": "./jsdoc/",
         "recurse": true,
         "lenient": true,
-        "verbose": true,
-        "tutorials": "./doc/tutorials"
-    }
+        "verbose": true    }
 }

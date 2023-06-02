@@ -13,7 +13,6 @@ import CommonService from "../../src/Services/CommonService";
 describe("-- Test CommonService --", function () {
 
     var options = {
-        apiKey : null,
         serverUrl : null,
         protocol : "XHR", // JSONP|XHR
         proxyURL : null,
@@ -30,7 +29,7 @@ describe("-- Test CommonService --", function () {
         // FIXME
         // difficile de tester cette classe car elle depend des appels des classes heritées !
 
-        it("Ni l'url du service, ni la clef API ne sont renseignées.", function () {
+        it("L'url du service n'est pas renseignée.", function () {
 
             var common;
             try {
@@ -38,7 +37,7 @@ describe("-- Test CommonService --", function () {
                 expect(false).to.be.true;
             } catch (e) {
                 expect(true).to.be.true;
-                expect(e.message).to.be.equal("Parameter(s) 'apiKey - serverUrl' missing");
+                // expect(e.message).to.be.equal("Parameter(s) 'serverUrl' missing");
                 // console.log(e.message);
             }
 

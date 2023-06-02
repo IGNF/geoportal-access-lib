@@ -1,7 +1,7 @@
 {{#extend "layout-sample-bundle"}}
 
 {{#content "head"}}
-        <title>Service d'autoconfiguration</title>
+            <title>Recupération de configuration</title>
 {{/content}}
 
 {{#content "style"}}
@@ -9,13 +9,12 @@
 {{/content}}
 
 {{#content "body"}}
-        <h1>Utilisation du Service d'autoconfiguration</h1>
-        <h2>Avec le protocole XHR</h2>
+        <h1>Utilisation du projet geoportal configuration</h1>
+        <h2>Avec un fichier de configuration local</h2>
         <pre>
           <code>
               var options = {
-                apiKey : '{{ apikey }}',
-                protocol : "XHR",
+                customConfigFile : '{{ resources }}/essentielsConfig.json',
                 onSuccess : function (response) {
                     print(response);
                 }
@@ -27,8 +26,7 @@
 
 {{#content "js"}}
         var options = {
-            apiKey : '{{ apikey }}',
-            protocol : "XHR",
+            customConfigFile : '{{ resources }}/essentielsConfig.json',
             onSuccess : function (response) {
                 print(response);
             }

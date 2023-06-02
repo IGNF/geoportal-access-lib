@@ -9,27 +9,24 @@ Here is how you can do.
 
 ### 1. Get the configuration file
 
-Fill the input text below with your geoportal access key ; if you want Geoportal Services to be accessed by default in https, check the "https access" check box.
+Fill the input text below with your geoportal access key.
 
 Click the "Get Config File" button.
 
-<form>
-    <section>
-        <label for="keyNumber">Number of keys : </label>
-        <input type="number" min="1" max="10" id="keyNumber" value="1">
-    </section>
-    <section id="keyInputSection">
-        <p id="keyInputPara1">
-            <label for="keyInput1" class="key-label">Key 1 : </label>
-            <input type="text" class="form-control input-sm key-value" placeholder="Geoportail access key 1"
-                size="30" id="apiKey1">
-        </p>
-    </section>
-    <section>
-        <input type="checkbox" id="https-cb">https access</input>
-        <input type="button" onclick="doIt()" id="key-button" value="Get Config File" class="key-button"></input>
-        </p>
-    </section>
+<form action="" method="POST">
+    <div>
+      <label for="keyNumber">Nombre de clefs : </label>
+      <input type="number" min="1" max="10" id="keyNumber" value="1">
+    </div>
+    <div id="keyInputSection">
+      <p id="keyInputPara1">
+          <label for="keyInput1" class="key-label">Clef 1 : </label>
+          <input type="text" class="form-control input-sm key-value" placeholder="Clef d'accès Géoportail 1" size="30" name="apiKey1" id="apiKey1">
+      </p>
+    </div>
+    <div>
+      <input type="submit" id="key-button" value="Récupérer le fichier de configuration" class="key-button">
+    </div>
 </form>
 <script type="text/javascript" src="./../dist/GpServices.js"></script>
 <script type="text/javascript">
@@ -56,76 +53,25 @@ Click the "Get Config File" button.
             // create label for key input
             var keyLabel = document.createElement("div");
             keyLabel.className = "key-label";
-            keyLabel.innerHTML = "Key " + i + " : ";
-            // create key input 
+            keyLabel.innerHTML = "Clef " + i + " : ";
+            // create key input
             var keyInput = document.createElement("input");
             keyInput.type = "text";
             keyInput.className = "form-control input-sm key-value"; // set the CSS class
-            keyInput.placeholder = "Geoportail access key " + i;
+            keyInput.placeholder = "Clef d'accès Géoportail " + i;
             keyInput.size = "30";
             keyInput.id = "apiKey" + i;
+            keyInput.name = "apiKey" + i;
             // add the form elements to the DOM
             keyPara.appendChild(keyLabel);
             keyPara.appendChild(keyInput);
             document.getElementById("keyInputSection").appendChild(keyPara);
         }
     };
-    function concatKeys() {
-        var keyInputs = document.getElementsByClassName("key-value");
-        var concatenedKeys = keyInputs[0].value;
-        for (var i = 1; i < keyInputs.length; i++) {
-            concatenedKeys = concatenedKeys + "," + keyInputs[i].value;
-        }
-        return concatenedKeys;
-    }
-    function doIt() {
-        var firstkelem = document.getElementById("apiKey1");
-        var concatenedKeys = concatKeys();
-        if (!firstkelem.value || firstkelem.value.trim().length == 0) {
-            return;
-        }
-        // disable submit button
-        var belem = document.getElementById("key-button");
-        belem.setAttribute("disabled", "true");
-        // makes pointer wait
-        belem.style.cursor = "wait";
-        var article = document.getElementsByClassName("content")[0];
-        article.style.cursor = "wait";
-        // https access
-        var httpsCB = document.getElementById("https-cb");
-        var protocol = "http";
-        var resultFileName = "autoconf.json";
-        if (httpsCB.checked) {
-            protocol += "s";
-            resultFileName = "autoconf-https.json";
-        }
-        var getconfigUrl = protocol + "://wxs.ign.fr/" + firstkelem.value.trim() + "/autoconf/?keys=" +concatenedKeys.trim();
-        Gp.Services.getConfig({
-            serverUrl: getconfigUrl,
-            onBeforeParse: function (result) {
-                var jsonpResult = result;
-                if (result.indexOf("callback") < 0) {
-                    // result en XML => needs jsonp
-                    jsonpResult = 'callback({"http":{"status":200,"error":null},"xml":"' + result.replace(/"/g,'\\"') + '"});';
-                }
-                var a = document.createElement("a");
-                a.setAttribute("href", "data:text/javascript;charset=utf-8," + encodeURIComponent(jsonpResult));
-                a.setAttribute("download", resultFileName);
-                document.body.appendChild(a);
-                a.click();
-                // re-enable submit button
-                belem.removeAttribute("disabled");
-                // re-change cursor
-                article.style.cursor = "auto";
-                belem.style.cursor = "auto";
-            }
-        });
-    }
 </script>
 
 
-
-When prompted, save the file "autoconf.json" (or "autoconf-https.json") on your platform.
+When prompted, save the file "customConfig.json" on your platform.
 
 
 ### 2. Configure geoportal functions to use that file
@@ -135,12 +81,12 @@ Be it [Geoportal access lib](https://github.com/ignf/geoportal-access-lib), [Geo
 
 #### With Geoportal access lib
 
-Use it as a value of the **serverUrl** param of the [Gp.Services.getConfig()](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~getConfig) function (instead of the **apiKey** param) :
+Use it as a value of the **customConfigFile** param of the [Gp.Services.getConfig()](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~getConfig) function (instead of the **apiKey** param) :
 
 ``` javascript
 the Gp.Services.getConfig({
     ...
-    serverUrl : "path/to/autoconf.json",
+    customConfigFile : "path/to/customConfig.json",
     callbackSuffix : "",
     ...
 }) ;
@@ -152,22 +98,22 @@ the Gp.Services.getConfig({
 Use it with the **data-url** attribute of the script tag used to load the Geoportal extension (instead of the **data-key** attribute) :
 
 ``` html
-<script type="text/javascript" src="path/to/GpPluginLeaflet.js" data-url="path/to/autoconf.json"></script>
+<script type="text/javascript" src="path/to/GpPluginLeaflet.js" data-url="path/to/customConfig.json"></script>
 <!-- or -->
-<script type="text/javascript" src="path/to/GpPluginOpenLayers.js" data-url="path/to/autoconf.json"></script>
+<script type="text/javascript" src="path/to/GpPluginOpenLayers.js" data-url="path/to/customConfig.json"></script>
 ```
 
 
 #### With Geoportal SDK
 
-Use it as a value of the **configUrl** param of the Gp.MapOptions object used in the Gp.Map.load() function (instead of the **apiKey** param) :
+Use it as a value of the **customConfigFile** param of the Gp.MapOptions object used in the Gp.Map.load() function (instead of the **apiKey** param) :
 
 ``` javascript
 Gp.Map.load(
     "mapDiv",    
     {
         ...
-        configUrl : "path/to/autoconf.json",
+        customConfigFile : "path/to/customConfig.json",
         ...
     }
 ) ;
