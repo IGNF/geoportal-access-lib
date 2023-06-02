@@ -1,7 +1,7 @@
 {{#extend "layout-sample-bundle"}}
 
 {{#content "head"}}
-        <title>Service d'autoconfiguration</title>
+        <title>Recupération de configuration</title>
 {{/content}}
 
 {{#content "style"}}
@@ -9,14 +9,16 @@
 {{/content}}
 
 {{#content "body"}}
-        <h1>Utilisation du Service d'autoconfiguration</h1>
-        <h2>Avec les paramètres obligatoires seulement</h2>
+        <h1>Utilisation du projet geoportal configuration</h1>
         <pre>
           <code>
               var options = {
-                apiKey : "{{ apikey }}",
+                apiKey : "cartes,essentiels",
                 onSuccess : function (response) {
                     print(response);
+                },
+                onFailure : function (error) {
+                    print(error.message);
                 }
             };
             Gp.Services.getConfig(options);
@@ -26,11 +28,16 @@
 
 {{#content "js"}}
         var options = {
-            apiKey : "{{ apikey }}",
+            apiKey : "cartes,essentiels",
+            sync : true,
             onSuccess : function (response) {
                 print(response);
-            }
+            },
+            onFailure : function (error) {
+              print(error.message);
+          }
         };
         Gp.Services.getConfig(options);
+        console.log("En mode SYNC, ce message doit s'afficher en dernier !");
 {{/content}}
 {{/extend}}

@@ -71,7 +71,6 @@ import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
  *      maximumResponses : 25,
  *   };
  *
- * @private
  */
 function ReverseGeocode (options_) {
     if (!(this instanceof ReverseGeocode)) {

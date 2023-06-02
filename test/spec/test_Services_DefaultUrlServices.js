@@ -26,8 +26,8 @@ describe("-- Test DefaultUrlService --", function () {
             expect(DefaultUrlService.ProcessIsoCurve.url(key)).to.be.equal("https://wxs.ign.fr/CLE/geoportail/isochrone/rest/1.0.0/isochrone");
             expect(DefaultUrlService.AutoComplete.url(key)).to.be.equal("https://wxs.ign.fr/CLE/ols/apis/completion" );
             expect(DefaultUrlService.ReverseGeocode.url(key)).to.be.equal("https://wxs.ign.fr/CLE/geoportail/ols");
-            expect(DefaultUrlService.AutoConf.url(key)["apiKey"]).to.be.equal("https://wxs.ign.fr/CLE/autoconf");
-            expect(DefaultUrlService.AutoConf.url(keys)["apiKeys"]).to.be.equal("https://wxs.ign.fr/CLE1/autoconf?keys=CLE1,CLE2");
+            expect(DefaultUrlService.Config.url([key])).deep.to.be.equal(["https://raw.githubusercontent.com/IGNF/geoportal-configuration/main/dist/CLEConfig.json"]);
+            expect(DefaultUrlService.Config.url(keys)).deep.to.be.equal(["https://raw.githubusercontent.com/IGNF/geoportal-configuration/main/dist/CLE1Config.json","https://raw.githubusercontent.com/IGNF/geoportal-configuration/main/dist/CLE2Config.json"]);
             expect(DefaultUrlService.Geocode.url(key)).to.be.equal("https://wxs.ign.fr/CLE/geoportail/ols");
             expect(DefaultUrlService.Route.url(key)).to.be.equal("https://wxs.ign.fr/CLE/geoportail/itineraire/rest/1.0.0/route");
         });

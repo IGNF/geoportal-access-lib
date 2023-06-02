@@ -1,3 +1,9 @@
+import Logger from "../../../Utils/LoggerByDefault";
+import MRes from "../../../Utils/MessagesResources";
+import ErrorService from "../../../Exceptions/ErrorService";
+import RouteResponse from "./model/RouteResponse";
+import RouteInstruction from "./model/RouteInstruction";
+
 /**
  * Factory pour générer une reponse JSON à partir d'un XML ou d'un JSON
  * (Factory)
@@ -6,12 +12,6 @@
  * @alias Gp.Services.Route.Response.RouteResponseFactory
  * @private
  */
-import Logger from "../../../Utils/LoggerByDefault";
-import MRes from "../../../Utils/MessagesResources";
-import ErrorService from "../../../Exceptions/ErrorService";
-import RouteResponse from "./model/RouteResponse";
-import RouteInstruction from "./model/RouteInstruction";
-
 var RouteResponseFactory = {
 
     /**

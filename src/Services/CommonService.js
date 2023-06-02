@@ -15,14 +15,9 @@ import Pkg from "../../package.json";
  * @alias Gp.Services.CommonService
  * @param {Object} options - options communes à tous les services
  *
- * @param {String} options.apiKey - Clef d'accès à la plateforme Géoportail,
- *      nécessaire pour franchir la couche de contrôle des accès pour avoir une réponse du service invoqué.
- *      Plusieurs clefs peuvent être passées dans le cas de l'invocation du service d'autoconfiguration.
- *      Si ce paramètre n'est pas renseigné, alors le paramètre serverUrl doit être renseigné (comprenant alors, si nécessaire la clef API).
- *
- * @param {String} options.serverUrl - URL d'accès au service.
+ * @param {String} [options.serverUrl] - URL d'accès au service. Par défaut "https://wxs.ign.fr/calcul/geoportail/SERVICE/".
  *      Permet de forcer l'utilisation d'un service équivalent déployé derrière une éventuelle autre URL d'accès.
- *      Si ce paramètre est renseigné alors, le paramètre apiKey est ignoré.
+ *      Si ce paramètre est renseigné alors, le paramètre par défaut est ignoré.
  *
  * @param {String} [options.protocol] - Le protocole à utiliser pour récupérer les informations du service :
  *      peut valoir 'JSONP' ou 'XHR'.
@@ -40,7 +35,7 @@ import Pkg from "../../package.json";
  * @param {String} [options.callbackSuffix] - Suffixe de la fonction de callback à utiliser, dans le cas du protocole JSONP.
  *      Par défaut, la fonction de callback portera un nom du type "callback"+ID, où ID est soit un identifiant unique généré à chaque requête,
  *      soit le paramètre callbackSuffix s'il est spécifié. Par exemple, si callbackSuffix="_2", la fonction sera "callback_2 ()".
- *      Utile pour utiliser une réponse déjà encapsulée dans une fonction de callback, dont le nom est connu (ex : chargement de l'autoconfiguration en local)
+ *      Utile pour utiliser une réponse déjà encapsulée dans une fonction de callback, dont le nom est connu
  *      Utile seulement si le paramètre 'protocol' vaut 'JSONP', il ne sera pas pris en compte si protocol vaut 'XHR'.
  *
  * @param {String} [options.httpMethod] - La méthode HTTP
@@ -77,7 +72,6 @@ import Pkg from "../../package.json";
  *
  * @example
  *   var options = {
- *      apiKey : null,
  *      serverUrl : 'http://localhost/service/',
  *      protocol : 'JSONP', // JSONP|XHR
  *      ssl : false,
@@ -91,7 +85,6 @@ import Pkg from "../../package.json";
  *      onFailure : function (error) {},
  *      onBeforeParse : function (rawResponse) {}
  *   };
- * @private
  */
 function CommonService (options) {
     if (!(this instanceof CommonService)) {
@@ -153,11 +146,6 @@ function CommonService (options) {
     // analyse des options
     // #####################
 
-    // gestion des clefs API
-    if (!this.options.apiKey && !this.options.serverUrl) {
-        throw new Error(_.getMessage("PARAM_MISSING", "apiKey", "serverUrl"));
-    }
-
     // modification de la fonction de callback onSuccess dans le cas où la réponse brute est demandée
     if (this.options.rawResponse && !this.options.onSuccess) {
         /**
@@ -183,7 +171,7 @@ function CommonService (options) {
         // les cas particuliers des services avec plusieurs urls (ex. Alti) devront être traité dans la classe du composant
         // donc si l'url n'est pas renseignée, il faut utiliser les urls par defaut
         DefaultUrlService.ssl = this.options.ssl;
-        var urlByDefault = DefaultUrlService[this.CLASSNAME].url(this.options.apiKey);
+        var urlByDefault = DefaultUrlService[this.CLASSNAME].url("calcul");
         if (typeof urlByDefault === "string") {
             this.options.serverUrl = urlByDefault;
         } else {

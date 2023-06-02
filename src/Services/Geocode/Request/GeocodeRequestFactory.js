@@ -1,3 +1,6 @@
+import Logger from "../../../Utils/LoggerByDefault";
+import GeocodeRequestREST from "./GeocodeRequestREST";
+
 /**
  * Creation d'une requête
  * (Factory)
@@ -6,9 +9,6 @@
  * @alias Gp.Services.Geocode.Request.GeocodeRequestFactory
  * @private
  */
-import Logger from "../../../Utils/LoggerByDefault";
-import GeocodeRequestREST from "./GeocodeRequestREST";
-
 var GeocodeRequestFactory = {
 
     /**

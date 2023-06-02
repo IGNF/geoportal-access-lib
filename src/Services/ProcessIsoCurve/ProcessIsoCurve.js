@@ -95,7 +95,6 @@ import ProcessIsoCurveResponseFactory from "./Response/ProcessIsoCurveResponseFa
  *      graph : "voiture",
  *      reverse : false
  *  };
- * @private
  */
 
 function ProcessIsoCurve (options) {
@@ -247,7 +246,7 @@ function ProcessIsoCurve (options) {
     // gestion de l'url du service par defaut
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
     if (!this.options.serverUrl) {
-        var urlFound = DefaultUrlService.ProcessIsoCurve.url(this.options.apiKey);
+        var urlFound = DefaultUrlService.ProcessIsoCurve.url("calcul");
         if (!urlFound) {
             throw new Error("Url by default not found !");
         }

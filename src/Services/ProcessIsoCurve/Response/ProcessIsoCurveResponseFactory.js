@@ -1,3 +1,8 @@
+import Logger from "../../../Utils/LoggerByDefault";
+import MRes from "../../../Utils/MessagesResources";
+import ErrorService from "../../../Exceptions/ErrorService";
+import ProcessIsoCurveResponse from "./model/ProcessIsoCurveResponse";
+
 /**
  * Factory pour générer une reponse JSON à partir d'un JSON
  * (Factory)
@@ -6,11 +11,6 @@
  * @alias Gp.Services.ProcessIsoCurve.Response.ProcessIsoCurveResponseFactory
  * @private
  */
-import Logger from "../../../Utils/LoggerByDefault";
-import MRes from "../../../Utils/MessagesResources";
-import ErrorService from "../../../Exceptions/ErrorService";
-import ProcessIsoCurveResponse from "./model/ProcessIsoCurveResponse";
-
 var ProcessIsoCurveResponseFactory = {
 
     /**

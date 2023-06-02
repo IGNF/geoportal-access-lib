@@ -352,9 +352,9 @@ Gp.Services.isoCurve({
 
 ## Obtenir des informations relatives à un contrat d'accès au Géoportail
 
-La fonction [Gp.Services.getConfig()](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~getConfig) permet de consulter, via le service d'autoconfiguration de la plateforme Géoportail, les ressources disponibles pour une clef d'accès à la plateforme et d'avoir les paramètres permettant leur utilisation. Elle prend en paramètres :
+La fonction [Gp.Services.getConfig()](http://ignf.github.io/geoportal-access-lib/latest/jsdoc/module-Services.html#~getConfig) permet de consulter les ressources disponibles pour une clef d'accès à la plateforme et d'avoir les paramètres permettant leur utilisation. Elle prend en paramètres :
 
-* une **clef d'accès à la plateforme Géoportail** obtenue sur le site [geoservices.ign.fr](https://geoservices.ign.fr/services-web) dont on veut consulter les droits.
+* une (ou plusieurs) **clef d'accès à la plateforme Géoportail** obtenue sur le site [geoservices.ign.fr](https://geoservices.ign.fr/services-web) dont on veut consulter les droits.
 
 * d'autres paramètres éventuels à passer au service...
 

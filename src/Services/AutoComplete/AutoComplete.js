@@ -56,7 +56,6 @@ import ErrorService from "../../Exceptions/ErrorService";
  *      territory : 'METROPOLE',
  *      maximumResponses : 10
  *   };
- * @private
  */
 function AutoComplete (options_) {
     if (!(this instanceof AutoComplete)) {
