@@ -288,6 +288,10 @@ Config.prototype.analyzeResponse = function (error, success) {
     // enregistrement
     if (scope.Gp.Config) {
         Object.assign(scope.Gp.Config, IConfig);
+        // dans le doute..., ceinture et bretelles !
+        for (var property in IConfig) {
+            scope.Gp.Config[property] = IConfig[property];
+        }
     } else {
         scope.Gp.Config = IConfig;
     }
