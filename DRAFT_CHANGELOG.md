@@ -1,6 +1,6 @@
-# Bibliothèque d'accès aux services Géoportail, version 3.3.0
+# Bibliothèque d'accès aux services Géoportail, version 3.3.1
 
-**02/06/2023 : 3.3.0**
+**02/06/2023 : 3.3.1**
 
 > release of geoportal access library
 
