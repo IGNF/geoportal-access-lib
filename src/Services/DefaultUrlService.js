@@ -122,7 +122,7 @@ var DefaultUrlService = {
      * @property {Function} url (key) - Returns config service default urls with or without geoportal access key given as a parameter.
      */
     Config : {
-        _key : "https://raw.githubusercontent.com/IGNF/geoportal-configuration/main/dist/",
+        _key : "https://raw.githubusercontent.com/IGNF/geoportal-configuration/new-url/dist/",
         /**
         * url
         * @param {String} key - key
