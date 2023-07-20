@@ -6,8 +6,6 @@
 
 ## Summary
 
-Fix Config Interface pour WMS vecteur
-
 ## Changelog
 
 * [Added]
@@ -17,8 +15,6 @@ Fix Config Interface pour WMS vecteur
 * [Removed]
 
 * [Fixed]
-
-    - chaine de caractères vide pour style des couches WMS Vecteur récupérée depuis la configuration (424b40d10c9bc7a6c5fe318d9ec1f3483615b1d1)
 
 * [Deprecated]
 
