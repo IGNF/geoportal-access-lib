@@ -173,7 +173,7 @@ ConfigInterface.prototype = {
     getLayerParams : function (layerName, service) {
         var params = {};
 
-        if (Object.keys(this.tileMatrixSets).length !== 0 && Object.keys(this.layers).length !== 0) {
+        if ((service === "WMS" || Object.keys(this.tileMatrixSets).length !== 0) && Object.keys(this.layers).length !== 0) {
             // get the layerId of the layer
             var layerId = this.getLayerId(layerName, service);
 
@@ -193,8 +193,17 @@ ConfigInterface.prototype = {
                         params.url = layerConf.serviceParams.serverUrl[keys[i]];
                     }
                 }
+
+                const wmsTypeRegex = new RegExp('\/v\/');
+                // WMS vector style always empty (not in getCap)
+                if (wmsTypeRegex.test(params.url)) {
+                  params.styles = "";
+                } else {
+                  // WMS raster style is defined in getCap
+                  params.styles = layerConf.styles[0].name;
+                }
+
                 params.version = layerConf.serviceParams.version;
-                params.styles = layerConf.styles[0].name;
                 params.format = layerConf.formats[0].name;
                 params.projection = layerConf.defaultProjection;
 
