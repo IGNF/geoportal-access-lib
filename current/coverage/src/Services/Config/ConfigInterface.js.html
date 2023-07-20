@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">1.03% </span>
+                <span class="strong">1% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/97</span>
+                <span class='fraction'>1/100</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/57</span>
+                <span class='fraction'>0/60</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">1.03% </span>
+                <span class="strong">1% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/97</span>
+                <span class='fraction'>1/100</span>
             </div>
         
             
@@ -373,7 +373,16 @@
 <a name='L308'></a><a href='#L308'>308</a>
 <a name='L309'></a><a href='#L309'>309</a>
 <a name='L310'></a><a href='#L310'>310</a>
-<a name='L311'></a><a href='#L311'>311</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L311'></a><a href='#L311'>311</a>
+<a name='L312'></a><a href='#L312'>312</a>
+<a name='L313'></a><a href='#L313'>313</a>
+<a name='L314'></a><a href='#L314'>314</a>
+<a name='L315'></a><a href='#L315'>315</a>
+<a name='L316'></a><a href='#L316'>316</a>
+<a name='L317'></a><a href='#L317'>317</a>
+<a name='L318'></a><a href='#L318'>318</a>
+<a name='L319'></a><a href='#L319'>319</a>
+<a name='L320'></a><a href='#L320'>320</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -568,7 +577,16 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -858,7 +876,7 @@ ConfigInterface.prototype = {
     getLayerParams : <span class="fstat-no" title="function not covered" >function (l</span>ayerName, service) {
         var params = <span class="cstat-no" title="statement not covered" >{};</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        if (Object.keys(this.tileMatrixSets).length !== 0 &amp;&amp; Object.keys(this.layers).length !== 0) {</span>
+<span class="cstat-no" title="statement not covered" >        if ((service === "WMS" || Object.keys(this.tileMatrixSets).length !== 0) &amp;&amp; Object.keys(this.layers).length !== 0) {</span>
             // get the layerId of the layer
             var layerId = <span class="cstat-no" title="statement not covered" >this.getLayerId(layerName, service);</span>
 &nbsp;
@@ -878,8 +896,17 @@ ConfigInterface.prototype = {
 <span class="cstat-no" title="statement not covered" >                        params.url = layerConf.serviceParams.serverUrl[keys[i]];</span>
                     }
                 }
+&nbsp;
+                const wmsTypeRegex = <span class="cstat-no" title="statement not covered" >/\/v\//;</span>
+                // WMS vector style always empty (not in getCap)
+<span class="cstat-no" title="statement not covered" >                if (wmsTypeRegex.test(params.url)) {</span>
+<span class="cstat-no" title="statement not covered" >                    params.styles = "";</span>
+                } else {
+                    // WMS raster style is defined in getCap
+<span class="cstat-no" title="statement not covered" >                    params.styles = layerConf.styles[0].name;</span>
+                }
+&nbsp;
 <span class="cstat-no" title="statement not covered" >                params.version = layerConf.serviceParams.version;</span>
-<span class="cstat-no" title="statement not covered" >                params.styles = layerConf.styles[0].name;</span>
 <span class="cstat-no" title="statement not covered" >                params.format = layerConf.formats[0].name;</span>
 <span class="cstat-no" title="statement not covered" >                params.projection = layerConf.defaultProjection;</span>
 &nbsp;
@@ -1000,7 +1027,7 @@ export default ConfigInterface;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-07T16:52:00.352Z
+                at 2023-07-20T17:03:08.495Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
