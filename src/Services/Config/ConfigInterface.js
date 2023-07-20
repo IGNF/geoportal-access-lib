@@ -194,13 +194,13 @@ ConfigInterface.prototype = {
                     }
                 }
 
-                const wmsTypeRegex = new RegExp('\/v\/');
+                const wmsTypeRegex = /\/v\//;
                 // WMS vector style always empty (not in getCap)
                 if (wmsTypeRegex.test(params.url)) {
-                  params.styles = "";
+                    params.styles = "";
                 } else {
-                  // WMS raster style is defined in getCap
-                  params.styles = layerConf.styles[0].name;
+                    // WMS raster style is defined in getCap
+                    params.styles = layerConf.styles[0].name;
                 }
 
                 params.version = layerConf.serviceParams.version;
