@@ -1,7 +1,7 @@
 {
   "name": "geoportal-access-lib",
-  "version": "3.3.2",
-  "date": "20/07/2023",
+  "version": "3.3.3",
+  "date": "02/08/2023",
   "description": "French Geoportal resources access library",
   "module": "src/Gp.js",
   "main": "dist/GpServices-src.js",
