@@ -59,7 +59,11 @@ function Config (options) {
     this.options.sync = options.sync || false;
 
     // gestion d'un tableau d'url des fichiers de configuration
-    this.options.listConfigUrls = (options.customConfigFile) ? [options.customConfigFile] : DefaultUrlService.Config.url(options.apiKey.split(","));
+    this.options.listConfigUrls = (options.customConfigFile)
+        ? [options.customConfigFile]
+        : !Array.isArray(options.apiKey)
+            ? DefaultUrlService.Config.url(options.apiKey.split(","))
+            : DefaultUrlService.Config.url(options.apiKey);
 }
 
 /**
