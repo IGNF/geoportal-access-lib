@@ -154,7 +154,7 @@ function Route (options) {
     }
     this.options.outputFormat = "json";
 
-    this.options.resource = options.resource || "bdtopo-osrm";
+    this.options.resource = options.resource || "osrm77";
     this.options.startPoint = options.startPoint;
     this.options.endPoint = options.endPoint;
     this.options.viaPoints = options.viaPoints || [];
