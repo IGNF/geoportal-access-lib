@@ -35,6 +35,11 @@ function AltiElevationRequest (options) {
      * true|false
      */
     this.zonly = this.options.zonly || false; // test des options héritées !
+
+    /* 
+     * Ressource utilisée 
+    */
+    this.resource = this.options.resource;
 }
 
 /**
@@ -96,6 +101,10 @@ AltiElevationRequest.prototype.getData = function () {
     map.push({
         k : "format",
         v : this.format
+    });
+    map.push({
+        k : "resource",
+        v : this.resource
     });
 
     return map;

@@ -67,6 +67,7 @@ var AltiRequestFactory = {
         settings.param.format = options.outputFormat;
         settings.param.sampling = options.sampling;
         settings.param.zonly = options.zonly;
+        settings.param.resource = options.resource;
 
         // gestion des callback
         var bOnError = !!(options.onError !== null && typeof options.onError === "function"); // cast variable to boolean

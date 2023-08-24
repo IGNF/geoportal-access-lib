@@ -47,6 +47,8 @@ import AltiResponseFactory from "./Response/AltiResponseFactory";
  *
  * @param {Boolean} [options.zonly] - Permet de ne récupérer que les altitudes en sortie s'il vaut 'true'.
  *      Vaut 'false' par défaut.
+ * 
+ * @param {String} [options.resource] - Resource utilisée pour réaliser le calcul.
  *
  * @example
  *   var options = {
@@ -65,7 +67,8 @@ import AltiResponseFactory from "./Response/AltiResponseFactory";
  *      outputFormat : 'json' // json|xml
  *      sampling : 3,
  *      api : 'REST', // REST|WPS
- *      zonly : false // false|true
+ *      zonly : false // false|true,
+ *      resource : "resource-par-defaut"
  *   };
  *
  */
@@ -103,6 +106,9 @@ function Alti (options) {
 
     // format de réponse du service : "json" ou "xml" (valeur par défaut), en minuscule !
     this.options.outputFormat = (typeof options.outputFormat === "string") ? options.outputFormat.toLowerCase() : "xml";
+
+    // ressource utilisée pour le calcul altimétrique
+    this.options.resource = options.resource || "rge_alti_corse2a_float32_zip_lamb93";
 
     // sampling
     this.options.sampling = options.sampling || null;
@@ -195,6 +201,7 @@ Alti.prototype.buildRequest = function (error, success) {
         onError : error,
         scope : this,
         // spécifique au service :
+        resource : this.options.resource,
         positions : this.options.positions,
         outputFormat : this.options.outputFormat,
         sampling : this.options.sampling,

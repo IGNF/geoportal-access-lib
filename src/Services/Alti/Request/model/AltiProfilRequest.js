@@ -34,6 +34,11 @@ function AltiProfilRequest (options) {
      * Par defaut, 3
      */
     this.sampling = this.options.sampling || 3; // test des options héritées !
+
+    /* 
+     * Ressource utilisée 
+    */
+    this.resource = this.options.resource;
 }
 
 /**
@@ -94,6 +99,10 @@ AltiProfilRequest.prototype.getData = function () {
     map.push({
         k : "format",
         v : this.format
+    });
+    map.push({
+        k : "resource",
+        v : this.resource
     });
 
     return map;

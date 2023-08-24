@@ -115,7 +115,7 @@ AltiRequestREST.prototype = {
     template : {
         get : {
             // FIXME on retire le param 'delimiter' : &delimiter='__DELIMITER__'
-            value : "lon=__LON__&lat=__LAT__&indent=__INDENT__&crs='__CRS__'",
+            value : "lon=__LON__&lat=__LAT__&indent=__INDENT__&crs='__CRS__'&resource=__RESOURCE__",
             input : {
                 point : "&zonly=__ZONLY__",
                 profil : "&sampling=__SAMPLING__"
@@ -126,7 +126,8 @@ AltiRequestREST.prototype = {
             value : "lon=__LON__\n" +
                 "lat=__LAT__\n" +
                 "indent=__INDENT__\n" +
-                "crs='__CRS__'\n",
+                "crs='__CRS__'\n" +
+                "resource='__RESOURCE__'\n",
             input : {
                 point : "zonly=__ZONLY__",
                 profil : "sampling=__SAMPLING__"
@@ -158,6 +159,7 @@ AltiRequestREST.prototype = {
         // template = template.replace(/__DELIMITER__/g, this.DataObject.delimiter);
         template = template.replace(/__INDENT__/g, this.DataObject.indent);
         template = template.replace(/__CRS__/g, this.DataObject.crs);
+        template = template.replace(/__RESOURCE__/g, this.DataObject.resource);
 
         // ajout +
         template = template + this.__addDataInputs();
