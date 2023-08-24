@@ -357,7 +357,8 @@ CommonService.prototype = {
         // INFO : acces au numero de version de package.conf aprés compilation !
         if (this.CLASSNAME !== "Geocode" && this.CLASSNAME !== "ReverseGeocode" && this.CLASSNAME !== "AutoComplete") {
             this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, {
-                "gp-access-lib" : Pkg.version
+                "gp-access-lib" : Pkg.version,
+                "apiKey" : this.options.apiKey || "calcul"
             }, false);
         }
 
