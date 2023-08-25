@@ -3,7 +3,6 @@
 //  DefaultUrlService.Alti.url(key)[elevation-xml]
 //  DefaultUrlService.Alti.url(key)[profil-json]
 //  DefaultUrlService.Alti.url(key)[profil-xml]
-//  DefaultUrlService.Alti.url(key)[wps]
 //  DefaultUrlService.ProcessIsoCurve.url(key)
 //  DefaultUrlService.AutoComplete.url(key)
 //  DefaultUrlService.ReverseGeocode.url(key)
@@ -21,7 +20,6 @@
 // -> http://wxs.ign.fr/calcul/alti/rest/elevation.xml
 // -> http://wxs.ign.fr/calcul/alti/rest/elevationLine.json
 // -> http://wxs.ign.fr/calcul/alti/rest/elevationLine.xml
-// -> http://wxs.ign.fr/calcul/alti/wps
 //
 // ssl by default.
 //
@@ -53,7 +51,7 @@ var DefaultUrlService = {
     * @param {String} path - path
     * @returns {String} url
     */
-    url : function (key, path) {
+    url : function (path) {
         // comportement par défaut => https
         // sinon, il est fixé par l'option 'ssl' (false => http)
         var _protocol;
@@ -63,7 +61,7 @@ var DefaultUrlService = {
             _protocol = "https://";
         }
 
-        return _protocol + HOSTNAME.concat("/", key, path);
+        return _protocol + HOSTNAME + path;
     },
 
     /**
@@ -91,12 +89,35 @@ var DefaultUrlService = {
      * @property {Function} url (key) - Returns elevation service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols ("elevation-json", "elevation-xml", "profil-json" or "profil-xml").
      */
     Alti : {
-        _key : {
+        new_key : {
             // rest
             "elevation-json" : "/altimetrie/1.0/calcul/alti/rest/elevation.json",
             "elevation-xml" : "/altimetrie/1.0/calcul/alti/rest/elevation.xml",
             "profil-json" : "/altimetrie/1.0/calcul/alti/rest/elevationLine.json",
             "profil-xml" : "/altimetrie/1.0/calcul/alti/rest/elevationLine.xml",
+        },
+        _key : {
+            // rest
+            "elevation-json" : "/calcul/alti/rest/elevation.json",
+            "elevation-xml" : "/calcul/alti/rest/elevation.xml",
+            "profil-json" : "/calcul/alti/rest/elevationLine.json",
+            "profil-xml" : "/calcul/alti/rest/elevationLine.xml",
+            // other
+            wps : "/alti/wps"
+        },
+        /**
+        * newurl
+        * @param {String} key - key
+        * @returns {String} url
+        */
+        newUrl : function (key) {
+            return {
+                // rest
+                "elevation-json" : DefaultUrlService.newUrl(this.new_key["elevation-json"]),
+                "elevation-xml" : DefaultUrlService.newUrl(this.new_key["elevation-xml"]),
+                "profil-json" : DefaultUrlService.newUrl(this.new_key["profil-json"]),
+                "profil-xml" : DefaultUrlService.newUrl(this.new_key["profil-xml"]),
+            };
         },
         /**
         * url
@@ -106,10 +127,10 @@ var DefaultUrlService = {
         url : function (key) {
             return {
                 // rest
-                "elevation-json" : DefaultUrlService.newUrl(this._key["elevation-json"]),
-                "elevation-xml" : DefaultUrlService.newUrl(this._key["elevation-xml"]),
-                "profil-json" : DefaultUrlService.newUrl(this._key["profil-json"]),
-                "profil-xml" : DefaultUrlService.newUrl(this._key["profil-xml"]),
+                "elevation-json" : DefaultUrlService.url(this._key["elevation-json"]),
+                "elevation-xml" : DefaultUrlService.url(this._key["elevation-xml"]),
+                "profil-json" : DefaultUrlService.url(this._key["profil-json"]),
+                "profil-xml" : DefaultUrlService.url(this._key["profil-xml"]),
             };
         }
     },

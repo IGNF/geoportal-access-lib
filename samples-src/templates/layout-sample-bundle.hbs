@@ -9,10 +9,19 @@
         {{#block "head"}}
         {{/block}}
         <style>
-        #result {
+        .results {
             padding: 5px;
             width: 100%;
             height: 200px;
+            box-shadow: 0 0 10px #999;
+            font-family: monospace;
+            overflow: scroll;
+        }
+
+        .altiResults {
+            padding: 5px;
+            width: 50%;
+            height: 300px;
             box-shadow: 0 0 10px #999;
             font-family: monospace;
             overflow: scroll;
@@ -26,7 +35,7 @@
         {{#block "body"}}
         {{/block}}
 
-        <div id="result"></div>
+        <div id="result" class="results"></div>
 
         <script type="text/javascript">
         {{#block "js"}}

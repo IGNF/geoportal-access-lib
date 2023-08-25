@@ -3,8 +3,11 @@
         <!-- Function -->
         <script>
             /** Affichage de la reponse dans la balise (+ console) */
-            function print (response) {
-                var el = document.getElementById("result");
+            function print (response, divId) {
+                if (!divId) {
+                    divId = "result";
+                }
+                var el = document.getElementById(divId);
                 el.innerHTML = "<pre>" + JSON.stringify(response, null, 2) + "</pre>";
                 console.log(response);
             };
