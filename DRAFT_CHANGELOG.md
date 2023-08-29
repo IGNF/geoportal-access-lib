@@ -1,12 +1,12 @@
-# Bibliothèque d'accès aux services Géoportail, version 3.3.3
+# Bibliothèque d'accès aux services Géoportail, version 3.3.4
 
-**02/08/2023 : 3.3.3**
+**29/08/2023 : 3.3.4**
 
 > release of geoportal access library
 
 ## Summary
 
-Correction mineure sur l'utilisation d'un fichier de configuration local
+Correction de la récupération automatique du paramètre style pour les couches géoportail de type WMS Vecteur
 
 ## Changelog
 
@@ -18,7 +18,7 @@ Correction mineure sur l'utilisation d'un fichier de configuration local
 
 * [Fixed]
 
-    - Correction parsing des ressources liées à un fichier de config local (#85)
+    - Récupération du string vide des styles WMS vecteur pour les couches Géoportail
 
 * [Deprecated]
 
