@@ -166,6 +166,7 @@ jobs:
     if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
     needs: build
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -237,6 +238,7 @@ jobs:
     if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
     needs: create_release
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -267,6 +269,7 @@ jobs:
     if: github.event_name == 'push' && contains(github.ref, '/tags/') # Only for tags !
     needs: publish_package
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: Checkout
         uses: actions/checkout@v2
