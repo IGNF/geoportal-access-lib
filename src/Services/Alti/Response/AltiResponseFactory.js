@@ -123,6 +123,9 @@ var AltiResponseFactory = {
                                         if (elevations[i].acc) {
                                             elevation.acc = elevations[i].acc;
                                         }
+                                        if (elevations[i].measures) {
+                                            elevation.measure = elevations[i].measures;
+                                        }
                                     } else if (typeof elevations[i] === "number") {
                                         // elevations[i] est un nombre, dans le cas de zonly=true notamment
                                         elevation.z = elevations[i];

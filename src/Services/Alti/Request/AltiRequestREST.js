@@ -18,7 +18,9 @@ import AltiProfilRequest from "./model/AltiProfilRequest";
  * @param {Boolean}  options.param.indent - false|true
  * @param {String}   options.param.crs - 'CRS:84'
  * @param {String}   options.param.sampling - 3
+ * @param {String}   options.param.resource - 'rge_alti_corse2a_float32_zip_lamb93'
  * @param {Boolean}  options.param.zonly - false|true
+ * @param {Boolean}  options.param.measures - false|true
  * @param {String}   options.param.format - "JSON|XML"
  * @param {String}   options.type - "Profil|Elevation"
  * @param {String}   options.method - GET|POST
@@ -39,6 +41,7 @@ import AltiProfilRequest from "./model/AltiProfilRequest";
  *               format    : 'json',      // par defaut (only to POST)
  *               sampling  : 3 ,          // par defaut (only use by Profil)
  *               zonly     : false        // par defaut (only use by Elevation)
+ *               measures  : false        // par defaut (only use by Elevation)
  *           }
  *      };
  *
@@ -117,7 +120,7 @@ AltiRequestREST.prototype = {
             // FIXME on retire le param 'delimiter' : &delimiter='__DELIMITER__'
             value : "lon=__LON__&lat=__LAT__&indent=__INDENT__&crs='__CRS__'&resource=__RESOURCE__",
             input : {
-                point : "&zonly=__ZONLY__",
+                point : "&zonly=__ZONLY__&measures=__MEASURES__",
                 profil : "&sampling=__SAMPLING__"
             }
         },
@@ -129,7 +132,8 @@ AltiRequestREST.prototype = {
                 "crs='__CRS__'\n" +
                 "resource='__RESOURCE__'\n",
             input : {
-                point : "zonly=__ZONLY__",
+                point : "zonly=__ZONLY__\n" +
+                "measures=__MEASURES__\n",
                 profil : "sampling=__SAMPLING__"
             }
         }
@@ -191,7 +195,14 @@ AltiRequestREST.prototype = {
         var tmpl = null;
         if (this.DataObject.CLASSNAME === "AltiElevationRequest") {
             tmpl = myTemplate.input.point;
-            return tmpl.replace(/__ZONLY__/g, this.DataObject.zonly);
+            // if zonly is true, measures is always false
+            if (this.DataObject.zonly) {
+                tmpl = tmpl.replace(/__ZONLY__/g, this.DataObject.zonly.toString());
+                return tmpl.replace(/__MEASURES__/g, "false");
+            } else {
+                tmpl = tmpl.replace(/__ZONLY__/g, this.DataObject.zonly.toString());
+                return tmpl.replace(/__MEASURES__/g, this.DataObject.measures.toString());
+            }
         } else if (this.DataObject.CLASSNAME === "AltiProfilRequest") {
             tmpl = myTemplate.input.profil;
             return tmpl.replace(/__SAMPLING__/g, this.DataObject.sampling);

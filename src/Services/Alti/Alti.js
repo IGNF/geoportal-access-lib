@@ -124,6 +124,9 @@ function Alti (options) {
     // param. zonly
     this.options.zonly = options.zonly || false;
 
+    // param. measures
+    this.options.measures = options.measures || false;
+
     // gestion de l'url du service par defaut
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
     // en fonction du type d'api, REST ou WPS, du format de reponse demandé (outputFormat)
