@@ -35,8 +35,8 @@ function AltiProfilRequest (options) {
      */
     this.sampling = this.options.sampling || 3; // test des options héritées !
 
-    /* 
-     * Ressource utilisée 
+    /*
+     * Ressource utilisée
     */
     this.resource = this.options.resource;
 }

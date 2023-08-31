@@ -358,7 +358,7 @@ CommonService.prototype = {
         if (this.CLASSNAME !== "Geocode" && this.CLASSNAME !== "ReverseGeocode" && this.CLASSNAME !== "AutoComplete") {
             this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, {
                 "gp-access-lib" : Pkg.version,
-                "apiKey" : this.options.apiKey || "calcul"
+                apiKey : this.options.apiKey || "calcul"
             }, false);
         }
 

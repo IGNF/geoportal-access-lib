@@ -94,7 +94,7 @@ var DefaultUrlService = {
             "elevation-json" : "/altimetrie/1.0/calcul/alti/rest/elevation.json",
             "elevation-xml" : "/altimetrie/1.0/calcul/alti/rest/elevation.xml",
             "profil-json" : "/altimetrie/1.0/calcul/alti/rest/elevationLine.json",
-            "profil-xml" : "/altimetrie/1.0/calcul/alti/rest/elevationLine.xml",
+            "profil-xml" : "/altimetrie/1.0/calcul/alti/rest/elevationLine.xml"
         },
         _key : {
             // rest
@@ -116,7 +116,7 @@ var DefaultUrlService = {
                 "elevation-json" : DefaultUrlService.newUrl(this.new_key["elevation-json"]),
                 "elevation-xml" : DefaultUrlService.newUrl(this.new_key["elevation-xml"]),
                 "profil-json" : DefaultUrlService.newUrl(this.new_key["profil-json"]),
-                "profil-xml" : DefaultUrlService.newUrl(this.new_key["profil-xml"]),
+                "profil-xml" : DefaultUrlService.newUrl(this.new_key["profil-xml"])
             };
         },
         /**
@@ -130,7 +130,7 @@ var DefaultUrlService = {
                 "elevation-json" : DefaultUrlService.url(this._key["elevation-json"]),
                 "elevation-xml" : DefaultUrlService.url(this._key["elevation-xml"]),
                 "profil-json" : DefaultUrlService.url(this._key["profil-json"]),
-                "profil-xml" : DefaultUrlService.url(this._key["profil-xml"]),
+                "profil-xml" : DefaultUrlService.url(this._key["profil-xml"])
             };
         }
     },

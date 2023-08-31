@@ -36,8 +36,8 @@ function AltiElevationRequest (options) {
      */
     this.zonly = this.options.zonly || false; // test des options héritées !
 
-    /* 
-     * Ressource utilisée 
+    /*
+     * Ressource utilisée
     */
     this.resource = this.options.resource;
 }

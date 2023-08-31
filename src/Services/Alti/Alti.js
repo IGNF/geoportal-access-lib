@@ -47,7 +47,7 @@ import AltiResponseFactory from "./Response/AltiResponseFactory";
  *
  * @param {Boolean} [options.zonly] - Permet de ne récupérer que les altitudes en sortie s'il vaut 'true'.
  *      Vaut 'false' par défaut.
- * 
+ *
  * @param {String} [options.resource] - Resource utilisée pour réaliser le calcul.
  *
  * @example
@@ -132,7 +132,7 @@ function Alti (options) {
         var lstUrlByDefault = DefaultUrlService.Alti.newUrl("calcul");
         if (this.options.oldAltiService) {
             lstUrlByDefault = DefaultUrlService.Alti.url("calcul");
-        }     
+        }
         var urlFound = null;
         switch (this.options.api) {
             case "WPS":
@@ -209,7 +209,8 @@ Alti.prototype.buildRequest = function (error, success) {
         outputFormat : this.options.outputFormat,
         sampling : this.options.sampling,
         api : this.options.api,
-        zonly : this.options.zonly
+        zonly : this.options.zonly,
+        measures : this.options.measures
     };
 
     AltiRequestFactory.build(options);
