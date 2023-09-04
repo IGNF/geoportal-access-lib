@@ -240,7 +240,7 @@ AltiResponseReader.READERS = {
     },
 
     /**
-     * Lecture d'un noeud "measures" de la réponse xml du service alti.
+     * Lecture d'un noeud "measures" et de ses enfants "measure" de la réponse xml du service alti.
      *      (contient une valeur de précision, qui est un flottant)
      *
      * @param {DOMElement} node - noeud à lire pour récupérer la précision
@@ -249,22 +249,27 @@ AltiResponseReader.READERS = {
      * @memberof AltiResponseReader
      */
     measures : function (node, elevation) {
-        var measure = new Measure();
-
+        elevation.measures = [];
+        var measure;
         if (node.hasChildNodes()) {
-            var children = node.childNodes[0].childNodes;
-            var child;
+            var children = node.childNodes;
+            var measureNode;
+            var measureChildren;
             for (var i = 0; i < children.length; i++) {
-                child = children[i];
-                if (AltiResponseReader.READERS[child.nodeName]) {
-                    // INFO : on passe en paramètre l'objet en entrée elevation, vide, à remplir.
-                    AltiResponseReader.READERS[child.nodeName](child, measure);
+                measure = new Measure();
+                measureNode = children[i];
+                measureChildren = measureNode.childNodes;
+                for (var j = 0; j < measureChildren.length; j++) {
+                    if (AltiResponseReader.READERS[measureChildren[j].nodeName]) {
+                        // INFO : on passe en paramètre l'objet en entrée elevation, vide, à remplir.
+                        AltiResponseReader.READERS[measureChildren[j].nodeName](measureChildren[j], measure);
+                    } else {
+                        throw new Error("Erreur dans la lecture de la réponse du service : measures attendues mais absentes");
+                    }
                 }
+                elevation.measures.push(measure);
             }
-        } else {
-            throw new Error("Erreur dans la lecture de la réponse du service : measures attendues mais absentes");
         }
-        elevation.measures = measure;
     },
 
     /**
