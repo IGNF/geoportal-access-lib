@@ -35,17 +35,6 @@ function AltiElevationRequest (options) {
      * true|false
      */
     this.zonly = this.options.zonly || false; // test des options héritées !
-
-    /**
-     * Réponse détaillée (source & accuracy)
-     * true|false
-     */
-    this.measures = this.options.measures || false;
-
-    /*
-     * Ressource utilisée
-    */
-    this.resource = this.options.resource;
 }
 
 /**

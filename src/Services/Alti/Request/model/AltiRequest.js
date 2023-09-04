@@ -59,6 +59,17 @@ function AltiRequest (options) {
      * Par defaut, "json".
      */
     this.format = this.options.format || "json";
+
+    /*
+     * Ressource utilisée
+    */
+    this.resource = this.options.resource;
+
+    /**
+     * Réponse détaillée (source & accuracy)
+     * true|false
+    */
+    this.measures = this.options.measures || false;
 }
 
 /**

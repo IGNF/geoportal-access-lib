@@ -118,9 +118,9 @@ AltiRequestREST.prototype = {
     template : {
         get : {
             // FIXME on retire le param 'delimiter' : &delimiter='__DELIMITER__'
-            value : "lon=__LON__&lat=__LAT__&indent=__INDENT__&crs='__CRS__'&resource=__RESOURCE__",
+            value : "lon=__LON__&lat=__LAT__&indent=__INDENT__&crs='__CRS__'&resource=__RESOURCE__&measures=__MEASURES__",
             input : {
-                point : "&zonly=__ZONLY__&measures=__MEASURES__",
+                point : "&zonly=__ZONLY__",
                 profil : "&sampling=__SAMPLING__"
             }
         },
@@ -130,10 +130,10 @@ AltiRequestREST.prototype = {
                 "lat=__LAT__\n" +
                 "indent=__INDENT__\n" +
                 "crs='__CRS__'\n" +
-                "resource='__RESOURCE__'\n",
+                "resource='__RESOURCE__'\n" +
+                "measures='__MEASURES__'\n",
             input : {
-                point : "zonly=__ZONLY__\n" +
-                "measures=__MEASURES__\n",
+                point : "zonly=__ZONLY__\n",
                 profil : "sampling=__SAMPLING__"
             }
         }
@@ -164,6 +164,7 @@ AltiRequestREST.prototype = {
         template = template.replace(/__INDENT__/g, this.DataObject.indent);
         template = template.replace(/__CRS__/g, this.DataObject.crs);
         template = template.replace(/__RESOURCE__/g, this.DataObject.resource);
+        template = template.replace(/__MEASURES__/g, this.DataObject.measures);
 
         // ajout +
         template = template + this.__addDataInputs();
@@ -195,14 +196,7 @@ AltiRequestREST.prototype = {
         var tmpl = null;
         if (this.DataObject.CLASSNAME === "AltiElevationRequest") {
             tmpl = myTemplate.input.point;
-            // if zonly is true, measures is always false
-            if (this.DataObject.zonly) {
-                tmpl = tmpl.replace(/__ZONLY__/g, this.DataObject.zonly.toString());
-                return tmpl.replace(/__MEASURES__/g, "false");
-            } else {
-                tmpl = tmpl.replace(/__ZONLY__/g, this.DataObject.zonly.toString());
-                return tmpl.replace(/__MEASURES__/g, this.DataObject.measures.toString());
-            }
+            return tmpl.replace(/__ZONLY__/g, this.DataObject.zonly.toString());
         } else if (this.DataObject.CLASSNAME === "AltiProfilRequest") {
             tmpl = myTemplate.input.profil;
             return tmpl.replace(/__SAMPLING__/g, this.DataObject.sampling);
