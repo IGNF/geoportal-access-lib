@@ -1,0 +1,89 @@
+{{#extend "layout-sample-bundle"}}
+
+{{#content "head"}}
+        <title>Service Isochrone : comparaison GPF / ancien service</title>
+{{/content}}
+
+{{#content "style"}}
+        <style></style>
+{{/content}}
+
+{{#content "body"}}
+        <div id="params">
+            <p>
+              longitude  :
+              <input type="text" id="lon1" size="10" /> 
+              latitude  :
+              <input type="text" id="lat1" size="10" />
+              temps (200 par défaut)  :
+              <input type="number" id="time" size="5" value="200"/>
+              Reverse : 
+              <input type="checkbox" id="reverse" checked="false" />
+              <label for="graph">Graph :</label>
+              <select id="graph" name="graph">
+                  <option selected="selected" value="car">Voiture</option>
+                  <option value="pedestrian">Piéton</option>
+              </select>
+            </p>
+          </div>
+          <div id="go">
+            <input type="button" value="getIso" onclick="go()" />
+        </div>
+        <h1>GEOPLATEFORME : Utilisation du Service de Calcul d'isochrone</h1>
+        <div id="result1" class="results"></div>
+
+        <h1>WXS : Utilisation du Service de Calcul d'isochrone</h1>
+        <div id="result2" class="results"></div>
+{{/content}}
+
+{{#content "js"}}
+function go() {
+    // récupération des options du formulaire
+
+    var lon1 = document.getElementById("lon1").value;
+    var lat1 = document.getElementById("lat1").value;
+    var time = document.getElementById("time").value;
+    var reverse = document.getElementById("reverse").value;
+    var graph = document.getElementById("graph").value;
+
+    var result1Div = document.getElementById("result1");
+    var result2Div = document.getElementById("result2");
+
+    var position = {};
+    if (lon1 && lat1) {
+        position.x = lon1;
+        position.y = lat1;
+    };
+
+    // Appel service WXS
+    Gp.Services.isoCurve({
+        position : position,
+        oldIsoService : true,
+        resource : "bdtopo-iso",
+        time : time,
+        graph : graph,
+        reverse : reverse,
+        onSuccess: function(result) {
+            print(result, "result2");
+        },
+        onFailure: function(error) {
+          result2Div.innerHTML = "<p>" + error + "</p>"
+        }
+    });
+
+    // Appel service GPF
+    Gp.Services.isoCurve({
+        position : position,
+        time : time,
+        reverse : reverse,
+        graph : graph,
+        onSuccess: function(result) {
+            print(result, "result1");
+        },
+        onFailure: function(error) {
+          result1Div.innerHTML = "<p>" + error + "</p>"
+        }
+    });
+}
+{{/content}}
+{{/extend}}
