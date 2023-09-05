@@ -32,7 +32,6 @@
 
 // constantes internes
 var HOSTNAME = "wxs.ign.fr";
-var NEW_HOSTNAME = "geoplateforme-gpf-apim.qua.gpf-tech.ign.fr";
 
 /**
  * Default Geoportal web services URLs access.
@@ -69,7 +68,7 @@ var DefaultUrlService = {
     * @param {String} path - path
     * @returns {String} url
     */
-    newUrl : function (path) {
+    newUrl : function (path, hostname) {
         // comportement par défaut => https
         // sinon, il est fixé par l'option 'ssl' (false => http)
         var _protocol;
@@ -79,7 +78,7 @@ var DefaultUrlService = {
             _protocol = "https://";
         }
 
-        return _protocol + NEW_HOSTNAME + path;
+        return _protocol + hostname + path;
     },
 
     /**
@@ -111,12 +110,14 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function (key) {
+            var NEW_ALTI_HOSTNAME = "geoplateforme-gpf-apim.qua.gpf-tech.ign.fr";
+
             return {
                 // rest
-                "elevation-json" : DefaultUrlService.newUrl(this.new_key["elevation-json"]),
-                "elevation-xml" : DefaultUrlService.newUrl(this.new_key["elevation-xml"]),
-                "profil-json" : DefaultUrlService.newUrl(this.new_key["profil-json"]),
-                "profil-xml" : DefaultUrlService.newUrl(this.new_key["profil-xml"])
+                "elevation-json" : DefaultUrlService.newUrl(this.new_key["elevation-json"], NEW_ALTI_HOSTNAME),
+                "elevation-xml" : DefaultUrlService.newUrl(this.new_key["elevation-xml"], NEW_ALTI_HOSTNAME),
+                "profil-json" : DefaultUrlService.newUrl(this.new_key["profil-json"], NEW_ALTI_HOSTNAME),
+                "profil-xml" : DefaultUrlService.newUrl(this.new_key["profil-xml"], NEW_ALTI_HOSTNAME)
             };
         },
         /**
@@ -141,6 +142,7 @@ var DefaultUrlService = {
      * @property {Function} url (key) - Returns isocurve service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols ("iso-json" or "iso-xml").
      */
     ProcessIsoCurve : {
+
         _key : "/itineraire/isochrone",
         /**
         * url
@@ -148,7 +150,9 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         url : function (key) {
-            return DefaultUrlService.newUrl(this._key);
+            var NEW_ISO_HOSTNAME = "geoplateforme-gpf-apim.qua.gpf-tech.ign.fr";
+
+            return DefaultUrlService.newUrl(this._key, NEW_ISO_HOSTNAME);
         }
     },
     /**
@@ -242,7 +246,9 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         url : function (key) {
-            return DefaultUrlService.newUrl(this._key);
+            var NEW_ITI_HOSTNAME = "geoplateforme-gpf-apim.qua.gpf-tech.ign.fr";
+
+            return DefaultUrlService.newUrl(this._key, NEW_ITI_HOSTNAME);
         }
     }
 };
