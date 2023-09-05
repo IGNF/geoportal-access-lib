@@ -46,7 +46,6 @@ var DefaultUrlService = {
 
     /**
     * base url of services (ssl protocol management)
-    * @param {String} key - key
     * @param {String} path - path
     * @returns {String} url
     */
@@ -105,11 +104,11 @@ var DefaultUrlService = {
             wps : "/alti/wps"
         },
         /**
-        * newurl
+        * newurl from geoplateforme service
         * @param {String} key - key
         * @returns {String} url
         */
-        newUrl : function (key) {
+        newUrl : function () {
             var NEW_ALTI_HOSTNAME = "geoplateforme-gpf-apim.qua.gpf-tech.ign.fr";
 
             return {
@@ -121,11 +120,10 @@ var DefaultUrlService = {
             };
         },
         /**
-        * url
-        * @param {String} key - key
+        * url from wxs service
         * @returns {String} url
         */
-        url : function (key) {
+        url : function () {
             return {
                 // rest
                 "elevation-json" : DefaultUrlService.url(this._key["elevation-json"]),
@@ -143,16 +141,26 @@ var DefaultUrlService = {
      */
     ProcessIsoCurve : {
 
-        _key : "/itineraire/isochrone",
+        new_key : "/itineraire/isochrone",
+
+        _key : "/calcul/geoportail/isochrone/rest/1.0.0/isochrone",
+
         /**
-        * url
-        * @param {String} key - key
+        * url from geoplateforme service
         * @returns {String} url
         */
-        url : function (key) {
+        newUrl : function () {
             var NEW_ISO_HOSTNAME = "geoplateforme-gpf-apim.qua.gpf-tech.ign.fr";
 
-            return DefaultUrlService.newUrl(this._key, NEW_ISO_HOSTNAME);
+            return DefaultUrlService.newUrl(this.new_key, NEW_ISO_HOSTNAME);
+        },
+
+        /**
+        * url from wxs service
+        * @returns {String} url
+        */
+        url : function () {
+            return DefaultUrlService.url(this._key);
         }
     },
     /**
@@ -239,16 +247,26 @@ var DefaultUrlService = {
      * @property {Function} url (key) - Returns routing service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols.
      */
     Route : {
-        _key : "/itineraire/route",
+        new_key : "/itineraire/route",
+
+        _key : "/calcul/geoportail/itineraire/rest/1.0.0/route",
+
         /**
-        * url
-        * @param {String} key - key
+        * url from geoplateforme service
         * @returns {String} url
         */
-        url : function (key) {
+        newUrl : function () {
             var NEW_ITI_HOSTNAME = "geoplateforme-gpf-apim.qua.gpf-tech.ign.fr";
 
             return DefaultUrlService.newUrl(this._key, NEW_ITI_HOSTNAME);
+        },
+
+        /**
+        * url from wxs service
+        * @returns {String} url
+        */
+        url : function () {
+            return DefaultUrlService.url(this._key);
         }
     }
 };

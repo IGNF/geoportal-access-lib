@@ -132,9 +132,9 @@ function Alti (options) {
     // en fonction du type d'api, REST ou WPS, du format de reponse demandé (outputFormat)
     // ainsi que sur le type de service (profil ou elevation)
     if (!this.options.serverUrl) {
-        var lstUrlByDefault = DefaultUrlService.Alti.newUrl("calcul");
+        var lstUrlByDefault = DefaultUrlService.Alti.newUrl();
         if (this.options.oldAltiService) {
-            lstUrlByDefault = DefaultUrlService.Alti.url("calcul");
+            lstUrlByDefault = DefaultUrlService.Alti.url();
         }
         var urlFound = null;
         switch (this.options.api) {

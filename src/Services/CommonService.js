@@ -164,6 +164,7 @@ function CommonService (options) {
         throw new Error(_.getMessage("PARAM_MISSING", "onSuccess()"));
     }
 
+    /* FIXME traitement au niveau de chaque composant pour tester service WXS / GPF
     // gestion de l'url du service par defaut
     if (!this.options.serverUrl) {
         // INFO
@@ -177,7 +178,7 @@ function CommonService (options) {
         } else {
             this.logger.trace("URL par defaut à determiner au niveau du composant...");
         }
-    }
+    }*/
 
     // FIXME nettoyage des KVP dans l'url du service
     // if (this.options.serverUrl) {
