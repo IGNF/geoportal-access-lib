@@ -258,7 +258,7 @@ var DefaultUrlService = {
         newUrl : function () {
             var NEW_ITI_HOSTNAME = "geoplateforme-gpf-apim.qua.gpf-tech.ign.fr";
 
-            return DefaultUrlService.newUrl(this._key, NEW_ITI_HOSTNAME);
+            return DefaultUrlService.newUrl(this.new_key, NEW_ITI_HOSTNAME);
         },
 
         /**
