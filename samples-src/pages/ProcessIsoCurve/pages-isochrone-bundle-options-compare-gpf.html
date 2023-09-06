@@ -17,8 +17,11 @@
               <input type="text" id="lat1" size="10" />
               temps (200 par défaut)  :
               <input type="number" id="time" size="5" value="200"/>
-              Reverse : 
-              <input type="checkbox" id="reverse" checked="false" />
+              <label for="direction">Sens :</label>
+              <select id="direction" name="direction">
+                  <option selected="selected" value="false">Départ</option>
+                  <option value="true">Arrivée</option>
+              </select>
               <label for="graph">Graph :</label>
               <select id="graph" name="graph">
                   <option selected="selected" value="car">Voiture</option>
@@ -43,7 +46,7 @@ function go() {
     var lon1 = document.getElementById("lon1").value;
     var lat1 = document.getElementById("lat1").value;
     var time = document.getElementById("time").value;
-    var reverse = document.getElementById("reverse").value;
+    var direction = JSON.parse(document.getElementById("direction").value);
     var graph = document.getElementById("graph").value;
 
     var result1Div = document.getElementById("result1");
@@ -62,7 +65,7 @@ function go() {
         resource : "bdtopo-iso",
         time : time,
         graph : graph,
-        reverse : reverse,
+        reverse : direction,
         onSuccess: function(result) {
             print(result, "result2");
         },
@@ -75,7 +78,7 @@ function go() {
     Gp.Services.isoCurve({
         position : position,
         time : time,
-        reverse : reverse,
+        reverse : direction,
         graph : graph,
         onSuccess: function(result) {
             print(result, "result1");
