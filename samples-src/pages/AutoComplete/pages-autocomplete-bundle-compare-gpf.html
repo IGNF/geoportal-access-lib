@@ -1,0 +1,58 @@
+{{#extend "layout-sample-bundle"}}
+
+{{#content "head"}}
+        <title>Service d'autocompletion</title>
+{{/content}}
+
+{{#content "style"}}
+        <style></style>
+{{/content}}
+
+{{#content "body"}}
+        <h1>Utilisation du Service d'autocompletion</h1>
+        <h2>Avec les paramètres obligatoires seulement</h2>
+        <pre>
+          <code>
+              var options = {
+                apiKey : "calcul",
+                onSuccess : function (response) {
+                    print(response);
+                },
+                // spécifique au service
+                text : "Saint-Man"
+            };
+            Gp.Services.autoComplete(options);
+          </code>
+        </pre>
+        <h1>GEOPLATEFORME : Utilisation du Service d'Autocompletion'</h1>
+        <div id="result1" class="results"></div>
+
+        <h1>WXS : Utilisation du Service d'Autocompletion</h1>
+        <div id="result2" class="results"></div>
+
+        <div id="result" class="results"></div>
+{{/content}}
+
+{{#content "js"}}
+var optionsGPF = {
+    apiKey : "calcul",
+    onSuccess : function (response) {
+        print(response, "result1");
+    },
+    // spécifique au service
+    text : "Saint-Man"
+};
+Gp.Services.autoComplete(optionsGPF);
+
+var optionsWXS = {
+    apiKey : "calcul",
+    oldAutocompleteService: true,
+    onSuccess : function (response) {
+        print(response, "result2");
+    },
+    // spécifique au service
+    text : "Saint-Man"
+};
+Gp.Services.autoComplete(optionsWXS);
+{{/content}}
+{{/extend}}

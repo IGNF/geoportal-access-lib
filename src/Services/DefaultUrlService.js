@@ -196,14 +196,26 @@ var DefaultUrlService = {
      * @property {Function} url (key) - Returns autocomplete service default urls with or without geoportal access key given as a parameter. The result is a String.
      */
     AutoComplete : {
-        _key : "/ols/apis/completion",
+        new_key : "/completion",
+
+        _key : "/calcul/geoportail/geocodage/rest/0.1/completion",
+
+        /**
+        * url from geoplateforme service
+        * @returns {String} url
+        */
+        newUrl : function () {
+            var NEW_AUTOCOMPLETE_HOSTNAME = "geoplateforme-gpf-geocodeur.qua.gpf-tech.ign.fr"
+            
+            return DefaultUrlService.newUrl(this.new_key, NEW_AUTOCOMPLETE_HOSTNAME);
+        },
+
         /**
         * url
-        * @param {String} key - key
         * @returns {String} url
         */
         url : function (key) {
-            return DefaultUrlService.url(key, this._key);
+            return DefaultUrlService.url(this._key);
         }
     },
     /**
@@ -213,14 +225,26 @@ var DefaultUrlService = {
      * @property {Function} url (key) - Returns reverse geocoding service default urls with or without geoportal access key given as a parameter. The result is a String.
      */
     ReverseGeocode : {
-        _key : "/geoportail/ols",
+        new_key : "/reverse",
+
+        _key : "/calcul/geoportail/geocodage/rest/0.1/reverse",
+
         /**
-        * url
-        * @param {String} key - key
+        * url from geoplateforme service
         * @returns {String} url
         */
-        url : function (key) {
-            return DefaultUrlService.url(key, this._key);
+        newUrl : function () {
+            var NEW_REVERSE_GEOCODE_HOSTNAME = "geoplateforme-gpf-geocodeur.qua.gpf-tech.ign.fr"
+            
+            return DefaultUrlService.newUrl(this.new_key, NEW_REVERSE_GEOCODE_HOSTNAME);
+        },
+
+        /**
+        * url
+        * @returns {String} url
+        */
+        url : function () {
+            return DefaultUrlService.url(this._key);
         }
     },
     /**
@@ -230,14 +254,26 @@ var DefaultUrlService = {
      * @property {Function} url (key) - Returns geocoding service default urls with or without geoportal access key given as a parameter. The result is a String.
      */
     Geocode : {
-        _key : "/geoportail/ols",
+        new_key : "/search",
+
+        _key : "/calcul/geoportail/geocodage/rest/0.1/search",
+
         /**
-        * url
-        * @param {String} key - key
+        * url from geoplateforme service
         * @returns {String} url
         */
-        url : function (key) {
-            return DefaultUrlService.url(key, this._key);
+        newUrl : function () {
+            var NEW_GEOCODE_HOSTNAME = "geoplateforme-gpf-geocodeur.qua.gpf-tech.ign.fr"
+
+            return DefaultUrlService.newUrl(this.new_key, NEW_GEOCODE_HOSTNAME);
+        },
+
+        /**
+        * url
+        * @returns {String} url
+        */
+        url : function () {
+            return DefaultUrlService.url(this._key);
         }
     },
     /**

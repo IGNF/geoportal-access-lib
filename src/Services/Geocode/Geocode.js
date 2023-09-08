@@ -2,6 +2,7 @@ import Logger from "../../Utils/LoggerByDefault";
 import _ from "../../Utils/MessagesResources";
 import ErrorService from "../../Exceptions/ErrorService";
 import CommonService from "../CommonService";
+import DefaultUrlService from "../DefaultUrlService";
 import GeocodeRequestFactory from "./Request/GeocodeRequestFactory";
 import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
 
@@ -82,7 +83,12 @@ function Geocode (options_) {
     this.logger.trace("[Constructeur Geocode (options)]");
 
     var options = this.patchOptionConvertor(options_);
-    options.serverUrl = options.serverUrl || "https://wxs.ign.fr/calcul/geoportail/geocodage/rest/0.1/search";
+    if (!options.serverUrl) {
+        options.serverUrl = DefaultUrlService.Geocode.newUrl();
+        if (options.oldGeocodeService) {
+            options.serverUrl = DefaultUrlService.Geocode.url();
+        }
+    }
 
     // appel du constructeur par heritage
     CommonService.apply(this, [options]);
