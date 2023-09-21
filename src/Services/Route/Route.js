@@ -154,7 +154,7 @@ function Route (options) {
     }
     this.options.outputFormat = "json";
 
-    this.options.resource = options.resource || "osrm77";
+    this.options.resource = options.resource || "bdtopo-osrm";
     this.options.startPoint = options.startPoint;
     this.options.endPoint = options.endPoint;
     this.options.viaPoints = options.viaPoints || [];
@@ -231,10 +231,13 @@ function Route (options) {
     // gestion de l'url du service par defaut
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
     if (!this.options.serverUrl) {
-        var UrlByDefault = DefaultUrlService.Route.newUrl();
+        // Code commenté : Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'itinéraire
+        /* var UrlByDefault = DefaultUrlService.Route.newUrl();
         if (this.options.oldRouteService) {
             UrlByDefault = DefaultUrlService.Route.url();
-        }
+        } */
+        // Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'itinéraire
+        var UrlByDefault = DefaultUrlService.Route.url();
 
         if (!UrlByDefault) {
             throw new Error("Url by default not found !");

@@ -109,15 +109,7 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
-            var NEW_ALTI_HOSTNAME = "geoplateforme-gpf-apim.qua.gpf-tech.ign.fr";
-
-            return {
-                // rest
-                "elevation-json" : DefaultUrlService.newUrl(this.new_key["elevation-json"], NEW_ALTI_HOSTNAME),
-                "elevation-xml" : DefaultUrlService.newUrl(this.new_key["elevation-xml"], NEW_ALTI_HOSTNAME),
-                "profil-json" : DefaultUrlService.newUrl(this.new_key["profil-json"], NEW_ALTI_HOSTNAME),
-                "profil-xml" : DefaultUrlService.newUrl(this.new_key["profil-xml"], NEW_ALTI_HOSTNAME)
-            };
+            return;
         },
         /**
         * url from wxs service
@@ -150,9 +142,7 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
-            var NEW_ISO_HOSTNAME = "geoplateforme-gpf-apim.qua.gpf-tech.ign.fr";
-
-            return DefaultUrlService.newUrl(this.new_key, NEW_ISO_HOSTNAME);
+            return;
         },
 
         /**
@@ -205,9 +195,7 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
-            var NEW_AUTOCOMPLETE_HOSTNAME = "geoplateforme-gpf-geocodeur.qua.gpf-tech.ign.fr"
-            
-            return DefaultUrlService.newUrl(this.new_key, NEW_AUTOCOMPLETE_HOSTNAME);
+            return;
         },
 
         /**
@@ -234,9 +222,7 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
-            var NEW_REVERSE_GEOCODE_HOSTNAME = "geoplateforme-gpf-geocodeur.qua.gpf-tech.ign.fr"
-            
-            return DefaultUrlService.newUrl(this.new_key, NEW_REVERSE_GEOCODE_HOSTNAME);
+            return;
         },
 
         /**
@@ -263,9 +249,7 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
-            var NEW_GEOCODE_HOSTNAME = "geoplateforme-gpf-geocodeur.qua.gpf-tech.ign.fr"
-
-            return DefaultUrlService.newUrl(this.new_key, NEW_GEOCODE_HOSTNAME);
+            return;
         },
 
         /**
@@ -292,9 +276,7 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
-            var NEW_ITI_HOSTNAME = "geoplateforme-gpf-apim.qua.gpf-tech.ign.fr";
-
-            return DefaultUrlService.newUrl(this.new_key, NEW_ITI_HOSTNAME);
+            return;
         },
 
         /**

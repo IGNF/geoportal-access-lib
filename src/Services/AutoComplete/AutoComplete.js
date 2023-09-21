@@ -75,10 +75,13 @@ function AutoComplete (options_) {
     var options = this.patchOptionConvertor(options_);
 
     if (!options.serverUrl) {
-        options.serverUrl = DefaultUrlService.AutoComplete.newUrl();
+        // Code commenté : Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'autocomplétion
+        /* options.serverUrl = DefaultUrlService.AutoComplete.newUrl();
         if (options.oldAutocompleteService) {
             options.serverUrl = DefaultUrlService.AutoComplete.url();
-        }
+        } */
+        // Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'autocompletion
+        options.serverUrl = DefaultUrlService.AutoComplete.url();
     }
 
     // appel du constructeur par heritage

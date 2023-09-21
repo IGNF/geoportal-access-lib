@@ -156,7 +156,7 @@ function ProcessIsoCurve (options) {
 
     // options par defaut du service
     // TODO: modifier la ressource lors de la mise en production du service
-    this.options.resource = options.resource || "valhalla77";
+    this.options.resource = options.resource || "bdtopo-iso";
     this.options.exclusions = options.exclusions || [];
     this.options.reverse = options.reverse || false;
     this.options.srs = options.srs || "EPSG:4326";
@@ -246,11 +246,13 @@ function ProcessIsoCurve (options) {
     // gestion de l'url du service par defaut
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
     if (!this.options.serverUrl) {
-        var urlFound = DefaultUrlService.ProcessIsoCurve.newUrl();
+        // Code commenté : Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'isochrone
+        /* var urlFound = DefaultUrlService.ProcessIsoCurve.newUrl();
         if (this.options.oldIsoService) {
             urlFound = DefaultUrlService.ProcessIsoCurve.url();
-        }
-
+        } */
+        // Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'isochrone
+        var urlFound = DefaultUrlService.ProcessIsoCurve.url();
         if (!urlFound) {
             throw new Error("Url by default not found !");
         }
