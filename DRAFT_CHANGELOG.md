@@ -1,12 +1,12 @@
-# Bibliothèque d'accès aux services Géoportail, version 3.3.4
+# Bibliothèque d'accès aux services Géoportail, version 3.4.0-beta2
 
-**29/08/2023 : 3.3.4**
+**27/10/2023 : 3.4.0-beta2**
 
 > release of geoportal access library
 
 ## Summary
 
-Correction de la récupération automatique du paramètre style pour les couches géoportail de type WMS Vecteur
+Utilisation du service de geocodage direct, inverse, et de l'autocompletion de la Géoplateforme
 
 ## Changelog
 
@@ -14,11 +14,11 @@ Correction de la récupération automatique du paramètre style pour les couches
 
 * [Changed]
 
+    - la bibliothèque d'accès utilise désormais le service de Geocodage de la Géoplateforme (89f3360c297b7d5af3b3cb71805d9b3d2967b7b8)
+
 * [Removed]
 
 * [Fixed]
-
-    - Récupération du string vide des styles WMS vecteur pour les couches Géoportail
 
 * [Deprecated]
 
