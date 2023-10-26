@@ -84,13 +84,10 @@ function Geocode (options_) {
 
     var options = this.patchOptionConvertor(options_);
     if (!options.serverUrl) {
-        // Code commenté : Release beta services DIFFUSION uniquement : on tape sur l'anvcien service de geocodage
-        /* options.serverUrl = DefaultUrlService.Geocode.newUrl();
+        options.serverUrl = DefaultUrlService.Geocode.newUrl();
         if (options.oldGeocodeService) {
             options.serverUrl = DefaultUrlService.Geocode.url();
-        } */
-        // Release beta services DIFFUSION uniquement : on tape sur l'anvcien service de geocodage
-        options.serverUrl = DefaultUrlService.Geocode.url();
+        }
     }
 
     // appel du constructeur par heritage

@@ -89,13 +89,10 @@ function ReverseGeocode (options_) {
 
     var options = this.patchOptionConvertor(options_);
     if (!options.serverUrl) {
-        // Code commenté : Release beta services DIFFUSION uniquement : on tape sur l'anvcien service de geocodage inverse
-        /* options.serverUrl = DefaultUrlService.ReverseGeocode.newUrl();
+        options.serverUrl = DefaultUrlService.ReverseGeocode.newUrl();
         if (options.oldReverseService) {
             options.serverUrl = DefaultUrlService.ReverseGeocode.url();
-        } */
-        // Release beta services DIFFUSION uniquement : on tape sur l'anvcien service de geocodage inverse
-        options.serverUrl = DefaultUrlService.ReverseGeocode.url();
+        }
     }
 
     // appel du constructeur par heritage

@@ -186,7 +186,7 @@ var DefaultUrlService = {
      * @property {Function} url (key) - Returns autocomplete service default urls with or without geoportal access key given as a parameter. The result is a String.
      */
     AutoComplete : {
-        new_key : "/completion",
+        new_key : "/geocodage/completion",
 
         _key : "/calcul/geoportail/geocodage/rest/0.1/completion",
 
@@ -195,7 +195,9 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
-            return;
+            var NEW_AUTOCOMPLETE_HOSTNAME = "data.geopf.fr";
+
+            return DefaultUrlService.newUrl(this.new_key, NEW_AUTOCOMPLETE_HOSTNAME);
         },
 
         /**
@@ -213,7 +215,7 @@ var DefaultUrlService = {
      * @property {Function} url (key) - Returns reverse geocoding service default urls with or without geoportal access key given as a parameter. The result is a String.
      */
     ReverseGeocode : {
-        new_key : "/reverse",
+        new_key : "/geocodage/reverse",
 
         _key : "/calcul/geoportail/geocodage/rest/0.1/reverse",
 
@@ -222,7 +224,9 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
-            return;
+            var NEW_REVERSE_GEOCODE_HOSTNAME = "data.geopf.fr";
+
+            return DefaultUrlService.newUrl(this.new_key, NEW_REVERSE_GEOCODE_HOSTNAME);
         },
 
         /**
@@ -240,7 +244,7 @@ var DefaultUrlService = {
      * @property {Function} url (key) - Returns geocoding service default urls with or without geoportal access key given as a parameter. The result is a String.
      */
     Geocode : {
-        new_key : "/search",
+        new_key : "/geocodage/search",
 
         _key : "/calcul/geoportail/geocodage/rest/0.1/search",
 
@@ -249,7 +253,9 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
-            return;
+            var NEW_GEOCODE_HOSTNAME = "data.geopf.fr";
+
+            return DefaultUrlService.newUrl(this.new_key, NEW_GEOCODE_HOSTNAME);
         },
 
         /**
