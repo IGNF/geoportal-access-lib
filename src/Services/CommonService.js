@@ -3,7 +3,7 @@ import Helper from "../Utils/Helper";
 import _ from "../Utils/MessagesResources";
 import Protocol from "../Protocols/Protocol";
 import ErrorService from "../Exceptions/ErrorService";
-import DefaultUrlService from "./DefaultUrlService";
+// import DefaultUrlService from "./DefaultUrlService";
 // package.json (extract version)
 import Pkg from "../../package.json";
 
@@ -164,8 +164,9 @@ function CommonService (options) {
         throw new Error(_.getMessage("PARAM_MISSING", "onSuccess()"));
     }
 
-    /* FIXME traitement au niveau de chaque composant pour tester service WXS / GPF
+    // FIXME traitement au niveau de chaque composant pour tester service WXS / GPF
     // gestion de l'url du service par defaut
+    /*
     if (!this.options.serverUrl) {
         // INFO
         // gestion de l'url du service par defaut pour les services qui ne possèdent qu'une seul url par defaut
@@ -178,7 +179,8 @@ function CommonService (options) {
         } else {
             this.logger.trace("URL par defaut à determiner au niveau du composant...");
         }
-    }*/
+    }
+    */
 
     // FIXME nettoyage des KVP dans l'url du service
     // if (this.options.serverUrl) {

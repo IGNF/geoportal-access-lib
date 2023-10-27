@@ -136,7 +136,7 @@ function Alti (options) {
         /* var lstUrlByDefault = DefaultUrlService.Alti.newUrl();
         if (this.options.oldAltiService) {
             lstUrlByDefault = DefaultUrlService.Alti.url();
-        }*/
+        } */
         // Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'alti
         var lstUrlByDefault = DefaultUrlService.Alti.url();
         var urlFound = null;

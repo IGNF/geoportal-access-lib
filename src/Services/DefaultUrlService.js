@@ -109,7 +109,6 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
-            return;
         },
         /**
         * url from wxs service
@@ -142,7 +141,6 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
-            return;
         },
 
         /**
@@ -282,7 +280,6 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
-            return;
         },
 
         /**
