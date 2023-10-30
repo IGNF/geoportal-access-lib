@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.13% </span>
+                <span class="strong">89.58% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>41/46</span>
+                <span class='fraction'>43/48</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.13% </span>
+                <span class="strong">89.58% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>41/46</span>
+                <span class='fraction'>43/48</span>
             </div>
         
             
@@ -265,7 +265,17 @@
 <a name='L200'></a><a href='#L200'>200</a>
 <a name='L201'></a><a href='#L201'>201</a>
 <a name='L202'></a><a href='#L202'>202</a>
-<a name='L203'></a><a href='#L203'>203</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a>
+<a name='L207'></a><a href='#L207'>207</a>
+<a name='L208'></a><a href='#L208'>208</a>
+<a name='L209'></a><a href='#L209'>209</a>
+<a name='L210'></a><a href='#L210'>210</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -410,6 +420,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
@@ -423,6 +435,8 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -487,7 +501,9 @@ import AltiProfilRequest from "./model/AltiProfilRequest";
  * @param {Boolean}  options.param.indent - false|true
  * @param {String}   options.param.crs - 'CRS:84'
  * @param {String}   options.param.sampling - 3
+ * @param {String}   options.param.resource - 'rge_alti_corse2a_float32_zip_lamb93'
  * @param {Boolean}  options.param.zonly - false|true
+ * @param {Boolean}  options.param.measures - false|true
  * @param {String}   options.param.format - "JSON|XML"
  * @param {String}   options.type - "Profil|Elevation"
  * @param {String}   options.method - GET|POST
@@ -508,6 +524,7 @@ import AltiProfilRequest from "./model/AltiProfilRequest";
  *               format    : 'json',      // par defaut (only to POST)
  *               sampling  : 3 ,          // par defaut (only use by Profil)
  *               zonly     : false        // par defaut (only use by Elevation)
+ *               measures  : false        // par defaut (only use by Elevation)
  *           }
  *      };
  *
@@ -584,7 +601,7 @@ AltiRequestREST.prototype = {
     template : {
         get : {
             // FIXME on retire le param 'delimiter' : &amp;delimiter='__DELIMITER__'
-            value : "lon=__LON__&amp;lat=__LAT__&amp;indent=__INDENT__&amp;crs='__CRS__'",
+            value : "lon=__LON__&amp;lat=__LAT__&amp;indent=__INDENT__&amp;crs='__CRS__'&amp;resource=__RESOURCE__&amp;measures=__MEASURES__",
             input : {
                 point : "&amp;zonly=__ZONLY__",
                 profil : "&amp;sampling=__SAMPLING__"
@@ -595,9 +612,11 @@ AltiRequestREST.prototype = {
             value : "lon=__LON__\n" +
                 "lat=__LAT__\n" +
                 "indent=__INDENT__\n" +
-                "crs='__CRS__'\n",
+                "crs='__CRS__'\n" +
+                "resource='__RESOURCE__'\n" +
+                "measures='__MEASURES__'\n",
             input : {
-                point : "zonly=__ZONLY__",
+                point : "zonly=__ZONLY__\n",
                 profil : "sampling=__SAMPLING__"
             }
         }
@@ -627,6 +646,8 @@ AltiRequestREST.prototype = {
         // template = template.replace(/__DELIMITER__/g, this.DataObject.delimiter);
         template = template.replace(/__INDENT__/g, this.DataObject.indent);
         template = template.replace(/__CRS__/g, this.DataObject.crs);
+        template = template.replace(/__RESOURCE__/g, this.DataObject.resource);
+        template = template.replace(/__MEASURES__/g, this.DataObject.measures);
 &nbsp;
         // ajout +
         template = template + this.__addDataInputs();
@@ -658,7 +679,7 @@ AltiRequestREST.prototype = {
         var tmpl = null;
         if (this.DataObject.CLASSNAME === "AltiElevationRequest") {
             tmpl = myTemplate.input.point;
-            return tmpl.replace(/__ZONLY__/g, this.DataObject.zonly);
+            return tmpl.replace(/__ZONLY__/g, this.DataObject.zonly.toString());
         } else <span class="missing-if-branch" title="else path not taken" >E</span>if (this.DataObject.CLASSNAME === "AltiProfilRequest") {
             tmpl = myTemplate.input.profil;
             return tmpl.replace(/__SAMPLING__/g, this.DataObject.sampling);
@@ -676,7 +697,7 @@ export default AltiRequestREST;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-30T15:38:38.294Z
+                at 2023-10-30T16:37:32.181Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
