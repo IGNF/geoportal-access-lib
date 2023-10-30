@@ -257,7 +257,7 @@ describe("-- Test AltiRequest --", function () {
             var data = myReq.getData();
 
             expect(data).to.be.an("Array");
-            expect(data).to.be.length(6);
+            expect(data).to.be.length(7);
 
             for (var i = 0; i < data.length; i++) {
                 var o = data[i];
@@ -331,7 +331,7 @@ describe("-- Test AltiRequest --", function () {
             var data = myReq.getData();
 
             expect(data).to.be.an("Array");
-            expect(data).to.be.length(6);
+            expect(data).to.be.length(7);
 
             for (var i = 0; i < data.length; i++) {
                 var o = data[i];
@@ -394,7 +394,7 @@ describe("-- Test AltiRequest --", function () {
             }
 
             expect(myReq.requestString).not.to.be.null;
-            expect(myReq.requestString).to.be.equal("lon=1.10|1.11|1.12&lat=1.10|1.11|1.12&indent=true&crs='EPSG:4326'&zonly=false");
+            expect(myReq.requestString).to.be.equal("lon=1.10|1.11|1.12&lat=1.10|1.11|1.12&indent=true&crs='EPSG:4326'&resource=undefined&measures=false&zonly=false");
         });
 
         it("test avec objet PROFIL en mode GET", function () {
@@ -415,7 +415,7 @@ describe("-- Test AltiRequest --", function () {
             }
 
             expect(myReq.requestString).not.to.be.null;
-            expect(myReq.requestString).to.be.equal("lon=1.10|1.11|1.12&lat=1.10|1.11|1.12&indent=true&crs='EPSG:4326'&sampling=10");
+            expect(myReq.requestString).to.be.equal("lon=1.10|1.11|1.12&lat=1.10|1.11|1.12&indent=true&crs='EPSG:4326'&resource=undefined&measures=false&sampling=10");
 
         });
 
@@ -474,115 +474,6 @@ describe("-- Test AltiRequest --", function () {
                 // console.log(e.message);
             }
         });
-    });
-
-    describe("-- AltiRequestWPS --" , function () {
-
-        var options = {
-            type : "Profil", // Elevation
-            method : "POST", // GET
-            param : {
-                positions : [
-                    {lon : "1.10", lat : "1.10"},
-                    {lon : "1.11", lat : "1.11"},
-                    {lon : "1.12", lat : "1.12"}
-                ],
-                // delimiter : ";",
-                indent    : true,
-                crs       : "EPSG:4326",
-                format    : "json",
-                sampling  : 50 ,  // (only Profil)
-                zonly     : false,// (only Point)
-                output    : null, // (only GET)
-                callback  : null  // (only GET)
-            },
-            wps : {
-                service : "",
-                version : "",
-                identifier : "gs:WPSLineElevation", // gs:WPSElevation
-                rawdataoutput : "",
-                request : ""
-            }
-        };
-
-        it("test de parsing d'une requete WPS de Profile alti", function () {
-
-            var requestWPSminify = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><wps:Execute version=\"1.0.0\" service=\"WPS\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.opengis.net/wps/1.0.0\" xmlns:wfs=\"http://www.opengis.net/wfs\" xmlns:wps=\"http://www.opengis.net/wps/1.0.0\" xmlns:ows=\"http://www.opengis.net/ows/1.1\" xmlns:gml=\"http://www.opengis.net/gml\" xmlns:ogc=\"http://www.opengis.net/ogc\" xmlns:wcs=\"http://www.opengis.net/wcs/1.1.1\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xsi:schemaLocation=\"http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd\"><ows:Identifier>gs:WPSLineElevation</ows:Identifier><wps:DataInputs><wps:Input><ows:Identifier>lon</ows:Identifier><wps:Data><wps:LiteralData>1.10;1.11;1.12</wps:LiteralData></wps:Data></wps:Input><wps:Input><ows:Identifier>lat</ows:Identifier><wps:Data><wps:LiteralData>1.10;1.11;1.12</wps:LiteralData></wps:Data></wps:Input><wps:Input><ows:Identifier>delimiter</ows:Identifier><wps:Data><wps:LiteralData>;</wps:LiteralData></wps:Data></wps:Input><wps:Input><ows:Identifier>indent</ows:Identifier><wps:Data><wps:LiteralData>true</wps:LiteralData></wps:Data></wps:Input><wps:Input><ows:Identifier>crs</ows:Identifier><wps:Data><wps:LiteralData>EPSG:4326</wps:LiteralData></wps:Data></wps:Input><wps:Input><ows:Identifier>sampling</ows:Identifier><wps:Data><wps:LiteralData>50</wps:LiteralData></wps:Data></wps:Input><wps:Input><ows:Identifier>format</ows:Identifier><wps:Data><wps:LiteralData>json</wps:LiteralData></wps:Data></wps:Input></wps:DataInputs><wps:ResponseForm><wps:RawDataOutput><ows:Identifier>result</ows:Identifier></wps:RawDataOutput></wps:ResponseForm></wps:Execute>";
-            var p = new XML();
-            p.setXMLString(requestWPSminify);
-            var data = p.parse();
-            should().exist(data);
-            expect(data).to.have.property("wps:Execute");
-            // todo...
-            // console.log(data);
-
-        });
-
-        it("test avec objet ELEVATION en mode GET", function () {
-
-            options.method = "GET";
-            options.type   = "Elevation";
-
-            var result = AltiRequestWPS.build(options);
-            expect(result).not.to.be.null;
-            expect(result).to.be.equal("service=WPS&version=1.0.0&rawdataoutput=result&identifier=gs:WPSElevation&request=Execute&datainputs=lon=1.10|1.11|1.12;lat=1.10|1.11|1.12;indent=true;crs=EPSG:4326;zonly=false;format=json");
-
-        });
-
-        it("test avec objet PROFIL en mode GET", function () {
-
-            options.method = "GET";
-            options.type   = "Profil";
-
-            var result = AltiRequestWPS.build(options);
-            expect(result).not.to.be.null;
-            expect(result).to.be.equal("service=WPS&version=1.0.0&rawdataoutput=result&identifier=gs:WPSLineElevation&request=Execute&datainputs=lon=1.10|1.11|1.12;lat=1.10|1.11|1.12;indent=true;crs=EPSG:4326;sampling=50;format=json");
-
-        });
-
-        it("test avec objet ELEVATION en mode POST", function () {
-
-            options.method = "POST";
-            options.type   = "Elevation";
-            var valide =  function (result) {
-                var p = new XML();
-                p.setXMLString(result);
-                var data = p.parse();
-                should().exist(data);
-                expect(data).to.have.property("wps:Execute");
-
-            };
-
-            var result = AltiRequestWPS.build(options);
-            expect(result).not.to.be.null;
-            valide(result);
-
-        });
-
-        it("test avec objet PROFIL en mode POST", function () {
-
-            options.method = "POST";
-            options.type   = "Profil";
-            var valide =  function (result) {
-                var p = new XML();
-                p.setXMLString(result);
-                var data = p.parse();
-                // console.log(data);
-                should().exist(data);
-                expect(data).to.have.property("wps:Execute");
-                expect(data["wps:Execute"]).to.have.property("ows:Identifier");
-                var exec = data["wps:Execute"];
-                expect(exec["ows:Identifier"].textContent).to.equal("gs:WPSLineElevation");
-                expect(data["wps:Execute"]).to.have.property("wps:DataInputs");
-                expect(data["wps:Execute"]).to.have.property("wps:ResponseForm");
-                // todo...
-            };
-
-            var result = AltiRequestWPS.build(options);
-            expect(result).not.to.be.null;
-            valide(result);
-        });
-
     });
 
     describe("-- AltiRequestFactory --" , function () {
