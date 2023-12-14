@@ -108,7 +108,7 @@ function Alti (options) {
     this.options.outputFormat = (typeof options.outputFormat === "string") ? options.outputFormat.toLowerCase() : "xml";
 
     // ressource utilisée pour le calcul altimétrique
-    this.options.resource = options.resource || "rge_alti_corse2a_float32_zip_lamb93";
+    this.options.resource = options.resource || "ign_rge_alti_wld";
 
     // sampling
     this.options.sampling = options.sampling || null;
@@ -132,13 +132,10 @@ function Alti (options) {
     // en fonction du type d'api, REST ou WPS, du format de reponse demandé (outputFormat)
     // ainsi que sur le type de service (profil ou elevation)
     if (!this.options.serverUrl) {
-        // Code commenté pour Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'alti
-        /* var lstUrlByDefault = DefaultUrlService.Alti.newUrl();
+        var lstUrlByDefault = DefaultUrlService.Alti.newUrl();
         if (this.options.oldAltiService) {
             lstUrlByDefault = DefaultUrlService.Alti.url();
-        } */
-        // Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'alti
-        var lstUrlByDefault = DefaultUrlService.Alti.url();
+        }
         var urlFound = null;
         switch (this.options.api) {
             case "WPS":

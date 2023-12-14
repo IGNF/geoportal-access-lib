@@ -109,6 +109,15 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
+            var NEW_ALTI_HOSTNAME = "data.geopf.fr";
+
+            return {
+                // rest
+                "elevation-json" : DefaultUrlService.newUrl(this.new_key["elevation-json"], NEW_ALTI_HOSTNAME),
+                "elevation-xml" : DefaultUrlService.newUrl(this.new_key["elevation-xml"], NEW_ALTI_HOSTNAME),
+                "profil-json" : DefaultUrlService.newUrl(this.new_key["profil-json"], NEW_ALTI_HOSTNAME),
+                "profil-xml" : DefaultUrlService.newUrl(this.new_key["profil-xml"], NEW_ALTI_HOSTNAME)
+            };
         },
         /**
         * url from wxs service
