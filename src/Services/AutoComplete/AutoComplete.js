@@ -97,7 +97,7 @@ function AutoComplete (options_) {
     }
 
     this.options.type = options.type;
-    this.options.territory = options.territory || "";
+    this.options.territory = options.terr || "";
     this.options.maximumResponses = options.maximumResponses || 10;
 
     // INFO
