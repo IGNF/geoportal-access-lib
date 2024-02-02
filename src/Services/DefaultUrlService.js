@@ -99,7 +99,7 @@ var DefaultUrlService = {
      */
     ProcessIsoCurve : {
 
-        new_key : "/itineraire/isochrone",
+        new_key : "/navigation/isochrone",
 
         /**
         * url from geoplateforme service
@@ -193,7 +193,7 @@ var DefaultUrlService = {
      * @property {Function} url (key) - Returns routing service default urls with or without geoportal access key given as a parameter. The result is a javascript object with different urls given used protocols.
      */
     Route : {
-        new_key : "/itineraire/route",
+        new_key : "/navigation/itineraire",
 
         /**
         * url from geoplateforme service
