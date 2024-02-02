@@ -246,13 +246,7 @@ function ProcessIsoCurve (options) {
     // gestion de l'url du service par defaut
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
     if (!this.options.serverUrl) {
-        // Code commenté : Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'isochrone
-        /* var urlFound = DefaultUrlService.ProcessIsoCurve.newUrl();
-        if (this.options.oldIsoService) {
-            urlFound = DefaultUrlService.ProcessIsoCurve.url();
-        } */
-        // Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'isochrone
-        var urlFound = DefaultUrlService.ProcessIsoCurve.url();
+        var urlFound = DefaultUrlService.ProcessIsoCurve.newUrl();
         if (!urlFound) {
             throw new Error("Url by default not found !");
         }

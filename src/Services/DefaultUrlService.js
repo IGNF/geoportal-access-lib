@@ -106,6 +106,7 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
+            return DefaultUrlService.newUrl(this.new_key);
         }
     },
     /**
@@ -199,6 +200,7 @@ var DefaultUrlService = {
         * @returns {String} url
         */
         newUrl : function () {
+            return DefaultUrlService.newUrl(this.new_key);
         }
     }
 };

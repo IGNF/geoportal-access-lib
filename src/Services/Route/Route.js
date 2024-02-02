@@ -231,13 +231,7 @@ function Route (options) {
     // gestion de l'url du service par defaut
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
     if (!this.options.serverUrl) {
-        // Code commenté : Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'itinéraire
-        /* var UrlByDefault = DefaultUrlService.Route.newUrl();
-        if (this.options.oldRouteService) {
-            UrlByDefault = DefaultUrlService.Route.url();
-        } */
-        // Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'itinéraire
-        var UrlByDefault = DefaultUrlService.Route.url();
+        var UrlByDefault = DefaultUrlService.Route.newUrl();
 
         if (!UrlByDefault) {
             throw new Error("Url by default not found !");
