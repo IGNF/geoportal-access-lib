@@ -76,9 +76,6 @@ function AutoComplete (options_) {
 
     if (!options.serverUrl) {
         options.serverUrl = DefaultUrlService.AutoComplete.newUrl();
-        if (options.oldAutocompleteService) {
-            options.serverUrl = DefaultUrlService.AutoComplete.url();
-        }
     }
 
     // appel du constructeur par heritage

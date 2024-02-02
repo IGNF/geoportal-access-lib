@@ -90,9 +90,6 @@ function ReverseGeocode (options_) {
     var options = this.patchOptionConvertor(options_);
     if (!options.serverUrl) {
         options.serverUrl = DefaultUrlService.ReverseGeocode.newUrl();
-        if (options.oldReverseService) {
-            options.serverUrl = DefaultUrlService.ReverseGeocode.url();
-        }
     }
 
     // appel du constructeur par heritage

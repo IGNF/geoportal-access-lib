@@ -85,9 +85,6 @@ function Geocode (options_) {
     var options = this.patchOptionConvertor(options_);
     if (!options.serverUrl) {
         options.serverUrl = DefaultUrlService.Geocode.newUrl();
-        if (options.oldGeocodeService) {
-            options.serverUrl = DefaultUrlService.Geocode.url();
-        }
     }
 
     // appel du constructeur par heritage

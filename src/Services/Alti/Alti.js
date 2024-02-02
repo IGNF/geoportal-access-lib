@@ -133,9 +133,6 @@ function Alti (options) {
     // ainsi que sur le type de service (profil ou elevation)
     if (!this.options.serverUrl) {
         var lstUrlByDefault = DefaultUrlService.Alti.newUrl();
-        if (this.options.oldAltiService) {
-            lstUrlByDefault = DefaultUrlService.Alti.url();
-        }
         var urlFound = null;
         switch (this.options.api) {
             case "WPS":

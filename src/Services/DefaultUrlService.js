@@ -30,9 +30,6 @@
 // output {Object|String}
 // -> https://wxs.ign.fr/calcul/ols/apis/completion
 
-// constantes internes
-var HOSTNAME = "wxs.ign.fr";
-
 /**
  * Default Geoportal web services URLs access.
  *
@@ -45,11 +42,13 @@ var DefaultUrlService = {
     ssl : true,
 
     /**
-    * base url of services (ssl protocol management)
+    * base new-url of geoplateforme services (ssl protocol management)
     * @param {String} path - path
     * @returns {String} url
     */
-    url : function (path) {
+    newUrl : function (path) {
+        var NEW_GEOCODE_HOSTNAME = "data.geopf.fr";
+
         // comportement par défaut => https
         // sinon, il est fixé par l'option 'ssl' (false => http)
         var _protocol;
@@ -59,25 +58,7 @@ var DefaultUrlService = {
             _protocol = "https://";
         }
 
-        return _protocol + HOSTNAME + path;
-    },
-
-    /**
-    * base new-url of services (ssl protocol management)
-    * @param {String} path - path
-    * @returns {String} url
-    */
-    newUrl : function (path, hostname) {
-        // comportement par défaut => https
-        // sinon, il est fixé par l'option 'ssl' (false => http)
-        var _protocol;
-        if (DefaultUrlService.ssl === false) {
-            _protocol = "http://";
-        } else {
-            _protocol = "https://";
-        }
-
-        return _protocol + hostname + path;
+        return _protocol + NEW_GEOCODE_HOSTNAME + path;
     },
 
     /**
@@ -94,42 +75,19 @@ var DefaultUrlService = {
             "profil-json" : "/altimetrie/1.0/calcul/alti/rest/elevationLine.json",
             "profil-xml" : "/altimetrie/1.0/calcul/alti/rest/elevationLine.xml"
         },
-        _key : {
-            // rest
-            "elevation-json" : "/calcul/alti/rest/elevation.json",
-            "elevation-xml" : "/calcul/alti/rest/elevation.xml",
-            "profil-json" : "/calcul/alti/rest/elevationLine.json",
-            "profil-xml" : "/calcul/alti/rest/elevationLine.xml",
-            // other
-            wps : "/alti/wps"
-        },
+
         /**
         * newurl from geoplateforme service
         * @param {String} key - key
         * @returns {String} url
         */
         newUrl : function () {
-            var NEW_ALTI_HOSTNAME = "data.geopf.fr";
-
             return {
                 // rest
-                "elevation-json" : DefaultUrlService.newUrl(this.new_key["elevation-json"], NEW_ALTI_HOSTNAME),
-                "elevation-xml" : DefaultUrlService.newUrl(this.new_key["elevation-xml"], NEW_ALTI_HOSTNAME),
-                "profil-json" : DefaultUrlService.newUrl(this.new_key["profil-json"], NEW_ALTI_HOSTNAME),
-                "profil-xml" : DefaultUrlService.newUrl(this.new_key["profil-xml"], NEW_ALTI_HOSTNAME)
-            };
-        },
-        /**
-        * url from wxs service
-        * @returns {String} url
-        */
-        url : function () {
-            return {
-                // rest
-                "elevation-json" : DefaultUrlService.url(this._key["elevation-json"]),
-                "elevation-xml" : DefaultUrlService.url(this._key["elevation-xml"]),
-                "profil-json" : DefaultUrlService.url(this._key["profil-json"]),
-                "profil-xml" : DefaultUrlService.url(this._key["profil-xml"])
+                "elevation-json" : DefaultUrlService.newUrl(this.new_key["elevation-json"]),
+                "elevation-xml" : DefaultUrlService.newUrl(this.new_key["elevation-xml"]),
+                "profil-json" : DefaultUrlService.newUrl(this.new_key["profil-json"]),
+                "profil-xml" : DefaultUrlService.newUrl(this.new_key["profil-xml"])
             };
         }
     },
@@ -143,21 +101,11 @@ var DefaultUrlService = {
 
         new_key : "/itineraire/isochrone",
 
-        _key : "/calcul/geoportail/isochrone/rest/1.0.0/isochrone",
-
         /**
         * url from geoplateforme service
         * @returns {String} url
         */
         newUrl : function () {
-        },
-
-        /**
-        * url from wxs service
-        * @returns {String} url
-        */
-        url : function () {
-            return DefaultUrlService.url(this._key);
         }
     },
     /**
@@ -195,24 +143,12 @@ var DefaultUrlService = {
     AutoComplete : {
         new_key : "/geocodage/completion",
 
-        _key : "/calcul/geoportail/geocodage/rest/0.1/completion",
-
         /**
         * url from geoplateforme service
         * @returns {String} url
         */
         newUrl : function () {
-            var NEW_AUTOCOMPLETE_HOSTNAME = "data.geopf.fr";
-
-            return DefaultUrlService.newUrl(this.new_key, NEW_AUTOCOMPLETE_HOSTNAME);
-        },
-
-        /**
-        * url
-        * @returns {String} url
-        */
-        url : function (key) {
-            return DefaultUrlService.url(this._key);
+            return DefaultUrlService.newUrl(this.new_key);
         }
     },
     /**
@@ -224,24 +160,12 @@ var DefaultUrlService = {
     ReverseGeocode : {
         new_key : "/geocodage/reverse",
 
-        _key : "/calcul/geoportail/geocodage/rest/0.1/reverse",
-
         /**
         * url from geoplateforme service
         * @returns {String} url
         */
         newUrl : function () {
-            var NEW_REVERSE_GEOCODE_HOSTNAME = "data.geopf.fr";
-
-            return DefaultUrlService.newUrl(this.new_key, NEW_REVERSE_GEOCODE_HOSTNAME);
-        },
-
-        /**
-        * url
-        * @returns {String} url
-        */
-        url : function () {
-            return DefaultUrlService.url(this._key);
+            return DefaultUrlService.newUrl(this.new_key);
         }
     },
     /**
@@ -253,24 +177,12 @@ var DefaultUrlService = {
     Geocode : {
         new_key : "/geocodage/search",
 
-        _key : "/calcul/geoportail/geocodage/rest/0.1/search",
-
         /**
         * url from geoplateforme service
         * @returns {String} url
         */
         newUrl : function () {
-            var NEW_GEOCODE_HOSTNAME = "data.geopf.fr";
-
-            return DefaultUrlService.newUrl(this.new_key, NEW_GEOCODE_HOSTNAME);
-        },
-
-        /**
-        * url
-        * @returns {String} url
-        */
-        url : function () {
-            return DefaultUrlService.url(this._key);
+            return DefaultUrlService.newUrl(this.new_key);
         }
     },
     /**
@@ -282,21 +194,11 @@ var DefaultUrlService = {
     Route : {
         new_key : "/itineraire/route",
 
-        _key : "/calcul/geoportail/itineraire/rest/1.0.0/route",
-
         /**
         * url from geoplateforme service
         * @returns {String} url
         */
         newUrl : function () {
-        },
-
-        /**
-        * url from wxs service
-        * @returns {String} url
-        */
-        url : function () {
-            return DefaultUrlService.url(this._key);
         }
     }
 };
