@@ -47,7 +47,7 @@ var DefaultUrlService = {
     * @returns {String} url
     */
     newUrl : function (path) {
-        var NEW_GEOCODE_HOSTNAME = "data.geopf.fr";
+        var NEW_GPF_HOSTNAME = "data.geopf.fr";
 
         // comportement par défaut => https
         // sinon, il est fixé par l'option 'ssl' (false => http)
@@ -58,7 +58,7 @@ var DefaultUrlService = {
             _protocol = "https://";
         }
 
-        return _protocol + NEW_GEOCODE_HOSTNAME + path;
+        return _protocol + NEW_GPF_HOSTNAME + path;
     },
 
     /**
