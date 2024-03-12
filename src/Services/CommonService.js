@@ -164,35 +164,6 @@ function CommonService (options) {
         throw new Error(_.getMessage("PARAM_MISSING", "onSuccess()"));
     }
 
-    // FIXME traitement au niveau de chaque composant pour tester service WXS / GPF
-    // gestion de l'url du service par defaut
-    /*
-    if (!this.options.serverUrl) {
-        // INFO
-        // gestion de l'url du service par defaut pour les services qui ne possèdent qu'une seul url par defaut
-        // les cas particuliers des services avec plusieurs urls (ex. Alti) devront être traité dans la classe du composant
-        // donc si l'url n'est pas renseignée, il faut utiliser les urls par defaut
-        DefaultUrlService.ssl = this.options.ssl;
-        var urlByDefault = DefaultUrlService[this.CLASSNAME].url("calcul");
-        if (typeof urlByDefault === "string") {
-            this.options.serverUrl = urlByDefault;
-        } else {
-            this.logger.trace("URL par defaut à determiner au niveau du composant...");
-        }
-    }
-    */
-
-    // FIXME nettoyage des KVP dans l'url du service
-    // if (this.options.serverUrl) {
-    //     // INFO
-    //     // si l'url est renseignée, il faut la nettoyer de tous ses KVP
-    //     // ex. on ne veut pas de params. 'callback' ou 'output' car ceci declencherait
-    //     // des opérations d'encapsulations des reponses légèrement farfelues ...
-    //     var urlsource = this.options.serverUrl;
-    //     var urlparts = urlsource.split("?");
-    //     this.options.serverUrl = urlparts[0];
-    // }
-
     // gestion de la methode HTTP
     this.options.httpMethod = (typeof options.httpMethod === "string") ? options.httpMethod.toUpperCase() : "GET";
 
@@ -358,12 +329,15 @@ CommonService.prototype = {
 
         // rajout de l'option gpbibaccess
         // INFO : acces au numero de version de package.conf aprés compilation !
-        if (this.CLASSNAME !== "Geocode" && this.CLASSNAME !== "ReverseGeocode" && this.CLASSNAME !== "AutoComplete") {
-            this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, {
-                "gp-access-lib" : Pkg.version,
-                apiKey : this.options.apiKey || "calcul"
-            }, false);
+        var requestMetaOptions = {
+            "gp-access-lib" : Pkg.version,
+        };
+
+        if (this.options.apiKey) {
+            requestMetaOptions.apiKey = this.options.apiKey;
         }
+
+        this.options.serverUrl = Helper.normalyzeUrl(this.options.serverUrl, requestMetaOptions, false);
 
         // si le proxy est renseigné, on proxifie l'url du service
         if (bUrlProxified) {
