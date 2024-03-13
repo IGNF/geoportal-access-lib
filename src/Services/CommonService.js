@@ -15,7 +15,7 @@ import Pkg from "../../package.json";
  * @alias Gp.Services.CommonService
  * @param {Object} options - options communes à tous les services
  *
- * @param {String} [options.serverUrl] - URL d'accès au service. Par défaut "https://wxs.ign.fr/calcul/geoportail/SERVICE/".
+ * @param {String} [options.serverUrl] - URL d'accès au service. Par défaut "https://data.geopf.fr/SERVICE/".
  *      Permet de forcer l'utilisation d'un service équivalent déployé derrière une éventuelle autre URL d'accès.
  *      Si ce paramètre est renseigné alors, le paramètre par défaut est ignoré.
  *
