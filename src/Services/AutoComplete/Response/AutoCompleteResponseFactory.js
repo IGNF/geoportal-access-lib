@@ -81,8 +81,8 @@ var AutoCompleteResponseFactory = {
                                     suggestedLocation.type = "StreetAddress";
                                 } else if (result.country === "PositionOfInterest") {
                                     suggestedLocation.poi = result.street;
-                                    suggestedLocation.kind = result.kind;
                                     suggestedLocation.type = "PositionOfInterest";
+                                    suggestedLocation.poiType = result.poiType;
                                 }
 
                                 if (suggestedLocation.position) {
@@ -90,6 +90,7 @@ var AutoCompleteResponseFactory = {
                                     suggestedLocation.position.y = result.y;
                                 }
 
+                                suggestedLocation.kind = result.kind;
                                 suggestedLocation.commune = result.city;
                                 suggestedLocation.fullText = result.fulltext;
                                 suggestedLocation.postalCode = result.zipcode;
