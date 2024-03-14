@@ -330,7 +330,7 @@ CommonService.prototype = {
         // rajout de l'option gpbibaccess
         // INFO : acces au numero de version de package.conf aprés compilation !
         var requestMetaOptions = {
-            "gp-access-lib" : Pkg.version,
+            "gp-access-lib" : Pkg.version
         };
 
         if (this.options.apiKey) {
