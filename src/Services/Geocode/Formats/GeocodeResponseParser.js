@@ -101,7 +101,7 @@ function _parseFeature (feature, geocodeResponse) {
                     location.type = "StreetAddress";
                 } else if (feature.properties[prop] === "poi") {
                     location.type = "PositionOfInterest";
-                } else if (feature.properties[prop] === "parcel") {
+                } else if (feature.properties[prop] === "parcel" || feature.properties[prop] === "cadastral") {
                     location.type = "CadastralParcel";
                 }
             } else {
