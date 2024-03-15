@@ -11,8 +11,7 @@ var LoggerByDefault = {
     getLogger : function (name) {
         // Substitute global constants configured at compile time
         // cf. webpack.config.js
-        // FIXME howtodo !? DefineWebpackPlugin ? EnvironmentWebpackPlugin ?
-        ("__PRODUCTION__".match(/true/)) ? Log.disableAll() : Log.enableAll();
+        (process.env.VERBOSE) ? Log.enableAll() : Log.disableAll();
         var logname = name || "default";
         return Log.getLogger(logname);
     }

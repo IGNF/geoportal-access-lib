@@ -15,6 +15,7 @@ var webpack = require("webpack");
 
 // -- plugins
 var BannerWebPackPlugin    = webpack.BannerPlugin;
+var EnvWebPackPlugin       = webpack.EnvironmentPlugin;
 var TerserJsWebPackPlugin  = require("terser-webpack-plugin");
 var JsDocWebPackPlugin     = require("jsdoc-webpack-plugin");
 var CleanWebpackPlugin     = require("clean-webpack-plugin");
@@ -172,31 +173,34 @@ module.exports = (env, argv) => {
                     onBuildEnd : [],
                     safe : true
                 }),
-                new ReplaceWebpackPlugin(
-                    [
-                        // {
-                        //     partten : /__VERSION__/g,
-                        //     /** replacement de la clef __VERSION__ par la version du package */
-                        //     replacement : function () {
-                        //         return version;
-                        //     }
-                        // },
-                        // {
-                        //     partten : /__DATE__/g,
-                        //     /** replacement de la clef __DATE__ par la date du build */
-                        //     replacement : function () {
-                        //         return date;
-                        //     }
-                        // },
-                        {
-                            partten : /__PRODUCTION__/g,
-                            replacement : function () {
-                                /** replacement de la clef __PRODUCTION__ pour le LOGGER */
-                                return production;
-                            }
-                        }
-                    ]
-                ),
+                new EnvWebPackPlugin({
+                    VERBOSE : development
+                }),
+                // new ReplaceWebpackPlugin(
+                //     [
+                //         // {
+                //         //     partten : /__VERSION__/g,
+                //         //     /** replacement de la clef __VERSION__ par la version du package */
+                //         //     replacement : function () {
+                //         //         return version;
+                //         //     }
+                //         // },
+                //         // {
+                //         //     partten : /__DATE__/g,
+                //         //     /** replacement de la clef __DATE__ par la date du build */
+                //         //     replacement : function () {
+                //         //         return date;
+                //         //     }
+                //         // },
+                //         {
+                //             partten : /__PRODUCTION__/g,
+                //             replacement : function () {
+                //                 /** replacement de la clef __PRODUCTION__ pour le LOGGER */
+                //                 return production;
+                //             }
+                //         }
+                //     ]
+                // ),
                 // new DefineWebpackPlugin({
                 //     __PRODUCTION__ : JSON.stringify(production)
                 // }),
