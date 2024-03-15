@@ -18,7 +18,7 @@ import ProcessIsoCurveResponseFactory from "./Response/ProcessIsoCurveResponseFa
  * @alias Gp.Services.ProcessIsoCurve
  * @param {Object} options - options spécifiques au service (+ les options heritées)
  *
- * @param {String} options.resource - La ressource utilisée pour le calcul. Ce paramètre devrait être obligatoire car il l'est dans l'appel au service. Mais il ne l'est pas pour des raisons de rétrocompatibilité.
+ * @param {String} options.resource - La ressource utilisée pour le calcul : bdtopo-valhalla (par défaut) ou bdtopo-pgr.
  *
  * @param {String} options.outputFormat - Le format de la réponse du service iso : 'json' uniquement et par défaut.
  *
@@ -89,6 +89,7 @@ import ProcessIsoCurveResponseFactory from "./Response/ProcessIsoCurveResponseFa
  *           x : 2.3242664298058053,
  *           y : 48.86118017324745
  *      },
+ *      resource : bdtopo-valhalla,
  *      distance : 200,
  *      [time : ]
  *      method : "distance",
