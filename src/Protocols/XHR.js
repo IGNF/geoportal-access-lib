@@ -145,11 +145,7 @@ var XHR = {
 
                 // seulement si options.data n'est pas vide (peut être un objet ou une chaine de caractères)
                 if (options.data && ((typeof options.data === "object" && Object.keys(options.data).length) || (typeof options.data === "string" && options.data.length)) && !corps) {
-                    if (options.scope.CLASSNAME === "Geocode" || options.scope.CLASSNAME === "ReverseGeocode") {
-                        options.url = options.url + options.data;
-                    } else {
-                        options.url = Helper.normalyzeUrl(options.url, options.data);
-                    }
+                    options.url = Helper.normalyzeUrl(options.url, options.data);
                 }
 
                 logger.trace("URL = ", options.url);
