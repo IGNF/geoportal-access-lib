@@ -79,7 +79,7 @@ var Helper = {
 
         if (params) {
             if (typeof params === "string") {
-                params = params.replace("?", "&");
+                params = params.replace("?", "");
                 myUrl += params;
             } else {
                 myUrl += this.normalyzeParameters(params);
