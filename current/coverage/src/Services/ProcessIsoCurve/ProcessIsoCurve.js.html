@@ -57,7 +57,7 @@
         <template id="filterTemplate">
             <div class="quiet">
                 Filter:
-                <input oninput="onInput()" type="search" id="fileSearch">
+                <input type="search" id="fileSearch">
             </div>
         </template>
     </div>
@@ -381,12 +381,7 @@
 <a name='L316'></a><a href='#L316'>316</a>
 <a name='L317'></a><a href='#L317'>317</a>
 <a name='L318'></a><a href='#L318'>318</a>
-<a name='L319'></a><a href='#L319'>319</a>
-<a name='L320'></a><a href='#L320'>320</a>
-<a name='L321'></a><a href='#L321'>321</a>
-<a name='L322'></a><a href='#L322'>322</a>
-<a name='L323'></a><a href='#L323'>323</a>
-<a name='L324'></a><a href='#L324'>324</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L319'></a><a href='#L319'>319</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -486,6 +481,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -634,12 +630,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -729,7 +719,7 @@ import ProcessIsoCurveResponseFactory from "./Response/ProcessIsoCurveResponseFa
  * @alias Gp.Services.ProcessIsoCurve
  * @param {Object} options - options spécifiques au service (+ les options heritées)
  *
- * @param {String} options.resource - La ressource utilisée pour le calcul. Ce paramètre devrait être obligatoire car il l'est dans l'appel au service. Mais il ne l'est pas pour des raisons de rétrocompatibilité.
+ * @param {String} options.resource - La ressource utilisée pour le calcul : bdtopo-valhalla (par défaut) ou bdtopo-pgr.
  *
  * @param {String} options.outputFormat - Le format de la réponse du service iso : 'json' uniquement et par défaut.
  *
@@ -800,6 +790,7 @@ import ProcessIsoCurveResponseFactory from "./Response/ProcessIsoCurveResponseFa
  *           x : 2.3242664298058053,
  *           y : 48.86118017324745
  *      },
+ *      resource : bdtopo-valhalla,
  *      distance : 200,
  *      [time : ]
  *      method : "distance",
@@ -867,7 +858,7 @@ function <span class="fstat-no" title="function not covered" >ProcessIsoCurve </
 &nbsp;
     // options par defaut du service
     // TODO: modifier la ressource lors de la mise en production du service
-<span class="cstat-no" title="statement not covered" >    this.options.resource = options.resource || "bdtopo-iso";</span>
+<span class="cstat-no" title="statement not covered" >    this.options.resource = options.resource || "bdtopo-valhalla";</span>
 <span class="cstat-no" title="statement not covered" >    this.options.exclusions = options.exclusions || [];</span>
 <span class="cstat-no" title="statement not covered" >    this.options.reverse = options.reverse || false;</span>
 <span class="cstat-no" title="statement not covered" >    this.options.srs = options.srs || "EPSG:4326";</span>
@@ -957,13 +948,7 @@ function <span class="fstat-no" title="function not covered" >ProcessIsoCurve </
     // gestion de l'url du service par defaut
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
 <span class="cstat-no" title="statement not covered" >    if (!this.options.serverUrl) {</span>
-        // Code commenté : Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'isochrone
-        /* var urlFound = DefaultUrlService.ProcessIsoCurve.newUrl();
-        if (this.options.oldIsoService) {
-            urlFound = DefaultUrlService.ProcessIsoCurve.url();
-        } */
-        // Release beta services DIFFUSION uniquement : on tape sur l'anvcien service d'isochrone
-        var urlFound = <span class="cstat-no" title="statement not covered" >DefaultUrlService.ProcessIsoCurve.url();</span>
+        var urlFound = <span class="cstat-no" title="statement not covered" >DefaultUrlService.ProcessIsoCurve.newUrl();</span>
 <span class="cstat-no" title="statement not covered" >        if (!urlFound) {</span>
 <span class="cstat-no" title="statement not covered" >            throw new Error("Url by default not found !");</span>
         }
@@ -1039,7 +1024,7 @@ export default ProcessIsoCurve;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-14T18:26:04.322Z
+                at 2024-03-18T17:33:45.131Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
