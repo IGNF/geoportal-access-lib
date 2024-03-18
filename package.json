@@ -1,7 +1,7 @@
 {
   "name": "geoportal-access-lib",
-  "version": "3.3.4",
-  "date": "29/08/2023",
+  "version": "3.4.0",
+  "date": "18/03/2024",
   "description": "French Geoportal resources access library",
   "module": "src/Gp.js",
   "main": "dist/GpServices-src.js",
@@ -38,6 +38,7 @@
     "url": "https://github.com/IGNF/geoportal-access-lib.git"
   },
   "keywords": [
+    "geoplateforme",
     "geoportail",
     "webservice",
     "javascript",

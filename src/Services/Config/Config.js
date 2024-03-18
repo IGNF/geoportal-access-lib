@@ -49,7 +49,8 @@ function Config (options) {
         throw new Error(_.getMessage("PARAM_MISSING", "onSuccess()"));
     }
     if (!options.apiKey && !options.customConfigFile) {
-        throw new Error(_.getMessage("PARAM_MISSING", "apiKey", "customConfigFile"));
+        // si pas de thème spécifié, on récupère toutes les ressources possibles dans l'objet Config
+        options.apiKey = "full";
     }
     this.options = {};
     this.options.onSuccess = options.onSuccess;

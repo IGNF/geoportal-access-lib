@@ -48,6 +48,8 @@ import AltiResponseFactory from "./Response/AltiResponseFactory";
  * @param {Boolean} [options.zonly] - Permet de ne récupérer que les altitudes en sortie s'il vaut 'true'.
  *      Vaut 'false' par défaut.
  *
+ * @param {String} [options.resource] - Resource utilisée pour réaliser le calcul.
+ *
  * @example
  *   var options = {
  *      apiKey : null,
@@ -65,7 +67,8 @@ import AltiResponseFactory from "./Response/AltiResponseFactory";
  *      outputFormat : 'json' // json|xml
  *      sampling : 3,
  *      api : 'REST', // REST|WPS
- *      zonly : false // false|true
+ *      zonly : false // false|true,
+ *      resource : "resource-par-defaut"
  *   };
  *
  */
@@ -104,6 +107,9 @@ function Alti (options) {
     // format de réponse du service : "json" ou "xml" (valeur par défaut), en minuscule !
     this.options.outputFormat = (typeof options.outputFormat === "string") ? options.outputFormat.toLowerCase() : "xml";
 
+    // ressource utilisée pour le calcul altimétrique
+    this.options.resource = options.resource || "ign_rge_alti_wld";
+
     // sampling
     this.options.sampling = options.sampling || null;
 
@@ -118,12 +124,15 @@ function Alti (options) {
     // param. zonly
     this.options.zonly = options.zonly || false;
 
+    // param. measures
+    this.options.measures = options.measures || false;
+
     // gestion de l'url du service par defaut
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
     // en fonction du type d'api, REST ou WPS, du format de reponse demandé (outputFormat)
     // ainsi que sur le type de service (profil ou elevation)
     if (!this.options.serverUrl) {
-        var lstUrlByDefault = DefaultUrlService.Alti.url("calcul");
+        var lstUrlByDefault = DefaultUrlService.Alti.newUrl();
         var urlFound = null;
         switch (this.options.api) {
             case "WPS":
@@ -195,11 +204,13 @@ Alti.prototype.buildRequest = function (error, success) {
         onError : error,
         scope : this,
         // spécifique au service :
+        resource : this.options.resource,
         positions : this.options.positions,
         outputFormat : this.options.outputFormat,
         sampling : this.options.sampling,
         api : this.options.api,
-        zonly : this.options.zonly
+        zonly : this.options.zonly,
+        measures : this.options.measures
     };
 
     AltiRequestFactory.build(options);

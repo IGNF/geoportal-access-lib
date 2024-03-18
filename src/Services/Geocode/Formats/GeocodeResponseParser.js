@@ -94,14 +94,14 @@ function _parseFeature (feature, geocodeResponse) {
     }
     if (feature.properties) {
         for (var prop in feature.properties) {
-            if (prop === "_score") {
+            if (prop === "score") {
                 location.accuracy = feature.properties[prop];
             } else if (prop === "_type") {
                 if (feature.properties[prop] === "address") {
                     location.type = "StreetAddress";
                 } else if (feature.properties[prop] === "poi") {
                     location.type = "PositionOfInterest";
-                } else if (feature.properties[prop] === "parcel") {
+                } else if (feature.properties[prop] === "parcel" || feature.properties[prop] === "cadastral") {
                     location.type = "CadastralParcel";
                 }
             } else {

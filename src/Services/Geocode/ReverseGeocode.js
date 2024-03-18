@@ -2,6 +2,7 @@ import Logger from "../../Utils/LoggerByDefault";
 import _ from "../../Utils/MessagesResources";
 import ErrorService from "../../Exceptions/ErrorService";
 import CommonService from "../CommonService";
+import DefaultUrlService from "../DefaultUrlService";
 import GeocodeRequestFactory from "./Request/GeocodeRequestFactory";
 import GeocodeResponseFactory from "./Response/GeocodeResponseFactory";
 
@@ -87,7 +88,9 @@ function ReverseGeocode (options_) {
     this.logger.trace("[Constructeur ReverseGeocode (options)]");
 
     var options = this.patchOptionConvertor(options_);
-    options.serverUrl = options.serverUrl || "https://wxs.ign.fr/calcul/geoportail/geocodage/rest/0.1/reverse";
+    if (!options.serverUrl) {
+        options.serverUrl = DefaultUrlService.ReverseGeocode.newUrl();
+    }
 
     // appel du constructeur par heritage
     CommonService.apply(this, [options]);

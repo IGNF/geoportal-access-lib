@@ -1,24 +1,24 @@
 {{#extend "layout-sample-bundle"}}
 
 {{#content "head"}}
-        <title>Service de geocodage</title>
+<title>Service de geocodage</title>
 {{/content}}
 
 {{#content "style"}}
-        <style></style>
+<style></style>
 {{/content}}
 
 {{#content "body"}}
-        <h1>Utilisation du Service de geocodage</h1>
-        <h2>Avec les paramètres obligatoires seulement</h2>
-        <pre>
+<h1>Utilisation du Service de geocodage</h1>
+<h2>Avec les paramètres obligatoires seulement</h2>
+<pre>
             <code>
                 var options = {
-                    index : "CadastralParcel", // CadastralParcel, PositionOfInterest, StreetAddress
+                    index : "PositionOfInterest", // CadastralParcel, PositionOfInterest, StreetAddress
                     // maximumResponses: 1,
                     // returnTrueGeometry: true,
                     filters: {
-                        type: "CadastralParcel", // CadastralParcel, PositionOfInterest, StreetAddress
+                        type: "PositionOfInterest", // CadastralParcel, PositionOfInterest, StreetAddress
                         departmentcode: 75,
                     },
                     onSuccess : function (response) {
@@ -27,8 +27,8 @@
                     onFailure : function (error) {
                         print(error);
                     },
-                    // query : "73 avenue de paris, 94160 Saint-Mandé"
-                    query : "75102000AO0020"
+                    query : "73 avenue de paris, 94160 Saint-Mandé"
+                    // query : "75102000AO0020"
                 };
                 Gp.Services.geocode(options);
               </code>
@@ -36,42 +36,22 @@
 {{/content}}
 
 {{#content "js"}}
-        var options = {
-            // maximumResponses: 1,
-            // returnTrueGeometry: true,
-            index : "CadastralParcel", // CadastralParcel, PositionOfInterest, StreetAddress
-            filters: {
-                // postalCode: 94160,
-                departmentcode: 75,
-            },
-            onSuccess : function (response) {
-                print(response);
-            },
-            onFailure : function (error) {
-                print(error);
-            },
-            // query : "73 avenue de paris, 94160 Saint-Mandé"
-            query : "75102000AO0020"
-        };
+var options = {
+// maximumResponses: 1,
+// returnTrueGeometry: true,
+index : "PositionOfInterest", // CadastralParcel, PositionOfInterest, StreetAddress
+filters: {
+postalCode: 94160,
+},
+onSuccess : function (response) {
+print(response);
+},
+onFailure : function (error) {
+print(error);
+},
+query : "73 avenue de paris, 94160 Saint-Mandé"
+};
 
-        //test patch ancien formalisme
-        //var options = {
-        //    apiKey : "{{ apikey }}",
-        //    onSuccess : function (response) {
-        //    print(response.locations);
-        //    },
-        //    filterOptions : {
-        //       type : ["PositionOfInterest"],
-        //       postalCode : "41290"
-        //    },
-        //    position: {
-        //        x : 1.3,
-        //        y : 47.8
-        //    },
-        //    location : "Saint-Mandé",
-        //    maximumResponses : 1
-        //};
-
-        Gp.Services.geocode(options);
+Gp.Services.geocode(options);
 {{/content}}
 {{/extend}}

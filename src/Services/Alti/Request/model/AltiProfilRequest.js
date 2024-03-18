@@ -95,6 +95,10 @@ AltiProfilRequest.prototype.getData = function () {
         k : "format",
         v : this.format
     });
+    map.push({
+        k : "resource",
+        v : this.resource
+    });
 
     return map;
 };

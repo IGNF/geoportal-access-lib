@@ -14,6 +14,7 @@
 // import Logger from "../../../Utils/LoggerByDefault";
 import AltiResponse from "../Response/model/AltiResponse";
 import Elevation from "../Response/model/Elevation";
+import Measure from "../Response/model/Measure";
 
 /**
  *
@@ -31,7 +32,7 @@ import Elevation from "../Response/model/Elevation";
  *      du service alti, correspondant logiquement à la racine du document
  *      (contient un ou plusieurs childNodes correspondant chacun à une élévation retournée)
  *
- * @property {Method} AltiResponseReader.READERS.elevation - ecture d'un noeud "elevation" de la réponse xml du service alti.
+ * @property {Method} AltiResponseReader.READERS.elevation - Lecture d'un noeud "elevation" de la réponse xml du service alti.
  *      (contient un ou 4 childNode (s) correspondant à l'altitude (z) et éventuellement lat, lon, et acc)
  *
  * @property {Method} AltiResponseReader.READERS.lat - Lecture d'un noeud "lat" de la réponse xml du service alti.
@@ -45,6 +46,15 @@ import Elevation from "../Response/model/Elevation";
  *
  * @property {Method} AltiResponseReader.READERS.acc - Lecture d'un noeud "acc" de la réponse xml du service alti.
  *      (contient une valeur de précision, qui est un flottant)
+ *
+ * @property {Method} AltiResponseReader.READERS.measures - Lecture d'un noeud "measures" de la réponse xml du service alti.
+ *      (contient une valeur de précision, qui est un flottant)
+ *
+ * @property {Method} AltiResponseReader.READERS.source_name - Lecture d'un noeud "source_name" de la réponse xml du service alti.
+ *      (pour remplir l'éventuel objet measure)
+ *
+ * @property {Method} AltiResponseReader.READERS.source_mesure - Lecture d'un noeud "source_mesure" de la réponse xml du service alti.
+ *      (pour remplir l'éventuel objet measure)
  *
  * @property {Method} AltiResponseReader.READERS.exceptionreport - Lecture d'un noeud "ExceptionReport" de la réponse xml du service alti.
  *
@@ -91,9 +101,9 @@ AltiResponseReader.READERS = {
 
     /**
      * Lecture d'un noeud "elevation" de la réponse xml du service alti.
-     *      (contient un ou 4 childNode (s) correspondant à l'altitude (z) et éventuellement lat, lon, et acc)
+     *      (contient un ou 5 childNode (s) correspondant à l'altitude (z) et éventuellement lat, lon, acc et measures)
      *
-     * @param {DOMElement} node - noeud elevation à lire pour récupérer les informations de l'élévation retournée (z [, lon, lat, acc])
+     * @param {DOMElement} node - noeud elevation à lire pour récupérer les informations de l'élévation retournée (z [, lon, lat, acc, measures])
      * @return {Array} elevationResponse - format de la réponse en sortie, instance de AltiResponse
      * @static
      * @memberof AltiResponseReader
@@ -156,19 +166,19 @@ AltiResponseReader.READERS = {
      *      (contient une valeur d'altitude, qui est un flottant)
      *
      * @param {DOMElement} node - noeud à lire pour récupérer l'altitude
-     * @param {Object} elevation - objet dans lequel stocker l'altitude retournée
+     * @param {Object} elevationObject - objet dans lequel stocker l'altitude retournée : elevation ou measure
      * @static
      * @memberof AltiResponseReader
      */
-    z : function (node, elevation) {
+    z : function (node, elevationObject) {
         var textNode = node.firstChild;
         if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
-            if (elevation) {
-                elevation.z = parseFloat(textNode.nodeValue);
+            if (elevationObject) {
+                elevationObject.z = parseFloat(textNode.nodeValue);
             } else {
-                elevation = new Elevation();
-                elevation.z = parseFloat(textNode.nodeValue);
-                return elevation;
+                elevationObject = new Elevation();
+                elevationObject.z = parseFloat(textNode.nodeValue);
+                return elevationObject;
             }
         } else {
             throw new Error("Erreur dans la lecture de la réponse du service : altitude attendue mais absente");
@@ -180,16 +190,85 @@ AltiResponseReader.READERS = {
      *      (contient une valeur de précision, qui est un flottant)
      *
      * @param {DOMElement} node - noeud à lire pour récupérer la précision
+     * @param {Object} elevationObject - objet dans lequel stocker la précision retournée : elevation ou measure
+     * @static
+     * @memberof AltiResponseReader
+     */
+    acc : function (node, elevationObject) {
+        var textNode = node.firstChild;
+        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
+            elevationObject.acc = parseFloat(textNode.nodeValue);
+        } else {
+            throw new Error("Erreur dans la lecture de la réponse du service : précision (acc) attendue mais absente");
+        }
+    },
+
+    /**
+     * Lecture d'un noeud "source_name" de la réponse xml du service alti.
+     *      (contient le nom de la source, qui est un string)
+     *
+     * @param {DOMElement} node - noeud à lire pour récupérer la précision
+     * @param {Object} measure - objet dans lequel stocker le nom de la source retourné
+     * @static
+     * @memberof AltiResponseReader
+     */
+    source_name : function (node, measure) {
+        var textNode = node.firstChild;
+        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
+            measure.source_name = textNode.nodeValue;
+        } else {
+            throw new Error("Erreur dans la lecture de la réponse du service : source_name attendue mais absente");
+        }
+    },
+
+    /**
+     * Lecture d'un noeud "source_measure" de la réponse xml du service alti.
+     *      (contient le nom de la mesure, qui est un string)
+     *
+     * @param {DOMElement} node - noeud à lire pour récupérer la précision
+     * @param {Object} measure - objet dans lequel stocker le nom de la source retourné
+     * @static
+     * @memberof AltiResponseReader
+     */
+    source_measure : function (node, measure) {
+        var textNode = node.firstChild;
+        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
+            measure.source_measure = textNode.nodeValue;
+        } else {
+            throw new Error("Erreur dans la lecture de la réponse du service : source_measure attendue mais absente");
+        }
+    },
+
+    /**
+     * Lecture d'un noeud "measures" et de ses enfants "measure" de la réponse xml du service alti.
+     *      (contient une valeur de précision, qui est un flottant)
+     *
+     * @param {DOMElement} node - noeud à lire pour récupérer la précision
      * @param {Object} elevation - objet dans lequel stocker la précision retournée
      * @static
      * @memberof AltiResponseReader
      */
-    acc : function (node, elevation) {
-        var textNode = node.firstChild;
-        if (textNode && textNode.nodeType === 3) { // 3 === node.TEXT_NODE
-            elevation.acc = parseFloat(textNode.nodeValue);
-        } else {
-            throw new Error("Erreur dans la lecture de la réponse du service : précision (acc) attendue mais absente");
+    measures : function (node, elevation) {
+        elevation.measures = [];
+        var measure;
+        if (node.hasChildNodes()) {
+            var children = node.childNodes;
+            var measureNode;
+            var measureChildren;
+            for (var i = 0; i < children.length; i++) {
+                measure = new Measure();
+                measureNode = children[i];
+                measureChildren = measureNode.childNodes;
+                for (var j = 0; j < measureChildren.length; j++) {
+                    if (AltiResponseReader.READERS[measureChildren[j].nodeName]) {
+                        // INFO : on passe en paramètre l'objet en entrée elevation, vide, à remplir.
+                        AltiResponseReader.READERS[measureChildren[j].nodeName](measureChildren[j], measure);
+                    } else {
+                        throw new Error("Erreur dans la lecture de la réponse du service : measures attendues mais absentes");
+                    }
+                }
+                elevation.measures.push(measure);
+            }
         }
     },
 

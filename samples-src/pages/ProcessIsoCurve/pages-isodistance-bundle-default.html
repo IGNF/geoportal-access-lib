@@ -14,8 +14,7 @@
         <pre>
           <code>
             var options = {
-                apiKey : "{{ apikey }}",
-                serverUrl : "https://wxs.ign.fr/calcul/geoportail/isochrone/rest/1.0.0/isochrone",
+                serverUrl : "https://data.geopf.fr/navigation/isochrone",
                 onSuccess : function (response) {
                     print(response);
                 },
@@ -23,7 +22,8 @@
                    x : 2.35,
                    y : 48.87
                 },
-                distance : 200
+                distance : 200,
+                resource : "bdtopo-pgr"
             };
             Gp.Services.isoCurve(options);
           </code>
@@ -32,8 +32,7 @@
 
 {{#content "js"}}
         var options = {
-            apiKey : "{{ apikey }}",
-            serverUrl : "https://wxs.ign.fr/calcul/geoportail/isochrone/rest/1.0.0/isochrone",
+            serverUrl : "https://data.geopf.fr/navigation/isochrone",
             onSuccess : function (response) {
                 print(response);
             },
@@ -41,7 +40,8 @@
                x : 2.35,
                y : 48.87
             },
-            distance : 200
+            distance : 200,
+            resource : "bdtopo-pgr"
         };
         Gp.Services.isoCurve(options);
 {{/content}}

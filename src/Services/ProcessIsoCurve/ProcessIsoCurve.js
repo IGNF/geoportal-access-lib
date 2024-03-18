@@ -18,7 +18,7 @@ import ProcessIsoCurveResponseFactory from "./Response/ProcessIsoCurveResponseFa
  * @alias Gp.Services.ProcessIsoCurve
  * @param {Object} options - options spécifiques au service (+ les options heritées)
  *
- * @param {String} options.resource - La ressource utilisée pour le calcul. Ce paramètre devrait être obligatoire car il l'est dans l'appel au service. Mais il ne l'est pas pour des raisons de rétrocompatibilité.
+ * @param {String} options.resource - La ressource utilisée pour le calcul : bdtopo-valhalla (par défaut) ou bdtopo-pgr.
  *
  * @param {String} options.outputFormat - Le format de la réponse du service iso : 'json' uniquement et par défaut.
  *
@@ -89,6 +89,7 @@ import ProcessIsoCurveResponseFactory from "./Response/ProcessIsoCurveResponseFa
  *           x : 2.3242664298058053,
  *           y : 48.86118017324745
  *      },
+ *      resource : bdtopo-valhalla,
  *      distance : 200,
  *      [time : ]
  *      method : "distance",
@@ -156,7 +157,7 @@ function ProcessIsoCurve (options) {
 
     // options par defaut du service
     // TODO: modifier la ressource lors de la mise en production du service
-    this.options.resource = options.resource || "bdtopo-iso";
+    this.options.resource = options.resource || "bdtopo-valhalla";
     this.options.exclusions = options.exclusions || [];
     this.options.reverse = options.reverse || false;
     this.options.srs = options.srs || "EPSG:4326";
@@ -246,7 +247,7 @@ function ProcessIsoCurve (options) {
     // gestion de l'url du service par defaut
     // si l'url n'est pas renseignée, il faut utiliser les urls par defaut
     if (!this.options.serverUrl) {
-        var urlFound = DefaultUrlService.ProcessIsoCurve.url("calcul");
+        var urlFound = DefaultUrlService.ProcessIsoCurve.newUrl();
         if (!urlFound) {
             throw new Error("Url by default not found !");
         }

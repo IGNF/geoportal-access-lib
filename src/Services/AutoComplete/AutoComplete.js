@@ -1,4 +1,5 @@
 import CommonService from "../CommonService";
+import DefaultUrlService from "../DefaultUrlService";
 import AutoCompleteResponseFactory from "./Response/AutoCompleteResponseFactory";
 import Logger from "../../Utils/LoggerByDefault";
 import MR from "../../Utils/MessagesResources";
@@ -72,7 +73,10 @@ function AutoComplete (options_) {
     this.logger.trace("[Constructeur AutoComplete (options)]");
 
     var options = this.patchOptionConvertor(options_);
-    options.serverUrl = options.serverUrl || "https://wxs.ign.fr/calcul/geoportail/geocodage/rest/0.1/completion";
+
+    if (!options.serverUrl) {
+        options.serverUrl = DefaultUrlService.AutoComplete.newUrl();
+    }
 
     // appel du constructeur par heritage
     CommonService.apply(this, arguments);
@@ -90,7 +94,7 @@ function AutoComplete (options_) {
     }
 
     this.options.type = options.type;
-    this.options.territory = options.territory || "";
+    this.options.territory = options.terr || "";
     this.options.maximumResponses = options.maximumResponses || 10;
 
     // INFO

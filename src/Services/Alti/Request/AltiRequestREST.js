@@ -18,7 +18,9 @@ import AltiProfilRequest from "./model/AltiProfilRequest";
  * @param {Boolean}  options.param.indent - false|true
  * @param {String}   options.param.crs - 'CRS:84'
  * @param {String}   options.param.sampling - 3
+ * @param {String}   options.param.resource - 'rge_alti_corse2a_float32_zip_lamb93'
  * @param {Boolean}  options.param.zonly - false|true
+ * @param {Boolean}  options.param.measures - false|true
  * @param {String}   options.param.format - "JSON|XML"
  * @param {String}   options.type - "Profil|Elevation"
  * @param {String}   options.method - GET|POST
@@ -39,6 +41,7 @@ import AltiProfilRequest from "./model/AltiProfilRequest";
  *               format    : 'json',      // par defaut (only to POST)
  *               sampling  : 3 ,          // par defaut (only use by Profil)
  *               zonly     : false        // par defaut (only use by Elevation)
+ *               measures  : false        // par defaut (only use by Elevation)
  *           }
  *      };
  *
@@ -115,7 +118,7 @@ AltiRequestREST.prototype = {
     template : {
         get : {
             // FIXME on retire le param 'delimiter' : &delimiter='__DELIMITER__'
-            value : "lon=__LON__&lat=__LAT__&indent=__INDENT__&crs='__CRS__'",
+            value : "lon=__LON__&lat=__LAT__&indent=__INDENT__&crs='__CRS__'&resource=__RESOURCE__&measures=__MEASURES__",
             input : {
                 point : "&zonly=__ZONLY__",
                 profil : "&sampling=__SAMPLING__"
@@ -126,9 +129,11 @@ AltiRequestREST.prototype = {
             value : "lon=__LON__\n" +
                 "lat=__LAT__\n" +
                 "indent=__INDENT__\n" +
-                "crs='__CRS__'\n",
+                "crs='__CRS__'\n" +
+                "resource='__RESOURCE__'\n" +
+                "measures='__MEASURES__'\n",
             input : {
-                point : "zonly=__ZONLY__",
+                point : "zonly=__ZONLY__\n",
                 profil : "sampling=__SAMPLING__"
             }
         }
@@ -158,6 +163,8 @@ AltiRequestREST.prototype = {
         // template = template.replace(/__DELIMITER__/g, this.DataObject.delimiter);
         template = template.replace(/__INDENT__/g, this.DataObject.indent);
         template = template.replace(/__CRS__/g, this.DataObject.crs);
+        template = template.replace(/__RESOURCE__/g, this.DataObject.resource);
+        template = template.replace(/__MEASURES__/g, this.DataObject.measures);
 
         // ajout +
         template = template + this.__addDataInputs();
@@ -189,7 +196,7 @@ AltiRequestREST.prototype = {
         var tmpl = null;
         if (this.DataObject.CLASSNAME === "AltiElevationRequest") {
             tmpl = myTemplate.input.point;
-            return tmpl.replace(/__ZONLY__/g, this.DataObject.zonly);
+            return tmpl.replace(/__ZONLY__/g, this.DataObject.zonly.toString());
         } else if (this.DataObject.CLASSNAME === "AltiProfilRequest") {
             tmpl = myTemplate.input.profil;
             return tmpl.replace(/__SAMPLING__/g, this.DataObject.sampling);

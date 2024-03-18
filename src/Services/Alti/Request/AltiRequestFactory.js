@@ -58,7 +58,8 @@ var AltiRequestFactory = {
                 crs : null, // par defaut
                 format : null, // (only to POST)
                 sampling : null, // (only use by Profil)
-                zonly : null // (only use by Elevation)
+                zonly : null, // (only use by Elevation)
+                measures : null // (only use by Elevation)
             }
         };
 
@@ -67,6 +68,8 @@ var AltiRequestFactory = {
         settings.param.format = options.outputFormat;
         settings.param.sampling = options.sampling;
         settings.param.zonly = options.zonly;
+        settings.param.measures = options.measures;
+        settings.param.resource = options.resource;
 
         // gestion des callback
         var bOnError = !!(options.onError !== null && typeof options.onError === "function"); // cast variable to boolean
