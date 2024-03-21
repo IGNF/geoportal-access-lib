@@ -17,6 +17,8 @@
 
 * [Fixed]
 
+    - remplace dépendance xmldom par @xmldom/xmldom (ba127d66030d632ce5058ce7274013f531acbfcc)
+
 * [Deprecated]
 
 * [Security]
