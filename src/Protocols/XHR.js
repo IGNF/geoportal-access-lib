@@ -392,7 +392,7 @@ var XHR = {
 
                 // test on env. nodejs or browser
                 if (typeof window === "undefined") {
-                    var DOMParser = require("xmldom").DOMParser; // __xmldom.DOMParser
+                    var DOMParser = require("@xmldom/xmldom").DOMParser; // __xmldom.DOMParser
                     xmlDoc = new DOMParser().parseFromString(response, "text/xml");
                 } else {
                     if (window.DOMParser) {
