@@ -18,6 +18,7 @@
 * [Fixed]
 
     - remplace dépendance xmldom par @xmldom/xmldom (ba127d66030d632ce5058ce7274013f531acbfcc)
+    - variable process utilisée par logger définie par défaut au cas où non présente dans l'environnement
 
 * [Deprecated]
 
