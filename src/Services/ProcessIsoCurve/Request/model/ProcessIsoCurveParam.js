@@ -62,6 +62,10 @@ function ProcessIsoCurveParam (options) {
     if (this.options.method === "distance") {
         this.costType = "distance";
         this.costValue = this.options.distance;
+        if (this.distanceUnit === "m" && this.costValue >= 50000) {
+            this.distanceUnit = "km";
+            this.costValue /= 1000;
+        }
     } else {
         this.costType = "time";
         this.costValue = this.options.time;
