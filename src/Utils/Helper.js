@@ -67,6 +67,12 @@ var Helper = {
         var myUrl = url;
 
         if (url) {
+            if (url.split("?").length - 1 >= 2) {
+                // S'il y a plusieurs "?" dans l'URL, on garde le premier et on remplace les autres par des &
+                var firstOccuranceIndex = url.search(/\?/) + 1;
+                url = url.substring(0, firstOccuranceIndex) + url.slice(firstOccuranceIndex).replace(/\?/g, "&");
+            }
+
             var k = url.indexOf("?");
             if (k === -1) { // pas de ? et KVP
                 myUrl += "?";
