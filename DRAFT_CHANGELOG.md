@@ -1,6 +1,6 @@
-# Bibliothèque d'accès aux services Géoplateforme, version 3.4.x
+# Bibliothèque d'accès aux services Géoplateforme, version 3.4.2
 
-**xx/xx/2024 : 3.4.x**
+**14/05/2024 : 3.4.2**
 
 > release of geoportal access library
 
