@@ -6,7 +6,7 @@
 
 ## Summary
 
-Corrections mineures sur le logger et le build
+Corrections sur le paramètrage du service d'isochrone et la normalisation des URL des services images
 
 ## Changelog
 
@@ -17,6 +17,9 @@ Corrections mineures sur le logger et le build
 * [Removed]
 
 * [Fixed]
+
+    - Fix pour permettre des isodistances de plus de 50km (96ff3800e43e2b609208c8492cad2a8994997a6c)
+    - Fix pour correctement normaliser les URL ayant plusieurs point d'interrogation (#88)
 
 * [Deprecated]
 
