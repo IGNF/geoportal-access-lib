@@ -1,12 +1,12 @@
-# Bibliothèque d'accès aux services Géoplateforme, version 3.4.1
+# Bibliothèque d'accès aux services Géoplateforme, version 3.4.2
 
-**16/04/2024 : 3.4.1**
+**14/05/2024 : 3.4.2**
 
 > release of geoportal access library
 
 ## Summary
 
-Corrections mineures sur le logger et le build
+Corrections sur le paramètrage du service d'isochrone et la normalisation des URL des services images
 
 ## Changelog
 
@@ -18,8 +18,8 @@ Corrections mineures sur le logger et le build
 
 * [Fixed]
 
-    - remplace dépendance xmldom par @xmldom/xmldom (ba127d66030d632ce5058ce7274013f531acbfcc)
-    - variable process utilisée par logger définie par défaut au cas où non présente dans l'environnement (e61330419a1ed86d32e36c66d3aec86062bc8860)
+    - Fix pour permettre des isodistances de plus de 50km (96ff3800e43e2b609208c8492cad2a8994997a6c)
+    - Fix pour correctement normaliser les URL ayant plusieurs point d'interrogation (#88)
 
 * [Deprecated]
 
