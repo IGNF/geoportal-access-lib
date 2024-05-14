@@ -70,7 +70,7 @@ var Helper = {
             if (url.split("?").length - 1 >= 2) {
                 // S'il y a plusieurs "?" dans l'URL, on garde le premier et on remplace les autres par des &
                 var firstOccuranceIndex = url.search(/\?/) + 1;
-                url = url.substring(0, firstOccuranceIndex) + url.slice(firstOccuranceIndex).replace(/\?/g, "&");
+                myUrl = url.substring(0, firstOccuranceIndex) + url.slice(firstOccuranceIndex).replace(/\?/g, "&");
             }
 
             var k = url.indexOf("?");
