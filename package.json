@@ -26,6 +26,9 @@
     "doc": "npm run doc:serve",
     "doc:serve": "webpack-dev-server --content-base jsdoc --port 9001 --open"
   },
+  "engines": {
+    "node": "<=16"
+  },
   "nyc": {
     "include": [
       "src/**/*.js"
