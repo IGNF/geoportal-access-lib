@@ -1,4 +1,5 @@
 
+/* eslint-disable no-unused-vars */
 /**
  * Object used to describe a format to use with Geoportal resources.
  *
@@ -8,5 +9,4 @@
  * @namespace
  * @alias Gp.Services.Config.Format
  */
-
 var Format = {};

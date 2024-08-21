@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 /**
  * Object used to describe properties of a french territory covered by geoportal resources.

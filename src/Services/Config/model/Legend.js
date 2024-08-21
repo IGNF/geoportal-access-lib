@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 /**
  * Object used to describe a legend file associated with a geoportal resource (WMTS, WMS, WFS layers).
@@ -9,5 +10,4 @@
  * @namespace
  * @alias Gp.Services.Config.Legend
  */
-
 var Legend = {};

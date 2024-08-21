@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 /**
  *
@@ -10,5 +11,5 @@
  *
  * @namespace
  * @alias Gp.Services.Config.TileMatrixSet
- */
+*/
 var TileMatrixSet = {};

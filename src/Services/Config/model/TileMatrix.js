@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 /**
  * Object used to describe a TileMatrix.
@@ -13,5 +14,4 @@
  * @namespace
  * @alias Gp.Services.Config.TileMatrix
  */
-
 var TileMatrix = {};

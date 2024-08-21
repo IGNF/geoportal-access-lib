@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /**
  * Object used to describe geoportal resource (WMTS, WMS, WFS layers, geocoding resources or elevation service) parameters. Properties may be used or not depending on the resource type.
  *

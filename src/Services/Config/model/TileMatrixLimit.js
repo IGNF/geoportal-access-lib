@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 /**
  * Object used to describe a layer extent on a Tile Matrix.
@@ -10,5 +11,4 @@
  * @namespace
  * @alias Gp.Services.Config.TileMatrixLimit
  */
-
 var TileMatrixLimit = {};

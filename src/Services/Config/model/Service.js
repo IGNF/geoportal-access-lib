@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 /**
  * Object used to describe a web service of the geoportal platform.

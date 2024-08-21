@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 /**
  * Object used to describe a style that may be used for a geoportal resource.
@@ -10,5 +11,4 @@
  * @namespace
  * @alias Gp.Services.Config.Style
  */
-
 var Style = {};

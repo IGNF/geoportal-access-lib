@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 /**
  * Object used to describe a metadata file associated with a geoportal resource.
@@ -8,5 +9,4 @@
  * @namespace
  * @alias Gp.Services.Config.Metadata
  */
-
 var Metadata = {};

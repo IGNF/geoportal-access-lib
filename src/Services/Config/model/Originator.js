@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 /**
  * Object used to describe an Originator of geoportal resource.
@@ -11,5 +12,4 @@
  * @namespace
  * @alias Gp.Services.Config.Originator
  */
-
 var Originator = {};

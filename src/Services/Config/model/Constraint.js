@@ -1,4 +1,5 @@
 
+/* eslint-disable no-unused-vars */
 /**
  *
  * Object used to express a geographical (BBOX, scale) and temporal constraint.
@@ -12,5 +13,4 @@
  * @namespace
  * @alias Gp.Services.Config.Constraint
  */
-
 var Constraint = {};
