@@ -1,7 +1,7 @@
 {
   "name": "geoportal-access-lib",
-  "version": "3.4.2",
-  "date": "14/05/2024",
+  "version": "3.4.3",
+  "date": "21/08/2024",
   "description": "French Geoportal resources access library",
   "module": "src/Gp.js",
   "main": "dist/GpServices-src.js",
@@ -25,6 +25,9 @@
     "sample:serve:dev": "webpack-dev-server --mode=development --open-page samples/index-map.html --content-base . --output-public-path '/dist/' --port 9001 --open",
     "doc": "npm run doc:serve",
     "doc:serve": "webpack-dev-server --content-base jsdoc --port 9001 --open"
+  },
+  "engines": {
+    "node": "<=16"
   },
   "nyc": {
     "include": [
