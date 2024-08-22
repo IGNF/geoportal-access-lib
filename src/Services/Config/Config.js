@@ -16,6 +16,7 @@ import ConfigInterface from "./ConfigInterface";
  * @param {Sting} options.apiKey - clé(s) dont on veut obtenir la configuration. Si plusieurs clés, séparer chacune par une virgule
  * @param {Boolean} [options.sync=false] - force le mode synchrone
  * @param {String} options.customConfigFile - chemin vers un fichier de configuration personnalisé. Surcharge le paramètre apiKey.
+ * @see Gp.Services.GetConfigInterface
  *
  * @example
  *   var options = {

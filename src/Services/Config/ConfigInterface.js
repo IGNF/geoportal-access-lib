@@ -139,6 +139,7 @@ ConfigInterface.prototype = {
      *
      * @param {String} layerId - Geoportal layer identifier (e.g. "GEOGRAPHICALGRIDSYSTEMS.MAPS$GEOPORTAIL:OGC:WMTS")
      * @return {Object} layer - Layer configuration
+     * @see Gp.Services.Config.Layer
      */
     getLayerConf : function (layerId) {
         if (!this.layers) {
@@ -281,6 +282,7 @@ ConfigInterface.prototype = {
      *
      * @param {String} tmsID - Tile Matrix Set identifier (e.g. : "PM")
      * @return {Object} tileMatrixSet - Tile Matrix Set configuration
+     * @see Gp.Services.Config.TileMatrixSet
      */
     getTMSConf : function (tmsID) {
         if (!this.tileMatrixSets) {
