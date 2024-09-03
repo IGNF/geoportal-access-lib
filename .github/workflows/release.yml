@@ -106,7 +106,7 @@ jobs:
           mkdir ${{ steps.get_version.outputs.VERSION }}
 
       - name: Download JSDoc artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: jsdoc
           path: tmp/jsdoc
@@ -117,7 +117,7 @@ jobs:
           cp -r tmp/jsdoc ${{ steps.get_version.outputs.VERSION }}
 
       - name: Download bundles artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: dist
           path: tmp/dist
@@ -133,7 +133,7 @@ jobs:
           ln -s ${{ steps.get_version.outputs.VERSION }} latest
 
       - name: Download coverage artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: coverage
           path: tmp/coverage
@@ -144,7 +144,7 @@ jobs:
           cp -r tmp/coverage current
       
       - name: Download test-report artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: test-report
           path: tmp/test-report
@@ -185,12 +185,12 @@ jobs:
           prerelease: false
 
       - name: Download bundles artifacts # FIXME inutile ?
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: bundles
 
       - name: Download bundles artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: dist
 
@@ -248,7 +248,7 @@ jobs:
           mkdir dist
 
       - name: Download bundles artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: dist
           path: dist
