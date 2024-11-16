@@ -13,6 +13,7 @@ Mise à jour de la JSdoc sur le service de configuration
 * [Added]
 
     * Ajout de la jsdoc sur le service de configuration
+    * Ajout de la conf technique pour le WFS
 
 * [Changed]
 
