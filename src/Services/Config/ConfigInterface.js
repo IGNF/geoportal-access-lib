@@ -207,7 +207,7 @@ ConfigInterface.prototype = {
                 }
 
                 params.version = layerConf.serviceParams.version;
-                params.format = (layerConf.formats && layerConf.formats.length)  ? layerConf.formats[0].name : "";
+                params.format = (layerConf.formats && layerConf.formats.length) ? layerConf.formats[0].name : "";
                 params.projection = layerConf.defaultProjection;
 
                 // get layer info and constraints
