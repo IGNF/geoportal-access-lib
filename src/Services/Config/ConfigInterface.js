@@ -149,12 +149,12 @@ ConfigInterface.prototype = {
     },
 
     /**
-     * Get all parameters needed to display a WMS or WMTS layer given its name, its service and its key
+     * Get all parameters needed to display a WFS, WMS or WMTS layer given its name, its service and its key
      *
      * @param {String} layerName - name of the layer (ex. "ORTHOIMAGERY.ORTHOPHOTOS")
      * @param {String} service   - name of the service (ex. "WMS" ou "WMTS")
      * @param {String} [apiKey]  - Contract API key
-     * @returns {Object} params  - params of the service (WMS or WMTS) for the given layer
+     * @returns {Object} params  - params of the service (WFS, WMS or WMTS) for the given layer
      * @returns {String} params.url        - Url of the service to reach to display the layer
      * @returns {String} params.version    - Version of the service
      * @returns {String} params.styles     - Default style of the layer
@@ -195,17 +195,19 @@ ConfigInterface.prototype = {
                     }
                 }
 
-                const wmsTypeRegex = /\/v\//;
-                // WMS vector style always empty (not in getCap)
-                if (wmsTypeRegex.test(params.url)) {
-                    params.styles = " ";
-                } else {
-                    // WMS raster style is defined in getCap
-                    params.styles = layerConf.styles[0].name;
+                if (service !== "WFS") {
+                    const wmsTypeRegex = /\/v\//;
+                    // WMS vector style always empty (not in getCap)
+                    if (wmsTypeRegex.test(params.url)) {
+                        params.styles = " ";
+                    } else {
+                        // WMS raster style is defined in getCap
+                        params.styles = layerConf.styles[0].name;
+                    }
                 }
 
                 params.version = layerConf.serviceParams.version;
-                params.format = layerConf.formats[0].name;
+                params.format = (layerConf.formats && layerConf.formats.length) ? layerConf.formats[0].name : "";
                 params.projection = layerConf.defaultProjection;
 
                 // get layer info and constraints
