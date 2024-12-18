@@ -6,14 +6,11 @@
 
 ## Summary
 
-Mise à jour de la JSdoc sur le service de configuration
+Build avec node JS > 20
 
 ## Changelog
 
 * [Added]
-
-    * Ajout de la jsdoc sur le service de configuration
-    * Ajout de la conf technique pour le WFS
 
 * [Changed]
 
