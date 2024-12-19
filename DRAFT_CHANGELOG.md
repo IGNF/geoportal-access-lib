@@ -1,6 +1,6 @@
-# Bibliothèque d'accès aux services Géoplateforme, version 3.4.5
+# Bibliothèque d'accès aux services Géoplateforme, version 3.4.6
 
-**19/12/2024 : 3.4.5**
+**19/12/2024 : 3.4.6**
 
 > release of geoportal access library
 
@@ -17,6 +17,8 @@ Build avec node JS > 20
 * [Removed]
 
 * [Fixed]
+
+  - version 2.6.1 node-fetch compatible webpack@4
 
 * [Deprecated]
 
