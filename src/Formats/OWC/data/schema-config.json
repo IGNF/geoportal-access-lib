@@ -1,0 +1,630 @@
+
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "jsdoc": "schema.jsdoc",
+    "title": "Generated schema for configuration service",
+    "type": "object",
+    "properties": {
+      "generalOptions": {
+        "type": "object",
+        "properties": {
+          "apiKeys": {
+            "type": "object",
+            "properties": {
+              "$apikey": {
+                "type": "array",
+                "items": {}
+              }
+            },
+            "required": [
+              "$apikey"
+            ]
+          }
+        },
+        "required": [
+          "apiKeys"
+        ]
+      },
+      "layers": {
+        "type": "object",
+        "properties": {
+          "$GEOPORTAIL:OGC:WMTS": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "globalConstraint": {
+                "type": "object",
+                "properties": {
+                  "maxScaleDenominator": {
+                    "type": "number"
+                  },
+                  "minScaleDenominator": {
+                    "type": "number"
+                  },
+                  "bbox": {
+                    "type": "object",
+                    "properties": {
+                      "left": {
+                        "type": "number"
+                      },
+                      "right": {
+                        "type": "number"
+                      },
+                      "top": {
+                        "type": "number"
+                      },
+                      "bottom": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "left",
+                      "right",
+                      "top",
+                      "bottom"
+                    ]
+                  }
+                },
+                "required": [
+                  "maxScaleDenominator",
+                  "minScaleDenominator",
+                  "bbox"
+                ]
+              },
+              "serviceParams": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "version": {
+                    "type": "string"
+                  },
+                  "serverUrl": {
+                    "type": "object",
+                    "properties": {
+                      "$apikey": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "$apikey"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "version",
+                  "serverUrl"
+                ]
+              },
+              "defaultProjection": {
+                "type": "string"
+              },
+              "wmtsOptions": {
+                "type": "object",
+                "properties": {
+                  "tileMatrixSetLink": {
+                    "type": "string"
+                  },
+                  "tileMatrixSetLimits": {
+                    "type": "object",
+                    "properties": {
+                      "$level": {
+                        "type": "object",
+                        "properties": {
+                          "minTileRow": {
+                            "type": "string"
+                          },
+                          "maxTileRow": {
+                            "type": "string"
+                          },
+                          "minTileCol": {
+                            "type": "string"
+                          },
+                          "maxTileCol": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "minTileRow",
+                          "maxTileRow",
+                          "minTileCol",
+                          "maxTileCol"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "$level"
+                    ]
+                  }
+                },
+                "required": [
+                  "tileMatrixSetLink",
+                  "tileMatrixSetLimits"
+                ]
+              },
+              "styles": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "current": {
+                      "type": "boolean"
+                    },
+                    "url": {}
+                  },
+                  "required": [
+                    "name",
+                    "title",
+                    "current",
+                    "url"
+                  ]
+                }
+              },
+              "legends": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "format": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "minScaleDenominator": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "format",
+                    "url",
+                    "minScaleDenominator"
+                  ]
+                }
+              },
+              "formats": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "current": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "current"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "name",
+              "title",
+              "description",
+              "globalConstraint",
+              "serviceParams",
+              "defaultProjection",
+              "wmtsOptions",
+              "styles",
+              "legends",
+              "formats"
+            ]
+          },
+          "$GEOPORTAIL:OGC:WMS": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "globalConstraint": {
+                "type": "object",
+                "properties": {
+                  "minScaleDenominator": {
+                    "type": "number"
+                  },
+                  "maxScaleDenominator": {
+                    "type": "number"
+                  },
+                  "bbox": {
+                    "type": "object",
+                    "properties": {
+                      "left": {
+                        "type": "number"
+                      },
+                      "right": {
+                        "type": "number"
+                      },
+                      "top": {
+                        "type": "number"
+                      },
+                      "bottom": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "left",
+                      "right",
+                      "top",
+                      "bottom"
+                    ]
+                  }
+                },
+                "required": [
+                  "minScaleDenominator",
+                  "maxScaleDenominator",
+                  "bbox"
+                ]
+              },
+              "serviceParams": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "version": {
+                    "type": "string"
+                  },
+                  "serverUrl": {
+                    "type": "object",
+                    "properties": {
+                      "$apikey": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "$apikey"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "version",
+                  "serverUrl"
+                ]
+              },
+              "defaultProjection": {
+                "type": "string"
+              },
+              "queryable": {
+                "type": "boolean"
+              },
+              "metadata": {
+                "type": "array",
+                "items": {}
+              },
+              "styles": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "title"
+                  ]
+                }
+              },
+              "legends": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "format": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "format",
+                    "url"
+                  ]
+                }
+              },
+              "formats": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "current": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "current"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "name",
+              "title",
+              "description",
+              "globalConstraint",
+              "serviceParams",
+              "defaultProjection",
+              "queryable",
+              "metadata",
+              "styles",
+              "legends",
+              "formats"
+            ]
+          },
+          "$GEOPORTAIL:GPP:TMS": {
+            "type": "object",
+            "properties": {
+              "hidden": {
+                "type": "boolean"
+              },
+              "queryable": {
+                "type": "boolean"
+              },
+              "serviceParams": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "version": {
+                    "type": "string"
+                  },
+                  "serverUrl": {
+                    "type": "object",
+                    "properties": {
+                      "$apikey": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "$apikey"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "version",
+                  "serverUrl"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "formats": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "current": {
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "current",
+                    "name"
+                  ]
+                }
+              },
+              "styles": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "current": {
+                      "type": "boolean"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "title",
+                    "current",
+                    "url"
+                  ]
+                }
+              },
+              "globalConstraint": {
+                "type": "object",
+                "properties": {
+                  "crs": {
+                    "type": "string"
+                  },
+                  "bbox": {
+                    "type": "object",
+                    "properties": {
+                      "left": {
+                        "type": "number"
+                      },
+                      "right": {
+                        "type": "number"
+                      },
+                      "top": {
+                        "type": "number"
+                      },
+                      "bottom": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "left",
+                      "right",
+                      "top",
+                      "bottom"
+                    ]
+                  },
+                  "minScaleDenominator": {},
+                  "maxScaleDenominator": {}
+                },
+                "required": [
+                  "crs",
+                  "bbox",
+                  "minScaleDenominator",
+                  "maxScaleDenominator"
+                ]
+              },
+              "layerId": {
+                "type": "string"
+              },
+              "defaultProjection": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "hidden",
+              "queryable",
+              "serviceParams",
+              "name",
+              "title",
+              "description",
+              "formats",
+              "styles",
+              "globalConstraint",
+              "layerId",
+              "defaultProjection"
+            ]
+          }
+        },
+        "required": []
+      },
+      "tileMatrixSets": {
+        "type": "object",
+        "properties": {
+          "$tmsid": {
+            "type": "object",
+            "properties": {
+              "projection": {
+                "type": "string"
+              },
+              "nativeResolutions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "tileMatrices": {
+                "type": "object",
+                "properties": {
+                  "$level": {
+                    "type": "object",
+                    "properties": {
+                      "matrixId": {
+                        "type": "string"
+                      },
+                      "matrixHeight": {
+                        "type": "number"
+                      },
+                      "matrixWidth": {
+                        "type": "number"
+                      },
+                      "scaleDenominator": {
+                        "type": "number"
+                      },
+                      "tileHeight": {
+                        "type": "number"
+                      },
+                      "tileWidth": {
+                        "type": "number"
+                      },
+                      "topLeftCorner": {
+                        "type": "object",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "matrixId",
+                      "matrixHeight",
+                      "matrixWidth",
+                      "scaleDenominator",
+                      "tileHeight",
+                      "tileWidth",
+                      "topLeftCorner"
+                    ]
+                  }
+                },
+                "required": [
+                  "$level"
+                ]
+              }
+            },
+            "required": [
+              "projection",
+              "nativeResolutions",
+              "tileMatrices"
+            ]
+          }
+        },
+        "required": [
+          "$tmsid"
+        ]
+      }
+    },
+    "required": [
+      "generalOptions",
+      "layers",
+      "tileMatrixSets"
+    ]
+}
