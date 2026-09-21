@@ -83,6 +83,7 @@ var AutoCompleteResponseFactory = {
                                     suggestedLocation.poi = result.street;
                                     suggestedLocation.type = "PositionOfInterest";
                                     suggestedLocation.poiType = result.poiType;
+                                    suggestedLocation.names = Array.isArray(result.names) ? result.names : null;
                                 }
 
                                 if (suggestedLocation.position) {

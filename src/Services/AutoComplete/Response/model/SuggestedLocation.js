@@ -109,6 +109,12 @@ function SuggestedLocation () {
     this.poi = null;
 
     /**
+     * Alternative names for the suggested location ("PositionOfInterest" only).
+     * @type {Array<String>}
+     */
+    this.names = null;
+
+    /**
      * Nature of the suggested location : "prefecture", "monument", "commune", ... for instance ("PositionOfInterest" only).
      * @type {String}
      */
