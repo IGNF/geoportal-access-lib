@@ -6,6 +6,7 @@
 
 ## Summary
 
+Autocompletion : interfacage du paramètre "names" dans les résultats de type POI
 
 ## Changelog
 
