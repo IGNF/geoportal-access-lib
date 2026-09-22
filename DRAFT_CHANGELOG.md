@@ -1,12 +1,11 @@
-# Bibliothèque d'accès aux services Géoplateforme, version 3.4.6
+# Bibliothèque d'accès aux services Géoplateforme, version 3.4.7
 
-**19/12/2024 : 3.4.6**
+**22/09/2026 : 3.4.7**
 
 > release of geoportal access library
 
 ## Summary
 
-Build avec node JS > 20
 
 ## Changelog
 
@@ -14,11 +13,11 @@ Build avec node JS > 20
 
 * [Changed]
 
+  - autocomplete : transmission du paramètre names pour les results de type POI (#94)
+
 * [Removed]
 
 * [Fixed]
-
-  - version 2.6.1 node-fetch compatible webpack@4
 
 * [Deprecated]
 
