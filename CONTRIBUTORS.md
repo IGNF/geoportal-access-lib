@@ -1,7 +1,7 @@
 
 Le fichier [CONTRIBUTING.md](CONTRIBUTING.md) définit les règles et pratiques pour contribuer au projet geoportal-access-lib. Les personnes suivantes ont contribué à ce projet :
 
-# Equipe de développement
+# Équipe de développement
 
   * [lboulanger](https://github.com/lboulanger)
   * [lowzonenose](https://github.com/lowzonenose)
@@ -16,4 +16,3 @@ Le fichier [CONTRIBUTING.md](CONTRIBUTING.md) définit les règles et pratiques 
   * [ThomasG77](https://github.com/ThomasG77)
   * [sylvainpolletvillard](https://github.com/sylvainpolletvillard)
   * [jfgigand](https://github.com/jfgigand)
-
