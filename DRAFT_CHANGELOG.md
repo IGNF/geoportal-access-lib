@@ -1,12 +1,12 @@
-# Bibliothèque d'accès aux services Géoplateforme, version 3.4.7
+# Bibliothèque d'accès aux services Géoplateforme, version 3.4.8
 
-**22/09/2026 : 3.4.7**
+**30/10/2026 : 3.4.8**
 
 > release of geoportal access library
 
 ## Summary
 
-Autocompletion : interfacage du paramètre "names" dans les résultats de type POI
+Geocodage : correction de la recherche de POI contenant des catégories avec des virgules.
 
 ## Changelog
 
@@ -14,7 +14,7 @@ Autocompletion : interfacage du paramètre "names" dans les résultats de type P
 
 * [Changed]
 
-  - autocomplete : transmission du paramètre names pour les results de type POI (#94)
+  - search : guillemets autour des catégories dans la construction des requêtes de geocodage (#97)
 
 * [Removed]
 

@@ -32,5 +32,20 @@ describe("-- Test GeocodeRequest --", function () {
             var request = GeocodeRequestFactory.build(options);
             valide(request);
         });
+
+        it("Encadre chaque catégorie de guillemets dans les filtres de recherche", function () {
+            var options = {
+                geocodeMethod : "search",
+                query : "Ancien Glacier du Puy Gris",
+                index : "PositionOfInterest",
+                filters : {
+                    category : ["glacier, névé", "plan d'eau"]
+                }
+            };
+
+            var request = GeocodeRequestFactory.build(options);
+
+            expect(request).to.contain('category="glacier, névé","plan d\'eau"');
+        });
     });
 });
