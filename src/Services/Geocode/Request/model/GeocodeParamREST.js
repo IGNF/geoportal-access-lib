@@ -163,9 +163,15 @@ GeocodeParamREST.prototype.getParams = function () {
 
     const filters = this.getFilters();
     for (var key in filters) {
+        var value = filters[key];
+        if (key === "category") {
+            value = (Array.isArray(value) ? value : [value]).map(function (category) {
+                return '"' + category + '"';
+            }).join(",");
+        }
         map.push({
             k : key,
-            v : filters[key]
+            v : value
         });
     }
 
