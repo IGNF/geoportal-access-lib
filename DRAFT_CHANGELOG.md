@@ -1,12 +1,10 @@
-# Bibliothèque d'accès aux services Géoplateforme, version 3.4.7
+# Bibliothèque d'accès aux services Géoplateforme, version 3.4.
 
-**22/09/2026 : 3.4.7**
+**30/10/2026 : 3.4.8**
 
 > release of geoportal access library
 
 ## Summary
-
-Autocompletion : interfacage du paramètre "names" dans les résultats de type POI
 
 ## Changelog
 
@@ -14,7 +12,7 @@ Autocompletion : interfacage du paramètre "names" dans les résultats de type P
 
 * [Changed]
 
-  - autocomplete : transmission du paramètre names pour les results de type POI (#94)
+  - documentation : mise à jour de la documentation opensource du projet (#96)
 
 * [Removed]
 
