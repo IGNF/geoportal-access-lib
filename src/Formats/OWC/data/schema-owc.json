@@ -1,0 +1,82 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "OWS Context JSON schema",
+    "type": "object",  
+    "properties": {
+      "type": { "enum": ["FeatureCollection"] },
+      "properties": {
+        "type": "object",
+        "properties": {
+          "lang": { "type": "string" },
+          "id": { "type": "string", "format": "uri" },
+          "title": { "type": "string" },
+          "subtitle": { "type": "string" },
+          "updated": { "type": "string" },
+          "authors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" }
+              }
+            }
+          },
+          "categories": { "type": "array" },
+          "contributors": { "type": "array" },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "rel": { "enum": ["profile"] },
+                "href": { "type": "string", "format": "uri" },
+                "title": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "features": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": { "enum": ["Feature"] },
+            "geometry": { "type": "object" },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string", "format": "uri" },
+                "title": { "type": "string" },
+                "updated": { "type": "string" },
+                "content": { "type": "string" },
+                "categories": { "type": "array" },
+                "links": { "type": "array" },
+                "offerings": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "code": { "type": "string", "format": "uri" },
+                      "operations": { "type": "array" },
+                      "contents": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": { "type": "string" },
+                            "href": { "type": "string", "format": "uri" },
+                            "content": { "type": "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+}

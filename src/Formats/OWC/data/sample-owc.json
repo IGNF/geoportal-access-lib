@@ -1,0 +1,84 @@
+{
+  "type": "FeatureCollection",
+  "id": "http://www.opengis.net/owc/1.0/examples/WMS_scale",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [4567125, 414475],
+        [4567125, 451575],
+        [4588025, 451575],
+        [4588025, 414475],
+        [4567125, 414475]
+      ]
+    ]
+  },
+  "properties": {
+    "lang": "ca-CA",
+    "title": "Ortofotoimatge de Barcelona 1:5 000 [ICC]",
+    "subtitle": "Finestra l'ortofotoimatge de Catalunya 1:5 000 [ICC]",
+    "updated": "2012-11-04T17:26:23Z",
+    "generator": "MiraMon",
+    "authors": [{ "name": "Joan Masó" }],
+    "contributors": [],
+    "categories": [],
+    "links": [
+      {
+        "rel": "profile",
+        "href": "http://www.opengis.net/spec/owc-atom/1.0/req/core",
+        "title": "This file is compliant with version 1.0 of OGC Context"
+      }
+    ]
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "http://shagrat.icc.es/lizardtech/iserv/ows/orto5m",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [4567125, 414475],
+            [4567125, 451575],
+            [4588025, 451575],
+            [4588025, 414475],
+            [4567125, 414475]
+          ]
+        ]
+      },
+      "properties": {
+        "title": "Ortofotoimatge de Barcelona 1:5 000 [ICC]",
+        "updated": "2011-11-01T00:00:00Z",
+        "content": "Ortofotoimatge de Barcelona 1:5 000 de l'Institut Cartogràfic de Catalunya (la més actual disponible)",
+        "authors": [{ "name": "ICC", "email": "icc@icc.cat" }],
+        "contributors": [],
+        "categories": [],
+        "links": [],
+        "offerings": [
+          {
+            "code": "http://www.opengis.net/spec/owc-atom/1.0/req/wms",
+            "operations": [
+              {
+                "code": "GetCapabilities",
+                "method": "GET",
+                "type": "application/xml",
+                "href": "http://shagrat.icc.es/lizardtech/iserv/ows?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+                "request": {},
+                "result": {}
+              },
+              {
+                "code": "GetMap",
+                "method": "GET",
+                "type": "image/jpeg",
+                "href": "http://shagrat.icc.es/lizardtech/iserv/ows?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:23031&BBOX=414475,4567125,451575,4588025&WIDTH=600&HEIGHT=400&LAYERS=orto5m&FORMAT=image/jpeg&STYLES=",
+                "request": {},
+                "result": {}
+              }
+            ],
+            "contents": []
+          }
+        ]
+      }
+    }
+  ]
+}
