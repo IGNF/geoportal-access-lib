@@ -166,7 +166,7 @@ GeocodeParamREST.prototype.getParams = function () {
         var value = filters[key];
         if (key === "category") {
             value = (Array.isArray(value) ? value : [value]).map(function (category) {
-                return '"' + category + '"';
+                return "\"" + category + "\"";
             }).join(",");
         }
         map.push({
