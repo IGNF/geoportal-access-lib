@@ -1,0 +1,60 @@
+{{#extend "layout-sample-bundle"}}
+
+{{#content "head"}}
+        <title>Geocodage avec filtre de categories</title>
+{{/content}}
+
+{{#content "style"}}
+    <style>
+        #result {
+            white-space: pre-wrap;
+        }
+    </style>
+{{/content}}
+
+{{#content "body"}}
+        <h1>Geocodage avec plusieurs categories</h1>
+        <h2>Ancien Glacier du Puy Gris</h2>
+        <pre>
+<code>var options = {
+    query: "Ancien Glacier du Puy Gris",
+    index: "PositionOfInterest",
+    maximumResponses: 1,
+    returnTrueGeometry: true,
+    filters: {
+        category: ["glacier, névé", "plan d'eau"],
+        postcode: 73130
+    }
+};
+Gp.Services.geocode(options);</code>
+        </pre>
+        <button type="button" id="geocodeButton">Rechercher</button>
+        <h3>Resultat</h3>
+{{/content}}
+
+{{#content "js"}}
+        var geocodeAction = function () {
+            var resultElement = document.getElementById("result");
+            resultElement.textContent = "Recherche en cours...";
+
+            Gp.Services.geocode({
+                query: "Ancien Glacier du Puy Gris",
+                index: "PositionOfInterest",
+                maximumResponses: 1,
+                returnTrueGeometry: true,
+                filters: {
+                    category: ["glacier, névé", "plan d'eau"],
+                    postcode: 73130
+                },
+                onSuccess: function (response) {
+                    resultElement.textContent = JSON.stringify(response.locations, null, 2);
+                },
+                onFailure: function (error) {
+                    resultElement.textContent = String(error);
+                }
+            });
+        };
+
+        document.getElementById("geocodeButton").onclick = geocodeAction;
+{{/content}}
+{{/extend}}
