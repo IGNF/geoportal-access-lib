@@ -15,6 +15,7 @@ Geocodage : correction de la recherche de POI contenant des catégories avec des
 * [Changed]
 
   - search : guillemets autour des catégories dans la construction des requêtes de geocodage (#97)
+  - documentation : mise à jour de la documentation opensource du projet (#96)
 
 * [Removed]
 
