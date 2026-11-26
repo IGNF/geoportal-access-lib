@@ -1,17 +1,16 @@
 
 # Geoportal resources access library
 
-This software is released under the licence CeCILL-B (Free BSD compatible)
+This software is released under the GNU Affero General Public License version 3 or later (AGPL-3.0-or-later).
 
-You may obtain a copy of the License at :
+You may obtain a copy of the License in the [LICENSE](LICENSE) file or at :
 
-http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt (english)
+https://www.gnu.org/licenses/agpl-3.0.html
 
-http://www.cecill.info/licences/Licence_CeCILL-B_V1-fr.txt (french)
+Copyright (c) 2016-2026 IGN
 
-see http://www.cecill.info/
-
-Copyright (c) 2016-2017 IGN
+> Versions up to 3.4.8 included were released under the CeCILL-B licence.
+> Versions after 3.4.8 are released under the AGPL-3.0-or-later licence.
 
 
 ## Third party code :

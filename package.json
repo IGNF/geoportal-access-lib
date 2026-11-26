@@ -48,7 +48,7 @@
     "es6"
   ],
   "author": "IGNF",
-  "license": "CECILL-B",
+  "license": "AGPL-3.0-or-later",
   "dependencies": {
     "@xmldom/xmldom": "^0.9.6",
     "es6-promise": "^4.2.4",
